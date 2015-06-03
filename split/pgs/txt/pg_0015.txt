@@ -1,0 +1,5 @@
+*Kristina Toutanova, David Traum, Reut Tsarfaty, Oren Tsur, Yoshimasa Tsuruoka, *Peter Turney, *Oscar Täckström. Jakob Uszkoreit. Tim Van de Cruys, *Benjamin Van Durme, **Lucy Vanderwende, Yannick Versley, Aline Villavicencio. *Xiaojun Wan, *Stephen Wan, Haifeng Wang, Lidan Wang, Lu Wang, Zhiguo Wang, *William Yang Wang, *Taro Watanabe, Andy Way, *Bonnie Webber, David Weir, David Weiss, *Michael White, Janyce Wiebe, Michael Wiegand, Shuly Wintner, Andreas Witt, *Kam-Fai Wong, Kristian Woodsend. *Fei Xia, Yunqing Xia, Bing Xiang, Tong Xiao, Peng Xu, Wei Xu, Jia Xu, Nianwen Xue. Hui Yang, Bishan Yang, Muyun Yang, Yi Yang, *Xuchen Yao, Mahsa Yarmohammadi, *Wen-tau Yih, Dani Yogatama, Jianxing Yu, *François Yvon. Fabio Massimo Zanzotto, Alessandra Zarcone, *Rabih Zbib, Richard Zens, Ke Zhai, Min Zhang, Lei Zhang, Hao Zhang, Hai Zhao, Guodong Zhou, Xiaodan Zhu, Chengqing Zong, *Geoffrey Zweig.
+
+xv
+
+

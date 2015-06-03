@@ -1,0 +1,25 @@
+2013)). The Third and Fourth i2b2 Shared Tasks included medication detection from clinical texts (Uzuner et al., 2010; Uzuner et al., 2011), and the Fourth i2b2 Shared Task also included relation classification between treatments (including medications), problems, and tests. Recently, there has been growing interest in extracting medication information from other types of text, such as Twitter, online health forums, and drug review sites (e.g., (Leaman et al., 2010; Bian et al., 2012; Liu et al., 2013; Liu and Chen, 2013; Yates and Goharian, 2013; Segura-Bedmar et al., 2014)). Much of this research is geared toward identifying adverse drug events or drug-drug interactions. Many methods have been used for medication extraction, including rule based approaches (Levin et al., 2007; Xu et al., 2010), machine learning (Patrick and Li, 2010; Doan and Xu, 2010; Tang et al., 2013), and hybrid methods (Halgrim et al., 2010; Meystre et al., 2010). Rule based and hybrid approaches typically rely on manually created lexicons and rules. RxNorm (Nelson et al., 2011; Liu et al., 2005) is a large knowledge base containing generic and brand names of drugs and it is often used as a component in these systems. We compare our results with the MedEx system (Xu et al., 2010), which uses RxNorm coupled with manually defined rules. To our knowledge, classifying medication mentions with respect to administration use categories has not yet been studied. A novel aspect of our work is also the use of Web Context features for medication detection. Similar Web features have been exploited for fine-grained person classification (Giuliano, 2009), while we demonstrate that they can be highly beneficial for medical concept extraction.
+
+Rx: The text indicates that a doctor prescribed the medication for a patient, or that a patient is taking (or has previously taken) the medication. Example: "I started the dog on abx." Change: A change in the administration of the medication was made (e.g., dosage, route, frequency). Example: "I increased the pred to 5mg." Stop: Use of the medication was discontinued. Example: "We took the cat off metacam." Effect: The text reports a positive or negative effect from the medication on a patient. Example: "The dog responded well to Vetsulin." Question: A question is asked about the medication. Example: "Do you think we should consider lasix?" Other: None of the above. This category primarily covers contexts not describing patient use. Example: "Aranesp is expensive." Our data consists of discussion forums from the Veterinary Information Network (VIN), which is a web portal (www.vin.com) that hosts message boards for veterinary professionals to discuss cases and issues in their practice. To produce gold standard annotations, we collected the initial post of 500 randomly selected threads from VIN forums about cardiology/pulmonology, endocrinology, and feline internal medicine. We defined annotation guidelines to identify the minimum span of medication mentions.1 Two people independently annotated 50 texts, and we measured their inter-annotator agreement (IAA) using Cohen's kappa () statistic. For medication detection, their IAA score was  = .96. For the medication use categories, we measured IAA in two ways. First, we measured agreement on all of the words labeled as a medication by at least one annotator, yielding  = 0.80. Second, we measured agreement only on the words labeled as a medication by both annotators (to more directly assess agreement on the six categories), yielding  = .92. Finally, the annotators labeled an additional 450 texts, producing a gold standard set of 500 labeled texts. Of the annotated medication mentions, 93% have one word and 6% have two words. The frequency of each category is shown below.
+Rx 908
+1
+
+3
+
+Task Description and Data Set
+
+We divide our task into two subproblems: (1) Medication Detection aims to identify words corresponding to non-food substances used to treat patients (e.g., drugs, potassium supplements), and (2) Medication Use Categorization aims to classify medication mentions based on actions and observations related to their administration and to identify question contexts. We assign each medication mention to one of the six categories below. 1453
+
+Question 289
+
+Effect 181
+
+Change 52
+
+Stop 53
+
+Other 470
+
+Dosage and duration terms were not included.
+
+

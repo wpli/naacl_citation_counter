@@ -1,0 +1,77 @@
+P(y|x)
+
+
+
+ex h1 g1
+
+ 
+
+
+
+
+
+
+
+
+ hn
+
+
+ew1 gn
+
+
+
+ewn
+
+Wf
+f1,m-1 f1,m fn,1 fn,2
+
+Wf
+fn,m-1 fn,m
+
+f1,1 f1,2
+
+Figure 2: Neural network representation of LRFCM. example in Figure 1, FCM can learn parameters which give words similar to "driving" with the feature f3 = 1 (is-on-dependency-path  type(M1 )=PER  type(M2 )=VEH ) high weight for the ART label.
+
+§4), 3,000 features, and 200 dimensional word embeddings. For FCM, the size of T is 1.92 × 107 ; potentially yielding a high variance estimator. However, for LRFCM with 20-dimensional feature embeddings, the size of T is 1.28 × 105 , significantly smaller with lower variance. Moreover, feature embeddings can capture correlations among features, further increasing generalization. Figure 2 shows the vectorized form of LRFCM as a multi-layer perceptron. LRFCM constructs a dense low-dimensional matrix used as the input to Eq. 2. By contrast, FCM does not have a feature embedding layer and both feature vector f and word embedding ew are feed forward directly to the outer product layer. Training We optimize the following loglikelihood (of the probability in Eq. 2) objective with AdaGrad (Duchi et al., 2011) and compute gradients via back-propagation: log P (y |x; T, Wf ), (3) where D is the training set. For each instance (y, x) we compute the gradient of the log-likelihood = log P (y |x; T, Wf ). We define the vector s = [ i Ty (gi  ewi )]1yL , which yields
+(y,x)D
+
+3
+
+Low-Rank Approximation of FCM
+
+achieved state of the art performance on SemEval relation extraction (Yu et al., 2014), yet its generalization ability is limited by the size of the tensor T , which cannot easily scale to large number of features. We propose to replace features with feature embeddings (Chen and Manning, 2014), thereby reducing the dimensionality of the feature space, allowing for more generalization in learning the tensor. This will be especially beneficial with an increased number of output labels (i.e. more relation types), as this increases the number of parameters. Our task is to determine the label y (relation) given the instance x. For each word wi  x, there exists a list of m associated features fi = fi,1 , fi,2 , ..., fi,m . The model then transforms the feature vector into a dg -dimensional (dg m) vector with a matrix (i.e. a lookup table) Wf as: gi = fi · Wf . Here we use a linear transformation for computational efficiency. We score label y given x as (replacing Eq. 1):
+FCM
+
+L(T, Wf ) =
+
+1 |D |
+
+ / s = (I [y = y ] - P (y |x; T, Wf ))1y L , where I [x] is the indicator function equal to 1 if x is true and 0 otherwise. Then we have the following stochastic gradients, where  is the tensor product:
+  =  gi  ewi , T  s i=1  =  Wf
+n i=1 n
+
+T
+
+(4)  fi .
+
+  gi =  gi  Wf
+
+n
+
+T
+i=1
+
+  ewi s
+
+4 Experiments
+Datasets We consider two relation extraction datasets: ACE2005 and ERE, both of which contain two sets of relations: coarse relation types and fine relation (sub-)types. Prior work on English ACE 2005 has focused only on coarse relations (Plank and Moschitti, 2013; Nguyen and Grishman, 2014; Li and Ji, 2014); to the best of our knowledge, this paper establishes the first baselines for the other datasets. Since the fine-grained relations require a large number of parameters, they will test the ability
+
+P (y |x; T, Wf )  exp(
+
+i Ty
+
+(gi  ewi )) (2)
+
+We call this model low-rank FCM (LRFCM). The result is a dramatic reduction in the number of model parameters, from O(md|L|) to O(dg d|L| + dg m), where d is the size of the word embeddings. This reduction is intended to reduce the variance of our estimator, possibly at the expense of higher bias. Consider the case of 32 labels (fine-grained relations in 1376
+
+

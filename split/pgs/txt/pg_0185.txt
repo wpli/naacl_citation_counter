@@ -1,0 +1,72 @@
+KPLM+TSR
+
+C-LexRank
+
+Pyramid score
+
+Domain
+
+0.8 0.7 0.6 0.5 0.4
+
+
+
+KPLM
+
+
+
+Paper
+
+  
+
+DP
+
+PBMT
+
+SUMM
+
+QA
+
+TE
+
+C96-1058 P97-1003 P99-1065 P05-1013 P05-1012 N03-1017 W03-0301 J04-4002 N04-1033 P05-1033 A00-1043 A00-2024 C00-1072 W00-0403 W03-0510 A00-1023 W00-0603 P02-1006 D03-1017 P03-1001 D04-9907 H05-1047 H05-1079 W05-1203 P05-1014 Mean Median
+
+1.00 1.00 0.94 1.00 0.95 0.96 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 0.99 1.00
+
+Gold
+
+0.73 0.40 0.67 0.67 0.62 0.64 1.00 0.48 0.85 0.85 0.95 0.60 0.93 0.70 0.83 0.86 0.60 0.87 0.85 0.59 0.94 1.00 0.56 0.71 0.78 0.75 0.73
+
+0.33 0.79 0.62 0.66 0.23 0.60 0.80 0.86 0.57 0.97 0.50 0.60 0.87 0.81 1.00 0.88 0.44 0.93 0.70 0.94 0.77 0.83 0.78 1.00 0.89 0.73 0.79
+
+0.56 0.79 0.76 0.66 0.73 0.60 0.80 0.89 0.86 0.97 0.50 0.60 0.93 0.54 1.00 1.00 0.94 0.93 0.90 0.44 0.91 0.83 0.89 1.00 1.00 0.80 0.86
+
+5
+
+4
+
+3
+
+2
+
+1
+
+Summary length limit
+
+Figure 1: Pyramid scores of KPLM+TSR under different summary length limits.
+
+Table 5: Summary pyramid score evaluation results with summary length limit k = 5.
+
+tion summary. A desirable property of a good summariser is thus the ability in maintaining its performance while the task becomes increasingly demanding. To further evaluate KPLM's performance under increasingly more stringent summary length limits, we gathered the pyramid scores with summary length limit k decreasing from 5 to 1 and visualised the results in Figure 1. We can see that KPLM's performance decays quite gracefully as more stringent limits are imposed. Even under the harshest constraint with the summary length limit sets to 1, our system still managed a mean pyramid score of close to 0.6 across the 25 papers. Indeed, it can be seen that the variance in pyramid scores gradually spreads wider (the dark band in the figure marks out 95% confidence interval of the mean scores), but this phenomenon is expected as the error margin also shrinks along with the summary length limit.
+
+terising keywords that are both overly represented and relatively exclusively used in the paper's citation summary. We then used the keyword profile of a paper to build a discriminative pseudo unigram language model that directly incorporates words' salience in characterising a paper's main contributions into pseudo generative probabilities. Based on the fact that a paper's KPLM represents an effective language model from which pseudo citing sentences with good coverage of important keywords could be sampled, we cast the task of summarisation as language model divergence based IR. Finally, we implemented an information-driven sentence reranking algorithm that can effectively leverage diversity in keyword coverage in summaries produced. Experimental results show that our approach outperforms the current state-of-the-art systems in scientific paper summarisation, which is also with good resilience to more stringent summary length limits. In the future, we plan to extend our approach to higher order n-grams and see whether larger information units (phrases) would help boost summarisation performance. We also plan to apply our method to the problem of multi-document summarisation. In particular, we are very interested to test our system's performance on automatically generating a technical survey of a scientific paradigm, which thanks to the authors of (Mohammad et al., 2009; Qazvinian et al., 2013), has been established as a well-defined task with high-quality open data. Finally, while we have shown that our approach is effective in summarising a scientific paper's major contributions using its citation summary text, further experiments are required to test our method's effectiveness on more generic summarisation tasks and texts genres.
+
+5
+
+Conclusion and Future Work
+
+Acknowledgement
+We thank Vahed Qazvinian for making the 25 paper summarisation corpus publicly available; without it, our formal evaluations would have been impossible. We also thank the anonymous reviewers for their highly constructive comments.
+
+We designed a statistical framework to summarise scientific papers, using methods rooted in quantitative statistics and information theory. We first built a keyword profile for a paper using a quantitative statistical method that captures its charac131
+
+

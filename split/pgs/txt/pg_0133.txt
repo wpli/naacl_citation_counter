@@ -1,0 +1,34 @@
+3.3
+
+WSIC (Who Should I Cite?)
+
+In attempt to compare our systems against Bethard and Jurafsky's system (2010), we implemented the features they concluded to be most useful for retrieval, and like our Logit-Expanded system, used logistic regression as the mechanism for learning citation prediction. Instead of using only the text from the abstracts, like in their research, to make the comparison more fair we used text from the entire documents ­ just like we did for the rest of our systems. Specifically, adhering to their naming convention, the features from their system that we used are: citation-count, venue-citation-count, authorcitation-count, author-h-index, age (# years between report and source), terms-citing, topics, authors, authors-cited-article, and authors-cited-author.
+
+4
+4.1
+
+Experiments
+Corpora
+
+The past research mentioned in Section 2 primarily makes use of three corpora: Cora, CiteSeer, and WebKB. As shown in Table 3, these corpora are relatively small with ~3,000 documents, an average of less than three links per document, and a modest number of unique word types. We wanted to use a corpus which was larger, provided the complete text of the original documents, and included meta-data such as author information. Thus, we used the ACL Anthology (Radev et al., 2013) (the December 2013 release), which provides author and year information for each paper, and the corpus details are listed in Table 3. For the task of citation prediction, we are the first to use full content information from a corpus this large. 4.2 Training/Testing Data The research listed in Section 2 commonly uses 90% of all positive links (i.e., a distinct report-to-source instance) for training purposes and 10% for testing. LDA-based topic modelling approaches, which are standard for this task, require that at testing time each report and candidate source has already been observed during training. This is because at test time the topic distribution for each document must have already been inferred. Additionally, it is common to make the assumption that the corpus is split into a bipartite graph: a priori we know which documents 79
+
+are reports and which are sources, with most being both. At testing time, one then predicts sources from the large set of candidate sources, all of which were seen at some point during training (as either a report or a source document). We follow suit with the past research and randomly split the ACL Anthology's report-to-source links (citations) into 90% for training and 10% for testing, with the requirement that every candidate source document during testing was seen during training as either a report or a source ­ ensuring we have a topic distribution for each document. On average, each report has 6.8 sources, meaning typically at test time each report has just a few (e.g., 1-5) sources which we hope to predict from our 12,265 candidate sources. For all of our experiments, the systems (e.g., LDA-Bayes, LinkLDA, Logit-Expanded, etc) were evaluated on the exact same randomly chosen split of training/testing data. As for training Logit-Expanded, naturally there are vastly more negative examples (i.e., no link between the given report-source pair) than positive examples; most sources are not cited for a given report. This represents a large class-imbalance problem, which could make it difficult for the classifier to learn our task. Consequently, we downsampled the negative examples. Specifically, for each report, we included all positive examples (the cited sources), and for each positive example, we included 5 randomly selected negative examples (sources). Note, for testing our system, we still need to evaluate every possible candidate report-source pair ­ that is 12,265 candidate sources per tested report.
+Table 3: Report-to-Source Citation Prediction Corpora Cora CiteSeer WebKB ACL
+
+# docs # links vocab size # authors
+
+2,708 5,429 1,433 -
+
+3,312 4,608 3,703 -
+
+3,453 1,733 24,182 -
+
+17,298 106,992 137,885 14,407
+
+4.3 4.3.1
+
+Results Report-To-Source Citation Prediction
+
+First, we tested our LDA-Bayes baseline system and compared it to LinkLDA and PMTLM (Zhu et
+
+

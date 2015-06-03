@@ -1,0 +1,6 @@
+References
+Hannah Alpert-Abrams and Dan Garrette. 2015. Reading Primeros Libros: From archive to OCR. In Proceedings of The Annual Meeting of the American Comparative Literature Association. Susan Baddeley and Anja Voeste. 2013. Orthographies in Early Modern Europe. De Gruyter. Taylor Berg-Kirkpatrick and Dan Klein. 2014. Improved typesetting models for historical OCR. In Proceedings of ACL. Taylor Berg-Kirkpatrick, Greg Durrett, and Dan Klein. 2013. Unsupervised transcription of historical documents. In Proceedings of ACL. Thomas G. Dolan. 2012. The Primeros Libros Project. The Hispanic Outlook in Higher Education, 22:20­22, March. Elizabeth L. Eisenstein. 1979. The printing press as an agent of change. Cambridge University Press. Walter Mignolo. 1995. The Darker Side of the Renaissance. University of Michigan Press. Thamar Solorio, Elizabeth Blair, Suraj Maharjan, Steven Bethard, Mona Diab, Mahmoud Gohneim, Abdelati Hawwari, Fahad AlGhamdi, Julia Hirschberg, Alison Chang, and Pascale Fung. 2014. Overview for the first shared task on language identification in codeswitched data. In Proceedings of The First Workshop on Computational Approaches to Code Switching.
+
+1041
+
+

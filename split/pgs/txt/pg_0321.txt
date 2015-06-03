@@ -1,0 +1,66 @@
+UNK COMP
+
+ROOT
+
+COMP
+
+SUBJ NMOD TMP SBJ PRT ADV
+
+COMP COMP
+
+RELC AMOD
+
+
+
+
+
+31 
+
+
+
+
+
+OP
+
+pro
+
+T
+
+
+
+
+
+
+
+
+
+
+
+
+
+/Russian /troops 31 /31rd /hold /past-tense-marker /farewell  /Germany /DE /final /ceremony 
+Figure 3: ECs in a Dependency Tree Train 81-325, 400-454 500-554, 590-596 600-885, 900 1023 1089 2099 1981 91 22 0 6305 Dev 41-80 Test 1-40 901-931 297 298 575 527 32 19 0 1748
+
+File
+
+#pro #PRO #OP #T #RNR #* #Others Total
+
+166 210 301 287 15 0 0 979
+
+is learned using the word2vec toolkit (Mikolov et al., 2013). We train the model on a large Chinese news copora provided by Sogou2 , which contains about 1 billion words after necessary preprocessing. The text is segmented into words using ICTCLAS(Zhang et al., 2003)3 . 3.2 Experiment Settings Initialization WA is initialized according to 24 24 , ]. unif orm[- din +d hidden din +dhidden And WB is initialized using 24 24 unif orm[- dhidden +dout , dhidden +dout ]. Here din , dhidden and dout are the dimensions of the input layer, the hidden space and the label space. Parameter Tuning To optimize the parameters, firstly, we set the dimension of word vectors to be 80, the dimension of hidden space to be 50. We search for the suitable learning rate in {10-1 , 10-2 , 10-4 }. Then we deal with the dimension of word vectors {80, 100, 200}. Finally we tune the dimension of hidden space in {50, 200, 500} against the F-1 scores. . Those underlined figures are the value of the parameters after optimization. We use the stochastic gradient descent algorithm to optimize the model. The details can be checked here (Weston et al., 2011). The maximum iteration number we used is 10K. In the following experiments,
+http://www.sogou.com/labs/dl/cs.html The word segment standards used by CTB and ICTCLAS are roughly the same with minor differences.
+3 2
+
+Table 1: Data Division and EC Distribution
+
+3
+3.1
+
+Experiments on CTB
+Data
+
+The proposed method can be applied to various kinds of languages as long as annotated corpus are available. In our experiments, we use a subset of Chinese Treebank V7.0. We split the data set into three parts, training, development and test data. Following the previous research, we use File 1-40 and 901-931 as the test data, File 41-80 as the development data. The training data includes File {81-325, 400-454, 500-554, 590-596, 6000-885, 900}. The development data is used to tune parameters and the final results are reported on the test data. CTB trees are transferred to dependency trees for feature extraction with ECs preserved (Xue, 2007). The distributed word representation we use
+
+267
+
+

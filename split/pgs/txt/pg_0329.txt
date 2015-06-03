@@ -1,0 +1,28 @@
+fied as a non-sentential utterance (Schlangen, 2004). Its transliteration consists of 8 Japanese characters, which could be tokenized into two words. The more difficult RE shown in Example (2) requires the model to learn how spatial placements map to certain descriptions. Moreover, Japanese is a head-final language where comparative landmark pieces are uttered before the referent. Also, because this was a highly interactive setting, many exophoric pronouns were used, e.g., sore and sono, both meaning that.2 Pronoun references like this made up around 32% of the utterances. Corpus annotations included (for both participants) transcriptions of utterances, the object being looked at any given time, the object being pointed at or manipulated by the mouse, segmentation of the REs and the corresponding referred object or objects. The spatial layout of the board was recorded each time an object was manipulated. Further details of the corpus can be found in (Iida et al., 2011). In order to directly compare our work with previous work, in our evaluations below we consider the same annotated REs. Iida et al. (2011) applied a support vector machine-based ranking algorithm (Joachims, 2002) to the task of resolving REs in this corpus. They used a total of 36 binary features in the SVM classifier, which predicted the referred object. They further used a separate model for pronoun utterances and non-pronoun utterances, allowing the classifier to learn patterns without confusing utterance types. More details on the results of these models are given below. The SIU-model has previously been applied to two datasets from the Pentomino domain (Kennington et al., 2013), where the speaker's goal was to identify one out of a set of tetris-like (but consisting of five instead of four blocks) puzzle pieces. However, in these datasets, the references were "one-shot" and not embedded in longer dialogues, as is the case in the REX corpus. A summary of differences between the two tasks is summarised in Table 1. Applying SIUM to data like that found in the REX corpus is a natural next step to test the abilities of the model as a RR component in a dialogue system.
+
+PENTO
+
+REX
+
+language language type phrase type avg utt length number of objects interactivity recorded gaze % of pronoun utts
+
+German SVO head-initial 7-8 15 human-wizard SV (speaker) 0%
+
+Japanese SOV head-final 4-5 7 human-human SV, OP 32%
+
+Table 1: Summary of differences between PENTO and REX tasks.
+
+5
+
+Experiment
+
+Procedure The procedure for this experiment is as follows. In order to compare our results directly with those of Iida et al. (2011), we provide our model with the same training and evaluation data, in a 10-fold cross-validation of the 1192 REs from 27 dialogues (the T2009-11 corpus in Tokunaga et al. (2012)). For development, we used a separate part of the REX corpus (N2009-11) that was structured similarly to the one used in our evaluation. Task The task is RR. At each increment, SIUM returns a distribution over all objects; the probability for each object represents the strength of the belief that it is the referred one. The argmax of the distribution is chosen as the hypothesised referred object. P(R|I) P (R|I ) models the likelihood of selecting a property of a candidate object for verbalisation; this likelihood is assumed to be uniform for all the properties that the candidate object has.3 We derive these properties from a representation of the scene; similar to how Iida et al. (2011) computed features to present to their classifier: namely Ling (linguistic features), TaskSp (task specific features), and Gaze (from SV only). Some features were binary, others such as shape and size had more values. Table 2 shows all the properties that were used here. Each will now be explained. Ling Each object had a shape, size, and relative position to the other pieces. We determined by hand
+3 Uniformity in the likelihood of the properties isn't an ideal approach as certain properties could be more likely to be selected than others; we leave a more principled approach to using saliency to help determine the likelihood of the properties to future work.
+
+2
+
+To be precise, sono is a demonstrative adjective.
+
+275
+
+

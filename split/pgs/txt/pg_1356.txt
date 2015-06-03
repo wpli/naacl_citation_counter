@@ -1,0 +1,21 @@
+Embeddings query CBOW
+
+Skip-gram
+
+CWindow (this work)
+
+Structured Skip-gram (this work)
+
+WIKI(S) breaking breaks turning broke break stumbled break breaks broke down broken putting turning sticking pulling picking break turning putting out breaks
+
+TWITTER amazing incredible awesome fantastic phenomenal awsome incredible awesome fantastic phenominal phenomenal incredible amaaazing awesome amzing a-mazing incredible awesome amaaazing ah-mazing amzing
+
+WIKI(L) person someone anyone oneself woman if harasser themself declarant someone right-thinking woman man child grandparent servicemember declarant circumstance woman schoolchild someone
+
+center word are sampled more frequently. That is, when defining a window size of 5, the actual window size used for each sample is a random value between 1 and 5. As we use a separate output layer for each position, we did not find this property to be useful as it provides less training samples for output matrixes with higher indexes. While our models are slower they are still suitable for processing large datasets as all the embeddings we use were all built within a day. 4.2 Part-Of-Speech Tagging We reimplemented the window-based model proposed in (Collobert et al., 2011), which defines a 3-layer perceptron. In this network, words are first projected into embeddings, which are concatenated and projected into a window embedding. These are finally projected into an output layer with size of the POS tag vocabulary, followed by a softmax. In our experiments, we used a window size of 5, word embeddings of size 50 and window embeddings of size 500. Word embeddings were initialized using the pre-trained vectors and these parameters are updated as the rest of the network. Additionally, we also add a capitalization feature which indicates whether the first letter of the work is uppercased, as all word features are lowercased words. Finally, for words unseen in the training set and in the pre-trained embeddings, we replace them with a special unknown token, which is also modelled as a word type with a set of 50 parameters. At training time, we stochastically replace word types that only occur once in the training dataset with the unknown token. Evaluation is performed with the part-of-speech tag accuracy, which denotes the percentage of words labelled correctly. Experiments are performed on two datasets, the English Penn Treebank (PTB) dataset using the standard train, dev and test splits, and the ARK dataset (Gimpel et al., 2011), with 1000 training, 327 dev and 500 labelled English tweets from Twitter. For the PTB dataset, we use the WIKI(L) embeddings and use TWITTER embeddings for the ARK dataset. Finally, the set of parameters with the highest accuracy in the dev set are used to report the score for the test set. Results are shown in Table 2, where we observe that our adapted models tend to yield better re-
+
+Table 1: Most similar words using different word embedding models for the words breaking, amazing and person. Each word is queried in a different dataset.
+
+preserving such properties. As for the TWITTER embeddings, we can observe that our adapted embeddings are much better at finding lexical variations of the words, such as a-mazing, resembling the results obtained using brown clusters (Owoputi et al., 2013). Finally, for the query person, we can see that our models tend to associate this term to other words in the same class, such as man, woman and child, while original models tend to include unrelated words, such as if and right-thinking. In terms of computation speed, the Skip-gram and CBOW models, achieve a processing rate of 71.35k and 342.17k words per second, respectively. The Structured Skip-gram and CWindow models can process 34.64k and 124.43k words per second, respectively. There is a large drop in computational speed in the CWindow model compared to the CBOW model, as it uses a larger output matrix, which grows with the size of the window. The Structured Skip-gram model processes words at almost half the speed of the Skip-gram model. This is explained by the fact that the Skip-gram model subsamples context words, varying the size of the window size stochastically, so that words closer to the 1302
+
+

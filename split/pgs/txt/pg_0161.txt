@@ -1,0 +1,29 @@
+Output
+
+1 (positive) Output layer Pooling layers Convolution layers One One-hot vectors
+
+region size s1
+
+region size s2
+
+Input: "I really love it !"
+
+Figure 4: CNN with two convolution layers in parallel. more convolution layers in parallel6 , as illustrated in Figure 4. The idea is to learn multiple types of embedding of small text regions so that they can complement each other to improve model accuracy. In this architecture, multiple convolution-pooling pairs with different region sizes (and possibly different region vector representations) are given one-hot vectors as input and produce feature vectors for each region; the top layer takes the concatenation of the produced feature vectors as input.
+
+We used two techniques commonly used with CNN on image, which typically led to small performance improvements. One is dropout (Hinton et al., 2012) optionally applied to the input to the top layer. The other is response normalization as in (Krizhevsky et al., 2012), which in our case scales the output of the pooling layer z at each location by multiplying (1 + |z|2 )-1/2 . 3.2 Baseline methods For comparison, we tested SVM with the linear kernel and fully-connected neural networks (see e.g., Bishop (1995)) with bag-of-n-gram vectors as input. To experiment with fully-connected neural nets, as in CNN, we minimized square loss with L2 regularization and optional dropout by SGD, and activation was fixed to rectifier. To generate bag-ofn-gram vectors, on topic classification, we first set each component to log(x + 1) where x is the word frequency in the document and then scaled them to unit vectors, which we found always improved performance over raw frequency. On sentiment classification, as is often done, we generated binary vectors and scaled them to unit vectors. We tested three types of bag-of-n-gram: bow1 with n  {1}, bow2 with n  {1, 2}, and bow3 with n  {1, 2, 3}; that is, bow1 is the traditional bow vectors, and with bow3, each component of the vectors corresponds to either uni-gram, bi-gram, or tri-gram of words. We used SVMlight9 for the SVM experiments. NB-LM We also tested NB-LM, which first appeared (but without performance report10 ) as NBSVM in WM12 (Wang and Manning, 2012) and later with a small modification produced performance that exceeds state-of-the-art supervised methods on IMDB (which we experimented with) in MMRB14 (Mesnil et al., 2014). We experimented with the MMRB14 version, which generates binary bag-of-n-gram vectors, multiplies the component for each n-gram fi with log(P (fi |Y = 1)/P (fi |Y = -1)) (NB-weight) where the probabilities are estimated using the training data, and does logistic regression training. We used MMRB14's software11 with a modification so that
+http://svmlight.joachims.org/ WM12 instead reported the performance of an ensemble of NB and SVM as it performed better. 11 https://github.com/mesnilgr/nbsvm
+10 9
+
+3
+
+Experiments
+
+We experimented with CNN on two tasks, topic classification and sentiment classification. Detailed information for reproducing the results is available on the internet along with our code. 3.1 CNN
+
+We fixed the activation function to rectifier  (x) = max(x, 0) and minimized square loss with L2 regularization by stochastic gradient descent (SGD). We only used the 30K words that appeared most frequently in the training set; thus, for example, in seq-CNN with region size 3, a region vector is 90K dimensional. Out-of-vocabulary words were represented by a zero vector. On bow-CNN, to speed up computation, we used variable region stride so that a larger stride was taken where repetition7 of the same region vectors can be avoided by doing so. Padding8 size was fixed to p - 1 where p is the region size.
+Similar architectures have been used for image. Kim (2014) used it for text, but it was on top of a word vector conversion layer. 7 For example, if we slide a window of size 3 over "* * foo * *" where "*" is out of vocabulary, a bag of "foo" will be repeated three times with stride fixed to 1. 8 As is commonly done, to the beginning and the end of each document, special words that are treated as unknown words (and converted to zero vectors instead of one-hot vectors) were added as `padding'. The purpose is to equally treat the words at the edge and words in the middle.
+6
+
+107
+
+

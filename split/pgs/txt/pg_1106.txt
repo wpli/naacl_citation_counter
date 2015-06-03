@@ -1,0 +1,31 @@
+mate due to regularization7 and the large number of sparse, mostly irrelevant linguistic features from the response-based approach. In fact, the referencebased sparse features constitute almost 90% of the entire feature set, while the response-based dense features constitute the remaining 10%. This leads us to explore stacking (Wolpert, 1992), an ensemble technique where a top-layer model makes predictions based on predictions from lowerlayer models. Here, we train a lower-layer model to aggregate the sparse response-based features into a single "response-based prediction" feature, and then train an upper-layer SVR model that includes that feature along with all of the reference-based features. Figure 1 shows the details.8 For training our stacking model, we first train the response-based regression model (SVR #1 in Figure 1), and then train the reference-based regression model (SVR #2) with an additional prediction feature value from the response-based model. Specifically, the lower-layer model concentrates sparse and binary features into a single continuous value, which accords with reference-based dense features in the upper-layer model. In training the lower-layer SVR on the training data, computing the response-based prediction feature (i.e., output of the lower-layer SVR) from the sparse features is similar to k -fold cross-validation (k = 10 here): the prediction feature values are computed for each fold by responsebased SVR models trained on the remaining folds. In training the upper-layer SVR on the testing data, this prediction feature is computed by a single model trained on the entire training set.
+
+BLEU word2vec cosine word2vec alignment WordNet alignment All ("ref") length response-based ("resp")
+
+Q1 .72 .75 .76 .73 .78 .68 .82
+
+Q2 .45 .45 .47 .49 .52 .42 .72
+
+Q3 .60 .61 .61 .59 .66 .59 .75
+
+Q4 .52 .52 .51 .51 .59 .51 .74
+
+Table 1: Training set cross-validation performance of reference-based models, in quadratically weighted , with baselines for comparison. The response-based ("resp") model is a stronger baseline as described in §3.3. Note that each reference-based model includes the length bin features for a fair comparison to "resp".
+
+quadratically weighted  between the human and predicted scores. 4.1 Similarity Metrics
+
+4
+
+Experiments
+
+This section describes two experiments: an evaluation of reference-based similarity metrics, and an evaluation of methods for combining the referenceand response-based features by stacking. As mentioned in §2, we evaluate performance using
+Another possible combination approach would be to use the combination method from §3.3 but apply less regularization to the reference-based features, or, equivalently, scale them by a large constant. We only briefly explored this through training set cross-validation. The stacking approach seemed to perform at least as well in general. 8 It would also be possible to also make a lower-layer model for the reference-based features, though doing this did not show benefits in preliminary experiments.
+7
+
+We first evaluate the similarity metrics from §3.2 using 10-fold cross-validation on the training data. We evaluated SVR models for each metric individually as well as a model combining all features from all metrics. In all models, we included the response length bin features (§3.1) as a proxy for responsebased features. We compare to the response-based model (§3.1) and to a model consisting of only the response length bin feature. The results are shown in Table 1. Each similarity metric by itself does not always improve the performance remarkably from the baseline (i.e., the response length bin features). However, when we incorporate all the similarity features, we obtained substantial gain in all 4 questions. In the subsequent model combination experiment, therefore, we used all similarity features to represent the referencebased approach because it outperformed the other similarity models. 4.2 Model Combination
+
+Next, we tested models that use both responseand reference-based features on a held-out test set, which contains 400 responses per question. We evaluated the response-based ("resp", §3.1) and reference-based ("ref", §3.2) individual models as well as the two combination methods ("ref+resp", §3.3 and "ref+resp stacking", §3.4). We also eval-
+
+1052
+
+

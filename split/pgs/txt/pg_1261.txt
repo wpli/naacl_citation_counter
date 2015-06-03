@@ -1,0 +1,30 @@
+exploration. The positions of facts in the sentence can be very flexible and therefore difficult to be captured using a limited number of patterns. For example, the patterns in table 23 fail to extract James in Figure 1. However, the ways in which we express the trigger and words it dominated tend to be relatively fixed. For example, all the following patterns contain a fact-specific trigger and also facts usually appear within its scope.
+PER:SIBLING [Q] poss-1 brother appos [A] [Q] appos-1 brother appos [A] [Q] appos brother appos-1 [A] [Q] nsubjpass-1 survived agent brother appos [A] [Q] poss-1 sister appos [A] [Q] appos-1 sister appos [A] [Q] appos sister appos-1 [A] [Q] nsubjpass-1 survived agent sister appos [A] Table 3: Patterns used for extracting sibling facts (Li et al., 2013). Q: Query, A: Answer.
+
+to fragment-level. We only focus on analyzing the content which is likely to contain an answer. Our trigger scoping method is also partially inspired from the negation scope detection work (e.g., (Szarvas et al., 2008; Elkin et al., 2005; Chapman et al., 2001; Morante and Daelemans, 2009; Agarwal and Yu, 2010)) and reference scope identification in citing sentences (Abu-Jbara and Radev, 2011; AbuJbara and Radev, 2012).
+
+5
+
+Conclusions and Future Work
+
+The limitation of our method is that we assume a sentence centers around only one person thus every biographical fact mentioned should be related to the centroid person. For example, our method mistakenly extracted February as the death-date fact for both Reina and Orlando in the following case. Also at the mass was Reina Tamayo, the mother of Orlando Zapata, who [<died> in February] after an 85-day hunger strike to protest the fate of political prisoners here. In order to solve this problem, we need to further analyze the relation between the query entity mention and the trigger so that we can identify Orlando Zapata is irrelevant to the death-related fact.
+
+In this paper we explore the role of triggers and their scopes in biographical fact extraction. We implement the trigger scoping strategy using two simple but effective methods. Experiments demonstrate that our approach outperforms state-of-the-art without any syntactic analysis and external knowledge bases. In the future, we will aim to explore how to generate a trigger list for a "surprise" new fact type within limited time.
+
+Acknowledgement
+This work was supported by the U.S. DARPA Award No. FA8750-13-2-0045 in the Deep Exploration and Filtering of Text (DEFT) Program, the U.S. Army Research Laboratory under Cooperative Agreement No. W911NF-09-2-0053 (NS-CTA), U.S. NSF CAREER Award under Grant IIS-0953149, U.S. AFRL DREAM project, IBM Faculty Award, Google Research Award, Disney Research Award, Bosch Research Award, and RPI faculty start-up grant. The views and conclusions contained in this document are those of the authors and should not be interpreted as representing the official policies, either expressed or implied, of the U.S. Government. The U.S. Government is authorized to reproduce and distribute reprints for Government purposes notwithstanding any copyright notation here on.
+
+4
+
+Related Work
+
+Previous successful approaches to construct the biographical knowledge base are relatively expensive: Distant Supervision (Surdeanu et al., 2010) relies upon external knowledge bases and it is timeconsuming to manually write or edit patterns (Sun et al., 2011; Li et al., 2012). The main impact of our trigger scoping strategy is to narrow down the text span of searching for facts, from sentence-level
+A poss-1 B means there is a possession modifier relation (poss) between B and A.
+3
+
+References
+A. Abu-Jbara and D. Radev. 2011. Coherent citationbased summarization of scientific papers. In Proc. Association for Computational Linguistics (ACL2011). Association for Computational Linguistics. A. Abu-Jbara and D. Radev. 2012. Reference scope identification in citing sentences. In Proc. Human
+
+1207
+
+

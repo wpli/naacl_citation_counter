@@ -1,0 +1,17 @@
+Robust Morphological Tagging with Word Representations
+¨ ¨ Thomas Muller and Hinrich Schutze Center for Information and Language Processing University of Munich, Germany muellets@cis.lmu.de
+
+Abstract
+We present a comparative investigation of word representations for part-of-speech (POS) and morphological tagging, focusing on scenarios with considerable differences between training and test data where a robust approach is necessary. Instead of adapting the model towards a specific domain we aim to build a robust model across domains. We developed a test suite for robust tagging consisting of six languages and different domains. We find that representations similar to Brown clusters perform best for POS tagging and that word representations based on linguistic morphological analyzers perform best for morphological tagging.
+
+cases; e.g., the morphological suffix "-iste" is a reliable indicator of the informal second person singular preterite indicative form of a verb in Spanish. In what follows, we use the term "morphological tagging" to refer to "morphological and POS tagging" since morphological tags generally include POS information. The importance of morphological tagging as part of the computational linguistics processing pipeline motivated us to conduct the research reported in this paper. The specific setting that we address is increasingly recognized as the setting in which most practical NLP takes place: We look at scenarios with considerable differences between the training data and the application data, i.e., between the data that the tagger is trained on and the data that it is applied to. This type of scenario is frequent because of the great diversity and variability of natural language and because of the high cost of annotation ­ which makes it impossible to create large training sets for each new domain. For this reason, we address morphological tagging in a setting in which training and application data differ. The most common approach to this setting is domain adaptation. Domain adaptation has been demonstrated to have good performance in scenarios with differently distributed training/test data. However, it has two disadvantages. First, it requires the availability of data from the target domain. Second, we need to do some extra work in domain adaptation ­ consisting of taking target domain data and using it to adapt our NLP system to the target domain ­ and we end up with a number of different versions of our NLP system. The extra work required and the pro-
+
+1
+
+Introduction
+
+Most natural language processing (NLP) tasks can be better solved if a preprocessor tags each word in the natural language input with a label like "noun, singular" or "verb, past tense" that gives some indication of the syntactic role that the word plays in its context. The most common form of such preprocessing is POS tagging. However, for morphologically rich languages, a large subset of the languages of the world, POS tagging in its original form ­ where labels are syntactic categories with little or no morphological information ­ does not make much sense. The reason is that POS and morphological properties are mutually dependent, so solving only one task or solving the tasks sequentially is inadequate. The most important dependence of this type is that POS can be read off morphology in many 526
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 526­536, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

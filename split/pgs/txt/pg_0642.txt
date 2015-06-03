@@ -1,0 +1,19 @@
+Using Zero-Resource Spoken Term Discovery for Ranked Retrieval
+Jerome White New York University Abu Dhabi, UAE jerome.white@nyu.edu Douglas W. Oard University of Maryland College Park, MD USA oard@umd.edu Jiaul Paik University of Maryland College Park, MD USA jiaul@umd.edu
+
+Rashmi Sankepally University of Maryland College Park, MD USA rashmi@umd.edu Abstract
+Research on ranked retrieval of spoken content has assumed the existence of some automated (word or phonetic) transcription. Recently, however, methods have been demonstrated for matching spoken terms to spoken content without the need for language-tuned transcription. This paper describes the first application of such techniques to ranked retrieval, evaluated using a newly created test collection. Both the queries and the collection to be searched are based on Gujarati produced naturally by native speakers; relevance assessment was performed by other native speakers of Gujarati. Ranked retrieval is based on fast acoustic matching that identifies a deeply nested set of matching speech regions, coupled with ways of combining evidence from those matching regions. Results indicate that the resulting ranked lists may be useful for some practical similarity-based ranking tasks.
+
+Aren Jansen John Hopkins HLTCOE Baltimore, MD USA aren@jhu.edu
+most from such systems speak only one of the several hundred other languages that each have at least a million speakers;1 Balochi, Mossi or Quechua, for example. Addressing this challenge in a scalable manner requires an integration of speech processing and information retrieval techniques that can be effectively and affordably extended to a large number of languages. To this end, the experiments in this paper were conducted in a conventional ranked retrieval framework consisting of spoken queries, spoken "documents" (responses, hereafter), graded relevance judgments, and standard evaluation measures. As with other information retrieval tasks, there is an element of uncertainty in our best representations of what was said. Our focus on speech processing techniques that are language-agnostic creates the potential for explosive growth in the uncertainty that our search techniques must accommodate. The design and evaluation of such techniques is therefore the central focus of the work explored in this paper. Our results are both heartening and disconcerting. On the positive side, useful responses can often be found. As one measure of success, we show that a Mean Reciprocal Rank near 0.5 can be achieved when more than one relevant response exists; this corresponds to a relevant response appearing in the second position of a ranked list, on average (by the harmonic mean). On the negative side, the zeroresource speech processing technique that we rely on to generate indexing terms has quadratic time complexity, making even the hundred-hour scale of
+1 There are 393 languages with at least one million speakers according to Ethnologue.
+
+1
+
+Introduction
+
+Despite new methods of interaction, speech continues to be a dominant modality for information exchange, particularly among the half of the world's almost five billion mobile phone users who currently lack text-based Internet access. Recording speech poses no particular problems, but retrieval of spoken content using spoken queries is presently available only for the approximately two dozen languages in which there is an established path to market; English, German, or Chinese, for example. However, many of the mobile-only users who could benefit 588
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 588­597, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

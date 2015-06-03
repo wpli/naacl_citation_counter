@@ -1,0 +1,27 @@
+Context-Dependent Automatic Response Generation Using Statistical Machine Translation Techniques
+Ryohei Sasano Hiroya Takamura Manabu Okumura Tokyo Institute of Technology shin@lr.pi.titech.ac.jp {sasano,takamura,oku}@pi.titech.ac.jp Andrew Shin
+
+Abstract
+Developing a system that can automatically respond to a user's utterance has recently become a topic of research in natural language processing. However, most works on the topic take into account only a single preceding utterance to generate a response. Recent works demonstrate that the application of statistical machine translation (SMT) techniques towards monolingual dialogue setting, in which a response is treated as a translation of a stimulus, has a great potential, and we exploit the approach to tackle the context-dependent response generation task. We attempt to extract relevant and significant information from the wider contextual scope of the conversation, and incorporate it into the SMT techniques. We also discuss the advantages and limitations of this approach through our experimental results.
+
+better-suited for response generation than some of the previous approaches, including information retrieval approach. We exploit this model to address the above-mentioned problem of reflecting a wider scope of conversation. We present a context-dependent model where we attempt to generate more semantically relevant and diverse responses by adding the semantically important words from previous utterances to the most recent one. By doing so, we hope not only to diversify the responses, but also to be able to take semantics from broader scope of the conversation into account.
+
+2
+2.1
+
+Response Generation using SMT
+Overview
+
+1
+
+Introduction
+
+Various approaches have been applied to the response generation task, each with its own merits and drawbacks. While one of the main concerns on the topic has been the semantic relevance of the response, it has mostly been discussed in terms of a limited conversational scope, mostly a single utterance. This provides us with a room for research on a wider scope of conversation, which reflects not only a single preceding utterance, but the overall context of the current conversation. SMT-based data-driven approach to the response generation task was recently introduced by Ritter et al. (2011). They demonstrated that it was 1345
+
+Ritter et al. (2011) remarked that stimulus-response pairs in the same language often have a strong structural resemblance, as shown in the example conversation below, that may be exploited in SMT platforms. In the usual SMT setting, a string f in a source language is translated into a string e in a target language according to probability distribution p(e|f ) (Brown et al., 1993). Ritter et al. applied the SMT techniques to monolingual conversation setting, and treated the response as the translation of the stimulus. Stimulus: What is your hobby? Response: My hobby is hiking. 2.2 Challenges
+
+Although the application of SMT to the response generation task demonstrates potentials, it has a few drawbacks due to its nature.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1345­1350, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

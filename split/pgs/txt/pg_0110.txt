@@ -1,0 +1,23 @@
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11)
+
+S S RL S RR S S RR RRev S LRev
+
+[ [ [ [ [ [ [ [ [ [ [
+
+NPJohn NPJohn S/NPlikes S/NPlikes Slikes Slikes Slikes Slikes Slikes Slikes Slikes
+
+(S\NP)/NPlikes NPmangoes (NP\NP)/NPf rom (NP\NP)/NPf rom NP\NPf rom (S\NP)\(S\NP)madly NPIndia John
+
+(3)
+
+likes (5) mangoes (9) from (8) India
+
+(11) madly
+
+Figure 3: RevInc - Sequence of actions with parser configuration and the corresponding dependency graph. We use indexed CCG categories (Clark et al., 2002) and obtain the CCG dependencies after every action to build the dependency graph in parallel to the CCG derivation. This is similar to Xu et al. (2014) but differs from Zhang and Clark (2011), who extract the dependencies at the end after obtaining a derivation for the entire sentence. Figure 2 also shows the dependency graph generated and the arc labels give the step ID after which the dependency is generated. 3.2 Revealing based Incremental Algorithm (RevInc) The NonInc algorithm described above is not incremental because it relies purely on the mostly rightbranching CCG derivation. In our example sentence, the verb (likes) combines with the subject (John) only at the end (step ID = 11) after all the remaining words in the sentence are processed, making the parse non-incremental. In this section we describe a new incremental algorithm based on a `revealing' technique (Pareschi and Steedman, 1987) which tries to build the most incremental derivation. 3.2.1 Revealing Pareschi and Steedman (1987)'s original version of revealing was defined in terms of (implicitly higher-order) unification. It was based on the following observation. If we think of categories as terms in a logic programming language, then while we usually think of CCG combinatory rules like the following as applying with the two categories on the left X/Y and Y as inputs, say instantiated as S /NP and NP , to define the category X on the right as S , in fact instantiating any two of those categories defines the third. X/Y Y = X For example, if we define X and X/Y as S and S /NP , we clearly define Y as NP . They proposed to use unification-based revealing to recover unbuilt constituents in from the result of overlygreedy incremental parsing. A related secondorder matching-based mechanism was used by (Kwiatkowski et al., 2010) to decompose logical forms for semantic parser induction. The present incremental parser uses a related revealing technique confined to the right periphery. Using CCG combinators and rules like type-raising followed by forward composition, we combine nodes in the stack if there is a dependency between them. However, this can create problems for the newly shifted node as its dependent might already have been reduced. For instance, if the object `mangoes' is reduced after it is shifted to the stack, then it won't be available for the preposition phrase (PP) `from India' (of course, this goes for more complex NPs as well). We have to extract `mangoes', which is hidden in the derivation, so as to make the correct attachment to the PP. This is where revealing comes into play. Mangoes is `revealed' so that it is available to attach to the PP following it, although it has already been reduced. To handle this, in addition to the four actions of the NonInc algorithm, we introduce two new actions: Left Reveal (LRev) and Right Reveal (RRev). For this, after every action, in addition to updating the stack we also keep track of the dependencies resolved and update the dependency graph accordingly1 . In other words, we build the dependency graph for the
+Xu et al. (2014) also obtain CCG dependencies after every action. But they don't have a dependency graph which is updated based on the CCG derivation and used in the CCG parsing (in our case for LRev and RRev actions).
+1
+
+56
+
+

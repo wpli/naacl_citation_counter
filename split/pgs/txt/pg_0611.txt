@@ -1,0 +1,48 @@
+Kakade (2008) who showed that learning with multiple views is beneficial since it reduces the complexity of the learning problem by restricting the search space. Recent work by Anandkumar et al. (2014) showed that at least three views are necessary for recovering hidden variable models. Note that there exist different variants of GCCA depending on the measure of  that we choose to maximize. Kettenring (1971) enumerated a variety of possible measures, such as the spectral-norm of . Kettenring noted that maximizing this spectralnorm is equivalent to finding linear projections of the covariates that are most amenable to rank-one PCA, or that can be best explained by a single term factor model. This variant was named MAX-VAR GCCA and was shown to be equivalent to a proposal by Carroll (1968), which searched for an auxiliary orthogonal representation G that was maximally correlated to the linear projections of the covariates. Carroll's objective targets the intuition that representations leveraging multiple views should correlate with all provided views as much as possible.
+
+trices of different views: Define Pj =Xj (Xj Xj )-1 Xj ,
+J
+
+(2) (3)
+
+M=
+j =1
+
+Pj .
+
+Then, for some positive diagonal matrix , G and Uj satisfy: M G =G, Uj = Xj Xj
+-1
+
+(4) Xj G. (5)
+
+3
+
+Proposed Method: MVLSA
+
+Computationally storing Pj  RN ×N is problematic owing to memory constraints. Further, the scatter matrices may be non-singular leading to an ill-posed procedure. We now describe a novel scalable GCCA with 2 -regularization to address these issues. Approximate Regularized GCCA: GCCA can be regularized by adding rj I to scatter matrix Xj Xj before doing the inversion where rj is a small constant e.g. 10-8 . Projection matrices in (2) and (3) can then be written as Pj =Xj (Xj Xj + rj I )-1 Xj ,
+J
+
+(6) (7)
+
+Let Xj  RN ×dj j  [1, . . . , J ] be the mean centered matrix containing data from view j such that row i of Xj contains the information for word wi . Let the number of words in the vocabulary be N and number of contexts (columns in Xj ) be dj . Following standard notation (Hastie et al., 2009) we call Xj Xj the scatter matrix and Xj (Xj Xj )-1 Xj the projection matrix. The objective of MAX-VAR GCCA can be written as the following optimization problem: Find G  RN ×r and Uj  Rdj ×r that solve:
+J
+
+M=
+j =1
+
+Pj .
+
+Next, to scale up GCCA to large datasets, we first form a rank-m approximation of projection matrices (Arora and Livescu, 2012) and then extend it to an eigendecomposition for M following ideas by Savostyanov (2014). Consider the rank-m SVD of Xj : Xj = Aj Sj Bj , where Sj  Rm×m is the diagonal matrix with mlargest singular values of Xj and Aj  RN ×m and Bj  Rm×dj are the corresponding left and right singular vectors. Given this SVD, write the j th projection matrix as Pj = Aj Sj (rj I + Sj SJ )-1 Sj Aj , = Aj Tj Tj Aj , where Tj  Rm×m is a diagonal matrix such that Tj Tj = Sj (rj I + Sj SJ )-1 Sj . Finally, we note
+
+arg min
+G,Uj j =1
+
+G - Xj Uj
+
+2 F
+
+(1)
+
+subject to G G = I. The matrix G that solves problem (1) is our vector representation of the vocabulary. Finding G reduces to spectral decomposition of sum of projection ma557
+
+

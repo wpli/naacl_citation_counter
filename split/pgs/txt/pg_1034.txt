@@ -1,0 +1,40 @@
+Dataset
+
+Method (d = 500, C-S KIP) (d = 500, CBOW) WORD 2 VEC (d = 1000, C-S KIP) (d = 1000, CBOW)
+
+comp 1 comp 1 +SS .628 .696 .636 .717 .640 .615 .614 .761 .786 .764 .789 .764 .758 .749 .714 .644 .744 .289 .293 .289 .289 .309 .294 .273 .496 .486 .504 .489 .506 .498 .494 .165 .385 .417 .393 .400 .341 .371 .181 .202 .155 .442 .439 .411 .414 .320 .335 .310 .140 .372 .450
+
+comp 2 .632 .710 .648 .736 .624 .594 .631
+
+comp 2 +SS .761 .791 .767 .796 .759 .758 .756
+
+ENC
+
+(d = 300, w = 5) MSSG (d = 600, w = 5) (d = 600, w = 10) Distributional similarity String similarity State-of-the-art (d = 500, C-S KIP) (d = 500, CBOW) WORD 2 VEC (d = 1000, C-S KIP) (d = 1000, CBOW)
+
+-- -- -- -- -- -- --
+
+-- -- -- -- -- -- --
+
+EVPC
+
+(d = 300, w = 5) MSSG (d = 600, w = 5) (d = 600, w = 10) Distributional similarity String similarity State-of-the-art (d = 500, C-S KIP) (d = 500, CBOW) WORD 2 VEC (d = 1000, C-S KIP) (d = 1000, CBOW)
+
+.321 .361 .282 .349 .122 .146 .101
+
+.415 .423 .394 .411 .295 .303 .282
+
+GNC
+
+(d = 300, w = 5) MSSG (d = 600, w = 5) (d = 600, w = 10) Distributional Similarity String Similarity State-of-the-art
+
+Table 1: Pearson's correlation (r) for the different methods over the three datasets; the state-of-the-art for each dataset is described in Section 4
+
+generate a compositionality prediction back-off for the small numbers of MWEs in this category, we assign a default value, which is the mean of computed compositionality scores for other instances.7 As a baseline, we use the translation string similarity approach of Salehi and Cook (2013), including the cross-validation-based method for selecting the 10 best languages to use for each dataset. We further include a linear combination of the string similarity method with each of the various approaches based on word embeddings. Table 1 shows the results for the various methods,
+lack of lemmatisation. 7 We also experimented with using the string similarity approach as a back-off, which resulted in marginally lower results than what is reported in Table 1.
+
+over a range of hyper-parameter settings for each of WORD 2 VEC (vector dimensionality d; we also present results for CBOW vs. C-S KIP) and MSSG (vector dimensionality d and window size w), informed by the experimental results in the respective publications. Note that for EVPC, we don't use the vector for the particle, in keeping with Salehi et al. (2014b); as such, there are no results for comp 2 . For comp 1 ,  is set to 1.0 for EVPC, and 0.7 for both ENC and GNC, also based on the findings of Salehi et al. (2014b). The results indicate that the approaches using both WORD 2 VEC and MSSG outperform simple distributional and string similarity by a substantial margin. Further, over a variety of parameteriza-
+
+980
+
+

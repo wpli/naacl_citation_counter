@@ -1,0 +1,65 @@
+Their There There Their There There
+
+is is is is is is
+
+wide widespread widespread wide widespread widespread
+
+spread use use spread
+
+usage
+
+usage use use
+
+of of of of of of
+
+technology technology technology technology technology technology
+
+. . . . . .
+
+
+
+
+
+A B B A B B
+
+A A A A A A
+
+A B B A B B
+
+A B B A -
+
+A A B B
+
+A A A A A A
+
+A A A A A A
+
+A A A A A A
+
+Table 5: Two equally optimal alignments under the SP alignment model.
+Tokens Hypothesis a a a b b b b a a a Classification Detection Correction TN TN FN FN FN FN FP FP TP TP TP FP, FN, FPN TP FP, FN, FPN FP FP TP FP, FN, FPN TP TP TP TP TP FP, FN, FPN FP FP FN FN
+
+Source a a a a a a a a a a -
+
+Reference a b a b c a b a b a
+
+As mentioned in Section 1, the F measure does not shed light on the error rates in the data and is unable to discriminate between a `do-nothing' baseline and other systems unless TP > 0. However, because we now have a TN count, we can address problems 1.(b) and 1.(c) by computing accuracy (Acc) as follows: Acc = TP + TN TP + TN + FP + FN - FPN
+
+Table 6: Our extended WAS evaluation scheme.
+
+The limitation in 1.(j) is addressed by computing these metrics for both detection and correction. We adopt an extended version of the WriterAnnotator-System (WAS) evaluation scheme (Chodorow et al., 2012) where each token alignment is classified as a true positive (TP), true negative (TN), false positive (FP) or false negative (FN). As noted by Chodorow et al. (2012), cases where source = hypothesis = reference1 are both a FP and a FN for correction,2 so we introduce a new FPN class to count such cases and adjust our metrics accordingly. Our extended WAS scheme is shown in Table 6. With these counts, we can compute P , R and F using their standard definitions: P = TP TP + FP R= TP TP + FN
+
+Unlike in information retrieval, for example, where the whole document collection is usually unknown to the user so TNs are perhaps less relevant, the sentences fed into an error correction system will be provided by users. In this context, TNs are relevant because they indicate what parts of the text are already correct, allowing users to focus on problematic regions. For this reason, accuracy seems a more appropriate measure of text quality than F -score. 2.3.1 Weighted accuracy Accuracy treats all counts equally, which has two main side effects. A system that introduces the same number of TPs and FPs will have the same accuracy as the `do-nothing' baseline, in which case we would prefer to keep the original text and rank the system lower, in accord with the choice of F0.5 for evaluating the 2014 shared task. Accuracy is also unable to discriminate between systems with different TP and TN counts if their sum is the same. It is clear that for error correction these counts should be weighted differently. In particular, we would like to: · Reward correction more than preservation (i.e. weightTP > weightTN ). · Penalise unnecessary corrections more than uncorrected errors (i.e. weightFP > weightFN ).
+
+F = (1 +  2 ) ·
+1
+
+( 2
+
+P ·R · P) + R
+
+Note that we use different terminology where source = writer, hypothesis = system and reference = annotator. 2 From a correction perspective, an alignment where a = b = c generates a FP for the b class and a FN for the c class.
+
+582
+
+

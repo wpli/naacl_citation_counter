@@ -1,0 +1,28 @@
+Dataset CORPS Movie
+
+Example I think we can do better and I think we must do better. It will be waged with determination and it will be waged until we win. The night time is the right time. Beautiful.... beautiful butterfly... Dog eat dog, brother. Different Stores, Different Stories. Why ask why? Try Bud Dry Live, Love, Life. A Nerd in Need is a Nerd indeed. Easter cupcake baking!!
+
+Rhyme 0.789 0.566 0.818 0.667 0.533 0.621 0.625 0.818 0.636 0.0
+
+Alliteration 0.737 0.679 0.545 0.708 0.533 0.896 0.625 0.909 0.727 0.0
+
+Plosive 0.342 0.189 0.181 0.250 0.400 0.207 0.312 0.0 0.227 0.412
+
+Homogeneity 0.631 0.736 0.636 0.583 0.400 0.690 0.437 0.636 0.681 0.470
+
+Slogan Twitter
+
+Table 2: Euphonic examples of persuasive sentences from each dataset, along with their phonetic scores.
+Dataset CORPS¬P CORPSP Movie¬P MovieP Slogan¬P SloganP Twitter¬P TwitterP µ Rhyme  0.143 0.152 0.143 0.165 0.111 0.194 0.116 0.121 Alliteration µ  0.208 0.223** 0.167 0.196*** 0.047 0.123*** 0.180 0.193*** 0.142 0.154 0.142 0.164 0.092 0.185 0.114 0.120 µ Plosive  0.058 0.060 0.073 0.067 0.098 0.098 0.058 0.055 Homogeneity µ  0.603 0.588** 0.485 0.526*** 0.343 0.366*** 0.617 0.636*** 0.173 0.179 0.155 0.164 0.163 0.156 0.134 0.128
+
+0.233 0.245 0.196 0.214* 0.071 0.140*** 0.204 0.216***
+
+0.187 0.194*** 0.191 0.185 0.204 0.189*** 0.188 0.185**
+
+Table 3: Average phonetic scores for our datasets - ***, p < .001; **, p < .01; *, p < .05; , not significant
+
+the difference is highly significant for Slogan and Twitter (p < .001), slightly significant for Movie quotes (p < .05), but not significant for CORPS. The average alliteration scores are again higher in persuasive sentences and all the differences are highly significant in all datasets (apart from CORPS with p < .01). Plosives seem not to correlate well with our intuition of persuasiveness and euphony: either there is no significance (movie quotes) or the averages of euphonic scores are higher in the nonpersuasive sentences (the difference is highly significant in slogans, and significant in Twitter). The only dataset that meets our expectation is CORPS with a highly significant difference in favor of persuasive sentences. Finally, the average homogeneity scores are significantly (p < .001) higher in persuasive sentences in all datasets except CORPS, where the scores of non-persuasive sentences are significantly higher (p < .01) than persuasive ones. Without going into details of cross-dataset comparisons we would like to note that CORPS seems a very peculiar dataset in terms of average scores, as compared to the others. In terms of rhyme and alliteration, the average scores of non-persuasive 1487
+
+sentences (¬P ) in CORPS are always higher than the persuasive sentences (P ) in the other datasets (p < .001 in all cases), while for homogeneity the same holds apart from Twitter. These results may derive from the fact that a political speech is a carefully crafted text ­ aimed at influencing the audience ­ in its entirety, so also "non-persuasive" sentences in CORPS are on average more persuasive than in other datasets. As a next step, we conducted another analysis on the distribution of "extreme cases", i.e. sentences that have a very high phonetic score at least in one feature. This analysis derives from the intuition that a euphonic sentence might be recognized as such by humans only if its phonetic scores are above a certain threshold. In fact, sound repetition in a sentence may occur by chance, as in "I saw the knife in the drawer", and the longer the sentence is, the higher the probability that phonetic scores will be non-zero even in absence of a euphonic effect. Therefore, the average scores for each phonetic device, as reported in Table 3, are only partially informative. Given this premise, to evaluate the "persuasive power" of the phonetic devices taken into account,
+
+

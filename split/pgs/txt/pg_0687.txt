@@ -1,0 +1,21 @@
+airports!in!Europe! !European!airports+ amendment!of!regula1on! !amending!regula1on+ should!be!noted!that! !is!worth!no1ng!that!
+
+parison with previous work, we eliminate only pairs that have no shared context, i.e., Sim (e1 , e2 ) = 0. 3.1 Step 1. Learning Paraphrase Patterns
+
+X:!in!Y:! !Y:an!X:! X:ment!of!Y:! !X:ing!Y:! should!be!X:ed!that! !is!worth!X:ing!that!
+
+cohesion!in!Europe! !European!cohesion+ democracy!in!Europe! !European!democracy+ increase!in!Hai1! !Hai1an!increase+ transporta1on!in!suburb! !suburban!transporta1on+ economy!in!Uruguay! !Uruguayan!economy+ amendment!of!documents+ !amending!documents+ amendment!of!protocol+ !amending!protocol+ investment!of!resources+ !investing!resources+ recruitment!of!engineers+ !recruiting!engineers+ should!be!highlighted!that! !is!worth!highlighting!that! should!be!reiterated!that! !is!worth!reiterating!that! should!be!stated!that! !is!worth!stating!that!
+
+Given a set of seed paraphrases (SSeed ) we first induce a set of paraphrase patterns. From a seed paraphrase (4a), for instance, while IDENT learns (4b), LEXVAR generates (4c) by exploiting the generality exhibited by corresponding pairs of lexical variants, i.e., ("amendment", "amending"). (4) a. amendment of regulation  amending regulation b. amendment of X  amending X c. X :ment of Y :  X :ing Y :
+
+Figure 1: Overview of our proposed method.
+
+sufficient number of high-quality pairs to make lexical generalization possible. 3.0 Step 0. Acquiring Seed Paraphrase Pairs Our method requires as input a seed paraphrase lexicon (SSeed ) that has high quality and preferably exhibits various lexical correspondences that our method will exploit. For this purpose, paraphrases acquired from bilingual or monolingual parallel corpora are preferable (see Section 2.1.2). In this study, we take the bilingual pivoting method as an example for the sake of reproducibility. However, the method also outputs a large number of non-paraphrases. To obtain further clean seeds, we apply several filters as described in (Fujita et al., 2012) and discard pairs that have low paraphrase probability, i.e., p(e2 |e1 ) < 0.01, following the convention in (Du et al., 2010; Max, 2010; Denkowski and Lavie, 2010; Fujita et al., 2012). Previous work (Chan et al., 2011; Fujita et al., 2012; Ganitkevitch et al., 2013) has proved that the information obtained from monolingual data can be used for assessing bilingually originated paraphrases. Thus, pairs that have low contextual similarity are also filtered out. Among various recipes for computing contextual similarity, we use a simple one: cosine measure of two context vectors comprising adjacent word 1­4 grams of all of the phrase appearances in given monolingual data. For a fair com-
+
+The central issue at this stage is to robustly and accurately identify various types of lexical variants. We examine a data-driven approach, targeting for increased coverage, but manually created resources such as dictionaries can also be used. 3.1.1 Collecting Affix Patterns As exemplified by ("X :ment", "X :ing") in (4c), we represent pairs of lexical variants with affix patterns. While Gaussier (1999) considered only suffix patterns, we also deal with prefix patterns such as those exhibited by ("reliable", "unreliable") and ("exist", "coexist") observed in the following paraphrase pairs. (5) a. is not reliable  is unreliable b. exist together with  coexist with
+
+However, we currently do not consider prefix/suffix combinations, such as ("directly", "indirect") and ("believed", "unbelievable"), and other types of affixes than prefixes and suffixes. Reliable affix patterns are collected from SSeed (cf., headwords of manually compiled dictionaries (Gaussier, 1999; Fujita et al., 2007)). First, candidates of affix patterns are extracted from SSeed on the following assumption. A pair of words will share a definite semantic relation if the words appear on opposite sides of a paraphrase pair and have the same stem. We do not rely on any language resources to identify the stems of words. Instead, we regard word pairs that share at least one character as candidate
+
+633
+
+

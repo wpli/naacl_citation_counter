@@ -1,0 +1,54 @@
+matrix W (j ) , ht
+(f ) (b)
+
+=  (W (j )T ht
+
+(j -1)
+
++ W (f )T ht-1 + b(j ) ), + W (b)T ht+1 + b(j ) ).
+(b)
+
+(f )
+
+ht =  (W (j )T ht
+
+(j -1)
+
+(5)
+
+Note that the recurrent forward and backward hidden representations are computed entirely independently from each other. As with the other hidden layers of the network we use  (z ) = min(max(z, 0), µ). All hidden layers aside from the first hidden layer and temporal hidden layer use a standard dense weight matrix and bias vector, h(i) =  (W (i)T h(i-1) + b(i) ). (6)
+
+2014). The simplest form of decoding does not employ the language model and instead finds the highest probability character transcription given only the DBRNN outputs. This process selects a transcript hypothesis W  by making a greedy approximation, W  = arg max p(W |X )  (arg max p(C |X ))
+W C T
+
+= (arg max
+C t=1
+
+p(ct |X )). (8)
+
+DBRNNs can have an arbitrary number of hidden layers, but we assume that only one hidden layer contains temporally recurrent connections. The model outputs a distribution p(c|xt ) over a set of possible characters  using a softmax output layer. We compute the softmax layer as, p(c = ck |xt ) =
+| | (s)T (:) h j =1 exp(-(Wj
+
+exp(-(Wk
+
+(s)T (:) h
+
++ bk ))
+
+(s)
+
+This decoding procedure ignores the issue of many time-level character sequences mapping to the same final hypothesis, and instead considers only the most probable character at each point in time. Because our model assumes the character labels for each timestep are conditionally independent, C  is simply the most probable character at each timestep in our DBRNN output. As a result, this decoding procedure is very fast to compute, requiring only time O(T | |). 3.2 Beam Search Decoding To decode while taking language model probabilities into account, we use a beam search to combine a character language model and the outputs of our DBRNN. This search-based decoding method does not make a greedy approximation and instead assigns probability to a final hypothesis by integrating over all character sequences consistent with the hypothesis under our collapsing function (·). Algorithm 1 outlines our decoding procedure. We note that our decoding procedure is significantly simpler, and in practice faster, than previous decoding procedures applied to CTC models. This is due to reasoning at the character level without a lexicon so as to not introduce difficult multi-level constraints to obey during the decoding search procedure. While a softmax over words is typically the bottleneck in neural network language models, a softmax over possible characters is comparatively cheap to compute. Our character language model is applied at every time step, while word models can only be applied when we consider adding a space or by computing the likelihood of a sequence being the prefix of a word in the lexicon (Graves and Jaitly, 2014). Additionally, our lexicon-free approach re-
+
+, (s) + bj )) (7)
+
+where Wk is the k 'th column of the output weight (s) matrix W (s) and bk is a scalar bias term. The vector h(:) is the hidden layer representation of the final hidden layer in our DBRNN. We can directly compute a gradient for all weights and biases in the DBRNN with respect to the CTC loss function and apply batch gradient descent.
+
+(s)
+
+3
+
+Decoding
+
+Our decoding procedure integrates information from the DBRNN and language model to form a single cohesive estimate of the character sequence in a given utterance. For an input sequence X of length T our DBRNN produces a set of probabilities p(c|xt ), t = 1, . . . , T . Again, the character probabilities are a categorical distribution over the symbol set  . 3.1 Decoding Without a Language Model As a baseline, we use a simple, greedy approach to decoding the DBRNN outputs (Graves and Jaitly, 348
+
+

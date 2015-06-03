@@ -1,0 +1,25 @@
+monly referred to as neutral sentences should be classified as objective segments, as they do not carry any sentiment related to the subject matter. When annotating the corpus we considered the intended semantic orientation of a segment, not its literal meaning and the presence and polarity of lexical cues. Thus, segments without any lexical cues could be annotated both as subjective and objective: (4) I bought this mobo from Amazon, after buying the same month the DG31PR Classic for my wife. (objective) (5) After I install my new PC, the 2do. day of use, the LAN failed. (subjective, negative) Segments with a lexical cue of a certain polarity could be annotated both as positive and negative: (6) The ring is nice and heavy. (positive) (7) It's going to be a nice paperweight. (negative, from a review of a camera) Finally, segments where an alternative product was praised or preferred were understood to be a criticism towards the reviewed product: (8) I will never buy another Panasonic product. There are plenty of other brands that are loyal to their customers. (both segments are negative) We view each of the reviews as a separate discourse with its own sentiment flow, and thus treat the sentiment analysis problem as a sequence classification task. We employ the CRF method, which outperforms other methods of sequence labeling (Lafferty, 2001). In CRFs the probability of a sequence is defined as
+
+where X is a set of input random variables, Y is a set of labels, and  is a weight for the feature function F(Y,X). (Sha, 2003). All experiments in this paper were conducted using a C++ implementation of a linear Conditional Random Fields classifier (CRF++) 5 . Though more complex or constrained types of CRF classifiers and models based on them proved to be more suitable for sentiment analysis (Mao, 2006; Yang, 2014), we use the simplest model as a proof of concept in this study. Each review in the training and test data is converted into a sequence of polarity segments assigned to it. For example, the following short review: (9) The ring is nice and heavy. Have been wearing if for almost a month and still not a scratch! is presented as a sequence of tokens POSITIVE POSITIVE, based on the sentiment labels from the annotation. The tokens are assigned features, as defined in the following sections, which are then fed into the classifier.
+
+4.2
+
+Features for Experiments
+
+4.2.1 Lexical Features To set a baseline, we use a state-of-art lexical classifier ­ Stanford Sentiment Analysis Classifier from Stanford CoreNLP toolkit6 ­ to determine the lexical polarity of each individual sentence. Thus the lexical classifier considers only lexical features available in a particular sentence without looking at neighboring sentences or discourse cues. For the local context classifier we also determine the lexical polarity of the previous and next sentences and use the sequence of {prev_polarity, current_polarity, next_polarity} as a feature (a similar approach is taken by Somasundaran (2010)). This is done to disambiguate and, if necessary, to correct the polarity of misclassified instances that are sandwiched between the correctly classified ones. For example, if the lexical classifier fails to detect an implicit opinion
+
+p (Y | X ) 
+where
+
+exp   F (Y , X ) Z (X )
+
+Z  ( x)   exp   F ( y, x)
+y
+
+5 6
+
+Available from http://taku910.github.io/crfpp/ Available from http://nlp.stanford.edu/sentiment/code.html
+
+1562
+
+

@@ -1,0 +1,40 @@
+to the coherence of the node e. Thus, the set of contributors towards coh(e) is defined as CON T Re(m,c) = { (m , argmax coh(m ,c) (e) )  V, m = m }
+c
+
+(2)
+
+ity to the entity. To combine the coherence score coh(e) with iSim(e), we weight the latter with an average value of P P R weights used in coherence computation (3) across all nodes in the document graph G(V, E ): P P Ravg =
+eV sCON T Re
+
+Then coherence of the node e to graph G is given by coh(e) =
+sCON T Re(m,c)
+
+P P R(s  e) (4)
+
+cohs (e)
+
+|V |
+
+(3)
+
+Consider the example in Figure 1, which has two connected components. Candidate Devon White (baseball) is disconnected from the rest of the graph and can neither contribute towards any other candidate nor get contributions from other nodes. So its coherence is zero. All other candidates are connected, i.e. belong to the same connected component. Thus, the random walker, started from any node in this component, will land at any other node in this component with some positive likelihood. Let us consider the CON T Re(m,c) for entity mention m = Lincolnshire and candidate c = Lincolnshire, 0.4,. Without our constraints, nodes Devon White (footballer), 0.5, Lincoln United F.C., 0.5, Boston United F.C., 0.5, Lincoln Lincolnshire, 0.3, Boston Lincolnshire, 0.3 can all potentially contribute towards coherence of Lincolnshire, 0.4. However, (c1) and (c2) will eliminate contribution from some of the candidates: Constraint (c1) does not allow Lincoln Lincolnshire, 0.3 and Boston Lincolnshire, 0.3 to contribute, because they compete for the same entity mention as candidate Lincolnshire, 0.4; constraint (c2) will allow only one contribution from either Lincoln United F.C., 0.5 or Boston United F.C., 0.5 whichever is bigger, since they compete for the same entity mention United F.C.. Therefore, set CON T Re(m,c) for entity mention m = Lincolnshire and candidate c = Lincolnshire, 0.4, will contain only two contributors: candidate Devon White (footballer), 0.5, for entity mention Devon White, and exactly one of the candidates for entity mention United F.C. 4.3 PPRSim Our goal is to find the best candidate for every entity given a candidate's coherence and its initial similar241
+
+Thus, the final score for node e is a linear combination score(e) = coh(e) + P P Ravg · iSim(e) (5)
+
+If the document graph has no edges then P P Ravg is zero and for any node e its coherence coh(e) is zero as well. In this case we set score(e) to its initial similarity iSim(e) for all nodes e in the graph G. Finally, PPRSim disambiguates entity mention m with the highest scored candidate c  Cm : disambiguate(m) = argmax score(m, c)
+cCm
+
+(6)
+
+To resolve ties in (6) we pick a candidate with the most incoming wikipedia links. Thus, candidate Devon White (footballer), 0.5 in Figure 1 will get higher overall score than its competitor, Devon White (baseball), 0.5. Their initial scores are the same, 0.5, but the latter one is disconnected from other nodes in the graph and thus has a zero coherence. So, entity mention Devon White will be correctly disambiguated with the candidate Devon White (footballer), 0.5. This candidate is directly connected to Boston United F.C., 0.5 and has a shortest path of length 3 to Lincolnshire United F.C., 0.5, and therefore contributes more towards Boston United F.C., 0.5, and boosts its coherence to make it the correct disambiguation for United F.C. Similarly, Lincolnshire is correctly disambiguated with Boston Lincolnshire F.C., 0.3.
+
+5
+
+Experiments and Results.
+
+Data. For our experiments we use dataset AIDA2 . All textual entity mentions are manually disambiguated against Wikipedia links (Hoffart et al.,
+2
+
+http://www.mpi-inf.mpg.de/yago-naga/aida/
+
+

@@ -1,0 +1,24 @@
+Echoes of Persuasion: The Effect of Euphony in Persuasive Communication
+Marco Guerini Trento RISE Povo, I-38100 Trento
+marco.guerini@trentorise.eu
+
+¨ G¨ ozde Ozbal FBK-Irst Povo, I-38100 Trento
+gozbalde@gmail.com
+
+Carlo Strapparava FBK-Irst Povo, I-38100 Trento
+strappa@fbk.eu
+
+Abstract
+While the effect of various lexical, syntactic, semantic and stylistic features have been addressed in persuasive language from a computational point of view, the persuasive effect of phonetics has received little attention. By modeling a notion of euphony and analyzing four datasets comprising persuasive and nonpersuasive sentences in different domains (political speeches, movie quotes, slogans and tweets), we explore the impact of sounds on different forms of persuasiveness. We conduct a series of analyses and prediction experiments within and across datasets. Our results highlight the positive role of phonetic devices on persuasion.
+
+making people remember a statement or a product) to diffusion (e.g., making people pass on a content in social networks by sharing it), from behavioral change (e.g., political communication) to influencing purchasing decisions (e.g., slogans to convince people to try or buy a product) ­ see for example (Heath and Heath, 2007). While many techniques such as resorting to expert opinion, utilizing the framing effect, emotive language or exaggeration can be used to obtain such persuasive effects, we devote this study to explore particular techniques pertaining to euphony. Euphony refers to the inherent pleasantness of the sounds of words, phrases and sentences, and it is utilized to achieve pleasant, rhythmical and harmonious effects. The idea that the pleasantness of the sounds in a sentence can foster its effectiveness is rooted in our culture, and is connected to the concepts of rhythm and music. The fact that language and music interact in our brain has been shown by localizing low-level syntactic processes of music and language in the temporal lobe (Sammler et al., 2013). It has also been shown that changes in the cardiovascular and respiratory systems can be induced by music ­ specifically tempo, rhythm, melodic structure (Bernardi et al., 2006). The importance of euphony has its roots also in ancient human psychology. As Julian Jaynes suggests (Jaynes, 2000), poetry used to be divine knowledge. It was the sound and tenor of authorization and it commanded where plain prose could only ask. A paradigmatic example of this conception is the act of casting a spell. Spells (incantations) are special linguistic objects that are meant not only to change how
+
+1
+
+Hocus Pocus
+
+Historically, in human sciences, several definitions of persuasion have been proposed ­ see for example (Toulmin, 1958; Walton, 1996; Chaiken, 1980; Cialdini, 1993; Petty and Cacioppo, 1986). Most of them have a common core addressing: methodologies aiming to change the mental state of the receiver by means of communication in view of a possible action to be performed by her/him. (Perelman and Olbrechts-Tyteca, 1969; Moulin et al., 2002). These methodologies might take into account the overall structure of a text such as the ordering of the arguments or simply single word choices. For a successful text both of them are often required. The focus of persuasion may vary according to the goal of the communication and it can take different forms according to the domain: from memorability (e.g., 1483
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1483­1493, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

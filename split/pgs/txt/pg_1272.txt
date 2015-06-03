@@ -1,0 +1,38 @@
+Forum Asthma Acne Diabetes ENT
+
+Expanded 77.01 73.84 82.37 80.66
+
+Expanded-M 75.68 75.41 44.25 80.04
+
+NotExpanded 74.48 71.65 48.75 77.02
+
+Average 65.42 65.05 21.82 59.50
+
+Table 1: Area under Precision-Recall curve for all the systems. Expanded is our system when word vectors are learned using the Wiki+Twit+MedHelp data and Expanded-M is when word vectors are learning using the MedHelp data.
+ASTHMA 1 0.95 Precision 0.9 0.85 0.8 0.75 0 0.2 0.4 0.6 0.8 Recall (268.0 correct entities) DIABETES Expanded NotExpanded Average Precision 1 Expanded NotExpanded Average Precision 1 0.95 0.9 0.85 0.8 0.75 0 0.2 0.4 0.6 0.8 Recall (268.0 correct entities) ENT Expanded NotExpanded Average 1 ACNE Expanded NotExpanded Average
+
+1 0.95 Precision 0.9 0.85 0.8 0.75 0
+
+1 0.95 0.9 0.85 0.8 0.75
+
+0.2 0.4 0.6 0.8 Recall (268.0 correct entities)
+
+1
+
+0
+
+0.2 0.4 0.6 0.8 Recall (268.0 correct entities)
+
+1
+
+Figure 1: Precision vs. Recall curves of our system and the baselines for the four forums. high precision. Recall is defined as the fraction of correct entities among the total unique correct entities pooled from all systems.7 We calculate the area under the precision-recall curves (AUC-PR) to compare the systems. We call our system Expanded in the experiments. To compare the effects of word vectors learned using different types of datasets, we also study our system when the word vectors are learned using just the in-domain MedHelp data, called Expanded-M. We compare against two baselines: NotExpanded as explained in Section 3, and Average, in which we average the feature values, similar to (Gupta and ManNote that calculating lower precisions or true recall is very hard to compute. Our dataset is unlabeled and manually labeling all entities is expensive. Pooling is a common evaluation strategy in such situations (such as, TAC-KBP shared task).
+7
+
+ning, 2014).
+
+6 Results and Discussion
+Table 1 shows AUC-PR of various systems and Figure 1 shows the precision-recall curves. Our systems Expanded and Expanded-M, which used similar entities for training, improved the scores for all four forums. We believe the improvement for the Diabetes forum was much higher than other forums because the baseline's performance on the forum degraded quickly in later iterations (see the figure), and improving the classifier helped in adding more correct entities. Additionally, Diabetes DT entities are more lifestyle-based and hence occur frequently in web text, making the word vectors trained using the Wiki+Twit+MedHelp dataset better suited. In three out of four forums, word vectors trained
+
+1218
+
+

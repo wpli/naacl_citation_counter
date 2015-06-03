@@ -1,0 +1,80 @@
+0.25 0.20 0.15 0.10 0.05 -5 0.25 0.20 0.15 0.10 0.05 -5 0 5 0 5
+
+k
+
+0.25
+
+c e k
+
+sh
+
+0.20 0.15 0.10 0.05
+
+i h s t
+
+10
+
+15
+
+20
+
+25
+
+-5 0.25
+
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+w
+
+w
+
+uw
+
+0.20 0.15 0.10 0.05
+
+d o u y
+
+10
+
+15
+
+20
+
+25
+
+-5
+
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+Figure 3: Character probabilities from the CTC-trained neural network averaged over monophone segments created by a forced alignment of the HMM-GMM system. Time is measured in frames, with 0 indicating the start of the monophone segment. The vertical dotted line indicates the average duration of the monophone segment. We show only characters with non-trivial probability for each phone while excluding the blank and space symbols. probabilities generally rise slightly later in the phone segment as compared to consonants. This may occur to avoid the large contextual variations in vowel pronunciations at phone boundaries. For certain consonants we observe CTC probability spikes before the monophone segment begins, as is the case for sh. The probabilities for sh additionally exhibit multiple modes, suggesting that CTC may learn different behaviors for the two common spellings of the sibilant sh: the letter sequence "sh" and the letter sequence "ti". or pronunciation dictionary, instead learning orthography and phonics directly from data. We hope the simplicity of our approach will facilitate future research in improving LVCSR with CTC-based systems and jointly training LVCSR systems for SLU tasks. DNNs have already shown great results as acoustic models in HMM-DNN systems. We free the neural network from its complex HMM infrastructure, which we view as the first step towards the next wave of advances in speech recognition and language understanding.
+
+6
+
+Conclusion
+
+Acknowledgments
+We thank Awni Hannun for his contributions to the software used for experiments in this work. We also thank Peng Qi and Thang Luong for insightful discussions, and Kenneth Heafield for help with the KenLM toolkit. Our work with HMM-GMM systems was possible thanks to the Kaldi toolkit and its contributors. Some of the GPUs used in this work were donated by the NVIDIA Corporation. AM was supported as an NSF IGERT Traineeship Recipient under Award 0801700. ZX was supported by an NDSEG Graduate Fellowship.
+
+We presented an LVCSR system consisting of two neural networks integrated via beam search decoding that matches the performance of an HMM-GMM system on the challenging Switchboard corpus. We built on the foundation of Graves and Jaitly (2014) to vastly reduce the overall complexity required for LVCSR systems. Our method yields a complete first-pass LVCSR system with about 1,000 lines of code -- roughly an order of magnitude less than high performance HMM-GMM systems. Operating entirely at the character level yields a system which does not require assumptions about a lexicon 353
+
+

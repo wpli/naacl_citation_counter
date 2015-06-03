@@ -1,0 +1,25 @@
+Vocabulary
+
+Noun Phrases With : Without Interpretation(s) I : ¬I AI : A¬I MI : M¬I ListQ 2.14 : 1 2.93 : 1 2.65 : 1 IsA 2.31 : 1 5.76 : 1 3.26 : 1 WikiC 2.60 : 1 3.72 : 1 3.63 : 1
+
+Table 12: Correlation between coverage, measured as the presence of some extracted interpretation(s) for a noun phrase, on one hand; and frequency of the noun phrase as a query, on the other hand (I=number of noun phrases that are queries and have some extracted interpretation(s); ¬I=number of noun phrases that are queries and do not have any extracted interpretation(s); A=average query frequency of noun phrases as queries; M=median query frequency of noun phrases as queries)
+
+0.800 0.400 0.200 0.100 0.050 0.020 0.010 0.004 0.001 0.000 2 3 4 5 6 7 8
+
+ListQ IsA WikiC
+
+9
+
+10
+
+Number of tokens in noun phrase
+
+Figure 2: Ability to extract interpretations for noun phrases, as a function of the length of noun phrases. Computed as the fraction of noun phrases from an input vocabulary with a particular number of tokens, for which there are some extracted interpretation(s)
+
+the effect is visible in that query frequency is higher for noun phrases with some extracted interpretations vs. noun phrases with none. For example, the average query frequency is almost three times higher for the former than for the latter, for the ListQ vocabulary. Similarly, in Figure 2, a larger fraction of the input noun phrases with a particular number of tokens have some extracted interpretations, when the number of tokens is lower rather than higher. The effect is somewhat less pronounced for, but still applicable to, the WikiC vocabulary, with some extracted interpretations being present for 75%, 71%, 63%, and 37% of the noun phrases containing 2, 3, 4 and 8 tokens respectively. That a larger fraction of the longer noun phrases can be interpreted in the WikiC vocabulary is attributed to the role of wiki-templ variants in extracting interpretations that would otherwise not be available. Interpretations from Queries vs. Documents: For 342
+
+completeness, additional experiments evaluate the interpretations extracted from queries, relative to a gold standard introduced in (Hendrickx et al., 2013). The gold standard consists of a gold set of 181 compound noun phrases (e.g., "accounting principle" and "application software"), their manually-assembled gold paraphrases (e.g., "principle of accounting", "software to make applications"), and associated scoring metrics referred to as non-isomorphic and isomorphic. Note that, in comparison to the ListQ, IsA and WikiC evaluation sets, the gold standard in (Hendrickx et al., 2013) may contain relatively less popular gold phrases. As many as 45 gold paraphrases are available per gold phrase on average. They illustrate the difficulty of any attempt to manually assemble exhaustive sets of all strings that are valid interpretations of a noun phrase. For example, the gold paraphrases of the gold phrase blood cell include "cell that is found in the blood", but not the arguably equally-relevant "cell found in the blood". In addition, more than one human annotators independently provide the same gold paraphrase for only a tenth of all gold paraphrases. See (Hendrickx et al., 2013) for details on the gold standard and scoring metrics. The gold set is added as another input vocabulary to the method proposed here. After inspection of a training set of compound noun phrases also introduced in (Hendrickx et al., 2013), the parameter settings are modified to only retain interpretations whose penalty score is 0. The isomorphic and non-isomorphic scores reward coverage and accuracy respectively. For the ranked candidate interpretations extracted from queries for the gold set, they are 0.037 and 0.556 respectively. In comparison to previous methods that operate over documents instead of queries, the isomorphic score is much lower for our method (e.g., 0.037 vs. 0.130 (Van de Cruys et al., 2013)). It suggests that queries cannot reliably provide an exhaustive list of all possible strings available in the gold standard for each gold phrase. However, the non-isomorphic score is higher for our method than for the best method operating over documents (i.e., 0.556 vs. 0.548 (Hendrickx et al., 2013)). In fact, the non-isomorphic score using queries would be 0.745 instead of 0.556, if it were computed over only the 135 gold noun phrases with some extracted interpretations. The results suggests that the method proposed here extracts more accurate interpretations from queries, than previous methods extract from
+
+Fraction of noun phrases
+
+

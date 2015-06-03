@@ -1,0 +1,30 @@
+3.2
+
+Conditional Random Field Autoencoders
+
+4.1
+
+Choice of POS Induction Models
+
+The second class of models this work extends is called CRF autoencoders, which we recently proposed in (Ammar et al., 2014). It is a scalable family of models for feature-rich learning from unlabeled examples. The model conditions on one copy of the structured input, and generates a reconstruction of the input via a set of interdependent latent variables which represent the linguistic structure of interest. As shown in Eq. 5, the model factorizes into two distinct parts: the encoding model p ( t | w ) and the reconstruction model p ( w ^ | t ) ; where w is the structured input (e.g., a token sequence), t is the linguistic structure of interest (e.g., a sequence of POS tags), and w ^ is a generic reconstruction of the input. For POS induction, the encoding model is a linear-chain CRF with feature vector  and local feature functions f . p(w ^ ,t | w ) = p ( t | w ) × p ( w ^ | t)
+|w |
+
+Here, we compare the following models for POS induction: · Baseline: HMM with multinomial emissions (Kupiec, 1992), · Baseline: HMM with log-linear emissions (BergKirkpatrick et al., 2010), · Baseline: CRF autoencoder with multinomial reconstructions (Ammar et al., 2014), 7 · Proposed: HMM with Gaussian emissions, and · Proposed: CRF autoencoder with Gaussian reconstructions. Data. To train the POS induction models, we used the plain text from the training sections of the CoNLL-X shared task (Buchholz and Marsi, 2006) (for Danish and Turkish), the CoNLL 2007 shared task (Nivre et al., 2007) (for Arabic, Basque, Greek, Hungarian and Italian), and the Ukwabelana corpus (Spiegler et al., 2010) (for Zulu). For evaluation, we obtain the corresponding gold-standard POS tags by deterministically mapping the language-specific POS tags in the aforementioned corpora to the corresponding universal POS tag set (Petrov et al., 2012). This is the same set up we used in (Ammar et al., 2014). Setup. In this section, we used skip-gram (i.e., word2vec) embeddings with a context window size = 1 and with dimensionality d = 100, trained with the largest corpora for each language in (Quasthoff et al., 2006), in addition to the plain text used to train the POS induction models. 8 In the proposed models, we only show results for estimating µ t , assuming a diagonal covariance matrix  t ( k , k ) = 0.45k  {1, . . . , d }. 9 While the CRF autoencoder with multinomial reconstructions were carefully initialized as
+7We use the configuration with best performance which reconstructs Brown clusters. 8We used the corpus/tokenize-anything.sh script in the cdec decoder (Dyer et al., 2010) to tokenize the corpora from (Quasthoff et al., 2006). The other corpora were already tokenized. In Arabic and Italian, we found a lot of discrepancies between the tokenization used for inducing word embeddings and the tokenization used for evaluation. We expect our results to improve with consistent tokenization. 9Surprisingly, we found that estimating  t significantly degrades the performance. This may be due to overfitting (Shinozaki and Kawahara, 2007). Possible remedies include using a prior (Gauvain and Lee, 1994).
+
+ p(w ^ | t ) × exp  ·
+i =1
+
+f ( t i , t i -1 , w )
+
+(5)
+
+In (Ammar et al., 2014), we explored two kinds of reconstructions w ^ : surface forms and Brown clusters (Brown et al., 1992), and used "stupid multinomials" as the underlying distributions for re-generating w ^. Gaussian Reconstruction. In this paper, we use d dimensional word embedding reconstructions w ^i = vw i  Rd , and replace the multinomial distribution of the reconstruction model with the multivariate Gaussian distribution in Eq. 2. We again use the Baum­ Welch algorithm to estimate µ t  and  t  similar to Eq. 3. The only difference is that posterior label probabilities are now conditional on both the input sequence w and the embeddings sequence v, i.e., replace p (t i = t  | v) in Eq. 2 with p (t i = t  | w , v) .
+
+4
+
+Experiments
+
+In this section, we attempt to answer the following questions: · §4.1: Do syntactically-informed word embeddings improve POS induction? Which model performs best? · §4.2: What kind of word embeddings are suitable for POS induction? 1313
+
+

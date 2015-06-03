@@ -1,0 +1,29 @@
+column vector given by feature map smt ,
+T Fsmt (h, qe , qf ) = wsmt smt (h, qe , qf ).
+
+(2)
+
+In CLIR, we seek to choose a derivation that is both an accurate translation of the input according to the translation model, and a well-formed discriminative query that matches relevant documents with high probability. We combine both objectives by directly modeling the probability of a document de in target language e given a query qf in source language f , factorized as follows: P (de |qf ) =
+hEqf
+
+where IR features do not depend on qf (thus allowing us to drop this term) and decompose over derivation terms. This allows a bag-of-word vector representation of documents, and retrieval features are local to single edges in the search space for efficient Viterbi inference. The joint scoring model is defined as follows: score(qf , de ; w) = max eFsmt (h,qe ,qf )+Fir (h,de ) ,
+hEqf
+
+P (h|qf ) × P (de |h, qf ) .
+translation retrieval
+
+Applying the same Viterbi approximation during inference as in (1), we choose the retrieval score of de to be the score of the highest scoring hypothesis h, score(qf , de ) = max P (h|qf ) × P (de |h, qf ), (3)
+hEqf
+
+where the product between both models can be interpreted as a conjunctive operation similar to a product of experts (Hinton, 2002): A high score is achieved if both experts, namely translation and retrieval models, assign high scores to a hypothesis. That is, the model attempts to produce a wellformed translation, but at the same time chooses lexical items present in the bag-of-words representation of the document. Similarly, we can interpret the inclusion of the retrieval component as a constraint to force the decoder to retrieve de with high probability. By a slight abuse of terminology, we will henceforth call our approach Bag-of-Words Forced Decoding (BOW-FD).1 The translation term P (h|qf ) is modeled as in (2) for standard hierarchical phrase-based SMT (Chiang, 2007) and left unchanged in our joint model. The retrieval term P (de |h, qf ) is modeled in a similar form
+T Fir (h, de ) = wir ir (h, de ),
+
+where the weight vector is defined by the vector concatenation w = wsmt wir , and qe refers to the yield that is determined uniquely by derivation h. Following the interpretation of our joint model as forced or constrained decoding, we can view pipeline approaches such as the direct translation baseline as instances of unconstrained decoding. That is, the SMT decoder yields a single translation output for every document and the assignment of document scores is deferred to a (monolingual) retrieval model given this single output structure. Other CLIR approaches such as probabilistic structured queries (Darwish and Oard, 2003; Ture et al., 2012b) try to mitigate this early disambiguation by keeping enumerated translation alternatives at retrieval time. However, they either use context-free word-based translation tables or select only terms from a small n-best fraction of the full search space. Dynamic Programming on Hypergraphs. Decoding in a hierarchical phrase-based SMT (Chiang, 2007) is usually understood as a two-step process: Initially, an input sentence is parsed using a Weighted Synchronous Context-Free Grammar (WSCFG) in a bottom-up manner to construct an initial hypergraph H that compactly encodes the full search space ("translation forest") (Gallo et al., 1993; Klein and Manning, 2001; Huang and Chiang, 2005; Dyer et al., 2010). An ordered, directed hypergraph H is a tuple V, E, g, W , consisting of a finite set of nodes V , a finite set of hyperedges E , and weight function W : E  R assigning realvalued weights to e  E . Language models are typically added in a second rescoring phase that is carried out by approximate solutions, such as cubepruning (Chiang, 2007; Huang and Chiang, 2007), limiting the number of derivations created at each node. A translation hypothesis h  E corresponds
+
+Standardly, the term forced decoding is used to describe the search for only those derivations that exactly produce the reference translation. Our use of this terminology deviates from the standard in two respects: First, we do not require exact reachability of the reference, but only a BOW match. Second, our constraint on the decoder is not strict, but only applies with high probability.
+
+1
+
+1174
+
+

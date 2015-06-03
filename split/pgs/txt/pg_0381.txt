@@ -1,0 +1,24 @@
+... 33 debinarize the binary vector  0 1 0 0 ... 0 0 0 1 binarize according to categorical constraints  0.01 0.00 0.92 0.02 0.01 0.01 ... 0.00 0.99 decode using the autoencoder h 0.21 0.84 ... 0.03 encode using the autoencoder x 1 0 0 0 ... 0 1 0 0 binarize the categorical vector v 2 2 0 ... 3 3
+ 2 2 0
+
+The training objective of the autoencoder alone is to minimize cross-entropy of reconstruction: LAE (x, x ) = -
+ d  k=1  xk log x k +(1-xk ) log(1-xk ),
+
+Figure 1: Representations of a language. predict missing feature values. The substituted data are used (1) to train the typology evaluator and (2) to initialize phylogenetic inference. To evaluate the performance of missing data imputation, we hid some known features to see how well they were predicted. A 10-fold cross-validation test using the PARTIAL dataset showed that 64.6% of feature values were predicted correctly. It considerably outperformed (1) the random baseline of 22.4% and (2) the most-frequent-value baseline of 28.1%. Thus our assumption of dependencies among features was confirmed.
+
+where xk is the k -th element of x. Next, we plug an energy-based model into the autoencoder. It gives a probability to x. T g) exp(Ws p(x) =  , T  x exp(Ws g ) g = s(Wl h + bl ), where vector Ws , matrix Wl and bias term bl are the weights to be estimated. h is mapped to g  [0, 1]d2 before evaluation. This transformation is motivated by our speculation that typologically natural languages may not be linearly separable from unnatural ones in the latent space since biplots of principal components of PCA often show sinusoidal waves (Novembre and Stephens, 2008). The denominator sums over all possible states of x , including those which violate categorical constraints. By maximizing the average log probability of training data, we can distinguish typologically natural languages from other possible combinations of features. Given a set of N languages with missing data imputed,2 our training objective is to maximize the following:
+N  (-LAE (xi , x i ) + C log p(xi ))),
+
+4 Typology Evaluator
+We use a combination of an autoencoder to transform typological features into continuous latent components, and an energy-based model to evaluate how a given feature vector is typologically natural. We begin with the autoencoder. Figure 1 shows various representations of a language. The original feature representation v is a vector of categorical features. v is binarized into x  {0, 1}d0 in a oneversus-rest manner. x is mapped by an encoder to a latent representation h  [0, 1]d1 , in which d1 is the dimension of the latent space: h = s(We x + be ), where s is the sigmoid function, and matrix We and vector be are weight parameters to be estimated. A decoder then maps h back to x through a similar transformation: x = s(Wd h + bd ).
+T . Note that x is We use tied weights: Wd = We a real vector. To recover a categorical vector, we need to first binarize x according to categorical constraints and then to debinarize the resultant vector. 
+
+where C is some constant. Weights are optimized by the gradient-based AdaGrad algorithm (Duchi et al., 2011) with a mini-batch. A problem with this optimization is that the derivative of the second term contains an expectation that involves a summation over all possible states of x , which is computationally intractable. Inspired by contrastive divergence (Hinton, 2002), we do not compute the expectation exactly but approximate it by few negative samples collected from Gibbs samplers. 4.1 Mixing Languages: An Experiment To analyze the continuous space representations, we generated mixtures of two languages, which were
+We tried a joint inference of weight optimization and missing data imputation but dropped it for its instability. A crossvalidation test revealed that the joint inference caused a big accuracy drop in missing data imputation.
+2
+
+i=1
+
+327
+
+

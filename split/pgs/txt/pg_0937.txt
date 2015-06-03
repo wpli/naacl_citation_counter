@@ -1,0 +1,22 @@
+tationally convenient approximation to minimizing a discriminative 0-1 loss objective, giving rise to the common practice of referring to conditional models as discriminative. Contributions. This paper challenges the popular preference for discriminative data models in the crowdsourcing literature by demonstrating that in typical crowdsourcing scenarios a generative model enjoys a strong advantage over its discriminative counterpart. We conduct, on both real and synthetic annotations, the first empirical comparison of structurally comparable generative and discriminative crowdsourcing models. The comparison is made fair by developing similar mean-field variational inference algorithms for both models. The generative model is considerably improved by our variational algorithm compared with the previously reported state-of-the-art for that model.
+
+3
+
+Models
+
+At a minimum, a probabilistic crowdsourcing model predicts ground truth labels y from imperfect annotations a (i.e., argmaxy p(y|a)). In this section we review the specifics of two previously-proposed dataaware crowdsourcing models. These models are best understood as extensions to a Bayesian formulation of the item-response model that we will refer to as I TEM R ESP. I TEM R ESP, illustrated in Figure 1a, is defined by the joint distribution p( ,  , y, a) = p( )
+jJ kK iN jJ
+
+(1)
+
+  p( jk )  p(yi | )  p(ai j | j , yi )
+
+2
+
+Previous Work
+
+Dawid and Skene (1979) laid the groundwork for modern annotation aggregation by proposing the item-response model: a probabilistic crowdsourcing model p(y, a| ) over document labels y and annotations a parameterized by confusion matrices  for each annotator. A growing body of work extends this model to account for such things as correlation among annotators, annotator trustworthiness, item difficulty, and so forth (Bragg et al., 2013; Hovy et al., 2013; Passonneau and Carpenter, 2013; Pasternack and Roth, 2010; Smyth et al., 1995; Welinder et al., 2010; Whitehill et al., 2009; Zhou et al., 2012). Of the crowdsourcing models that are data-aware, most model the data discriminatively (Carroll et al., 2007; Liu et al., 2012; Raykar et al., 2010; Yan et al., 2014). A smaller line of work models the data generatively (Lam and Stork, 2005; Simpson and Roberts, In Press). We are aware of no papers that compare a generative crowdsourcing model with a similar discriminative model. In the larger context of supervised machine learning, Ng and Jordan (2001) observe that generative models parameters tend to converge with fewer training examples than their discriminatively trained counterparts, but to lower asymptotic performance levels. This paper explores those insights in the context of crowdsourcing models. 883
+
+where J is the set of annotators, K is the set of class labels, N is the set of data instances in the corpus,  is a stochastic vector in which k is the probability of label class k,  j is a matrix of stochastic vector rows in which  jkk is the probability that annotator j annotates with k items whose true label is k, yi is the class label associated with the ith instance in the corpus, and ai jk is the number of times that instance i was annotated by annotator j with label k. The fact that ai j is a count vector allows for the general case where annotators express their uncertainty over multiple class values. Also,   Dirichlet (b( ) ), ( )  jk  Dirichlet (b jk ), yi |  Categorical ( ), and ai j |yi ,  j  Multinomial ( jyi , Mi ) where Mi is the number of times annotator j annotated instance i. We need not define a distribution over Mi because in practice Mi = |ai j |1 is fixed and known during posterior inference. A special case of this model formulates ai j as a categorical distribution assuming that annotators will provide at most one annotation per item. All hyperparameters are designated b and are disambiguated with a superscript (e.g., the hyperparameters for p( ) are b( ) ). When I TEM R ESP parameters are set with uniform  values and diagonal confusion matrices  , majority vote is obtained. Inference in a crowdsourcing model involves a corpus with an annotated portion N A = {i : |ai |1 > 0} and also potentially an unannotated portion NU = {i : |ai |1 = 0}. I TEM R ESP can be written as p( , y, a) = p( , yA , yU , a) where yA = {yi : i  N A } and yU = {yi : i  NU }. However, because I TEM R ESP has no model of the data x, it receives no benefit from unannotated data NU .
+
+

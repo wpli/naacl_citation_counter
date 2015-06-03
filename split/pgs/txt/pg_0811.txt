@@ -1,0 +1,45 @@
+requires POS-REG stimulates POS-REG
+CAUSE
+(POS-REG,BCL,(NEG-REG,IL-10,RFLAT)) (NEG-REG,TP53,(POS-REG,BCL,IL-2)) (POS-REG,AKT2,(POS-REG,IL-4,ERBB2))
+
+THEME
+NEG-REG ability RAISE RAISING CAUSE
+
+CAUSE
+
+THEME
+
+BCL
+
+BCL
+
+inhibition NEG-REG
+CAUSE
+
+THEME
+
+The NULL IL-10
+
+block NEG-REG
+THEME
+
+(NEG-REG,(POS-REG,BCL,IL-2),BRAF)
+
+RFLAT
+
+IL-10
+
+RFLAT
+BCL stimulates inhibition of RFLAT by IL-10. (b) The ability of IL-10 to block RFLAT requires BCL. (c)
+
+(a)
+
+Figure 2: Grounded semantic parsing for complex knowledge extraction: (a) input database of complex events, without textual annotation; (b) event extraction as semantic parsing; (c) a complex sentence that requires RAISING.
+
+plication area for semantic parsing, with great potential. Text with valuable information has been undergoing rapid growth across scientific and business disciplines alike. A prominent example is PubMed (www.ncbi.nlm.nih.gov/pubmed), which contains over 24 million biomedical research articles and grows by over one million each year. Research on information extraction abounds, but it tends to focus on classifying simple relations among entities, so is incapable of extracting the prevalent complex knowledge with nested event structures. Figure 1 illustrates this problem with an example sentence "BCL stimulates inhibition of RFLAT by IL-10". Traditional information extraction would be content with extracting two binary relation instances (NEG-REG,BCL,RFLAT) and (NEG-REG,IL-10,RFLAT), where NEG-REG represents a negative regulation (i.e., inhibition). However, the sentence also discloses important contextual information, i.e., BCL regulates RFLAT by stimulating the inhibitive effect of IL-10, and likewise the inhibition of RFLAT by IL-10 is controlled by BCL. Such context-specific knowledge is crucial in translational medicine: imagine a targeted therapy that tries to suppress RFLAT by inducing either BCL or IL-10, without taking into account their interdependency. As Figure 1 shows, this knowledge can be represented by events with nested structures (e.g., the THEME argument of E1 is an event E2), as exemplified by the GENIA event extraction dataset (Kim et al., 2009). Complex knowledge extraction can be naturally framed as a semantic parsing problem, with the event structure represented by a semantic parse; see 757
+
+......
+
+Figure 2. However, annotating example sentences is expensive and time-consuming. GENIA is the only corpus of its kind by far; its annotation took years and its scope is limited to the narrow domain of transcription in human blood cells. In contrast, databases are usually available. For example, due to the central importance of biological pathways in understanding diseases and developing drug targets, there exist many pathway databases (Schaefer et al., 2009; Kanehisa, 2002; Cerami et al., 2011). Limited by manual curation, they are incomplete and not up-to-date, thereby the need for automated extraction. But compared to question answering, knowledge extraction can derive more leverage from such databases via distant supervision (Craven and Kumlien, 1999; Mintz et al., 2009). The key insight is that databases can be used to automatically annotate sentences with a relation if the arguments of a known instance co-occur in the sentence. This learning paradigm, however, has never been applied to extracting nested events. In this paper, we propose the first approach to learn a semantic parser from a database of complex events and unannotated text, by generalizing distant supervision to complex knowledge extraction. The key idea is to recover the latent annotations via EM, guided by a structured prior that favors semantic parses containing known events in the database, in the form of virtual evidence (Pearl, 1988; Subramanya and Bilmes, 2007). Experiments on the GENIA dataset demonstrate the promise of this direction. Our GUSPEE (GroUnded Semantic Parsing for Event Extraction) system can successfully learn from and extract complex events, without requiring
+
+

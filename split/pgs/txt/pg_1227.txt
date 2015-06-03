@@ -1,0 +1,24 @@
+jective of retrieving relevant documents, and use decoding over the weighted translation hypergraph directly to perform cross-lingual search. Since high weights on retrieval features for words in the bagof-words (BOW) representation of documents force the decoder to prefer relevant documents with high probability, by a slight abuse of terminology, we call our approach BOW Forced Decoding. One of the key features of our approach is the use of context-sensitive information such as the language model and reordering information. We show that the use of such a translation-benign search space is crucial to outperform state-of-the-art CLIR approaches. Our experimental evaluation of retrieval performance is done on Wikipedia cross-lingual article retrieval (Bai et al., 2010; Schamoni et al., 2014) and patent prior art search (Fujii et al., 2009; Guo and Gomes, 2009; Sokolov et al., 2013; Schamoni et al., 2014). On both datasets, we show substantial improvements over the CLIR baselines of direct translation (Chin et al., 2008) or Probabilistic Structured Queries (Ture et al., 2012b), with and without further parameter tuning using learning-to-rank techniques and extended feature sets. From our results we conclude, that, in spite of algorithmic complexity, it is central to model translation and retrieval jointly to create more powerful CLIR models.
+
+2
+
+Related Work
+
+The framework of translation-model based retrieval has been introduced by Berger and Lafferty (1999). An extension to the cross-lingual case using contextfree lexical translation tables has been given by Xu et al. (2001). While the industry standard to CLIR is a pipeline of SMT-based query translation feeding into monolingual retrieval (Chin et al., 2008), recent approaches include (weighted) SMT translation alternatives into the query structure to allow a more generalized term matching (Ture et al., 2012a; Ture et al., 2012b). Less work has been devoted to optimizing SMT towards a retrieval objective, for example in a re-ranking framework (Nikoulina et al., 2012) or by integrating a decomposable proxy for retrieval quality of query translations into discriminative ranking (Sokolov et al., 2014). The idea of forced decoding has been employed recently to select better perceptron updates from the 1173
+
+full SMT search space for discriminative parameter tuning of SMT systems (Yu et al., 2013; Zhao et al., 2014). Most similar to our approach is the recent work of Dong et al. (2014) who use the Moses translation option lattices for translation retrieval, i.e., for mining comparable data. Their query lattices given by the translation options encode exponentially many queries and are used to retrieve the most probable translation candidate from a set of candidates. The approach is evaluated in the context of a parallel corpus mining system. We present a model that not only uses the full search space, including the language model and reordering information, but also evaluate the model specifically for the task of retrieval, rather than mate-finding only. We show that a forced decoding model using bag-of-word representations for documents and retrieval features that are decomposable over query terms significantly outperforms state-of-the-art CLIR baselines such as direct translation (Chin et al., 2008) or Probabilistic Structured Queries obtained from n-best list query translations (Darwish and Oard, 2003; Ture et al., 2012b). Additionally we find that the use of context-sensitive translation information such as language models or reordering information, greatly improves retrieval quality in these types of models. We furthermore show how to directly optimize the retrieval objective using large-scale retrieval data sets with automatically induced relevance judgments.
+
+3
+
+A Bag-of-Words Forced Decoding Model
+
+Model Definition. SMT systems use a Viterbi ap proximation to find the output hypothesis qe
+ qe = arg max max P (h, qe |qf ). qe hEqf
+
+(1)
+
+over the search space of hypotheses or derivations h  Eqf for a given input qf . The probability of a translation output qe under derivation h given qf is usually modeled in a log-linear model P (h, qe |qf ; wsmt ) = eFsmt (h,qe ,qf ) , Fsmt (h,qe ,qf ) qe ,h e
+
+where F (h, qe , qf ) is a learned linear combination of input-output features, that is, the dot product between parameter column vector wsmt and feature
+
+

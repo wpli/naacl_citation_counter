@@ -1,0 +1,70 @@
+wT M h2 h4 h5 h3 R2
+(a)
+
+wT M (h1 - h4 ) wLM h2 h4 h5 h3 h1 R2
+(b)
+] ,h 1 ] ,h 1 h4 [ N
+
+w h1
+
+] ,h 1 h4 [ N
+
+wLM
+
+N [h 3
+
+] ,h 1
+
+(R2 ) wT M
+N[
+h4
+
+(R2 ) N{h4 }
+
+N [h 4 ,h
+
+h2
+
+h4 h5 h1 h3 R2
+(c)
+
+h2 wLM h3
+
+h4 h5 h1 R2
+(d)
+
+N{h2 }
+
+] ,h 1 h4 [ N
+
+2]
+
+N{h1 }
+
+N [h 3 ,h 2 ] N{h3 }
+
+N{h1 }
+
+N [h 3
+
+(R2 )
+
+Figure 2: Drawing the Normal Fan. See the description in Section 3.2. The end result in the r.h.s. of Part (d) reproduces Figure 1 from Cer et al. (2008), identifying the normal cones for all vertices. normal cone of the vertex N{h1 } . In Part (c) we have shaded and labelled N{h1 } . Note that no other edges are needed to define this normal cone; these other edges are redundant to the normal cone's description. Finally in Part (d) we draw the full fan. We have omitted the axes in (R2 ) for clarity. The normal cones for all 4 vertices have been identified. We illustrate this operation in the top part of Figure 3. The Minkowski sum is commutative and associative and generalises to more than two polytopes (Gritzmann and Sturmfels, 1992). For the polytopes Hs and Ht the common refinement (Ziegler, 1995) is N (Hs )  N (Ht ) := {N  N : N  N (Hs ), N  N (Ht )} (12) Each cone in the common refinement is the set of parameter vectors that maximise two faces in Hs and Ht . This operation is shown in the bottom part of Figure 3. As suggested by Figure 3 the Minkowski sum and common refinement are linked by the following Proposition 1. N (Hs + Ht ) = N (Hs )  N (Ht ) Proof. See Gritzmann and Sturmfels (1992) This implies that, with hi defined for the index vector i, the Minkowski sum defines the parameter vectors that satisfy the following (Tsochantaridis et al., 2005, Eqn. 3) w(hs,j - hs,is )  0, 1  s  S, 1  j  K (13)
+
+N [h 3
+
+] ,h 1
+
+] ,h 1
+
+(R2 )
+
+4
+
+Training Set Geometry
+
+The previous discussion treated only a single sentence. For a training set of S input sentences, let i be an index vector that contains S elements. Each element is an index is to a hypothesis and a feature vector for the sth sentence. A particular i specifies a set of hypotheses drawn from each of the K-best lists. LP-MERT builds a set of K S feature vectors associated with S dimensional index vectors i of the form hi = h1,i1 + . . . + hS,iS . The polytope of these feature vectors is then constructed. In convex geometry this operation is called the Minkowski sum and for the polytopes Hs and Ht , is defined as (Ziegler, 1995) Hs + Ht := {h + h : h  Hs , h  Ht } (11)
+
+380
+
+

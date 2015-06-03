@@ -1,0 +1,28 @@
+N [h 4 ,h
+
+from the S K -best lists in bounded above by O(min(K S , S D-1 K 2(D-1) )). For low dimension features, i.e. for D : D S -1 K 2(D-1) K S , the optimiser is therefore tightly constrained. It cannot pick arbitrarily from the individual K -best lists to optimise the overall BLEU score. We believe this acts as an inherent form of regularisation. For example, in the system of Section 4.2 (D=12, S=1502, K=1000), only 10-4403 percent of the K S possible index vectors are feasible. However, if the feature dimension D is increased to D = 493, then S D-1 K 2(D-1) K S and this inherent regularisation is no longer at work: any index vector is feasible, and sentence hypotheses can chosen arbitrarily to optimise the overall BLEU score. This exponential relationship of feasible solutions with respect to feature dimension can be seen in Figure 6 of Galley and Quirk (2011). At low feature dimension, they find that the LP-MERT algorithm can run to completion for a training set size of hundreds of sentences. As feature dimension increases, the runtime increases exponentially. PRO and other ranking methods are similarly constrained for low dimensional feature vectors. Theorem 2. If H is a D-dimensional polytope, then for D  3 the following is an upper bound on the number of edges |E | |E |  | vert(H )| 2 (14)
+
+N{h4 }
+w(0) w(1)
+N
+] ,h 1 4 h [
+
+w(2)
+
+2]
+
+N{h2 }
+
+^ w
+
+N{h1 }
+
+Figure 5: We redraw the normal fan from Figure 2 with potential optimal parameters under the 2 regularisation scheme of Galley et al. (2013) marked. The thick red line is the subspace of (R2 ) optimised. The dashed lines mark the distances between the decision boundaries and w(0) . their objective functions. Although this form of regularisation may be helpful in practice, there is no guarantee that it will prevent overtraining due to the exponential increase in feasible solutions. For example the adaptive learning rate method of Green et al. (2013) finds gains of over 13 BLEU points in the training set with the addition of 390,000 features, yet only 2 to 3 BLEU points are found in the test set. 5.1 A Note on Regularisation
+
+Proof. This is a special case of the upper bound theorem. See Ziegler (1995, Theorem 8.23). Each feasible pairwise ranking of pairs of hypotheses corresponds to an edge in the Minkowski sum polytope. Therefore in low dimension ranking methods also benefit from this inherent regularisation. For higher dimensional feature vectors, these upper bounds no longer guarantee that this inherent regularisation is at work. The analysis suggests - but does not imply - that index vectors, and their corresponding solutions, can be picked arbitrarily from the K -best lists. For MERT overtraining is clearly a risk. MIRA and related methods have a regularisation mechanism due to the margin maximisation term in
+
+The above analysis suggest a need for regularisation in training with high dimensional feature vectors. Galley et al. (2013) note that regularisation is hard to apply to linear models due to the magnitude invariance of w in Eqn. (1). Figure 2 makes the difficulty clear: the normal cones are determined entirely by the feature vectors of the training samples, and within any particular normal cone a parameter vector can be chosen with arbitrary magnitude. This renders schemes such as L1 or L2 normalisation ineffective. To avoid this, Galley et al. (2013) describe a regularisation scheme for line optimisation that encourages the optimal parameter to be found close to w(0) . The motivation is that w(0) should be a trusted initial point, perhaps taken from a lowerdimensional model. We briefly discuss the challenges of doing this sort of regularisation in MERT. In Figure 5 we reproduce the normal fan from Figure 2. In this diagram we represent the set of parameters considered by a line optimisation as a thick red line. Let us assume that both e1 and e2 have a
+
+383
+
+

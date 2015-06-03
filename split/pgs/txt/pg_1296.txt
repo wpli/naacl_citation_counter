@@ -1,0 +1,24 @@
+Figure 2: UMFS-WE accuracy on Hindi WSD for words with various frequency thresholds in Newspaper dataset
+
+Figure 3: UMFS-WE accuracy on English WSD for words with various frequency thresholds in SENSEVAL2 dataset
+
+with SemCor frequency below five. Buitelaar et al. (2001) presented the knowledge based approach for ranking GermaNet synsets on specific domains. Lapata et al. (2004) worked on detecting the predominant sense of verbs where verb senses are taken from the Levin classes. Our approach is similar to that of McCarthy et al. (2007) as we are also learning predominant senses from the untagged text.
+
+TDIL, DeitY for their continued support.
+
+References
+Satanjeev Banerjee and Ted Pedersen. 2003. Extended Gloss Overlaps as a Measure of Semantic Relatedness. In Proceedings of the Eighteenth International Joint Conference on Artificial Intelligence, pp 805-810. Mohit Bansal, Kevin Gimpel and Karen Livescu. 2014. Tailoring Continuous Word Representations for Dependency Parsing. Proceedings of ACL 2014. ´k Ond rej Bojar, Diatka Vojt ech, Rychl´ y Pavel, Stra na Pavel, Suchomel V´ it, Tamchyna Ale s and Zeman Daniel. 2014. HindEnCorp - Hindi-English and Hindi-only Corpus for Machine Translation. Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC'14). Paul Buitelaar and Bogdan Sacaleanu. 2001. Ranking and selecting synsets by domain relevance. Proceedings of WordNet and Other Lexical Resources, NAACL 2001 Workshop. Xinxiong Chen, Zhiyuan Liu and Maosong Sun. 2014. A Unified Model for Word Sense Representation and Disambiguation. Proceedings of ACL 2014. Ronan Collobert, Jason Weston, L´ eon Bottou, Michael Karlen, Koray Kavukcuoglu, Pavel P. Kuksa. 2011. Natural Language Processing (almost) from Scratch. CoRR, http://arxiv.org/abs/1103.0398. Agirre Eneko and Edmonds Philip. 2007. Word Sense Disambiguation: Algorithms and Applications. Springer Publishing Company, Incorporated, ISBN:1402068700 9781402068706.
+
+6
+
+Conclusion and Future Work
+
+In our paper, we presented an unsupervised approach for finding the most frequent sense for nouns by exploiting word embeddings. Our approach is tested on Hindi and English WSD. It is found that our approach outperforms the WFS baseline for Hindi. As the frequency of noun increases in the corpus, our approach outperforms the baseline for both Hindi and English WSD. Our approach can be easily ported to various domains and across languages. In future, we plan to improve on the performance of our model for English, even for infrequent words. Also, we will explore this approach for other languages and for other parts-of-speech.
+
+7
+
+Acknowledgments
+
+We would like to thank Mrs. Rajita Shukla, Mrs. Jaya Saraswati and Mrs. Laxmi Kashyap for their enormous efforts in the creation of the WordNet First Baseline for the Hindi WordNet. We also thank 1242
+
+

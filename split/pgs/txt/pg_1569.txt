@@ -1,0 +1,5 @@
+Conference on Empirical Methods in Natural Language Processing, pages 444­454, Edinburgh, Scotland. Hsiang-Fu Yu, Fang-Lan Huang, and Chih-Jen Lin. 2011. Dual coordinate descent methods for logistic regression and maximum entropy models. Machine Learning, 85(1-2):41­75. R. Zens, F. J. Och, and H. Ney. 2002. Phrase-based statistical machine translation. In Springer Verlag, editor, German Conference on Artificial Intelligence, pages 18­32. C. Lawrence Zitnick and Devi Parikh. 2013. Bringing semantics into focus using visual abstraction. In Proceedings of the 2013 IEEE Conference on Computer Vision and Pattern Recognition, pages 3009­ 3016, Portland, Oregon. C. Lawrewnce Zitnick, Devi Parikh, and Lucy Vanderwende. 2013. Learning the visual interpretation of sentences. In Proceedings of the 2013 IEEE International Conference on Computer Vision, pages 1681­ 1688, Sydney, Australia.
+
+1515
+
+

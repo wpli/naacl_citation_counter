@@ -1,0 +1,26 @@
+trices (unigram, short ngram, long ngram, sentence). CNN-IM feeds into a logistic classifier that performs paraphrase detection. See Sections 4 and 5 for these two parts of Bi-CNN-MI. 3.1 Wide convolution We use Kalchbrenner et al. (2014)'s wide onedimensional convolution. Denoting the number of tokens of Si as |Si |, we convolve weight matrix M  Rd×m over sentence representation matrix S  Rd×|Si | and generate a matrix C  Rd×(|Si |+m-1) each column of which is the representation of an mgram. d is the dimension of word (and also ngram) embeddings. m is filter width. Our motivation for using convolution is that after training, a convolutional filter corresponds to a feature detector that learns to recognize a class of m-grams that is useful for paraphrase detection. 3.2 Averaging After convolution, to build simple relations across rows, each odd row and the row behind immediately are averaged, generating matrix A  d R 2 ×(|Si |+m-1) . Namely: A = (Codd + Ceven )/2 (1)
+
+after k-max pooling many tanh units had an input close to 1, in the nondynamic range of the function (since the input is the addition of several values). This makes learning difficult. We therefore changed the sequence to convolution, averaging, tanh, k-max pooling. This makes it less likely that tanh units will be saturated. We have described convolution, averaging and kmax pooling. We can stack several blocks of these three layers to form deep architectures, as the two blocks (marked "first block" and "top block") in Figure 1.
+
+4
+
+Convolution interaction model CNN-IM
+
+After the introduction in the previous section of the CNN-SM part of our architecture for processing an individual sentence, we now turn to the CNN-IM interaction model that computes the four feature matrices in Figure 1 to assess the interactions between the two sentences. 4.1 Feature matrices One key innovation of our approach is multigranularity: we compute similarity between the two paraphrase candidates on multiple levels. Specifically, we compute similarity at four levels in this paper: unigram, short ngram, long ngram and sentence. We use notation l  {u, sn, ln, s} to refer to the four levels, and use Si,l to denote the matrix representing sentence Si at level l. For level l, we compute fea^ l as follows: ture matrices F ^ ij = exp( F l
+,l 2,l 2 -||S1 :,i - S:,j ||
+
+where Codd , Ceven denote the odd and even rows of C, respectively. Finally, this convolution layer will output matrix B whose j th column is defined thus: B:,j = tanh(A:,j + bT ) 0  j < (|Si | + m - 1) (2) b is a bias vector with dimension d/2, same for each column. 3.3 Dynamic k-max pooling We use Kalchbrenner et al. (2014)'s dynamic kmax pooling to extract features for variable-length sentences. It extracts k dy top values from each dimension after the first layer of averaging and k top = 4 top values after the top layer of averaging. We set k dy = max(k top , |Si |/2 + 1) (3)
+
+2
+
+)
+
+(4)
+
+Thus, k dy depends on the length of Si . The sequence of layers in (Kalchbrenner et al., 2014) is convolution, folding, k-max pooling, tanh. We experimented with this sequence and found that
+
+,l 2,l 2 where ||S1 :,i - S:,j || is the Euclidean distance between the representations of the ith item of S1 and the j th item of S2 on level l. We set  = 2 (cf. Wu et al. (2013)). We do not use cosine because the magnitude of the activations of hidden units is important, not just ,l 2,l the overall direction; e.g., if S1 :,i and S:,j point in the same direction, but activations are much larger ,l in S2 :,j , then the two vectors are very dissimilar. The lowest level feature matrix (l = u) is the un^ u . It has size |S1 | × |S2 |. igram similarity matrix F ij ^ The feature entry Fu is the similarity between the ith word of S1 and the j th word of S2 where each
+
+905
+
+

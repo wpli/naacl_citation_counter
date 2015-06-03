@@ -1,0 +1,67 @@
+IMDB - Multinomial Naive Bayes
+0.86 0.96 0.94 0.92 0.90 0.80 AUC AUC 0.88
+
+NOVA - Multinomial Naive Bayes
+
+0.84
+
+0.82
+
+0.78
+
+0.86
+0.76 UNC-LwR-tfidf 0.74 UNC-PC-LwR-tfidf 0.72 0 50 100 150 Number of documents 200 0.82 0.80 0 50 100 150 Number of documents 200 0.84 UNC-LwR-tfidf UNC-PC-LwR-tfidf
+
+(a)
+SRAA - Multinomial Naive Bayes
+1.00 0.91
+
+(b)
+WvsH - Multinomial Naive Bayes
+
+0.98
+
+0.89
+
+0.96
+
+0.87
+
+AUC
+
+0.94
+
+AUC UNC-LwR-tfidf UNC-PC-LwR-tfidf
+
+0.85
+
+0.92
+
+0.83 UNC-LwR-tfidf UNC-PC-LwR-tfidf 0.79 0 50 100 150 Number of documents 200 0 50 100 150 Number of documents 200
+
+0.90
+
+0.81
+
+0.88
+
+(c)
+
+(d)
+
+Figure 2: Comparison of LwR using UNC and UNC-PC for all datasets with tf-idf representation and using multinomial na¨ ive Bayes classifier.
+
+feature annotation work can be utilized for the learning with rationales framework by decoupling rationales from their documents, this is expected to result in information loss (such as weighting features globally rather than locally). The precise effect of decoupling rationales and documents on the classifier performance still needs to be tested empirically.
+
+representations and three classifiers showed that our proposed method utilizes rationales effectively. Additionally, we presented an active learning strategy that is tailored specifically for the learning with rationales framework and empirically showed that it improved active learning.
+
+7
+
+Conclusion
+
+Acknowledgment
+This material is based upon work supported by the National Science Foundation CAREER award no. 1350337.
+
+We introduced a novel framework to incorporate rationales into active learning for text classification. Our simple strategy to incorporate rationales can utilize any off-the-shelf classifier. The empirical evaluations on four text datasets with binary and tf-idf 449
+
+

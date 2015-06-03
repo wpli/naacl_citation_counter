@@ -1,0 +1,36 @@
+A Comparison of Word Similarity Performance Using Explanatory and Non-explanatory Texts
+Lifeng Jin Department of Linguistics The Ohio State University jin@ling.osu.edu William Schuler Department of Linguistics The Ohio State University schuler@ling.osu.edu
+
+Abstract
+Vectorial representations of words derived from large current events datasets have been shown to perform well on word similarity tasks. This paper shows vectorial representations derived from substantially smaller explanatory text datasets such as English Wikipedia and Simple English Wikipedia preserve enough lexical semantic information to make these kinds of category judgments with equal or better accuracy.
+
+1
+
+Introduction
+
+Internet.1 As of December 2014, Wikipedia contained over 4.6 million articles 2 and 1.6 billion words. Wikipedia as a corpus has been heavily used to train various NLP models. Features of Wikipedia are well exploited in research like semantic web (Lehmann et al, 2014) and topic modeling (Dumais, 1988; Gabrilovich, 2007), but more importantly Wikipedia has been a reliable source for word embedding training because of its sheer size and coverage (Qiu, 2014), as recent word embedding models (Mikolov et al, 2013; Pennington et al, 2014) all use Wikipedia as an important corpus to build and evaluate their algorithms for word embedding creation.
+
+Vectorial representations derived from large current events datasets such as Google News have been shown to perform well on word similarity tasks (Mikolov, 2013; Levy & Goldberg, 2014). This paper shows vectorial representations derived from substantially smaller explanatory text datasets such as English Wikipedia and Simple English Wikipedia preserve enough lexical semantic information to make these kinds of category judgments with equal or better accuracy. Analysis shows these results may be driven by a prevalence of commonsense facts in explanatory text. These positive results for relatively small datasets suggest vectors derived from slower but more accurate analyses of these resources may be practical for lexical semantic applications.
+
+2.2
+
+Simple English Wikipedia
+
+2 2.1
+
+Background
+Wikipedia
+
+Simple English Wikipedia3 is a Wikipedia database where all articles are written using simple English words and grammar. It is created to help adults and children who are learning English to look for encyclopedic information. Compared with full English Wikipedia, Simple English Wikipedia is much smaller. It contains around 120,000 articles and 20 million words, which is almost one fortieth the number of articles and one eightieth the number of words compared to full English Wikipedia, so the average length of articles is also shorter. Simple English Wikipedia is often used in simplification research (Coster, 2011; Napoles, 2010) where sentences from full English Wikipedia are matched to sentences from Simple English Wikipedia to explore techniques to simplify sentences. It would be
+1 2
+
+Wikipedia is a free Internet encyclopedia website and the largest general reference work over the
+
+http://en.wikipedia.org/wiki/Wikipedia:Size_of_ Wikipedia 3 See http://simple.wikipedia.org/wiki/Main_Page
+
+See https://en.wikipedia.org/wiki/Wikipedia See
+
+990
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 990­994, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

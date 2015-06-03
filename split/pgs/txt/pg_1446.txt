@@ -1,0 +1,21 @@
+3
+
+Entities in Streams
+
+Streams like Twitter are well known as being realtime and highly bursty. Some entities are continually mentioned throughout the stream (eg: President Obama) whereas others burst, suddenly peak in popularity then decay (eg: Phillip Hughes, a cricketer who died following a bowling injury). Capturing the information required to perform streaming CDC in constant space requires us to sample from the stream. For example we may consider only the most recent information (eg: the previous 24 hours worth of mentions). This may not be ideal as it would result in a sample biased towards bursting entities, neglecting the continually mentioned entities. We propose three properties that are important when sampling mentions from a stream of tweets: · Recency: There should be some bias towards recent mentions to take into account the realtime nature of the stream. The set of entities mentioned one day is likely to be similar to the set of entities mentioned on the following day. · Distant Reference: The temporal gap between mentions of the same entity can vary drastically, recency captures the small gaps though to capture the larger gaps older mentions should be stored. A mention should be correctly resolved if the last mention of the entity was either a day or a week ago. · Entity Diversity: The sample should contain mentions of many entities instead of storing lots of mentions about a few entities. If the sample only contains mentions of the most tweeted about entity (the one that is bursting) it is impossible to resolve references to other entities. These properties suggest we should take into account a notion of streaming discourse when sampling: mentions sampled should depend on the previous mentions (informed sampling).
+
+text and contextual similarity (weighted 0.8 and 0.2 respectively) similar to Rao et al. (2010). Mention text similarity is measured using cosine similarity of character skip bigram indicator vectors and contextual similarity is measured using tf-idf weighted cosine similarity of tweet terms. The stream is processed sequentially: we resolve each mention by finding its nearest neighbor in the sample, linking the two mentions if the similarity is above the linking threshold.
+
+5
+
+Sampling Techniques
+
+The sampling techniques we investigate are summarized below. Each technique has an insertion and removal policy that are followed each time a mention is processed. New sampling techniques are indicated by a star (*). The new sampling techniques require the nearest neighbor to be identified. As this is already computed during resolution hence the overhead of these new techniques is very low. Parameters particular to each sampling technique are noted in square brackets and are set using a standard grid search on a training dataset. · Exact: To provide an upper bound on performance we forgo the constraints of the streaming resource model and store all previously seen mentions: Insertion: Add current mention to sample. Removal: Do nothing. · Window: We sample a moving window of the most recent mentions (first in, first out). For example this technique assumes that if we are processing mentions on Monday with a window of approximately 24 hours all relevant entities were mentioned since Sunday. Insertion: Add current mention to sample. Removal: Remove oldest mention. · Uniform Reservoir Sampling (Uniform-R): A uniform sample of previously seen mentions will capture a diverse set of entities from the entire stream - taking into account diversity and distant references. This can be achieved using a reservoir sample (Vitter, 1985). We assume each previously seen mention is equally likely to help resolve the current mention.
+
+4
+
+Approach
+
+We implemented a representative pairwise streaming CDC system using single link clustering. Mention similarity is a linear combination of mention 1392
+
+

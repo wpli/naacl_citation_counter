@@ -1,0 +1,23 @@
+preorderer, the NN is trained to predict whether the nodes should be reordered or not, i.e. |o| = 2. For the rest of the layers, we use |i| = 50, |h1 | = 100, |h2 | = 50. We set the learning rate to 1, the minibatch size to 64 and the number of epochs to 20.
+
+3
+3.1
+
+Experiments
+Data and setup
+
+We report translation results in English into Japanese, Korean, Chinese, Arabic and Hindi. For each language pair, we use generic parallel data extracted from the web. The number of words is about 100M for Japanese and Korean, 300M for Chinese, 200M for Arabic and 9M for Hindi. We use two types of dev/test sets: in-domain and mix-domain. The in-domain sets have 2K sentences each and were created by randomly extracting parallel sentences from the corpus, ensuring no repetitions remained. The mix-domain sets have about 1K sentences each and were created to evenly represent 10 different domains, including world news, chat/SMS, health, sport, science, business, and others. Additionally, we report results on the English-toHindi WMT 2014 shared task (Bojar et al., 2014a) using the data provided2 . The dev and test sets have 520 and 2507 sentences each. All dev and test sets have one single reference. We use SVMTool (Gim´ enez and M` arquez, 2004) for POS Tagging, and MaltParser (Nivre et al., 2007) for dependency parsing. 3.2 Intrinsic reordering evaluation
+
+Figure 2: Normalized crossing score for English into Japanese, Korean, Hindi, Chinese, Arabic, Spanish and Portuguese.
+
+corpus, the better the translation models will be and the faster decoding will run as less distortion will be needed. Normalizing over the number of source words allows us to compare this metric across language pairs, and so the potential impact of preordering in translation performance becomes apparent. See Figure 2 for results across several language pairs. In all cases our proposed NN-based preorderer achieves the lowest normalized crossing score among all preordering schemes. 3.3 Translation performance
+
+We evaluate the intrinsic preordering task on a random 5K-sentence subset of the training data which is excluded from model estimation. We report the normalized crossing score c/s, where c is the number of crossing links (Genzel, 2010; Yang et al., 2012) in the aligned parallel corpus, and s is the number of source (e.g. English) words. Ideally we would like this metric to be zero, meaning a completely monotonic parallel corpus3 ; the more monotonic the
+HindEndCorp v0.5 (Bojar et al., 2014b) However this may not be achievable given the alignment links and parse tree available. In this approach, only permutations of sibling nodes in the single source parse tree are permitted.
+3 2
+
+For translation experiments, we use a phrase-based decoder that incorporates a set of standard features and a hierarchical reordering model (Galley and Manning, 2008). The decoder stack size is set to 1000. Weights are tuned using MERT to optimize BLEU on the dev set. In English-to-Japanese and Chinese we use character-BLEU instead. To minimise optimization noise, we tune all our systems from flat parameters three times and report average BLEU score and standard deviation on the test set. Table 1 contrasts the performance obtained by the system when using no preordering capabilities (baseline), and when using three alternative preordering schemes: the rule-based approach of Genzel (2010), the linear-model logistic-regression approach of Jehl et al (2014) and our NN-based preorderer. We report two baselines: one with distortion limit d = 10 and another with d = 3. For systems
+
+1014
+
+

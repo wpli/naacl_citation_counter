@@ -1,0 +1,36 @@
+Table 7: Performance results on Winograd and WinoCoref datasets. All our three systems are trained on WinoCoref, and we evaluate the predictions on both datasets. Our systems improve over the baselines by over than 20% on Winograd and over 15% on WinoCoref. Evaluation Metrics: When evaluating on the full datasets of ACE and OntoNotes, we use the widely recoginzed metrics MUC (Vilain et al., 1995), BCUB (Bagga and Baldwin, 1998), Entity-based CEAF (CEAFe ) (Luo, 2005) and their average. As Winograd is a pronoun resolution dataset, we use precision as the evaluation metric. Although WinoCoref is more general, each coreferent cluster only contains 2-4 mentions and all are within the same sentence. Since traditional coreference metrics cannot serve as good metrics, we extend the precision metric and design a new one called AntePre. Suppose there are k pronouns in the dataset, and each pronoun has n1 , n2 , · · · , nk antecedents, respectively. We can view predicted coreference clusters as binary decisions on each antecedent-pronoun pair (linked or not). The total number of binary decisions is k i=1 ni . We then meaure how many binary decisions among them are correct; let m be the number of correct decisions, then AnrePre is computed as: km .
+i=1
+
+Dataset Winograd WinoCoref
+
+Metric Precision AntePre
+
+Illinois 51.48 68.37
+
+IlliCons 53.26 74.32
+
+Rahman and Ng (2012) 73.05 --­
+
+KnowFeat 71.81 88.48
+
+KnowCons 74.93 88.95
+
+KnowComb 76.41 89.32
+
+BCUB CEAFe AVG ACE IlliCons 78.17 81.64 78.45 79.42 KnowComb 77.51 81.97 77.44 78.97 OntoNotes IlliCons 84.10 78.30 68.74 77.05 KnowComb 84.33 78.02 67.95 76.76 Table 8: Performance results on ACE and OntoNotes datasets. Our system gets the same level of performance compared to a state-of-art general coreference system. Category Cat1 Cat2 Cat3 Size 317 1060 509 Portion 16.8% 56.2% 27.0% Table 9: Distribution of instances in Winograd dataset of each category. Cat1/Cat2 is the subset of instances that require Type 1/Type 2 schema knowledge, respectively. All other instances are put into Cat3. Cat1 and Cat2 instances can be covered by our proposed Predicate Schemas. KnowComb system achieves the same level of performance as does the state-of-art general coreference system we base it on. As hard coreference problems are rare in standard coreference datasets, we do not have significant performance improvement. However, these results show that our additional Predicate Schemas do not harm the predictions for regular mentions. 5.4 Detailed Analysis
+
+System
+
+MUC
+
+ni
+
+5.2
+
+Results for Hard Coreference Problems
+
+Performance results on Winograd and WinoCoref datasets are shown in Table 7. The best performing system is KnowComb. It improves by over 20% over a state-of-art general coreference system on Winograd and also outperforms Rahman and Ng (2012) by a margin of 3.3%. On the WinoCoref dataset, it improves by 15%. These results show significant performance improvement by using Predicate Schemas knowledge on hard coreference problems. Note that the system developed in Rahman and Ng (2012) cannot be used on the WinoCoref dataset. The results also show that it is better to compile knowledge into constraints when the knowledge quality is high than add them as features. 5.3 Results for Standard Coreference Problems Performance results on standard ACE and OntoNotes datasets are shown in Table 8. Our 816
+
+To study the coverage of our Predicate Schemas knowledge, we label the instances in Winograd (which also applies to WinoCoref ) with the type of Predicate Schemas knowledge required. The distribution of the instances is shown in Table 9. Our proposed Predicate Schemas cover 73% of the instances. We also provide an ablation study on the
+
+

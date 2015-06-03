@@ -1,0 +1,39 @@
+Class Freely omissible Omissible Alternating I + II Non-Omissible All of above
+
+Gigaword only 0.505 0.313 0.399 0.449 0.490
+
+Gigaword + Implicit PDTB 0.571 0.527 0.546 0.554 0.547
+
+Class Freely omissible Omissible Alternating I Alternating II Non-omissible
+
+Comp. 2 4 1 2 0
+
+Sense Cont. Exp. 6 10 2 5 0 5 0 0 3 3
+
+Temp. 1 3 0 3 2
+
+Table 5: The accuracy rates for the freely omissible class are higher than the ones for the other classes both when using the Gigaword data alone and when using it in conjunction with the implicit relations in the PDTB.
+Mean accuracy rate
+0.570 0.565 0.560 0.555 0.550 2500 3000 3500 4000 Optimized Corpus Gigaword PDTB Explicit
+
+Table 6: The sense distribution by connective class. has not shown satisfactory results (Pitler et al., 2009; Park and Cardie, 2012; Wang et al., 2012; Sporleder and Lascarides, 2008) Explicit discourse relations have been used to remedy the sparsity problem or gain extra features with limited success (Biran and McKeown, 2013; Pitler et al., 2009). Our heuristics for extracting discourse relations has been explored in the unsupervised setting (Marcu and Echihabi, 2002), but it has never been evaluated on the gold standard data to show its true efficacy. Our distant supervision approach chooses only certain types of discourse connectives to extract weakly labeled data and is the first of its kind to improve the performance in this task tested on the manually annotated data. Distant supervision approaches have recently been explored in the context of natural language processing due to the recent capability to process large amount of data. These approaches are known to be particularly useful for relation extraction tasks because training data provided do not suffice for the task and are difficult to obtain (Riloff et al., 1999; Yao et al., 2010). For example, Mintz et al. (2009) acquire a large amount of weakly labeled data based on the Freebase knowledge base and improves the performance of relation extraction. Distantly supervised learning has also recently been demonstrated to be useful for text classification problems (Speriosu et al., 2011; Marchetti-Bowick and Chambers, 2012). For example, Thamrongrattanarit et al. (2013) use simple heuristics to gather weakly labeled data to perform text classification with no manually annotated training data. Discourse connectives have been studied and classified based on their syntactic properties such subordinating conjunction, adverbials, etc. (Fraser, 2006; Fraser, 1996). While providing a useful insight into how discourse connectives fit into utterances, the syntactic classification does not seem suitable for selecting useful discourse connectives for our purposes of distant supervision for our task.
+
+Number of samples from distant supervision
+
+Figure 5: The PDTB corpus leads to more improvement for the same amount of the data. However, Gigaword corpus achieves significantly better performance (p < 0.05; bootstrap test) when both models are tuned on the developement set. and bootstrap test) for the same number of training instances combined with the implicit discourse relations. However, when the number of introduced weakly labeled data exceeds a certain threshold of around 12,000 instances, the performance of the Gigaword corpus rises significantly above the baseline and the explicit PDTB (Figure 4). The relative superiority of our approach derives precisely from the two selection criteria that we propose. The performance gain does not come from the fact that freely omissible discourse connectives have better coverage of all four senses (Table 6). When all classes are combined equally, the system performs worse as we add more samples although all four senses are covered. The coverage of all four senses is not sufficient for a class of discourse connectives to boost the performance. The two selection criteria are both necessary for the success of this paradigm.
+
+4
+
+Related work
+
+5
+
+Conclusion and Future Directions
+
+Previous work on implicit discourse relation classification have focused on supervised learning approaches (Lin et al., 2010; Rutherford and Xue, 2014), and the distantly supervised approach using explicit discourse relations
+
+We propose two selection criteria for discourse connectives that can be used to gather weakly labeled data for implicit discourse relation classifiers and improve the performance of the state-of-the-art system without further feature engineering. As part of this goal, we classify dis-
+
+806
+
+

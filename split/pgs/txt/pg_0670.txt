@@ -1,0 +1,18 @@
+Figure 1: The transliteration generative story as a cascade of wFSTs. Each box represents a transducer. Top: transliteration of the word "computer" to Japanese Katakana. Bottom: the reverse process. MIR jointly trains the two cascades by maximizing the regularized data log-likelihood with respect to the two (shaded) phoneme mapping models t1 , t2 .
+aa ah aw b d eh ey g ih jh l n ow p s t uh v y zh 0.64 0.56 0.48 0.40 0.32 0.24 0.16 0.08 A B CH D E G H I J K M N O P R S SH T TS U W Y Z 0.00 aa ah aw b d eh ey g ih jh l n ow p s t uh v y zh 0.64 0.56 0.48 0.40 0.32 0.24 0.16 0.08 A B CH D E G H I J K M N O P R S SH T TS U W Y Z 0.00
+
+Figure 2: The 1-to-1 mapping submatrix of the t1 transliteration table for independent training (left) and MIR (right). MIR learns sparser, peaked models compared to those learned by independent training.
+
+(see Ravi and Knight (2009)), our model's hyperparameter   {1, 2, 3, 4}, and the number of iterations (up to 15) to minimize WNER on the development set. We decoded Japanese terms using the Viterbi algorithm, applied on the selected t1 model (using Eq. 6 to convert the bi-EM model  back to to t1 ). Finally, note that ABA training and symmetrization decoding heuristics are inapplicable, since they rely on parallel data. 6.6 Senator Name Decoding Results
+
+best model learned by MIR, showing the difference in parameter sparsity. WNER 67% 66% 59% 43% NED 23.2 21.8 17.3 10.8 t1 > 0.01 649 600 421 152
+
+baseline bi-EM MIR Oracle
+
+Table 3: MIR reduces error rates (WNER, NED) and learns sparser models (number of t1 parameters greater than 0.01) compared to the other models.
+
+We compiled our own test set, consisting of 100 US senator names (first and last), and compared the performance of the four algorithms. Table 3 reports WNER, average normalized edit distance (NED) and the number of model parameters (t1 ) with value greater than 0.01 as an indication of sparsity. Figure 2 further compares the 1-to-1 portions of the best model learned by the baseline method with the 616
+
+Using MIR, we obtained significant reduction in error rates, closing the gap between the baseline method and Oracle, which was trained on parallel data, by 33% in WNER and nearly 50% in NED. This error reduction clearly demonstrates the efficacy of MIR in the non-parallel data setting.
+
+

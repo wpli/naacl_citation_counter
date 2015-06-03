@@ -1,0 +1,19 @@
+spelled identically but pronounced differently. If we changed the spellings to indicate the difference in pronunciation, we would move towards phonemic optimality, but away from morphemic optimality. Apart from purely phonographic or logographic variants, any English spelling system must be a compromise between phonemic and morphemic transparency. In this paper, we attempt to algorithmically create an orthography that simultaneously approaches the optimality along both dimensions.
+
+1: 2: 3: 4: 5: 6: 7: 8: 9: 10: 11: 12: 13: 14: 15: 16: 17: 18:
+
+3
+
+Algorithm
+
+In this section, we describe our algorithm for generating English spellings (Figure 1), which serves as a constructive proof that the traditional orthography is not optimal. Our objective is to find the best compromise between phonemic transparency and morphemic consistency. Section 3.1 explains how we derive a unique representation for each morpheme. Section 3.2 shows how the morpheme representations are combined into word spellings. Without a loss of generality, the generated spellings are composed of IPA symbols. 3.1 Morpheme representations
+
+// Create word sets for each word w in lexicon L do for each morpheme m in w do add w to word set Sm // Generate morpheme representations for each word set Sm do m0 := longest representation of m for each word w in Sm do aw := alignment of m0 and w add aw to multi-alignment A for each position i in A do select representative phoneme r[i] rm := r[1..|m0 |] // Adopt a surface phoneme predictor Pronounce := Predictor (L) // Generate word representations for each word w = m1 . . . mk do r := rm1 · . . . · rmk for each phoneme r[i] in r do if Pronounce(r[i]) = w[i] then r[i] := w[i] rw := r[1..|w|]
+
+Figure 1: Spelling generation algorithm. All representations consists of phonemes.
+
+We start by identifying all morphemes in the lexicon, and associating each morpheme with sets of words that contain it (lines 1­3 in Figure 1). An example word set that corresponds to the morpheme atom is shown in Table 1. Words may belong to more than one set. For example, the word atomic will also be included in the word set that corresponds to the morpheme -ic. We make no distinction between bound and free morphemes. As can be seen in Table 1, English morphemes often have multiple phonemic realizations. The objective of the second step (lines 4­11) is to follow the consistency principle by establishing a single representation of each morpheme. They suggest that orthographic representations should reflect the underlying forms of morphemes as much as possible. Unfortunately, underlying forms are not attested, and there is no commonly accepted algorithm to construct them. Instead, our algorithm attempts to establish a sequence of phonemes that is maximally similar to the attested surface allomorphs. Table 1 shows an example of generating the com539
+
+mon representation for a morpheme. We extract the phonemic representation of each allomorph in the word set, and perform a multi-alignment of the representations by pivoting on the longest representation of the morpheme (lines 5­8). For each position in the multi-alignment, we identify the set of phonemes corresponding to that position. If there is no variation within a position, we simply adopt the common phoneme. Otherwise, we choose the phoneme that is most preferred in a fixed hierarchy of phonemes. In this case, since [æ] and [A] are preferred to [@], the resulting morpheme representation is `ætAm'. For selecting between variant phonemes, we follow a manually-constructed hierarchy of phonemes (Table 2), which roughly follows the principle of least effort. The assumption is that the phonemes requiring more articulatory effort to produce are more likely to represent the underlying phoneme. Within a single row, phonemes are listed in the order of preference. For example, alveolar fricatives like [s]
+
+

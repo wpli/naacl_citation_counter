@@ -1,0 +1,38 @@
+and SSW =
+f
+
+(1 - cos2 (f, cf ))
+
+(4)
+
+and then (2) choosing the final number of clusters such that k = (V RCk+1 - V RCk ) - (V RCk - V RCk-1 ) (5) is minimized. Intuitively, this procedure is meant to find the number of clusters for which adding another cluster does not explain significantly more variance in the data. Also, note that the V RC metric is equivalent to the F-score in a one way ANOVA. The main drawback of the V RC method is that it cannot evaluate fewer than three clusters, due to having both a V RCk+1 and a V RCk-1 term in Equation (5). However, as long as enough top role-fillers are retrieved, it should not hurt the system. Equivalently, we set V RC0 and V RC1 equal to V RC2 . To examine the effect of this choice, we evaluate two clustering methods: 2Clusters , which chooses two clusters for every verb-role, and kClusters , which dynamically chooses a number of clusters between 3 and 10 based on the above criterion. Once again, the system is prohibited from returning a cosine of 1.0. This means that if the DM retrieves the test role-filler itself as one of the top rolefillers, the system would skip comparing the test role-filler against itself if it were in a singleton cluster, but would not skip it if it were a member of a cluster of size two or greater. The alternative to this would have been removing the test role-filler before clustering, but we saw these role-filler-specific partitions as a form of supervision. 3.3 Evaluation procedure The Centroid , OneBest , 2Clusters , and kClusters methods each determine their own prototype vector set for a verb-role, and then return the maximum cosine similarity value for each test role-filler. Prototype sets are stored in a dictionary so they can be reused. It is necessary to expand the sparse data structure of each vector in order to efficiently compute all of the necessary cosine similarities. Finally, we calculate Spearman's  values to measure the correlations between these sets of thematic fit scores and the four datasets of human judgements. 27
+
+Dataset Pad´ o (2007) McRae et al. (1998) Ferretti et al. (2001) inst. Ferretti et al. (2001) loc.
+
+SDDM (X ) 98.6 96.0 94.0 99.6
+
+TypeDM 100.0 95.2 93.1 98.9
+
+Table 2: Coverage (%) by dataset for each DM model.
+
+Spearman's rho
+
+0.30
+
+0.40
+
+SDDMX Centroid SDDMX OneBest SDDMX kClusters TypeDM Centroid TypeDM OneBest TypeDM kClusters 10 20 30 Role-fillers retrieved (n) 40 50
+
+Figure 3: Spearman's  values for Ferretti et al. (2001) instruments vs. the number of vectors retrieved.
+
+For our main experiment, we always retrieve the top 20 highest-ranked role-fillers for the verb-role pair to compute the prototype set. This allows our work to be more directly comparable with other implementations. Also, choosing a value of n that maximizes  would make this unsupervised system more supervised. However, it is useful to know how the number of top role-fillers retrieved affects the correlation with human judgements, so as a follow-up experiment, we evaluate versions of the Centroid , OneBest , and kClusters methods, with the SDDMX and TypeDM models, retrieving from 10 to 50 top role-fillers, against the Ferretti et al. (2001) instruments dataset.
+
+4
+
+In Table 2, we report the coverage percentages for the DM models on each of the thematic fit datasets. Note that since SDDM and SDDMX differ only in the additional links added between existing pairs of words, their coverages are the same. Figure 3 shows the relationship between the number of vectors retrieved from the DM model and the correlation of the system with human judgements.
+
+0.20
+
+Results
+
+

@@ -1,0 +1,5 @@
+Wen Wang and Mary Harper. 2003. Language modeling using a statistical dependency grammar parser. In Proceedings of the International Workshop on Automatic Speech Recognition and Understanding, US Virgin Islands. Wenduan Xu, Stephen Clark, and Yue Zhang. 2014. Shift-Reduce CCG Parsing with a Dependency Model. In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 218­227, Baltimore, Maryland, June. Hiroyasu Yamada and Yuji Matsumoto. 2003. Statistical Dependency Analysis with Support Vector Machines. In In Proceedings of IWPT, pages 195­206. Yue Zhang and Stephen Clark. 2011. Shift-Reduce CCG Parsing. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, pages 683­692, Portland, Oregon, USA, June. Yue Zhang and Joakim Nivre. 2011. Transition-based Dependency Parsing with Rich Non-local Features. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, pages 188­193, Portland, Oregon, USA.
+
+63
+
+

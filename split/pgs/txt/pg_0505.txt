@@ -1,0 +1,5 @@
+classification. Journal of Machine Learning Research, 2:45­66. Geoffrey G Towell and Jude W Shavlik. 1994. Knowledge-based artificial neural networks. Artificial intelligence, 70(1):119­165. Geofrey G Towell, Jude W Shavlik, and Michiel Noordewier. 1990. Refinement of approximate domain theories by knowledge-based neural networks. In Proceedings of the eighth National conference on Artificial intelligence, pages 861­866. Omar Zaidan, Jason Eisner, and Christine D Piatko. 2007. Using" annotator rationales" to improve machine learning for text categorization. In HLT-NAACL, pages 260­267. Omar F Zaidan, Jason Eisner, and Christine Piatko. 2008. Machine learning with annotator rationales to reduce annotation cost. In Proceedings of the NIPS* 2008 Workshop on Cost Sensitive Learning. J. Zhu and E. Hovy. 2007. Active learning for word sense disambiguation with methods for addressing the class imbalance problem. In Proceedings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, pages 783­790.
+
+451
+
+

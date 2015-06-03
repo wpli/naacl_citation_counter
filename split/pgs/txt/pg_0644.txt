@@ -1,0 +1,93 @@
+[ x1, x2 ]
+y2 r1 y1
+
+r1
+
+[ y1, y2 ]
+e1
+
+[ x1, x2 ]
+[ x3 , x 4 ]
+
+r1
+
+Cluster  1  
+
+[ y1, y2 ]
+[ x1, x2 ]
+
+r1
+
+[ y1, y2 ]
+[ y3, y4 ]
+
+r2
+
+[ x3 , x 4 ]
+
+r2
+...
+
+[ y3, y4 ]
+
+e1
+[ x3 , x 4 ]
+
+r2
+
+[ y3, y4 ]
+[ x5, x6 ]
+e2
+
+r3
+
+Cluster  2  
+
+[ y5, y6 ]
+e2
+
+[ x5, x6 ]
+[ x7, x8 ]
+
+r3
+
+[ y5, y6 ]
+[ y7, y8 ]
+
+x1
+
+x2
+
+[ xm-1, xm ]
+
+rn
+
+[ ym-1, ym ]
+
+[ x7, x8 ]
+
+r4
+
+[ y7, y8 ]
+
+r4
+
+(a) Term discovery.
+
+(b) Term extraction.
+
+(c) Term overlap.
+
+(d) Term clustering.
+
+Figure 1: Overview of the pseudo-term creation process. The term discovery system is run over the audio. A threshold,  , dictates the acceptable length, r, and thus the number of regions extracted. Extracted regions are then made into a graph structure, where vertices are regions of speech, and edges denote a connection between those regions. A second edge set is added based on region overlap. Resulting connected components are then clustered; these clusters are known as pseudo-terms. in low-resource languages has to date been hampered by a lack of suitable test collections. We have therefore made our new test collection freely available for research use in recent shared-task information retrieval evaluations (Oard et al., 2013; Joshi and White, 2014). subsections below. Complete specifications can be found in the literature (Drezde et al., 2010; Jansen and Van Durme, 2011). 3.1 Repetition and Clustering
+
+3
+
+Zero-Resource Term Discovery
+
+In traditional speech retrieval applications, document-level features are derived from the outputs of supervised phonetic or word recognizers. Recent term discovery systems automatically identify repeating words and phrases in large collections of audio (Park and Glass, 2008; Jansen et al., 2010), providing an alternative means of extracting lexical features for retrieval tasks. Critically, this discovery is performed without the assistance of any supervised speech tools by instead resorting to a search for repeated trajectories in a suitable acoustic feature space (for example, Mel Frequency Cepstrum Coefficients (MFCC) and Perceptual Linear Prediction (PLP)) followed by a graph clustering procedure. We refer to the discovered units as pseudo-terms (by analogy to the terms built from character sequences that are commonly used in text retrieval), and we can represent each query and response as a set of pseudo-term offsets and durations. We summarize each step in the 590
+
+Our test collection consists of nearly 100 hours of speech audio. Term discovery is inherently an O(n2 ) search problem, and application to a corpus of this size is unprecedented in the literature. We applied the scalable system described by Jansen and Van Durme (2011), which employs a pure-tonoisy strategy to achieve a very substantial (ordersof-magnitude) speedup over its predecessor state-ofthe-art system (Park and Glass, 2008). The system functions by constructing a sparse (thresholded) distance matrix across the frames of the entire corpus and then searching for approximately diagonal line structures in that matrix, as such structures are indicative that a word or phrase has been repeated (Figure 1a). To cluster the individual acoustic repetitions into pseudo-term categories we apply a simple graphbased procedure. First, we construct an unweighted acoustic similarity graph, where each segment of speech involved in a discovered repetition becomes a vertex, and each match provides an edge (Figure 1b). Since we construct an unweighted graph and employ a simple connected-components clustering, it is es-
+
+

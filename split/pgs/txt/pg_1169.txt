@@ -1,0 +1,29 @@
+Coreference Berkeley Mentions 75 50 25 0 75 50 25 0 75 50 25 0 F1 P R F1
+
+LR
+
+QB Final (Berkeley trained on QB) CRF Mentions Gold Mentions BCUB CEAFE
+
+Score
+
+MUC
+
+P
+
+R
+
+F1
+
+P
+
+R
+
+Figure 5: All models are trained and evaluated on quiz bowl data via five fold cross validation on F1 , precision, and recall. Berkeley/crf/Gold refers to the mention detection used, lr refers to our logistic regression model and QB Final refers to the Berkeley model trained on quiz bowl data. Our model outperforms the Berkeley model on every metric when using our detected crf mentions. When given gold mentions, lr outperforms Berkeley QB Final in five of nine metrics.
+
+when both are trained on our quiz bowl dataset? We hypothesize that some of Berkeley's features, while helpful for sparse OntoNotes coreferences, do not offer the same utility in the denser quiz bowl domain. Compared to newswire text, our dataset contains a much larger percentage of complex coreference types that require world knowledge to resolve. Since the Berkeley system lacks semantic features, it is unlikely to correctly resolve these instances, whereas the pretrained word embedding features give our lr model a better chance of handling them correctly. Another difference between the two models is that the Berkeley system ranks mentions as opposed to doing pairwise classification like our lr model, and the mention ranking features may be optimized for newswire text. 5.4 Why Quiz Bowl Coreference is Challenging
+
+rai's battle against an imperial. For ten points, name this Japanese writer of A Personal Matter and The Silent Cry. While Final identifies most of pronouns associated with Kenzaburo Oe (the answer), it cannot recognize that the theme of the entire paragraph is building to the final reference, "this Japanese writer", despite the many Japanese-related ideas in the text of the question (e.g., Samurai and emperor). Final also cannot reason effectively about coreferences that are tied together by similar modifiers as in the below example: That title character plots to secure a "beautiful death" for Lovberg by burning his manuscript and giving him a pistol. For 10 points, name this play in which the titular wife of George Tesman commits suicide. While a reader can connect "titular" and "title" to the same character, Hedda Gabler, the Berkeley system fails to make this inference. These data are a challenge for all systems, as they require extensive world knowledge. For example, in the following sentence, a model must know that the story referenced in the first sentence is about a dragon and that dragons can fly.
+
+While models trained on newswire falter on these data, is this simply a domain adaptation issue or something deeper? In the rest of this section, we examine specific examples to understand why quiz bowl coreference is so difficult. We begin with examples that Final gets wrong. This writer depicted a group of samu1115
+
+

@@ -1,0 +1,48 @@
+(a) Single-target <i, j>
+
+<i, j> <i, j> <i, j> <i, j>
+
+* * * *
+
+Beam
+
+(b) Joint <i, j>
+
+<i, j> <i, j> <i, j> <i, j>
+
+* * * * * * * *
+
+(c) Sequential <i, j> <i, j> <i, j> <i, j> <i, j>
+* * * *
+
+<i, j> <i, j> <i, j> <i, j> <i, j> <i, j>
+
+*
+
+* 
+
+* * * * * * * *  *   * 
+
+Figure 3: State splitting with (a) one LM, (b) two LMs with joint search, and (c) two LMs with sequential search, where T1 and T2 are the first (red) and second (blue) columns respectively.
+
+part of both standard SMT systems and the proposed method. Unlike the other features assigned to rules in Section 4.3, LM probabilities are non-local features, and cannot be decomposed over rules. In case of n-gram LMs, this probability is defined as:
+|E |+1
+
+PLM (E ) =
+i=1
+
+p(ei |ei-n+1 , . . . , ei-2 , ei-1 ) (5)
+
+where the probabilities of the next word ei depend on the previous n - 1 words. When not considering an LM, it is possible to efficiently find the best translation for an input sentence J using the CKY+ algorithm, which performs dyf1 namic programming remembering the most probable translation rule for each state corresponding to source span fij . When using an LM, it is further necessary split each state corresponding to fij to distinguish between not only the span, but also the strings of n - 1 boundary words on the left and right side of the translation hypothesis, as illustrated in Figure 3 (a). As this expands the search space to an intractable size, this space is further reduced based on a limit on expanded edges (the pop limit), or total states per span (the stack limit), through a procedure such as cube pruning (Chiang, 2007). In a multi-target translation situation with one LM for each target, managing the LM state becomes 297
+
+more involved, as we need to keep track of the n - 1 boundary words for both targets. We propose two methods for handling this problem. The first method, which we will dub the joint search method, is based on consecutively expanding the LM states of both T1 and T2. As shown in the illustration in Figure 3 (b), this means that each post-split search state will be annotated with boundary words from both targets. This is a natural and simple expansion of the standard search algorithm, simply using a more complicated representation of the LM state. On the other hand, because the new state space is the cross-product of all sets of boundary words in the two languages, the search space becomes significantly larger, with the side-effect of reducing the diversity of T1 translations for the same beam size. For example, in the figure, it can be seen that despite the fact that 3 hypotheses have been expanded, we only have 2 unique T1 LM states. Our second method, which we will dub the sequential search method, first expands the state space of T1, then later expands the search space of T2. This procedure can be found in Figure 3 (c). It can be seen that by first expanding the T1 space we ensure diversity in the T1 search space, then additionally expand the states necessary for scoring with the T2 LM. On the other hand, if the T2 LM is important for creating high-quality translations, it is possible that the first pass of search will be less accurate and prune important hypotheses.
+
+6
+6.1
+
+Experiments
+Experimental Setup
+
+We evaluate the proposed multi-target translation method through translation experiments on the MultiUN corpus (Eisele and Chen, 2010). We choose this corpus as it contains a large number of parallel documents in Arabic (ar), English (en), Spanish (es), French (fr), Russian (ru), and Chinese (zh), languages with varying degrees of similarity. We use English as our source sentence in all cases, as it is the most common actual source language for UN documents. To prepare the data, we first deduplicate the sentences in the corpus, then hold out 1,500 sentences each for tuning and test. In our basic training setup, we use 100k sentences for training both the TM and the T1 LM. This somewhat small
+
+

@@ -1,0 +1,25 @@
+phrase table. They then combine the pivoted and direct tables by linear interpolation whose weights were manually specified. There is a method to automatically learn the weights (Sennrich, 2012) but it requires reference phrase pairs not easily available in resource constrained scenarios like ours. Work on translation from Indonesian to English using Malay and Spanish to English using Portuguese (Nakov and Ng, 2009) as pivot languages worked well since the pivots had substantial similarity to the source languages. This is one of the first works to use MDP in the pivot based SMT scenario. (Paul et al., 2013) and (Paul et al., 2009) showed that English is not the best pivot language for many language pairs, including Japanese and Hindi. This was reason enough for us to not consider English as a pivot in our experiments. None of the above works focus on the utilization and impact of more than 2 pivots in their experiments which was one of our main objectives. Related to multilingual translation are works by Habash and Hu (2009), El Kholy et al. (2013), Salloum et al. (2014) and Koehn et al. (2009). Work on multi source translation (Och and Ney, 2001) which is complementary to our work must also be noted. In the related field of information retrieval, pivot languages were employed to translate queries in cross-language information retrieval (CLIR) (Gollins and Sanderson, 2001) (Kishida and Kando, 2003). Chinnakotla et al. (2010) retrieved feedback terms from documents written in the pivot languages (after translating back from the pivot), and augmented source queries leading to improvements in information retrieval. We now talk about the languages, corpora and experiments conducted.
+
+3.1
+
+Languages involved
+
+We performed experiments on translation between Japanese and Hindi which do not belong to the same language group but exhibit many similarities: Japanese (J) and Hindi (H) both have SOV order and are morphologically rich. For pivots we considered languages like Chinese, Korean (East-Asian languages of which Korean is closer to source), Marathi, Kannada, Telugu (Indian languages closer to target), Paite (Sino-Tibetian) and Esperanto (relatively distant from both source and target). Increasing the number of languages reduced the size of multilingual parallel translations available5 . Our choice of languages was initially random but led to interesting observations as will be seen later. 3.2 Corpora Details
+
+The corpora used comes from the freely available multilingual Bible corpus6 stored in XML files. After sentence aligning all 9 languages we got 29780 sentence tuples. A tuple contains 9 sentences: 1 for each language. This we divided into 29000 training tuples, 280 tuning tuples and 500 testing tuples. The Japanese sentences were segmented using JUMAN (Kurohashi et al., 1994). The Chinese and Korean (Hangul blocks were space separated) sentences were directly available in their character segmented form. The corpora of the other languages were left morphologically and syntactically unprocessed. 3.3 Phrase Table Triangulation
+
+3
+
+Description of Languages, Corpora and Experiments
+
+We implemented the phrase table triangulation method (Wu and Wang, 2007) using JAVA as the programming language. The phrase table has 4 main scores: forward and inverse phrase translation probabilities (equations 1 and 2) accompanied by forward and inverse lexical translation probabilities (equations 3 and 4). The formulae for generating them using pivots are: (f |e) =
+pi
+5 It must be noted that Hebrew and Greek are most likely the languages from which the Bible sentences were translated into the other languages. 6 http://homepages.inf.ed.ac.uk/s0787820/bible/
+
+We first describe the pivot languages and the corpora we use. We follow this with a description of the triangulation method which we use to construct phrase tables using the pivot languages, the methods used to combine the constructed tables and then the experiments that use them. 1194
+
+(f |pi )  (pi |e)
+
+(1)
+
+

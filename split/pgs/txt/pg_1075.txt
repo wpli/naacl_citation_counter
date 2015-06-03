@@ -1,0 +1,97 @@
+(2014). Using order statistics trees (Cormen et al., 2001), the quantities qi· , q·i , and ri· can be precomputed in O(k log k ) time (see details in Lee and Lin (2014)). This precomputation, together with the rearranged loss, allows A PRO to make efficient weight updates without having to subsample. Detailed derivation. We explain how to derive Equation 11 from Equation 10. First, let us define the following equalities: h1 = q1· · h1
+(1,j )Q
+
+Lang. Ara-Eng Chi-Eng Eng-Swe Eng-Fra Ita-Eng Pol-Eng
+
+Train 14.4M 142.9M 100.1M 100.0M 102.8M 90.5M
+
+Dev 66K 61K 21K 63K 21K 21K
+
+Test 37K 29K 22K 20K 20K 19K
+
+Table 1: Number of words in the used data sets.
+
+=
+i
+
+hi ri·
+
+(16)
+
+We now use equalities 12, 13, and 16 to arrive at Equation 11: Lw =
+i
+
+h2 = q2· · h2
+(2,j )Q
+
+... If we do not fix the first pair element to a particular value, we have: hi = Similarly:
+(i,j )Q i
+
+qi· (h2 i - 2hi +1)+
+i
+
+q·i (h2 i +2hi )
+
+-2
+i
+
+ri· hi
+
+qi· · hi
+
+(12)
+
+=
+i
+
+2 qi· (h2 i - 2hi +1)+ q·i (hi +2hi )
+
+- 2ri· hi
+
+h1 = q· 1 · h1
+(j,1)Q
+
+5
+5.1
+
+Experiments
+Experimental Setup
+
+h2 = q·2 · h2
+(j,2)Q
+
+... If we do not fix the second element of each pair to a particular value, we have: hi =
+(j,i)Q i
+
+q·i · hi
+
+(13)
+
+We split Equation 10 into separate sums and perform a change of variables in the second sum: Lw =
+(i,j )Q
+
+h2 i - 2hi +1+
+(j,i)Q
+
+h2 i +2hi (14)
+
+-2
+(i,j )Q
+
+hi hj
+
+We introduce one more equality, where (16) follows from the definition of ri· in Equation 7:  hi hj =
+(i,j )Q i
+
+ hj 
+(i,j )Qi·
+
+We validate A PRO on 6 diverse language pairs. For each one, we perform HMM-based word alignment (Vogel et al., 1996) and phrase rule extraction on the training data. We use 20 standard features, incl. 8 reordering features, plus the sparse features listed for PBTM systems in Hopkins and May (2011).5 For Ara-Eng and Chi-Eng, we use BOLT Y2 data sets.6 For all other languages, we sample train, dev, and test sets from in-house data. Table 1 describes the different data set sizes. We use 5-gram LMs trained on the target side of the training data; for Ara-Eng and Chi-Eng, we add 2 LMs trained on English Gigaword and other sources. We tune on dev data. In each tuning run, we use k = 500, except for Ara-Eng (k = 1500). We use the same weight initialization for every tuning run, where most features are initialized to 0 and some dense features are initialized to 1 or -1. During tuning, we use case-insensitive B LEU +1. We tune for
+We use the 500 most frequent words for word pair features. For ara-eng, a subset of the training data was chosen whose source side has maximum similarity to the test source side.
+6 5
+
+hi 
+
+(15) 1021
+
+

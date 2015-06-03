@@ -1,0 +1,20 @@
+Table 1: Examples of valid and invalid subtrees of the input trees in Fig. 1
+Rooted tree Multi-rooted tree Nested tree Valid e1 e2 e3 , e1 e2 e5 e1 e2 e5 , e2 e3 e4 e1 e2 e4 , e1 e4 e5 e8 Invalid e2 e3 e4 , e6 e3 , e5 e6 e4 e5 e6 , e1 e2 e7
+
+(a) Rooted tree
+
+(b) Multi-rooted tree
+
+(c) Nested tree
+
+Figure 1: Example trees. is the set of all subtrees of the input tree whose root node is contained in R. Sentence Extraction & Compression Kikuchi et al. (2014) proposed a single-document summarization method that can select compressed sentences. It is an extension of the sentence extraction method proposed in (Hirao et al., 2013). They represent a document as a sentence dependency tree that is obtained from DEP-DT, and then represent each sentence in the sentence dependency tree as a word dependency tree. In the following, inner trees refer to the word dependency trees that correspond to sentences, while the outer tree represents the sentence dependency tree that represents a document. Hence a document is represented as a nested tree where each node of the outer tree corresponds to an inner tree. They then make a summary by first selecting a rooted subtree of the outer tree, and then selecting a subtree for each inner tree that corresponds to a node of the selected subtree of the outer tree. Each inner tree has multiple root candidate nodes, and the root node of a subtree of an inner tree is a root candidate node of the tree. The set of feasible solutions, T , corresponds to all possible nested trees constructed in this way1 . Fig. 1 shows example input trees used in the above three tasks: (a) a rooted tree used in sentence extraction, (b) a multi-rooted tree used in sentence comKikuchi et al. (2014) set further constraints on possible subtrees of a syntactical tree. Our method can also cope with these additional constraints (see Sect. 7).
+1
+
+pression, and (c) a nested tree used in sentence extraction & compression. Gray nodes are root candidate nodes. Each tree yields a different set of valid subtrees. Tab. 1 shows examples of valid and invalid subtrees of each input tree, where we assume that each subtree in T is represented by a set of nodes that is contained in the subtree.
+
+3 Zero-suppressed Binary Decision Diagram (ZDD)
+The key idea of the proposed algorithm is to represent the set of candidate subtrees T as a zerosuppressed binary decision diagram (ZDD) (Minato, 1993). ZDD is a variant of binary decision diagram (BDD) (Bryant, 1986; Akers, 1978), and is a data structure that can succinctly represent a family of sets as a DAG. ZDD has two types of nodes, namely branch nodes and terminal nodes. Branch nodes are non-terminal nodes. Each branch node has exactly two out edges, called low-edge and high-edge, and a label that represents the item that the node corresponds to. We use hi(i), lo(i), and v(i) to represent the node pointed to by the high-edge, low-edge, and the label of the i-th node of the ZDD, respectively. The branch node that has no parent node is the root node. Terminal nodes have no outgoing edges, and a ZDD has exactly two terminal nodes whose labels are and . A path from the root node to terminal node represents a set of items contained in the family of sets represented by the ZDD. We can recover the set of items that corresponds to a path by selecting the labels of the branch nodes whose highedges lie on the path. Fig. 2(a) is a ZDD that represents the family of sets {e1 e2 , e2 e3 , e1 e3 }. We use circles to represent branch nodes and rectangles to represent the terminal nodes. A dashed edge represents a low-edge and full edge represents a high-edge. The number on each circle node represents the label of the node. For example, the label of the root node of the ZDD
+
+464
+
+

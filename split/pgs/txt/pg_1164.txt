@@ -1,0 +1,36 @@
+NW NW NW QB QB QB
+
+Later, [they]1 all met with [President Jacques Chirac]2 . [Mr. Chirac]2 said an important first step had been taken to calm tensions. Around the time of the [Macau]1 handover, questions that were hot in [the Western media]2 were "what is Macaense"? And what is native [Macau]1 culture? [MCA]1 said that [it]1 expects [the proposed transaction]2 to be completed no later than November 10th. As a child, [this character]1 reads [[his]1 uncle]2 [the column]3 [That Body of Yours ]3 every Sunday. At one point, [these characters]1 climb into barrels aboard a ship bound for England. Later, [one of [these characters]1 ]2 stabs [the Player]3 with a fake knife. [One poet from [this country]2 ]1 invented the haiku, while [another]3 wrote the [Tale of Genji ]4 . Identify [this homeland]2 of [Basho]1 and [Lady Murasaki]3 .
+
+Table 1: Three newswire sentences and three quiz bowl sentences with annotated coreferences and singleton mentions. These examples show that quiz bowl sentences contain more complicated types of coreferences that may even require world knowledge to resolve.
+[The Canadian rock band by [this name]] has released such albums as Take A Deep Breath, Young Wild and Free, and Love Machine and had a 1986 Top Ten single with Can't Wait For the Night. [The song by [this name]] is [the first track on Queen's Sheer Heart Attack]. [The novel by [this name]] concerns Fred Hale, who returns to town to hand out cards for a newspaper competition and is murdered by the teenage gang member Pinkie Brown, who abuses [the title substance]. [The novel] was adapted into [a 1947 film starring Richard Attenborough]; [this] was released in the US as Young Scarface. FTP, identify [the shared name of, most notably, [a novel by Graham Greene]].
+
+Data Coref
+
+Newswire Mentions
+
+Quiz Bowl Nested
+
+6000
+
+Count
+
+4000 2000 0 0 10000 20000 30000 40000 50000
+
+Figure 1: An example quiz bowl question about the novel Brighton Rock. Every mention referring to the answer of the question has been marked; note the variety of mentions that refer to the same entity.
+
+Tokens
+
+Figure 2: Density of quiz bowl vs. CoNLL coreference both for raw and nested mentions.
+
+erenced by the question. Each sentence contains progressively more informative references and more well-known clues. For example, a question on Sherlock Holmes might refer to him as "he", "this character", "this housemate of Dr. Watson", and finally "this detective and resident of 221B Baker Street". While quiz bowl has been viewed as a classification task (Iyyer et al., 2014), previous work has ignored the fundamental task of coreference. Nevertheless, quiz bowl data are dense and diverse in coreference examples. For example, nested mentions, which are difficult for both humans and machines, are very rare in the newswire text of OntoNotes--0.25 men1110
+
+tions per sentence--while quiz bowl contains 1.16 mentions per sentence (Figure 2). Examples of nested mentions can be seen in in Table 1. Since quiz bowl is a game, it makes the task of solving coreference interesting and challenging for an annotator. In the next section, we use the intrinsic fun of this task to create a new annotated coreference dataset.
+
+4
+
+Intelligent Annotation
+
+Here we describe our annotation process. Each document is a single quiz bowl question containing an average of 5.2 sentences. While quiz bowl
+
+

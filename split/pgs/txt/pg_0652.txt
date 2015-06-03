@@ -1,0 +1,20 @@
+Constraint-Based Models of Lexical Borrowing
+Yulia Tsvetkov Waleed Ammar Chris Dyer Language Technologies Institute Carnegie Mellon University Pittsburgh, PA, 15213, USA {ytsvetko, wammar, cdyer}@cs.cmu.edu
+
+Abstract
+Linguistic borrowing is the phenomenon of transferring linguistic constructions (lexical, phonological, morphological, and syntactic) from a "donor" language to a "recipient" language as a result of contacts between communities speaking different languages. Borrowed words are found in all languages, and--in contrast to cognate relationships--borrowing relationships may exist across unrelated languages (for example, about 40% of Swahili's vocabulary is borrowed from Arabic). In this paper, we develop a model of morpho-phonological transformations across languages with features based on universal constraints from Optimality Theory (OT). Compared to several standard-- but linguistically naïve--baselines, our OTinspired model obtains good performance with only a few dozen training examples, making this a cost-effective strategy for sharing lexical information across languages.
+
+1
+
+Introduction
+
+We may imagine that globalization is a modern phenomenon, but the lexicons of the world's languages attest to the fact that robust interaction between communities of speakers of different languages is widespread throughout history. Language contact breeds linguistic borrowing--a phenomenon as old as language itself--adoption and nativization of phonemes, morphemes, words, and syntactic constructions from another language (Thomason and Kaufman, 2001). Contact-induced borrowing is a fundamental research topic in linguistics; however, in computational 598
+
+linguistics, very limited work has addressed modeling this phenomenon. The problem we address is the identification of plausible donor words (in the donor language) given a loanword (in the recipient language), and vice versa, identification of loanwords given a donor. For example, given a Swahili loanword safari `journey', our model identifies its Arabic donor (sfryh)1 `journey' (§2). Although at a high level, this is an instance of the well-known problem of modeling string transductions, our interest is being able to identify correspondences across languages with minimal supervision, so as to make the technique applicable in low-resource settings. To reduce the supervision burden, we propose a model that includes awareness of the morpho-phonological repair strategies that native speakers of a language subconsciously employ to adapt a loanword to phonological constraints of the recipient language (§3). To this end, we use constraint-based theories of phonology, as exemplified by Optimality Theory (OT) (Prince and Smolensky, 2008; McCarthy, 2009), which noncomputational linguistic work has demonstrated to be particularly well suited to account for phonologically complex borrowing processes (Kang, 2011). We operationalize OT constraints as features in our borrowing model (§4). We conduct a case study on Arabic and Swahili, two unrelated languages with a long history of contact; we then apply the model to additional language pairs (§5). The proposed approach significantly outperforms transliteration and cognate discovery models (§6).
+1
+
+We use Buckwalter notation to write Arabic glosses.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 598­608, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

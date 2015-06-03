@@ -1,0 +1,25 @@
+Model Charniak (2000) Stanford PCFG (2003) Petrov (2007) Zhu (2013) Carreras (2008) CJ Reranking (2005) Stanford RNN (2013) PAD PAD (Pruned)
+
+PTB §23 F1 Sent./s. 89.5 85.5 90.1 90.3 91.1 91.5 90.0 90.4 90.3 CTB F1 80.8 80.6 83.3 83.2 82.4 ­ 5.3 8.6 39.0 ­ 4.3 2.8 34.3 58.6 Model M ALT PARSER RS-K1 RS-K4 RS-K16 YARA -K1 YARA -K16 YARA -K32 YARA -K64 TP-BASIC TP-S TANDARD TP-F ULL UAS 89.7 90.1 92.5 93.1 89.7 92.9 93.1 93.1 92.8 93.3 93.5 F1 85.5 86.6 90.1 90.6 85.3 89.8 90.4 90.5 88.9 90.9 90.8 Sent./s. 240.7 233.9 151.3 58.6 1265.8 157.5 48.3 47.3 132.8 27.2 13.2 Oracle 87.8 87.6 91.5 92.5 86.7 91.7 92.0 92.2 90.8 92.6 92.9
+
+Model Charniak (2000) Bikel (2004) Petrov (2007) Zhu (2013) PAD
+
+Table 3: Accuracy and speed on PTB §23 and CTB 5.1 test split. Comparisons are to state-of-the-art non-reranking supervised phrase-structure parsers (Charniak, 2000; Klein and Manning, 2003; Petrov and Klein, 2007; Carreras et al., 2008; Zhu et al., 2013; Bikel, 2004), and semi-supervised and reranking parsers (Charniak and Johnson, 2005; Socher et al., 2013).
+
+unlabeled accuracy score (UAS). We implemented the grammar binarization, head rules, and pruning tables in Python, and the parser, features, and training in C++. Experiments are performed on a Lenovo ThinkCentre desktop computer with 32GB of memory and Core i7-3770 3.4GHz 8M cache CPU.
+
+Table 4: The effect of d-parsing accuracy (PTB §22) on PAD and an oracle converter. Runtime includes d-parsing and cparsing. Inputs include MaltParser (Nivre et al., 2006), the RedShift and the Yara implementations of the parser of Zhang and Nivre (2011) with various beam size, and three versions of TurboParser trained with projective constraints (Martins et al., 2013).
+
+7
+
+Experiments
+
+We ran experiments to assess the accuracy of the method, its runtime efficiency, the effect of dependency parsing accuracy, and the effect of the amount of annotated phrase-structure data. Parsing Accuracy Table 3 compares the accuracy and speed of the phrase-structure trees produced by the parser. For these experiments we treat our system and the Zhang-Nivre parser as an independently trained, but complete end-to-end c-parser. Runtime for these experiments includes both the time for dparsing and conversion. Despite the fixed depen-
+
+dency constraints, the English results show that the parser is comparable in accuracy to many widelyused systems, and is significantly faster. The parser most competitive in both speed and accuracy is that of Zhu et al. (2013), a fast shift-reduce phrasestructure parser. Furthermore, the Chinese results suggest that, even without making language-specific changes in the feature system we can still achieve competitive parsing accuracy. Effect of Dependencies Table 4 shows experiments comparing the effect of different input dparses. For these experiments we used the same version of PAD with 11 different d-parsers of varying quality and speed. We measure for each parser: its UAS, speed, and labeled F1 when used with PAD and with an oracle converter.10 The paired figure 8
+^, define the For a gold parse y and predicted dependencies d oracle parse as y = arg miny Y (x,d ^) (y, y )
+10
+
+795
+
+

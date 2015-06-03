@@ -1,0 +1,33 @@
+IMS IMS + CC (baseline) IMS + CC + CW (3) IMS + CC + adapted CW (3) PPRw2w Degree
+
+BNC 48.7% 51.7% 51.9% 52.3%* 37.7% -
+
+Sports 41.4% 55.7% 56.1%* 57.1%* 51.5% 42.0%
+
+Finance 53.4% 62.1% 62.3% 62.0% 59.3% 47.8%
+
+Total 47.8% 56.4% 56.7%* 57.1%* 49.3% -
+
+Table 6: DS05 task results. The values inside brackets are the selected window sizes and statistically significant (p < 0.05) improvements over `IMS + CC' are marked with `*'.
+
+4.2.1 Experimental Setup All-words tasks do not provide any training samples and only include a test set (see Table 7). In order to train our system for SE3 all-words task, we used the automatically labeled training samples used earlier for training models for DS05 (see section 4.1.1). Table 2 shows some statistics about our training set. #Word types #Test samples SE3 963 2,041
+
+IMS (baseline) IMS + CW IMS + adapted CW Rank 1 system Rank 2 system WNs1
+
+SE3 67.6% 68.0%* (9) 68.2%* (9) 65.2% 64.6% 62.4%
+
+Table 8: SE3 all-words task results. The values inside brackets are the selected window sizes and statistically significant (p < 0.05) improvements over the IMS baseline are marked with `*'.
+
+Table 7: Statistics of SE3 all-words task
+
+Similar to the lexical sample tasks, we tune our system on 20% of the original training set. After obtaining window size parameter via tuning, we train on the whole training set and test on the given standard test set. 4.2.2 Results The results of the evaluation on SE3 all-words task are given in Table 8. This table shows that CW word embeddings improve the accuracy. Similar to the results obtained for the lexical sample tasks, we observe some improvement by adapting word embeddings for SE3 all-words task as well. For comparison purposes, we have included the official scores of rank 1 and rank 2 participating systems in SE3 all-words task and the WordNet first sense (WNs1) score.
+
+samples that cannot be discriminated based on the original features (surrounding words, collocations, POS tags) have more chances to be classified correctly. Moreover, word embeddings are likely to contain valuable linguistic information too. Hence, adding continuous-space representations of words can provide valuable information to the classifier and the classifier can learn better discriminative criteria based on such information. In this paper, we exploited a type of word embeddings obtained by feed-forward neural networks. We also proposed a novel method (i.e., adaptation) to add discriminative information to such embeddings. These word embeddings were then added to a supervised WSD system by augmenting the original binary feature space with real-valued representations for all words occurring in a window of text. We evaluated our system on two general-domain lexical sample tasks, an all-words task, and also a domainspecific dataset and showed that word embeddings consistently improve the accuracy of a supervised word sense disambiguation system, across different datasets. Moreover, we observed that adding dis-
+
+5
+
+Conclusion
+
+Supervised word sense disambiguation systems usually treat words as discrete entities and consequently ignore the concept of similarity between words. However, by adding word embeddings, some of the 321
+
+

@@ -1,0 +1,22 @@
+(a)
+
+(b)
+
+Figure 1: A DSyntS (a) and its corresponding SSyntS (b) for the sentence Almost 1.2 million jobs have been created by the state in that time
+
+2.2
+
+Projection of DSyntS to SSyntS
+
+In order to project a DSyntS onto its corresponding SSyntS in the course of generation (where both DSyntSs and their corresponding SSyntSs are stored in the 14-column CoNLL'09 format), the following types of actions need to be performed:5 1. Project each node in the DSyntS onto its SSynS-correspondence. This correspondence can be a single node, as, e.g., job  [NN] (where NN is a noun), or a subtree (hypernode, known as syntagm in linguistics), as, e.g., time  [DT NN] (where DT is a determiner and NN a noun) or create  [VAUX VAUX VB IN] (where VAUX is an auxiliary, VB a full verb and IN a preposition). In formal terms, we assume any SSyntS-correspondence to be a hypernode with a cardinality  1. 2. Generate the correct lemma for the nodes in SSyntS that do not have a 1:1 correspondence with an origin DSyntS node (as DT and VAUX above).6 3. Establish the dependencies within the individual SSyntS-hypernodes. 4. Establish the dependencies between the SSyntSFor Spanish, we apply after the DSyntS­SSyntS transition in a postprocessing stage rules for the generation of relative pronouns that are implied by the the SSyntS. Since we cannot count on the annotation of coreference in the training data, we do not treat other types of referring expressions. 6 The lemmas of nodes with 1:1 correspondence are the same in both structures.
+5
+
+hypernodes (more precisely, between the nodes of different SSyntS-hypernodes) to obtain a connected SSyntS-tree. 2.3 2.3.1 Treebanks used in the experiments Spanish Treebank
+
+For the validation of the performance of our generator on Spanish, we use the AnCora-UPF treebank, which contains only about 100,000 tokens, but which has been manually annotated and validated on the SSyntS- and DSyntS-layers, such that its quality is rather high. The deep annotation does not contain any functional prepositions since they have been removed for all predicates of the corpus, and the DSyntS-relations have been edited following annotation guidelines. AnCora-UPF SSyntSs are annotated with fine-grained dependencies organized in a hierarchical scheme (Mille et al., 2012), in a similar fashion as the dependencies of the Stanford Scheme (de Marneffe et al., 2006).7 Thus, it is possible to use the full set of labels or to reduce it according to our needs. We performed preliminary experiments in order to assess which tag granularity is better suited for generation and came up with the 31-label tagset.
+The main difference with the Stanford scheme is that in AnCora-UPF no distinction is explicitly made between argumental and non-argumental dependencies.
+7
+
+389
+
+

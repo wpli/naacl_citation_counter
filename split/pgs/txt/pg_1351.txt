@@ -1,0 +1,38 @@
+is perhaps unique in determining such social constructs and evaluating on familiar and unfamiliar datasets. Table Table 1: Results
+SC Task Leader Task Leader Status Status Task Leader Status Q-Type Y-N List Y-N List Y-N Y-N Language EN EN EN EN KO KO Accuracy 0.8900 0.6700 0.4700 0.6923 0.5667 0.4074 F1 0.6700 0.9900 0.3457 0.5200 0.4338 0.3900
+
+(a)
+
+(b)
+
+Figure 2: (a) Training set percentage vs Accuracy graph for Leadership problem, (b) Training set percentage vs Accuracy graph for Status classification problem. others. The accuracy comparison of the SVM(with RBF kernel) and sparse Logistic Regression is provided in Figure 2. As we can observe, though the two methods are comparable, in most cases Sparse Logistic regression performs better.
+
+5.4
+
+Advantages from the integrated approach
+
+The primary advantages are the following: In general, statistical approaches need a "lot of data" to attain a certain level of accuracy. As the rules we use are quite universal and compact, we can achieve a comparable(or higher) accuracy with much less training data. Using the evidence and claim mappings, we give an "explanation" as to why we detected such a particular SC in the dialogue. Knowldege of such depth is very hard to achieve with only statistical approaches. Explicit representation of "context" specific information via rules results in improved accuracy in detection of LIs such as criticism, praise, command etc. Statistical modules complement the rule-based approach where our domain knowledge is "incomplete". We use ASP as the Logic Programming language of our choice as its ability to represent defaults and exceptions eases the implementation procedure.
+
+1 reports evaluations on wikipedia dump. These values are computed by comparing the results of our systems with annotated data. Note, in our experiments, we have performed strict evaluations. For example, the results are only marked positive if the complete list of leaders matches with a human-annotated list. Also, we consider the "explanation" too while performing the evaluation. The results are true positive only when the detected construct is correct alongwith the explanation provided by the reasoning module. In general, the previous research achieves an accuracy of 0.45 in comparable tasks such as dialog act tagging (Stolcke, 2000).
+
+7
+
+Conclusion
+
+6
+
+Results
+
+In this paper, we have proposed a novel approach for logically recognizing social constructs from textual conversations. We have used both statistical classification and logical reasoning to robustly detect status and leadership as observed in virtual social networks. From our experiments, we show empirically how our approach achieves a significant accuracy and provides logical explanation of construct detection. This research shows the merits of using logical rules along with statistical techniques to determine Social Constructs. As per our understanding, this level of accuracy and explainability needs integration of both statistical and logic based methods. Our observations suggest that there is an increasing need for such integration in various domains. We believe that this work is one of the early steps in that direction.
+
+We have implemented this system using ASP(Gelfond and Lifschitz, 1988) and Java. The Wikipedia conversations are obtained by parsing the wiki dump from http://dumps.wikimedia.org/. We also evaluated on the NWTRB (US Nuclear Waste Technical Review Board) dataset. The accuracy and F1 measure are summarized in Table 1 for approximately two thousand English and one thousand Korean Wikipedia conversations. We evaluated two types of questions - i. Yes-No indicates questions like Is John the leader? and ii. List indicates questions such as List all the leaders.. Our work
+
+8
+
+Acknowledgement
+
+We thank the IARPA SCIL program for supporting this research. We also thank NSF for the DataNet Federation Consortium grant OCI-0940841 and ONR for their grant N00014-13-1-0334 for partially supporting this research.
+
+1297
+
+

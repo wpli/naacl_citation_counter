@@ -1,0 +1,25 @@
+found in given formulae. Hence, there is a need for learning extractors that are able to combine logical knowledge with benefits of factorization techniques to facilitate precise extractions and generalization to novel relations. In this paper, we propose a paradigm for learning universal schema extractors by combining matrix factorization based relation extraction with additional information in the form of first-order logic knowledge. Our contributions are threefold: (i) We introduce simple baselines that enforce logic constraints through deterministic inference before and after matrix factorization (§3.1). (ii) We propose a novel joint training algorithm that learns vector embeddings of relations and entity-pairs using both distant supervision and first-order logic formulae such that the factorization captures these formulae (§3.2). (iii) We present an empirical evaluation using automatically mined rules that demonstrates the benefits of incorporating logical knowledge in relation extraction, in particular that joint factorization of distant and logic supervision is efficient, accurate, and robust to noise (§5).
+
+The simplest form of first-order formulae are ground atoms: predicates applied to constants, such as directorOf(N OLAN ,I NTERSTELLAR ). A possible world is a set of ground atoms. Ground literals are either ground atoms or negated ground atoms such as ¬ bornIn(N OLAN ,B ERLIN ), and correspond to positive or negative facts. Training data for distant supervision can now be viewed as a knowledge base of such ground literals. Our goal is to extend the class of formulae from such facts to rules such as the first-order formula above. 2.2 Matrix Factorization with Ground Atoms Given the notation presented above, matrix factorization can now be seen as a learning task in which low-dimensional embeddings are estimated for all constant pairs in P and predicates (relations) in R, given a collection of ground atoms (facts) as supervision. We represent constant-pairs as rows and predicates as columns of a |P| × |R| binary matrix, and each atom in the training data represents an observed cell in this matrix. As introduced in Riedel et al. (2013), we seek to find a low-rank factorization into a |P| × k matrix of embeddings of constant-pairs and a k × |R| matrix of predicate embeddings such that they approximate the observed matrix. More precisely, let v(·) denote the mapping from constant-pairs and predicates to their corresponding embedding. That is, vrm is the embedding for predicate rm , and v(ei ,ej ) is the embedding for the pair of constants (ei , ej ). Let w be a possible world (i.e. a set of ground atoms), and V be the set of all entity-pair and relation embeddings. Further, let ei ,ej m =  (vrm · vei ,ej ) where  is the sigmoid function and vrm · v(ei ,ej ) denotes the vector dot-product between the embeddings of relation rm and entitypair (ei , ej ). We define the conditional probability of a possible world w given embeddings V as p(w|V) =
+rm (ei ,ej )w
+i m
+
+2
+
+Matrix Factorization and Logic
+
+In this section we provide background on matrix factorization for universal schema relation extraction, and describe its connections to first-order logic. 2.1 Notation In order to later unify observed facts and logical background knowledge, we first represent given factual data in terms of first-order logic. We have a set E of constants that refer to entities, and a set of predicates R that refer to relations between these entities. In the following we will focus on binary relations in a universal schema that contains both structured relations from one (or more) knowledge bases, and surface-form relations. Further, with P  E × E we denote the domain over entity-pairs of interest. In function-free first-order logic a term is defined as a constant or a variable, and the most basic form of a formula is an atom such as professorAt(x, y ) that applies a predicate to a pair of terms. More complex formulae such as x, y : professorAt(x, y )  employeeAt(x, y ) can be constructed by combining atoms with logical connectives (such as ¬ and ) and quantifiers (x, x).
+
+e ,ej rm (ei ,ej ) /w
+
+i 1 - m
+
+e ,ej
+
+.
+
+The embeddings can be estimated by maximizing the likelihood of a set of observed ground atoms with 2 regularization (Collins et al., 2001), optimized using stochastic gradient descent. In summary, with atomic formulae (i.e. factual knowledge) we learn entity-pair and relation embeddings that reconstruct known facts and are able to generalize to unknown facts.
+
+1120
+
+

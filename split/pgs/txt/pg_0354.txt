@@ -1,0 +1,30 @@
+en-fr/es T1 1.0 39 38 0.8 37 0.6 36 0.4 35 0.2 34 0.0 33 0.0 10 20 40 100 200 400 1k 0.22k
+
+en-fr/es T1+T2 en-fr/zh T1 39 39 38 38 37 37 36 36 35 35 34 34 33 33 10 20 40 100 200 0.4 400 1k 2k 10 20 400.6 100 200 400 1k 2k Pop Limit
+
+en-fr/zh T1+T2 39 38 37 36 35 1 LM Joint 34 Seq. 33 100.8 20 40 100 200 400 1k 1.0 2k
+
+Figure 5: The impact of search on accuracy. Lines indicate a single LM (1 LM), two LMs with joint search (Joint) or two LMs with sequential search (Seq.) for various pop limits and pruning criteria.
+
+BLEU
+
+T2 ar es fr ru zh
+
+T1=fr T1+T2 T1 36.21 37.41 38.68 38.67 37.14 37.79 36.41 36.99
+
+T1=zh T1+T2 T1 20.35 20.84 20.73 21.33 20.49 21.16 19.87 21.14 -
+
+Table 3: BLEU scores by pruning criterion. Columns indicate T1 (fr or zh) and the pruning criterion (T1+T2 joint probability, or T1 probability plus max T2). Rows indicate T2.
+
+use the top 10 rules for any particular F . Results are shown in Table 3. From these results we can see that in almost all cases, pruning using T1 achieves better results. This indicates the veracity of the observation in Section 4.4 that considering multiple T2 for a particular T1 causes fragmentation of TM probabilities, and that this has a significant effect on translation results. Interestingly, the one exception to this trend is T1 of French and T2 of Spanish, indicating that with sufficiently similar languages, the fragmentation due to the introduction of T2 translations may not be as much of a problem. It should be noted that in this section, we are using the joint search algorithm, and the interaction between search and pruning will be examined more completely in the following section. 6.5 Effect of Search
+
+(T1 or T1+T2), and the pop limit. For sequential search, we set the pop limit of T2 to be 10, as this value did not have a large effect on results. For reference, we also show results when using no T2 LM. From the BLEU results shown in Figure 5, we can see that the best search algorithm depends on the pruning criterion and language pair.6 In general, when trimming using T1, we achieve better results using joint search, indicating that maintaining T1 variety in the TM is enough to maintain search accuracy. On the other hand, when using the T1+T2 pruned model when T2 is Chinese, sequential search is better. This shows that in cases where there are large amounts of ambiguity introduced by T2, sequential search effectively maintains necessary T1 variety before expanding the T2 search space. As there is no general conclusion, an interesting direction for future work is search algorithms that can combine the advantages of these two approaches.
+
+7 Related Work
+While there is very little previous work on multitarget translation, there is one line of work by Gonz´ alez and Casacuberta (2006) and P´ erez et al. (2007), which adapts a WFST-based model to output multiple targets. However, this purely monotonic method is unable to perform non-local reordering, and thus is not applicable most language pairs. It is also motivated by efficiency concerns, as opposed to this work's objective of learning from a T2 language. Factored machine translation (Koehn and Hoang, 2007) is also an example where an LM over a second
+Results for model score, a more direct measure of search errors, were largely similar.
+6
+
+Next we examine the effect of the search algorithms suggested in Section 5. To do so, we perform experiments where we vary the search algorithm (joint or sequential), the TM pruning criterion 300
+
+

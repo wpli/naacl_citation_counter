@@ -1,0 +1,30 @@
+Multi-Target Machine Translation with Multi-Synchronous Context-free Grammars
+Graham Neubig, Philip Arthur, Kevin Duh Graduate School of Information Science Nara Institute of Science and Technology 8916-5 Takayama-cho, Ikoma-shi, Nara, Japan {neubig,philip.arthur.om0,kevinduh}@is.naist.jp
+
+Abstract
+We propose a method for simultaneously translating from a single source language to multiple target languages T1, T2, etc. The motivation behind this method is that if we only have a weak language model for T1 and translations in T1 and T2 are associated, we can use the information from a strong language model over T2 to disambiguate the translations in T1, providing better translation results. As a specific framework to realize multi-target translation, we expand the formalism of synchronous context-free grammars to handle multiple targets, and describe methods for rule extraction, scoring, pruning, and search with these models. Experiments find that multi-target translation with a strong language model in a similar second target language can provide gains of up to 0.8-1.5 BLEU points.1
+
+Source  
+
+??
+
+Target 1   
+
+Target 2 Kyoto Treaty Kyoto Sanction Kyoto Protocol
+
+Figure 1: An example of multi-target translation, where a second target language is used to assess the quality of the first target language.
+
+1
+
+Introduction
+
+In statistical machine translation (SMT), the great majority of work focuses on translation of a single language pair, from the source F to the target E . However, in many actual translation situations, identical documents are translated not from one language to another, but between a large number of different languages. Examples of this abound in commercial translation, and prominent open data sets used widely by the MT community include UN documents in 6 languages (Eisele and Chen, 2010), European Parliament Proceedings in 21 languages
+Code and data to replicate the experiments can be found at http://phontron.com/project/naacl2015
+1
+
+(Koehn, 2005), and video subtitles on TED in as many as 50 languages (Cettolo et al., 2012). However, despite this abundance of multilingual data, there have been few attempts to take advantage of it. One exception is the multi-source SMT method of Och and Ney (2001), which assumes a situation where we have multiple source sentences, and would like to combine the translations from these sentences to create a better, single target translation. In this paper, we propose a framework of multitarget SMT. In multi-target translation, we translate F to not a single target E , but to a set of sentences E = E1 , E2 , . . . , E|E| in multiple target languages (which we will abbreviate T1, T2, etc.). This, in a way, can be viewed as the automated version of the multi-lingual dissemination of content performed by human translators when creating data for the UN, EuroParl, or TED corpora mentioned above. But what, one might ask, do we expect to gain by generating multiple target sentences at the same time? An illustrative example in Figure 1 shows three potential Chinese T1 translations for an Arabic input sentence. If an English speaker was asked to simply choose one of the Chinese translations, they
+
+293
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 293­302, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

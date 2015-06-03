@@ -1,0 +1,19 @@
+D´ ej` a Image-Captions: A Corpus of Expressive Descriptions in Repetition
+Jianfu Chen and Polina Kuznetsova and David S. Warren and Yejin Choi Stony Brook University University of Washington
+
+{jianchen,pkuznetsova,warren}@cs.stonybrook.edu , yejin@cs.washington.edu
+
+Abstract
+We present a new approach to harvesting a large-scale, high quality image-caption corpus that makes a better use of already existing web data with no additional human efforts. The key idea is to focus on D´ ej` a Image-Captions : naturally existing image descriptions that are repeated almost verbatim ­ by more than one individual for different images. The resulting corpus provides association structure between 4 million images with 180K unique captions, capturing a rich spectrum of everyday narratives including figurative and pragmatic language. Exploring the use of the new corpus, we also present new conceptual tasks of visually situated paraphrasing, creative image captioning, and creative visual paraphrasing.
+
+1
+
+Introduction
+
+The use of multimodal web data has been a recurring theme in many recent studies integrating language and vision, e.g., image captioning (Ordonez et al., 2011; Hodosh et al., 2013; Mason and Charniak, 2014; Kuznetsova et al., 2014), text-based image retrieval (Rasiwasia et al., 2010; Rasiwasia et al., 2007), and entry-level categorization (Ordonez et al., 2013; Feng et al., 2015). However, much research integrating complex textual descriptions to date has been based on datasets that rely on substantial human curation or annotation (Hodosh et al., 2013; Rashtchian et al., 2010; Lin et al., 2014), rather than using the web data in the wild as is (Ordonez et al., 2011; Kuznetsova et al., 2014). The need for human curation limits the potential scale of the multimodal dataset. Without human curation, however, the web data introduces significant noise. In particular, everyday captions 504
+
+often contain extraneous information that is not directly relevant to what the image shows (Kuznetsova et al., 2013b; Hodosh et al., 2013). In this paper, we present a new approach to harvesting a large-scale, high quality image-caption corpus that makes a better use of already existing web data with no additional human efforts. Figure 1 shows sample captions in the resulting corpus, e.g., "butterfly resting on a flower" and "evening walk along the beach". Notably, some of these are figurative, e.g., "rippled sky" and "sun is going to bed." The key idea is to focus on D´ ej` a Image-Captions, i.e., naturally existing image captions that are repeated almost verbatim by more than one individual for different images. The hypothesis is that such captions represent common visual content across multiple images, hence are more likely to be free of unwanted extraneous information (e.g., specific names, time, or any other personal information) and better represent visual concepts. A surprising aspect of our study is that such a strict data filtration scheme can still result in a large-scale corpus; sifting through 760 million image-caption pairs, we harvest as many as 4 million image-caption pairs with 180K unique captions. The resulting corpus, D´ ej` a Image Captions, provides several unique properties that complement human-curated or crowd-sourced datasets. First, as our approach is fully automated, it can be readily applied to harvesting a new dataset from the ever changing multimodal web data. Indeed, a recent internet report estimates that billions of new photographs are being uploaded daily (Meeker, 2014). In contrast, human-annotated datasets are costly to scale to different domains. Second, datasets that are harvested from the web
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 504­514, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

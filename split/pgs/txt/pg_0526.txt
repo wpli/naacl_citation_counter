@@ -1,0 +1,26 @@
+Modeling Word Meaning in Context with Substitute Vectors
+Oren Melamud Computer Science Dept. Bar-Ilan University
+melamuo@cs.biu.ac.il
+
+Ido Dagan Computer Science Dept. Bar-Ilan University
+dagan@cs.biu.ac.il
+
+Jacob Goldberger Faculty of Engineering Bar-Ilan University
+goldbej@eng.biu.ac.il
+
+Abstract
+Context representations are a key element in distributional models of word meaning. In contrast to typical representations based on neighboring words, a recently proposed approach suggests to represent a context of a target word by a substitute vector, comprising the potential fillers for the target word slot in that context. In this work we first propose a variant of substitute vectors, which we find particularly suitable for measuring context similarity. Then, we propose a novel model for representing word meaning in context based on this context representation. Our model outperforms state-of-the-art results on lexical substitution tasks in an unsupervised setting.
+
+our proposals will unlock new ways of raising the finance needed to develop businesses. representations of context BOW proposals, raising, unlock, ways substitutes alternate, proposing, infinite, various representation of word meaning in context paraphrases new, innovative, different, alternative, novel Table 1: Example for BOW and substitute vector representations for a context of the target word new. The paraphrase vector is the representation learned by our model for the meaning of new in this context. Only the first few entries for each vector are shown.
+
+1
+
+Introduction
+
+Following the distributional hypothesis (Firth, 1957), distributional models represent the meaning of a word type as an aggregation of its contexts. A recent line of work addresses polysemy of word types by representing the meaning (or sense) of each word instance individually as induced by its particular context. The context-sensitive meaning of a word instance is commonly called the word meaning in context, as opposed to the word meaning out-ofcontext of a word type. A key element of distributional models is the choice of context representation. A context of a word instance is typically represented by an unordered collection of its first-order neighboring words, called bag-of-words (BOW). In contrast, Yatbaz et al. (2012) proposed to represent this context as a second-order substitute vector. Instead of the neighboring words themselves, a substitute vector 472
+
+includes the potential filler words for the target word slot, weighted according to how `fit' they are to fill the target slot given the neighboring words. For example, the substitute vector representing the context "I my smartphone." (target slot underlined), would typically include potential slot fillers such as love, lost, upgraded, etc. Melamud et al. (2014) argued that substitute vectors are potentially more informative than traditional context representations since the fitness of the fillers is estimated using an n-gram language model, thereby capturing information embedded in the neighboring word order. They showed promising results on measuring word similarity out-of-context with a distributional model based on this approach. In this paper we first propose a variant of substitute vectors as a context representation, which we find particularly suitable for measuring context similarity. Then, we extend the work in Melamud et al. (2014) by proposing a novel distributional model for representing word meaning in context, based on this context representation. Like sub-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 472­482, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

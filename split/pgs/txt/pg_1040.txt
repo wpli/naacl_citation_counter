@@ -1,0 +1,36 @@
+be rewritten as follows.  {#(w, c) log  (sim(w, c))
+wV cV
+
+(3)
+
++ k #(w)P0 (c) log  (-sim(w, c))} The first term represents the co-occurrence pairs within a context window of C words preceding and following target words. #(w, c) stands for the number of appearances of a target word w and its context c. The second term represents the negative sampling. k is a number of negatively sampled words for each target word. #p (w) is the number of appearances of w as a target word, and its negative context c is sampled from a modified unigram distribution P0 (Mikolov et al., 2013a). We employ the subsampling (Mikolov et al., 2013a), which discards words  according to the probability of P (w) = 1 - p(t w) . p(w) is the proportion of occurrences of a word w in the corpus, and t is a threshold to control the discard. When we use a large-scale corpus directly, the effects of rare words are dominated by the effects of frequent words. Subsampling alleviates this problem by discarding frequent words more often than rare words. To incorporate the distributional information into the WE-T model, we propose the following objective function, which simply adds this objective function to Equation 1 with an weight  :   { log  (sim(w, s)) + +  
+wV sSw
+
+The objective is maximized by using AdaGrad. We skip some updates according to the coefficients Aw,c and Bw,c to speed up the computation; we ignore the terms with extremely small coefficients (< 10-5 ) and we sample the terms according to the coefficients when the coefficients are less than 1.
+
+3 Experiments
+3.1 Evaluation settings This section explains the task setting, resource for training, parameter settings, and evaluation metrics. 3.1.1 GRE antonym question task We evaluate our models and compare them with other existing models using GRE antonym question dataset originally provided by Mohammad et al. (2008). This dataset is widely used to evaluate the performance of antonym detection. Each question has a target word and five candidate words, and the system has to choose the most contrasting word to the target word from the candidate words (Mohammad et al., 2013). All the words in the questions are single-token words. This dataset consists of two parts, development and test, and they have 162 and 950 questions, respectively. Since the test part contains 160 development data set, We will also report results on 790 (950-160) questions following Mohammad et al. (2013). In evaluating our models on the questions, we first calculated similarities between a target word and its candidate words. The similarities were calculated by averaging asymmetric similarity scores using the similarity function in Equation 2. We then chose a word which had the lowest similarity among them. When the model did not contain any words in a question, the question was left unanswered. 3.1.2 Resource for training For supervised dataset, we used synonym and antonym pairs in two thesauri: WordNet (Miller, 1995) and Roget (Kipfer, 2009). These pairs were provided by Zhang et al. (2014)1 . There were 52,760 entries (words), each of which had 11.7 synonyms on average, and 21,319 entries, each of which had 6.5 antonyms on average.
+https://github.com/iceboal/ word-representations-bptf
+1
+
+log  (-sim(w, a))}
+
+
+wV cV
+
+wV aAw
+
+(4)
+
+{#(w, c) log  (sim(w, c))
+
++k #(w)P0 (c) log  (-sim(w, c))} This function can be further arranged as  {Aw,c log  (sim(w, c))
+wV cV
+
+(5)
+
++ Bw,c log  (-sim(w, c))} Here, the coefficients Aw,c and Bw,c are sums of corresponding coefficients in Equation 4. These terms can be pre-calculated by using the number of appearances of contextual word pairs, unigram distributions, and synonym and antonym pairs in thesauri.
+
+986
+
+

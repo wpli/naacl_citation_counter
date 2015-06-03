@@ -1,0 +1,33 @@
+Slikes
+
+S/NPlikes NPmangoes NP S
+
+R>
+
+NP\NPf rom
+< >
+
+Slikes
+
+NPJohn S\NPlikes S\NP S
+
+R<
+
+(S\NP)\(S\NP)madly
+< <
+
+(a) RRev
+
+Figure 4: RRev and LRev actions.
+
+(b) LRev
+
+sentence in parallel to the CCG derivation. As these dependencies are extracted from the CCG derivation, a node can have multiple parents and hence we construct a dependency graph rather than a tree. · Left Reveal (LRev) : Pop the top two nodes in the stack (left, right). Identify the left node's child with a subject dependency. Abstract over this child node and split the category of left node into two categories. Combine the nodes using CCG combinators accordingly. VP modifiers like VP coordination require this action. · Right Reveal (RRev) : Pop the top two nodes in the stack (left, right). Check the right periphery of the left node in the dependency graph, extract all the nodes with compatible CCG categories and identify all the possible nodes that the right node can combine with. Abstract over this node (e.g. object), split the category into two categories accordingly and combine the nodes using CCG combinators. Constructions like NP coordination, and PP attachment require this action. 3.2.2 Worked Example Figure 3 shows the sequence of steps for the example sentence described above. In steps 1 and 2, the first two words in the sentence: `John' and `likes', are shifted from the input buffer to the stack. In addition to standard CCG combinators of application and composition, we also use type-raising followed by forward composition2 . In step 3, the category of the left node `John', NP, is type-raised to S/(S\NP) which is then combined with the category of right node `likes', (S\NP)/NP, using forward composition operator to yield the category S/NP. This step also updates the dependency graph with an edge between `John' and `likes', where `likes' is the parent and `John' is the child. The
+Type-raising followed by forward composition is treated as a single step. Without this, after type-raising, the parser has to check all possible actions before applying forward composition, making it slower.
+2
+
+next word `mangoes' is shifted in step 4 and combined with S/NP:likes in step 5 using RR action yielding S:likes. After this step, the dependency graph will have `likes' as the root, with `John' and `mangoes' as its children. In this way, as our algorithm tries to be more incremental, both subject and object arguments are resolved as soon as the corresponding tokens are shifted to the stack. In steps 6 and 7, the next two words `from' and `India' are shifted to the stack. Step 8 combines (NP\NP)/NP:from and NP:India using RR action to form NP\NP:from. Now, we apply the RRev action in step 9 to correctly attach `from' to `mangoes'. In RRev we first check the right periphery and identify a possible node to be attached, `mangoes', which is the object argument of the verb `likes'. We abstract over this object and split the category in the following manner: If X is the category of the left node and Y\Y is the category of the right node, then X is split into X/Y and Y with corresponding heads. The head of the left node will be the head of X/Y, and the dependency graph helps in identifying the correct head for Y. Now, Y and Y\Y can be combined using the backward application rule to form Y, which can be combined with X/Y to form X back. In our example sentence, S:likes is split into S/NP:likes and NP:mangoes. NP:mangoes is combined with NP\NP:from to form NP:mangoes, which in return combines with S/NP:likes and forms back S:likes. Figure 4(a) sketches this process. This action also updates the dependency graph with a dependency between `mangoes' and `from'. The next word `madly' is shifted in step 10, after which the stack has two nodes S:likes and (S\NP)\(S\NP):madly. We apply the LRev action to combine these two nodes. We abstract over the subject of the left node, `likes', and split the category. Here, S:likes is split into NP:John and S\NP:likes. S\NP:likes is combined with (S\NP)\(S\NP):madly to form S\NP:likes,
+
+57
+
+

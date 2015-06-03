@@ -1,0 +1,71 @@
+n,t (m) hfn (t)
+
+
+
+1 = T
+
+T t =t
+
+zn,m (1 -  (ufn (t) vfn (t ) ))vfn (t ) (3) (4)
+
+-k EiP (n)  (ufn (t) vi )vi
+t
+
+1  n,t = vfn (t ) T Figure 3: Aggregating multiple embeddings.
+
+T t =t
+
+(1 -  (ufn (t) vfn (t ) ))ufn (t) .
+
+For each feature i drawn from the noise distribu(n) tion Pt , the gradient of vi w.r.t n,t is 
+n,t
+
+in Figure 3. The local "input" feature embedding ufn (t) is then defined as the summation, ufn (t) =
+(m) M m=0 zn,m hfn (t) .
+
+vi
+
+1 = -  (ufn (t) vi )ufn (t) . T
+
+(5)
+
+4
+
+Experiments
+
+The role of the global embedding is to capture domain-neutral information about the feature i, while the other embeddings capture attributespecific information. The global feature embeddings should therefore be more robust to domain shift, which is "explained away" by the attributespecific embeddings. We therefore use only these embeddings when constructing the augmented rep(aug) resentation, xn . To ensure that the global embeddings capture all of the domain-general information about each feature, we place an L2 regularizer on the attribute-specific embeddings. Note that we do not learn attribute-specific "output" embeddings v; these are shared across all instances, regardless of domain. The attribute-based embeddings yield a new training objective for instance n,
+
+(0) hi
+
+We evaluate F EMA on part-of-speech (POS) tagging, in two settings: (1) adaptation of English POS tagging from news text to web text, as in the SANCL shared task (Petrov and McDonald, 2012); (2) adaptation of Portuguese POS tagging across a graph of related domains over several centuries and genres, from the Tycho Brahe corpus (Galves and Faria, 2010). These evaluations are complementary: English POS tagging gives us the opportunity to evaluate feature embeddings in a well-studied and highimpact application; Portuguese POS tagging enables evaluation of multi-attribute domain adaptation, and demonstrates the capability of our approach in a morphologically-rich language, with a correspondingly large number of part-of-speech tags (383). As more historical labeled data becomes available for English and other languages, we will be able to evaluate feature embeddings and related techniques there. 4.1 Implementation details While POS tagging is classically treated as a structured prediction problem, we follow Schnabel and Sch¨ utze (2014) by taking a classification-based approach. Feature embeddings can easily be used in feature-rich sequence labeling algorithms such as conditional random fields or structured perceptron, but our pilot experiments suggest that with sufficiently rich features, classification-based methods can be extremely competitive on these datasets, at a fraction of the computational cost. Specifically, we apply a support vector machine (SVM) classifier,
+
+n
+
+=
+
+1 T
+
+T
+
+T
+
+M
+
+log  ([
+t=1 t =t m=0
+
+zn,m hfn (t) ] vfn (t ) ) zn,m hfn (t) ] vi ) . (2)
+(m)
+
+(m)
+
+M
+
++k EiP (n) log  (-[
+t
+
+m=0
+
+For brevity, we omit the regularizer from Equation 2. For feature fn (t), the (unregularized) gra(m) dients of hfn (t) and vfn (t ) w.r.t n,t are 675
+
+

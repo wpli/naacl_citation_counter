@@ -1,0 +1,32 @@
+slightly better.) This feature appears in the vector f (yij , i, j, G), as defined in Equation 3.
+
+Address terms
+
+Mutual friends
+
+Signed triads
+
+Log-likelihood -2133.28 -2018.21 -1884.02 -1582.43
+
+6
+
+Application to movie dialogues
+
+We apply the ideas in this paper to a dataset of movie dialogues (Danescu-Niculescu-Mizil and Lee, 2011), including roughly 300,000 conversational turns between 10,000 pairs of characters in 617 movies. This dataset is chosen because it not only provides the script of each movie, but also indicates which characters are in dialogue in each line. We evaluate on quantitative measures of predictive likelihood (a token-level evaluation) and coherence of the induced address term clusters (a type-level evaluation). In addition, we describe in detail the inferred signed social networks on two films. We evaluate the effects of three groups of features: address terms, mutual friends (using the Adamic-Adar metric), and triads. We include address terms in all evaluations, and test whether the network features improve performance. Ablating both network features is equivalent to clustering dyads by the counts of address terms, but all evaluations were performed by ablating components of the full model. We also tried ablating the text features, clustering edges using only the mutual friends and triad features, but we found that the resulting clusters were incoherent, with no discernible relationship to the address terms. 6.1 Predictive log-likelihood
+
+Table 4: Predictive log-likelihoods.
+V -cluster T -cluster FIRST NAME man baby honey darling sweetheart buddy sweetie hon dude
+
+sir mr+LAST NAME mr+FIRST NAME mr miss+LAST NAME son mister+FIRST NAME mrs mrs+LAST NAME FIRST NAME + LAST NAME
+
+Table 5: The ten strongest address terms for each cluster, sorted by likelihood ratio.
+
+6.2
+
+Cluster coherence
+
+To compute the predictive log-likelihood of the address terms, we hold out a randomly-selected 10% of films. On these films, we use the first 50% of address terms to estimate the dyad-label beliefs qij (y ). We then evaluate the expected log-likelihood of the second 50% of address terms, computed as y qij (y ) n log P (xn | y ) for each dyad. This is comparable to standard techniques for computing the held-out log-likelihood of topic models (Wallach et al., 2009). As shown in Table 4, the full model substantially outperforms the ablated alternatives. This indicates that the signed triad features contribute meaningful information towards the understanding of address terms in dialogue. 1622
+
+Next, we consider the model inferences that result when applying the EM procedure to the entire dataset. Table 5 presents the top address terms for each cluster, according to likelihood ratio. The cluster shown on the left emphasizes full names, titles, and formal address, while the cluster on the right includes the given name and informal address terms such as man, baby, and dude. We therefore use the labels "V-cluster" and "T-cluster", referring to the formal and informal clusters, respectively. We perform a quantitative evaluation of this clustering through an intrusion task (Chang et al., 2009). Specifically, we show individual raters three terms, selected so that two terms are from the same cluster, and the third term is from the other cluster; we then ask them to identify which term is least like the other two. Five raters were each given a list of forty triples, with the order randomized. Of the forty triples, twenty were from our full model, and twenty were from a text-only clustering model. The raters agreed with our full model in 73% percent of cases, and agreed with the text-only model in 52% percent
+
+

@@ -1,0 +1,24 @@
+introduced complex states such as Sinking and Implicit to combat syntax-semantics mismatch, which could also be incorporated into GUSPEE. Improving syntactic parsing, either separately by adapting to the biomedical domain, or jointly along with semantic parsing, is another important future direction. GUSPEE achieved better precision than recall, especially when learning with prototypes, and might benefit from augmenting prototypes by distributional similarity (Haghighi and Klein, 2006). 4.5 Comparison with Existing Distant Supervision Approaches
+
+Method MultiR MultiR (Super.) GUSPEE
+
+Rec. 11.2 12.1 22.9
+
+Prec. 21.7 24.4 15.3
+
+F1 (Class.) 14.8 16.2 18.4
+
+Table 4: Classification results on GENIA when events are simplified to binary relations for distant supervision.
+
+5
+
+Summary
+
+Existing distant supervision approaches are not directly applicable to extracting nested events. However, we can convert the extraction task into classifying minimum sub-events between proteins, for which existing methods can be applied. Specifically, we used binary sub-events in S (K ) (Section 3.3) for distant supervision, and evaluated on classifying test sentences. This would enable an interesting comparison with GUSPEE, as the latter also derived indirect supervision from S (K ) alone. Textual annotations of triggers and nested event structures in GUSPEE output were ignored, and prototypes were not used to enable a fair comparison. For distant supervision, we used the state-of-the-art MultiR system (Hoffmann et al., 2011) with standard lexical and syntactic features (Mintz et al., 2009). MultiR can be used for supervised learning by fixing relations according to the sentence-level annotations, which provides a supervised upper bound. Table 4 shows the results. GUSPEE outperformed MultiR by a wide margin, improving F1 by 24%. Surprisingly, GUSPEE even surpassed the supervised upper bound of MultiR. This suggests that our semantic parsing formulation not only is superior in representation power, but also facilitates better learning. We also experimented with sharing parameters among related sub-events in a MultiRlike model, but it did not improve the performance. Upon close inspection, we found that MultiR mainly scored on Binding events and failed almostly entirely on the more difficult Regulation events. GUSPEE was able to extract Regulation events, but incurred some precision errors. 764
+
+We generalize distant supervision to complex knowledge extraction and propose the first approach to learn a semantic parser from a database of nested events and unannotated text. Experiments on GENIA event extraction showed that our GUSPEE system could learn from and extract such complex events, and was competitive even among supervised systems after incorporating a few easily-obtainable prototype event trigger words. Future directions include: PubMed-scale pathway extraction; application to other domains; incorporating additional complex states to address syntax-semantics mismatch; learning vector-space representations for complex states; joint syntacticsemantic parsing; incorporating reasoning and other sources of indirect supervision.
+
+References
+Yoav Artzi and Luke Zettlemoyer. 2011. Bootstrapping semantic parsers from conversations. In Proceedings of the 2011 Conference on Empirical Methods in Natural Language Processing. Yoav Artzi and Luke Zettlemoyer. 2013. Weakly supervised learning of semantic parsers for mapping instructions to actions. Transactions of the Association for Computational Linguistics, 1:49­62. Taylor Berg-Kirkpatrick, John DeNero, and Dan Klein. 2010. Painless unsupervised learning with features. In Proceedings of Human Language Technologies: The 2010 Annual Conference of the North American Chapter of the Association for Computational Linguistics. Jari Bjorne, Juho Heimonen, Filip Ginter, Antti Airola, Tapio Pahikkala, and Tapio Salakoski. 2009. Extracting complex biological events with rich graph-based feature sets. In Proceedings of the BioNLP Workshop. Ethan G Cerami, Benjamin E Gross, Emek Demir, Igor ¨ un Babur, Nadia Anwar, Nikolaus Rodchenkov, Ozg¨ Schultz, Gary D Bader, and Chris Sander. 2011. Pathway commons, a web resource for biological pathway data. Nucleic acids research, 39(suppl 1):D685­ D690.
+
+

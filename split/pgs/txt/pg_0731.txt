@@ -1,0 +1,50 @@
+Target
+NEWSGROUPS REVIEWS WEBLOGS ANSWERS EMAILS
+
+baseline 88.56 91.02 93.67 89.05 88.12 90.08
+
+MEMM 89.11 91.43 94.15 88.92 88.68 90.46
+
+SCL 89.33 91.53 94.28 89.56 88.42 90.63
+
+mDA 89.87 91.96 94.18 90.06 88.71 90.95
+
+word2vec 89.70 91.70 94.17 89.83 88.51 90.78
+
+FLORS 90.86 92.95 94.71 90.30 89.44 91.65
+
+F EMA 91.26 92.82 94.95 90.69 89.72 91.89
+
+AVERAGE
+
+Table 2: Accuracy results for adaptation from WSJ to Web Text on SANCL dev set. Target
+NEWSGROUPS REVIEWS WEBLOGS ANSWERS EMAILS
+
+baseline 91.02 89.79 91.85 89.52 87.45 89.93
+
+MEMM 91.25 90.30 92.32 89.74 87.77 90.28
+
+SCL 91.51 90.29 92.32 90.04 88.04 90.44
+
+mDA 91.83 90.95 92.39 90.61 88.11 90.78
+
+word2vec 91.35 90.87 92.42 90.48 88.28 90.68
+
+FLORS 92.41 92.25 93.14 91.17 88.67 91.53
+
+F EMA 92.60 92.15 93.43 91.35 89.02 91.71
+
+AVERAGE
+
+Table 3: Accuracy results for adaptation from WSJ to Web Text on SANCL test set.
+
+weights of the pivot feature predictors. The mDA method does not include any such matrix factorization step, and therefore generates a number of dense features equal to the number of pivot features. Memory constraints force us to choose fewer pivots, which we achieve by raising the threshold to 200, yielding 2754 pivot features. Additional systems Aside from SCL and mDA, we compare against published results of FLORS (Schnabel and Sch¨ utze, 2014), which uses distributional features for domain adaptation. We also republish the baseline results of Schnabel and Sch¨ utze (2014) using the Stanford POS Tagger, a maximum entropy Markov model (MEMM) tagger. Results As shown in Table 2 and 3, F EMA outperforms competitive systems on all target domains except REVIEW, where FLORS performs slightly better. FLORS uses more basic features than F EMA; these features could in principle be combined with feature embeddings for better performance. Compared with the other representation learning approaches, F EMA is roughly 1% better on average, corresponding to an error reduction of 10%. Its training time is approximately 70 minutes on a 24core machine, using an implementation based on 677
+
+Figure 4: Accuracy results with different latent dimensions on SANCL dev sets.
+
+gensim.4 This is slightly faster than SCL, although slower than mDA with structured dropout noise. Figure 4 shows the average accuracy on the SANCL development set, versus the latent dimensions of different methods. The latent dimension of SCL is modulated by the number of singular vectors; we consider sizes 10, 25, 50, 75, and 100. In mDA, we consider pivot feature frequency thresholds 500, 400, 300, 250, and 200. For F EMA, we consider embedding sizes 25, 50, 100, 150, and 200. The resulting latent dimensionality multiplies these sizes by the number of non-binary templates
+4
+
+http://radimrehurek.com/gensim/
+
+

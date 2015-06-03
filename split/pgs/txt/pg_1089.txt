@@ -1,0 +1,7 @@
+Masaru Tomita. 1988. Graph-structured stack and natural language parsing. In Proceedings of the 26th annual meeting on Association for Computational Linguistics, pages 249­257, Morristown, NJ, USA. Association for Computational Linguistics. Zhiguo Wang and Nianwen Xue. 2014. Joint pos tagging and transition-based constituent parsing in chinese with non-local features. In Proceedings of ACL. Yue Zhang and Stephen Clark. 2008. A tale of
+
+two parsers: investigating and combining graph-based and transition-based dependency parsing using beamsearch. In Proceedings of EMNLP. Kai Zhao and Liang Huang. 2013. Minibatch and parallelization for online large margin structured learning. In Proceedings of NAACL 2013. Muhua Zhu, Yue Zhang, Wenliang Chen, Min Zhang, and Jingbo Zhu. 2013. Fast and accurate shift-reduce constituent parsing. In Proceedings of ACL 2013.
+
+1035
+
+

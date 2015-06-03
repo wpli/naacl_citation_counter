@@ -1,0 +1,20 @@
+High-Order Low-Rank Tensors for Semantic Role Labeling
+Tao Lei1 , Yuan Zhang1 , Llu´ is M` arquez2 , Alessandro Moschitti2 , and Regina Barzilay1 1 Computer Science and Artificial Intelligence Laboratory, Massachusetts Institute of Technology 2 ALT Research Group, Qatar Computing Research Institute 1 {taolei, yuanzh, regina}@csail.mit.edu 2 {lmarquez, amoschitti}@qf.org.qa
+
+Abstract
+This paper introduces a tensor-based approach to semantic role labeling (SRL). The motivation behind the approach is to automatically induce a compact feature representation for words and their relations, tailoring them to the task. In this sense, our dimensionality reduction method provides a clear alternative to the traditional feature engineering approach used in SRL. To capture meaningful interactions between the argument, predicate, their syntactic path and the corresponding role label, we compress each feature representation first to a lower dimensional space prior to assessing their interactions. This corresponds to using an overall cross-product feature representation and maintaining associated parameters as a four-way low-rank tensor. The tensor parameters are optimized for the SRL performance using standard online algorithms. Our tensor-based approach rivals the best performing system on the CoNLL-2009 shared task. In addition, we demonstrate that adding the representation tensor to a competitive tensorfree model yields 2% absolute increase in Fscore.1
+
+are manually created and thus offer specific means of incorporating prior knowledge into the method. However, finding compact, informative templates is difficult since the relevant signal may be spread over many correlated features. Moreover, the use of lexicalized features, which are inevitably sparse, leads to overfitting. In this case it is advantageous to try to automatically compress the feature set to use a small number of underlying co-varying dimensions. Dimensionality reduction of this kind can be incorporated into the classifier directly by utilizing tensor calculus. In this paper, we adopt this strategy. We start by building high-dimensional feature vectors that are subsequently mapped into a lowdimensional representation. Since this highdimensional representation has to reflect the interaction between different indicators of semantic relations, we construct it as a cross-product of smaller feature vectors that capture distinct facets of semantic dependence: predicate, argument, syntactic path and role label. By compressing this sparse representation into lower dimensions, we obtain dense representations for words (predicate, argument) and their connecting paths, uncovering meaningful interactions. The associated parameters are maintained as a four-way low-rank tensor, and optimized for SRL performance. Tensor modularity enables us to employ standard online algorithms for training. Our approach to SRL is inspired by recent success of our tensor-based approaches in dependency parsing (Lei et al., 2014). Applying analogous techniques to SRL brings about new challenges, however. The scoring function needs to reflect the highorder interactions between the predicate, argument,
+
+1
+
+Introduction
+
+The accuracy of Semantic Role Labeling (SRL) systems depends strongly on the features used by the underlying classifiers. For instance, the top performing system on the CoNLL­2009 shared task employs over 50 language-specific templates for feature generation (Che et al., 2009). The templates
+Our code is available at https://github.com/ taolei87/SRLParser.
+1
+
+1150
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1150­1160, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

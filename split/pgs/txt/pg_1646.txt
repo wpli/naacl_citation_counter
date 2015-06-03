@@ -1,0 +1,49 @@
+Log rate 2.49 2.49 2.49 1.66 1.66 1.66
+
+Tweet Holy shitballs, @Royals! #WorldSeries #Game7 Just when you thought the #WorldSeries was over.... #E8 Fuck you, Blanco. #Giants #WorldSeries Lets Go Giants!!! 5-0 #SFGiants #WorldSeries The guy in Marlins gear behind home plate needs to escorted off property for annoying everybody. #WorldSeries #WhoDoesThat I suppose I appreciate Bochy's "ASG" approach with Bumgarner. Of course, who are any of us to question him in late October? #WorldSeries
+
+Per-word entropy 3.99 4.76 5.54 3.26 4.85 7.42
+
+Table 2: Example tweets, grouped by the per-minute tweet rate during each at-bat.
+
+Per-tweet entropy
+
+slow and fast adaptation occurring in the discourse. The effects are both in the predicted directions: Entropy increases with time as more informative context builds up, but decreases with tweet rate as more exciting events encourage less informationladen tweets.
+
+Win Prob. Added vs. per-tweet entropy
+120
+q q q qq qq q q q q q q q q q q q q q q q q q q q q q q q q qq q q q q q qq q qq qqq qq q q q q q q q q q q q q q q q
+
+Game #
+q
+
+1 2
+
+100
+
+q q q q q
+
+3 4 5 6 7
+
+80
+
+5
+5.1
+
+Control Analyses
+Non-Rate Metrics of Context
+
+60
+
+Since tweet rate is an organic reflection of the interest accrued by in-game events, it is an important metric for examining fast adaptation. Nevertheless, it could be confounded with other factors influencing tweet production. For instance, there is evidence that online interactions exhibit rational responses to information overload, the state where the amount of incoming information exceeds a user's ability to process it (Miller, 1956; Schoberth et al., 2003). Previous investigations into forum posting behavior have shown that users adapt to overload by posting shorter messages (Jones et al., 2001b; Jones et al., 2001a; Whittaker et al., 2003; Schoberth et al., 2003), and a similar result was found for the more explicitly conversational setting of IRC chat channels (Jones et al., 2008). To show that the changes in information content are not merely reactions to increased tweet competition--that they have independent informational motivations--we need metrics of event importance and predictability that are not dependent on social media behavior. Luckily, baseball has a long history of statistical analysis, and as a result, there 1592
+
+40 0.0 0.1 0.2
+
+WPA
+
+Figure 3: Total entropy decreases for at-bats with greater win probability changes. Loess curve fitting with 95% confidence intervals.
+
+are independently-derived metrics that fit this bill. Two that are appropriate for this purpose are Leverage Index (LI)6 and Win Probability Added (WPA) (Tango et al., 2007). LI is an estimate of how critical an at-bat is to the outcome of the game. It is based on the difference in resultant win probability if the current batter gets a hit or an out, normalized by the mean change in win probability over all at-bats. 1 is the average LI, and greater LI indicates greater importance. LI, as a measure of the expected change in win probability, is similar to non-linguistic entropy term in Equation 2. WPA depends on the result of an at-bat, and eshttp://www.hardballtimes.com/ crucial-situations/
+6
+
+

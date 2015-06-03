@@ -1,0 +1,28 @@
+Test Set MEN RW SCWS AN-SYN AN-SEM
+
+All !Morphology !Framenet !Morphology !Bitext !Wikipedia !Dependency Views !Framenet 70.1 37.2 66.4 56.4 34.3 69.8 36.4 65.8 56.3 34.3 70.1 36.1 66.3 56.2 34.3 69.9 32.2 64.2 51.2 36.2 46.4 11.6 54.5 37.6 4.1 68.4 34.9 65.5 50.5 35.3 69.5 34.1 65.2 54.4 34.5
+
+!Morphology !Framenet !Bitext 68.4 27.1 60.8 46.0 30.6
+
+Table 8: Performance versus views removed from the multiview GCCA procedure. !Framenet means that the view containing counts derived from Frame semantic dataset was removed. Other columns are named similarly. The other 1 hyperparameters were nj = Count 4 , m = 300, t = 100K, v = 25, k = 300.
+
+Test Set Glove WSG MEN RW SCWS SIMLEX WS MTURK WS-REL WS-SEM RG MC AN-SYN AN-SEM TOEFL 70.4 28.1 54.1 33.7 58.6 61.7 53.4 69.0 73.8 70.5 61.8 80.9 83.8 73.9 32.9 65.6 36.7 70.8 65.1 63.6 78.4 78.2 78.5 59.8 73.7 81.2
+
+MV MVLSA MVLSA MVLSA MV G-WSG G-WSG Wiki All Views Combined Gain Gain 76.0 71.4 71.2 75.8 -0.2 4.6 37.2 29.0 41.7 40.5 12.7 -1.2 60.7 61.8 67.3 66.4 5.5 -0.9 41.1 34.5 42.4 43.9 7.9 1.5 67.4 68.0 70.8 70.1 2.8 -0.7 59.8 59.1 59.7 62.9 0.6 3.2 59.6 60.1 65.1 63.5 5.0 -1.6 76.1 76.8 78.8 79.2 2.0 0.4 80.4 71.2 74.4 80.8 3.2 6.4 82.7 76.6 75.9 77.7 -0.7 2.8  51.0 42.7 60.0 64.3 17.3 4.3  73.5 36.2 38.6 77.2 2.4 38.6 86.2 78.8 87.5 88.8 8.7 1.3
+
+rs MVLSA Glove WSG 71.9 89.1 72.3 74.2 87.1 94.5 62.4 78.2 72.3 88.1 80.0 87.7 58.2 81.0 74.4 90.6 80.3 90.6 80.1 94.1
+
+rs MV-G-WSG Glove WSG 85.8 92.3 80.2 75.6 91.3 96.3 79.3 86.0 81.8 91.8 87.3 92.5 69.6 85.3 83.9 94.0 91.8 92.9 91.4 95.8
+
+0.9 Table 9: Comparison of Multiview LSA against Glove and WSG(Word2Vec Skip Gram). Using 0 .05 as the threshold  we highlighted the top performing systems in bold font. marks significant increments in performance due to use of multiple views in the Gain columns. The rs columns demonstrate that GCCA increased pearson correlation.
+
+dran, 2008; Chan et al., 2011). 7 They have been trained using either one (Pennington et al., 2014) 8 or two sources of cooccurrence statistics (Zou et al., 2013; Faruqui and Dyer, 2014; Bansal et al., 2014; Levy and Goldberg, 2014) 9 or using multi-modal data (Hill and Korhonen, 2014; Bruni et al., 2012). Dhillon et al. (2011) and Dhillon et al. (2012) were the first to use CCA as the primary method to learn vector representations and Faruqui and Dyer (2014) further demonstrated that incorporatcode.google.com/p/ word2vec,metaoptimize.com/projects/ wordreprs 8 nlp.stanford.edu/projects/glove 9 ttic.uchicago.edu/~mbansal/data/ syntacticEmbeddings.zip,cs.cmu.edu/ ~mfaruqui/soft.html
+7
+
+ing bilingual data through CCA improved performance. More recently this same phenomenon was reported by Hill et al. (2014a) through their experiments over neural representations learnt from MT systems. Various other researchers have tried to improve the performance of their paraphrase systems or vector space models by using diverse sources of information such as bilingual corpora (Bannard and Callison-Burch, 2005; Huang et al., 2012; Zou et al., 2013),10 structured datasets (Yu and Dredze, 2014; Faruqui et al., 2014) or even tagged images (Bruni
+An example of complementary views: Chan et al. (2011) observed that monolingual distributional statistics are susceptible to conflating antonyms, where bilingual data is not; on the other hand bilingual statistics are susceptible to noisy alignments, where monolingual data is not.
+10
+
+563
+
+

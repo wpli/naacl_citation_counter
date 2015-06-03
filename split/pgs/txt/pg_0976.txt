@@ -1,0 +1,24 @@
+Inflection Generation as Discriminative String Transduction
+Garrett Nicolai Colin Cherry Grzegorz Kondrak Department of Computing Science University of Alberta Edmonton, AB, T6G 2E8, Canada {nicolai,gkondrak}@ualberta.ca
+
+
+National Research Council Canada 1200 Montreal Road Ottawa, ON, K1A 0R6, Canada Colin.Cherry@nrc-cnrc.gc.ca
+
+
+
+Abstract
+We approach the task of morphological inflection generation as discriminative string transduction. Our supervised system learns to generate word-forms from lemmas accompanied by morphological tags, and refines them by referring to the other forms within a paradigm. Results of experiments on six diverse languages with varying amounts of training data demonstrate that our approach improves the state of the art in terms of predicting inflected word-forms.
+
+Figure 1: A partial inflection table for the German verb atmen "to breathe" in Wiktionary.
+
+1
+
+Introduction
+
+Word-forms that correspond to the same lemma can be viewed as paradigmatically related instantiations of the lemma. For example, take, takes, taking, took, and taken are the word-forms of the lemma take. Many languages have complex morphology with dozens of different word-forms for any given lemma: verbs inflect for tense, mood, and person; nouns can vary depending on their role in a sentence, and adjectives agree with the nouns that they modify. For such languages, many forms will not be attested even in a large corpus. However, different lemmas often exhibit the same inflectional patterns, called paradigms, which are based on phonological, semantic, or morphological criteria. The paradigm of a given lemma can be identified and used to generate unseen forms. Inflection prediction has the potential to improve Statistical Machine Translation (SMT) into morphologically complex languages. In order to address data sparsity in the training bitext, Clifton and Sarkar (2011) and Fraser et al. (2012) reduce diverse 922
+
+inflected forms in the target language into the corresponding base forms, or lemmas. At test time, they predict an abstract inflection tag for each translated lemma, which is then transformed into a proper word-form. Unfortunately, hand-crafted morphological generators such as the ones that they use for this purpose are available only for a small number of languages, and are expensive to create from scratch. The supervised inflection generation models that we investigate in this paper can instead be trained on publicly available inflection tables. The task of an inflection generator is to produce an inflected form given a base-form (e.g., an infinitive) and desired inflection, which can be specified as an abstract inflectional tag. The generator is trained on a number of inflection tables, such as the one in Figure 1, which enumerate inflection forms for a given lemma. At test time, the generator predicts inflections for previously unseen base-forms. For example, given the input atmen + 1SIA, where the tag stands for "first person singular indicative preterite," it should output atmete. Recently, Durrett and DeNero (2013) and Ahlberg
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 922­931, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

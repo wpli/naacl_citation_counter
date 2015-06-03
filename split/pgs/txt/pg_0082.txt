@@ -1,0 +1,25 @@
+Centroid OneBest 2Clusters kClusters
+
+Centroid OneBest 2Clusters kClusters
+
+Centroid OneBest 2Clusters kClusters
+
+Pad´ o (2007) agents SDDM SDDMX TypeDM 0.515 0.528 0.535 0.321 0.324 0.464 0.489 0.412 0.522 0.281 0.322 0.460 Pad´ o (2007) patients SDDM SDDMX TypeDM 0.511 0.505 0.525 0.447 0.467 0.509 0.526 0.498 0.551 0.401 0.428 0.555 All from Pad´ o (2007) SDDM SDDMX TypeDM 0.512 0.521 0.530 0.385 0.395 0.482 0.508 0.458 0.532 0.343 0.375 0.503
+
+McRae et al. (1998) agents SDDM SDDMX TypeDM 0.371 0.394 0.359 0.375 0.376 0.431 0.367 0.373 0.370 0.396 0.394 0.416 McRae et al. (1998) patients SDDM SDDMX TypeDM 0.133 0.131 0.343 0.214 0.233 0.307 0.175 0.166 0.353 0.212 0.227 0.350 All from McRae et al. (1998) SDDM SDDMX TypeDM 0.237 0.251 0.325 0.273 0.287 0.345 0.252 0.256 0.336 0.287 0.294 0.359
+
+Ferretti et al. (2001) instruments SDDM SDDMX TypeDM 0.193 0.274 0.357 0.274 0.336 0.394 0.252 0.331 0.388 0.335 0.344 0.422 Ferretti et al. (2001) locations SDDM SDDMX TypeDM 0.187 0.248 0.230 0.234 0.276 0.244 0.294 0.249 0.235 0.293 0.326 0.289 All datasets SDDM SDDMX TypeDM 0.258 0.296 0.354 0.275 0.304 0.359 0.287 0.289 0.366 0.294 0.317 0.385
+
+Table 3: Spearman's  for each method on each dataset and on all datasets together, using the 20 highest ranked words per verb-role.
+
+The first six sections of Table 3 give the Spearman's  values for our four centroid set construction methods evaluated against the four datasets of human judgements, organized by thematic role, all using the 20 highest-ranked words per verb-role. We note that the  value for the Pad´ o (2007) dataset using TypeDM and the Centroid method is slightly higher than the value reported in Baroni and Lenci (2010) due to correcting some transpositions in the original file. Finally, the last three sections of Table 3 give the performance of each method on the two whole agent/patient datasets (for comparison with previous work), as well as on all datasets merged together.
+
+ings. But at the other extreme, we see how the  values for the OneBest method peak (at n = 13 for SDDMX and n = 34 for TypeDM ) and then decrease instead of increasing monotonically. This is because we disallowed cosines of 1.0 and because as we increase the number of vectors retrieved, the easier it becomes to be close to one of the prototype vectors, regardless of thematic fit distinctions within the prototype set. For the model comparison, we see that while TypeDM generally performs better than SDDMX on instruments, clustering reduces the gap considerably. Also SDDMX outperforms TypeDM for all methods on locations as shown in Table 3. This difference suggests that locations appear in sufficiently diverse syntactic configurations such that the handcrafted rules from TypeDM do not work well. From the All datasets section of Table 3, we see that both OneBest and kClusters improve the  values over the Centroid baseline for all three DM models. This holds, too, for the individual instruments and locations datasets. Also, the two clustering methods perform better than Centroid on Pad´ o (2007) patients with all DM models and on McRae et al. (1998) patients with TypeDM . The fact that Centroid performs best on Pad´ o (2007) agents con-
+
+5
+
+Discussion
+
+While SDDM and SDDMX have marginally better coverage than TypeDM , we do not expect that this had an effect on our results. Figure 3 shows that for the various numbers of vectors retrieved from the DM models, kClusters consistently outperforms OneBest , which consistently outperforms Centroid on the Ferretti et al. (2001) instruments dataset. So, using just a single centroid that is a mixture of all possible good role-fillers for a verb leads to problems due to conflating different word mean28
+
+

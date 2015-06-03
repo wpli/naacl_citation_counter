@@ -1,0 +1,33 @@
+m+1
+
+p(h|, S ) =
+i=1
+
+p(ei |ei-1 , , S ),
+
+where h = (h1 , . . . , hm+1 ) is a Hamiltonian path with hi = (ei-1 , ei ) being a directed edge in the path. Initial experimentation suggested that greedy inference (henceforth, G REEDY-L OG L IN) works better in practice than the ILP formulation for the locally-normalized model. We therefore do not report results on global inference with this log-linear model. We suspect that greedy inference works better with the log-linear model because it is trained locally, while the perceptron algorithm includes a global inference step in its training, and therefore better matches global decoding. G REEDY-L OG L IN closely resembles the learning model of Lapata (2003), as both are firstorder Markovian and use the same (greedy) inference procedure. Lapata's model differs from G REEDY-L OG L IN in being a generative model, where each event is a tuple of features, and the transition probability between events is defined as the product of transition probabilities between feature pairs. G REEDY-L OG L IN is discriminative, so to be maximally comparable to the presented model.
+
+Template (a1 , a2 ) (a1 , c2 1) (a2 , c1 1) 2 (c1 1 , c1 ) (B (a1 ),B (a2 )) (k, k )  K. 2 1 2 |{(c1 i , cj ) : B (ci ) = k, B (cj ) = k }| 2 k  K. |{c2 : B ( c ) = k }| i i B (a2 ) 1 1   L. log( + P [(a2 , c2 1 )|(a , c1 )]) 1 1 2 2   L. PMI ((a , c1 ), (a , c1 )) 1 1   L. PMI ((a2 , c2 1 ), (a , c1 )) ORD(a2 , c2 ) 1
+
+Brown
+
+Example (fry, add) (fry, oil) (onions, add) (onions, oil) (1,3) (5,4) : 2 12 : 1 5 -2.3 3.1 -2.0 3.2
+
+Table 1: Feature templates used for computing . The 1 templates operate on two events a1 , c1 and 1 , . . . , c m1 2 a2 , c2 , . . . , c . B ( w ) maps a word w to its Brown clus1 m2 ter in K = {1, . . . , 50}. ORD(e) returns the mean ordinal value of e. Feature templates which start with  stand for multiple features, one for each element in the set quantified over. Non-numerical feature templates correspond to binary features. E.g., (fry, add) as an instance of (a1 , a2 ) is a binary feature indicating the appearance of an event with a1 = fry on one end of the edge and an event with a2 = add on the other end of it. = 10-3 in our experiments. See text for elaboration.
+
+5
+
+The Feature Set
+
+Table 1 presents the complete set of features. We consider three sets of features: Lexical encodes the written forms of the event pair predicates and objects; Brown uses Brown clusters (Brown et al., 1992) to encode similar information, but allows generalization between distributionally similar words; and Frequency encodes the empirical distribution of temporally-related phenomena. The feature definitions make use of several functions. For brevity, we sometimes say that an event e is (a, c1 ) if e's predicate is a and its first argument is c1 , disregarding its other arguments. Let C be a reference corpus of recipes for collecting statistics. The function B (w) gives the Brown cluster of a word w, as determined by clustering C into 50 clusters {1, . . . , 50}. The function ORD(a, c) returns the mean ordinal number of an (a, c) event in C. The ordinal number of the event ei in a recipe m (e1 , ..., em ) is defined as i - . 2 1165
+
+We further encode the tendency of two events to appear with temporal discourse connectives, such as "before" or "until." We define a linkage between two events as a triplet (e1 , e2 , )  (U × U × L), where L is the set of linkage types, defined according to their marker's written form. §6 details the extraction process of linkages from recipes. We further include a special linkage type linear based on the order of events in the text, and consider every pair of events e1 and e2 that follow one another in a recipe as linked under this linkage type. For each linkage type  L, we define an empirical probability distribution P ((a, c1 ), (a , c1 )) = P ((a, c1 ), (a , c1 )| ), based on simple counting. The function PMI gives the point-wise mutual information of two events and is defined as:
+PMI ((a, c), (a , c )) = log P ((a, c1 ), (a , c1 )) P (a, c1 ) · P (a , c1 )
+
+Frequency-based features encode the empirical estimate of the probabilities that various pairs of features would occur one after the other or linked with a discourse marker. They are equivalent to using probabilities extracted from maximum likelihood estima-
+
+Frequency
+
+Lexical
+
+

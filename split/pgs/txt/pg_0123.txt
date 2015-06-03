@@ -1,0 +1,58 @@
+BV poss compound ARG2 ARG1 60
+
+_and_c ARG3 conj
+70 80 90 DM F1 -score (%) 100
+BN + SPINES + PATHS BKY + BN + PATHS BASELINE
+
+BN + SPINES + PATHS BKY + BN + PATHS BASELINE
+
+30
+
+40
+
+50 60 70 80 DM F1 -score (%)
+
+90
+
+100
+
+20 30 40 50 Sent. Length (bins of size 10)
+
+50+
+
+(a) Most frequent labels.
+
+(b) Best improved labels.
+
+(c) Sentence length.
+
+(d) Long-distance dependencies.
+
+Figure 3: Error analysis on DM (dev. set).
+
+As observed in the charts, the scores are higher for the most frequent labels on both corpora, especially when dealing with verbal arguments. There are also two interesting cases for DM: the predictions of _and_c and ARG3 edges show an improvement by at least 5 points (Figures 3(b) & 4(b)), showing that the recovery of coordination structures and the disambiguation of less frequent or more distant arguments is achieved by adding non-local features. 6.2 Length Factor
+
+Longer sentences are notoriously difficult to parse for most parsing models. Figures 3(c) and 4(c) show the F1 -measure of our models with respect to sentence length (in bins of size 10: 1-10, 11-20, etc.) for the DM and PAS corpora. It is worth noting that we greatly improve the scores for longer sentences. The use of paths and of the output of a graph-based parser (Bohnet, 2010) favors the capture of complex dependencies and enhances the learning of these constructions for our local transition-based parser. However, we also observe that the features are not able to completely stop the loss of F1 -score for longer sentences. The slopes of the curves in the different charts show the same trend: the longer the sentence, the lower the score. 6.3 Linguistic Factors
+
+Long-distance Dependencies (LDDs) For many systems, LDDs are difficult to recover because they are generally under-represented in the training corpus and the constructions involved in LDDs often require deep linguistic knowledge to be recovered. In Figure 7, we report the distribution of long-distance dependencies by bins of size 5 up to 40. They only account for 15% of all the dependencies in both corpora. The longest dependencies consist of the first and second arguments of the verb as well as coordination links. In the case of elided coordination structures, we have long-distance dependencies when two coordinated verbs share the same first or second argument, which explains the distribution of lengths.
+B INS DM PAS 5-10 2907 3705 11-15 734 1007 16-20 329 408 21-25 141 175 26-40 92 127
+
+Table 7: Number of LDDs edges (dev. set).
+
+We now center our analysis on long-distance dependencies (LDDs), by focusing our attention on edges length, i.e. the distance between two words linked by an edge. We will then concentrate on subject ellipsis, in a treatment of LDDs more similar to the linguistic definition of Cahill et al. (2004). 69
+
+As outlined in Figures 3(d) and 4(d), we can see that without structural information such as spines, surfacic dependencies or paths, the longest dependencies have low F1 -scores. When using these features, our models tend to perform better, with a gain of up to 25 points for high-dependency lengths (bins between 16-20 and 21-25). In Table 8, we show the global improvement when considering edge lengths between 5 and 40. For both corpora, the improvement is the same (around 9 points), showing that structural information is the key to better predictions. Looking into this improvement more closely, we found that PATHS combined with BN tend to be crucial, whereas SPINES
+
+F1 -score (%)
+
+F1 -score (%)
+
+BN + SPINES + PATHS BKY + BN + PATHS BASELINE
+
+appos loc
+
+88 86 84 82 80 78 76 74 72 70 10
+
+60 BN + SPINES + PATHS BKY + BN + PATHS 55 BASELINE 50 45 40 35 30 25 5-10 11-15 16-20 21-25 Edges Length (bins of size 5)
+
+

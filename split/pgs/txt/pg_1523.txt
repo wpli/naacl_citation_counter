@@ -1,0 +1,69 @@
+(Dempster et al., 1977), deriving for the E-step: setting the probability distribution q to p(zi |D, ,  )  zi |ci and in the M-step: n ki  e|z =
+i=1 ki   j =1 ej
+
+ej |zi ,
+
+(4)
+
+Method Co Co (freq) Co (uni) Wu et al. Freq Uniform CN/JA only EN only
+
+NEWS 0.687 (0.68) 0.668 (0.68) 0.666 (0.68) 0.632 (0.56) 0.635 (0.58) 0.628 (0.53) 0.816 (0.81) 0.718 (0.67)
+
+WEB 0.842 (0.84) 0.849 (0.83) 0.842 (0.83) 0.849 (0.74) 0.842 (0.76) 0.856 (0.76) 0.893 (0.90) 0.967 (0.97)
+
+TWEETS 0.430 (0.18) 0.424 (0.20) 0.426 (0.22) 0.391 (0.13) 0.376 (0.13) 0.407 (0.13) 0.894 (0.89) 0.682 (0.67)
+
+j =1 1e (ej ) · q (zi = z ) n ki i=1 j =1 q (zi = z )
+
+(5)
+
+and
+ z |c
+
+=
+
+n
+
+1 (c ) · q (zi = i=1 nc i i=1 q (zi = z )
+
+z)
+
+.
+
+(6)
+
+Table 1: Shows the break-even point (f1-score) of the proposed method Co and three baselines for each pair of corpora. Co (freq) and Co (uni) denote the proposed method without estimation of dictionary probabilities, but instead using word frequency and uniform distribution, respectively.
+
+3.2 Learning f |e Here we propose to chose the translation probabilities f |e with highest probability, under our current model, and such that the probability of observing the source documents (without labels) is maximized. Formally, given a collection of source documents D := F1 , ..., Fm , the optimal translation probabil is ity f |e
+   argmax p(D |f |e , c , z |c , e|z ) , f |e  ,   ,  are the parameters learned in the where c z |c e|z previous section. Unfortunately, the exact optimization is intractable, and therefore, we resort again to an EM-approximation, analogously to before. The E-step corresponds to setting for each source document i, the probability q (ei,1 , ..., ei,ki ) to
+
+p(ei,1 , ..., ei,ki |fi,1 , . . . fi,k , f |e )  
+ci zi
+
+p(ci )p(zi |ci )
+
+k  j =1
+
+p(ei,j |zi )fi,j |ei,j .
+
+In the M-step, we update f |e to
+ f |e
+
+m ki =
+i=1
+
+j =1 1f (fj,i ) · q (ei,j = e) . m ki i=1 j =1 q (ei,j = e)
+
+Japanese crawled from Internet news sites during 2012-2013, and were annotated as being related to "foreign policy" or not related. The corpora WEB contains web pages in English and Chinese that are categorized either as "sport" or "computer" in the Open Directory Project (ODP)6 crawled in 2013. TWEETS contains tweets in English and Chinese gathered during 2013, classified as related to "violence", or not related.7 We tokenize and stem the words in the English corpora using Senna (Collobert et al., 2011). For Chinese and Japanese we use the morphological analyzers described in (Qiu et al., 2013), and an inhouse analyzer, respectively. The Chinese to English dictionary, and the Japanese to English dictionary contains translations for 94351 and 1483440 words, respectively. For the classification we use LIBSVM (Chang and Lin, 2011) with linear kernel, and the feature representation as suggested in (Rennie et al., 2003). For the parameter estimation of our proposed model we use EM, as described in Section 3.1 and 3.2.8 The number of topics was determined by optimizing the f1-measure using only the English training data when applying the probabilistic model to monolingual text classification. In order to prevent non-zero probabilities, we use a symmetric Dirichlet
+www.dmoz.com The number of documents in the corpora pairs for source/target language are 2472/2289, 1302/6294, and 2005/1499 for NEWS, WEB and TWEETS, respectively. 8 We observed convergence for less than 50 iterations.
+7 6
+
+4
+
+Experiments
+
+For our experiments we use three pair of corpora denoted by NEWS, WEB, and TWEETS. The corpora NEWS contains news articles in English and
+
+1469
+
+

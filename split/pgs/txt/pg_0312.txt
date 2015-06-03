@@ -1,0 +1,31 @@
+work also enables novel prosodic features that compute pauses and word duration based on alignments to the speech signal itself, allowing the model to capture acoustic cues like pauses and hesitations that have proven useful for disfluency detection in earlier work (Shriberg et al., 1997). Such information has been exploited by NLP systems in the past via ToBI break indices (Silverman et al., 1992), a mid-level prosodic abstraction that might be indicative of disfluencies. These have been incorporated into syntactic parsers with some success (Kahn et al., 2005; Dreyer and Shafran, 2007; Huang and Harper, 2010), but we find that using features on predicted breaks is ineffective compared to directly using acoustic indicators. Our implementation of a baseline CRF model already achieves results comparable to those of a highperformance system based on pipelined inference (Qian and Liu, 2013). Our semi-CRF with span features improves on this, and adding prosodic indicators gives additional gains. Our final system gets an F-score of 85.4, which is 1.3 F1 better than the best prior reported F-score on this dataset (Honnibal and Johnson, 2014).
+
+to emissions and transitions, features in this model cannot recognize that a proposed disfluency begins with upper and ends before another occurrence of upper (see Figure 1). Identifying instances of this parallelism is key to accurately predicting disfluencies. Past work has captured information about repeats using token-level features (Qian and Liu, 2013), but these still apply to either the beginning or ending of a disfluency in isolation. Such features are naturally less effective on longer disfluencies as well, and roughly 15% of tokens occurring in disfluencies are in disfluencies of length 5 or greater. The presence of these longer disfluencies suggests using a more powerful semi-CRF model as we describe in the next section. 3.1 Semi-CRF Model The model that we propose in this work is a semiMarkov conditional random field (Sarawagi and Cohen, 2004). Given a sentence x = (x1 , . . . , xn ) the model considers sequences of labeled spans s ¯ = (( 1 , b1 , e1 ), ( 2 , b2 , e2 ), . . . , ( k , bk , ek )), where i  {Fluent, Disfluent} is a label for each span and bi , ei  {0, 1 . . . n} are fenceposts for each span such that bi < ei and ei = bi+1 . The model places distributions over these sequences given the sentence as follows:
+k
+
+2
+
+Experimental Setup
+
+Throughout this work, we make use of the Switchboard corpus using the train/test splits specified by Johnson and Charniak (2004) and used in other work. We use the provided transcripts and gold alignments between the text and the speech signal. We follow the same preprocessing regimen as past work: we remove partial words, punctuation, and capitalization to make the input more realistic.2 Finally, we use predicted POS tags from the Berkeley parser (Petrov et al., 2006) trained on Switchboard.
+
+p (¯ s|x)  exp 
+i=1
+
+f (x, ( i , bi , ei ))
+
+(1)
+
+3
+
+Model
+
+Past work on disfluency detection has employed CRFs to predict disfluencies using a IOBES tag set (Qian and Liu, 2013). An example of this is shown in Figure 2. One major shortcoming of this model is that beginning and ending of a disfluency are not decided jointly: because features in the CRF are local
+As described in Honnibal and Johnson (2014), we computed features over sentences with filler words (um and uh) and the phrases I mean and you know removed.
+2
+
+where f is a feature function that computes features for a span given the input sentence. In our model we constrain the transitions so that fluent spans can only be followed by disfluent spans. For this task, the spans we are predicting correspond directly to the reparanda of disfluencies, since these are the parts of the input sentences that should be removed. Note that our feature function can jointly inspect both the beginning and ending of the disfluency; we will describe the features of this form more specifically in Section 3.2.2. To train our model, we maximize conditional log likelihood of the training data augmented with a loss function via softmax-margin (Gimpel and Smith, 2010). Specifically, during training, we maximize L() = d s|x), where p (¯ s|x) = i=1 log p (¯ p (¯ s|x) exp ( (¯ s, s ¯ )). We take the loss function
+
+258
+
+

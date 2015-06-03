@@ -1,0 +1,82 @@
+h1,2 + h2,2
+
+h1,3 + h2,2
+
+R
+
+2
+
+h1,2
+
+h1,3
+
+h2,2
+
+h1,2 + h2,1 h1,1 + h2,2 h1,1 h1,4 h2,1 h2,3 h1,1 + h2,1 H1 N[h1,4 ,h1,1 ] N[h1,3 ,h1,2 ] H2
+
+{h1,3 + h2,1 , h1,2 + h2,3 }
+
+h1,3 + h2,3 h1,4 + h2,2 h1,4 + h2,3
+
+{h1,4 + h2,1 , h1,1 + h2,3 } H1 + H2 N[h1,4 ,h1,1 ] N[h1,3 ,h1,2 ]
+
+(R )
+
+2 
+
+N
+N[h1,4 ,h1,3 ]
+
+N
+2,1
+
+[h
+
+N[h1,2 ,h1,1 ]
+
+,h
+
+2,2
+
+]
+
+N [h 2
+
+,
+
+,h 3
+
+2,
+
+] 2
+
+[h
+
+2,1
+
+,h
+
+N[h1,2 ,h1,1 ]
+
+2,2 ]
+
+N [h N [h1,4 ,h1,3 ]
+N[h2,3 ,h2,1 ]
+
+2,3
+
+,h 2
+
+,2
+
+]
+
+N (H1 ) N (H2 ) N (H1 )  N (H2 ) Figure 3: An example of the equivalence between the Minkowski sum and the common refinement. 4.1 Computing the Minkowski Sum Now consider the vertex h1,3 + h2,2 in H = H1 + H2 and note it has two incident edges. These edges are parallel to edges in the summand polytopes and correspond to decision boundaries in the normal cone N{h1,3 +h2,2 } . We can find the redundant edges in the Minkowski sum by testing the edges suggested by the summand polytopes. If a decision boundary in (RD ) is redundant, then we can ignore the feature vector that shares the decision boundary. For example h1,4 + h2,2 is redundant and the decision boundary N[h1,3 ,h1,4 ] is also redundant to the description of the normal cone N{h1,3 +h2,2 } . The test for redundant edges can be performed by a linear program. Given a Minkowski sum H we can define an undirected cyclic graph G(H ) = (vert(H ), E ) where E is the set of edges. The degree of a vertex in G(H ) is the number of edges incident to a vertex;  is denoted as the maximum degree of the vertices. The linear program for testing redundancy of decision boundaries has a runtime of O(D3.5  ) (Fukuda, 2004). Enumerating the vertices of graph G(H ) is not trivial due to it being an undirected and cyclic graph. The solution is to use a reverse search algorithm (Avis and Fukuda, 1993). Essen-
+
+In the top part of the Figure 3 we see that computing the Minkowski sum directly gives 12 feature vectors, 10 of which are unique. Each feature vector would have to be tested under LP-MERT. In general there are K S such feature vectors and exhaustive testing is impractical. LP-MERT performs a lazy enumeration of feature vectors as managed through a divide and conquer algorithm. We believe that in the worst case the complexity of this algorithm could be O(K S ). The lower part of Figure 3 shows the computation of the common refinement. The common refinement appears as if one normal fan was superimposed on the other. We can see there are six decision boundaries associated with the six edges of the Minkowski sum. Even in this simple example, we can see that the common refinement is an easier quantity to compute than the Minkowski sum. We now briefly describe the algorithm of Fukuda (2004) that computes the common refinement. Consider the example in Figure 3. For H1 and H2 we have drawn an edge in each polytope with a dashed line. The corresponding decision boundaries in their normal fans have also been drawn with dashed lines.
+
+N[h2,3 ,h2,1 ]
+
+381
+
+

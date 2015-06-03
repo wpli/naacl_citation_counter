@@ -1,0 +1,56 @@
+the pool of labeled data, re-training the other classifier using the new labeled data. The procedure is performed iteratively. After a sufficient number of iterations, we obtain a set of classifiers and we combine them using a majority-voting scheme to predict the sentiment label for test data. The details of the algorithm are summarized in Algorithm 1.
+Accuracy
+
+0.95 0.90 0.85 0.80 0.75 0.70 0.65 0.60 0.80 5 10 20 30
+
+Movie Review dataset
+
+4
+
+Experiments
+
+In this section, we compare the proposed LCCT model with state-of-the-art methods in sentiment classification. The experiment demonstrates the superior performance of our approach. 4.1 Datasets
+
+LCCT Nguyen's Dasgupta's Li's Self-learning TSVM SVM LC
+40 50 60 70 Percentage of Labeled Data (%) 80 90 100
+
+We conduct experiments on English and Chinese reviews from three datasets. In this subsection, we describe the datasets. Movie Review (MR) dataset in English The movie reviews are selected if the rating was stars or a numerical score. In this paper, we use the Movie Review dataset containing 1000 positive examples and 1000 negative examples (Pang and Lee, 2004). Positive labels were assigned to reviews that had a rating above 3.5 stars and negative labels were assigned to the rest (Pang and Lee, 2004). SemEval-2013 (SemEval) dataset in English This dataset is constructed for the Twitter sentiment analysis task (Task 2) in the Semantic Evaluation of Systems challenge (SemEval-2013). All the tweets were manually annotated by 5 Amazon Mechanical Turk workers with negative, positive and neutral labels. SemEval contains 13,975 tweets with 2,186 negative, 6,440 neutrals and 5,349 positives tweets. We collect the 2,186 negative tweets and 5,349 positive tweets as the training data. COAE-2009 (COAE) dataset in Chinese This dataset is provided by COAE 2009 1 (Task 4). The corpus consists of 39,976 documents and 50 topics. The topics cover education, entertainment, finance, computer, etc. In this paper, we select the 2202 negative and 1248 positive documents as our dataset. In all experiments, data preprocessing is performed. For English dataset, the texts are first tokenized using the natural language toolkit NLTK2 .
+1 2
+
+SemEval dataset
+
+0.75
+
+0.70 Accuracy
+
+0.65
+
+0.60
+
+0.55 0.85
+
+LCCT Nguyen's Dasgupta's Li's Self-learning TSVM SVM LC
+5 10 20 30 40 50 60 70 Percentage of Labeled Data (%) 80 90 100
+
+COAE dataset
+
+0.80
+
+0.75 Accuracy
+
+0.70
+
+0.65
+
+0.60
+
+LCCT Nguyen's Dasgupta's Li's Self-learning TSVM SVM LC
+5 10 20 30 40 50 60 70 Percentage of Labeled Data (%) 80 90 100
+
+Figure 2: Comparing classification accuracy by varying the percentage of labeled data from 5% to 100%. The LCCT model is robust to incomplete data.
+
+http://ir-china.org.cn/coae2009.html http://www.nltk.org
+
+551
+
+

@@ -1,0 +1,25 @@
+X on Y X surrounds Y X above Y X below Y X opposite Y
+
+X near Y X close Y
+
+X infront Y X behind Y X same Y
+
+More than 50% of X overlaps with Y X overlaps entirely with Y The angle between X and Y is between 225 and 315 The angle between X and Y is between 45 and 135 . The angle between X and Y is between 315 and 45 or 135 and 225 . The Euclidean distance between X and Y is greater than w · 0.72. Similar to opposite but the Euclidean distance between X and Y is greater than w · 0.36. Similar to opposite but the Euclidean distance between X and Y is less or equal to w · 0.36. X is in front Y in the Z-plane X is behind Y in the Z-plane X and Y are at the same depth
+
+her jenny no one pink dress she baseball bat bat bat and ball homerun one baseball bat apple pie baked pie berry pie delicious pie pie
+
+blue collar brown dog happy dog small dog smiling dog apple apple tree big apple tree cherries fruit baseball cap baseball hat blue cap blue hat star hat
+
+Figure 3: Examples of argument-clipart object pairs with high MI values (shown in descending order).
+
+Table 1: VDG relations between pairs of clip art objects. All relations are considered with respect to the centroid of an object and the angle between those centroids. We follow the definition of the unit circle, in which 0 lies to the right and a turn around the circle is counter-clockwise. All regions are mutually exclusive. Parameter w refers to the width of the scene.
+
+only two arguments. The parallel sentences corresponding to Figure 2 are illustrated in Table 2. In cases where the the original description involves three objects, ternary relations are decomposed into binary ones. We create as many visual representations as there are linguistic descriptions. If two humans generate identical descriptions, we produce identical visual encodings. In total, we were able to create 46,053 parallel descriptions2 accounting for 79.5% of the sentences in the dataset. 4.2 Generation Model
+
+three geometric properties: pixel overlap, the angle between regions, and the distance between regions. Table 1 summarizes the relations used in our experiments most of which encode spatial object relations in the x-y space; the last three encode relative object position along the z axis. Our relations are broadly similar to those proposed in Elliott and Keller (2013) with the exception of beside which we break down into more fine-grained relations (namely near and close). We also add the same relation in the z axis. In cases where object X is facing object Y we subscript relations opposite, near, and close with the letter F . The procedure described above will generate a visual description for each linguistic description. It also assumes that visual relations hold between pairs of objects. The assumption is not unwarranted, 73.87% of the descriptions in the dataset involve 1508
+
+It is straightforward to train a phrase-based SMT model on the parallel corpus outlined above. The model would learn to translate a visual description (see the source side in Table 2) into natural language. However, when generating linguistic descriptions for a scene at test time, we must first decide "what to say" (content selection) and then "how to say" it (surface realization). What is the most important content in the scene worth describing? Given that visual relations between objects are assumed to be binary (see the VDG grammar in Table 1), there are n(n - 1) combinations of pairs of objects in a scene (where n is the number of clipart pieces available) and as many corresponding visual expressions. However, many of these visual expressions will capture unimportant aspects of the scene, or even express atypical relations unattested in the training data. We develop below a content selection component based on the intuition that frequently
+parallel corpus can be downloaded from http://homepages.inf.ed.ac.uk/mlap/index.php? page=resources.
+2 Our
+
+

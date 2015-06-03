@@ -1,0 +1,25 @@
+Primary polarity + Contrast + Background
+
+Subjective Negative Positive Prec Rec Prec Rec 0.75 0.94 0.71 0.83 0.81 0.90 0.68 0.95 0.82 0.91 0.73 0.95
+
+Objective Prec 0.00 0.00 1.00 Rec 0.00 0.00 0.19 Prec 0.61 0.63 0.83
+
+Total Rec 0.74 0.75 0.79 F1 0.66 0.68 0.76 Acc 0.7379 0.7517 0.7931
+
+Table 3. Precision, recall, F1 and accuracy scores for the top-down approach
+
+Also, because 3-star reviews contain more negative sentences than positive ones, all of them are lumped into the negative class. Thus the recall for the positive class is substantially low than for the negative class. To single out the segments whose polarity is different from the primary one, we add explicit and implicit contrast features and train the contrast classifier. Contrast features help to raise recall for positive and precision for negative sentences, though, as might be expected, they do not affect the classification of objective segments. However, the overall precision and recall are improved, as well as the overall accuracy (to 0.7517) The background classifier allows us to find some of objective sentences. Acquirement, personal background and personal experience patterns turn out to be precise features that also guarantee us at least some recall for objective sentences. Overall precision, recall and F1 scores are improved accordingly, as well as accuracy (to 0.7931). As can be seen from comparing these results, even the most primitive rating-based classifier (primary polarity) achieves better recall and accuracy than any of lexical classifiers (even the one with primary polarity features). Moreover, adding discourse features to it consistently improves the results, allowing us to build a highprecision, high-recall sentiment classifier. On the other hand, building up on the lexical classifier does not show such consistent improvements.
+
+that are too unreliable to become a basis of a discourse-level classification. We assert that starting from the top by roughly defining a text's polarity and assigning it to all its segments, and then fine-tuning the classification by "chiseling out" incorrect bits based on reliable discourse relations can be a more productive and effective approach. Our experiments show that such approach can lead to a substantial improvement over lexical baseline at least in texts with a predictable structure and recurring patterns, such as product reviews. Because each of the discourse features we tested led to improvement, we believe that the topdown classifier can be made even more accurate by employing other discourse relations in the form of carefully selected linguistic features.
+
+References
+Baccianella, S., Esuli, A., & Sebastiani, F. (2010). SentiWordNet 3.0: An Enhanced Lexical Resource for Sentiment Analysis and Opinion Mining. LREC, 10, 2200-2204. Breck E., Choi Y., & Cardie C. (2007). Identifying Expressions of Opinion in Context. IJCAI, 7, 26832688. Ding, X., Liu, B., & Yu, P. S. (2008). A holistic lexicon-based approach to opinion mining. WSDM, 231-240. Filatova, E. (2012). Irony and Sarcasm: Corpus Generation and Analysis Using Crowdsourcing. LREC, 392-398. Grice, P. (1975). Logic and conversation. Syntax and semantics, 3, 41-58. Hu, M., & Liu, B. (2004). Mining opinion features in customer reviews. AAAI, 4(4), 755-760. Lafferty, J., McCallum, A., & Pereira, F. C. (2001). Conditional random fields: Probabilistic models for segmenting and labeling sequence data. Proceedings of the Eighteenth International Conference on Machine Learning, 282-289.
+
+6
+
+Conclusion
+
+Until now the sentiment analysis has been primarily done in a bottom-up way, starting with the classification of lexical items, then resolving the polarity of the sentence, then using discourse information to improve the lexical classification. However, lexical classifiers so far produce results
+1567
+
+

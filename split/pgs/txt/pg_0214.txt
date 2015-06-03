@@ -1,0 +1,30 @@
+expected, but also for abstract ones, as predicted by embodied views of meaning. More precisely, we focused on the set of 200 words that were sampled across the USF norms concreteness spectrum by Kiela et al. (2014) (2 words had to be excluded for technical reasons). This set includes not only concrete (meat) and abstract (thought) nouns, but also adjectives (boring), verbs (teach), and even grammatical terms (how). Some words in the set have relatively high concreteness ratings, but are not particularly imageable, e.g.: hot, smell, pain, sweet. For each word in the set, we extracted the nearest neighbour picture of its MMS KIP - GRAM -A representation, and matched it with a random picture. The pictures were selected from a set of 5,100, all labeled with distinct words (the picture set includes, for each of the words associated to visual information as described in Section 4, the nearest picture to its aggregated visual representation). Since it is much more common for concrete than abstract words to be directly represented by an image in the picture set, when searching for the nearest neighbour we excluded the picture labeled with the word of interest, if present (e.g., we excluded the picture labeled tree when picking the nearest neighbour of the word tree). We ran a CrowdFlower5 survey in which we presented each test word with the two associated images (randomizing presentation order of nearest and random picture), and asked subjects which of the two pictures they found more closely related to the word. We collected minimally 20 judgments per word. Subjects showed large agreement (median proportion of majority choice at 90%), confirming that they understood the task and behaved consistently. We quantify performance in terms of proportion of words for which the number of votes for the nearest neighbour picture is significantly above chance according to a two-tailed binomial test. We set significance at p<0.05 after adjusting all p-values with the Holm correction for running 198 statistical tests. The results in Table 5 indicate that, in about half the cases, the nearest picture to a word MMS KIP GRAM -A representation is meaningfully related to the word. As expected, this is more often the case for concrete than abstract words. Still, we also observe a
+5
+
+all concrete abstract
+
+global 48% 73% 23%
+
+|words| 198 99 99
+
+unseen 30% 53% 23%
+
+|words| 127 30 97
+
+Table 5: Subjects' preference for nearest visual neighbour of words in Kiela et al. (2014) vs. random pictures. Figure of merit is percentage proportion of significant results in favor of nearest neighbour across words. Results are reported for the whole set, as well as for words above (concrete) and below (abstract) the concreteness rating median. The unseen column reports results when words exposed to direct visual evidence during training are discarded. The words columns report set cardinality.
+freedom theory wrong
+
+god
+
+together
+
+place
+
+Figure 2: Examples of nearest visual neighbours of some abstract words: on the left, cases where subjects preferred the neighbour to the random foil; on the right, cases where they did not. significant preference for the model-predicted nearest picture for about one fourth of the abstract terms. Whether a word was exposed to direct visual evidence during training is of course making a big difference, and this factor interacts with concreteness, as only two abstract words were matched with images during training.6 When we limit evaluation to word representations that were not exposed to pictures during training, the difference between concrete and abstract terms, while still large, becomes less dramatic than if all words are considered. Figure 2 shows four cases in which subjects expressed a strong preference for the nearest visual neighbour of a word. Freedom, god and theory are strikingly in agreement with the view, from embodied theories, that abstract words are grounded in relIn both cases, the images actually depict concrete senses of the words: a memory board for memory and a stop sign for stop.
+6
+
+http://www.crowdflower.com
+
+160
+
+

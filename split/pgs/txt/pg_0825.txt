@@ -1,0 +1,25 @@
+segmenting the Arabic source side of the training data with MADA 3.2 (Habash et al., 2009), using Penn Arabic Treebank (PATB) segmentation scheme as recommended by El Kholy and Habash (2012). The Arabic script is further normalized by converting different forms of Alif and Ya to bare Alif and dotless Ya . The different forms are used interchangeably, and normalization decreases the sparcity of Arabic tokens and improves translation. The English side of the training data is lowercased and tokenized by stripping punctuation marks. We set the decoder's stack size to 10000 and distortion limit to 7. We replace the out-of-vocabulary words in the translated text with UNKNOWN token (which is shown to the annotators). The decoder's log-linear model is tuned with MIRA (Chiang et al., 2008; Cherry and Foster, 2012). A KN-smoothed 5gram language model is trained on the English Gigaword and the target side of the parallel data.
+
+lose some of the sentiment information and there is a relatively higher percentage of neutral instances in the translated text than in the original text. For each post, we determine the count of the most frequent annotation divided by the total number of annotations. This score is averaged for all posts to determine the inter-annotator agreement shown in the last column of Table 1. We use this agreement score as benchmark to compare performance of automatic sentiment systems (described below).
+
+6
+
+English Sentiment Analysis
+
+5
+
+Creating sentiment labeled data in Arabic and English
+
+Manual sentiment annotations were performed on the crowdsourcing platform CrowdFlower3 for three BBN datasets and two Syrian datasets: 1. Original Arabic posts (BBN and Syria datasets), annotated by Arabic speakers. 2. Manual English translations of Arabic posts, annotated by English speakers (only for BBN dataset). 3. Automatic English translations of Arabic posts (BBN and Syria datasets), annotated by English speakers. Each post was annotated by at least ten annotators and the majority sentiment label was chosen. Table 1 shows the class distribution of sentiment labels in various datasets. Observe from rows a and d that neutral tweets constitute only about 10% of the data in both BBN and Syria datasets. The Syrian tweets have a much higher percentage of negative posts, whereas in the BBN data, the percentages of positive and negative posts are comparable. (Arabic tweets in general tend to be much more skewed to the negative class than Arabic blog post sentences.) Rows b, c, and e show that translated texts tend to
+3
+
+We use the English-language sentiment analysis system developed by NRC-Canada (Kiritchenko et al., 2014) in our experiments. This system obtained highest scores in two recent international competitions on sentiment analysis of tweets ­SemEval2013 Task 2 and SemEval-2014 Task 9 (Wilson et al., 2013; Rosenthal et al., 2014). We briefly describe the system below; for more details, we refer the reader to Kiritchenko et al. (2014). A linear-kernel Support Vector Machine (Chang and Lin, 2011) classifier is trained on the available training data. The classifier leverages a variety of surface-form, semantic, and sentiment lexicon features described below. The sentiment lexicon features are derived from existing, generalpurpose, manual lexicons, namely NRC Emotion Lexicon (Mohammad and Turney, 2010; Mohammad and Turney, 2013), Bing Liu's Lexicon (Hu and Liu, 2004), and MPQA Subjectivity Lexicon (Wilson et al., 2005), as well as automatically generated, tweet-specific lexicons, Hashtag Sentiment Lexicon and Sentiment140 Lexicon (Kiritchenko et al., 2014).4 6.1 Generating English Sentiment Lexicon Ablation experiments in Mohammad et al. (2013) showed that their sentiment system benefited most from the use of the Hashtag Sentiment Lexicon. The lexicon was created as follows. A list of 77 seed words, which are synonyms of positive and negative, was compiled from the Roget's Thesaurus. Then, the Twitter API was polled to collect tweets that had these words as hashtags. A tweet is considered positive if it has a positive hashtag and negative if it
+4
+
+http://www.crowdflower.com
+
+http://www.purl.com/net/lexicons
+
+771
+
+

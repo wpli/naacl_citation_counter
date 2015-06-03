@@ -1,0 +1,18 @@
+Chain based RNN for Relation Classification
+Javid Ebrahimi and Dejing Dou Department of Computer and Information Science, University of Oregon Eugene, Oregon 97403, USA {javid,dou}@cs.uoregon.edu
+
+Abstract
+We present a novel approach for relation classification, using a recursive neural network (RNN), based on the shortest path between two entities in a dependency graph. Previous works on RNN are based on constituencybased parsing because phrasal nodes in a parse tree can capture compositionality in a sentence. Compared with constituency-based parse trees, dependency graphs can represent relations more compactly. This is particularly important in sentences with distant entities, where the parse tree spans words that are not relevant to the relation. In such cases RNN cannot be trained effectively in a timely manner. However, due to the lack of phrasal nodes in dependency graphs, application of RNN is not straightforward. In order to tackle this problem, we utilize dependency constituent units called chains. Our experiments on two relation classification datasets show that Chain based RNN provides a shallower network, which performs considerably faster and achieves better classification results.
+
+on lexical, syntactic, and semantic features to classify relations between pairs of entities. The downside of this approach is that one has to retrain the model for other domains with different target relations. Thus it is not scalable to the web, where thousands of (previously-unseen) relations exist (Banko et al., 2007). To address this problem, Open Information Extraction is proposed, which does not require supervision. In these systems (Banko et al., 2007; Mausam et al., 2012), patterns based on lexical, syntactic, POS, and dependency features are extracted. While these patterns give good precision, they suffer from low recall (Banko and Etzioni, 2008). This is because they fail to extract patterns which have not been pre-specified, and thereby are unable to generalize. Recursive Neural Network (RNN) has proven to be highly successful in capturing semantic compositionality in text and has improved the results of several Natural Language Processing tasks (Socher et al., 2012; Socher et al., 2013). Previous applications of Recursive Neural Networks (RNN) to supervised relation extraction (Socher et al., 2012; Hashimoto et al., 2013; Khashabi, 2013) are based on constituency-based parsers. These RNNs may span words that do not contribute to the relation. We investigate the incorporation of dependency parsing into RNN that can give a more compact representation of relations. Our contribution is introducing a compositional account of dependency graphs that can match RNN's recursive nature, and can be applied to relation classification. We study different data structures that incorporate dependency trees into RNNs.
+
+1
+
+Introduction
+
+Relation extraction is the task of finding relations between entities in text, which is useful for several tasks such as information extraction, summarization, and question answering (Wu and Weld, 2010). For instance, in the sentence: those "cancers" were caused by radiation "exposures," the two entities have a cause-effect relation. As reported in detail (SaraWagi, 2008), one approach to the problem involves supervised methods where the models rely
+
+1244
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1244­1249, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

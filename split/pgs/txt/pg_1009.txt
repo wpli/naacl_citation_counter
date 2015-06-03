@@ -1,0 +1,15 @@
+Figure 1: Speech waveform and corresponding detector function employed for prosodic boundary detection of the phrase: "My tape machine records well, but the knobs are too small, the buttons are flimsy and the counter misplaced" (for details, see (Ludusan and Dupoux, 2014)).
+
+The parameters of the algorithm: the combination of cues, the cut-off threshold and the combination of conjunction of cues are obtained on a hold-out set, by aiming to maximize the performance of the system on that particular set. The prosodic boundary detection procedure is illustrated in Figure 1 for the following utterance: "My tape machine records well, but the knobs are too small, the buttons are flimsy and the counter misplaced". The waveform of the speech signal is shown in the upper panel, with prosodic boundaries marked with dashed lines. In the lower panel are the values of the computed detector function, for each syllable, and the contribution of each of the cues towards the value of the function (the asterisk denotes the position of the syllable nucleus). The syllables corresponding to local maxima of the detector function (syllables 2, 4, 7, 10, 13, 17, 19, 21 and 25) would be considered as possible candidates for the position of a prosodic boundary. Provided that their value is higher than the decision threshold, they will be marked as actual boundaries. For example, if the threshold is set to the first percentile of the function, all the candidates will be kept, for the 50th percentile only syllables 10, 13, 17 and 25 will be considered,
+
+while a threshold equal to the value of the 100th percentile will leave only syllable 13 to be marked as a boundary. If we also use what we called conjunction of cues, and we set the cues to be the nucleus and the onset, syllables 10, 13, 22 and 25 will be marked as boundary placeholders, regardless of the fact they are or not a local maximum or they pass or not over the decision threshold.
+
+3
+
+Word segmentation models
+
+3.1 Adaptor grammars Adaptor Grammars (AGs) are an extension of probabilistic context-free grammars (PCFGs) that learn probability of entire subtrees as well as probabilities of rules (Johnson et al., 2007). A PCFG (N, W, R, S, ) consists of a start symbol S , N and W disjoints sets of nonterminals and terminal symbols respectively. R is a set of rules producing elements of N or W . Finally,  is a set of distributions over the rules RX , X  N (RX are the rules that expand X ). An AG (N, W, R, S, , A, C ) extends the above PCFG with a subset (A  N ) of adapted nonterminals, each of them (X  A) having an associated adaptor (CX  C ). An AG defines a dis-
+
+955
+
+

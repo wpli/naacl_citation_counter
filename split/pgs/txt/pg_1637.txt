@@ -1,0 +1,44 @@
+Strudel
+
+white change pant trouser replace
+
+paint fasten thick layer apply
+
+hole shirt lie neck finish
+
+pattern hood cover crimson woolen
+
+man occasion see steal striped
+
+BCF
+
+wear cover veil woman coat
+
+white black color brown dark
+
+eye tooth ear skin lip
+
+wear suit trouser woman garment
+
+animal feather skin wool material
+
+Figure 5: Example feature types learnt for the category CLOTHING by Strudel (top) and BCF (bottom).
+`Select intruder feature type (right) wrt category (left).' ant hornet  egg female food young bird moth flea  ant insect butterfly wasp larva beetle wasp · wear cover veil woman coat cockroach  body air fish blood muscle
+
+ egg
+
+`Select the intruder word.'  ·  female box young
+
+ bird
+
+Figure 6: Illustration of the feature type intrusion task (top); and the word intrusion task (bottom).
+
+study, where participants were shown a single feature type (again represented as a word cluster) and asked to detect the intruder feature/word (see Figure 6 bottom). If the features are overall coherent and meaningful, it should be relatively straightforward to identify the intruder. Method We compared the feature types learnt by BCF and Strudel. We omitted BayesCat from this evaluation as it does not naturally produce feature types, rather it associates unstructured lists of features with categories. As mentioned earlier, Strudel does not induce feature types either, however, it associates concepts with features which can be postprocessed to obtain feature types as follows. Given a category induced by Strudel (as explained in Experiment 1), we collected the features associated with at least half of the concepts in the category with a log likelihood score no less than 19.51.3 We then clustered these features with K-means (using the Cluto toolkit) into K = 5 feature types. For BCF, for each category k, we select the five
+Baroni et al. (2010), this number corresponds to a probability of co-occurrence below 0.00001, assuming independence.
+3 Following
+
+feature types g with highest association P(g|k), together with one intruder feature type g which is highly associated with some other category k but not with k. For Strudel we took the five feature types elicited through the procedure described above, and one random feature type from the global set of feature types. Each feature type was represented by a cluster of five words. With respect to the word intrusion task, participants were only shown feature types (i.e., word clusters) irrespectively of the associated category. BCF feature types g were represented as the set of the five words w with highest probability P( f |g). In addition, we added one intruder word which had low probability under g but high probability under some other feature type. For Strudel, we represented feature types as a random subset of five words, and added an additional intruder word from the global set of features. For the feature type intrusion task, We evaluated a total of 40 categories for each model. Each participant assessed 10 categories per session (5 per model). Categories and feature types were presented in random order. For the word intrusion task, we evaluated a total of 66 feature types for each model. Participants saw 11 feature types per session, in randomized order. In both cases, we collected 10 responses per item. Metrics We evaluated feature type relevance and coherence by measuring precision (the proportion of intruders identified correctly). We also use the Kappa coefficient to measure inter-subject agreement (Fleiss, 1981) on our two tasks. Results Our results are presented in Table 4. Participants identify the intruder feature type correctly more than 50% of the time. The performance of Strudel is slightly better compared to BCF, both in terms of accuracy and Kappa (however the dif-
+
+1583
+
+

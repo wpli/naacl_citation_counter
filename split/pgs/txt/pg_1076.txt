@@ -1,0 +1,29 @@
+Ara-Eng Chi-Eng Eng-Fra Eng-Swe Ita-Eng Pol-Eng
+
+P RO B LEU LR (29.3) 30.7 (0.93) 0.97 (15.4) 20.8 (0.78) 0.98 (30.9) 33.0 (0.95) 0.97 (22.2) 22.4 (1.00) 1.01 (25.6) 25.3 (1.00) 1.00 (22.4) 23.0 (0.95) 0.99
+
+A PRO B LEU LR (30.3) 30.8 (0.98) 0.99 (19.2) 20.8 (1.01) 0.98 (32.7) 33.3 (1.00) 0.99 (23.1) 23.0 (1.00) 1.00 (25.2) 25.6 (1.00) 1.00 (23.3) 23.3 (1.00) 0.99
+
+Table 2: P RO versus A PRO after 10 iterations (small in parentheses) and at convergence ( 30 iterations). Good results after 10 iterations indicate fast convergence. P RO: mean over 2 runs (average BLEU standard deviation was 0.1); A PRO: single run. LR: length ratio.
+
+up to 30 iterations,7 where we reset the accumulated k -best list after 10 iterations.8 For P RO, we use =5000, =50,  =0.05, =0.1, and (MegaM) regularization strength =1 as described in Hopkins and May (2011). For A PRO, we use regularization strength C =0.01 and =1, which effectively removes the weight interpolation step. We repeat each P RO tuning twice and report the mean of length ratios and case-sensitive B LEU scores on test data. For A PRO, no repeated runs are necessary; it gives the same result on any run given initial feature weights. For A PRO, we optimize using the implementation by Lee and Lin, which uses a truncated Newton method.9 5.2 Results We measure the runtime of P RO and A PRO. For an accumulated k -best list containing s=2,748 sentences with an average ks =3,600 translation, P RO and A PRO take 13 and 8 minutes, respectively. Table 2 shows translation quality after 10 iterations and at convergence. We observe that A PRO converges quickly: After running for 10 iterations, it gives higher B LEU scores and better length ratios than P RO for five out of six language pairs. At convergence, P RO has caught up, but for all language
+Like Hopkins and May (2011), we stop earlier when the accumulated k-best list does not change anymore. 8 This removes bad translations from early iterations and provides good initial weights for the last 20 iterations. This did not decrease but sometimes increase final performance. 9 See http://goo.gl/CVmnoZ. No change to the software is necessary; but in each iteration it must be called with C C = N , see Equation 3. We have also experimented with a change to the software that scales the loss of each sentence by the number of translation pairs for that sentence; this did not give reliable B LEU improvements over Equation 3.
+7
+
+pairs A PRO performs similar or better. One of A PRO's advantages are stable results: Figure 1 compares P RO and A PRO for 3 values of : For each value, we run P RO eight times with different sampling settings and A PRO once. We observe that the different P RO settings result in different B LEU scores. Cherry and Foster (2012) report that they could not find one P RO setting that worked across all language pairs. This suggests that practitioners may have to run expensive grid searches to find optimal P RO performance; this is not necessary with A PRO. While P RO performs best with  = 0.1, A PRO gets good results for =1, which is the reason for its fast convergence (Table 2).
+
+6
+
+Conclusions
+
+We have presented A PRO, a new tuning method for machine translation. Like P RO, A PRO is a batch pairwise ranking method, and as such, it inherits P RO's advantages of being effective, scalable to large feature sets and easy to fit into the standard batch MT tuning framework. We remove P RO's sampling step and learn a pairwise ranking over the whole k -best list in O(k log k ) time. We have shown that P RO's different sampling settings result in different final results; by removing these settings we get more reliable results. We find that P RO's weight interpolation is not necessary for A PRO, resulting in faster convergence. At convergence, A PRO's translation quality was found to be similar or better than P RO's. A PRO's use of global optimization and the lack of randomness lead to more stable tuning with deterministic results.
+
+Acknowledgments
+We thank Jonathan May, Mark Hopkins, Bill Byrne, Adria Gispert, Gonzalo Iglesias, Steve DeNeefe and the anonymous reviewers for their valuable comments and suggestions.
+
+References
+Antti Airola, Tapio Pahikkala, and Tapio Salakoski. 2011. Training linear ranking SVMs in linearithmic time using red-black trees. Pattern Recognition Letters, 32(9):1328­1336. Marzieh Bazrafshan, Tagyoung Chung, and Daniel Gildea. 2012. Tuning as linear regression. In Pro-
+
+1022
+
+

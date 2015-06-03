@@ -1,0 +1,43 @@
+normalizer for each training example, or at least keeping track of an estimate of the normalizer for each training example. Our results here suggest that it should be possible to obtain approximate self-normalizing behavior without any representation of the normalizer on some training examples--as long as a sufficiently large fraction of training examples are normalized, then we have some guarantee that with high probability the normalizer will be close to one on the remaining training examples as well. Thus an unnormalized likelihood objective, coupled with a penalty term that looks at only a small number of normalizers, might nonetheless produce a good model. This suggests the following: l( ) =
+i
+
+0 Rtrain Rtest
+BLEU
+
+Normalized fraction ( ) 0.001 0.01 0.1 1.7 1.7 19.1 1.5 1.5 19.2 1.5 1.5 20.0
+
+1 1.5 1.5 20.0
+
+22.0 21.6 1.5
+
+Table 1: Result of varying normalized fraction  , with  = 1. When no normalization is applied, the model's behavior is pathological, but when normalizing only a small fraction of the training set, performance on the downstream translation task remains good. Normalization strength () 0.01 0.1 1 10 20.4 20.1 1.5 9.7 9.7 2.6 1.5 1.5 20.0 0.5 0.5 16.9
+
+ Rtrain Rtest
+BLEU
+
+ yi x i +
+
+ 
+
+(log Z (xh ;  ))2
+hH
+
+(5)
+
+where the parameter  controls the relative importance of the self-normalizing constraint, H is the set of indices to which the constraint should be applied, and  controls the size of H , with |H | = n . Unlike the objective used by Devlin et al. (2014) most examples are never normalized during training. Our approach combines the best properties of the two techniques for self-normalization previously discussed: like NCE, it does not require computation of the normalizer on all training examples, but like explicit penalization it allows fine-grained control over the tradeoff between the likelihood and the quality of the approximation to the normalizer. We evaluate the usefulness of this objective with a set of small language modeling experiments. We train a log-linear LM with features similar to Biadsy et al. (2014) on a small prefix of the Europarl corpus of approximately 10M words.4 We optimize the objective in Equation 5 using Adagrad (Duchi et al., 2011). The normalized set H is chosen randomly for each new minibatch. We evaluate using two metrics: BLEU on a downstream machine translation task, and normalization risk R, the average magnitude of the log-normalizer on held-out data. We measure the response of our training to changes in  and . Results are shown in Table 1 and Table 2.
+This prefix was chosen to give the fully-normalized model time to finish training, allowing a complete comparison. Due to the limited LM training data, these translation results are far from state-of-the-art.
+4
+
+Table 2: Result of varying normalization parameter , with  = 0.1. Normalization either too weak or too strong results in poor performance on the translation task, emphasizing the importance of training procedures with a tunable normalization parameter.
+
+Table 1 shows that with small enough , normalization risk grows quite large. Table 2 shows that forcing the risk closer to zero is not necessarily desirable for a downstream machine translation task. As can be seen, no noticeable performance penalty is incurred when normalizing only a tenth of the training set. Performance gains are considerable: setting  = 0.1, we observe a roughly tenfold speedup over  = 1. On this corpus, the original training procedure of Devlin et al. with  = 0.1 gives a BLEU score of 20.1 and Rtest of 2.7. Training time is equivalent to choosing  = 1, and larger values of  result in decreased BLEU, while smaller values result in significantly increased normalizer risk. Thus we see that we can achieve smaller normalizer variance and an order-of-magnitude decrease in training time with a loss of only 0.1 BLEU.
+
+6
+
+Relation to neural networks
+
+Our discussion has focused on log-linear models. While these can be thought of as a class of singlelayer neural networks, in practice much of the demand for fast training and querying of log-linear LMs
+
+247
+
+

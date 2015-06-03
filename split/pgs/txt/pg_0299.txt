@@ -1,0 +1,34 @@
+When can self-normalization work--for which distributions do good parameter settings exist? And why should self-normalization work--how does variance of the normalizer on held-out data relate to variance of the normalizer during training? Analysis of these questions suggests an improvement to the training procedure described by Devlin et al., and we conclude with empirical results demonstrating that our new procedure can reduce training time for self-normalized models by an order of magnitude.
+
+2
+
+Preliminaries
+exp{y x}
+y
+
+Consider a log-linear model of the form p(y |x;  ) = exp{y x} (1)
+Figure 1: A normalizable set, the solutions [x, y ] to Z ([x, y ]; {[-1, 1], [-1, -2]}) = 1. The set forms a smooth one-dimensional manifold bounded on either side by the hyperplanes normal to [-1, 1] and [-1, -2].
+
+We can think of this as a function from a context x to a probability distribution over decisions yi , where each decision is parameterized by a weight vector y .1 For concreteness, consider a language modeling problem in which we are trying to predict the next word after the context the ostrich. Here x is a vector of features on the context (e.g. x = {1-2=the ostrich, 1=the, 2=ostrich, . . . }), and y ranges over the full vocabulary (e.g. y1 = the, y2 = runs, . . . ). Our analysis will focus on the standard log-linear case, though later in the paper we will also relate these results to neural networks. We are specifically concerned with the behavior of the normalizer or partition function Z (x;  ) =
+y
+def
+
+from a normalizable X , how do we find a normalizing ? In sections 3 and 4, we do not analyze whether the setting of  corresponds to a good classifier--only a good normalizer. In practice we require both good normalization and good classification; in section 5 we provide empirical evidence that both are achievable. Some notation: Weight vectors  (and feature vectors x) are d-dimensional. There are k output classes, so the total number of parameters in  is kd. || · ||p is the p vector norm, and || · || specifically is the max norm.
+
+exp{y x}
+
+(2)
+
+3
+
+When should self-normalization work?
+
+and in particular with choices of  for which Z (x;  )  1 for most x. To formalize the questions in the title of this paper, we introduce the following definitions: Definition 1. A log-linear model p(y |x,  ) is normalized with respect to a set X if for every x  X , Z (x;  ) = 1. In this case we call X normalizable and  normalizing. Now we can state our questions precisely: What distributions are normalizable? Given data points
+An alternative, equivalent formulation has a single weight vector and a feature function from contexts and decisions onto feature vectors.
+1
+
+In this section, we characterize a large class of datasets (i.e. distributions p(y |x)) that are normalizable either exactly, or approximately in terms of their marginal distribution over contexts p(x). We begin by noting simple features of Equation 2: it is convex in x, so in particular its level sets enclose convex regions, and are manifolds of lower dimension than the embedding space. As our definition of normalizability requires the existence of a normalizing  , it makes sense to begin by fixing  and considering contexts x for which it is normalizing. Observation. Solutions x to Z (x;  ) = 1, if any exist, lie on the boundary of a convex region in Rd .
+
+245
+
+

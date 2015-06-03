@@ -1,0 +1,27 @@
+Mining for unambiguous instances to adapt part-of-speech taggers to new domains
+Dirk Hovy, Barbara Plank, H´ ector Mart´ inez Alonso, Anders Søgaard Center for Language Technology University of Copenhagen, Denmark Njalsgade 140 {dirk|bplank}@cst.dk,{alonso|soegaard}@hum.ku.dk
+
+Abstract
+We present a simple, yet effective approach to adapt part-of-speech (POS) taggers to new domains. Our approach only requires a dictionary and large amounts of unlabeled target data. The idea is to use the dictionary to mine the unlabeled target data for unambiguous word sequences, thus effectively collecting labeled target data. We add the mined instances to available labeled newswire data to train a POS tagger for the target domain. The induced models significantly improve tagging accuracy on held-out test sets across three domains (Twitter, spoken language, and search queries). We also present results for Dutch, Spanish and Portuguese Twitter data, and provide two novel manually-annotated test sets.
+
+1
+
+Introduction
+
+Part-of-speech (POS) taggers are typically trained on newswire and exhibit severe out-of-domain performance drops (Blitzer et al., 2006; Daume III, 2007; Foster et al., 2011). When faced with a new domain, one option is to try to leverage available unlabeled data. However, rather than resorting to pure self-training approaches (self-labeling), we here resort to another source of information. One way to address the annotation problem is to use collaboratively created resources such as Wikipedia for distant supervision (Mintz et al., 2009), or the automatically derived dictionaries called Wiktionary (Li et al., 2012). We show how to leverage these resources to create labeled training data. It turns out that many entries in Wiktionary are actually unambiguous, i.e., there is only one possible tag for the word. In fact, for English 1256
+
+Wiktionary (Li et al., 2012), we find that 93% of the unigram types are unambiguous (cf. Table 2). Our idea here is simple: we mine for unlabeled sentences that contain only unambiguous items (according to Wiktionary), and use the resulting data as additional, labeled training material. Concretely, we mine unannotated corpora of tweets, transcribed speech, and search queries for sentences that contain only unambiguous tokens, and combine those instances with newswire data to train POS models that adapt better to the respective domains. We show that adding unambiguous data leads to considerable improvements over both unadapted and weakly-supervised baselines (Li et al., 2012). Since Wiktionary has relatively low coverage for some of these domains, we also explore the use of Brown clusters to extend the coverage. This enables us to generalize across spelling variations and synonyms. Additionally, we evaluate our approach on Dutch, Portuguese and Spanish Twitter and present tow novel data sets for the latter two languages.
+
+2
+2.1
+
+Data
+Wiktionary
+
+In our experiments, we use the (unigram) tag dictionaries from Wiktionary, as collected by Li et al. (2012).1 The size and quality of our tag dictionaries crucially influence how much unambiguous data we can extract, and for some languages, the number of dictionary entries is small. We can resort to normalization dictionaries to extend Wiktionary's coverage. We do so for English (Han and Baldwin, 2011). It replaces some
+https://code.google.com/p/ wikily-supervised-pos-tagger/
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1256­1261, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

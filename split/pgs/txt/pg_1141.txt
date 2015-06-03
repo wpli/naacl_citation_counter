@@ -1,0 +1,23 @@
+Encoding World Knowledge in the Evaluation of Local Coherence
+Muyu Zhang1  , Vanessa Wei Feng2 , Bing Qin1 , Graeme Hirst2 , Ting Liu1 and Jingwen Huang1 1 Research Center for Social Computing and Information Retrieval Harbin Institute of Technology, Harbin, China 2 Department of Computer Science, University of Toronto, Toronto, ON, Canada {myzhang,qinb,tliu,jwhuang}@ir.hit.edu.cn {weifeng,gh}@cs.toronto.edu
+
+Abstract
+Previous work on text coherence was primarily based on matching multiple mentions of the same entity in different parts of the text; therefore, it misses the contribution from semantically related but not necessarily coreferential entities (e.g., Gates and Microsoft). In this paper, we capture such semantic relatedness by leveraging world knowledge (e.g., Gates is the person who created Microsoft), and use two existing evaluation frameworks. First, in the unsupervised framework, we introduce semantic relatedness as an enrichment to the original graph-based model of Guinaudeau and Strube (2013). In addition, we incorporate semantic relatedness as additional features into the popular entity-based model of Barzilay and Lapata (2008). Across both frameworks, our enriched model with semantic relatedness outperforms the original methods, especially on short documents.
+
+1
+
+Introduction
+
+In a well-written document, sentences are organized and presented in a logical and coherent form, which makes the text fluent and easily understood. Therefore, coherence is a fundamental aspect of high text quality, and the evaluation of coherence is a crucial component of many NLP applications, such as essay scoring (Miltsakaki and Kukich, 2004), story generation (McIntyre and Lapata, 2010), and document summarization (Barzilay et al., 2002).
+This work was partly done while the first author was visiting University of Toronto.
+
+
+A particularly popular model for evaluating text coherence is the entity-based local coherence model of Barzilay and Lapata (2008) (B&L), which extracts mentions of entities in adjacent sentences, and captures local coherence in terms of the transitions in the grammatical role of each mention. Following this direction, a number of extensions have been proposed (Elsner and Charniak, 2008; Elsner and Charniak, 2011; Lin et al., 2011; Feng et al., 2014), the majority of which focus on enriching the original entity features. An exception is the unsupervised model of Guinaudeau and Strube (2013) (G&S), which converts the document into a graph of sentences, and evaluates the text coherence by computing the average out-degree over the entire graph. However, despite the apparent success of these methods, they rely merely on matching mentions of the same entity, but neglect the contribution from semantically related but not necessarily coreferential entities. For example, the text in Figure 1a1 has no common entity in s2 and s3 . However, the transition between them is perfectly coherent, because there exists close semantic relatedness between two distinct entities, Gates in s2 and Microsoft in s3 , which can be captured by the world knowledge that Gates is the person who created Microsoft (represented by Gates-create-Microsoft). In fact, the issue of absence of common entities between adjacent sentences is quite prevalent. Analyzing the CoNLL 2012 dataset (Pradhan et al., 2012), we found that 42.34% of the time, adjacent sentences do not share common entities. As a result, methods which rely on strict entity matching would fail on these cases.
+1
+
+Based on a news item: http://www.cnbc.com/id/101576926
+
+1087
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1087­1096, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

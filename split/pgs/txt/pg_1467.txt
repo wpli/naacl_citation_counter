@@ -1,0 +1,53 @@
+Training set
+
+O RIG S WBD
+
+C AREFUL S COTUS A NNOT OYEZ
+
+66.1
+86.7 62.2 63.7 70.9
+
+Prec
+
+C AREFUL S COTUS + O RIG S WBD A NNOT OYEZ + T RANSF S WBD
+
+Rec 16.7 20.4 29.1 27.8 49.0
+
+F1 26.7 33.0 39.7 38.7 57.9
+
+Training set: A NNOT OYEZ+ O RIG S WBD S WBD WITH ... T RANSF S WBD
+
+Prec 67.8 63.1 70.9
+
+Rec 29.3 46.8 49.0
+
+F1 40.9 53.7 57.9
+
+Table 2: Disfluency detection of A NNOT OYEZ with different training sets.
+
+Table 3: The combination of A NNOT OYEZ and S WBD with different S WBD transformation steps.
+Training set
+
+5.1
+
+Transforming training data
+
+First, we assess the utility of different training sources and training data transformation using the baseline model. Note that the two S COTUS sets are quite small (four cases, 64k words) compared to Switchboard (1.3M words). Because of the difference in punctuation style between the original Oyez transcripts and the careful transcripts of both corpora, all sentence-internal punctuation is removed in the C AREFUL S COTUS and O RIG SWBD data. Table 2 reports results on training the CRF model with the different sources and their combinations. As expected, detection with in-domain training data and transformed S WBD (A NNOT OYEZ+T RANSF S WBD) outperforms training on all other dataset combinations. Training on A NNOT OYEZ alone significantly outperforms detection (especially precision) when only trained on the carefully annotated data because of the matching transcription style. Training with O RIG S WBD outperforms training with A NNOT OYEZ alone mainly due to the availability of more training data in the S WBD dataset, consistent with results in (Ostendorf and Hahn, 2013). Surprisingly, the C AREFUL S COTUS data did not provide any benefit when added to the O RIG S WBD. Next, we study the impact of adding `...' symbols and removing punctuation for transforming the S WBD data. Table 3 reports results for training the CRF model with the combination of A NNOT OYEZ and S WBD with different transformation steps. We observe that roughly 30% of the interruption points in C AREFUL S COTUS are associated with the `...' symbol in the OYEZ transcripts; therefore, we add `...' symbols after 1/3 of the interruption points in the S WBD. As expected, disfluency detection is improved by transforming S WBD with adding `...'. The largest gain is obtained when we also remove punc1413
+
+C AREFUL S COTUS A NNOT OYEZ O RIG S WBD C AREFUL S COTUS + O RIG S WBD A NNOT OYEZ + T RANSF S WBD
+
+Prec 57.8 81.7 59.0 64.6 71.7
+
+Rec 21.2 27.3 31.7 33.7 52.8
+
+F1 31.0 41.0 41.2 44.3 60.8
+
+Table 4: Self-training performance using different initial models.
+
+tuation (the row T RANSF S WBD). All further experiments use this setting for training the models. 5.2 Self-training
+
+Here we study the contribution of semi-supervised learning when applied on the baseline model (Table 5). For self-training, we use 1,765 OYEZ transcripts dated 1990 - 2011 as our unlabeled data (17.5M words), with a confidence threshold of 0.5 for augmenting the training data, as described previously. We use each one of the baseline models in Table 2 as an initial model for the self-training for comparison to the results in Table 4. While adding a lot of in-domain data definitely helps, the quality of the initial model plays a major role in the overall performance. 5.3 Two-stage model
+
+Finally, we assess the impact of the two-stage model with and without self-training (Table 5). For the two-stage semi-supervised model, self-training was only used for the second stage (non-repetition detection). As expected, both two-stage and selftraining models improve the baseline CRF model, and the combination performs the best. The twostage model helps to adapt the differences in distribution of repetitions and non-repetitions between the two domains by factoring the different problems to improve the match of the more difficult nonrepetition cases. Overall, we obtain nearly 23% im-
+
+

@@ -1,0 +1,24 @@
+mented Lagrangian to incorporate and relax these new constraints. We optimize for A, z1 and zc separately, update the dual variables and repeat until convergence (see Supplementary material for Lagrangian form, solutions and updates). We modified code for ADMM, which is available online1 . ADMM is used when solving for A in the Online Dictionary Learning algorithm, solving for D remains unchanged from the NNSE implementation (see Algorithms 1 and 2 in Supplementary Material). We use the weighted addition composition function because it performed well for adjective-noun composition in previous work (Mitchell and Lapata, 2010; Dinu et al., 2013; Hashimoto et al., 2014), maintains the convexity of the loss function, and is easy to optimize. In contrast, an element-wise multiplication, dilation or higher-order matrix composition function will lead to a non-convex optimization problem which cannot be solved using ADMM. Though not explored here, we hypothesize that A could be molded to respect many different composition functions. However, if the chosen composition function does not maintain convexity, finding a suitable solution for A may prove challenging. We also hypothesize that even if the chosen composition function is not the "true" composition function (whatever that may be), the fact that A can change to suit the composition function may compensate for this mismatch. This has the flavor of variational inference for Bayesian methods: an approximation in place of an intractable problem often yields better results with limited data, in less time.
+
+Table 2: Median rank, mean reciprocal rank (MRR) and percentage of test phrases ranked perfectly (i.e. first in a sorted list of approx. 4,600 test phrases) for four methods of estimating the test phrase vectors. w.addSVD is weighted addition of SVD vectors, w.addNNSE is weighted addition of NNSE vectors. Model w.addSVD w.addNNSE Lexfunc CNNSE Med. Rank 99.89 99.80 99.65 99.91 MRR 35.26 28.17 28.96 40.65 Perfect 20% 16% 20% 26%
+
+test (1/3) set. From the test set we removed 200 randomly selected phrases as a development set for parameter tuning. We did not lexically split the train and test sets, so many words appearing in training phrases also appear in test phrases. For this reason we cannot make specific claims about the generalizability of our methods to unseen words. NNSE has one parameter to tune (1 ); CNNSE has two: 1 and c . In general, these methods are not overly sensitive to parameter tuning, and searching over orders of magnitude will suffice. We found the optimal settings for NNSE were 1 = 0.05, and for CNNSE 1 = 0.05, c = 0.5. Too large 1 leads to overly sparse solutions, too small reduces interpretability. We set = 1000 for both NNSE and CNNSE and altered sparsity by tuning only 1 . 3.1 Phrase Vector Estimation
+
+3
+
+Data and Experiments
+
+We use the semantic vectors made available by Fyshe et al. (2013), which were compiled from a 16 billion word subset of ClueWeb09 (Callan and Hoy, 2009). We used the 1000 dependency SVD dimensions, which were shown to perform well for composition tasks. Dependency features are tuples consisting of two POS tagged words and their dependency relationship in a sentence; the feature value is the pointwise positive mutual information (PPMI) for the tuple. The dataset is comprised of 54,454 words and phrases. We randomly split the approximately 14,000 adjective noun phrases into a train (2/3) and
+http://www.stanford.edu/~boyd/papers/ admm/
+1
+
+To test the ability of each model to estimate phrase semantics we trained models on the training set, and used the learned model and the composition function to estimate vectors of held out phrases. We sort the vectors for the test phrases, Xtest , by their cosine ^ (p,:) . distance to the predicted phrase vector X We report two measures of accuracy. The first is median rank accuracy. Rank accuracy is: 100 × (1 - r P ), where r is the position of the correct phrase in the sorted list of test phrases, and P = |Xtest | (the number of test phrases). The second measure is mean reciprocal rank (MRR), which is often used to evaluate information retrieval tasks (Kantor and Voorhees, 2000). MRR is 100 × ( 4 1 P
+P i=1
+
+1 ( )). r
+
+(9)
+
+35
+
+

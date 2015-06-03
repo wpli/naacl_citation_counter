@@ -1,0 +1,72 @@
+System Baseline S1 S2 S3 S4
+
+TP 0 4 1 1 4
+
+FP 0 1 0 1 6
+
+TN 6 5 6 5 0
+
+FN 4 0 3 3 0
+
+P 1.00 0.80 1.00 0.50 0.40
+
+R 0.00 1.00 0.25 0.25 1.00
+
+F0.5 0.00 0.83 0.62 0.42 0.45
+
+Acc 0.60 0.90 0.70 0.60 0.40
+
+WAcc 0.60 0.87 0.73 0.58 0.40
+
+Table 8: An increase in P , R or F does not necessarily translate into an increase in Acc, assuming all systems are evaluated on the same set of references.
+
+{1.00
+
+Ia
+
+0
+
+Ib
+
++1.00
+
+DEGRADATION AREA
+
+IMPROVEMENT AREA
+
+0
+
+WAcca
+
+WAccbase WAccb
+
+1
+
+Figure 3: Graphical representation of improvement for two hypothetical systems, a and b. Values of I are shown at the top while values of WAcc are shown at the bottom.
+
+Value 1 >0 0 <0 -1
+
+Interpretation 100% improvement (100% correct text). Relative improvement. Baseline performance (no change). Relative degradation. 100% degradation (100% incorrect text).
+Table 9: Interpretation of I values.
+
+I , is defined as:
+ WAccsys         WAccsys - WAccbase I= 1 - WAccbase         WAccsys - 1 WAcc
+base
+
+if WAccsys = WAccbase if WAccsys > WAccbase otherwise
+
+Values of I lie in the [-1; 1] interval and should be interpreted as per Table 9. The use of this metric provides a solution to problems 1.(h) and 1.(i). The I -measure should be computed after maximising system WAcc at the sentence level, so as to ensure all the evaluated hypotheses are paired with their highest scoring references.
+
+3
+
+Experiments and results
+
+We tested our evaluation method by re-ranking systems in the CoNLL 2014 shared task on grammatical error correction. Re-ranking was limited to the 12 584
+
+participating teams that made their system's output publicly available. For the gold standard, we used the shared task test set containing corrections from the two official annotators as well as alternative corrections provided by three participating teams. This version allowed us to generate many more references than the original test set and thus reduce annotator bias. The corrections extracted from the gold standard were automatically clustered into groups of independent errors based on token overlap. This means that overlapping corrections from different annotators are considered to be mutually exclusive (i.e. alternative) corrections of the same error and are therefore grouped together (the error elements in Listing 1). Provided the original annotations are correct, the combination of alternatives will generate all possible valid references. Sentences containing corrections that could not be automatically clustered because they require human knowledge were excluded, leaving a subset of 711 sentences (out of 1,312). We restrict our analysis to correction, since that is the only aspect reported by the M2 Scorer. Table 10 shows the results of the M2 Scorer using the original annotations as well as a modified version containing mixed-and-matched corrections. Results of our proposed evaluation method are included in Table 11. As expected, rankings are clearly distinct between the two methods, as they use different units of evaluation (phrase-level edits vs tokens) and maximising metrics (F0.5 vs WAcc). Results show that only the UFC system is able to beat the baseline (by a small but statistically significant margin), being also the one with consistently highest P (much higher than the rest). These rankings are affected by the fact that systems were probably optimised for F0.5 during development, as it was the official evaluation metric
+
+{
+
+{
+
+

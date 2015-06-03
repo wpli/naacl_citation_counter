@@ -1,0 +1,19 @@
+GMM baseline in terms of average cepstral distortion. The GMM baseline, is however, the fastest of the compared systems. For both experiments, it is able to produce transformations substantially faster than real-time. The CPU-based local regression baseline achieves the best overall cepstral distortion, but is also the slowest method. In both experiments, it operates at 0.3X real-time speed. The GPU-based local regression method performs only slightly worse overall than the exact method in terms of cepstral distortion, yet in both experiments it operates substantially faster than real-time, nearly as fast as the parametric baseline.
+
+5
+
+Conclusion
+
+conversion. In Acoustics, Speech and Signal Processing (ICASSP), 2012 IEEE International Conference on, pages 4517­4520. IEEE. Yannis Stylianou, Olivier Cappé, and Eric Moulines. 1998. Continuous probabilistic transform for voice conversion. Speech and Audio Processing, IEEE Transactions on, 6(2):131­142. Tomoki Toda, Alan W Black, and Keiichi Tokuda. 2005. Spectral conversion based on maximum likelihood estimation considering global variance of converted parameter. In ICASSP (1), pages 9­12. T. Toda, A.W. Black, and K. Tokuda. 2007. Voice conversion based on maximum-likelihood estimation of spectral parameter trajectory. Audio, Speech, and Language Processing, IEEE Transactions on, 15(8):2222­ 2235.
+
+We have demonstrated a method for substantially speeding-up inference using a non-parametric estimator for spectral voice conversion. Related approaches may prove useful for making nonparametric estimators more efficient in other areas of speech and language processing.
+
+Acknowledgements
+This work was partially supported by BBN under DARPA contract HR0011-12-C-0014 and by an NSF fellowship for the first author. Thanks to the anonymous reviewers for their insightful comments. We further gratefully acknowledge a hardware donation by NVIDIA Corporation.
+
+References
+William S Cleveland. 1979. Robust locally weighted regression and smoothing scatterplots. Journal of the American statistical association, 74(368):829­836. E. Helander, H. Silen, T. Virtanen, and M. Gabbouj. 2012. Voice conversion using dynamic kernel partial least squares regression. IEEE transactions on audio, speech, and language processing, 20(3):806­817. H. Kawahara. 2006. Straight, exploitation of the other aspect of vocoder: Perceptually isomorphic decomposition of speech sounds. Acoustical science and technology, 27(6):349­353. John Nickolls, Ian Buck, Michael Garland, and Kevin Skadron. 2008. Scalable parallel programming with cuda. Queue, 6(2):40­53. Victor Popa, Hanna Silen, Jani Nurminen, and Moncef Gabbouj. 2012. Local linear transformation for voice
+
+1338
+
+

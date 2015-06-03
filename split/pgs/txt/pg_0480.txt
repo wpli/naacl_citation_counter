@@ -1,0 +1,22 @@
+The setup for evaluation of normalization edits on named entity recognition closely follows that of dependency parsing. We once again employ a tool from the suite of Stanford NLP tools, the Stanford named entity recognizer4 (Finkel et al., 2005). We also define precision and recall in a similar manner: precisionner = recallner = |EN T  EN Tgold | |EN T | |EN T  EN Tgold | |EN Tgold | (3) (4)
+
+Configuration -ADDITION -PUNCT -WORD -BEVERB -DETERMINER -OTHER -SUBJECT -REPLACEMENT -PUNCT -WORD -CAPITALIZATION -CONTRACTION -OTHER -SLANG -REMOVAL -PUNCT -WORD -OTHER -TWITTER
+
+F-measure 0.955 0.973 0.974 0.998 0.989 0.989 0.998 0.827 0.962 0.849 0.921 0.977 0.931 0.945 0.956 0.970 0.960 0.973 0.962
+
+Per-token Error Rate 0.00005 0.00006 0.00005 0.00001 0.00011 0.00008 0.00001 0.00010 0.00012 0.00010 0.00012 0.00009 0.00039 0.00013 0.00007 0.00025 0.00008 0.00015 0.00012
+
+Where EN T and EN Tgold are the sets of entities identified over the candidate normalization and gold standard sentences, respectively. Entities were labeled as one of three classes (person, location, or organization), and two entities were only considered a match if they both selected the same entity and the same entity class. 4.2.1 Results Table 3 shows the results of the NER ablation study. Unlike dependency parsing, only word replacement edits proved to be critically important for NER tasks, as adding and subtracting words had little impact on the overall performance. Capitalization, which is generally an important feature for the identification of named entities, was unsurprisingly important. Similarly, the replacement of word types other than slang and contraction was important, because many of these instances may come from misspelled named entities. Slang and contractions were less important, as they were generally not used to reference named entities. As the words dropped by Twitter users tend to be function words that are not critical to understanding the sentence they are rarely named entities and have only a small effect on named entity recognition. Similarly, terms that are removed during normalization also tend to not be named entities, and thus has minor overall impact. A similar phenomenon is observed in the pertoken evaluation, where unintentionally produced, non-slang, non-contraction word replacement was seen to be of paramount importance. Punctuation removal was also important on a per-token basis, despite having little impact in aggregate. Overall, the results given in Table 3 indicate that a focused approach to normalization for named entity
+4
+
+Table 3: NER Results.
+
+recognition is warranted. Unlike dependency parsing that required a broad approach involving token addition and removal, the replacement-centric normalization approach typically employed by previous work is likely to be sufficient when the goal is to improve entity recognition. 4.3 TTS Evaluation
+
+Version 1.2.8
+
+Unlike the previous two tasks, the TTS problem is complicated by its need for speech production. Similarly, evaluation of speech synthesis is more difficult, as it requires human judgment about the overall quality of the output (Black and Tokuda, 2005). While speech synthesis evaluations often rate performance on a 5 point scale, we adopt a more restricted method, based on the comparison to gold standard methodology used in the previous evaluations. For each tweet and each round of ablation, a synthesized audio file was produced from both the gold standard and ablated version of the tweet. These audio snippets were randomized and presented to human judges who were asked to make a binary judgment as to whether the meaning and understandability of the ablated case was comparable to the gold standard. The accuracy of a given round of ablation is then calculated to be the percentage of tweets judged
+
+426
+
+

@@ -1,0 +1,20 @@
+Deep Multilingual Correlation for Improved Word Embeddings
+Ang Lu1 , Weiran Wang2 , Mohit Bansal2 , Kevin Gimpel2 , and Karen Livescu2
+1
+
+Department of Automation, Tsinghua University, Beijing, 100084, China lva11@mails.tsinghua.edu.cn 2 Toyota Technological Institute at Chicago, Chicago, IL, 60637, USA {weiranwang, mbansal, kgimpel, klivescu}@ttic.edu
+
+Abstract
+Word embeddings have been found useful for many NLP tasks, including part-of-speech tagging, named entity recognition, and parsing. Adding multilingual context when learning embeddings can improve their quality, for example via canonical correlation analysis (CCA) on embeddings from two languages. In this paper, we extend this idea to learn deep non-linear transformations of word embeddings of the two languages, using the recently proposed deep canonical correlation analysis. The resulting embeddings, when evaluated on multiple word and bigram similarity tasks, consistently improve over monolingual embeddings and over embeddings transformed with linear CCA.
+
+1 Introduction
+Learned word representations are widely used in NLP tasks such as tagging, named entity recognition, and parsing (Miller et al., 2004; Koo et al., 2008; Turian et al., 2010; T¨ ackstr¨ om et al., 2012; Huang et al., 2014; Bansal et al., 2014). The idea in such representations is that words with similar context have similar meaning, and hence should be nearby in a clustering or vector space. Continuous representations are learned with neural language models (Bengio et al., 2003; Mnih and Hinton, 2007; Mikolov et al., 2013) or spectral methods (Deerwester et al., 1990; Dhillon et al., 2011). The context used to learn these representations is typically the set of nearby words of each word occurrence. Prior work has found that adding translational context results in better representations (Diab and Resnik, 2002; T¨ ackstr¨ om et al., 2012; Bansal et al., 2012; Zou et al., 2013). Recently, Faruqui and Dyer (2014) applied canonical correlation analysis (CCA) to word embeddings of two languages, and found that the resulting embeddings represent word 250
+
+similarities better than the original monolingual embeddings. In this paper, we follow the same intuition as Faruqui and Dyer (2014) but rather than learning linear transformations with CCA, we permit the correlated information to lie in nonlinear subspaces of the original embeddings. We use the recently proposed deep canonical correlation analysis (DCCA) technique of Andrew et al. (2013) to learn nonlinear transformations of two languages' embeddings that are highly correlated. We evaluate our DCCA-transformed embeddings on word similarity tasks like WordSim-353 (Finkelstein et al., 2001) and SimLex-999 (Hill et al., 2014), and also on the bigram similarity task of Mitchell and Lapata (2010) (using additive composition), obtaining consistent improvements over the original embeddings and over linear CCA. We also compare tuning criteria and ensemble methods for these architectures.
+
+2 Method
+We assume that we have initial word embeddings for two languages, denoted by random vectors x  RDx and y  RDy , and a set of bilingual word pairs. Our goal is to obtain a representation for each language that incorporates useful information from both x and y. We consider the two input monolingual word embeddings as different views of the same latent semantic signal. There are multiple ways to incorporate multilingual information into word embeddings. Here we follow Faruqui and Dyer (2014) in taking a CCA-based approach, in which we project the original embeddings onto their maximally correlated subspaces. However, instead of relying on linear correlation, we learn more powerful non-linear transformations of each view via deep networks. Canonical Correlation Analysis A popular method for multi-view representation learning is canonical correlation analysis (CCA; Hotelling, 1936). Its objective is to find two vectors u  RDx
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 250­256, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

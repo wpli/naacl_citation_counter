@@ -1,0 +1,17 @@
+A Comparison of Update Strategies for Large-Scale Maximum Expected B LEU Training
+Joern Wuebker, Sebastian Muehr, Patrick Lehnen, Stephan Peitz and Hermann Ney Human Language Technology and Pattern Recognition Group RWTH Aachen University Aachen, Germany {surname}@cs.rwth-aachen.de
+
+Abstract
+This work presents a flexible and efficient discriminative training approach for statistical machine translation. We propose to use the RPROP algorithm for optimizing a maximum expected B LEU objective and experimentally compare it to several other updating schemes. It proves to be more efficient and effective than the previously proposed growth transformation technique and also yields better results than stochastic gradient descent and AdaGrad. We also report strong empirical results on two large scale tasks, namely BOLT ChineseEnglish and WMT GermanEnglish, where our final systems outperform results reported by Setiawan and Zhou (2013) and on matrix.statmt.org. On the WMT task, discriminative training is performed on the full training data of 4M sentence pairs, which is unsurpassed in the literature.
+
+combination of multiple models (Och, 2003) has become the state of the art. However, most of the component models are still estimated by heuristics or generative training. In this paper, a flexible, efficient and easy to implement discriminative training scheme for SMT is presented. It can be applied to any kind and any number of features. We use the RPROP algorithm to optimize a maximum expected B LEU objective. n-best lists approximate the infeasibly large space of translation hypotheses. They are generated with the application of leave-one-out to make them more representative with respect to unseen data. We make the following main contributions: 1. We propose to apply the RPROP algorithm for maximum expected B LEU training and perform an experimental comparison with growth transformation (GT) (He and Deng, 2012; Setiawan and Zhou, 2013), stochastic gradient descent (Auli et al., 2014) and AdaGrad (Green et al., 2013). RPROP yields superior performance, reaching a total improvement of 1.2 B LEU points over our IWSLT GermanEnglish baseline using 5.22M features. 2. In terms of time and memory efficiency, RPROP clearly outperforms GT. The latter needs to update a much larger number of features due to its renormalization component. On the IWSLT data, RPROP is 6.4 times faster than GT and requires a third of the memory. 3. On the WMT GermanEnglish task, we perform discriminative training on 4M sentence
+
+1
+
+Introduction
+
+The main advantage of learning parameters in a discriminative fashion is the possibility to directly optimize towards a quality or error measure on the task that is being performed. This stands in contrast to the generative approach, where parameters are chosen to maximize likelihood under a generative story, which often bears little correspondence with the actual application of the model. In statistical machine translation (SMT), extending the generative noisy-channel formulation (Brown et al., 1993) as a discriminative, log-linear 1516
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1516­1526, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

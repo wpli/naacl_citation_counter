@@ -1,0 +1,48 @@
+1 CDEC
+
+2
+
+R AMPION
+
+3
+
+R EBOL
+
+S P P1 P2 P3
+
+40.0 42.92 42.92 43.81 43.36
+
+40.36 44.59 46.361 45.92 45.92
+
+42.9212 45.85 48.81 47.06 47.49
+
+take advantage of parsers with good FDR score since learning to move away from translations dissimilar to the reference is helpful if they do not lead to correct answers. REBOL can make the best use of parsers with low FDR score since it can learn to prevent incorrect translations from hurting parsing performance at test time.
+
+Table 2: Parsing F1 score on F REE 917 test set of translated database queries using different parser models to provide response for translated queries. Best results are indicated in bold face. Statistical significance of result differences at p < 0.05 are indicated by algorithm number in superscript.
+CDEC
+
+7
+
+Conclusion
+
+R AMPION 0.29 -0.58
+
+R EBOL 0.1 -0.7
+
+F1 FDR
+
+0.85 -0.21
+
+Table 3: Spearman correlation between F1 / FDR from Table 1 and CDEC / R AMPION / R EBOL F1 from Table 2.
+
+trained by using the correct English queries in the F REE 917 training data as references. Neither CDEC nor RAMPION use parser feedback in training. R E BOL (Response-based Online Learning) is an implementation of Algorithm 1 described in Section 3. This algorithm makes use of positive parser feedback to convert predicted translation into references, in addition to using the original English queries as references. Training for both RAMPION and REBOL is performed for 10 epochs over the F REE 917 training set, using a constant learning rate  that was chosen via cross-validation. All methods then proceed to translate the F REE 917 test set. Best results in Table 2 are obtained by using an extension of PARASEMPRE with one synset as parser in responsebased learning with REBOL. This parsing system scored best under the FDR metric in Table 1. Table 3 shows the Spearman rank correlation (Siegel and Castellan, 1988) between the F1 / FDR ranking of semantic parsers from Table 1 and their contribution to F1 scores in Table 2 for parsing query translations of CDEC, R AMPION or R EBOL. The system CDEC cannot learn from parser performance based on query translations, thus best results on translated queries correlate positively with good parsing F1 score per se. R AMPION can implicitly 1343
+
+We presented an adaptation of SMT to translating open-domain database queries by using feedback of a semantic parser to guide learning. Our work highlights an important aspect that is often overlooked in parser evaluation, namely that parser model selection in real-world applications needs to take the possibility of parsing incorrect language into account. We found that for our application of response-based learning for SMT, the key is to learn to prevent cases where the correct answer is retrieved despite the translation being incorrect. This can be avoided by performing model selection on semantic parsers that parse and retrieve correct answers for correct database queries, but do not do retrieve correct answers for incorrect queries. In our experiments, we found that the parser that contributes most to response-based learning in SMT is one that is carefully extended by paraphrases and synonyms. In future work, we would like to investigate additional techniques for paraphrasing and synonym extension. For example, a good fit for our task of response-based learning for SMT might be Bannard and Callison-Burch (2005)'s approach to paraphrasing via pivoting on SMT phrase tables.
+
+Acknowledgments
+This research was supported in part by DFG grant RI-2221/2-1 "Grounding Statistical Machine Translation in Perception and Action".
+
+References
+Jacob Andreas, Andreas Vlachos, and Stephen Clark. 2013. Semantic parsing as machine translation. In Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (ACL'13), Sofia, Bulgaria. Colin Bannard and Chris Callison-Burch. 2005. Paraphrasing with bilingual parallel corpora. In Proceed-
+
+

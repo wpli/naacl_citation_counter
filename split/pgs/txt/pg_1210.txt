@@ -1,0 +1,22 @@
+word pos pos-l + pos pos-l + pos + pos-r
+
+word-l pos-l pos + pos-r voice
+
+word-r pos-r pos + word embeddings
+
+Table 2: Predicate/argument atomic features used by our tensor for SRL. word stands for the word form (and also lemma), pos stands for the predicted POS tag and voice stands for the voice of the predicate. The suffixes -l and -r refer to the left and right of the current token respectively. For example, pos-l means the POS tag to the left of the current word in the sentence. official split for training, development and testing. For English, the data is mainly drawn from the Wall Street Journal. In addition, a subset of the Brown corpus is used as the secondary out-of-domain test set, in order to evaluate how well the model generalizes to a different domain. Following the official practice, we use predicted POS tags, lemmas and morphological analysis provided in the dataset across all our experiments. The predicates in each sentence are also given during both training and testing. However, we neither predict nor use the sense for each predicate. Systems for Comparisons We compare against three systems that achieve the top average performance in the joint syntactic and semantic parsing track of the CoNLL-2009 shared task (Che et al., 2009; Zhao et al., 2009a; Gesmundo et al., 2009). All approaches extensively explored rich features for the SRL task. We also compare with the stateof-the-art parser (Bj¨ orkelund et al., 2010) for English, an improved version of systems participated in CoNLL-2009. This system combines the pipeline of dependency parser and semantic role labeler with a global reranker. Finally, we compare with the recent approach which employs distributional word representations for SRL (Roth and Woodsend, 2014). We directly obtain the outputs of all these systems from the CoNLL-2009 website5 or the authors. Model Variants Our full model utilizes 4-way tensor component and a standard feature set
+http://ufal.mff.cuni.cz/conll2009-st/ results/results.php
+5
+
+from (Johansson, 2009). We also compare against our model without the tensor component, as well as a variant with a 3-way tensor by combining the path and semantic role label parts into a single mode (dimension). Evaluation Measures Following standard practice in the SRL evaluation, we measure the performance using labeled F-score. To this end, we apply the evaluation script provided on the official website.6 The standard evaluation script considers the predicate sense prediction as a special kind of semantic label.7 Since we are neither predicting nor using the predicate sense information, we exclude this information in most of the evaluation. In addition, we combine the predicate sense classification output of (Bj¨ orkelund et al., 2010) with our semantic role labeling output, to provide results directly comparable to previous reported numbers. Experimental Details Across all experiments, we fix the rank of the tensor to 50 and train our model for a maximum of 20 epochs. Following common practice, we average parameters over all iterations. For each experimental setting, we tune the hyper-parameter   {0.3, 0.5, 0.7, 0.9} and C  {0.01, 0.1, 1} on the development set and apply the best model on the test set. Each model is evaluated on the development set after every epoch to pick the the best number of training epoch. For the experiments with random initialization on the tensor component, the vectors are initialized as random unit vectors. We combine our SRL model with our syntactic dependency parser, RBGParser v1.1 (Lei et al., 2014), for joint syntactic and semantic parsing. The labeled attachment score (LAS) of RBGParser is 90.4 on English, when we train the "standard" model type using the unsupervised word vectors.
+
+7
+
+Results
+
+We first report the performance of our methods and other state-of-the-art SRL systems on English datasets (See Table 3). We single out performance
+6 http://ufal.mff.cuni.cz/conll2009-st/ scorer.html 7 Note that the original script includes such prediction in the F-score calculation, although the predicate sense is typically predicted in a separate step before semantic label classification.
+
+1156
+
+

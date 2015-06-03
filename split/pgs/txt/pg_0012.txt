@@ -1,0 +1,5 @@
+NLP-enabled Technology Richard Socher, Stanford University Phonology, Morphology, and Word Segmentation Sami Virpioja, Lingsoft and Aalto University Semantics Dipanjan Das, Google William Dolan, Microsoft Research Luke Zettlemoyer, University of Washington Sentiment Analysis and Opinion Mining Saif M. Mohammad, National Research Council Canada Jerry Zhu, University of Wisconsin-Madison Spoken Language Processing Xiaodong He, Microsoft Research Tagging, Chunking, Syntax, and Parsing Noah Smith, Carnegie Mellon University Yue Zhang, Singapore University of Technology and Design Text Categorization and Topic Models Jordan Boyd-Graber, University of Colorado at Boulder David Mimno, Cornell University
+
+xii
+
+

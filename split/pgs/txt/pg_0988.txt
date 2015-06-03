@@ -1,0 +1,28 @@
+In cyclic factor graphs, where exact inference for strings can be undecidable, the WFSAs can become unboundedly large as they are iteratively updated around a cycle (Dreyer and Eisner, 2009). Even in an acyclic graph (where BP is exact), the finite-state operations quickly lead to large WFSAs. Each intersection or composition is a Cartesian product construction, whose output's size (number of automaton states) may be as large as the product of its inputs' sizes. Combining many of these operations leads to exponential blowup.
+
+see later. Either way, the optimal q matches p's expected feature vector: Evq [f (v )] = Evp [f (v )]. This inspired the name "expectation propagation." 3.2 Working with 
+
+3
+
+Variational Approximation of WFSAs
+
+To address this difficulty through EP (section 4), we will need the ability to approximate any probability distribution p that is given by a WFSA, by choosing a "simple" distribution from a family Q. Take Q to be a family of log-linear distributions q (v ) = exp( · f (v )) / Z
+def
+
+Although p is defined by an arbitrary WFSA, we can represent q quite simply by just storing the parameter vector  . We will later take sums of such vectors to construct product distributions: observe that under (1), q1 +2 (v ) is proportional to q1 (v ) · q2 (v ). We will also need to construct WFSA versions of these distributions q  Q, and of other log-linear functions (messages) that may not be normalizable into distributions. Let E NCODE( ) denote a WFSA that accepts each v   with weight exp( · f (v )). 3.3 Substring features
+
+(v   )
+
+(1)
+
+where  is a weight vector, f (v ) is a feature vector def that describes v , and Z = v  exp( · f (v )) so that v q (v ) = 1. Notice that the featurization function f specifies the family Q, while the variational parameters  specify a particular q  Q.1 We project p into Q via inclusive KL divergence:  = argmin D(p || q ) (2) Now q approximates p, and has support everywhere that p does. We can get finer-grained approximations by expanding f to extract more features: however,  is then larger to store and slower to find. 3.1 Finding  Solving (2) reduces to maximizing -H (p, q ) = Evp [log q (v )], the log-likelihood of q on an "infinite sample" from p. This is similar to fitting a log-linear model to data (without any regularization: we want q to fit p as well as possible). This objective is concave and can be maximized by following its gradient Evp [f (v )] - Evq [f (v )]. Often it is also possible to optimize  in closed form, as we will
+1 To be precise, we take Q = {q : Z is finite}. For example,  = 0 is excluded because then Z = v  exp 0 = . Aside from this restriction,  may be any vector over R  {-}. We allow - since it is a feature's optimal weight if p(v ) = 0 for all v with that feature: then q (v ) = 0 for such strings as well. (Provided that f (v )  0, as we will ensure.)
+
+To obtain our family Q, we must design f . Our strategy is to choose a set of "interesting" substrings W . For each w  W , define a feature function "How many times does w appear as a substring of v ?" Thus, f (v ) is simply a vector of counts (nonnegative integers), indexed by the substrings in W . A natural choice of W is the set of all n-grams for fixed n. In this case, Q turns out to be equivalent to the family of n-gram language models.2 Already in previous work ("variational decoding"), we used (2) with this family to approximate WFSAs or weighted hypergraphs that arose at runtime (Li et al., 2009). Yet a fixed n is not ideal. If W is the set of bigrams, one might do well to add the trigram the-- perhaps because the is "really" a bigram (counting the digraph th as a single consonant), or because the bigram model fails to capture how common the is under p. Adding the to W ensures that q will now match p's expected count for this trigram. Doing this should not require adding all ||3 trigrams. By including strings of mixed lengths in W we get variable-order Markov models (Ron et al., 1996). 3.4 Arbitrary FSA-based features
+
+More generally, let A be any unambiguous and complete finite-state acceptor: that is, any v   has exactly one accepting path in A. For each arc or final state a in A, we can define a feature function "How
+2 Provided that we include special n-grams that match at the boundaries of v . See Appendix B.2 for details.
+
+934
+
+

@@ -1,0 +1,22 @@
+Gold standard clusters deceptive, false, fraudulent, misleading evil, immoral, sinful, wrong dangerous, risky, suicidal, unreliable
+
+Automatic clusters false, misleading, unreliable, wrong desperate, humiliated, immoral, insane, sinful dangerous, harmful, toxic
+
+Table 1: Example comparison of automatically derived clusters against gold standard clusters from WordNet.
+
+Data Clusters automatically derived from non-polysemous WordNet adjectives PubMed-derived clustering: Regular adjectives Domain-specific adjectives PubMed-derived clustering: Regular adverbs Domain-specific adverbs
+
+Corpus for strength counts in MILP ranking Google N-grams PubMed PubMed PubMed PubMed PubMed
+
+Clustering Accuracy 74.36 74.36 86.26 64.30 89.36 53.80
+
+Ranking Pairwise Accuracy 84.74 69.23 70.37 ­ 71.00 ­
+
+Table 2: AMT-based evaluations of cluster accuracy and pairwise ranking accuracy of systems that vary in the source of clustering data, source of strength counts, and part of speech. For comparison, the approach used by de Melo and Bansal (2013) achieves a pairwise ranking accuracy of 76.1% on the non-polysemous WordNet clusters.
+
+pairs to avoid random annotations. Each set was annotated by 10 workers. All workers passed all the checks and we did not discard any annotations for this task. To create a gold standard we assigned each pair one of four labels, weaker, stronger, equal, or not comparable. A value was assigned based on a majority vote. In case of a tie, the pair was assigned a label of being equal. In order to compute a ranking, the MILP needs two inputs: 1) the cluster of terms that are on the same scale, and 2) the counts for how many times all pairs of adjectives in that cluster satisfied the weak-strong and strong-weak patterns (henceforth referred to as "strength counts"). In the first experiment of ranking adjectives, we ran the full pipeline used by (de Melo and Bansal, 2013) on the 256 adjective (84 hard cluster) subset of their gold standard (see Section 4.1). Thus, this experiment uses hand-corrected WordNet dumbbells to determine adjectives on the same scale of semantic intensity, followed by the MILP using strength counts from the Google N-gram corpus, to determine the ranking. Their pipeline resulted in a pairwise accu488
+
+racy of 76.1% which serves as a baseline for comparison. In the second experiment of ranking adjectives, we used the 50 automatically derived adjective clusters described in Section 4.1 as an input for the MILP. Since these adjectives originate from WordNet dumbbells, we refer to them as "WordNet adjective clusters." We determined the ranking for adjectives within these clusters using strength counts obtained from our PubMed corpus. We obtained an accuracy of 69.23% across 105 pairs. The strength counts for all adjectives in these clusters, from Google N-grams corpus, used in the experiments of (de Melo and Bansal, 2013) were also available to us by the authors. We repeated the previous experiment by substituting strength counts from PubMed corpus with these strength counts from the Google N-grams corpus and obtained an accuracy of 84.74% across 119 pairs.3 It appears from our experiment that pattern counts from a general corpus
+3 The MILP does not produce a strength relationship between a pair of adjectives if there are no strength counts for this pair. Hence, we observe a difference in the number of pairs for which accuracy is determined in the two ranking experiments.
+
+

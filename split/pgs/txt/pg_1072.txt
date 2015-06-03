@@ -1,0 +1,27 @@
+A PRO: All-Pairs Ranking Optimization for MT Tuning
+Markus Dreyer SDL Research 6060 Center Drive Suite 150 Los Angeles, CA 90045 markus.dreyer@gmail.com Yuanzhe Dong SDL Research 6060 Center Drive Suite 150 Los Angeles, CA 90045 ydong@sdl.com
+
+Abstract
+We present A PRO, a new method for machine translation tuning that can handle large feature sets. As opposed to other popular methods (e.g., M ERT, M IRA, P RO), which involve randomness and require multiple runs to obtain a reliable result, A PRO gives the same result on any run, given initial feature weights. A PRO follows the pairwise ranking approach of P RO (Hopkins and May, 2011), but instead of ranking a small sampled subset of pairs from the k best list, A PRO efficiently ranks all pairs. By obviating the need for manually determined sampling settings, we obtain more reliable results. A PRO converges more quickly than P RO and gives similar or better translation results.
+
+procedure would ordinarily be too expensive since there are O(k 2 ) pairs per sentence, where both k and the number of sentences can be in the thousands, so billions of training examples would be produced per iteration. Therefore, Hopkins and May (2011) use subsampling to consider a small percentage of all pairs per sentence. We present A PRO (All-Pairs Ranking Optimization), a tuning approach that, like P RO, uses pairwise ranking for tuning. Unlike P RO, it is not limited to optimizing a small percentage of pairs per sentence. Based on an efficient ranking SVM formulation (Airola et al. (2011), Lee and Lin (2014)), we find, in each iteration, feature weights that minimize ranking errors for all pairs of translations per sentence. This tuning method inherits all the advantages of P RO--it is scalable, effective, easy to implement--and removes its limitations. It does not require meta-tuning of sampling parameters since no sampling is used; it does not need to be run multiple times to obtain reliable results, like M ERT (Och, 2003), P RO, M IRA (Chiang et al., 2008) and others, since it uses global optimization and is deterministic given initial feature weights; and it converges quickly.
+
+1
+
+Introduction
+
+Machine translation tuning seeks to find feature weights that maximize translation quality. Recent efforts have focused on methods that scale to large numbers of features (Cherry and Foster, 2012), and among these, P RO has gained popularity (Pairwise Ranking Optimization, Hopkins and May (2011)). P RO's goal is to find feature weights such that the resulting k -best list entries are ranked in the same way that an evaluation function (e.g., B LEU, Papineni et al. (2002)) ranks them. To do this, it labels pairs of translations for each sentence as positive or negative, depending on the gold ranking of the two pair elements given by B LEU. A binary classifier is trained on these labeled examples, resulting in new feature weights, and the procedure is iterated. This
+
+
+2
+
+Notation and Definitions
+
+Markus Dreyer is now at Amazon, Inc., Seattle, WA.
+
+For both P RO and A PRO, we use the following definitions: A tuning dataset contains S source sentences x1 , . . . , xS . Let Y s be the space of all translations of xs . It contains one or more known reference s s translations y s + . Each translation yi  Y has a fea-
+
+1018
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1018­1023, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

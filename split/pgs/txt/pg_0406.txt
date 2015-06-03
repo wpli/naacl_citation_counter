@@ -1,0 +1,33 @@
+# (1)
+
+Method Truth HMM-GMM CTC+CLM Truth HMM-GMM CTC+CLM
+
+Transcription yeah i went into the i do not know what you think of fidelity but yeah when the i don't know what you think of fidel it even them yeah i went to i don't know what you think of fidelity but um no no speaking of weather do you carry a altimeter slash barometer no i'm not all being the weather do you uh carry a uh helped emitters last brahms her no no beating of whether do you uh carry a uh a time or less barometer i would ima- well yeah it is i know you are able to stay home with them i would amount well yeah it is i know um you're able to stay home with them i would ima- well yeah it is i know uh you're able to stay home with them
+
+(2)
+
+(3)
+
+Truth HMM-GMM CTC+CLM
+
+Table 2: Example test set utterances with a ground truth transcription and hypotheses from our method (CTC+CLM) and a baseline HMM-GMM system of comparable overall WER. The words fidelity and barometer are not in the lexicon of the HMM-GMM system.
+time (t) 20
+
+1. 0 p( c| xt )
+
+0
+
+10
+
+30
+
+0. 5
+p( | x t ) p( ¬ | x t )
+
+s: _____o__hh__________ ____y_eahh___ (s): oh yeah
+
+Figure 2: DBRNN character probabilities over time for a single utterance along with the per-frame most likely character string s and the collapsed output (s). Due to space constraints we only show a distinction in line type between the blank symbol and non-blank symbols. GMM and DBRNN+NN-3 systems. The DBRNN sometimes correctly transcribes OOV words with respect to our audio training corpus. We find that OOVs tend to trigger clusters of errors in the HMM-GMM system, an observation that has been systematically explored in previous work (Goldwater et al., 2010). As shown in example utterance (3), HMM-GMM errors can introduce word substitution errors which may alter meaning whereas the DBRNN system outputs word fragments or non-words which are phonetically similar and may be useful input features for SLU systems. Unfortunately the Eval2000 test set does not offer a 352
+
+rich set of utterances containing OOVs or fragments to perform a deeper analysis. The HMM-GMM and best DBRNN system achieve identical WERs on the subset of test utterances containing OOVs and the subset of test utterances containing fragments. Finally, we quantitatively compare how character probabilities from the DBRNN align with phonetic segments from the HMM-GMM system. We generate HMM-GMM forced alignments on a large sample of the training set, and separate utterances into monophone segments. For each monophone, we compute the average character probabilities from the DBRNN by aligning the beginning of each monophone segment, treating it as time 0. We measure time using feature frames rather than seconds. Figure 3 shows character probabilities over time for the phones k, sh, w, and uw. Although the CTC model does not explicitly compute a forced alignment as part of training, we see significant rises in character probabilities corresponding to particular phones during HMM-GMMaligned monophone segments. This indicates that the CTC model automatically learns a reasonable alignment of characters to the audio. Generally, the CTC model tends to produce character spikes towards the beginning of monophone segments. This is especially evident in plosive consonants such as k and t. For liquids and glides (r, l, w, y), the CTC model does not produce characters until later in the monophone segment. For vowels the CTC character
+
+

@@ -1,0 +1,30 @@
+(1) analysis of spatial knowledge inferable from PropBank-style semantic roles; (2) annotations of temporally-anchored LOCATION relations on top of OntoNotes;1 (3) supervised models to infer the additional spatial knowledge; and (4) experiments detailing results using lexical, syntactic and semantic features. The framework presented here infers over 44% spatial knowledge on top of the PropBank-style semantic roles annotated in OntoNotes (certYES and certNO labels, Section 3.3).
+
+[Mr. Cray]ARG0 [will]ARGM-MOD [work]verb [for the Colorado Springs CO company]ARG2 [as an independent contractor]ARG1 . [I]ARG0 'd [slept]verb [through my only previous brush with natural disaster]ARG2 , [. . . ]
+
+Table 1: Examples of PropBank annotations.
+location extent ARGM - DIS: discourse connective ARGM - ADV : general-purpose ARGM - NEG : negation marker ARGM - MOD : modal verb
+ARGM - EXT : ARGM - LOC :
+
+2 Semantic Roles and Additional Spatial Knowledge
+We denote a semantic relation R between x and y as R(x, y ). R(x, y ) could be read "x has R y", e.g., AGENT(moved, John ) could be read "moved has AGENT John". Semantic roles2 are semantic relations R(x, y ) such that x is a verb and y is an argument of x. We refer to any spatial relation LO CATION (x, y ) where (1) x is not a verb, or (2) x is a verb but y is not a argument of x, as additional spatial knowledge. As we shall see, we target additional spatial knowledge beyond plain LOCATION(x, y ) relations, which only specify the location y of x. Namely, we consider polarity, i.e., whether something is or is not located somewhere, and temporally anchor this information. This paper complements semantic role representations with additional spatial knowledge. We follow a practical approach by inferring spatial knowledge from PropBank-style semantic roles. We believe this is an advantage since PropBank is wellknown in the field and several tools to predict PropBank roles are documented and publicly available.3 The work presented here could be incorporated into any NLP pipeline after role labeling without modifications to other components. 2.1 PropBank and OntoNotes
+
+cause time ARGM - PNC : purpose ARGM - MNR : manner ARGM - DIR : direction
+ARGM - TMP:
+
+ARGM - CAU :
+
+Table 2: Argument modifiers in PropBank. Treebank. It uses a set of numbered arguments4 (ARG0 , ARG1 , etc.) and modifiers (ARGM - TMP, ARGM - MNR , etc.). Numbered arguments do not share a common meaning across verbs, they are defined on verb-specific framesets. For example, ARG2 is used to indicate "employer" with verb work.01 and "expected terminus of sleep" with verb sleep.01 (Table 1). Unlike numbered arguments, modifiers have the same meaning across verbs (Table 2). The original PropBank corpus consists of (1) 3,327 framesets, each frameset defines the numbered roles for a verb, and (2) actual semantic role annotations (numbered arguments and modifiers) for 112,917 verbs. On average, each verb has 1.93 numbered arguments and 0.66 modifiers annotated. Only 7,198 verbs have an ARGM - LOC annotated, i.e., location information is present in 6.37% of verbs. For more information about PropBank and examples, refer to the annotation guidelines.5 OntoNotes (Hovy et al., 2006) is a more recent corpus that includes POS tags, word senses, parse trees, speaker information, named entities, PropBank-style semantic roles and coreference. While the original PropBank annotations were done exclusively in the news domain, OntoNotes includes other genres as well: broadcast and telephone conversations, weblogs, etc. Because of the additional annotation layers and genres, we work with OntoNotes instead of PropBank.
+4 5
+
+PropBank (Palmer et al., 2005) adds semantic role annotations on top of the parse trees of the Penn
+Available at http://hilt.cse.unt.edu/ We use semantic role to refer to PropBank-style (verbal) semantic roles. NomBank (Meyers et al., 2004) and FrameNet (Baker et al., 1998) also annotate semantic roles. 3 E.g., http://cogcomp.cs.illinois.edu/page/ software, http://ml.nec-labs.com/senna/;
+2 1
+
+Numbered arguments are also referred to as core.
+
+http://verbs.colorado.edu/~mpalmer/projects/ ace/PBguidelines.pdf
+
+453
+
+

@@ -1,0 +1,36 @@
+performance can be impacted by the initialization of the matrices P , Q, R and S . In addition to intializing these low-rank components randomly, we also experiment with a strategy to provide a good guess of the low-rank tensor. First, note that the traditional manually-selected feature set (i.e., (p, a, r) in our notation) is an expressive and informative subset of the huge feature expansion covered in the feature tensor. We can train our model using only the manual feature set and then use the corresponding feature weights w to intialize the tensor. Specifically, we create a sparse tensor T  Rn×n×m×l by putting each parameter weight in w into its corresponding entry in T . We then try to find a low-rank approximation of sparse tensor T by approximately minimizing the squared error:
+P,Q,R,S
+
+Input: sparse tensor T , rank number i and fixed rank-1 components P (j ), Q(j ), R(j ) and S (j ) for j = 1..(i - 1) Output: new component P (i), Q(i), R(i) and S (i).
+1: 2: 3: 4: 5: 6: 7: 8: 9: 10: 11:
+
+min
+
+T-
+i
+
+P (i)  Q(i)  R(i)  S (i)
+
+2 2
+
+Randomly initialize four unit vectors p, q , r and s T = T - j P (j )  Q(j )  R(j )  S (j ) repeat p = T , -, q, r, s and normalize it q = T , p, -, r, s and normalize it r = T , p, q, -, s and normalize it s = T , p, q, r, - norm = s 2 2 until norm converges P (i) = p and Q(i) = q R(i) = r and S (i) = s
+
+In the low-rank dependency parsing work (Lei et al., 2014), this is achieved by unfolding the sparse tensor T into a n × nml matrix and taking the SVD to get the top low-rank components. Unfortunately this strategy does not apply in our case (and other high-order tensor cases) because even the number of columns in the unfolded matrix is huge, nml > 1011 , and simply taking the SVD would fail because of memory limits. Instead, we adopt the generalized high-order power method, a.k.a. power iteration (De Lathauwer et al., 1995), to incrementally obtain the most important rank-1 component one-by-one ­ P (i), Q(i), R(i) and S (i) for each i = 1..k . This method is a very simple iterative algorithm and is used to find the largest eigenvalues and eigenvectors (or singular values and vectors in SVD case) of a matrix. Its generalization directly applies to our high-order tensor case.
+
+Figure 2: The iterative power method for highorder tensor initialization. The operator p = T , -, q, r, s is the multiplication between the tensor and three vectors, defined as pi = jkl Tijkl qj rk sl . Similarly, qj = ikl Tijkl pi rk sl etc. Features Table 1 summarizes the first-order feature templates. These features are mainly drawn from previous work (Johansson, 2009). In addition, we extend each template with the argument label. Table 2 summarizes the atomic features used in (p) and (a) for the tensor component. For each predicate or argument, the feature vector includes its word form and POS tag, as well as the POS tags of the context words. We also add unsupervised word embeddings learned on raw corpus.4 For atomic vectors (path) and (r) representing the path and the semantic role label, we use the indicator feature and a bias term.
+
+5
+
+Implementation Details
+
+Decoding Following Llu´ is et al. (2013), the decoding of SRL is formulated as a bipartite maximum assignment problem, where we assign arguments to semantic roles for each predicate. We use the maximum weighted assignment algorithm (Kuhn, 1955). For syntactic dependency parsing, we employ the randomized hill-climbing algorithm from our previous work (Zhang et al., 2014). 1155
+
+6
+
+Experimental Setup
+
+Dataset We evaluate our model on the English dataset and other 4 datasets in the CoNLL-2009 shared task (Surdeanu et al., 2008). We use the
+https://github.com/wolet/ sprml13-word-embeddings
+4
+
+

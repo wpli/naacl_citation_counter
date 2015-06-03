@@ -1,0 +1,13 @@
+Tuesday, June 2, 2015 (continued) 14:00­15:15 14:00­14:25 Session 6B: Discourse and Coreference (Long Papers) Encoding World Knowledge in the Evaluation of Local Coherence Muyu Zhang, Vanessa Wei Feng, Bing Qin, Graeme Hirst, Ting Liu and Jingwen Huang Chinese Event Coreference Resolution: An Unsupervised Probabilistic Model Rivaling Supervised Resolvers Chen Chen and Vincent Ng Removing the Training Wheels: A Coreference Dataset that Entertains Humans and Challenges Computers Anupam Guha, Mohit Iyyer, Danny Bouman and Jordan Boyd-Graber Session 6C: Information Extraction and Question Answering (Long Papers) Injecting Logical Background Knowledge into Embeddings for Relation Extraction Tim Rocktäschel, Sameer Singh and Sebastian Riedel Unsupervised Entity Linking with Abstract Meaning Representation Xiaoman Pan, Taylor Cassidy, Ulf Hermjakob, Heng Ji and Kevin Knight Idest: Learning a Distributed Representation for Event Patterns Sebastian Krause, Enrique Alfonseca, Katja Filippova and Daniele Pighin Break
+
+14:25­14:50
+
+14:50­15:15
+
+14:00­15:15 14:00­14:25 14:25­14:50 14:50­15:15
+
+15:15­15:45
+
+xliv
+
+

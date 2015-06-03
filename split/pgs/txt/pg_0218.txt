@@ -1,0 +1,27 @@
+Discriminative Unsupervised Alignment of Natural Language Instructions with Corresponding Video Segments
+Iftekhar Naim1 , Young Chol Song1 , Qiguang Liu1 , Liang Huang2 , Henry Kautz1 , Jiebo Luo1 and Daniel Gildea1 1 Department of Computer Science, University of Rochester, Rochester, NY 14627 2 Queens College & Graduate Center, City University of New York, Flushing, NY 11367
+
+Abstract
+We address the problem of automatically aligning natural language sentences with corresponding video segments without any direct supervision. Most existing algorithms for integrating language with videos rely on handaligned parallel data, where each natural language sentence is manually aligned with its corresponding image or video segment. Recently, fully unsupervised alignment of text with video has been shown to be feasible using hierarchical generative models. In contrast to the previous generative models, we propose three latent-variable discriminative models for the unsupervised alignment task. The proposed discriminative models are capable of incorporating domain knowledge, by adding diverse and overlapping features. The results show that discriminative models outperform the generative models in terms of alignment accuracy.
+Verb Nouns Add 500 mL of DI water to the labeled bottle
+
+Label the bottle
+
+Add 500 mL of DI water to the labeled bottle Transfer 1 mL of MgSO4 to the 50 mL Falcon tube
+Video Objects Touched by Hands
+
+Alignment of Video Segments with Text Sentences
+
+Figure 1: The proposed discriminative learning algorithm aligns protocol sentences to corresponding video frames. We incorporate features that can learn the co-occurrences of nouns and verbs in the sentences with the objects in the video.
+
+1
+
+Introduction
+
+Learning to integrate natural language descriptions with video events is attracting increasing attention in the natural language processing and computer vision communities. The Grounded Language Learning task aims to map the meaning of natural language expressions to their corresponding referents in videos (e.g., objects, actions, and events) without any dictionary. Most existing grounded language learning algorithms are either supervised or weakly-supervised. During the training stage, they assume each video is pre-segmented to chunks of short duration, and each video segment is manually 164
+
+aligned with a natural language sentence that describes that segment. Manually aligning each video segment with a sentence is tedious, especially for long videos. Therefore, it is desirable to automatically align video segments with their corresponding natural language sentences without direct supervision. Recently, Naim et al. (2014) proposed an unsupervised learning algorithm for automatically aligning sentences in a document with corresponding video segments. Given a sequence of natural language instructions and an unaligned video recording of a person following these instructions, a hierarchical generative model was applied to align each instruc-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 164­174, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

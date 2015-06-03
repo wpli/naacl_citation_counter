@@ -1,0 +1,13 @@
+Monday, June 1, 2015 (continued) 15:15­16:00 15:15­15:30 15:30­15:45 15:45­16:00 Session 3A: Generation and Summarization (Short Papers) How to Make a Frenemy: Multitape FSTs for Portmanteau Generation Aliya Deri and Kevin Knight Aligning Sentences from Standard Wikipedia to Simple Wikipedia William Hwang, Hannaneh Hajishirzi, Mari Ostendorf and Wei Wu Inducing Lexical Style Properties for Paraphrase and Genre Differentiation Ellie Pavlick and Ani Nenkova Session 3B: Information Extraction and Question Answering (Short Papers) Entity Linking for Spoken Language Adrian Benton and Mark Dredze Spinning Straw into Gold: Using Free Text to Train Monolingual Alignment Models for Non-factoid Question Answering Rebecca Sharp, Peter Jansen, Mihai Surdeanu and Peter Clark Personalized Page Rank for Named Entity Disambiguation Maria Pershina, Yifan He and Ralph Grishman Session 3C: Machine Learning for NLP (Short Papers) When and why are log-linear models self-normalizing? Jacob Andreas and Dan Klein Deep Multilingual Correlation for Improved Word Embeddings Ang Lu, Weiran Wang, Mohit Bansal, Kevin Gimpel and Karen Livescu Disfluency Detection with a Semi-Markov Model and Prosodic Features James Ferguson, Greg Durrett and Dan Klein Break
+
+15:15­16:00 15:15­15:30 15:30­15:45
+
+15:45­16:00
+
+15:15­16:00 15:15­15:30 15:30­15:45 15:45­16:00
+
+16:00­16:30
+
+xxxiv
+
+

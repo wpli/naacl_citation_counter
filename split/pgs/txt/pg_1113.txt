@@ -1,0 +1,27 @@
+in Section 4.4. In general, we alternately search for a better article summary S with hill climbing search and a better comment summary C with FordFulkerson algorithm until convergence. In the rest of this section, we first describe an entity-centered event threading algorithm to construct event threads T which are used to boost article timeline continuity. Then we explain how to compute Squal (S ; T ) and Cqual (C ) in Section 4.2, followed by X (S, C ) in Section 4.3. 4.1 Entity-Centered Event Threading
+
+sider unigrams/bigrams/trigrams generated from the entities of our event extractions. 4.2 Summary Quality Measurement Recall that we learned two separate importance scoring functions for sentences and comments, which will be denoted here as imps (s) and impc (c). With an article summary S and threads T = {i }, the article summary quality function Squal (S ; T ) has the following form:
+Squal (S ; T ) = +cov + cont
+s Vs  T sS
+
+imp(s) tf idf (s, s ), 
+s ^Vs
+
+min(
+
+sS
+
+tf idf (^ s, s ))
+
+We present an event threading process where each thread connects sequential events centered on a set of relevant entities. For instance, the following thread connects events about Obama's action towards the annexation of Crimea by Russia:
+Day 1: Day 2: Day 3: Day 4: Obama declared sanctions on Russian officials. President Obama warned Russian. Obama urges Russian to move back its troops. Obama condemns Russian aggression in Ukraine.
+
+tf idf (·, ·) is the TF-IDF similarity function. Squal (S ; T ) captures three desired qualities of an ar-
+
+maxsk S cohn(sk ,  )
+
+We first collect relation extractions as (entity, relation, entity) triples from OLLIE (Mausam et al., 2012), a dependency relation based open information extraction system. We retain extractions with confidence scores higher than 0.5. We further design syntactic patterns based on Fader et al. (2011) to identify relations expressed as a combination of a verb and nouns. Each relation contains at least one event-related word (Ritter et al., 2012). The entity-centered event threading algorithm works as follows: on the first day, each sentence in the summary becomes an individual cluster; thereafter, each sentence in the current day's article summary either gets attached to an existing thread or starts a new thread. The updated threads then become the input to next day's summary generation process. On day n, we have a set of threads T = { : s1 , s2 , · · · , sn-1 } constructed from previous n - 1 days, where si represents the set of sentences attached to thread  from day i. The cohesion between a new sentence s  S and a thread  is denoted as cohn(s,  ). s is attached to  ^ if there exists  ^ = max T cohn(s,  ) and cohn(s,  ^) > 0.0. Otherwise, s becomes a new thread. We define cohn(s,  ) = minsi ,si = tf simi(si , s), where tf simi(si , s) measures the TF similarity between si and s. We con1059
+
+ticle summary: importance (first item), coverage (second item), and the continuity of the current summary to previously generated summaries. The coverage function has been used to encourage summary diversity and reduce redundancy (Lin and Bilmes, 2011; Wang et al., 2014). The continuity function considers how well article summary S can be attached to each event thread, thus favors summaries that can be connected to multiple threads. Parameters cov and  are tuned on multidocument summarization dataset DUC 2003 (Over and Yen, 2003). Experiments show that system performance peaks and is stable for cont  [1.0, 5.0]. We thus fix cont to 1.0. We discard sentences with more than 80% of content words covered by historical summaries. We use BASIC to denote a system that only optimizes on importance and coverage (i.e. first two items in Squal (S ; T )). The system optimizing Squal (S ; T ) is henceforth called T HREAD. The comment summary quality function simply takes the form Cqual (C ) = cC impc (c). 4.3 Connectivity Measurement We encode two objectives in the connectivity function X (S, C ): (1) encouraging topical cohesion (i.e. connectivity) between article summary and comment summary; and (2) favoring comments that cover diversified events. Let conn(s, c) measure content similarity between a sentence s  S and a comment c  C . Connectivity between article summary S and comment summary C is computed as follows. We build a bipartite graph G between S and C with edge weight as conn(s, c).
+
+

@@ -1,0 +1,54 @@
+and exotic-1 , may also indicate qualities. These examples suggest that our hypothesis extends beyond hypernymy to other inference relations as well.
+
+5
+
+Analysis of Vector Composition
+
+Dataset Kotlerman 2010 Bless 2011 Baroni 2012 Turney 2014 Levy 2014
+
+LIN(concat) .367 .634 .745 .696 .229
+
+LIN(diff) .187 .665 .769 .694 .219
+
+RBF(diff) .407 .636 .848 .691 .252
+
+SIM .332 .687 .859 .641 .244
+
+Our empirical findings show that concat and diff are clearly ignoring the relation between x and y . To understand why, we analyze these compositions in the setting of a linear SVM. Given a test example, (x, y ) and a training example that is part of the SVM's support (xs , ys ), the linear kernel function yields Equations (1) for concat and (2) for diff.
+K (x  y, xs  ys ) = x · xs + y · ys
+
+Table 5: Performance (F1 ) of SVM across kernels. LIN refers to the linear kernel (equations (1) and (2)), RBF to the Gaussian kernel (equation (3)), and SIM to our new kernel (equation (4)). Uses lexical train/test splits.
+
+7
+
+The Limitations of Contextual Features
+
+(1)
+
+K (y - x, ys - xs ) = x · xs + y · ys - x · ys - y · xs (2)
+
+Assuming all vectors are normalized (as in our experiments), the kernel function of concat is actually the similarity of the x-words plus the similarity of the y -words. Two dis-similarity terms are added to diff's kernel, preventing the x of one pair from being too similar to the other pair's y (and vice versa). Notice the absence of the term x · y . This means that the classifier has no way of knowing if x and y are even related, let alone entailing. This flaw makes the classifier believe that any instance-category pair (x, y ) is in an entailment relation, even if they are unrelated, as seen in §4. Polynomial kernels also lack x · y , and thus suffer from the same flaw.
+
+In this work, we showed that state-of-the-art supervised methods for recognizing lexical inference appear to be learning whether y is a prototypical hypernym, regardless of its relation with x. We tried to factor in the similarity between x and y , yet observed only marginal improvements. While more sophisticated methods might be able to extract the necessary relational information from contextual features alone, it is also possible that this information simply does not exist in those features. A (de)motivating example can be seen in §4.2. A typical y often has such+1 as a dominant feature, whereas x tends to appear with such-2 . These features are relics of the Hearst (1992) pattern "y such as x". However, contextual features of single words cannot capture the joint occurrence of x and y in that pattern; instead, they record only this observation as two independent features of different words. In that sense, contextual features are inherently handicapped in capturing relational information, requiring supervised methods to harness complementary information from more sophisticated features, such as textual patterns that connect x with y (Snow et al., 2005; Turney, 2006).
+
+6
+
+Adding Intra-Pair Similarity
+
+Using an RBF kernel with diff slightly mitigates this issue, as it factors in x · y , among other similarities: KRBF (y - x, ys - xs ) = e- 2 |(y-x)-(ys -xs )| = e- 2 (xy+xs ys +xxs +yys -xys -yxs -2)
+1 1 2
+
+(3)
+
+A more direct approach of incorporating x · y is to create a new kernel, which balances intra-pair similarities with inter-pair ones:
+KSIM ((x, y ) , (xs , ys )) = (xy · xs ys ) 2 (xxs · y ys )
+ 1-  2
+
+(4)
+
+Acknowledgements
+This work was supported by the Adolf Messer Foundation, the Google Research Award Program, and the German Research Foundation through the German-Israeli Project Cooperation (DIP, grant DA 1600/1-1). We thank Stephen Roller for his valuable insights.
+
+While these methods reduce match error ­ match error = 0.618 · recall versus the previous regression curve of match error = 0.935 · recall ­ their overall performance is only incrementally better than that of linear methods (Table 5). This improvement is also, partially, a result of the nonlinearity introduced in these kernels. 974
+
+

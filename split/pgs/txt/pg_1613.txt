@@ -1,0 +1,25 @@
+Do We Really Need Lexical Information? Towards a Top-down Approach to Sentiment Analysis of Product Reviews
+Yulia Otmakhova
+Computational Linguistics Lab Department of Linguistics Seoul National University Gwanakro 1, Gwanak-gu Seoul, 151-742, South Korea julia.nixie@gmai1.com
+
+Hyopil Shin
+Computational Linguistics Lab Department of Linguistics Seoul National University Gwanakro 1, Gwanak-gu Seoul, 151-742, South Korea hpshin@snu.ac.kr
+
+Abstract
+Most of the current approaches to sentiment analysis of product reviews are dependent on lexical sentiment information and proceed in a bottom-up way, adding new layers of features to lexical data. In this paper, we maintain that a typical product review is not a bag of sentiments, but a narrative with an underlying structure and reoccurring patterns, which allows us to predict its sentiments knowing only its general polarity and discourse cues that occur in it. We hypothesize that knowing only the review's score and its discourse patterns would allow us to accurately predict the sentiments of its individual sentences. The experiments we conducted prove this hypothesis and show a substantial improvement over the lexical baseline.
+
+with irony (Tsur, 2010), etc. But even if we manage to solve all aforementioned problems and create an efficient classifier, there will always be cases where reliance on lexical cues for subjectivity will betray us. Consider, for instance, the following examples from reviews of online universities1: (1) The lectures are interactive and recorded. So, if you can't attend you can listen in later. (2) I assure you, online learning at Capella was the most difficult form of education I have undergone! (3) UMUC provided really good quality education until about 5 years ago. In the first example, the author expresses a positive opinion of the university, but it will fail to be detected because it does not include any explicit sentiment cues (such opinions are referred to as "implicit" by Liu (2012) or as "polar facts" by Toprak et al. (2010)). Because the sentiment (and its presence) of such sentences is highly domaindependent, they cannot be covered by any lexicons or learned in a supervised or a non-supervised way. The second example does have a sentiment cue difficult, and judging by it the sentiment should be
+1
+
+1
+
+Introduction
+
+For years, sentiment analysis has heavily relied on lexical resources, whether compiled by hand (Wilson et al., 2005) or automatically extracted from a large corpus (Hu and Lui, 2004). In addition to an overwhelming task of trying to capture all words and expressions that can convey a sentiment there are many other problems to solve: resolving the scope of negation to determine the shift of polarity (Lapponi et al., 2012), determining if an opinion is present in interrogative or conditional sentences (Narayanan et al., 2009), dealing
+1559
+
+The examples in this section are taken from Darmstadt Service Review Corpus, available from https://www.ukp.tudarmstadt.de/data/sentiment-analysis/darmstadt-servicereview-corpus (Toprak et al., 2010). The corpus was also used as a development set for extracting features for this study.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1559­1568, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

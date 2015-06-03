@@ -1,0 +1,44 @@
+500 200 100 50 20 10 5 2 1
+in es s Pe m op er _P le ro du ct Vi de o M us Bu ic si ne Ima ge ss _ Ev Lis en tin g t_ Li st in g Tr av el Pe op Bo o le _L k is tin Pu g bl ic at io n Ap Foo d pl ic at io n Fi C om lm pu te R ef r er en ce D in in g TV Ev ty ent _L is t At ing tra ct io n C ou Vi nt de r y o_ G am e Pr op er Bu s
+
+Millions
+
+su
+
+C on
+
+Figure 4: Statistics of structured web documents. The vertical axis shows the number of documents (in millions); the horizontal axis shows the web domain types.
+
+"play the latest batman movie" or "find beyonce's music". Our slot sequence tagger is trained with variants of CRF using lexical features, gazetteers, Brown clusters and context words. The domains consist of 35 slot types for movies, 25 for music and 24 for games. Slot types correspond to both named entities (e.g., game name, music title, movie name) as well as more general categories (genre, media type, description). Table 1 shows the size of the datasets used in our experiments. Domains games movies music Training 32017 48173 46377 Test 5508 7074 8890
+
+4.1
+
+Discrepancy between Engineered Data and Log Data
+
+Table 1: Labeled data set size for games, movies and music domains partitioned into training and test set.
+
+To empirically highlight the need for learning from real user queries, we first train a standard CRF on the (fully labeled) engineered data and test it on the log data. We have manually annotated some log data for evaluation purposes. For features in the CRF, we use n-grams, gazetteer, and clusters. The clusters were induced from a large body of unlabeled data which consist of log data and click log data. Table 2 shows the F1 scores in this experiment. They indicate that a model fully supervised with engineered data performs very poorly on log data. The difference between the scores within engineered data and the scores in log data is very large (29.05 absolute F1). 4.2 Experiments with CRF Variants Our main contribution is to leverage search log data to improve slot tagging in spoken dialogue systems. In this section, we assume that we have no log data in training slot taggers.1 For parameter estimation, both CRFs and POCRFs employ L-BFGS, while POHUCRF uses
+In practice, this assumption is not necessarily true because a deployed system can benefit from actual user logs. However, this controlled setting allows us to show the benefits of employing web search click log data.
+1
+
+Domains games movies music AVG.
+
+Engineered 89.63 88.67 88.77 89.02
+
+Log 68.58 74.21 37.13 59.97
+
+Diff. 21.05 14.45 51.64 29.05
+
+Table 2: The difference in F1 performance of CRF models trained only on engineered data but tested on both engineered and log data.
+
+89
+
+Lo
+
+ca t
+
+io
+
+n_
+
+

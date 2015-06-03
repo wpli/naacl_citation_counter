@@ -1,0 +1,17 @@
+Fast and Accurate Preordering for SMT using Neural Networks
+Adri` a de Gispert Gonzalo Iglesias Bill Byrne SDL Research East Road, Cambridge CB1 1BH, U.K. {agispert|giglesias|bbyrne}@sdl.com
+
+Abstract
+We propose the use of neural networks to model source-side preordering for faster and better statistical machine translation. The neural network trains a logistic regression model to predict whether two sibling nodes of the source-side parse tree should be swapped in order to obtain a more monotonic parallel corpus, based on samples extracted from the word-aligned parallel corpus. For multiple language pairs and domains, we show that this yields the best reordering performance against other state-of-the-art techniques, resulting in improved translation quality and very fast decoding.
+
+We propose using a neural network (NN) to estimate this node-swapping probability. We find that this straightforward change to their scheme has multiple advantages: 1. The superior modeling capabilities of NNs achieve better performance at preordering and overall translation quality when using the same set of features. 2. There is no need to manually define which feature combinations are to be considered in training. 3. Preordering is even faster as a result of the previous point. Our results in translating from English to Japanese, Korean, Chinese, Arabic and Hindi support these findings by comparing against two other preordering schemes. 1.1 Related Work There is a strong research and commercial interest in preordering, as reflected by the extensive previous work on the subject (Collins et al., 2005; Xu et al., 2009; DeNero and Uszkoreit, 2011; Neubig et al., 2012). We are interested in practical, language-independent preordering approaches that rely only on automatic sourcelanguage parsers (Genzel, 2010). The most recent work in this area uses large-scale feature-rich disriminative models, effectively treating preordering either as a learning to rank (Yang et al., 2012), multiclassification (Lerner and Petrov, 2013) or logistic regression (Jehl et al., 2014) problem. In this paper we incorporate NNs into the latter approach. Lately an increasing body of work that uses NNs for various NLP tasks has been published, including language modeling (Bengio et al., 2003), POS
+
+1
+
+Introduction
+
+Preordering is a pre-processing task in translation that aims to reorder the source sentence so that it best resembles the order of the target sentence. If done correctly, it has a doubly beneficial effect: it allows a better estimation of word alignment and translation models which results in higher translation quality for distant language pairs, and it speeds up decoding enormously as less word movement is required. Preordering schemes can be automatically learnt from source-side parsed, word-aligned parallel corpora. Recently Jehl et al (2014) described a scheme based on a feature-rich logistic regression model that predicts whether a pair of sibling nodes in the source-side dependency tree need to be permuted. Based on the node-pair swapping probability predictions of this model, a branch-and-bound search returns the best ordering of nodes in the tree. 1012
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1012­1017, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

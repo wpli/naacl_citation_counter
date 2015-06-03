@@ -1,0 +1,18 @@
+SC Category prefix suffix affix space-prefix space-suffix whole-word word mid-word multi-word beg-punct mid-punct end-punct punct
+
+act ors ac an he an The cto hio ea dl -fa d-f ld-
+
+Character n-grams wan pac see lik fas ted act med ike ned wa to se if th pa li ol on rs ed to ee if ct ke see tor ion sw no the old one ant nte eem eme ash shi one dt os ei ft ep ts do
+
+mid-punct A character n-gram with at least one punctuation character that is neither the first nor the last character. end-punct A character n-gram whose last character is punctuation, but middle characters are not. The above ten categories are intended to be disjoint, so that a character n-gram belongs to exactly one of the categories. For n-grams that contain both spaces and punctuation, we first categorize by punctuation and then by spaces. For example, `e, ' is assigned to the mid-punct category, not the spacesuffix category. We have observed that in our data almost 80% of the n-grams in the punct-beg and punct-mid categories contain a space. This tight coupling of punctuation and spaces is due to the rules of English orthography: most punctuation marks require a space following them. The 20% of n-grams that have punctuation but no spaces correspond mostly to the exceptions to this rule: quotation marks, mid-word hyphens, etc. An interesting experiment for future work would be to split out these two types of punctuation into separate feature categories.
+
+ne.
+
+Table 2: Example of the n-gram categories (n = 3) for the sentence in Table 1. The first column represents the super category (SC). The n-grams that appear in more than one category are in bold.
+
+space-suffix A character n-gram that ends with a space. 2.2 Word n-grams While character n-grams are often too short to capture entire words, some types can capture partial words and other word-relevant tokens. We consider the following such features: whole-word A character n-gram that covers all characters of a word that is exactly n characters long. mid-word A character n-gram that covers n characters of a word that is at least n + 2 characters long, and that covers neither the first nor the last character of the word. multi-word N -grams that span multiple words, identified by the presence of a space in the middle of the n-gram. 2.3 Punctuation n-grams The main stylistic choices that character n-grams can capture are the author's preferences for particular patterns of punctuation. The following features characterize punctuation by its location in the n-gram. beg-punct A character n-gram whose first character is punctuation, but middle characters are not. 95
+
+3 Datasets
+We consider two corpora, a single-domain corpus, where there is only one topic that all authors are writing about, and a multi-domain corpus, where there are multiple different topics. The latter allows us to test the generalization of AA models, by testing them on a different topic from that used for training. The first collection is the CCAT topic class, a subset of the Reuters Corpus Volume 1 (Lewis et al., 2004). Although this collection was not gathered for the goal of doing authorship attribution studies, previous work has reported results for AA with 10 and 50 authors (Stamatatos, 2008; Plakias and Stamatatos, 2008; Escalante et al., 2011). We refer to these as CCAT 10 and CCAT 50, respectively. Both CCAT 10 and CCAT 50 belong to CCAT category (about corporate/industrial news) and are balanced across authors, with 100 documents sampled for each author. Manual inspection of the dataset revealed that some of the authors in this collection consistently used signatures at the end of documents. Also, we noticed some writers use quotations a lot. Con-
+
+

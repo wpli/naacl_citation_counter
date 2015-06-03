@@ -1,0 +1,20 @@
+short, at least a billion people are speaking resourcescarce languages whose lexicons are heavily borrowed from resource-rich languages. Why is this important? Lexical translations or alignments extracted from large parallel corpora have been widely used to project annotations from high- to low-resource languages (Hwa et al., 2005; Täckström et al., 2013; Ganchev et al., 2009; Tsvetkov et al., 2014, inter alia). Unfortunately, parallel resources are unavailable for the majority of resource-limited languages. Loanwords can be used as a source of cross-lingual links complementary to lexical alignments. This holds promise for applying existing cross-lingual methods and bootstrapping linguistic resources in languages where no parallel data is available.
+
+and phonetic similarities, respectively. As our experiments confirm, orthographic and phonetic transliteration and string edit distance methods are not adequate models for the complex borrowing phenomena.
+
+9
+
+Conclusion
+
+8
+
+Related work
+
+With the exception of a study conducted by Blair and Ingram (2003) on generation of borrowed phonemes in English­Japanese language pair (the method does not generalize from borrowed phonemes to borrowed words, and does not rely on linguistic insights), we are not aware of any prior work on computational modeling of lexical borrowing. Few papers only mention or tangentially address borrowing, we briefly list them here. Daumé III (2009) focuses on areal effects on linguistic typology, a broader phenomenon that includes borrowing and genetic relations across languages. This study is aimed at discovering language areas based on typological features of languages. Garley and Hockenmaier (2012) train a maxent classifier with character n-gram and morphological features to identify anglicisms (which they compare to loanwords) in an online community of German hip hop fans. List and Moran (2013) have published a toolkit for computational tasks in historical linguistics but remark that "Automatic approaches for borrowing detection are still in their infancy in historical linguistics." Two related lines of research are transliteration and cognate identification. Knight and Graehl (1998), AlOnaizan and Knight (2002) developed a finite-state generative model of transliteration, and successfully applied it to Arabic­English named entity translation. Mann and Yarowsky (2001) and Kondrak (2001) identify cognate pairs, based on the learned surface 606
+
+Given a loanword, our model identifies plausible donor words in a contact language. We show that a discriminative model with Optimality Theoretic features effectively models systematic phonological changes in Arabic­Swahili loanwords. We also found that the model and methodology is generally applicable to other language pairs with minimal engineering effort. This paper makes two contributions: (1) To the best of our knowledge, this is the first computational model of lexical borrowing. (2) While there are implementations of OT (Hayes et al., 2013), they are used chiefly to facilitate linguistic analysis. There are numerous research questions that we would like to explore further. Is it possible to monolingually identify borrowed words in a language? Can we automatically identify a donor language (or its phonological properties) for a borrowed word? Since languages may borrow from many sources, can jointly modeling this process lead to better performance? Can we reduce the amount of languagespecific engineering required to deploy our model? Can we integrate knowledge of borrowing in downstream NLP applications? We intend to address these questions in future work.
+
+Acknowledgments
+This work was supported by the U.S. Army Research Laboratory and the U.S. Army Research Office under contract/grant number W911NF-10-10533. Computational resources were provided by Google in the form of a Google Cloud Computing grant and the NSF through the XSEDE program TGCCR110017. We are grateful to Nathan Schneider, David Mortensen, Archna Bhatia, Shuly Wintner, Shay Cohen, David Bamman, Noah Smith, and Lori Levin for extensive discussions and constructive feedback.
+
+

@@ -1,0 +1,30 @@
+baseline UMLS-reduce KW NP UMLS-expand UMLS -reduce + UMLS-expand NP + UMLS-expand
+
+Recall 0.169 0.132 (-22.0%) 0.173* (3.0%) 0.199** (18.3%) 0.182** (8.1%) 0.201** (19.6%) 0.180* (7.1%)
+
+Precision 0.152 0.146 (-4.08%) 0.193** (27.6%) 0.178** (17.6%) 0.148 (-2.1%) 0.179** (18.0%) 0.224** (47.8%)
+
+F-1 0.156 0.136 (-12.5%) 0.174** (11.5%) 0.185** (18.8%) 0.160* (3.2 %) 0.187** (20.0%) 0.196** (25.9%)
+
+ROUGE -L Recall 0.496 0.496 (0.0%) 0.491 (-0.1%) 0.550** (11.1 %) 0.498 (0.5%) 0.558** (12.6 %) 0.501 (1.13%)
+
+ROUGE -L Prec 0.200 0.224* (12.0%) 0.273** (36.3%) 0.211* (5.5 %) 0.245** (22.2%) 0.209** (4.4 %) 0.280** (39.9%)
+
+ROUGE -L F-1 0.280 0.293 (4.8%) 0.323** (15.2%) 0.280 (0.0%) 0.315** (12.3%) 0.293* (4.4%) 0.333** (18.8%)
+
+Table 2: Results for reference span matching; KW : reduction using KeyWords; NP: reduction using Noun Phrases; UMLS -expand : expansion using UMLS ; UMLS -reduce: reduction using UMLS; * (**) indicates statistical significance at p < 0.05 (p < 0.01) using student's t-test over the baseline.
+
+lent throughout the reference article. On the other hand, KW selects highly discriminative terms which are highly effective in retrieving some relevant reference spans, but might not appear in others. We observe that UMLS-expand, by adding related concepts to the query, achieves significant improvement over the baseline in terms of recall (+8.1%). Such improvement is expected, as UMLS-expand augments the citance with all possible formulations of the detected biomedical concepts. However, its precision is only comparable with the baseline, as it does not remove any noisy terms from the citance. Interestingly, we notice that its ROUGE -L precision greatly outperforms the baseline (+22.2%). This behavior is motivated by the fact that UMLS-expand, even when not retrieving all the correct reference spans, extracts certain parts of the reference articles that share many biomedical concepts with the gold spans, thus achieving high structural similarity. The two combined methods (NP + UMLS-expand and UMLS-reduce + UMLS-expand) obtain the best overall performance compared to the baseline. UMLS -reduce + UMLS -expand obtains the highest recall among all methods. This outcome directly depends on the fact that all the synonyms of a certain biomedical concept are captured using UMLSexpand. However, unlike UMLS-expand, this combined method also achieves statistically significant improvement in terms of precision, as UMLS-reduce removes terms that can cause query drift. NP + UMLS-expand has the highest overall performance, achieving a 25.9% increase over the baseline in terms of F-1, and an 18.8% increase in terms of ROUGE -L F-1. As previously mentioned, noun phrases are highly effective in identifying relevant biomedical concepts, as well as supporting expres1046
+
+sions. Given the addition of UMLS-expand, synonyms of the extracted noun phrases are also considered, further increasing the chance of retrieving relevant reference spans. The limited performance of all methods in terms of the overall weighted F-1 and ROUGE -L scores is expected due to the difficulty of the task, as further corroborated by the low agreement between annotators. As previously stated, this makes the task particularly challenging for any system, as identifying the most appropriate reference spans is highly nontrivial even for domain experts. Nevertheless, while full agreement between domain experts is not present, as it is shown in table 1, more than 60% of the time, annotators agree ­ at least partially ­ on the position of the reference spans. This makes the task worth exploring.
+
+5
+
+Conclusion
+
+In this paper, we propose an information retrieval approach for the problem of matching reference text spans with citances. Our approach takes advantage of several general and domain specific query reformulation techniques. Our best performing method obtains a significant increase over the baseline (25.9% F-1). However, as the absolute performance of the system indicates, the task of identifying matching reference spans to a given citance is highly non trivial. This fact is also reflected by the high disagreement between domain experts annotations and suggests that further exploration of the task is needed.
+
+Acknowledgments
+This work was partially supported by NSF (grant CNS-1204347).
+
+

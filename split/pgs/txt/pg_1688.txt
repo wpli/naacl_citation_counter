@@ -1,0 +1,30 @@
+System LSM2013 w/o morph LSM2013 w/ morph BB2014 w/o morph BB2014 w/ morph SG SG+Morph # pairs
+
+Language Testset
+
+RW 26.8 34.4 18.0 30.0 35.8 41.8 2034
+
+EN WS 62.6 64.6 32.0 40.0 71.2 71.2 353
+
+RG 62.8 65.5 47.0 41.0 75.1 75.1 65
+
+Spearman  DE FR Gur ZG RG 36.0 56.0 62.4 64.1 350 6.0 25.0 16.6 21.5 222 33.0 45.0 63.6 67.3 65
+
+ES WS 26.0 28.0 36.5 47.3 353
+
+RO WS 51.7 53.1 353
+
+AR WS 37.1 43.1 353
+
+Table 4: Performance of previously proposed methods, compared to SG and SG+Morph trained on Wiki1b. LSM2013 uses exactly the same training data for EN, whereas BB2014 uses the same training data for DE, FR, ES.
+
+ment under the morphology condition). The morphological treatment used by LSM2013 also has a small effect on the words present in the English WS and RG sets; our method does not propose any separate morphological treatment for the words in these datasets, since all of them have been observed more than our C = 100 threshold in the training data (therefore have reliable representations). The SG word-representations for all the other languages (German, French, Spanish, Romanian, and Arabic) also perform well on this task, with much higher Spearman scores obtained by SG compared with the previously-reported scores. The results in Table 4 also show that our morphology treatment provides consistent gains across all languages considered. For morphologically-rich languages, all datasets reflect the impact of morphology treatment. We observe significant gains between the performance of the SG and SG+Morph systems, on top of the high correlation numbers of the SG system. For German, the relatively small increase we observe is due to the fact the German noun-compounds are not covered by our morphological treatment. For French, Spanish, Romanian, and Arabic, the gains by the SG+Morph support the conclusion that our method, while completely languageagnostic, handles well the variety of morphological phenomena present in these languages. 4.2 Quality of Morphological Analysis for Unknown/Rare Words
+
+tion 3.3. We assume that the statistics for unseen words (with respect to their morphological makeup) are similar with the statistics for low-frequency words. Therefore, for some relatively-low counts L and H , the set V[L,H ) = VL - VH is a good proxy for the population of OOV words that we see at runtime. We evaluate OOV morphology as follows: 1. Run the procedure for morphology induction VL on VL , resulting in DM orph ; 2. Run the procedure for morphology induction VH on VH , resulting in DM orph ;
+VH 3. Apply OOV morphology using DM orph for each w  V[L,H ] ; evaluate resulting w  w VL against reference w  wref from DM orph , as normal-form(w )  normal-form(wref ).
+
+In this section, we quantify the accuracy of the morphological treatment for OOVs presented in Sec1634
+
+To make the analysis more revealing, we split the entries in V[L,H ) in two: type T1 entries are those that VL have in-degree > 0 in DM orph (i.e., words that have a morphological mapping in the reference graph); type T2 entries are those that have 0 in-degree in VL DM orph (i.e., words with no morphological mapping in the reference, e.g., proper-nouns in English). Note that the T1/T2 distinction reflects a recall/precision trade-off: T1-words should be morphologically analyzed, while T2-words should not; a method that over-analyses has poor performance on T2, while one that under-analyses performs poorly on T1. We use the same datasets as the ones presented in Section 4.1, see Table 3. The results for all the languages are shown in Table 6, with all rows using
+
+

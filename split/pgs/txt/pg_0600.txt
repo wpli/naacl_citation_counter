@@ -1,0 +1,32 @@
+LCCT: A Semi-supervised Model for Sentiment Classification
+Min Yang1
+1 2
+
+Department of Computer Science, The University of Hong Kong, Hong Kong
+
+Wenting Tu1
+
+Ziyu Lu1
+
+Wenpeng Yin2
+
+Kam-Pui Chow1
+
+Center for Information and Language Processing, University of Munich, Germany
+
+{myang,wttu,zylu,chow}@cs.hku.hk wenpeng@cis.lmu.de
+
+Abstract
+Analyzing public opinions towards products, services and social events is an important but challenging task. An accurate sentiment analyzer should take both lexicon-level information and corpus-level information into account. It also needs to exploit the domainspecific knowledge and utilize the common knowledge shared across domains. In addition, we want the algorithm being able to deal with missing labels and learning from incomplete sentiment lexicons. This paper presents a LCCT (Lexicon-based and Corpus-based, Co-Training) model for semi-supervised sentiment classification. The proposed method combines the idea of lexicon-based learning and corpus-based learning in a unified cotraining framework. It is capable of incorporating both domain-specific and domainindependent knowledge. Extensive experiments show that it achieves very competitive classification accuracy, even with a small portion of labeled data. Comparing to state-ofthe-art sentiment classification methods, the LCCT approach exhibits significantly better performances on a variety of datasets in both English and Chinese.
+
+1
+
+Introduction
+
+Due to the popularity of opinion-rich resources (e.g., online review sites, forums, blogs and the microblogging websites), people express their opinions all over the Internet. Motivated by the demand of gleaning insights from such valuable data, a flurry of research devotes to the task of extracting people's opinions from online reviews. Such opinions could be expressed on products, services or policies, etc 546
+
+(Pang and Lee, 2008). Existing sentiment analysis approaches can be divided into two categories based on the source of information they use: the lexiconbased approach (Turney, 2002; Dave et al., 2003) and the corpus-based approach (Pang et al., 2002; Blitzer et al., 2007; Wan, 2009). The lexicon-based approach counts positive and negative terms in a review based on the sentiment dictionary and classifies the document as positive if it contains more positive terms than negative ones. On the contrary, the corpus-based approach uses supervised learning algorithms to train a sentiment classifier. Further study (Kennedy and Inkpen, 2006; Andreevskaia and Bergler, 2008; Qiu et al., 2009) shows that corpus-based and lexicon-based approaches have complementary performances. Specifically, the corpus-based approach has high precision but low recall on positive instances, while the lexicon-based approach has high recall but low precision on positive instances. In fact, corpusbased approaches are over conservative in classifying instances as positive, because positive reviews usually contain many neutral statements. In contrast, the lexicon-based approaches tend to classify negative or neutral instances as positive when there are a few positive words appear in the document. It motivates us to develop a new approach that achieves good performance on both precision and recall evaluations. Besides reviews on products and services, another rich source of opinion data are social reviews in forums, blogs and microblogging websites. Different from product reviews, the social reviews are not associated with numerical ratings, making it difficult to perform supervised classification. Since manual labeling is time consuming and expensive, it is
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 546­555, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

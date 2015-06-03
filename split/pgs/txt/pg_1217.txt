@@ -1,0 +1,35 @@
+notated through crowd-sourcing, where Modi and Titov (2014) further included an evaluation on a large set of pairs automatically extracted from the Gigaword corpus. The appeal of the cooking domain for studying various semantic phenomena has been recognized by several studies in NLP and AI (Tasse and Smith, 2008; Bollini et al., 2013; Cimiano et al., 2013; Regneri et al., 2013; Malmaud et al., 2014). The domain is here motivated by several considerations. First, recipes mostly describe concrete actions, rather than abstract relations, which are less relevant to temporal ordering. Second, from a practical point of view, many recipes are available online in computerreadable format. Third, the restrictiveness of the cooking domain can also be seen as an advantage, as it can reveal major conceptual challenges raised by the task, without introducing additional confounds.
+
+as given in the recipe (e.g., spreading butter might be done before or after baking). One of the major obstacles in tackling planning problems in AI is the knowledge bottleneck. Lexical event ordering is therefore a step towards more ambitious goals in planning. For instance, temporal relations may be used to induce planning operators (Mour~ ao et al., 2012), which can in turn be used to generate a plan (recipe) given a specified goal and an initial set of ingredients.
+
+4
+
+Model, Inference and Learning
+
+In this section we describe the main learning components that compose our approach to event ordering. 4.1 Edge-Factored Model for Event Ordering We hereby detail the linear model we use for ordering events. Let S = {e1 , . . . , em }  U be a set of events as mentioned in §3. Let G(S ) = (S  {s, f }, E (S )) be an almost-complete directed graph with E (S ) = (S {s}) × (S {f })  U × U . Every Hamiltonian path2 in G(S ) that starts in s and ends in f defines an ordering of the events in S . The edge (ei , ej ) in such a path denotes that ei is the event that comes before ej . The modeling problem is to score Hamiltonian paths in a given directed graph G(S ). Here, we use an edge-factored model. Let  : (U × U )  Rd be a feature function for pairs of events, represented as directed edges. In addition, let   Rd be a weight vector. We define the score of a Hamiltonian path h = (h1 , . . . , hm+1 ) (hi  E (S )) as:
+m+1
+
+3
+
+Temporally Ordering Lexical Events
+
+We formalize our task as follows. Let U be a set of event types, namely actions or states (represented as predicates) and objects which these actions operate on (represented as arguments to the predicates; mostly ingredients or kitchenware). Formally, each e  U is a tuple a, c1 , . . . , cn where a is the main verb or predicate describing the event (such as "stir" or "mix") and c1 , . . . , cn is a list of arguments that the predicate takes (e.g., "salt" or "spoon"). Two additional marked events, s and f , correspond to "start" and "finish" events. A recipe is a sequence of events in U , starting at s and ending at f . Given a recipe R = e1 , ..., em , we wish to predict the order of the events just from the (multi)set {ei }m i=1 . In this work we use the textual order of events to approximate their temporal order (see, e.g., Talukdar et al. (2012) for a similar assumption). The validity of this assumption for cooking recipes is supported in §6. Figure 1 gives an example of a set of events extracted from our dataset for the dish "Apple Crisp Ala [sic] Brigitte." Lexical information places quite a few limitations on the order of this recipe. For instance, in most cases serving is carried out at the end while putting the ingredients in is done prior to baking them. However, lexical knowledge in itself is unlikely to predict the exact ordering of the events 1163
+
+score(h|S ) =
+i=1
+
+ (hi )
+
+(1)
+
+Given a weight vector  and a set of events S , inference is carried out by computing the highest scoring Hamiltonian path in G(S ): h = arg max score(h|S )
+hH (S )
+
+(2)
+
+where H (S ) is the set of Hamiltonian paths in G(S ) that start with s and end with f . The path h is the best temporal ordering of the set of events S according to the model in Eq. 1 with weight vector .
+2
+
+A path in a graph that visits all nodes exactly once.
+
+

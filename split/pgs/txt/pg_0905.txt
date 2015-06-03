@@ -1,0 +1,19 @@
+Learning Knowledge Graphs for Question Answering through Conversational Dialog
+Peter Clark Hannaneh Hajishirzi Ben Hixon Allen Institute for AI University of Washington University of Washington Seattle, WA, USA Electrical Engineering Computer Science & Engineering peterc@allenai.org Seattle, WA, USA Seattle, WA, USA hannaneh@washington.edu bhixon@cs.washington.edu
+
+Abstract
+We describe how a question-answering system can learn about its domain from conversational dialogs. Our system learns to relate concepts in science questions to propositions in a fact corpus, stores new concepts and relations in a knowledge graph (KG), and uses the graph to solve questions. We are the first to acquire knowledge for question-answering from open, natural language dialogs without a fixed ontology or domain model that predetermines what users can say. Our relation-based strategies complete more successful dialogs than a query expansion baseline, our taskdriven relations are more effective for solving science questions than relations from general knowledge sources, and our method is practical enough to generalize to other domains.
+
+S1: Here's the question: Which object is the best conductor of electricity? (A) a wax crayon (B) a plastic spoon (C) a rubber eraser (D) an iron nail. I'm not sure of the answer. What do you think the answer is? U1: iron nail S2: Why do you think the answer is (D) an iron nail? U2: electricity goes through metal S3: I know "metals are shiny and good conductors of electricity and heat," does that mean that the answer is (D) an iron nail? U3: yeah S4: Okay, great. What's the relationship between `electricity' and `iron', if any? U4: iron conducts electricity because its metal S5: Okay, great, I get it! The answer is (D) an iron nail
+
+1
+
+Introduction
+
+Our goal is a question-answering (QA) system that learns about its domain from users in open, natural language dialogs. Dialog learning interfaces built on top of existing QA systems can complement and refine knowledge acquired from other sources. Even large QA systems such as Watson (Ferrucci et al., 2010) that utilize heavy domain engineering could benefit from focused dialogs to dynamically improve their knowledge. A successful QA system requires domain knowledge. For example, 4th grade science questions are difficult since they often exclude knowledge necessary to relate answers to known facts. The question in Figure 1 asks if an iron nail conducts electricity; 851
+
+Figure 1: Top: A successful real user dialog. Openended prompts (S1&S2) encourage conversational explanations. Focused prompts (S4) target particular relations. Bottom: Corresponding knowledge graph consisting of relations between concepts. the system only knows that metal conducts electricity, and it needs to learn that iron is a metal in order to answer the question with the relevant fact. Our dialog system, K NOWBOT, conducts dialogs about science questions and learns how concepts in each question relate to propositions in a corpus of science facts. K NOWBOT presents its user with a question (line S1 in Figure 1), prompts them to choose and explain their answer, and extracts relations ­ any semantic relationship between two con-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 851­861, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

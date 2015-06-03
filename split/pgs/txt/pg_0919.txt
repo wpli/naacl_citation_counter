@@ -1,0 +1,25 @@
+the manually annotated sentence boundaries and report the F score, where F is the harmonic mean of recall and precision. For the PPA data and the small news data, we assess the system using a leave-oneout cross validation framework, in which each narrative is sequentially held out as test data while the system is trained on the remaining narratives. For the large TDT4 corpus, we randomly hold out 10% of the corpus as test data, and train on the remaining 90%. 4.4 Assessment of syntactic complexity
+
+Feature set Chance baseline All Lexical+prosody Lexical+POS POS+prosody POS Prosody Lexical
+
+TDT4 TDT4 (small) 0.07 0.07 0.61 0.57 0.57 0.50 0.48 0.36 0.61 0.59 0.45 0.39 0.50 0.48 0.26 0.14
+
+Controls 0.05 0.51 0.44 0.36 0.45 0.28 0.24 0.18
+
+SD 0.07 0.43 0.30 0.36 0.39 0.35 0.23 0.17
+
+PNFA 0.06 0.47 0.33 0.40 0.45 0.39 0.25 0.18
+
+Once we have segmented the transcripts, we want to assess how the (presumably noisy) segmentation affects our measures of syntactic complexity. Here we consider a number of syntactic complexity metrics that have been previously used in the study of PPA speech (Fraser et al., 2014). The metrics are defined in the first column of Table 3. For the first four metrics, we generated the parse tree for each sentence using the Stanford parser (Klein and Manning, 2003). The Yngve depth is a well-known measure of how left-branching a parse tree is (Sampson, 1997; Yngve, 1960). The remaining metrics in Table 3 were calculated using Lu's Syntactic Complexity Analyzer (SCA) (Lu, 2010). We follow Lu's definitions for the various syntactic units: a clause is a structure consisting of at least a subject and a finite verb, a dependent clause is a clause which could not form a sentence on its own, a verb phrase is a phrase consisting of at least a verb and its dependents, a complex nominal is a noun phrase, clause, or gerund that stands in for a noun, a coordinate phrase is an adjective, adverb, noun, or verb phrase immediately dominated by a coordinating conjunction, a T-unit is a clause and all of its dependent clauses, and a complex T-unit is a T-unit which contains a dependent clause.
+
+Table 1: F score for the automatic segmentation method on each data set. Boldface indicates best in column. sults are similar in both groups, although, as would be expected, the larger training sample performs better. However, the difference is small, which suggests that the small size of the PPA data set should not greatly hurt the performance. When we compare the performance of these two groups with different sets of training features, we notice that the difference in performance is greatest when training on lexical features. In a small random sample from the TDT4 corpus, it is unlikely that two stories will cover the same topic, and so there will be little overlap in vocabulary. This is reflected in the results showing that lexical features hurt the performance in this small news sample. Performance on the news corpus is better than on the PPA data (including the control group). Comparing the small news sample to the PPA controls, we see that this is not simply due to the size of the training set, so we instead attribute the effect to the fact that speech in broadcast news is often prepared, while in the PPA data sets it is spontaneous. A closer look at the effect of prosodic features in our training data further shows the difference we observe between prepared and spontaneous speech. When trained on the prosodic features alone, the news data set performs relatively well, while performance on the control data is much worse. These results are consistent with the findings of Kol´ ar et al. (2009) regarding the effect of prosodic features in prepared and spontaneous speech. When comparing the performance on the control group and on the PPA data, we see that generally, the results are better on the controls. This is to be expected, as the speech in the control group has more
+
+5
+5.1
+
+Segmentation results
+Comparison between data sets
+
+Table 1 shows the performance on the different data sets when trained using different combinations of feature types. We also report the chance baseline for comparison. We first consider the differences in results observed between the two news data sets. The best re865
+
+

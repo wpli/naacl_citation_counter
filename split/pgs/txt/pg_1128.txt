@@ -1,0 +1,32 @@
+MaxOv MinOv SceneSum Random
+
+Beginning 33.95 34.30 35.30 34.30
+
+Middle 34.89 33.91 33.54 33.91
+
+End 31.16 31.80 31.16 31.80
+
+Table 3: Average percentage of scenes taken from the beginning, middle and ends of movies, on automatic gold standard test set.
+
+erage percentage of scenes selected from the beginning, middle, and end of the movie (based on an equal division of the number of scenes in the screenplay). As can be seen, the number of selected scenes tends to be evenly distributed across the entire movie. SceneSum has a slight bias towards the beginning of the movie which is probably natural, since leading characters appear early on, as well as important scenes introducing essential story elements (e.g., setting, points of view). The results of our human evaluation study are summarized in Table 4. We observe that SceneSum summaries are overall more informative compared to those created by the baselines. In other words, AMT participants are able to answer more questions regarding the story of the movie when reading SceneSum summaries. In two instances ("A Nightmare on Elm Street 3" and "Mumford"), the overlap models score better, however, in this case the movies largely consist of scenes with the same characters and relatively little variation ("A Nightmare on Elm Street 3"), or the camera follows the main lead in his interactions with other characters ("Mumford"). Since our model is not so character-centric, it might be thrown off by non-character-based terms in its objective, leading to the selection of unfavorable scenes. Table 4 also presents a break down of the different types of questions answered by our participants. Again, we see that in most cases a larger percentage is answered correctly when reading SceneSum summaries. Overall, we observe that SceneSum extracts chains which encapsulate important movie content across the board. We should point out that although our movies are broadly classified as comedies and thrillers, they have very different structure and content. For example, "Little Athens" has a very loose plotline, "Living in Oblivion" has multi1074
+
+Movies Nightmare 3 Little Athens Living in Oblivion Mumford One Eight Seven Anniversary Party We Own the Night While She Was Out All Questions Five Questions Plot Question Characters Question
+
+MaxOv 69.18 34.92 40.95 72.86 47.30 45.39 28.57 72.86 51.51 51.00 60.00 45.54
+
+MinOv SceneSum Random 74.49 60.24 56.33 31.75 36.90 33.33 35.00 60.00 30.24 60.00 30.00 54.29 38.89 67.86 30.16 56.35 62.46 37.62 32.14 52.86 28.57 75.71 85.00 45.71 50.54 56.91 39.53 53.13 57.38 36.88 56.88 73.75 55.00 37.34 37.75 31.29
+
+Table 4: Percentage of questions answered correctly.
+
+ple dream sequences, whereas "While She was Out" contains only a few characters and a series of important scenes towards the end. Despite this variety, SceneSum performs consistently better in our taskbased evaluation.
+
+8
+
+Conclusions
+
+In this paper we have developed a graph-based model for script summarization. We formalized the process of generating a shorter version of a screenplay as the task of finding an optimal chain of scenes, which are diverse, important, and exhibit logical progression. A large-scale evaluation based on a question-answering task revealed that our method produces more informative summaries compared to several baselines. In the future, we plan to explore model performance in a wider range of movie genres as well as its applicability to other NLP tasks (e.g., book summarization or event extraction). We would also like to automatically determine the compression rate which should presumably vary according to the movie's length and content. Finally, our long-term goal is to be able to generate loglines as well as movie plot summaries. Acknowledgments We would like to thank Rik Sarkar, Jon Oberlander and Annie Louis for their valuable feedback. Special thanks to Bharat Ambati, Lea Frermann, and Daniel Renshaw for their help with system evaluation.
+
+References
+Bamman, David, Brendan O'Connor, and Noah A. Smith. 2013. Learning Latent Personas of
+
+

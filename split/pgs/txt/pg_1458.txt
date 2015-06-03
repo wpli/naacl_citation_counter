@@ -1,0 +1,29 @@
+glish (Granger et al., 2009) was widely used until recently, despite its shortcomings2 being widely noted (Brooke and Hirst, 2012a). More recently, T OEFL11, the first corpus designed for NLI was released (Blanchard et al., 2013). While it is the largest NLI dataset available, it only contains argumentative essays, limiting analyses to this genre. Research has also expanded to use non-English learner corpora (Malmasi and Dras, 2014a; Malmasi and Dras, 2014c). Recently, Malmasi and Dras (2014b) introduced the Chinese Learner Corpus for NLI and their results indicate that feature performance may be similar across corpora and even L1L2 pairs. This is a claim that we will test here. NLI is now also moving towards using features to generate SLA hypotheses. Swanson and Charniak (2014) approach this by using both L1 and L2 data to identify features exhibiting non-uniform usage in both datasets, creating lists of candidate transfer features. Malmasi and Dras (2014d) propose a different method, using linear SVM weights to extract lists of overused and underused linguistic features for each L1 group. Cross-corpus studies have been conducted for various data-driven NLP tasks, including parsing (Gildea, 2001), WSD (Escudero et al., 2000) and NER (Nothman et al., 2009). While most such experiments show a drop in performance, the effect varies widely across tasks, making it hard to predict the expected drop for NLI. We aim to address this question using large training and testing data.
+
+Common E F C AM DAT T OEFL11
+
+Arabic, Chinese, French, German, Italian, Japanese, Korean, Spanish, Turkish Portuguese, Russian Hindi, Telugu
+
+Table 1: The 11 L1 classes extracted from the EFCAMDAT corpus, compared to the T OEFL11 corpus. The first 9 classes are common between both.
+
+From the data we choose 850 texts from each of the top 11 nationalities. This subset of E F C AM DAT thus consists of 9,350 documents totalling approximately 3.2m tokens. This is an average of 337 tokens per text, close to the 348 tokens per text in T OEFL11. This also provides us with the same number of classes as the T OEFL11, as shown in Table 1, facilitating direct performance comparisons. The table also indicates the 9 classes common to both corpora. This subset of common classes enables us to perform large-scale cross-corpus validation experiments that have not been possible until now.
+
+4
+
+Methodology
+
+3
+
+EFCamDat: A new corpus for NLI
+
+The EF Cambridge Open Language Database (E F C AM DAT) is an English L2 corpus that was released recently (Geertzen et al., 2013). It is composed of texts submitted to Englishtown, an online school used by thousands of learners daily. This corpus is notable for its size, containing some 550k texts from numerous nationalities, making it an ideal candidate for NLI research. While the T OEFL11 is made of argumentative essays, E F C AM DAT has a much wider range of genres including writing emails, descriptions, letters, reviews, instructions and more. In this work we present an application of NLI to this new data. As some of the texts can be short, we use the methodology of Brooke and Hirst (2011) to concatenate and create texts with at least 300 tokens, much like the T OEFL11.
+2
+
+We use the standard NLI classification approach. A linear Support Vector Machine is used for classification and feature vectors are created using relative frequency values. We also combine features with a mean probability ensemble classifier (Polikar, 2006, §4.2) using the probabilities assigned to each class. We compare results with a random baseline and the oracle baseline used by Malmasi et al. (2015). The oracle correctly classifies a text if any ensemble member correctly predicts its label and defines an upper-bound for classification accuracy. We avoid using lexical features as E F C AM DAT is not topic balanced. We extract the following topicindependent feature types: Function words are topic-independent grammatical words such as prepositions which indicate the relations between other words. They are known to be useful for NLI. Frequencies of 400 English function words3 are extracted as features. We also apply function word bigrams as described in Malmasi et al. (2013). Context-free Grammar Production Rules are extracted after parsing each sentence. Each rule is a classification feature (Wong and Dras, 2011) and captures global syntactic patterns.
+3 Like previous work, this also includes stop words, which we sourced from the Onix Text Retrieval Toolkit: http://www.lextek.com/manuals/onix/stopwords1.html
+
+The issues exist as the corpus was not designed for NLI.
+
+1404
+
+

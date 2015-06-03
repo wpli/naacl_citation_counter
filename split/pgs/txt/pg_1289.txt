@@ -1,0 +1,40 @@
+p(zm,n = k |z¬(m,n) , w, o,  ) = K
+
+
+· Nm,n V  k w n + K l=1 ( w=1 nk,¬(m,n) + V  ) k =1 m,¬(m,n) Sm om,s s=1 (nk,¬m +  ) · Sm V w s=1 ( w=1 nk,¬m + V  )
+m,s nk, ¬(m,s) + 
+
+nk m,¬(m,n) + 
+
+Nm,n
+l=1
+
+(nk,m,n,l ¬(m,n) +  )
+
+w
+
+(1)
+
+o
+
+p(m,s = k |z, w, o, ¬(m,s) ) = V
+
+w w=1 nk,¬(m,s)
+
+1 L m +V ·
+
+(2)
+
+B charge cable, the same as company and warranty service. For all models, posterior inference was drawn after 1000 Gibbs iterations with an initial burn-in of 800 iterations. For all models, we set the hyperparameters  = 2 and  = 0.5. The evaluation results over Topic Coherence Metric are presented in Figure 2 and Figure 3. This figure indicates our model and BTM can get higher topic coherence score than GK-LDA and DFLDA, which means the self-defined knowledge and the mechanism of knowledge incorporation are effective to topic model. LDA's performance is acceptable but not stable. Our model performs better than BTM, which is probably because the rough assumption of BTM on generated biterms. From the above analysis, we can see our proposed model can get the best performance. T-test results show that the performance improvement of our model over baselines is statistically significant on Topic Coherence Metric. All p-values for t-test are less than 0.00001.
+
+4 Conclusions and Future Work
+In this paper, we present a topic model to achieve STU task starting from key-phrases. The terms in key-phrases identified from the short texts are supposed to share a common topic respectively. And those key-phrases are assumed to be the central focus in the generative process of documents. In the future work, the self-contained knowledge, such as those identified key-phrases, and the external knowledge-base should be integrated to guide topic modeling.
+
+Acknowledgements
+This work is supported by the National Natural Science Foundation of China No.61103099, the Fundamental Research Funds for the Central Universities(2014QNA5008), Chinese Knowledge Center of Engineering Science and Technology(CKCEST) and Specialized Research Fund for the Doctoral Program of Higher Education(SRFDP)(No.20130101110136).
+
+Figure 4 presents the fluctuation of topic coher- References ence when tuning the hyper-parameter  and  . We [Andrzejewski et al.2009] David Andrzejewski, Xiaojin can see that the performance fluctuates within a limZhu, and Mark Craven. 2009. Incorporating domain ited range as we vary  and  . The topic coherence knowledge into topic modeling via dirichlet forest prifluctuates between -550 and -950 other than food ors. In Proceedings of the 26th Annual International dataset, which gets less fluctuation range. Conference on Machine Learning, ICML 2009, pages 25­32. Table 3 shows example topics for each domain, [Blei et al.2003] David M Blei, Andrew Y Ng, and where inconsistent words are highlighted in red. Michael I Jordan. 2003. Latent dirichlet allocation. From this results, we can see the number of errors in the Journal of machine Learning research, 3:993­ phrase topic model(PTM) is significantly less than 1022. LDA, which indicates our proposed topic model is [Carlson et al.2010] Andrew Carlson, Justin Betteridge, more suitable than LDA for short text. Bryan Kisiel, Burr Settles, Estevam R. Hruschka Jr.,
+
+1235
+
+

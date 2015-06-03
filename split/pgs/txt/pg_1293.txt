@@ -1,0 +1,19 @@
+later in this paper. 2.1 Training of Word Embeddings Word embeddings for English and Hindi have been trained using word2vec1 tool (Mikolov et al., 2013). This tool provides two broad techniques for creating word embeddings: Continuous Bag of Words (CBOW) and Skip-gram model. The CBOW model predicts the current word based on the surrounding context, whereas, the Skip-gram model tries to maximize the probability of a word based on other words in the same sentence (Mikolov et al., 2013). Word Embeddings for English We have used publicly available pre-trained word embeddings for English which were trained on Google News dataset2 (about 100 billion words). These word embeddings are available for around 3 million words and phrases. Each of these word embeddings have 300-dimensions. Word Embeddings for Hindi Word embeddings for Hindi have been trained on Bojar's (2014) corpus. This corpus contains 44 million sentences. Here, the Skip-gram model is used for obtaining word embeddings. The dimensions are set as 200 and the window size as 7 (i.e. w = 7). We used the test of similarity to establish the correctness of these word embeddings. We observed that given a word and its embedding, the list of words ranked by similarity score had at the top of the list those words which were actually similar to the given word. 2.2 Sense Embeddings Sense embeddings are similar to word embeddings which are low dimensional real valued vectors. Sense embeddings are obtained by taking the average of word embeddings of each word in the sense-bag. The sense-bag for each sense of a word is obtained by extracting the context words from the WordNet such as synset members (S), content words in the gloss (G), content words in the example sentence (E), synset members of the hypernymy-hyponymy synsets (HS), content words in the gloss of the hypernymy-hyponymy synsets
+1 2
+
+(HG) and content words in the example sentence of the hypernymy-hyponymy synsets (HE). We consider word embeddings of all words in the sense-bag as a cluster of points and choose the sense embedding as the centroid of this cluster. Consider a word w with k senses wS1 , wS2 , ....wSk taken from the WordNet. Sense embeddings are created using the following formula, vec(wSi ) =
+xSB(wSi ) vec(x)
+
+N
+
+(1)
+
+where, N is the number of words present in the sense-bag SB(wSi ) and SB(wSi ) is the sense-bag for the sense wSi which is given as, SB(wSi ) = {x|x  Features(wSi )} where, Features(wSi ) includes the WordNet based features for wSi which are mentioned earlier in this section. As we can see in Figure 1, consider the sensebag created for the senses of a word table. Here, the word table has three senses, S1 {a set of data arranged in rows and columns}, S2 {a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs} and S3 {a company of people assembled at a table for a meal or game}. The corresponding word embeddings of all words in the sense-bag will act as a cluster as shown in the Figure. Here, there are three clusters with centroids C1 , C2 , C3 which corresponds to the three sense embeddings of the word table.
+
+https://code.google.com/p/word2vec/ Downloaded from https://code.google.com/p/word2vec/
+
+Figure 1: Most Frequent Sense (MFS) detection using Word Embeddings and Sense Embeddings
+
+1239
+
+

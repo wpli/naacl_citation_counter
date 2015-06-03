@@ -1,0 +1,23 @@
+Extractive Summarisation Based on Keyword Profile and Language Model
+Han Xu Eric Martin Ashesh Mahidadia
+
+School of Computer Science and Engineering UNSW, Sydney, NSW, Australia, 2052 hanx,emartin,ashesh@cse.unsw.edu.au Abstract
+We present a statistical framework to extract information-rich citation sentences that summarise the main contributions of a scientific paper. In a first stage, we automatically discover salient keywords from a paper's citation summary, keywords that characterise its main contributions. In a second stage, exploiting the results of the first stage, we identify citation sentences that best capture the paper's main contributions. Experimental results show that our approach using methods rooted in quantitative statistics and information theory outperforms the current state-of-the-art systems in scientific paper summarisation.
+
+1
+
+Introduction and Motivation
+
+Science is not an isolated endeavour, but benefits from and expands on the work of others, with more or less cross fertilisation between disciplines. The interdependent nature of research has naturally resulted in a network of scientific areas with dense interconnections between related fields. Though research is a highly specialised activity, researchers find themselves constantly in need to explore the network further from the core of their research. Tools that can facilitate understanding the key contributions of papers in those parts of the network being explored can only prove highly valuable. As an example of such tools, we focus on an application that automatically extracts informationrich sentences describing the main contributions of a given paper. From which corpus the extraction could take place? A natural answer is the abstract of the paper. However, the contributions as perceived by the authors can significantly deviate from those judged extrospectively by the community over time (Mei and Zhai, 2008). Instead, we take as corpus the set of citing sentences to the paper (from other papers). Indeed, those sentences can arguably be deemed as a form of crowd-sourced review of the 123
+
+paper's main contributions. The set of citing sentences is referred to as the citation summary of the target paper. Elkiss et al. (2008) carried out a largescale study and confirmed that citation summaries contain extra information that does not appear in paper abstracts. In addition, they found that the "selfcohesion", measured as the average cosine similarity between sentences, is consistently higher in a paper's citation summary than in its abstract: the former is more focused than the latter in describing papers' main contributions. This work presents our efforts in advancing research along this direction. Section 2 formally defines the problem we aim to solve: summarise scientific papers using the most informative and diversified part of their citation summaries. It surveys several prominent related studies, and introduces the data used in our experiments and evaluations. In Section 3, we present our statistical framework built upon quantitative statistics and information theory. In Section 4, we evaluate and compare the performance of our method with state-of-the-art systems. We conclude and point to future directions in Section 5.
+
+2
+
+Problem Statement
+
+The problem we tackle in this paper is to generate an extractive summary (usually, we will simply say summary) from its citation summary. More specifically, we opt for a two stage approach. In the first stage, we automatically discover salient keywords from a paper's citation summary, keywords that are essential in characterising the paper's main contributions. The second stage, exploiting the results of the first stage, identifies citation sentences (to the paper) that best capture the paper's main contributions. A word of caution: by utilising only citation summaries, one should not expect to obtain well formulated, readily consumable summaries of papers. Indeed, a citation sentence may be not all about the cited paper, but also talk about the citing paper and other co-cited papers, which disqualify citation sum-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 123­132, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

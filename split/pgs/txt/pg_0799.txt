@@ -1,0 +1,5 @@
+Sunita Sarawagi and William W Cohen. 2004. Semimarkov conditional random fields for information extraction. In NIPS, pages 1185­1192. Erik F. Tjong Kim Sang and Fien De Meulder. 2003. Introduction to the CoNLL-2003 shared task: Languageindependent named entity recognition. In CoNLL, pages 142­147. Joseph Turian, Lev Ratinov, and Yoshua Bengio. 2010. Word representations: a simple and general method for semi-supervised learning. In ACL, pages 384­394. Peter D Turney. 2012. Domain and function: A dualspace model of semantic relations and compositions. Journal of Artificial Intelligence Research, pages 533­ 585.
+
+745
+
+

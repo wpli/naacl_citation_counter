@@ -1,0 +1,43 @@
+D
+
+&
+
+Tm
+
+ger (Toutanova et al., 2003). Sample identified keyphrases are shown in Table 2. In this paper, our phrase topic model is proposed based on three assumptions:
+G m, s
+
+E
+&
+
+z m ,n
+
+· Key-phrases are the key points of interest in the short text, which should be the focus. · Terms consisting of the same key-phrase will share common topic. · Non-phrase term's topic assignment should depend on that of key-phrases in the same text. Our assumptions is indeed similar to other models (Gruber et al., 2007), for example each sentence is assumed to be assigned to one topic, however this assumption is too general, in many cases, different words should be assigned different topics even in short text. Our model is more refined to distinguish key-phrase and non-phrase. In addition, if two or more key-phrases exist in the same short text, they are probably assigned different topics. The graphical representation of PTM is illustrated in Figure 1.  and  are hyper-parameters, which are experienced tuned.  is corpus-level parameter, while  is document-level parameter. The hidden variables consist of zm,n and m,s . The generative process of phrase topic model is presented as follows. · For each topic k  [1, K ] ­ draw a topic-specific word distribution k  Dir( ) · For each document m  [1, M ] ­ draw a topic distribution m  Dir() ­ For each key-phrase n  [1, Nm ]  draw topic assignment zm,n  M ulti(m )  For each word l  [1, Nm,n ] · draw wm,n,l  M ulti(zm,n ) ­ For each non-phrase word s  [1, Sm ]  draw a topic assignment m,s  U nif orm(zm,1 , . . . , zm,Nm )  draw word om,s  M ulti(m,s ) From this process, we can see the generation of keyphrases and non-phrases are distinguished and nonphrase's generation is based on the topic assignment of key-phrases in the same document.
+
+Mk
+k  [1 , K ]
+
+wm, n,l
+l [1, Nm,n ]
+n  [1, N m ]
+
+Rm,s
+s [1, S m ]
+
+m  [1, M ]
+
+Figure 1: The phrase topic model proposed in this paper.
+
+vast amount of lexical knowledge about words and their relationships, denoted as LR-sets, available in online dictionaries or other resources can be exploited by this model to generate more coherent topics. However, for external knowledge-based models, the incorporated knowledge is too general to be consistent with the short text in the semantic space. On the other hand, BTM, as a typical self-contained knowledge-based model, makes rough assumption on the generated biterms. The generated biterms are inundated with noise, for not any two terms in short text share same topic. Based on the above analysis, we first identify key-phrases from short text, which can be deemed as self-contained knowledge, then propose phrase topic model (PTM), which constrains same topic for terms in key-phrase and sample topics for non-phrase terms from mixture of keyphrase's topic.
+
+2
+
+Phrase Topic Model
+
+2.1 Model A phrase is defined as a consecutive sequence of terms, or unigrams. In this paper, we focus on self-contained knowledge in short text, i.e., the key-phrases. Key-phrase extraction is a fundamental component in our work. We use CRF++1 to identify key-phrases in a short text. The training data is built manually, and the features contain the word itself, the part of speech tagged by Stanford Log-linear Part-Of-Speech Tag1
+
+http://crfpp.googlecode.com/svn/trunk/doc/index.html
+
+1233
+
+

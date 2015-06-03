@@ -1,0 +1,25 @@
+training and testing the SVM models. The hyperparameter C in linear SVM, and the  and C hyperparameters in Gaussian SVM are tuned on the training set using 10-fold cross-validation. Evaluation Metrics: Spearman's correlation (Hogg and Craig, 1994) and Kendall's tau (Kendall, 1938) have been widely used in many real-valued prediction (regression) problems in NLP (Albrecht and Hwa, 2007; Yogatama et al., 2011), and here we use them to mea^ by comparing sure the quality of predicted values y to the vector of ground truth y. Kendall's tau is a nonparametric statistical metric that have shown to be inexpensive, robust, and representation independent (Lapata, 2006). We use paired two-tailed t-test to measure the statistical significance. 5.1 Comparison with Various Baselines
+
+Feature Sets Unigrams + Bigrams + Named Entities + Part-of-Speech + Dependency + Semantics All Text + Vision Unigrams + Bigrams + Named Entities + Part-of-Speech + Dependency + Semantics All Text + Vision
+
+LR 0.152 0.163 0.188 0.184 0.191 0.183 0.413 0.102 0.115 0.127 0.125 0.130 0.124 0.284
+
+LSVM 0.158 0.248 0.296 0.318 0.322 0.368 0.415 0.105 0.164 0.202 0.218 0.223 0.257 0.288
+
+GSVM 0.176 0.279 0.312 0.337 0.348 0.388 0.451 0.118 0.187 0.213 0.232 0.242 0.270 0.314
+
+NPN 0.241* 0.318* 0.339* 0.343 0.350 0.367 0.754* 0.181* 0.237* 0.248* 0.239 0.255 0.270 0.580*
+
+The first two figures in Figure 5 show the learning curve of our system, comparing other baselines. We see that when increasing the amount of training data, our approach clearly dominates all other methods by a large margin. Linear and Gaussian SVMs perform similarly, and have good performances with only 25% of the training data, but the improvements are not large when increasing the amount of training data. In the last two figures in Figure 5, we increase the amount of features, and compare various models. We see that the linear regression model overfits with 600 features, and Gaussian SVM outperforms the linear SVM. We see that our NPN model clearly outperforms all baselines by a big gap, and does not overfit. 5.2 Combination of Text and Vision
+
+Table 1: The Spearman correlation (top table) and Kendall's  (bottom table) for comparing various text features and combining with vision features. The best results of each row are highlighted in bold. * indicates p < .001 comparing to the second best result.
+
+mance for associating popular votes, meme images, and text descriptions. 5.3 The Effects of Dropout Training for Nonparanormals
+
+In Table 1, we systematically compare the contributions of each feature set. First, we see that bigram features clearly improve the performance on top of unigram features. Second, named entities are crucial for further boosting the performance. Third, adding the shallow part-of-speech features does not benefit all models, but the dependency triples are shown to be useful for all methods. Finally, we see that using semantic features helps increasing the performances for most of the cases, and combining text and vision features in our NPN framework doubles the perfor361
+
+As we mentioned before, because NPNs model the complex network of random variables, a key issue for training NPN is to prevent the model from overfitting to the training data. So far, none of the prior work have investigated dropout training for regularizing the nonparanormals or even copula in general. To empirical test the effects of dropout training for nonparanormals, in addition to our datasets, we also compare with the unregularized copula from Wang and Hua (2014) on predicting financial risks from earnings calls. Table 2 clearly suggests that dropout training for NPNs significant improves the performances on various datasets. 5.4 Qualitative Analysis
+
+Table 3 shows the top ranked text features that are highly correlated with popular votes. We see that the named entity features are useful: Paul Walker, UPS, Bruce Willis, Pencil Guy, Amy Winehouse are recognized as entities in the meme dataset. Dependency triples, as a less-understood feature set, also perform well in this task. For example, xcomp(tell,mean)
+
+

@@ -1,0 +1,22 @@
+Key Female Characters in Film Have More to Talk About Besides Men: Automating the Bechdel Test
+Apoorv Agarwal Computer Science Department Columbia University NY, USA apoorv@cs.columbia.edu Shruti Vasanth Kamath Columbia University NY, USA svk2113@columbia.edu Abstract
+The Bechdel test is a sequence of three questions designed to assess the presence of women in movies. Many believe that because women are seldom represented in film as strong leaders and thinkers, viewers associate weaker stereotypes with women. In this paper, we present a computational approach to automate the task of finding whether a movie passes or fails the Bechdel test. This allows us to study the key differences in language use and in the importance of roles of women in movies that pass the test versus the movies that fail the test. Our experiments confirm that in movies that fail the test, women are in fact portrayed as less-central and less-important characters.
+
+Jiehan Zheng Trinity College of Arts and Sciences Duke University NC, USA jiehan.zheng@duke.edu Shirin Ann Dey Columbia University NY, USA sad2166@columbia.edu
+
+Sriram Balasubramanian Facebook CA, USA grambler@fb.com
+
+The test was designed to assess the presence of women in movies. Some researchers have embraced the test as an effective primary detector for male bias (Scheiner-Fisher and Russell III, 2012). Due to its generality, the Bechdel test has also been used to assess the presence of women in dialogues held on social media platforms such as MySpace and Twitter (Garcia et al., 2014). Several researchers have noted that gender inequality roots itself in both the subconscious of individuals and the culture of society as a  zek, 1989; Michel et al., 2011; Garc´ whole (Zi ia and Tanase, 2013). Therefore, combining the Bechdel test with computational analysis can allow for the exposure of gender inequality over a large body of films and literature, thus having the potential to alert society of the necessity to challenge the status quo of male dominance. In this paper, we investigate the task of automating the Bechdel test. In doing so, we aim to study the effectiveness of various linguistic and social network analysis features developed for conducting this task. Our results show that the features based on social network analysis metrics (such as betweenness centrality) are most effective. More specifically, in movies that fail the test, women are significantly less centrally connected as compared to movies that pass the test. This finding provides support for the long held belief that women are seldom portrayed as strong leaders and thinkers in popular media. Our results also show that word unigrams, topic modeling features, and features that capture mentions of men in conversations are less effective. This may look like a rather surprising result since the question,
+
+1
+
+Introduction
+
+The Bechdel test is a series of three questions, which originated from Alison Bechdel's comic "Dykes to Watch Out For" (Bechdel, 1986). The three questions (or tests) are as follows: (T1) are there at least two named women in the movie? (T2) do these women talk to each other? and (T3) do these women talk to each other about something besides a man? If after watching a movie, the viewers answer "yes" to all three questions, that movie is said to pass the Bechdel test.
+These authors contributed equally. The work was done while Jiehan Zheng was at Peddie School and Sriram Balasubramanian was at Columbia University.
+
+
+830
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 830­840, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

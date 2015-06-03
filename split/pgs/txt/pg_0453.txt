@@ -1,0 +1,42 @@
+pairs might be dissimilar to all seed domains. The number and choice of seed domains depends largely on the available resources but intuitively these seed domains are chosen to be relevant to parts of the heterogeneous corpus. A small number of such seeds can be expected to notably improve word alignment accuracy. In fact, a single seed sample already allows us to exploit the contrast between two parts in the corpus: similar or dissimilar to the seed data. Considering the small seed samples as partial supervision, in this paper we explore the question: how to obtain better word alignment in a heterogeneous, mix-of-domains corpus? We present a novel latent domain HMM alignment model, which aims to tighten the probability estimates of the generative alignment process of a sentence pair, and of the probability estimates of the sentence pair itself for a specific domain. We also present an accompanying training regime guided by partial supervision using the seed samples, exploiting the contrast between the domain-conditioned alignment statistics in these samples. This way we aim for an alignment model that is more domain-sensitive than the original HMM alignment model. Once the domainconditioned statistics are induced, we discuss how to combine them together to express the probability of a sentence pair as a mixture over specific domains. Finally, we report experimental results over heterogeneous corpora of 1M, 2M and 4M sentence pairs, where we are provided domain information for different samples of 10%, 5% and 2.5% of the heterogeneous data respectively. A large number of experiments are reported, showing that the latent domain HMM model produces notable improvements in word alignment accuracy over the original HMM alignment model. Furthermore, the translation accuracy of the resulting SMT systems is significantly improved across four different translation tasks.
+
+fj -1
+
+fj
+
+fj +1
+
+Observed layer (source words)
+
+aj -1
+
+aj
+
+aj +1
+
+Latent alignment layer (target words)
+
+Figure 1: HMM alignment model with observed and latent alignment layers.
+
+to denote the source sentence with length J . For an alignment a = (a1 , . . . , aJ ) of a sentence pair e, f , the model factors P (f, a| e) into the word translation and transition probabilities: P (f, a| e) =
+J j =1
+
+P (fj | eaj )P (aj | aj -1 ). (1)
+
+Here, P (fj | eaj ) represents the word translation probabilities and P (aj | aj -1 )1 represents the transition probabilities between positions. Note that P (aj | aj -1 ) depends only on the distance (aj - aj -1 ). Note also that the first-order dependency model is an extension of the uniform dependency model and zero-order dependency model of IBM models 1 and 2, respectively. In this work, we model explicitly distances in the range ±5. Note that null-links are also explicitly added in our implementation, following Och and Ney (2003) and Graca et al. (2010). Once the HMM alignment model is trained, the ^ for each sentence pair most probable alignment, a ^ = argmaxa P (f, a| e). can be computed by: a Here, the search problem can be solved by the Viterbi algorithm.
+
+3
+
+Latent Domain HMM Alignment Model
+
+2
+
+HMM Alignment Model
+
+In this section, we briefly review the HMM alignment model (Vogel et al., 1996). The generative story of the model is shown in Figure 1. The latent states take values from the target language words and generate source language words. Formally, we use e = (e1 , . . . , eI ) to denote the target sentence with length I and f = (f1 , . . . , fJ ) 399
+
+Because the heterogeneous data contains a mix of diverse domains, the induced statistics derived from word alignment models reflect translation preferences aggregated over these domains. In this sense, they can be considered domain-confused statistics (Cuong and Sima'an, 2014a). This work thus focuses on more representative statistics: the domainconditioned word alignment statistics, i.e., the statistics with respect to each of the diverse domains. By introducing a latent variable D representing domains of the heterogeneous data, we aim
+The "full" formula for transition probabilities would be P (aj | aj -1 , I ). For convenience, we ignore I in our presentation.
+1
+
+

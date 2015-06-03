@@ -1,0 +1,20 @@
+Frequencies/Values 95 Average Consonant Inventories 5 Moderately small 85 Average (5-6) Vowel Quality Inventories 15 Small (2-4) 100 Moderately complex Syllable Structure 0 Complex 97 Plural suffix 2 Plural word Coding of Nominal Plurality 1 No plural 0 Plural clitic 61 Noun-Numeral Order of Numeral and Noun 39 Numeral-Noun 61 No case affixes or adp. clitics Position of Case Affixes 39 Case suffixes 61 SOV Ord. of SOV 38 SVO 1 No dominant order 91 Postpositions Ord. of Adposition and NP 9 Prepositions 87 Noun-Adjective Ord. of Adjective and Noun 13 Adjective-Noun
+
+Features
+
+Rank Language Classificatoin Logprob. 1(Japanese)Japonic 76.8 Japonic -37.7 2Shuri -200.0 3Khalkha Altaic>Mongolic 4Lepcha Sino-Tibetan>Tibeto-Burman -201.9 5Chuvash Altaic>Turkic -205.5 6Deuri Sino-Tibetan>Tibeto-Burman -218.3 7Urum Altaic>Turkic -218.6 8Ordos Altaic>Mongolic -219.0 Altaic>Turkic -219.6 9Uzbek 10Archi N. Caucasian>E. Caucasian -221.5 131Korean (isolate) -265.7 493Ainu (isolate) -409.9
+
+Table 4: Modern languages ranked by the similarity to Japanese. similar to another. The case of Japanese is shown in Table 4. This ranked list is considerably different from that of disagreement rates of categorical vectors (Spearman's  = 0.76). When features' stability with respect to evolutionary history is considered, Japanese is less closer to Korean and Ainu than to some Tibeto-Burman languages south of the Himalayas. As the importance of these minor languages of Northeast India is recognized, the Sino-Tibetan tree might be drastically revised in the future (Blench and Post, 2013). The least similar languages include the Malayo-Polynesian and NiloSaharan languages.
+
+Table 3: Some features of the world's ancestor with sample frequencies. per. A tree was scored by the product of supports of all clades within it, and we created a tree that maximized the score. Each edge label shows the support of the corresponding clade. As indicated by generally low supports, the sample trees were very unstable. Some geographically distant groups of languages were clustered near the bottom. We partially attribute this to the underspecificity of linguistic typology: even if a pair of languages shares the same feature vector, they are not necessarily the same language. This problem might be eased by incorporating geospatial information into phylogenetic inference (Bouckaert et al., 2012). Table 3 shows some features of the root. The reconstructed ancestor is moderate in phonological typology, uses suffixing in morphology and prefers the SOV word order. The inferred word order agrees with speculations given by previous studies (Maurits and Griffiths, 2014). Figure 5 shows the histogram of variance parameters. Some latent components had smaller variances and thus were more stable with respect to evolutionary history. Figure 6 displays languages using the components with the two smallest variances. Unlike PCA plots, data concentrated at the edges. We used a geometric mean of pM OVE of multiple samples to calculate how a modern language is
+
+7 Conclusion
+In this paper, we proposed continuous space representations of linguistic typology and used them for phylogenetic inference. Feature dependencies are a major focus of linguistic typology, and typology data have occasionally been used for computational phylogenetics. To our knowledge, however, we are the first to integrate the two lines of research. In addition, the continuous space representations underlying interdependent discrete features are applicable to other data including phonological inventories (Moran et al., 2014). We believe that typology provides important clues for long-term language change. The currently available database only contains modern languages, but we expect that data of some ancestral languages could greatly facilitate computational approaches to diachronic linguistics.
+
+Acknowledgment
+
+This work was partly supported by JSPS KAKENHI Grant Number 26730122.
+
+332
+
+

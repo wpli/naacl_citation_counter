@@ -1,0 +1,36 @@
+C AREFUL S COTUS exact match `+' punctuation end of sentence word/punct word word
+
+OYEZ exact match `...' punctuation `...' `...' other word punct
+
+Score 4 3 2 2 1 -1 -1
+
+following a tagging approach with separate repetition and non-repetition reparandum states, as in (Ostendorf and Hahn, 2013). The feature set includes identity and pattern match features widely used in disfluency detection tasks, as well as distance-based and disfluency language model features from (Zayats et al., 2014). 4.1 Two-stage model
+
+Table 1: Matching scores used in dynamic programming transcript alignment.
+
+cost of 1. Some examples of CAREFUL S COTUS, OYEZ, ALIGNED OYEZ (with deletions marked) and ANNOTATED OYEZ transcripts are shown below. The full corpus is available at https://ssli. ee.washington.edu/tial/data/oyez.
+C AREFUL S COTUS : [ [S It is + it is ] a + ] we submit Where there used to be um um um uh the decision OYEZ : It is, it is, we submit Where there used to be the decision A LIGNED OYEZ : [ [S It is, + it is ], + ] we submit Where there used to be the decision A NNOTATED OYEZ : [ [S It is, + it is ], + ] we submit Where there used to be the decision
+
+3.2
+
+Switchboard transformation
+
+The ANNOTATED OYEZ training set is a very small dataset, and other work has shown that Switchboard (S WBD) is useful for cross-domain training for S CO TUS (Zayats et al., 2014). However, prior work has been with careful transcripts. S WBD transcripts do not include `...' symbols, and S WBD has many more commas and other punctuation symbols. In order to make best use of the S WBD data, we transform it to be more similar to the OYEZ transcripts in two steps. First, we add `...' after interruption points in S WBD. Second, we remove all punctuations except `...' in the middle of the sentence in both of the corpora.
+
+Using the same features as in the baseline, we introduce a two-stage CRF model motivated by our observation that many repetitions are omitted from the standard transcriptions. Thus, while 62% of disfluencies in CAREFUL S COTUS are repetitions, only 22% of all disfluencies in ANNOTATED OYEZ are repetitions. We find that training at two separate stages helps to overcome the difference in distributions of two disfluency types between source and target domains, and hence results in a better model for adaptation. In the first stage, we train a model to detect repetitions by only considering repetition states in the training data. In the second stage, we train a model to detect non-repetitions by removing all repetitions from the training data. Similarly at test time, we use the first-stage model to detect repetitions, then remove all the detected repetitions, and apply the second-stage model to detect non-repetitions. In evaluation, we report the disfluencies detected in both stages. 4.2 Self-training
+
+4
+
+Detecting disfluencies
+
+In this section we describe the U N E DITOR system, which is a two-stage CRF model trained on transformed training data and takes advantage of a large pool of unlabeled data with a self-training technique. Baseline: CRF We use a conditional random field (CRF) model that labels each word in a sentence, 1412
+
+A benefit of OYEZ transcripts is that there is a huge amount of unlabeled data available, which makes it natural to use semi-supervised learning. In this work, we use a simple self-training approach. First we apply a CRF model trained on the labeled data to the unlabeled data. Then we augment the training data with automatically labeled sentences that have been detected to contain a disfluency with a confidence score greater than 0.5, and retrain the model with the new augmented training set.
+
+5
+
+Experiments and discussion
+
+We evaluate the different sources/transformations of training data, self-training and the two-stage detection model on ANNOTATED OYEZ transcripts from three cases (30k words).
+
+

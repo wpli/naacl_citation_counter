@@ -1,0 +1,42 @@
+20 News WebKB Reuters8 Reuters52 CADE12 Enron
+
+CONFLICT 21% NA NA 0%
+
+LOW
+
+MED
+
+HIGH 0%
+
+7 Conclusions and Future Work
+We have argued that generative models are better suited than discriminative models to the task of annotation aggregation since they tend to be more robust to annotation noise and to approach their asymptotic performance levels with fewer annotations. Also, in settings where a discriminative model would usually shine, there are often enough annotations that a simple baseline of majority vote is sufficient. In support of this argument, we developed comparable mean-field variational inference for a generative-discriminative pair of crowdsourcing models and compared them on both crowdsourced and synthetic annotations on six text classification datasets. In practice we found that on classification tasks for which generative models of the data work reasonably well, the generative model greatly outperforms its discriminative log-linear counterpart. The generative multinomial model we employed makes inter-feature independence assumptions ill suited to some classification tasks. Document topic models (Blei, 2012) could be used as the basis of a more sophisticated generative crowdsourcing model. One might also transform the data to make it more amenable to a simple model using documents assembled from distributed word representations (Mikolov et al., 2013). Finally, although we expect these results to generalize, we have only experimented with text classification. Similar experiments could be performed on other commonly crowdsourced tasks such as sequence labeling.
+
+0%
+
+0% 18%
+
+Table 2: The percentage of the dataset that must be annotated (three-deep) before the generative model M OM R ESP is surpassed by L OG R ESP. indicates that M OM R ESP dominates the entire learning curve; 0% indicates that L OG R ESP dominates. NA indicates high variance cases that were too close to call.
+
+selecting up to three unique categories per document. During the course of a single day we gathered 7,265 annotations, with each document having a minimum of 3 and a mean of 7.3 annotations.3 Figure 5 shows learning curves for the CrowdFlower annotations. The trends observed previously are unchanged. M OM R ESP enjoys a significant advantage when relatively few annotations are available. Presumably L OG R ESP would still dominate if we were able to explore later portions of the curve or curves with greater annotation depth.
+
+Crowdflower Annotations
+0.7
+
+Accuracy
+
+algorithm MomResp LogResp Majority 0 2 4 6
+
+0.6 0.5 0.4
+
+Acknowledgments
+We thank Alex Smola and the anonymous reviewers for their insightful comments. This work was supported by the collaborative NSF Grant IIS-1409739 (BYU) and IIS-1409287 (UMD).
+
+Number of human annotations x 1,000
+
+Figure 5: Inferred label accuracy on annotations gathered from CrowdFlower over a subset of 1000 instances of the 20 Newsgroups dataset. At the last References plotted point there are 7, 265/1, 000  7.3 annota- [Asuncion et al.2009] A. Asuncion, tions per instance. P. Smyth, and Y. W. Teh. 2009.
+
+M. Welling, On smoothing and inference for topic models. In Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial 3 This dataset and the scripts that produced it are available Intelligence, pages 27­34. AUAI Press. via git at git://nlp.cs.byu.edu/plf1/crowdflower-newsgroups.git [Berry et al.2001] M. W. Berry, M. Browne, and
+
+890
+
+

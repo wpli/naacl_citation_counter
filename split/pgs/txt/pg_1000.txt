@@ -1,0 +1,23 @@
+Figure 2: Three pairwise alignments between the English word abbey, its transcription [abi], and the Japanese transliteration  (A-BE-I).
+
+Figure 3: Obtaining a triple alignment by pivoting on the source word.
+
+3.2
+
+Multi-alignment
+
+only requires more time, but also results in less accurate transliterations. 3.3 Scoring Model The scoring formula (1) is extended to compute a linear combination of features of three aligned strings (S, P, T ):
+m
+
+M2M-A LIGNER applies the EM algorithm to align sets of string pairs. For the purpose of joint generation, we need to align triples S , P and T prior to training. The alignment of multiple strings is a challenging problem (Bhargava and Kondrak, 2009). In general, there is no obvious way of merging three pairwise alignments. Figure 2 shows an example of three pairwise alignments that are mutually inconsistent: the English letter e is aligned to the phoneme [i] and to the grapheme (BE), which are not aligned to each other Our solution is to select one of the input strings as the pivot for aligning the remaining two strings. Specifically, we align the pivot string to each of the other two strings through one-to-many alignments, where the maximum length of aligned substrings in the pivot string is set to one. Then we merge these two pairwise alignments according to the pivot string. Since the source phoneme string may or may not be available for a particular training instance, we use the source orthographic string as the pivot. The one-to-many pairwise alignments between the graphemes and phonemes, and between the graphemes and the transliterations are generated with M2M-A LIGNER. Figure 3 provides an example of this process. An alternative approach is to pivot on the target string. However, because the target string is not available at test time, we need to search for the highest-scoring target string, given an unsegmented source string S and the corresponding unsegmented phoneme string P . We can generalize the original search algorithm by introducing another dimension into the dynamic-programming table for segmenting P , but it substantially increases the time complexity of the decoding process. Our development experiments indicated that pivoting on the target string not 946
+
+ · [(i, S, T ), (i, P, T )]
+i
+
+(2)
+
+The transition features on T are only computed once, because they are independent of the input strings. We observed no improvement by including features between S and P in our development experiments. 3.4 Search Our search algorithm finds the highest-scoring target string, given a source string and a phoneme string. Since we pivot on the source string to achieve multiple alignment, the input to the search algorithm is actually one-to-many aligned pair of the source string and the phoneme string. The search space is therefore the same as that of DirecTL+, i.e. the product of all possible segmentations of the source string and all possible target substrings. However, since we apply one-to-many alignment, there is only one possible segmentation of the source string, which is obtained by treating every letter as a substring. We apply the same dynamic programming search as DirecTL+, except that we extend the feature extraction j function (Sj +1 , t , t) in the original formulation
+
+j k to [(Sj +1 , t , t), (Pk +1 , t , t)] so that features bek tween the current phoneme substring Pk +1 and the target substrings are taken into consideration. The time complexity of this search is only double of the complexity of D IREC TL+, and is independent of the length of the phoneme string.
+
+

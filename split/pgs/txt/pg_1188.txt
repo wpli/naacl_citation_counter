@@ -1,0 +1,62 @@
+rator sets. From here on we refer to a coreferential chain of mentions as simply a "mention". AMR currently only represents sentence-level coreference resolution. In order to construct a knowledge network across sentences, we use the following heuristic rules. If two names have a substring match (on a token-wise basis with stop words removed), or one name consists of the initials of another in all capital letters, then we mark them as coreferential. We replace all names in a coreferential chain with their canonical name, which may have been derived via name expansion (Section 3.1): full names for people and abbreviations for organizations. 3.5 Knowledge Networks for Coherent Mentions
+
+4 Knowledge Network Construction from KB
+We combine Wikipedia with derivative resources to create the KB. The KB is a single knowledge network in which nodes are entities (Wikipedia articles) or constant values (e.g. a dollar amount or date), and the edges represent relations. We use this structure for context representation for entities, which together with context representation for mentions (Section 3) feeds re-ranking based on context comparison. The KB is formally represented by triples:  Entity, EdgeLabel, N ode  where Entity is the entity's unique identifier, EdgeLabel is relation type, and Node is the corresponding relation value - either another Entity or a constant. These triples are derived from typed relations expressed within Wikipedia infoboxes, Templates, and Categories, untyped hyperlinks within Wikipedia article text, typed relations within DBpedia (dbpedia.org) and Freebase (www.freebase.com), and Google's "people also searched for" list 8 . Figure 3 shows a portion of the KB pertaining to the example in Figure 1. In order to merge nodes from multiple KBs, we use the Wikipedia title as a primary key, and then use DBpedia wikiPageID and Freebase Key relations.
+
+AMR defines a rich set of conjunction relations: "and", "or", "contrast-01", "either", "compared to", "prep along with", "neither", "slash", "between" and "both". These relations are often expressed between entities that have other relations in common. We therefore group mentions connected by conjunction relations into sets of coherent mentions. This representation is used only in preliminary experiments on collective entity linking. Figure 2 shows the expanded knowledge network that includes results from individual networks for each of the coherent mentions from the walkthrough example. For each coherent set, we merge the knowledge networks of all of its mentions 7 .
+Massachusetts
+governor
+
+5
+5.1
+
+Linking Knowledge Networks
+Overview
+
+Mormon pioneer
+grandson
+
+Johnson
+co nju nc tio n: an d
+
+conjunction: and modify modify
+
+Romney
+nominate-01 : pol
+
+n: a
+
+Republican
+modify
+
+Mitt Romney
+
+Paul
+
+GOP
+
+Figure 2: Knowledge Network for Mentions in Source
+recall that by mention, we mean a coreferential chain of mentions that may extend across sentences
+7
+
+In this section we present our detailed algorithm to link each mention to a KB entity using a simple similarity measure over knowledge networks. Recall that a rule-based method has already been employed to construct star-shaped knowledge networks for individual mentions and entities (see sections 3 and 4; A KB knowledge network is the subnetwork of the entire KB centered at a candidate entity). For each mention to be linked, an initial list of candidate entities are enumerated based on entity salience with respect to the mention, independent of mention context (Section 5.2)9 . Context collaborator re-ranking proceeds in an unsupervised fashion
+In response to a query entity Google provides a list of entities that "people also search for" - we add them to the entity's network. 9 Here, "mention" means coreferential chain of mentions.
+8
+
+co e ref
+
+nd
+
+ren ce
+
+co nj
+
+un ct
+
+io
+
+arity -
+
+1134
+
+

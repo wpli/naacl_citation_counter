@@ -1,0 +1,34 @@
+3.3
+
+Multi-phase Iterated Reranking
+
+Training in machine learning often uses starting big which is to use up all training data at the same time. However, Elman (1993) suggests that in some cases, learning should start by training simple models on small data and then gradually increase the model complexity and add more difficult data. This is called starting small. In unsupervised dependency parsing, starting small is intuitive. For instance, given a set of long sentences, learning the fact that the head of a sentence is its main verb is difficult because a long sentence always contains many syntactic categories. It would be much easier if we start with only lengthone sentences, e.g "Look!", since there is only one choice which is usually a verb. This training scheme was successfully applied by Spitkovsky et al. (2010a) under the name: Baby Step. We adopt starting small to construct the multiphase iterated reranking (MPIR) framework. In phase 0, a parser M with a simple model is trained on a set of short sentences S (0) as in traditional approaches. This parser is used to parse a larger set (1) (1) of sentences S (1)  S (0) , resulting in D1 . D1 is then used as the starting point for the iterated reranking in phase 1. We continue this process until phase N finishes, with S (i)  S (i-1) (i = 1..N ). In general, we use the resulting reranker in the previous phase to generate the starting point for the iterated reranking in the current phase.
+
+Figure 1: Inside-Outside Recursive Neural Network (IORNN). Black/white rectangles correspond to inner/outer representations. we generate its left dependents and its right dependents. We then generate dependents for each ROOT's dependent. The generative process recursively continues until there is no dependent to generate. Formally, this model is described by the following formula
+L
+
+P (d(H )) =
+l=1 R r =1
+
+P HlL |C (HlL ) P d(HlL ) × (3)
+
+R R R P Hr |C (Hr ) P d(Hr )
+
+4
+
+Le and Zuidema (2014)'s Reranker
+
+Le and Zuidema (2014)'s reranker is an exception among supervised parsers because it employs an extremely expressive model whose features are order2 . To overcome the problem of sparsity, they introduced the inside-outside recursive neural network (IORNN) architecture that can estimate treegenerating models including those proposed by Eisner (1996) and Collins (2003a). 4.1 The -order Generative Model
+
+where H is the current head, d(N ) is the fragment of the dependency parse rooted at N , and C (N ) is the context to generate N . H L , H R are respectively H 's left dependents and right dependents, plus EOC (End-Of-Children), a special token to inform that there are no more dependents to generate. Thus, P (d(ROOT )) is the probability of generating the entire dependency structure d. Le and Zuidema's -order generative model is defined as Eisner's model in which the context C  (D) to generate D contains all of D's generated siblings, its ancestors and their siblings. Because of very large fragments that contexts are allowed to hold, traditional count-based methods are impractical (even if we use smart smoothing techniques). They thus introduced the IORNN architecture to estimate the model. 4.2 Estimation with the IORNN
+
+Le and Zuidema (2014)'s reranker employs the generative model proposed by Eisner (1996). Intuitively, this model is top-down: starting with ROOT,
+2
+
+In fact, the order is finite but unbound.
+
+An IORNN (Figure 1) is a recursive neural network whose topology is a tree. What make this network different from traditional RNNs (Socher et al., 2010) is that each tree node u caries two vectors: iu - the inner representation, represents the content of the
+
+654
+
+

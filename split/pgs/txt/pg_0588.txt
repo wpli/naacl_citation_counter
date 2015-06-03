@@ -1,0 +1,28 @@
+three features with the highest improvements. Gender is also always among the three features with the highest improvements for the four languages that have gender (es, de, la, cs). We just discussed an example for German where gender could not be derived from context or inflectional suffixes. Other languages also have word forms that do not mark gender, e.g., Spanish masculine ave `bird' vs. feminine llave `key'. The gender can, however, easily be derived if the word representation encodes whether a word form has been seen with a specific determiner or adjective on its right or left. Lastly, we use Jaccard similarity13 to compare the sets of gold and predicted morphological features. Jaccard can be interpreted as a soft variant of accuracy: If the two tags are identical it yields 1 and otherwise it corresponds to the number of correctly predicted features divided by the size of the union of gold and predicted features.
+accuracy Jaccard cs 79.41 89.89 de 85.72 90.71 es 95.43 96.77 hu 91.14 93.52 la 73.23 83.68 morph
+
+performs slightly better than the implementation by Liang (2005). We also compared the learned representations to manually created Morphological Analyzers (MAs). We found that MarLiN outperforms MAs in POS tagging, but that it is substantially worse in morphological tagging. In our analysis of the results, we showed that both MarLiN and MAs decrease the error most for out-of-vocabulary words and for the features POS and gender.
+
+8 Resources
+As part of this publication we also release the following resources at http://cistern.cis.lmu. de/marmot/: (i) our implementation of MarLiN as open-source (ii) the morphological layer of the German part of the SMULTRON corpus. For easier reproducibility, we also made (iii) the preprocessed Wikipedia dumps and the induced representation dictionaries available. (iv) Morphological dictionaries were released to the extent this was compatible with the usage agreement. (v) We also published the conversion code for unifying the Spanish and Czech annotations.
+
+This table demonstrates that the evaluation measure we have used throughout this paper ­ a tag counts as completely wrong if a single feature was misidentified even though all others are correct ­ is conservative. On a feature-by-feature basis accuracy would be much higher. The difference is largest for Czech and Latin.
+
+Acknowledgments
+We would like to thank the anonymous reviewers for their comments. The first author is a recipient of the Google Europe Fellowship in Natural Language Processing, and this research is supported by this Google Fellowship. The annotation of the SMULTRON data was supported by Deutsche Forschungsgemeinschaft (grant DFG 2246/2, Wordgraph).
+
+7
+
+Conclusion
+
+We have presented a test suite for morphological tagging consisting of in-domain (ID) and out-ofdomain (OOD) data sets for six languages: Czech, English, German, Hungarian, Latin and Spanish. We converted some of the data sets to obtain a reasonably consistent annotation and manually annotated the German part of the Smultron treebank. We surveyed four different word representations: SVDreduced count vectors, LM-based clusters, accumulated tag counts and CW embeddings. We found that the LM-based clusters outperformed the other representations for POS and MORPH tagging, ID and OOD data sets and all languages. We also showed that our implementation of MarLiN (Martin et al., 1998) is an order-of-magnitude more efficient and
+13
+
+References
+Rami Al-Rfou, Bryan Perozzi, and Steven Skiena. 2013. Polyglot: Distributed word representations for multilingual NLP. In Proceedings of CoNLL. Rie Kubota Ando and Tong Zhang. 2005. A highperformance semi-supervised learning method for text chunking. In Proceedings of ACL. Giuseppe Attardi and Antonia Fuschetto. 2013. Wikipedia Extractor. http://medialab.di. unipi.it/wiki/Wikipedia_Extractor. Steven Bird, Ewan Klein, and Edward Loper. 2009. Natural language processing with Python. " O'Reilly Media, Inc.".
+
+Jaccard(U, V ) = |U  V |/|U  V |
+
+534
+
+

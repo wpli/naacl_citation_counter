@@ -1,0 +1,25 @@
+              
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+Figure 2: Different pseudo-term nesting structures for various settings of the speech-to-term extraction model. The y -axis represents the number of terms extracted at a given period in time. This figure represents an approximately twenty second interval of Query 42. sential some DTW distance threshold  is applied before a repetition is passed along to the clustering procedure. This produces a graph consisting of a set of disconnected "dumbbells." Finally, the original edge list is augmented with a set of "overlap" edges between corresponding nodes in different dumbbells (Figure 1c); these overlap edges indicate that two nodes correspond to essentially the same segment of speech. For two nodes (two segments of speech) to be considered essentially the same, we require a minimal fractional overlap of 0.97, which is set less than unity to allow some noise in the segment end points. These overlap edges act to effectively merge vertexes across the dumbbells, enabling transitive matches between acoustic segments that did not match directly. The pseudo-terms are defined to be the resulting connected components of the graph, each consisting of a set of corresponding acoustic segments that can occur anywhere in the collection (Figure 1d). In the experiments described in this paper, three pseudo-term feature variants arising from three settings of the DTW distance threshold are considered. Lower thresholds imply higher fidelity matches that yield fewer and purer pseudo-term clusters. These are referred to as pure clustering ( = 0.06, produc591 ing 406,366 unique pseudo-terms), medium clustering ( = 0.07, producing 1,213,223 unique pseudoterms) and noisy clustering ( = 0.075, producing 1,503,169 unique pseudo-terms). 3.2 Nested Pseudo-Terms
+
+Each pseudo-term cluster consists of a list of occurrences. A term is denoted using start and end offsets, in units of 10 milliseconds, from the beginning of the file. It is thus a simple matter of bookkeeping to construct a bag-of-pseudo-terms representation for each query and response. Moreover, because we have start and end offsets for each pseudo-term, we can also construct more sophisticated representations that are based on filtering or grouping the pseudo-terms based on the ways in which they overlap temporally. One interesting effect of pseudo-term creation is that the pseudo-terms are often "nested," and they are often nested quite deeply. This sort of nesting has previously been explored for phrase indexing, where a longer term contains a shorter term that might also be used independently elsewhere in the collection. As an English text analogy, if we index "White House spokesman" we might well also want to index "White House" and "spokesman"
+
+

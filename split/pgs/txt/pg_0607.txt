@@ -1,0 +1,35 @@
+Dataset MR SemEval COAE
+
+SVM 0.669 0.632 0.625
+
+LC 0.721 0.604 0.706
+
+Self-learning 0.677 0.675 0.679
+
+TSVM 0.684 0.609 0.649
+
+Dasgupta's 0.762 0.735 0.709
+
+Li's 0.731 0.702 0.692
+
+Nguyen's 0.769 0.652 0.642
+
+LCCT 0.815 0.775 0.713
+
+Table 1: Comparing classification accuracy with 10% labeled data. The LCCT model performs significantly better
+
+We summarize the experiment results in Table 1. According to Table 1, the proposed LCCT method substantially and consistently outperforms other methods on all the three datasets. This verifies the effectiveness of the proposed approach and demonstrates its advantage in semi-supervised sentiment analysis where reviews are from different domains and different language. For example, the overall accuracy of our algorithm is 5.3% higher than Dasgupta's method and 13.1% higher than TSVM on Movie Reviews dataset. On other datasets, we observe the similar results. To verify that unlabeled data improves the performance, we compare the SVM and Nguyen's classifier trained on 10% of the labeled data with other semi-supervised classifiers. Table 1 shows that the semi-supervised learning methods greatly benefit from using unlabeled data, especially on the Movie Reviews and on the SemEval dataset. Surprisingly, on the COAE dataset, lexicon-based method turns out to outperform SVM, self-learning and TSVM. The reason might be that the topics in the COAE dataset are pretty diverse. Without sufficient labeled data or prior knowledge such as sentiment lexicon, the corpus-based classifiers tend to separate the documents into topical sub-clusters as opposed to sentiment classes. To understand the performance of our algorithm with respect to different portions of labeled data, we compare our algorithm with baseline methods by varying the percentage of labeled data from 5% to 100%. Figure 2 shows that our approach is robust and achieves excellent performance on different labeling percentages. As expected, having more labeled data improves the performance. The LCCT method achieves a relative high accuracy with 10% of the reviews labeled, better than SVM, TSVM and Self-learning with 100% of the reviews labeled. On the other hand, when all the training data are labeled, LCCT is still significantly more accurate than all 553
+
+the competitors except Nguyen's method. Although, the accuracy of Nguyen's method is slightly better than ours on Movie Reviews dataset, it dosen't perform well on SemEval and COAE datasets since the rating-based features learned from score-associated product reviews cannot significantly benefit the social reviews in forums and blogs, etc. The main advantage of our model comes from its capability of exploiting the complementary information from the lexicon-based approach and the corpusbased approach. Another reason for the effectiveness of our approach is the way that we combine the domain-independent knowledge and the domainspecific knowledge. It is known that both the corpus-based approach and the lexicon-based approach have classification biases (Kennedy and Inkpen, 2006; Andreevskaia and Bergler, 2008; Qiu et al., 2009). To evaluate the effectiveness of our algorithm in reducing the bias, we compare it with the classifier that only uses one view of the LCCT model: either using the corpus-based view or using the lexicon-based view. The comparison is conducted on the Movie Review dataset. As Table 2 shows, our algorithm achieves good performance on both precision and recall. In contrast, the baseline methods either have high precision but low recall, or have high recall but low precision. The experiment result suggests that combining the two views is essential in eliminating the classification bias.
+
+Data MR pos. MR neg.
+
+Corpus-based Prec. 0.92 0.78 Rec. 0.79 0.90
+
+Lexicon-based Prec. 0.67 0.80 Rec. 0.86 0.58
+
+LCCT Prec. 0.90 0.88 Rec. 0.86 0.89
+
+Table 2: Precision and recall on Movie reviews
+
+

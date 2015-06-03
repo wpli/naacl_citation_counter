@@ -1,0 +1,32 @@
+Unsupervised Code-Switching for Multilingual Historical Document Transcription
+Dan Garrette
+ 
+
+Hannah Alpert-Abrams
+
+Taylor Berg-Kirkpatrick
+
+Dan Klein
+
+Department of Computer Science, University of Texas at Austin, dhg@cs.utexas.edu Comparative Literature Program, University of Texas at Austin, halperta@gmail.com  Computer Science Division, University of California at Berkeley, {tberg,klein}@cs.berkeley.edu
+
+Abstract
+Transcribing documents from the printing press era, a challenge in its own right, is more complicated when documents interleave multiple languages--a common feature of 16th century texts. Additionally, many of these documents precede consistent orthographic conventions, making the task even harder. We extend the state-of-the-art historical OCR model of Berg-Kirkpatrick et al. (2013) to handle word-level code-switching between multiple languages. Further, we enable our system to handle spelling variability, including now-obsolete shorthand systems used by printers. Our results show average relative character error reductions of 14% across a variety of historical texts.
+
+1
+
+Introduction
+
+Transcribing documents printed on historical printing presses poses a number of challenges for OCR technology. Berg-Kirkpatrick et al. (2013) presented an unsupervised system, called Ocular, that handles the types of noise that are characteristic of pre20th century documents and uses a fixed monolingual language model to guide learning. While this approach is highly effective on English documents from the 18th and 19th centuries, problems arise when it is applied to older documents that feature code-switching between multiple languages and obsolete orthographic characteristics. In this work, we address these issues by developing a new language model for Ocular. First, to handle multilingual documents, we replace Ocular's simple n-gram language model with an unsupervised model of intrasentential code-switching that 1036
+
+allows joint transcription and word-level language identification. Second, to handle orthographic variation, we provide an interface that allows individuals familiar with relevant languages to guide the language model with targeted orthographic information. As a result, our system handles inconsistent spelling, punctuation, and diacritic usage, as well as now-obsolete shorthand conventions used by printers. We evaluate our model using documents from the Primeros Libros project, a digital archive of books printed in the Americas prior to 1601 (Dolan, 2012). These texts, written in European and indigenous languages, often feature as many as three languages on a single page, with code-switching occurring on the chapter, sentence, and word level. Orthographic variations are pervasive throughout, and are particularly difficult with indigenous languages, for which writing systems were still being developed. Our results show improvements across a range of documents, yielding an average 14% relative character error reduction over the previous state-of-the-art, with reductions as high as 27% on particular texts.
+
+2
+
+Data
+
+Writing during the early modern period in Europe was characterized by increasing use of vernacular languages alongside Latin, Greek, and Hebrew. In the colonies, this was matched by the development of grammars and alphabetic writing systems for indigenous languages (see Eisenstein (1979) and Mignolo (1995)). In all cases, orthographies were regionally variable and subject to the limited resources of the printing houses; this is particularly true in the Americas, where resources were scarce,
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1036­1041, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

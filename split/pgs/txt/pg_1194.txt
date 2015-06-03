@@ -1,0 +1,25 @@
+I DEST: Learning a Distributed Representation for Event Patterns
+Sebastian Krause LT Lab, DFKI Alt-Moabit 91c 10559 Berlin, Germany
+skrause@dfki.de
+
+Enrique Alfonseca Katja Filippova Daniele Pighin Google Research Brandschenkestrasse 110 8810 Zurich, Switzerland
+{ealfonseca,katjaf,biondo}@google.com
+
+Abstract
+This paper describes I DEST, a new method for learning paraphrases of event patterns. It is based on a new neural network architecture that only relies on the weak supervision signal that comes from the news published on the same day and mention the same real-world entities. It can generalize across extractions from different dates to produce a robust paraphrase model for event patterns that can also capture meaningful representations for rare patterns. We compare it with two state-of-the-art systems and show that it can attain comparable quality when trained on a small dataset. Its generalization capabilities also allow it to leverage much more data, leading to substantial quality improvements.
+
+news articles that were published on the same day and mention the same entities should contain good paraphrase candidates. Two state-of-the-art event paraphrasing systems that are based on this assumption are N EWS S PIKE (Zhang & Weld, 2013) and H EADY (Alfonseca et al., 2013; Pighin et al., 2014). These two systems have a lot in common, yet they have never been compared with each other. They have specific weak and strong points, and there are many ways in which they are substantially different: · Scope of generalization. In N EWS S PIKE the paraphrase clusters are learned separately for each publication day and entity set, and the system cannot generalize across events of the same type involving different entities occurring on the same or on different days. For example, if the event verbs has married and wed appear in news about two entities A and B marrying, and has married and tied the knot with appear in news involving two different entities C and D, N EWS S PIKE is not able to infer that wed and tied the knot with are also paraphrases, unless a post-processing is done. H EADY overcomes this limitation thanks to a global model that learns event representations across different days and sets of entities. However, the global nature of the learning problem can incur into other drawbacks. First, training a global model is more costly and more difficult to parallelize. Second, relatively frequent patterns that erroneously co-occur with other patterns may have a negative impact on the final models, potentially resulting in noisier clusters. Lastly, low-frequency patterns are likely to be
+
+1
+
+Introduction
+
+Most Open Information Extraction (Open-IE) systems (Banko et al., 2007) extract textual relational patterns between entities automatically (Fader et al., 2011; Mausam et al., 2012) and optionally organize them into paraphrase clusters. These pattern clusters have been found to be useful for Question Answering (Lin & Pantel, 2001; Fader et al., 2013) and relation extraction (Moro & Navigli, 2012; Grycner & Weikum, 2014), among other tasks. A related Open-IE problem is that of automatically extracting and paraphrasing event patterns: those that describe changes in the state or attribute values of one or several entities. An existing approach lo learn paraphrases of event patterns is to build on the following weak supervision signal:
+
+
+Work performed during an internship at Google
+
+1140
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1140­1149, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

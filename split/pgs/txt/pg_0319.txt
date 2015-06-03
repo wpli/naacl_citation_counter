@@ -1,0 +1,29 @@
+2.1
+
+System Overview
+
+The proposed system consists of two maps. M APA is from the feature vector of an EC position to a low dimensional space. M APA : Rn  Rk , k  n fA (X )  WA X (1)
+
+M APA is a linear transformation, and WA is a k  n matrix. The other one is from labels to the same low dimensional space. M APB : {Label1 , Label2 , ...}  R  Rk
+i fB (Labeli )  WB
+
+(2)
+
+i M APB is also a linear transformation. WB is a k dimensional vector and it is also the distributed representation of Labeli in the low dimensional space. The two maps are learned from the training data simultaneously. In the testing phase, for any possible EC position to be classified, we extract the corresponding feature vector X , and then map it to the low dimensional space using fA (X ) = WA X . Then we have gi (X ) for each Labeli as follows: i gi (X ) = (fA (X ))T WB
+
+learning rate and some other parameters of the stochastic gradient descent algorithm are to be optimized using the development set. An alternative method is to train a neural network model for multi-class classification directly. It is plausible when the number of classes is not large. One of the advantages of representing ECs and labels in a hidden space is that EC detection usually serves as an intermediate task. Usually we want to know more about the ECs such as their roles and explicit content. Representing labels and ECs as dense vectors will greatly benefit other work such as EC resolution or full parsing. Besides, such a joint embedding framework can scale up to the large set of labels as is shown in the image annotation task (Weston et al., 2011), which makes the identification of dependency types of ECs (which is a large set) possible. 2.2 Context Features Construction 2.2.1 Defining Locations In a piece of text, possible EC positions can be described with references to tokens, e.g., before the nth token (Yang and Xue, 2010). One problem with such methods is that if there are more than one ECs preceding the nth token, they will occupy the same position and can not be distinguished. One solution is to decide the number of ECs for each position, which complicates the problem. But if we do nothing, some ECs will be ignored. A compromised solution is to describe positions using parse trees (Xue and Yang, 2013). Adjacent ECs before a certain token usually have different head words, which means they are attached to different nodes (head words) in a parse tree. Therefore it is possible to define positions using "head word, following word" pairs. Thus the problem of EC detection can be formulated as a classification problem: for each "head word, following word" pair, what is the type of the EC? An example is shown in figure 2, in which there are 2 possible EC positions, (, ) and (, )1 .
+Note that there are still problems with the tree based method. As is shown in Fig. 3, the pro and T are attached to the same head word () and share the same
+1
+
+(3)
+
+For each possible label Labeli , gi (X ) is the score that the example having a Labeli and the label predicted for the example is the i that maximizes gi (X ). Following the method of Weston et al. (2011), we try to minimize a weighted pairwise loss, learned using stochastic gradient descent: 
+X i=c
+
+L(rankc (X )) max(0, (gi (X ) - gc (X )))
+
+(4) Here c is the correct label for example X , and rankc (X ) is the rank of Label c among all possible labels for X . L is a function which reflects our attitude towards errors. A constant function L = C implies we aim to optimize the full ranking list. Here we adopt L() =  i=1 1/i, which aims to optimize the top 1 in the ranking list, as stated in (Usunier et al., 2009). The
+
+265
+
+

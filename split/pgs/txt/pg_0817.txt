@@ -1,0 +1,39 @@
+Event Type Expression Transcription Catabolism Phosphorylation Localization Binding Regulation Positive regulation Negative regulation Total Event F1
+
+Rec. 55.3 50.0 52.4 61.7 52.8 20.2 24.1 17.4 8.4 27.9
+
+Prec. 88.3 39.1 100.0 82.9 100.0 92.7 64.0 63.8 52.8 72.2
+
+F1 68.0 43.9 68.9 70.7 69.1 33.2 35.0 27.4 14.5 40.2
+
+40 35 30 25 20 15 0.1 0.2
+
+GENIA Event Extraction F1
+
+10% Database 50% Database
+0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+Table 3: GENIA event extraction results of GUSPEE with five prototype words per event type
+GENIA Event Extraction F1
+40
+
+Figure 4: GENIA Event F1 of GUSPEE with prototypes, using a fraction of database and increasing amount of unannotated text.
+
+35
+
+30 0.1 0.2 0.3 0.4 0.5
+
+Incomplete Database Incomplete Text
+0.6 0.7 0.8 0.9 1.0
+
+Figure 3: GENIA Event F1 of GUSPEE with prototypes, using incomplete database or text.
+
+events such as Catabolism benefited the most from prototypes, as they have fewer variations in triggers. While the F1 score 40.2 still lags behind the supervised state of the art, it would have been competitive compared to the 24 teams participating in the original shared task, outperforming 19 of them (the top 5th system scored an F1 of 40.5, see www.nactem.ac.uk/tsujii/GENIA/SharedTask /results/results-master.html, Task 1). 4.3 Database-Text Mismatch
+
+In our simulation of grounded learning, every event in the database is mentioned in some text and vice versa. In practice, however, there is usually a mismatch between database and text: the unannotated text generally contains more facts than are already populated in the database; conversely, a database fact may not be explicitly mentioned in the text. The GENIA dataset offers an excellent opportunity to study the robustness of grounded learning in light of such mismatch. Specifically, we simu763
+
+lated a grounded learning scenario with an incomplete database by populating events from the annotations of a random fraction of training text, and then learning GUSPEE with this database and all training text. Likewise, we simulated a scenario with incomplete text using the training event database in full, but only a fraction of unannotated text. Figure 3 shows the results of GUSPEE with prototypes as the fraction varies between 0.1 and 1, by averaging five random runs. In both scenarios, the F1 score degrades smoothly as the fraction gets smaller. Precision stays roughly the same while recall gradually degrades (curves not shown). This shows that GUSPEE is reasonably robust. Not surprisingly, the degradation is steeper with incomplete database than with incomplete text. To further investigate the effect of unannotated text, we also randomly sampled a fraction of database events for grounded supervision, and evaluated GUSPEE with increasing amounts of unannotated text. Figure 4 shows the results by averaging nine random runs. The F1 increases steadily with additional unannotated text, mainly due to rising recall (curves not shown). This suggests that GUSPEE could potentially benefit from more unannotated text and is reasonably robust even when some text is not relevant to the available events. As expected, more grounded supervision (50% vs. 10% database) led to substantially better F1 and lower variation. 4.4 Error Analysis
+
+Upon manual inspection, we found that syntactic errors considerably affect performance. Poon (2013)
+
+

@@ -1,0 +1,49 @@
+A RTICLE
+A RT.D EF.N OM .S G .F EM
+
+A DJECTIVE
+A DJ .N OM .S G .F EM
+
+N OUN
+N.N OM .S G .F EM
+
+die the
+
+größte biggest
+
+Stadt city
+
+Table 1: A sample German phrase in TIGER (Brants et al., 2004) annotation with an accompanying English translation. Each word is annotated with a complex morphological tag and its corresponding coarsegrained POS tag. For instance, Stadt is annotated with N.N OM .S G .F EM indicating that it is a noun in the nominative case and also both singular and feminine. Each tag is composed of meaningful sub-tag units that are shared across whole tags, e.g., the feature N OM fires on both adjectives and nouns.
+
+hoff (2003) introduced factored LMs, which effectively add tiers, allowing easy incorporation of morphological structure as well as part-of-speech (POS) tags. More recently, Müller and Schütze (2011) trained a class-based LM using common suffixes-- often indicative of morphology--achieving stateof-the-art results when interpolated with a KneserNey LM. In neural probabilistic modeling, Luong et al. (2013) described a recursive neural network LM, whose topology was derived from the output of M ORFESSOR, an unsupervised morphological segmentation tool (Creutz and Lagus, 2005). Similarly, Qiu et al. (2014) augmented WORD 2 VEC (Mikolov et al., 2013) to embed morphs as well as whole words--also taking advantage of M ORFES SOR . LMs were tackled by dos Santos and Zadrozny (2014) with a convolutional neural network with a k -best max-pooling layer to extract character level n-grams, efficiently inserting orthographic features into the LM--use of the vectors in down-stream POS tagging achieved state-of-the-art results in Portuguese. Finally, most similar to our model, Botha and Blunsom (2014) introduced the additive logbilinear model (LBL++). Best summarized as a neural factored LM, the LBL++ created separate embeddings for each constituent morpheme of a word, summing them to get a single word-embedding. 2.2 Computational Morphology
+
+a small tag set. For instance, in their universal POS tagset, Petrov et al. (2011) propose the coarse tag N OUN to represent all substantives. In inflectionally-rich languages, like German, considering other nominal attributes, e.g., case, gender and number, is also important. An example of an annotated German phrase is found in table 1. This often leads to a large tag set; e.g., in the morphological tag set of Haji c (2000), English had 137 tags whereas morphologically-rich Czech had 970 tags! Clearly, much of the information needed to determine a word's morphological tag is encoded in the word itself. For example, the suffix ed is generally indicative of the past tense in English. However, distributional similarity has also been shown to be an important cue for morphology (Yarowsky and Wicentowski, 2000; Schone and Jurafsky, 2001). Much as contextual signatures are reliably exploited approximations to the semantics of the lexicon (Harris, 1954)--you shall know the meaning of the word by the company it keeps (Firth, 1957)--they can be similarly exploited for morphological analysis. This is not an unexpected result--in German, e.g., we would expect nouns that follow an adjective in the genitive case to also be in the genitive case themselves. Much of what our model is designed to accomplish is the isolation of the components of the contextual signature that are indeed predictive of morphology.
+
+3
+
+Log-Bilinear Model
+
+The LBL is a generalization of the well-known loglinear model. The key difference lies in how it deals with features--instead of making use of handcrafted features, the LBL learns the features along with the weights. In the language modeling setting, we define the following model, p(w | h) =
+def
+
+exp (s (w, h)) , w exp (s (w , h))
+
+(1)
+
+Our work is also related to morphological tagging, which can be thought of as ultra-fine-grained POS tagging. For morphologically impoverished languages, such as English, it is natural to consider 1288
+
+where w is a word, h is a history and s is an energy function. Following the notation of Mnih and Teh (2012), in the LBL we define s (w, h) =
+i=1
+def
+
+n-1
+
+T
+
+Ci rhi
+
+qw + bw ,
+
+(2)
+
+

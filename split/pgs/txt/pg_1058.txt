@@ -1,0 +1,26 @@
+day 1 2 3 4 5
+
+method DA DA+CSLM DA DA+CSLM PA+CSLM-adapt DA DA+CSLM PA+CSLM-adapt DA DA+CSLM PA+CSLM-adapt DA DA+CSLM PA+CSLM-adapt
+
+translator 1 33.34 (28.10) [54.59] 31.13 (25.73) [54.94] 35.33 (30.73) [56.63] 33.06 (28.86) [56.30] 34.31 (29.07) [56.18] 30.76 (26.68) [55.49] 27.87 (24.70) [55.09] 25.24 (20.04) [54.13] 33.01 (29.07) [55.90] 29.79 (27.12) [56.78] 30.47 (25.87) [55.21] 31.34 (26.31) [54.78] 29.52 (24.88) [52.59] 31.52 (24.43) [53.08]
+
+translator 2 32.99 (28.10) [54.59] 31.43 (25.73) [54.94] 37.44 (30.73) [56.63] 36.24 (28.86) [56.30] 30.48 (27.21) [56.30] 35.09 (26.68) [55.49] 33.86 (24.70) [55.09] 27.48 (20.40) [54.16] 38.31 (29.07) [55.90] 37.92 (27.12) [56.78] 30.15 (25.53) [56.12] 34.38 (26.31) [54.78] 33.94 (24.88) [54.74] 26.19 (22.34) [53.16]
+
+translator 3 48.62 (28.10) [54.59] 48.50 (25.73) [54.94] 49.03 (30.73) [56.63] 49.12 (28.86) [56.30] 47.29 (29.62) [56.53] 38.05 (26.68) [55.49] 36.72 (24.70) [55.09] 27.42 (20.99) [53.77] 41.96 (29.07) [55.90] 41.03 (27.12) [56.78] 32.70 (24.03) [55.86] 39.41 (26.31) [54.78] 38.85 (24.88) [54.74] 30.46 (23.71) [54.31]
+
+Table 1: TER scores for English-French data of the Legal domain for the three translators over 5 days. Parenthesized scores are calculated using the references of all three translators, while scores in brackets are calculated using a generic reference provided by the European Commission.
+
+analyzing translation quality in terms of BLEU score (results not presented here). Like for the prior TER results, the BLEU scores for translator 3 are much worse than the scores of the two other ones. After the third day, the scores reach the same level. Again, this could indicate that the adaptation process has learned his particular style. 5.2 Translation speed Table 2 reports, for each translator, the translation speed, expressed in number of post-edited words per hour. The results are given for the two conditions of our experiment, along with the percentage of relative improvement. We can observe a very high productivity gain for all translators between the two sessions of our test, from 18.5% to 38.3%. The huge User Translation speed (words/hour) ID DA+CSLM PA+CSLM-adapt  T1 928 1283 38.3% T2 1533 1816 18.5 % T3 308 704 128.5%
+Table 2: Overall translation speed for all translators. Measurements are taken on post-edits performed with the domain-adapted MT system (DA+CSLM) and the project-adapted MT system (PA+CSLM-adapt).
+
+gain for translator T3 could be biased by the low working speed of the translator, even if we had confirmed that all the translators are experts with the post-editing process. We assume that either T3 had some difficulties with the legal domain or he had just taken his time to perform the test, or both. This could partially explain the huge improvement in productivity which is doubled.
+
+6
+
+Conclusion
+
+Several studies have also shown that the close integration of MT into a CAT tool can increase the productivity of human translators. In this work, we extended these works in several aspects. We have observed systematic improvements of the translation quality and speed when adapting the systems with data generated during the translation project (spanning several days). The MT system does not only adapt to the style of the human translator who postedit the automatic translations. In all cases, we observed improved translation quality with respect to an independent reference translation. Finally, we have shown that neural network LMs can be used in an operational SMT system and that they can be adapted very quickly to small amount of data. Although the use of neural networks in SMT is drawing a lot of attention, we are not aware at any other
+
+1004
+
+

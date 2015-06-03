@@ -1,0 +1,73 @@
+noun_ARG1 prep_ARG2 adj_ARG1 verb_ARG2 prep_ARG1 60
+
+F1 -score (%)
+
+coord_ARG2 conj_ARG2 coord_ARG1 verb_ARG3
+
+F1 -score (%)
+
+BKY + BN ( H )+ PATHS ALL ( HPOS ) BASELINE
+
+verb_ARG1
+
+BKY + BN ( H )+ PATHS ALL ( HPOS ) BASELINE
+
+92 90 88 86 84 82 80 78 76 74 10
+
+65 60 55 50 45
+
+BKY + BN ( H )+ PATHS ALL ( HPOS ) BASELINE
+
+BKY + BN ( H )+ PATHS ALL ( HPOS ) BASELINE
+
+70 80 90 PAS F1 -score (%)
+
+100
+
+30
+
+40
+
+50 60 70 80 PAS F1 -score (%)
+
+90
+
+100
+
+20 30 40 50 Sent. Length (bins of size 10)
+
+50+
+
+40 5-10
+
+11-15 16-20 Edges Length (bins of size 5)
+
+21-25
+
+(a) Most frequent labels.
+
+(b) Best improved labels.
+
+(c) Sentence length.
+
+(d) Long-distance cies.
+
+dependen-
+
+BKY + BN ( H )+ PATHS
+
+Figure 4: Error analysis on PAS (dev. set).
+
+stands for BKY + BN ( HPOS )+ PATHS.
+
+may sometimes penalize the models. Even though, BN + SPINES + PATHS is the best model for DM, a spine is only a partial projection which lacks attachment information. Spines alone only therefore provide a local context and are unable to cope well with LDDs. Coordination Structures We now focus on structures with subject ellipsis. We extracted them by using a simple graph pattern, i.e. two verbs with a shared ARG1 and a coordination dependency. Our best models' scores are displayed in Tables 9. Once again, our models improve the F1 score, but not in the same proportion. DM considers the conjunction as a semantically empty word and attaches an edge _and_c between the two verbs to mark the coordination. Consequently this edge is more difficult to predict, because it is less informative, our baseline model relying on tokens, lemmas and POS. We note that the difference in the number of evaluated dependencies in both corpora comes from an annotation scheme divergence between PAS and DM regarding subject ellipsis. DM opts for coordinate structures with a chain of dependencies rooted at the first conjunct, the coordinating conjunctions being therefore semantically empty. In PAS, the final coordinating conjunction and each coordinating conjunction is a two-place predicate, taking left and right conjuncts as its arguments. The gain of 6.30 points for DM (Table 9(a), resp. +3 for PAS) indicates that, when an annotation scheme is designed to have many semantically empty words, using syntactic information tends to enhance the parser accuracy. This gives a clear insight into what type of information is required to 70
+
+parse semantic graphs: the greater the distance between the head and the dependent, the larger the context needed to disambiguate the attachments. 6.4 Ruling out the Structural Factor Bias It may argued that the improvement we noPAS DM ticed could stem from Overlap +2.87 +2.67 a potentially strong Rest +2.70 +2.74 overlap between surface trees and predicate-argument structures, both in terms of edges and labels. In fact, the conversion from surfacic parses into predicate-argument structures requires a large amount of edges relabeling (for instance, when nsubj is relabeled to ARG1). We tested this hypothesis by computing the number of common edges between MATE predictions and DM and PAS. The overlap corresponds to about 22% of all edges in PAS and 27% in DM. Although important, it does not represent the majority of dependencies in our corpora, because most of edges are not present in surface predictions. We evaluated the improvement of the overlap as well as for the rest. Results show that our best models perform roughly the same on both sets. Interestingly, as opposed to PAS's model, DM's model performs better on the non-overlap part. This suggests that the use of PTB-based features is somehow not optimal when applied on a none PTB-based treebank, such as DM which comes from a handcrafted grammar.
+
+7
+
+Discussion
+
+Our point was to prove that providing more syntactic context, in the form of phrased-based tree fragments and surface dependencies, helps transition-
+
+

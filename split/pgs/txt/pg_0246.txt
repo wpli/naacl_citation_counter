@@ -1,0 +1,37 @@
+0.85 0.80 0.75 Accuracy
+
+Race: county-follow
+
+0.85 0.80 Accuracy 0.70 0.65 0.60 0.550 0.75
+
+Age: county-follow-name
+
+0.80 0.75 Accuracy 0.70 0.65 0.60 0.550
+
+Politic-Followers: county-follow
+
+0.70 0.65 0.60 0.55 0.500
+20 40 60 80 Iteration
+
+grasp greedy imp-greedy semi-greedy
+100 120 140
+
+semi-greedy greedy imp-greedy grasp
+20 40 60 80 Iteration 100 120 140
+
+grasp greedy imp-greedy semi-greedy
+20 40 60 80 Iteration 100 120 140
+
+(a)
+
+(b)
+
+(c)
+
+Figure 1: Accuracy per iteration of constraint selection for three classification tasks.
+
+fied by constraint type. Note that imp-greedy selects the constraints that perform best on the tuning set, fits the classification model, and then classifies the testing set. We can see that for three of the four tasks (race, age, pol-f), imp-greedy results in higher accuracy than using all the constraints. This is particularly pronounced for age: the best result without constraint selection is 61.4, compared with 79.2 for imp-greedy. Furthermore, impgreedy outperforms logistic on two of four tasks, suggesting that using unlabeled data can improve accuracy. Note that both imp-greedy and logistic use the same amount of labeled data, though in different ways: logistic performs standard supervised classification; imp-greedy uses the labeled data to perform constraint selection for label regularization. Thus, to summarize our answer to RQ2, we find that imp-greedy provides a robust method to select constraints in the presence of noise. While it comes at the cost of a small amount of labeled data, it is less reliant on this data than a traditional supervised approach, and so may be more applicable in streaming settings. To answer RQ3, we can compare the accuracies provided by each of the constraint types in Table 1. For all-const, the follower constraints (fol) outperform the county constraints (cnt) for all tasks, while the name constraint (which only applies to age), falls between the two. Including both cnt and fol improves accuracy on two of the four tasks. These trends change somewhat for imp-greedy. The cnt constraints are superior for two tasks, while fol are superior for the other two. The nam constraints again fall between the two. Unlike for all-const, 192
+
+using more constraint types improves accuracy on three of four tasks. These differences suggest that the constraint selection algorithms allow label regularization to be more robust to noisy and conflicting constraints. That is, using constraint selection, we can view constraint engineering akin to feature engineering in discriminative, supervised learning methods -- developers can add many types of constraints to the model without (much) fear of reducing accuracy. The usual caveat of overfitting applies here as well; indeed, comparing the accuracies on the tuning set (Table 2) with those on the testing set (Table 1) suggests that some over-tuning has occurred, most notably on age and pol. We further examined the coefficients of the models trained using each constraint type. We find, for example, that county constraints result in models with large coefficients for location-specific terms (e.g., college names for younger users, southern cities for Republican users), while follower constraints tend to learn models dominated by follower features ("thenation" for Democrats, "glennbeck" for Republicans). Similarly, name constraints result in models dominated by name features. This analysis helps explain how combining constraint types can improve overall accuracy, since each type emphasizes different subsets of features. This difference between constraint types is further shown in Table 3, which lists the top features for the semi-greedy constraint selection algorithm, fit using different subsets of constraints. In this table, the italicized words are the words from the description field of the user's profile, the underlined words are followed accounts, and the bold words are the words
+
+

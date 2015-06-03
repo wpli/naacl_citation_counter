@@ -1,0 +1,25 @@
+r
+0 0.2 0.4 0.6 0.8 1
+
+p-value 0 0.05 0.1
+
+Figure 3: Pearson's correlation between every pair of segment-level metric competing in the W MT-13 Spanishto-English task.
+
+the new assessment reflects how well metrics score translations of very close or equal quality, and, as described in Section 2, ameliorates the issue of low inter-annotator agreement as well as resolving the original mismatch between discrete human relative preference judgments and continuous metric scores. Figure 3 is a heat map of the Pearson's correlation between each pair of segment-level metrics for Spanish-to-English from W MT-13, and Figure 4 shows correspondence between scores of three segment-level metrics with our human evaluation data. Figure 5 displays the outcome of the Williams significance test as applied to each pairing of competing metrics. Since the power of Williams test increases with the strength of correlation between a pair of metrics, it is important not to conclude the best system by the number of other metrics it outperforms. Instead, the best choice of metric for that language pair is any metric that is not signicifantly outperformed by any other metric. Three metrics prove not to be significantly outperformed by any other metric for Spanish-to-English, and tie for best performance: METEOR (Denkowski and Lavie, 2011), NLEPOR (Han et al., 2013) and SENT BLEU- MOSES (sBLEU-moses). 1189
+
+Figure 5: Evaluation of significance of increase in correlation with human judgment between every pair of segment-level metrics competing in the Spanish-toEnglish W MT-13 metrics task. A colored cell (i,j ) indicates that system named in row i significantly outperforms system named in column j at p < 0.1, and green cells at p < 0.05.
+
+Metric
+METEOR NLEPOR SENT BLEU- MOSES SIMP BLEU P LEPOR SIMP BLEU R
+
+r 0.441 0.416 0.422 0.418 0.404 0.326
+
+Table 3: Pearson's correlation between each W MT-13 segment-level metric and human assessment for the combined set of nine language pairs.
+
+4.3
+
+9 Language Pairs
+
+Since human assessments are now absolute, scores effectively have the same meaning across language pairs, facilitating the combination of data across multiple language pairs. Since many approaches to MT are language-pair independent, the ability to know what segment-level metric works best across all language pairs is useful for choosing an appropriate default metric or simply avoiding having to swap and change metrics across different language
+
+

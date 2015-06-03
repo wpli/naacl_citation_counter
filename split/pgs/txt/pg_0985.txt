@@ -1,0 +1,5 @@
+Sittichai Jiampojamarn, Colin Cherry, and Grzegorz Kondrak. 2010. Integrating joint n-gram features into a discriminative training framework. In Proceedings of NAACL-2010, Los Angeles, CA, June. Association for Computational Linguistics. Thorsten Joachims. 2002. Optimizing search engines using clickthrough data. In Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining, pages 133­142. ACM. Ryan McDonald, Koby Crammer, and Fernando Pereira. 2005. Online large-margin training of dependency parsers. In Proceedings of the Annual Meeting of the Association for Computational Linguistics. Kristina Toutanova and Colin Cherry. 2009. A global model for joint lemmatization and part-of-speech prediction. In Proceedings of the Joint Conference of the 47th Annual Meeting of the ACL and the 4th International Joint Conference on Natural Language Processing of the AFNLP: Volume 1-Volume 1, pages 486­ 494. Association for Computational Linguistics. Richard Zens and Hermann Ney. 2004. Improvements in phrase-based statistical machine translation. In HLTNAACL 2004: Main Proceedings, pages 257­264, Boston, USA, May.
+
+931
+
+

@@ -1,0 +1,207 @@
+Ranking Turkers: Gold Ranking vs. First 20 Sentences Ranking
+
+Ranking Turkers: Gold Ranking vs. Model Ranking
+50
+
+50
+
+q
+
+qq
+q
+
+q
+
+q
+
+q
+
+q
+
+First 20 Sentences Ranking
+
+40
+
+q
+q
+
+40
+
+qq
+
+q
+
+q
+
+q
+q
+q
+
+qq
+
+q
+
+q q
+q q
+
+q q
+q
+
+q
+
+q
+
+q
+
+q
+
+Model Ranking
+
+q
+
+q
+
+q
+q
+
+qq
+
+qq
+q
+q
+
+q
+q
+
+q q
+q
+q
+
+30
+
+30
+
+q
+
+q
+q
+
+q
+q
+
+q
+
+q
+
+20
+
+20
+
+q
+
+q
+
+qq
+q
+q
+
+q qq
+q
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+q
+
+q
+q
+
+q
+
+10
+
+q
+
+q
+
+10
+
+q
+
+q
+
+q q q
+
+q q
+0
+
+qq
+
+q
+q
+
+q
+
+q
+
+q
+q
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+0
+
+q
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+Gold Ranking
+
+Gold Ranking
+
+Figure 3: Correlation between gold standard ranking and ranking computed using the first 20 sentences as calibration. Each bubble represents a worker. The radius of each bubble shows the relative volume of translations completed by the worker. The weighted correlation is 0.94.
+
+Figure 4: Correlation between gold standard ranking and our model's ranking. The corresponding weighted correlation is 0.95.
+
+fit the gold ranking better. Consequently, we can decide whether to continue to hire a worker in a very short time after analyzing the first k sentences (k  20) provided by each worker. Figure 3 shows the correlation of gold ranking and the ranking based on workers' first 20 sentences. 5.4.3 Ranking workers using a model We train a linear regression model on 10% of the data to rank workers. We use the model to select the best translation in one of two ways: · Using the model's prediction of workers' rank, and selecting the translation from the best worker. · Using the model's score for each translation and selecting the highest scoring translation of each source sentence. Table 3 shows that the model trained on all features achieves a very high correlation with the gold standard ranking (Pearson's  = 0.95), and a BLEU score of 39.80. Figure 4 presents a visualization of the gold ranking and model ranking. The workers who produce the largest number of translations (large bubbles in the figure) are ranked extremely well. 710
+
+5.5
+
+Filtering out bad workers
+
+Ranking translators would allow us to reduce costs by only re-hiring top workers. Table 4 shows what happens when we vary the percentage of top ranked workers we retain. In general, the model does a good job of picking the best translations from the remaining good translators. Compared to actually knowing the gold ranking, the model loses only 0.55 BLEU when we filter out 75% of the workers. In this case we only need to solicit two translations for each source sentence on average.
+
+6
+
+Cost Analysis
+
+We have introduced several ways of significantly lowering the costs associated with crowdsourcing translations when a large amount of data are solicited (on the order of millions of samples): · We show that after we have collected one translation of a source sentence, we can consult a model that predicts whether its quality is sufficiently high or whether we should pay to have the sentence re-translated. The cost savings for non-professionals here comes from reducing the number of redundant translations. We
+
+

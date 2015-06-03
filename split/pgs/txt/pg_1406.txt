@@ -1,0 +1,20 @@
+Figure 1: RE in a Spanish sentence using the crosslingual relation extraction pipeline.
+
+Data: s, t, a, pt Result: ps P  PhraseExtract(s, t, a) ps = , score = -, overlap = 0 for (phrs , phrt )  P do if BLEU(phrt , pt ) > score then if phrt  pt =  then pt  phrt score  BLEU(phrt , pt ) overlap  phrt  pt if overlap = 0 then length =  for (phrs , pt )  P do if len(phrs ) < length then length  len(phrs ) ps  phrs ; else ps  WordAlignmentProj(s, t, a, pt ); Algorithm 1: Cross-lingual projection of phrase pt from a target sentence t to a source sentence s using word alignments a and parallel phrases P . tracted relation (Godse; killed; Gandhi) can be expressed by the dependency pattern: arg1  nsubj  rel:postag=VBD  dobj  arg2.3 O LLIE also normalizes the relation phrase for some of the phrases, for example is president of is normalized to be president of. 4 2.2 Cross-lingual Relation Projection
+
+2
+
+Multilingual Relation Extraction
+
+Our method of RE for a sentence s = s1 , s2 , . . . sN in a non-English language consists of three steps: (1) Translation of s into English, that generates a sentence t = t1 , t2 , . . . tM with word alignments a relative to s, (2) Open RE on t, and (3) Relation projection from t to s. Figure 1 shows an example of RE in Spanish using our proposed pipeline. We employ O LLIE1 (Mausam et al., 2012) for RE in English and G OOGLE T RANSLATE2 API for translation from the source language to English, although in principle, we could use any translation system to translate the language to English. We next describe each of these components. 2.1 Relation Extraction in English
+
+Suppose t = t1 , t2 , . . . , tM is a tokenized English sentence. Open relation extraction computes triples of non-overlapping phrases (arg1; rel; arg2) from the sentence t. The two arguments arg1 and arg2 are connected by the relation phrase rel. We utilized O LLIE (Mausam et al., 2012) to extract the relation tuples for every English sentence. We chose O LLIE because it has been shown to give a higher yield at comparable precision relative to other open RE systems such as R EVERB and WOEparse (Mausam et al., 2012). O LLIE was trained by extracting dependency path patterns on annotated training data. This training data was bootstrapped from a set of high precision seed tuples extracted from a simpler RE system R EVERB (Fader et al., 2011). In Godse killed Gandhi, the exhttp://knowitall.github.io/ollie/ https://developers.google.com/ translate/
+2 1
+
+We next describe an algorithm to project the extracted relation tuples in English back to the source language sentence. Given a source sentence, the G OOGLE T RANSLATE API provides us its translation along with the word-to-word alignments relaM tive to the source. If s = sN 1 and t = t1 denote the source and its English translation, then the alignment a = {aij : 1  i  N ; 1  j  M } where, aij = 1 if si is aligned to tj , and is 0 otherwise. A
+Example borrowed from Mausam et al. (2012) For sentences where the veracity of a relation depends on a clause, O LLIE also outputs the clause. For example, in Early astronomers believed that Earth is the center of the universe, the relation (Earth; be center of; universe) is supplemented by an (AttributedTo: believe; Early astronomers) clause. We ignore this clausal information.
+4 3
+
+1352
+
+

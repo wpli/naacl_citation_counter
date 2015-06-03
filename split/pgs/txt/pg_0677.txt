@@ -1,0 +1,25 @@
+Typed Dependency Relation Word Slot restaurant, AMOD, cheap locale by use, AMOD, expensiveness
+
+Target Word restaurant cheap locale by use expansiveness
+
+Contexts cheap/AMOD restaurant/AMOD-1 expensiveness/AMOD locale by use/AMOD-1
+
+Table 1: The contexts extracted for training dependency-based word/slot embeddings from the utterance of Fig. 2.
+
+pendency relations from headwords to their dependents, and words on arcs denote types of the dependencies. All typed dependencies between two words are encoded in triples and form a word-based dependency set Tw = { wi , t, wj }, where t is the typed dependency between the headword wi and the dependent wj . For example, Figure 4 generates restaurant, AMOD, cheap , have, DOBJ, restaurant , etc. for Tw . Similarly, we build a slot-based dependency set Ts = { si , t, sj } by transforming dependencies between slot-fillers into ones between slots. For example, restaurant, AMOD, cheap from Tw is transformed into locale by use, AMOD, expensiveness for building Ts , because both sides of the non-dotted line are parsed as slot-fillers by SEMAFOR. For the edges within a single knowledge graph, we assign a weight of the edge connecting nodes xi and xj as r ^(xi , xj ), where x is either s or w. Since the weights are measured based on the relations between nodes regardless of the directions, we combine the scores of two directional dependencies: r ^(xi , xj ) = r(xi  xj ) + r(xj  xi ), (2)
+
+as a head and xj as a dependent. t - xj ), xi xj = arg max C (xi 
+t t t
+
+(3)
+
+where C (xi  - xj ) counts how many times the dependency xi , t, xj occurs in the dependency set Tx . Then the scoring function that estimates the dependency xi  xj is measured as r1 (xi  xj ) = C (xi - - - -  xj ), 
+txi xj
+
+(4)
+
+which equals to the highest observed frequency of the dependency xi  xj among all types from Tx . 4.2.2 Embedding-Based Measurement Most neural embeddings use linear bag-of-words contexts, where a window size is defined to produce contexts of the target words (Mikolov et al., 2013c; Mikolov et al., 2013b; Mikolov et al., 2013a). However, some important contexts may be missing due to smaller windows, while larger windows capture broad topical content. A dependency-based embedding approach was proposed to derive contexts based on the syntactic relations the word participates in for training embeddings, where the embeddings are less topical but offer more functional similarity compared to original embeddings (Levy and Goldberg, 2014). Table 1 shows the extracted dependency-based contexts for each target word from the example in Figure 4, where headwords and their dependents can form the contexts by following the arc on a word in the dependency tree, and -1 denotes the directionality of the dependency. After replacing original bagof-words contexts with dependency-based contexts, we can train dependency-based embeddings for all target words (Yih et al., 2014; Bordes et al., 2011; Bordes et al., 2013). For training dependency-based word embeddings, each word w is associated with a word vector vw 
+
+where r(xi  xj ) is the score estimating the dependency including xi as a head and xj as a dependent. In Section 4.2.1 and 4.2.2, we propose two scoring functions for r(·), frequency-based as r1 (·) and embedding-based as r2 (·) respectively. For the edges in Ews , we estimate the edge weights based on the frequency that the slot candidates and the words are parsed as slot-filler pairs. In other words, the edge weight between the slot-filler wi and the slot candidate sj , r ^(wi , sj ), is equal to how many times the filler wi corresponds to the slot candidate sj in the parsing results. 4.2.1 Frequency-Based Measurement Based on the dependency set Tx , we use t xi xj to denote the most frequent typed dependency with xi 623
+
+

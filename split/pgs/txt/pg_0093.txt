@@ -1,0 +1,20 @@
+3.3.1
+
+Interpretability and Phrase Similarity
+
+CNNSE has the additional advantage of interpretability. To illustrate, we created a web page to explore the dataset under the CNNSE model. The page http://www.cs.cmu.edu/~fmri/ papers/naacl2015/cnnse_mitchell_ lapata_all.html displays phrase pairs sorted by average similarity score. For each phrase in the pair we show a summary of the CNNSE composed phrase meaning. The scores of the 10 top dimensions are displayed in descending order. Each dimension is described by its interpretable summarization. As one scrolls down the page, the similarity scores increase, and the number of dimensions shared between the phrase pairs (highlighted in red) increases. Some phrase pairs with high similarity scores share no top scoring dimensions. Because we can interpret the dimensions, we can begin to understand how the CNNSE model is failing, and how it might be improved. For example, the phrase pair judged most similar by the human subjects, but that shares none of the top 10 dimensions in common, is "large number" and "great majority" (behavioral similarity score 5.61/7). Upon exploration of CNNSE phrasal representations, we see that the representation for "great majority" suffers from the multiple word senses of majority. Majority is often used in political settings to describe the party or group with larger membership. We see that the top scoring dimension for "great majority" has top scoring words "candidacy, candidate, caucus", a politically-themed dimension. Though the CNNSE representation is not incorrect for the word, the common theme between the two test phrases is not political. The second highest scoring dimension for "large number" is "First name, address, complete address". Here we see another case of the collision of multiple word senses, as this dimension is related to identifying numbers, rather than the quantity-related sense of number. While it is satisfying that the word senses for majority and number have been separated out into different dimensions for each word, it is clear that both the composition and similarity functions used for this task are not gracefully handling multiple word senses. To address this issue, we could partition the dimensions of A into sense-related groups 39
+
+Table 6: Correlation of phrase similarity judgements (Mitchell and Lapata, 2010) to pairwise distances in several adjective-noun composition models. Model w.addSVD w.addNNSE Lexfunc CNNSE Correlation to behavioral data 0.5377 0.4469 0.1347 0.5923
+
+and use the maximally correlated groups to score phrase pairs. CNNSE interpretability allows us to perform these analyses, and will also allow us to iterate and improve future compositional models.
+
+4
+
+Conclusion
+
+We explored a new method to create an interpretable VSMs that respects the notion of semantic composition. We found that our technique for incorporating phrasal relationship constraints produced a VSM that is more consistent with observed phrasal representations and with behavioral data. We found that, compared to NNSE, human evaluators judged CNNSE phrasal representations to be a better match to phrase meaning. We leveraged this improved interpretability to explore composition in the context of a previously published compositional task. We note that the collision of word senses often hinders performance on the behavioral data from Mitchell and Lapata (2010). More generally, we have shown that incorporating constraints to represent the task of interest can improve a model's performance on that task. Additionally, incorporating such constraints into an interpretable model allows for a deeper exploration of performance in the context of evaluation tasks. Acknowledgments This work was supported in part by a gift from Google, NIH award 5R01HD075328, IARPA award FA865013C7360, DARPA award FA8750-13-20005, and by a fellowship to Alona Fyshe from the Multimodal Neuroimaging Training Program (NIH awards T90DA022761 and R90DA023420).
+
+References
+8 Marco Baroni and Roberto Zamparelli. Nouns are vectors, adjectives are matrices: Representing
+
+

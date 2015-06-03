@@ -1,0 +1,19 @@
+#WhyIStayed, #WhyILeft: Microblogging to Make Sense of Domestic Abuse
+Nicolas Schrading1 Cecilia O. Alm2 Ray Ptucha1 Christopher M. Homan3 1 Kate Gleason College of Engineering, Rochester Institute of Technology 2 College of Liberal Arts, Rochester Institute of Technology 3 Golisano College of Computing and Information Sciences, Rochester Institute of Technology {jxs8172§ |coagla§ |rwpeec§ |cmh }@{§ rit.edu| cs.rit.edu}
+
+Abstract
+In September 2014, Twitter users unequivocally reacted to the Ray Rice assault scandal by unleashing personal stories of domestic abuse via the hashtags #WhyIStayed or #WhyILeft. We explore at a macro-level firsthand accounts of domestic abuse from a substantial, balanced corpus of tweeted instances designated with these tags. To seek insights into the reasons victims give for staying in vs. leaving abusive relationships, we analyze the corpus using linguistically motivated methods. We also report on an annotation study for corpus assessment. We perform classification, contributing a classifier that discriminates between the two hashtags exceptionally well at 82% accuracy with a substantial error reduction over its baseline.
+
+1
+
+Introduction
+
+Domestic abuse is a problem of pandemic proportions; nearly 25% of females and 7.6% of males have been raped or physically assaulted by an intimate partner (Tjaden and Thoennes, 2000). These numbers only include physical violence; psychological abuse and other forms of domestic abuse may be even more prevalent. There is thus an urgent need to better understand and characterize domestic abuse, in order to provide resources for victims and efficiently implement preventative measures. Survey methods exploring domestic abuse involve considerable time and investment, and may suffer from under-reporting, due to the taboo and stressful nature of abuse. Additionally, many may not
+
+have the option of directly seeking clinical help. Social media may provide a less intimidating and more accessible channel for reporting, collectively processing, and making sense of traumatic and stigmatizing experiences (Homan et al., 2014; Walther, 1996). Such data has been used for analyzing and predicting distinct societal and health issues, aimed at improving the understanding of wide-reaching societal concerns. For instance, Choudhury et al. (2013) predicted the onset of depression from user tweets, while other studies have modeled distress (Homan et al., 2014; Lehrman et al., 2012). Xu et al. (2013) used Twitter data to identify bullying language, then analyzed the characteristics of these tweets, and forecasted if a tweet would be deleted out of regret. In September 2014, in the wake of the Ray Rice assault scandal1 and the negative public reaction to the victim's decision to stay and support her abuser, Twitter users unequivocally reacted in a viral discussion of domestic abuse, defending the victim using the hashtag #WhyIStayed and contrasting those with #WhyILeft. Such narrative sharing may have a cathartic and therapeutic effect, extending the viral reach of the trend. Analysis of the linguistic structures embedded in these tweet instances provides insight into the critical reasons that victims of domestic abuse report for choosing to stay or leave. Trained classifiers agree with these linguistic structures, adding evidence that these social media texts provide valuable insights into domestic abuse.
+1 http://www.sbnation.com/nfl/2014/5/23/5744964/ ray-rice-arrest-assault-statement-apology-ravens.
+
+1281
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1281­1286, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

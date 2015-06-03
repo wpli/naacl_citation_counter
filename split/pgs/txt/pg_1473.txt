@@ -1,0 +1,24 @@
+subtyping and polymorphism: capital takes a state type as input, so argmax must returns a state, and therefore its first argument, the state function, must have type stt so that the matched type variable 'a will be bound to st. This more refined design will also help prune unnecessary argument matching using type checking. 3.2 Semantics with Parametric Polymorphism The above type system works smoothly for first-order functions (i.e., predicates taking atomic type arguments), but the situation with higher-order functions (i.e., predicates that take functions as input) is more involved. What is the type of argmax in the context "the capital of largest state ..."? One possibility is to define it to be as general as possible, as in the simply typed version (and many conventional semantic parsers): argmax : (topt)(topi)top. But this actually no longer works for our sophisticated type system for the following reason. Intuitively, remember that capital:stct is a function that takes a state as input, so the return type of argmax must be a state or its subtype, rather than top which is a supertype of st. But we can not simply replace top by st, since argmax can also be applied in other scenarios such as "the largest city". In other words, argmax is a polymorphic function, and to assign a correct type for it we have to introduce type variables: argmax : ('at)('ai)'a, where type variable 'a is a place-holder for "any type". 3.3 Parsing with Subtype Polymorphism and Parametric Polymorphism
+
+Can we still apply right reduce here? According to subtyping requirement (§3.1), we want loi <: sti to hold, knowing that st <: lo. Luckily, there is a rule about function types in type theory that exactly fits here: A <: B BC <: AC (4)
+
+which states the input side is reversed (contravariant). This might look counterintuitive, but the intuition is that, it is safe to allow the function size : loi to be used in the context where another type sti is expected, since in that context the argument passed to size will be state type (st), which is a subtype of location type (lo) that size expects, which in turn will not surprise size. See the classical type theory textbook (Pierce, 2002, Chap. 15.2) for details. Several works in literature (Zettlemoyer and Collins, 2005; Zettlemoyer and Collins, 2007; Wong and Mooney, 2007; Kwiatkowski et al., 2013) employ some primitive type hierarchies and parse with typed lambda calculus. However, simply introducing subtyped predicates without polymorphism will cause type checking failures in handling high-order functions, as we discussed above.
+
+4
+
+Training: Latent Variable Perceptron
+
+capital : stct argmax : ('at)('ai)'a state : stt
+
+We modify the previous parsing algorithm to accommodate subtyping and polymorphic types. Figure 1 (right) shows the derivation of the running example using the new parsing algorithm. Below we focus on the differences brought by the new algorithm. Note that we also modified the MR templates as in Table 1. The new MR templates are more general due to the polymorphism from type variables. For example, now we use only one MR template P : 'b'c . P to replace the three NN MR templates for simple types. In step 4, unlike capital : ee, we shift the predicate capital : stct; in step 7, we shift the polymorphic expression for "largest": argmax : ('at)('ai)'a. And after the shift in step 8, the stack becomes At step 9, in order to apply argmax onto state : stt, we simply bind type variable 'a to type st, results in (argmax state) : (sti)st. After the shift in step 11, the stack becomes:
+
+We follow the latent variable max-violation perceptron algorithm of Yu et al. (2013) for training. This algorithm is based on the "violation-fixing" framework of Huang et al. (2012) which is tailored to structured learning problems with abundant search errors such as parsing or machine translation. The key challenge in the training is that, for each question, there might be many different unknown derivations that lead to its annotated MR, which is known as the spurious ambiguity. In our task, the spurious ambiguity is caused by how the MR templates are chosen and grounded during the shift step, and the different reduce orders that lead to the same result. We treat this unknown information as latent variable. More formally, we denote D(x) to be the set of all partial and full parsing derivations for an input sentence x, and mr (d) to be the MR yielded by a full derivation d. Then we define the sets of (partial and full) reference derivations as: good i (x, y ) = {d  D(x) | |d| = i, full derivation d s.t. d is a prefix of d , mr (d ) = y }, Those "bad" partial and full derivations that do not lead to the annotated MR can be defined as: bad i (x, y ) = {d  D(x) | d  good i (x, y ), |d| = i}. At step i, the best reference partial derivation is d+ i (x, y ) = argmax w · (x, d),
+dgood i (x,y )   
+
+capital : stct (argmax state) : (sti)st size : loi.
+
+(5)
+
+1419
+
+

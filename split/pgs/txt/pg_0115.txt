@@ -1,0 +1,30 @@
+Algorithm NonInc (beam=1) RevInc (beam=1) NonInc (beam=16) Z&C (beam=16)* Hassan et al. 09*
+
+UP 92.45 91.83 92.68 -
+
+UR 82.16 86.35 89.57 -
+
+UF 87.00 89.00 91.10 86.31
+
+LP 85.59 84.02 86.20 87.43 -
+
+LR 76.06 79.00 83.32 83.61 -
+
+LF 80.55 81.43 84.74 85.48 -
+
+Cat Acc. 91.39 91.17 92.70 93.12 -
+
+Table 4: Performance on the test data. *: These results are from their paper. We also analyzed the performance of the greedy (beam=1) NonInc and RevInc parsers in terms of parsing speed (excluding pos tagger and supertagger time). NonInc and RevInc parse 110 and 125 sentences/second respectively. Despite the complexity of the revealing actions, RevInc is faster than the NonInc. Significant amount of parsing time is spent on the feature extraction step. Features from top four nodes in the stack and their children are extracted for both the algorithms. Since the average connectedness of RevInc and NonInc are 4.62 and 2.15 respectively, on average, all four nodes in the stack are processed for NonInc and only two nodes are processed for RevInc. Because of this there is significant reduction in the feature extraction step for RevInc compared to NonInc. Also, the complex LRev and RRev actions only constituted 5% of the total actions in the parsing process. Table 4 presents the results of our approaches on test data. Our incremental algorithm, RevInc, gives 2.0% and 0.88% improvements over NonInc in unlabeled and labeled F-scores respectively on the test data. Results of RevInc without a beam are reasonably close to the results of Z&C which uses a beam of 16. We compare our results with Incremental+Lookahead model of Hassan et al. (2009). They reported 86.31% unlabeled F-score on test data which is 2.69% lower. Note that these Fscores are not directly comparable since Hassan et al. (2009) use simplified lexicalized CCG categories. Our evaluation is based on CCG dependencies which are different from dependencies in the dependency grammar. Hence, we can't directly compare our results with dependency parsers like Zhang and Nivre (2011) and Honnibal et al. (2013). revealing for parsing CCG (Pareschi and Steedman, 1987). On the standard CCGbank test data, our algorithm achieved improvements of 0.88% and 2.0% in labeled and unlabeled F-scores respectively over the baseline non-incremental shift-reduce algorithm. We achieved this without changing any CCG lexical categories and only changing a single head rule of making the main verb rather than the auxiliary verb the head. Our algorithm models transitions rather than incremental derivations, and hence we don't need an incremental CCGbank. Our approach can therefore be adapted to languages with dependency treebanks, since CCG lexical categories can be easily extracted from dependency treebanks (Cakici, 2005; Ambati et al., 2013). We also designed new measures of incrementality and showed that our algorithm is more incremental than the standard shift-reduce CCG parsing algorithm. We expect to improve our current model in a number of ways. Providing information about lexical category probabilities (Auli and Lopez, 2011) assigned by the supertagger can be useful during parsing. We would like to explore the limited use of a beam to handle lexical ambiguity by only keeping analyses derived from distinct lexical categories in the beam. Following Xu et al. (2014), we also plan to explore a dynamic oracle strategy. Ultimately, we intend to evaluate the impact of our incremental parser extrinsically in terms of language modeling for SMT or ASR.
+
+Acknowledgments
+We thank Mike Lewis, Greg Coppola, Francesco Sartorio and Siva Reddy for helpful discussions. We also thank the three anonymous reviewers for their useful suggestions. This work was supported by ERC Advanced Fellowship 249520 GRAMPLUS, EU IST Cognitive Systems IP Xperience and ARC Discovery grant DP 110102506.
+
+5
+
+Conclusion and Future Plan
+
+We have designed and implemented a new incremental shift-reduce algorithm based on a version of
+
+61
+
+

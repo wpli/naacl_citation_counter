@@ -1,0 +1,35 @@
+Encarta lookup WordNet & Roget lookup¶ WE-T WordNet + Affix heuristics + Adjacent category annotation§ WE-D Encarta PILSA + S2Net + Embedding WordNet & Roget BPTF WE-TD
+
+Prec. 0.65 1.00 0.92 0.79 0.09 0.88 0.88 0.92
+
+Dev. Set Rec. F 0.61 0.63 0.49 0.66 0.71 0.80 0.66 0.08 0.87 0.88 0.91 0.72 0.09 0.87 0.88 0.91
+
+Test Set (950) Prec. Rec. F 0.61 0.56 0.59 0.98 0.45 0.62 0.90 0.72 0.80 -- 0.08 0.81 0.82 0.90 -- 0.07 0.80 0.82 0.88 -- 0.07 0.81 0.82 0.89
+
+Test Set (790) Prec. Rec. F -- -- -- 0.98 0.45 0.61 0.90 0.72 0.80 0.77 0.07 -- -- 0.89 0.63 0.07 -- -- 0.87 0.69 0.07 -- -- 0.88
+
+Table 1: Results on the GRE antonym question task.  is from Yih et al. (2012),  is from Zhang et al. (2014), and § is from Mohammad et al. (2013). ¶ slightly differs from the result in Zhang et al. (2014) since thesauri can contain multiple candidates as antonyms and the answer is randomly selected for the candidates.
+
+Error Type Contrasting Degree Incorrect gold Wrong expansion Incorrect Total
+
+Description Predicted answer is contrasting, but not antonym. Both answers are antonyms, but gold has a higher degree of contrast. Gold answer is incorrect. Gold and predicted answers are both in the expanded thesauri. Predicted answer is not contrasting.
+
+# Errors 7 3 2 1 1 14
+
+Target reticence dussuade postulate flinch hapless sessile --
+
+Example Gold loquaciousness exhort verify extol fortunate obile --
+
+Predicted storm extol reject advance happy ceasing --
+
+Table 2: Error types by WE-TD on the development set.
+
+We obtained raw texts from Wikipedia on November 2013 for unsupervised dataset. We lowercased all words in the text. 3.1.3 Parameter settings The parameters were tuned using the development part of the dataset. In training the WE-T model, the dimension of embeddings was set to 300, the number of iteration of AdaGrad was set to 20, and the initial learning rate of AdaGrad was set to 0.03.  in Equation 1 were set to 3.2, according to the proportion of the numbers of synonym and antonym pairs in the thesauri. In addition to these parameters, when we trained the WE-TD model, we added the top 100,000 frequent words appearing in Wikipedia into the vocabulary. The parameter  was set to 100,
+
+the number of negative sampling k was set as 5, the context window size C was set to 5, the threshold for subsampling2 was set to 10-8 . 3.1.4 Evaluation metrics We used the F-score as a primary evaluation metric following Zhang et al. (2014). The F-score is the harmonic mean of precision and recall. Precision is the proportion of correctly answered questions over answered questions. Recall is the proportion of correctly answered questions over the questions.
+This small threshold is because this was used to balance the effects of supervised and unsupervised information.
+2
+
+987
+
+

@@ -1,0 +1,32 @@
+3
+
+Grounded Semantic Parsing for Event Extraction
+
+We use the GENIA event extraction task (Kim et al., 2009) as a representative example of complex knowledge extraction. The goal is to identify biological events from text, including the trigger words and arguments (Figure 1, bottom). There are nine event types, including simple ones such as Expression and Transcription that can only have one THEME argument, Binding that can have more than one THEME argument, and regulations that can have both THEME and CAUSE arguments. Protein annotations are given as input. We formulate this task as semantic parsing and present our GUSPEE system (Figure 2). The core of GUSPEE is a tree HMM (Section 3.1), which extracts events from a sentence by annotating its syntactic dependency tree with event and argument states. In training, GUSPEE takes as input unannotated text and a database of complex events, and learns the tree HMM using EM, guided by grounded learning from the database via virtual evidence. 3.1 Problem Formulation Let t be a syntactic dependency tree for a sentence, with nodes ni and dependency edges di,j (nj is a child of ni ). A semantic parse of t is an assignment z that maps each node to an event state and each dependency to an argument state. The semantic state of a protein word is fixed to that protein annotation. Basic event states are the nine event types and NULL (signifying a non-event, e.g., "The" in Figure 2 (c)). Basic argument states are THEME, CAUSE, and NULL. Additional states will be introduced later in Section 3.2 and 3.4. GUSPEE models z, t by a tree HMM: P (z, t) =
+m
+
+In training, GUSPEE takes as input a set of complex events (database K ) and syntactic dependency trees (unannotated text T ), and maximizes the likelihood of T augmented by virtual evidence K (z ).  = arg max log P (T |K )
+
+
+= arg max
+ tT
+
+log
+z
+
+P (z, t) · K (z )
+
+Virtual evidence is analogous to a Bayesian prior, but applies to variable states rather than model parameters (Subramanya and Bilmes, 2007). 3.2 Handling Syntax-Semantics Mismatch
+
+For simple sentences such as the one in Figure 2(b), the complex event can be represented by a semantic parse using only basic states. In general, however, syntax and semantics often diverge. For example, in Figure 2(c), "requires" triggers the top POS-NEG event that has a THEME argument triggered by "block", but "ability" stands in between the two; likewise for "block" and "IL-10". Additionally, mismatch could stem from errors in the syntactic parse. In such cases, the correct semantic parse can no longer be represented by basic states alone. Following GUSP (Poon, 2013), we introduced a new argument state RAISING which, if assigned to a dependency, would require that the parent and child be assigned the same basic event state. We also introduce a corresponding RAISE version for each nonnull event state, to signify that the word derives its basic state from RAISING of a child. RAISING is related to but not identical with type raising in CCG and other grammars. For simplicity, we did not use other complex states explored in Poon (2013). 3.3 Virtual Evidence for Grounded Learning
+
+PEMIT (tm |zm , )·PTRANS (zm |z(m) , )
+
+where  are the emission and transition parameters, m ranges over the nodes and dependency edges,  (nj ) = di,j and  (di,j ) = ni . Note that this formulation implicitly assumes a fixed underlying directed tree, while the words and dependencies may vary. Semantic parsing finds the most probable semantic assignment given the dependency tree: z  = arg max log P (z |t) = arg max log P (z, t)
+z z
+
+Grounded learning in GUSPEE is attained by incorporating the virtual evidence K (z ), which favors the z 's containing known events in K and penalizes those containing unknown events. Intuitively, this can be accomplished by identifying events in z and comparing them with events in K . But this is not robust as individual events and mentions may be fragmental and incomplete. Insisting on matching an event in full would miss partial matches that still convey valuable supervision. Proteins are given as
+
+759
+
+

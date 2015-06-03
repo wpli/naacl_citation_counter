@@ -1,0 +1,76 @@
+Discourse Connective Type
+
+q
+
+All Non-omissible High JSD
+
+Low OR. Low JSD High OR. Low JSD
+
+q
+
+q
+
+q q
+
+q
+
+q
+
+q q
+
+q q
+
+q q
+
+q
+
+q q
+
+q q
+
+Mean accuracy rate
+
+q q
+
+0.55
+
+0.54
+
+Precision Recall F1 Comparison Precision Recall F1 Contingency Precision Recall F1 Temporal Precision Recall F1 Accuracy Macro-Average F1
+
+Expansion
+
+Baseline features 0.608 0.751 0.672 0.398 0.228 0.290 0.465 0.418 0.440 0.263 0.091 0.135 0.550 0.384
+
+Baseline + extra data 0.614 0.788 0.691 0.449 0.276 0.342 0.493 0.396 0.439 0.385 0.091 0.147 0.571 0.405
+
+0
+
+5000
+
+10000
+
+15000
+
+20000
+
+Number of samples from distant supervision
+
+Figure 4: Discourse connectives with high omission rates and low context differentials lead to highest performance boost over the state-of-the-art baseline (dotted line). Each point is an average over multiple trials. The solid lines are LOESS smoothing curves. connectives are used. In addition, it shows that on average, the system with weakly labeled data from freely omissible discourse connectives continues to rise as we increase the number of samples unlike the other classes of discourse connectives, which show the opposite trend. This suggests that discourse connectives must have both high omission rates and low context differential between implicit and explicit use of the connectives in order to be helpful to the inference of implicit discourse relations. Table 3 presents results that show, overall, our best performing system, the one using distant supervision from freely omissible discourse connectives, raises the accuracy rate from 0.550 to 0.571 (p < 0.05; bootstrap test) and the macro-average F1 score from 0.384 to 0.405. We achieve such performance after we tune the subset of weakly labeled data to maximize the performance on the development set. Our distant supervision approach improves the performance by adding more weakly labeled data and no additional features. For a more direct comparison with previous results, we also replicated the state-of-the-art system described in Rutherford and Xue (2014), who follows the practice of the first work on this topic (Pitler et al., 2009) in setting up the task as four binary one vs. other classifiers. The results are presented in Table 4. The results show that the extra data extracted from the Gigaword Corpus is particularly helpful for minority classes such as Comparison vs. Others and Temporal vs Others, where our current system significantly outperforms that of Rutherford and Xue (2014). Interestingly, the Expansion vs. Others classifier
+
+Table 3: Our current 4-way classification system outperforms the baseline overall. The difference in accuracy is statistically significant (p < 0.05; bootstrap test).
+R&X (2014) 0.397 0.544 0.702 0.287 Baseline + extra data 0.410 0.538 0.694 0.333 Baseline 0.380 0.539 0.679 0.246
+
+Comparison vs Others Contingency vs Others Expansion vs Others Temporal vs Others
+
+Table 4: The performance of our approach on the binary classification task formulation. did not improve as the Expansion class in the four-way classification (Table 3).
+
+3.3
+
+Just how good is the weakly labeled data?
+
+We performed additional experiments to get a sense of just how good the weakly labeled data extracted from an unlabeled corpus are. Table 5 presents four-way classification results using just the weakly labeled data from the Gigaword Corpus. The results show that the same trend holds when the implicit relations from the PDTB are not included in the training process. The freely omissible discourse connectives achieves the accuracy rate of 0.505, which is significantly higher than the other classes, but they are weaker than the manually labeled data, which achieves the accuracy rate of 0.550 for the same number of training instances. Weakly labeled data are not perfectly equivalent to the true implicit discourse relations, but they do provide strong enough additional signal. Figure 5 presents experimental results that compare the impact of weakly labeled data from Gigaword Corpus vs gold standard data from the PDTB for the freely omissible class. The mean accuracy rates from the PDTB data are significantly higher than those from the Gigaword Corpus (p <0.05; t-test
+
+805
+
+

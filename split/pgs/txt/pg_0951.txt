@@ -1,0 +1,37 @@
+database but Freebase is incomplete (Ritter et al., 2013). So a data point is labeled nil when either no relation exists or the relation is absent in Freebase. To avoid this ambiguity we train and evaluate the baseline and our algorithms on a subset of this dataset which consists of only non-nil relation labeled datapoints (termed as positive dataset). For the sake of completeness, we do report the accuracies of the various approaches on the entire evaluation dataset. Systems and Baseline: Hoffmann et al. (2011) describe a state-of-the-art approach for this task. They use a perceptron-style parameter update scheme adapted to handle latent variables; their training objective is the conditional likelihood. Out of the two implementations of this algorithm, we use the better5 of these two6 , as our baseline (denoted by Hoffmann). For a fair comparison, the training dataset and the set of features defined over it are common to all the experiments. We discuss the results of two of our approaches. One, is the LatentSVM max-margin formulation with the simple decomposable Hamming loss function which minimizes the error rate (denoted by MM-hamming). The other is the LatentSVM maxmargin formulation with the non-decomposable loss function which minimizes the negative of F score (denoted by MM-F-loss)7 . Evaluation Measure: The performance measure is F which can be expressed in terms of false positives (FP) and false negatives (FN) as:
+F = Np - F N  (F P - F N ) + Np
+
+Figure 2: Experiments on 10% Riedel datasets.
+
+Hoffmann MM-Hamming MM-F-loss
+
+Precision 65.93 59.74 64.81
+
+Recall 47.22 53.81 61.63
+
+F1 54.91 56.32 63.44
+
+Table 1: Average results on 10% Riedel datasets.
+
+We use 1 - F as the expression for the multivariateloss. 4.1 Training on Sub-samples of Data We performed a number of experiments using different randomized subsets of the Riedel dataset (10% of the positive dataset) for training the max-margin approaches. This was done in order to empirically determine a good set of parameters for training. We also compare the results of the approaches with Hoffmann trained on the same sub-samples. Comparison with the Baseline: We report the average over 15 subsets of the dataset with a 90% confidence interval (using student-t distribution). The results of these experiments are shown in Figure 2 and Table 1. We observe that both MM-hamming and MM-F-loss have higher F1 -score compared to the baseline. There is a significant improvement in F1 score to the tune of 8.52% for the multivariate performance measure over Hoffmann. There is also an improvement of F1 -score of 7.12% compared to MM-Hamming. This highlights the importance of using non-linear loss functions compared to simple loss functions like error rate during training. However, Hoffmann has a marginally higher precision of about 1.13%. We noticed that this was
+
+where  is the weight assigned to precision (and 1 -  to recall). F P , F N and Np are defined as :
+FP FN Np
+5
+
+=
+i
+
+yi, (1 - yi,l ) yi, (1 - yi,l )
+i
+
+= =
+i
+
+yi,
+
+It is not quite clear why the performance of the two implementations are different. 6 nlp.stanford.edu/software/mimlre.shtml 7 We use a combination of F1 loss and hamming loss, as using only F1-loss overfits the training dataset, as observed from the experiments.
+
+897
+
+

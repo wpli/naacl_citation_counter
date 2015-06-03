@@ -1,0 +1,93 @@
+[1] Both sites list compatible devices including the Samsung Galaxy Tab. [2] My Dell Streak needed more power than any normal USB car adapter could give me. [3] This actually comes with a micro USB charge cable which fits and works perfectly for my Nokia N97 mini. [4] I contacted the company for warranty service. On my android phone I paired . . . [5] Everything from pulling it out of the box to syncing it with both my IPhone and Ipod touch 4g were effortless.
+200.000 400.000
+Topic Coherence
+
+Table 2: Identified Key-phrase in Cellphone dataset
+
+Topic Coherence vs. Number of Topics
+
+Computer 0
+
+Cellphone
+
+Camera
+
+Food
+
+600.000 800.000 1000.000 1200.000 1400.000 2 4 6 8 10 12 14 16 18 20
+
+OurModel LDA BTM GKLDA DFLDA
+
+500 1000 1500 2000 2500
+
+OurModel LDA BTM GKLDA DFLDA
+
+Number of Topics
+
+Figure 2: Average Topic Coherence score of each model.
+,UUJ
+850 950 1050
+
+
+Figure 3: Detailed Topic Coherence score of T = 15.
+)KRRVNUT ) TK
+
+) )GSKXG
+950 9  8 850 1050 9 950 0.6 0.1 1150 1050
+
+Computer
+650 0 600 0 750 0 650 0 850 0 750 0 950 0 850 0
+550 650 750 850 650 550 750 650 850 750 950 850
+
+5 550 650 750 850
+
+
+
+
+0.5 1.5 2.5 3.5 4.5
+
+0.5 1.5 2.5 2
+
+3.5 4.5
+
+0.5 2.0 3.5 5.0
+
+0.5 1.5 2.5 3.5 4.5
+
+
+
+
+
+
+
+
+
+Figure 4: Parameter influences with fixed topic number T = 15. Table 3: Example topics. First row: domain, Second row: inferred topic tag. Errors are highlighted in red.
+
+Cellphone music LDA PTM phone phone music music iphone car calls radio play device bluetooth sound hear quality free iphone cell volume listen bluetooth hands easy charge good
+
+Computer game LDA PTM buy fps make disruption games dips time playable fast wars play age people pretty thing update card star full empires product laggy read unplayable
+
+Food dinner LDA PTM coffee soup product good found bread love mix amazon popcorn bread taste popcorn great eating bag ordered flavor bought make good coffee taste eat
+
+Camera buy LDA PTM camera camera bought bought wanted pictures year video time sony happy back purchase canon day battery month time love price ago lens week quality
+
+1236
+
+
+
+1150
+
+950
+
+0.6 0.1
+
+650 550 750 650 850 750 950 850
+
+650 6 750 850 950 0.6 0 0.1
+
+950
+
+0.6 0.1
+
+

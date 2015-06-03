@@ -1,0 +1,46 @@
+Generate category distribution,   Dir() for concept type do Generate category, k  Mult () for category k do Generate feature type distribution, 탃  Dir() for feature type g do Generate feature distribution, g  Dir() for stimulus d do d Observe concept cd and retrieve category kc Generate a feature type, gd  Mult (탃cd ) for feature position i do Generate a feature fd ,i  Mult (gd )
+
+c
+
+g
+
+f I D
+
+ G 
+
+
+
+
+
+탃c K
+
+k
+
+
+
+L
+
+Figure 2: The plate diagram of the BCF model. Shaded nodes indicate observed variables, and dotted nodes indicate hyperparameters. tential feature types, and the prior probability of observing that feature type with the concept's assigned category. More formally, we can describe the model through the generative story given in Figure 1. We assume a global multinomial distribution over categories Mult (), drawn from a symmetric Dirichlet distribution with hyperparameter . For each category k, we assume an independent set of multinomial parameters over feature types 탃 , drawn from a symmetric Dirichlet distribution with hyperparameter . For each concept type , we draw a category k from Mult (). Finally, for each feature type g, we draw a multinomial distribution over features Mult (g ) from a symmetric Dirichlet distribution with hyperparameter . With these global assignments in place, we can generate stimuli d as d follows: we first retrieve the category kc of the observed concept cd ; we then generate a feature type gd from the category's feature type distribution Mult (탃cd ); and finally, for each feature position i we generate feature fd ,i from the feature type's distribution Mult (gd ). The joint probability of the model over latent categories, latent feature types, model parameters, and data can be factorized as: P(g, f , �, , , k|c, , , ) = P(|)  P(k |)  P(탃 |)  P(g |)
+k g
+
+Figure 1: The generative story of the BCF model. Observations f and latent labels k and g are drawn from Multinomial distributions (Mult ). Parameters for the multinomial distributions are drawn from Dirichlet distributions (Dir).
+
+differ in their strength of association with feature types (e.g., the feature type function will be highly associated with TOOLS but less so with ANIMALS). BCF jointly optimizes categories and their featural representation: the learning objective is to obtain a set of meaningful categories, each characterized by relevant and coherent feature types. The generative story and plate diagram for the BCF model are shown in Figures 1 and 2, respectively. The input to the model is a collection of stimuli d  {1..D} extracted from a large text corpus. Each stimulus consists of a target concept c  {1..L } and its context f  {1..F }. We adopt a simple representation of context as the set of words making up the sentence c occurs in (except c). The model assigns concepts to categories k  {1..K } and features to feature types g  {1..G}. It learns a set of concept clusters (i.e., categories), as well as a clustering over features (i.e., feature types), and a distribution over those feature clusters for each category (i.e., category-feature type associations). Specifically, the occurrences of a concept will be assigned a category, based on how similar the concept's feature types are compared to the feature types of all other potential categories. Simultaneously, upon observing a stimulus (i.e., a concept in context), the model assigns the context to a particular feature type based on its probability under all po1578
+
+(1)
+
+ P(g
+d
+
+d
+
+|탃cd )  P( f
+i
+
+d ,i
+
+|gd ).
+
+Since we use conjugate priors throughout, we can integrate out the model parameters analytically, and perform inference only over the latent variables, namely the category and feature type labels associ-
+
+

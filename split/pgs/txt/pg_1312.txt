@@ -1,0 +1,26 @@
+2.3
+
+Labeled data
+
+We train our models on newswire, as well as mined unambiguous instances. For English, we use the OntoNotes release of the WSJ section of the Penn Treebank as training data for Twitter, spoken data, and queries.5 For Dutch, we use the training section of the Alpino treebank from the CoNLL task.6 For Portuguese, we use the training section of the Bosque treebank.7 For Spanish, we use the training section of the Cast3LB treebank.8 In order to map between Wiktionary and the treebanks, we need a common coarse tag set. We thus map all data to the universal tag set (Petrov et al., 2012). Dev and test sets Our approach is basically parameter free. However, we did experiment with different ways of extending Wiktionary and hence used an average over three English Twitter dev sections as development set (Ritter et al., 2011; Gimpel et al., 2011; Foster et al., 2011), all mapped and normalized following Hovy et al. (2014). For evaluation, we use three domains: tweets, spoken data and queries. For Twitter, we performed experiments in four languages: English, Portuguese, Spanish and Dutch. The Spanish and Portuguese tweets were annotated in-house, which will be made available.9 For the other languages, we use preexisting datasets for English (Hovy et al., 2014) and Dutch (Avontuur et al., 2012). Table 2 lists the complete statistics for the different language data sets. For the other two domains, we use the manually labeled data from Switchboard section 4 as spoken data test set. For queries, we use manually labeled data from Bendersky et al. (2010).
+
+fault parameters. As baselines we consider a) a CRF model trained only on newswire; b) available off-the-shelf systems (T OOLS); and c) a weakly supervised model (L I 10). For English, the off-theshelf tagger is the Stanford tagger (Toutanova et al., 2003), for the other languages we use TreeTagger (Schmid, 1994) with pre-trained models. The weakly supervised model trained is on the unannotated data. It is a second-order HMM model (Mari et al., 1997; Thede and Harper, 1999) (SOHMM) using logistic regression to estimate the emission probabilities. This method allows us to use feature vectors rather than just word identity, as in standard HMMs. In addition, we constrain the inference space of the tagger using type-level tag constraints derived from Wiktionary. This model, called L I 10 in Table 3, was originally proposed by Li et al. (2012). We extend the model by adding continuous word representations, induced from the unlabeled data using the skip-gram algorithm (Mikolov et al., 2013), to the feature representations. Our logistic regression model thus works over a combination of discrete and continuous variables when estimating emission probabilities. This extended model is called L I 10+ . For both models, we do 50 passes over the data as in Li et al. (2012).
+
+4
+
+Results
+
+3
+3.1
+
+Experiments
+Model
+
+We use a CRF10 model (Lafferty et al., 2001) with the same features as Owoputi et al. (2013) and deLDC2011T03. http://www.let.rug.nl/~vannoord/trees/ 7 http://www.linguateca.pt/floresta/info_ floresta_English.html 8 http://www.iula.upf.edu/recurs01_tbk_ uk.htm 9 http://lowlands.ku.dk/results 10 https://code.google.com/p/crfpp/
+6 5
+
+Table 3 presents results for various models on several languages. Our results show that our newswiretrained CRF model with target-specific Brown clusters already does better than all our other baseline models (T OOLS and weakly L I 10) , with the exception of Q UERIES, where the Stanford tagger does remarkably well. All improvements are statistically significant (p < 0.005, calculated using approximate randomization with 10k iterations). Adding the unambiguous unlabeled data leads to further improvements, with error reductions (over CRF) of up to 20%. The exceptions here are Portuguese tweets and S POKEN. For S POKEN, this is due to the small amounts of unlabeled data, so we re-used the clusters induced on Twitter, reasoning that language use in these two domains is similar to each other. Despite this conjecture, we see small improvements. For English, Portuguese, and Spanish T WITTER, as well as Q UERIES, we see further
+
+1258
+
+

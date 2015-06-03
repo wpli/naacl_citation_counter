@@ -1,0 +1,43 @@
+Input
+
+Embedding
+
+SoftMax
+
+part-of-speech tags or dependency trees are used to select the most likely pattern from the source sentence (Fader et al., 2011; Mausam et al., 2012; Alfonseca et al., 2013). · Sentence compression, which takes as input the original sentence and the entities of interest and produces a shorter version of the sentence that still includes the entities (Pighin et al., 2014). · Memory-based, that tries to find the shortest reduction of the sentence that still includes the entities, with the constraint that its lexicosyntactic structure has been seen previously as a full sentence in a high-quality corpus (Pighin et al., 2014). It is important to note that the final purpose of the system may impact the decision of which extraction method to choose. Pighin et al. (2014) use the event models to generate headlines, and using the memory-based method resulted in more grammatical headlines at the cost of coverage. If the purpose of the patterns is information extraction for knowledge base population, then the importance of having well-formed complete sentences as patterns becomes less obvious, and higher coverage methods become more attractive. For these reasons, in this paper we focus on the first two approaches, which are very well-established and can produce high-coverage output. More specifically, we use R E V ERB extractions and a statistical compression model trained on (sentence, compression) pairs implemented after Filippova & Altun (2013). 4.2 Generating clusters from the embedding vectors
+
+P0 P1 ... Pi ... PV
+wi0 wi1 wiE
+
+4: O C 0 / ) ; e0 D )# e 5A 1 # ... ) 5 eE
+w0j w1j
+
+/ 4 O1 ?
+
+...
+*$ 5 Oj
+
+wEj
+
+...
+)
+
+OV
+
+
+
+Figure 3: Model used for training. V is the total number of unique patterns, which are used both in the one-of-V input and output. E is the dimensionality of the embedding space.
+
+[Alex]"} and {"[Carl] and [Jane] wed", "[Carl] married [Jane]"}, I DEST could learn an embedding space in which "[Per] tied the know with [Per]" and "[Per] and [Per] wed" are relatively close, even though the two patterns never co-occur in the same EEC. This is possible because both patterns have been trained to predict the same pattern {"[Per] married [Per]"}. Reported representations of word embeddings typically use between 50 and 600 dimensions (Mikolov et al., 2013; Levy & Goldberg, 2014). For our pattern embeddings we have opted for an embedding layer size of 200 nodes. We also experimented with larger sizes and with adding more intermediate hidden layers, but while the added cost in terms of training time was substantial we did not observe a significant difference in the results.
+
+4
+4.1
+
+Experimental settings
+Pattern extraction methods used
+
+In previous work we can find three different pattern extraction methods from a sentence: · Heuristic-based, where a number of handwritten rules or regular expressions based on 1144
+
+I DEST does not produce a clustering like N EWS S PIKE and H EADY, so in order to be able to compare against them we have used the algorithm described in Figure 4 to build paraphrase clusters from the pattern embeddings. Given a similarity threshold on the cosine similarity of embedding vectors, we start by sorting the patterns by extraction frequency and proceed in order along the sorted vector by keeping the most similar pattern of each. Used patterns are removed from the original set to make sure that a pattern is not added to two clusters at the same time.
+
+

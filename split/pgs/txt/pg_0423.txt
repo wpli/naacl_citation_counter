@@ -1,0 +1,25 @@
+Action NEXT EDGE-lr SWAP-lr REATTACHk -lr REPLACE HEAD REENTRANCEk -lr MERGE NEXT NODE-lc DELETE NODE
+
+Current state  Result state (0 | , 0 | , G)  (0 | ,  , G ) (0 | , 0 | , G)  (0 |0 | ,  , G ) (0 | , 0 | , G)  (0 | ,  , G ) (0 | , 0 | , G)  (0 | ,  = CH (0 , G ), G ) (0 | , 0 | , G)  (0 | , 0 | , G ) (0 | , 0 | , G)  (~  | ,  , G ) (0 |1 | , [], G)  (1 | ,  = CH (1 , G ), G ) (0 |1 | , [], G)  (1 | ,  = CH (1 , G ), G )
+
+Assign labels  [(0 , 0 )  lr ]  [(0 , 0 )  lr ]  [(k, 0 )  lr ] NONE  [(k, 0 )  lr ] NONE  [0  lc ] NONE
+
+Precondition
+
+ is not empty
+
+ is empty
+
+Table 1: Transitions designed in our parser. CH (x, y ) means getting all node x's children in graph y . erwise, only the current node 0 is examined. Also, to simultaneously make decisions on the assignment of concept/relation label, we augment some of the actions with an extra parameter lr or lc . We define  : V  LV as the concept labeling function for nodes and  : A  LA as the relation labeling function for arcs. So  [(0 , 0 )  lr ] means assigning relation label lr to arc (0 , 0 ). All the actions update buffer  ,  and apply some transformation G  G to the partial graph. The 8 actions are described below. · NEXT-EDGE-lr (ned). This action assigns a relation label lr to the current edge (0 , 0 ) and makes no further modification to the partial graph. Then it pops out the top element of buffer  so that the parser moves one step forward to examine the next edge if it exists.
+oppose oppose and Korea South and Israel South op1 Korea Israel South Israel South
+
+plying SWAP-op1 action for arc (Korea, and) in the dependency tree of sentence "South Korea and Israel oppose ...". · REATTACHk -lr (reat). This action removes the current arc (0 , 0 ) and reattaches node 0 to some node k in the partial graph. It also assigns a relation label lr to the newly created arc (k, 0 ) and advances one step by popping out 0 . Theoretically, the choice of node k could be any node in the partial graph under the constraint that arc (k, 0 ) doesn't produce a self-looping cycle. The intuition behind this action is that after swapping a head and its dependent, some of the dependents of the old head should be reattached to the new head. Figure 5 shows an example where node Israel needs to be reattached to node and after a headdependent swap.
+oppose and op1 reattach Korea op1 Korea oppose and op2 Israel
+
+Figure 4: SWAP action · SWAP-lr (sw). This action reverses the dependency relation between node 0 and 0 and then makes node 0 as new head of the subgraph. Also it assigns relation label lr to the arc (0 , 0 ). Then it pops out 0 and inserts it into  right after 0 for future revisiting. This action is to resolve the difference in the choice of head between the dependency tree and the AMR graph. Figure 4 gives an example of ap-
+
+Figure 5: REATTACH action · REPLACE-HEAD (rph). This action removes node 0 , replaces it with node 0 . Node 0 also inherits all the incoming and outgoing arcs of 0 . Then it pops out 0 and inserts it into the top position of buffer  .  is re-initialized with all the children of 0 in the transformed graph G . This action targets nodes in the dependency tree that do not correspond to concepts in AMR
+
+369
+
+

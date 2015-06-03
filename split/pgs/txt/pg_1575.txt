@@ -1,0 +1,26 @@
+above mentioned rare phrases are penalized and the decoder is encouraged to use more general phrases taken from the remainder of the training data. Singleton phrases are given a fixed penalty. In this work, we apply leave-one-out with all update strategies. 5.3 Features
+
+Maximum expected B LEU training facilitates training of arbitrary features. In this work we apply four types of features. (a) A discriminative phrase table, i.e. one feature for each phrase pair. (b) Lexical features, i.e. one feature for each source-target word pair that appear within the same phrase. (c) Source and target triplet features (Hasan et al., 2008), i.e. triples of one source and two target words or one target and two source words appearing within a single phrase pair. (d) The hierarchical lexicalized reordering model (Galley and Manning, 2008), i.e. one feature for each combination of phrase pair, orientation (monotone (M), swap (S) or discontinuous (D)) and orientation direction (forward or backward). GT is only applied with feature set (a), where we reestimate the two phrasal channel models as was done in (He and Deng, 2012). With the other update algorithms we follow the approach taken in (Auli et al., 2014) and condense each feature type into a small number of models for the log-linear combination, which is afterwards tuned with MERT. (a) and (b) result in a single additional model, (c) in two models (source and target triplets) and (d) in six models ({forward,backward}×{M,S,D}). 5.4 Efficient Implementation
+
+1. Create the baseline system and run MERT 2. Generate n-best list on training corpus 3. Compute sentence-level B LEU  (En ) for each hypothesis En in the list 4. Initialize parameters with  = 0,    5. Iterate: () a) Compute the derivatives O  b) Perform update and output (t) 6. Run MERT on dev with each table (t) 7. Select best (t) on dev 8. Evaluate on test sets
+Figure 1: The complete training algorithm.
+
+5.5
+
+Complete Training Algorithm
+
+The complete training and evaluation procedure is shown in Figure 1. We start by building a baseline translation system with MERT-optimized model weights . With the baseline system we generate nbest lists on the training data. Now, for each translation hypothesis En of the n-best list, we compute the sentence-level B LEU score  (En ) and initialize the parameter set for training with the count model. Next, we run the training algorithm for a fixed number of iterations1 and output the updated feature values (t) after each iteration t. Finally, we run MERT with each (t) , select the best table on dev and evaluate on our test sets.
+
+6
+6.1
+
+Experiments
+Setup
+
+The expected B LEU   is efficiently computed in one iteration over the full n-best list. As can be   seen from Equation 13, the derivative   is additive with respect to each firing instance of feature  in the n-best list. The additive factor only depends on the current sentence pair. Therefore, for each sentence of the training data we iterate through its n-best list once to compute the expectation of the sentence-level B LEU score  n and then a second time to update the current derivative for each time the feature fires. The only thing that needs to be kept in memory is a list of the current derivatives for each parameter . 1521
+
+The experiments are carried out on the IWSLT 2013 GermanEnglish shared translation task.2 For rapid experimentation, the translation model is trained on the in-domain TED portion of the bilingual data, which is also used for maximum expected B LEU training. However, we use a large 4-gram LM with modified Kneser-Ney smoothing (Kneser and Ney, 1995; Chen and Goodman, 1998), trained with the SRILM toolkit (Stolcke, 2002). As additional data sources for the LM we use the complete News Commentary, Europarl v7 and Common Crawl corpora as well as selected parts of the Shuffled News
+Note that we keep the  weights fixed throughout all iterations of maximum expected B LEU training. 2 http://www.iwslt2013.org
+1
+
+

@@ -1,0 +1,24 @@
+muc System Surface Final Surface Final Train OntoN OntoN QB QB P 47.22 50.79 60.44 60.21 R 27.97 30.77 31.31 33.41 F1 35.13 38.32 41.2 42.35
+   
+
+Table 3: The top half of the table represents Berkeley models trained on OntoNotes 4.0 data, while the bottom half shows models trained on quiz bowl data. The muc F1 -score of the Berkeley system on OntoNotes text is 66.4, which when compared to these results prove that quiz bowl coreference is significantly different than OntoNotes coreference.
+
+
+
+   
+
+the token itself the part of speech the named entity type a dependency relation concatenated with the parent token12
+
+m1 and m2 concatenated with their partsof-speech same as above except for an n-word window before and after m1 and m2 how many tokens separate m1 and m2 how many sentences separate m1 and m2 the cosine similarity of word2vec (Mikolov et al., 2013) vector representations of m1 and m2 ; we obtain these vectors by averaging the word embeddings for all words in each mention. We use publicly-available 300dimensional embeddings that have been pretrained on 100B tokens from Google News. same as above except with publicly-available 300-dimensional GloVe (Pennington et al., 2014) vector embeddings trained on 840B tokens from the Common Crawl
+
+Using these simple features, we obtain surprisingly good results. When comparing our detected mentions to gold standard mentions on the quiz bowl dataset using exact matches, we obtain 76.1% precision, 69.6% recall, and 72.7% F1 measure. Now that we have high-quality mentions, we can feed each pair of mentions into a pairwise mention classifier. 5.3 A Simple Coref Classifier We follow previous pairwise coreference systems (Ng and Cardie, 2002; Uryupina, 2006; Versley et al., 2008) in extracting a set of lexical, syntactic, and semantic features from two mentions to determine whether they are coreferent. For example, if Sylvia Plath, he, and she are all of the mentions that occur in a document, our classifier gives predictions for the pairs he --Sylvia Plath, she --Sylvia Plath, and he --she. Given two mentions in a document, m1 and m2 , we generate the following features and feed them to a logistic regression classifier:
+ binary indicators for all tokens contained in
+12 These features were obtained using the Stanford dependency parser (De Marneffe et al., 2006).
+
+The first four features are standard in coreference literature and similar to some of the surface features used by the Berkeley system, while the word embedding similarity scores increase our F-measure by about 5 points on the quiz bowl data. Since they have been trained on huge corpora, the word embeddings allow us to infuse world knowledge into our model; for instance, the vector for Russian is more similar to Dostoevsky than Hemingway. Figure 5 shows that our logistic regression model (lr) outperforms the Berkeley system on numerous metrics when trained and evaluated on the quiz bowl dataset. We use precision, recall, and F1 , metrics applied to muc, bcub, and ceafe measures used for comparing coreference systems.13 We find that our lr model outperforms Berkeley by a wide margin when both are trained on the mentions found by our mention detector (crf). For four metrics, the crf mentions actually improve over training on the gold mentions. Why does the lr model outperform Berkeley
+The muc (Vilain et al., 1995) score is the minimum number of links between mentions to be inserted or deleted when mapping the output to a gold standard key set. bcub (Bagga and Baldwin, 1998) computes the precision and recall for all mentions separately and then combines them to get the final precision and recall of the output. ceafe (Luo, 2005) is an improvement on bcub and does not use entities multiple times to compute scores.
+13
+
+1114
+
+

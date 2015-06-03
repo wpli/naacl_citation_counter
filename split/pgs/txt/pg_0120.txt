@@ -1,0 +1,42 @@
+DM L ABELS ARG1 ARG2 compound BV root poss -and-c loc ARG3 times mwe appos conj neg subord -or-c -but-c total
+
+% 37.89 23.08 11.01 10.39 5.77 2.23 2.02 1.38 1.21 0.87 0.85 0.72 0.57 0.47 0.43 0.31 0.20 94.98
+
+PAS L ABELS adj_ARG1 noun_ARG1 prep_ARG2 prep_ARG1 verb_ARG2 verb_ARG1 det_ARG1 punct_ARG1 root aux-ARG2 aux-ARG1 coord-ARG2 coord-ARG1 comp-ARG1 conj-ARG1 poss-ARG2 poss-ARG1 total
+
+% 13.46 9.54 9.51 9.37 9.34 9.23 9.13 5.23 4.48 3.06 3.05 2.35 2.35 1.85 1.20 0.89 0.85 94.89
+
+Word1 ,2 ,3 Word1 ,2 leftPOS1 ,2 rightLabel1 ,2
+
+Lemma1 ,2 ,3 Lemma1 ,2 rightPOS1 ,2 a
+
+POS1 ,2 ,3 POS1 ,2 ,3 leftLabel1 ,2 d12 d11
+
+Table 3: Baseline features for the parser.
+Xi , . . . , j stands for Xi , . . . , Xj .
+
+Table 2: Breakdown of Label Statistics. Cell values in italics not counted in the DM total.
+
+3
+
+Transition-based Graphs Parsing
+( |wi , , A) ( |wi , , A  (wi , r, wj )) ( |wj , , A  (wj , r, wi )) ( |wj |wi , , A  (wi , r, wj )) ( |wj , wi |, A  (wj , r, wi ) (, , A)
+(shift) (lR) (rR) (lA) (rA) (pop0)
+
+multiple edges between the same pair of nodes. It is to be noted that the pop0 action may also be used to remove words with no heads. We base our work on the the DAG parser of Sagae and Tsujii (2008) (henceforth S&T) which we extended with the set of actions displayed above (Figure 1) to cope with partially connected planar graphs, and we gave it the ability to take advantage of an extended set of features. Finally, for efficiency reasons (memory consumption and speed), we replaced the original Maxent model with an averaged structured perceptron (Freund and Schapire, 1999; Collins, 2002).
+
+4
+4.1
+
+Feature Design
+Baseline Features
+
+(, wi |, A) ( |wj |wi , , A) ( |wj |wi , , A) ( |wj |wi , , A) ( |wj |wi , , A) ( |wi , , A)
+
+Figure 1: Set of transitions for dependency graphs.
+
+Shift-reduce transition-based parsers essentially rely on configurations formed of a stack and a buffer, with stack transitions used to move from a configuration to the next one, until reaching a final configuration. Following Kübler et al. (2009), we define a configuration by c = (, , A) where  denotes a stack of words wi ,  a buffer of words, and A a set of dependency arcs of the form (wi , r, wj ), with wi the head, wj the dependent, and r a label in some set R. As shown in Figure 1, besides the usual shift and reduce transitions (lR & rR) of the arc-standard strategy, we introduced the new left and right attach (lA & rA) transitions for adding new dependencies (while keeping the dependent on the stack) and a pop0 transition to remove a word from the stack after attachment of its dependents. All the transitions that add an edge must also satisfy the condition that the newly created edge does not introduce a cycle or 66
+
+We define Wordi (resp. Lemmai and POSi ) as the word (resp. lemma and part-of-speech) at position i in the queue. The same goes for i , which is the position i in the stack. Let di,j be the distance between Wordi and Wordj . We also define di,j , the distance between Wordi and Wordj . In addition, we define leftPOSi (resp. leftLabeli ) the part-of-speech (resp. the label if any) of the word immediately to the left of i , and the same goes for rightPOSi (resp. rightLabeli ). Finally, a is the previous action predicted by the parser. Table 3 lists our baseline features. Xi , j , k means that we use Xi , Xj , Xk as unigram features as well as bigram and trigram features. 4.2 Syntactic Features We combined the previous features with different types of syntactic features (constituents and dependencies), our intuition being that syntax and semantic are interdependent, and that syntactic features should therefore help predicate-argument parsing. In fact, we considered that the low density of syntactic information (compared to regular dependency treebanks) would be counterbalanced by
+
+

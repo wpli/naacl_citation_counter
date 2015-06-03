@@ -1,0 +1,35 @@
+100 80 60 logprob + C 40 20 0 -20 -40 -60 0 v h 0.2 0.4 0.6 0.8 1
+
+Figure 2: Mixtures of Mundari (a Munda language) and Khmer (a Mon-Khmer language). The transitions
+from Mundari (leftmost) to Khmer (rightmost). The vertical axis denotes typological naturalness log p(x) + C .
+
+potential candidates for their common ancestor. The pair of languages A and B was mixed in two ways. First, we replaced elements of A's categorical vector vA with vB , with the specified probability. We repeated this procedure 1,000 times to obtain a mean and a standard deviation. Second, we applied linear interpolation of two vectors hA and hB and mapped the resultant vector to v . In this experiment, d0 = 539 and we set d1 = 100 and d2 = 10. Figure 2 shows the case of the Austroasiatic languages. In the original, categorical representations, the mixtures of two languages form a deep valley (i.e., typologically unnatural intermediate states). By contrast, the continuous space representations allow a language to change into another without harming typological naturalness. This indicates that in the continuous space, we can easily reconstruct typologically natural ancestors. The major feature changes include "postpositional" to "prepositional" (0.46­0.47), "strongly suffixing" to "little affixation" (0.53­0.54) and "SOV" to "SVO" (0.60­0.61).
+
+space. We assume that latent components are independent. For the k -th component, the node's value hk is drawn from a Normal distribution with mean hP k (its parent's value) and precision k (inverse variance). The further the node moves, the smaller probability it receives. Precision controls each component's stability with respect to evolutionary history. We set a gamma prior over k , with hyperparameters  and  .3 Taking advantage of the conjugacy property, we marginalize out k . Suppose that we have drawn n samples and let mi be the difference between the i-th node and its parent, hk - hP k . Then the posterior  hyperparameters are n =  + n/2 and n 2 n =  + 1 i=1 mi . The posterior predictive dis2 tribution is Student's t-distribution (Murphy, 2007):
+P 2 pk (hk |hP k , Mhist , ,  ) = t2n (hk |hk ,  = n /n ),
+
+where Mhist is a collection of ,  and a history of previously observed differences. The probability of a parent-to-child move is a product of the probabilities of its component moves: pM OVE (h|hP , Mhist ) =
+d  k=1
+
+pk (hk |hP k , Mhist ).
+
+The root node is drawn from a uniform distribution. To sum up, the probability of a phylogenetic tree  is given by pE VAL (tree) × pC ONT (tree), where  pE VAL (tree) = Uniform(tree) p(x),
+xnodes( )
+
+pC ONT (tree) = Uniform(root)  pM OVE (h|hP , Mhist ). ×
+(h,hP )edges( )
+
+5
+
+Phylogenetic Inference
+
+nodes( ) is the set of nodes in  , and edges( ) is the set of edges in  , We abuse notation as Mhist is updated each time a node is observed. 5.2 Inference Given observed data, we aim at reconstructing the best phylogenetic tree. The data observed are (1) leaves (with some missing feature values) and (2) some tree topologies. We need to infer (1) the missing feature values of leaves, (2) the latent components of internal nodes including the root and (3) the remaining portion of tree topologies. Since leaves
+3
+
+5.1 Tree Model We use continuous space representations and the typology evaluator for phylogenetic inference. Our strategy is to find a tree in which (1) nodes are typologically natural and (2) edges are shorter by the principle of Occam's razor. The first point is realized by applying the typology evaluator. To implement the second point, we define a probability distribution over a parent-to-child move in the continuous
+
+In the experiments, we set  =  = 0.1.
+
+328
+
+

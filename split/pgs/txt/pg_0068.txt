@@ -1,0 +1,21 @@
+quadratic constraints: zfert2  zij zik j < k (5)
+
+This factor penalizes rows that have fertility of at least two, but does not distinguish beyond that. An alternative would be to introduce a factor for every pair of variables in a row, each with one constraint. This would heavily penalize fertilities greater than two. We found that the resulting quadratic program took longer to solve and gave worse results. Since documents have been processed to identify in-document coreference chains, we do not expect multiple arguments from a source document to align to a single target item. For this reason, we expect fert2 for arguments to have a large negative weight. In contrast, since predicates do not form chains, we may have multiple source predicates for one target. We note an important difference between our fertility factor compared with Lacoste-Julien et al. (2006). We parameterize fertility for only two cases (1 and 2) whereas they consider fertility factors from 2 to D. We do not parameterize fertilities higher than two because they are not common in our dataset and come at a high computational cost. The features f () for both fert1 and fert2 are an intercept feature (which always fires), indicator features for whether this row corresponds to an argument or a predicate, and a discretized feature for how many alignments are in this row. Predicate Argument Structure We expect structure among links that involve a predicate and its associated arguments. Therefore, we add joint factors that consider a predicate and its associated alignments: the predicate argument structure. We determine this structure from a dependency parse, though the idea is general to any semantic binding, e.g. FrameNet or Propbank style parses. Given a coherent discourse, there are several expected types of patterns in the PAS; we add factors for these. Predicate-centric We begin with a predicatecentric factor, which views scores an alignment between predicates based on their arguments, i.e. the two predicates share the same arguments. Ideally, two predicates can only align when their arguments are coreferent. However, in practice we may incorrectly resolve argument links, or there may be 14
+
+implicit arguments that do not appear as syntactic dependencies of the predicate trigger. Therefore, we settle for a weaker condition, that there should be some overlap in the arguments of two coreferent predicates. p For every predicate alignment zij , we add a factor psa whose score spsa is a penalty for having no argument overlap; predicates share arguments (psa). To constrain the variable of psa , we add a quadratic constraint that considers every possible pair of argument alignments that might overlap:
+p zpsa  zij 1- kargs(pi ) largs(pj ) a max zkl
+
+(6)
+
+where args(pi ) finds the indices of all arguments governed by the predicate pi . Entity-centric We expect similar behavior from arguments (entities). If an entity appears in two documents, it is likely that this entity will be mentioned in the context of a common predicate, i.e. arguments share predicates (asp). For a given argument aligna we add quadratic constraints so that z ment zij asp represents a penalty for two arguments not sharing a single predicate:
+a 1- zasp  zij kpreds(ai ) lpreds(aj )
+
+max
+
+p zkl
+
+(7)
+
+where preds(ai ) finds the indices of all predicates that govern any mention of argument ai . The features f () for both psa and asp are an intercept feature and a bucketed count of the size of args(pi ) × args(pj ) or preds(ai ) × preds(aj ) respectively. Temporal Information Temporal ordering, in contrast to textual ordering, can indicate when predicates cannot align: we expect aligned predicates in both documents to share the same temporal relations. SemEval 2013 included a task on predicting temporal relations between events (UzZaman et al., 2013). Many systems produced partial relations of events in a document based on lexical aspect and tense, as well as discourse connectives like "during" or "after". We obtain temporal relations with CAEVO, a state-of-the-art sieve-based system (Chambers et al., 2014).
+
+

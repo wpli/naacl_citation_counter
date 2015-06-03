@@ -1,0 +1,15 @@
+task, to assign predefined labels (EC types) to given contexts. Recently, Weston et al. (2011) proposed a system taking advantages of the hidden representations of neural networks for image annotation which is to annotate images with a set of textual words. Following the work, we design a novel method for EC detection. We represent possible EC positions using the word embeddings of their contexts and then map them to a low dimension space for EC detection. Experiments on Chinese Treebank show that the proposed model obtains significant improvements over the previous state-of-the-art methods based on strict evaluation metrics. We also identify the dependency relations between ECs and their heads, which is not reported in previous work. The dependency relations can help us with the resolution of ECs and benefit other tasks, such as full parsing and machine translation in practice.
+
+Distributed representations are good at capturing the semantics and syntax of contexts. For example, with word embeddings we are able to tell that "/eat" and "/drink" have a closer relationship than "/eat" and "/walk" or "/drink" and "/walk". Thus the knowledge we learn from: "EC(/You)-/have-EC( /supper)-/past tense marker-/question marker" could help us to detect ECs in sentences such as "EC(/You)-/beverage-/drink/past tense marker-/question marker", which are similar, though different from the original sentence. Below is a list of EC types contained in the Chinese Treebank, which are also the types of EC we are to identity in this work. · pro: small pro, refer to dropped pronouns. · PRO: big PRO, refer to shared elements in control structures or elements that have generic references. · OP: null operator, refer to empty relative pronouns. · T: trace left by A'-movement, e.g., topicalization, relativization. · RNR: used in right nodes rising. · *: trace left by passivization, raising. · Others: other ECs. According to the reason that one EC is caused, we are able to assign it one of the above categories. We can formulate EC detection as a combination of a two-class classification problem (is there an EC or not) and a seven-class classification problem (what type the EC is if there is one) following the two-pass method. For onepass method, EC detection can be formulated as an eight-class (seven EC types listed above plus a dummy "No" type) classification problem. Previous research shows there is no significant differences between their performances (Xue and Yang, 2013). Here we adopt the onepass method for simplicity.
+
+2
+
+Proposed Method
+
+We represent each EC as a vector by concatenating the word embeddings of its contexts. As is shown in Fig. 1, we learn a map M APA from the annotated data, to project the ECs' feature vectors to a low dimension space K . Meanwhile, we also obtain the distributed representations of EC types in the same low dimension space K . In the testing phase, for each possible EC position, we use M APA to project its context feature to the same space and further compare it with the representations of EC types for EC detection.
+
+Figure 1: System Architecture
+
+264
+
+

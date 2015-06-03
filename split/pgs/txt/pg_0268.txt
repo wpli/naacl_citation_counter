@@ -1,0 +1,23 @@
+Figure 2: Precisionrecall curve for our method vs. baselines.
+
+Good vs. Others Greedy Struc. WikNet (simG , sswk ) Unconst. WordNet (simU C , wd ) Ordered Vec. Space (simDP , scos ) Unconst. Vec. Space (simU C , scos ) Good & Good Partial vs. Others Greedy Struc. WikNet (simG , sswk ) Unconst. WordNet (simU C , wd ) Ordered Vec. Space (simDP , scos ) Unconst. Vec. Space (simU C , scos )
+
+Max F1 0.712 0.636 0.564 0.550 0.607 0.515 0.415 0.431
+
+AUC 0.694 0.651 0.495 0.509 0.529 0.499 0.387 0.391
+
+articles S and A, respectively. The run time of our method using WikNet is less than a minute for the sentence pairs in our test set. Many simple sentences only match with a fragment of a standard sentence. Therefore, we extend the greedy algorithm to discover good partial matches as well. The intuition is that two sentences are good partial matches if a simple sentence has higher similarity with a fragment of a standard sentence than the complete sentence. We extract fragments for every sentence from the Stanford syntactic parse tree (Klein and Manning, 2003). The fragments are generated based on the second level of the syntactic parse tree. Specifically, each fragment is a S, SBAR, or SINV node at this level. We then calculate the similarity between every simple sentence Sj with every standard sentence Ai as well as fragments of the standard sentence Ak i . The same greedy algorithm is then used to align simple sentences with standard sentences or their fragments.
+
+Table 2: Max F1, AUC for identifying good matches and identifying good & good partial matches.
+
+5
+
+Experiments
+
+We test our method on all pairs of standard and simple sentences for each article in the hand-annotated data (no training data is used). For our experiments, we preprocess the data by removing topic names, list markers, and non-English words. In addition, the data was tokenized, lemmatized, and parsed using Stanford CoreNLP (Manning et al., 2014). 5.1 Results
+
+et al., 2010), which uses a vector space representation and an unconstrained search for aligning sentences; and Ordered Vector Space (Coster and Kauchak, 2011), which uses dynamic programming for sentence alignment and vector space scoring. We compare our method (Greedy Structural WikNet) that combines the novel Wiktionary-based structural semantic similarity score with a greedy search to the baselines. Figure 2 and Table 2 show that our method achieves higher precision-recall, max F1, and AUC compared to the baselines. The precision-recall score is computed for good pairs vs. other pairs (good partial, partial, and bad). From error analysis, we found that most mistakes are caused by missing good matches (lower recall). As shown by the graph, we obtain high precision (about .9) at recall 0.5. Thus, applying our method on a large dataset yields high quality sentence alignments that would benefit data-driven learning in text simplification. Table 2 also shows that our method outperforms the baselines in identifying good and good partial matches. Error analysis shows that our fragment generation technique does not generate all possible or meaningful fragments, which suggests a direction for future work. We list a few qualitative examples in Table 3. Ablation Study: Table 4 shows the results of ablating each component of our method, sequencelevel alignments and word-level similarity. Sequence-level Alignment: We study the contribution of the greedy approach in our method by using word-level structural semantic WikNet similarity ss(wk) and replacing the sequence-level greedy search strategy with dynamic programming and un-
+
+Comparison to Baselines: The baselines are our implementations of previous work: Unconstrained WordNet (Mohler and Mihalcea, 2009), which uses an unconstrained search for aligning sentences and WordNet semantic similarity (in particular WuPalmer (1994)); Unconstrained Vector Space (Zhu 214
+
+

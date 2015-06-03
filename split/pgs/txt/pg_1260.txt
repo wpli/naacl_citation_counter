@@ -1,0 +1,38 @@
+Fact Type per:place of birth per:date of birth per:place of death per:date of death per:place of residence per:school attended per:parents per:sibling per:spouse per:children per:other family overall
+
+Recall (%) 1 2 59.4 88.2 59.1 94.4 55.4 92.4 46.4 98.2 60.0 68.9 54.3 65.8 41.9 75.7 50.0 76.2 36.0 63.3 39.5 61.8 23.1 66.7 47.7 77.4
+
+3 88.2 100.0 86.1 96.5 68.9 68.4 73.0 76.2 81.7 76.4 71.4 80.6
+
+Precision (%) 1 2 76.0 87.0 100.0 94.4 86.1 58.9 81.3 48.3 40.4 64.2 86.4 67.6 68.4 31.8 61.5 59.3 78.3 54.3 73.2 58.5 75.0 53.9 75.1 61.7
+
+3 88.2 100.0 63.6 53.4 61.3 76.5 50.0 55.2 49.5 71.6 53.6 65.7
+
+F-score (%) 1 2 3 66.7 87.6 88.2 74.3 94.4 100.0 67.4 71.9 73.1 59.1 64.7 68.8 48.3 66.5 64.9 66.7 66.7 72.2 52.0 44.8 59.3 55.2 66.7 64.0 49.3 58.5 61.6 51.3 60.1 73.9 35.3 59.6 61.2 56.9 67.4 71.6
+
+Table 1: performance on KBP 2013 (1:state-of-the-art; 2:rule-based; 3: SVMs).
+
+2.3
+
+Biographical Fact Extraction
+
+For each relevant document of a given query, we use Stanford CoreNLP to find the coreferential mentions of the query and then return all the sentences which contain at least one query entity mention. For each trigger in a sentence, we extract the entities which satisfy fact-specific constraints within its scope. As shown in Figure 1, brother is the trigger for per:siblings and the candidate fact should be a person name. Thus we return all the person names (e.g., James) within brother's scope as the query Paul's siblings.
+
+kernel are presented in Table 2. We can see that the supervised classification method performs better since it incorporates the weights of different features rather than simply applying hard constraints. In addition, it allows the answers to appear before a trigger as shown in the following sentence. Our rulebased method fails to extract Fred since it appears before the trigger married: She was a part of a group of black intellectuals who included philosopher and poet [Fred Clifton, whom she <married> in 1958].
+Fact Group Birth Death Residence Family Education Accuracy (%) Rule SVMs 85.97 96.66 92.31 94.56 90.67 95.67 92.49 94.11 91.51 93.87 F-score (%) Rule SVMs 80.01 94.21 82.16 89.01 76.11 83.25 75.30 77.31 88.46 90.65
+
+3
+3.1
+
+Experiments and Discussion
+Data
+
+We use the KBP 2012 and 2013 SF corpora as the development and testing data sets respectively. There are 50 person queries each year. From the KBP 2012 SF corpus, we annotated 2,806 sentences in formal writing from news reports as the gold-standard trigger scoping data set. We randomly partitioned the labeled data and performed ten-fold cross-validation using LIBSVM toolkit (Chang and Lin, 2011). We employ the classification model trained from all the labeled sentences to classify tokens in the unlabeled sentences. 3.2 3.2.1 Results Scope Identification
+
+Table 2: Scope identification results.
+
+The scope identification evaluation results of the rule-based method and the SVMs with the RBF 1206
+
+3.2.2 Biographical Fact Extraction The fact extraction results in Table 1 demonstrate our trigger scoping strategy can outperform state-ofthe-art methods. For a certain fact type, we choose the SF system which has the best performance for comparison. Specifically, we compare with two successful approaches: (1) the combination of distant supervision and rules (e.g., (Grishman, 2013; Roth et al., 2013)); (2) patterns based on dependency paths (e.g., (Li et al., 2013; Yu et al., 2013)). The advantage of our method lies in trigger-driven
+
+

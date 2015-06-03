@@ -1,0 +1,33 @@
+imizes the regularized sum of expected completedata log-likelihoods: max R(t1 , t2 ) +
+Nk k{1,2} n=1 n qk (zn k , xk ) log n pk (xn k , zk )
+
+4
+4.1
+
+Baselines
+Parallel Data Baseline: ABA and PostCAT
+
+1 ,2
+
+where n ranges over the appropriate sample set. Operationally, for models k that can be encoded as wFSTs (such as the IBM1, IBM2 and HMM word alignment models), the E-step can be carried out efficiently and exactly using dynamic programming (Eisner, 2002). Other models resort to approximation techniques ­ for example, the fertilitybased word alignment models apply hill-climbing and sampling heuristics in order to efficiently estimate the posteriors (Brown et al., 1993) From the computed posteriors qk we collect expected counts for each event, used to construct the M-step optimization objective. Since the MIR regularizer couples only the t-table parameters, the update rule for any remaining parameter is left unchanged (that is, one can use the usual closed-form count-and-divide solution). e, f e, f Now, let C1 and C2 denote the expected counts e, f for the t-table parameters. That is, Ck denotes the expected number of times a source-symbol type e is seen aligned to a target-symbol type f according to the posterior qk . In the M-step, we maximize the following objective with respect to t1 and t2 : arg max
+t1 ,t2 e, f
+
+Our approach is most similar to Alignment by Agreement (Liang et al., 2006) which uses a single joint objective for two word alignment models. The difference between our objective (Eq. 4) and theirs lies in their proposed regularizer, which rewards the per-sample agreement of the two models' alignment posteriors: log
+n z
+
+p1 (z | xn ) · p2 (z | xn )
+
+where xn = (en , f n ) and where z ranges over the possible alignments between en and f n (practically, only over 1-to-1 alignments, since each model is only capable of producing one-to-many alignments). Liang et al. (2006) note that proper EM optimization of their regularized joint objective leads to an intractable E-step. Unable to exactly and efficiently compute alignment posteriors, they resort to a product-of-marginals heuristic which breaks EM's convergence guarantees, but has a closed-form solution and works well in practice. MIR regularization has both theoretical and practical advantages compared to ABA, which make our method more convenient and broadly applicable: 1. By regularizing for posterior agreement, ABA is restricted to a parallel data setting, whereas MIR can be applied even without parallel data. 2. The posteriors of more advanced word alignment models (such as fertility-based models) do not correspond to alignments, and furthermore, are already estimated with approximation techniques. Thus, even if we somehow adapt ABA's product-of-marginals heuristic to such models, we run the risk of estimating highly inaccurate posteriors (specifically, zero-valued posteriors). In contrast, MIR extends to all IBM-style word alignment models and does not add heuristics. The M-step computation can be done exactly and efficiently with convex optimization. 3. MIR provides the same theoretical convergence guarantees as the underlying algorithms. Ganchev et al. (2008) propose PostCAT which uses Posterior Regularization (Ganchev et al., 2010)
+
+C1 log t1 ( f | e) + C2 log t2 (e | f ) + R(t1 , t2 )
+e, f
+
+e, f
+
+(5)
+
+e, f
+
+which can be efficiently solved using convex programming techniques due to the concavity of R and the complete-data log-likelihoods in both t1 and t2 . In our implementation, we applied Projected Gradient Descent (Bertsekas, 1999; Schoenemann, 2011), where at each step, the parameters are updated in the direction of the M-step objective gradient at (t1 , t2 ) and then projected back onto the probability simplex. We used simple stopping conditions based on objective function value convergence and a bounded number of iterations. 612
+
+

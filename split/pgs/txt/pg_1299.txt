@@ -1,0 +1,34 @@
+One of these structures produces a compact full binary tree that compared with the constituency-based RNN, has higher classification accuracy and saves up to 70% in the training time.
+
+3
+
+Chain based RNN
+
+2
+
+Related Work
+
+At the core of deep learning techniques for NLP, lies the vector based word representation, which maps words to an n-dimensional space. Having word vectors as parameters makes neural models flexible in finding different word embeddings for separate tasks (Collobert and Weston, 2008). Recursive Neural Network (RNN) is a recursive deep architecture that can learn feature representation of words, phrases and sentences. As an example, in (Socher et al., 2010), each node in the parse tree is associated with a vector and at each internal node p, there exists a composition function that takes its input from its children c1  Rn and c2  Rn . p = f (c1 , c2 ) = tanh(W c1 c2 + b) (1)
+
+While constituency-based parsing seems to be a reasonable choice for compositionality in general, it may not be the best choice for all NLP tasks. In particular, for relation classification, one may prefer to use a structure that encodes more information about the relations between the words in a sentence. To this end, we use dependency-based parsing that provides a one-to-one correspondence between nodes in a dependency graph (DG). DGs are significantly different from constituency parse trees since they lack phrasal nodes. More precisely, the internal nodes where the nonlinear combinations take place, do not exist in DGs. Therefore, we modify the original RNN and present a dependency-based RNN for relation classification. In our experiments, we restrict ourselves to trees where each dependent has only one head. We also use the example in Figure 1 for better illustration; in this example the arguments of the relation are child and cradle. wrapped
+
+The matrix W  Rn×2n is the global composition parameter, b is the bias term, and the output of the function p  Rn is another vector in the space of inputs. Socher et al. (2012) propose Matrix-Vector Recursive Neural Network (MV-RNN), where instead of using only vectors for words, an additional matrix for each word is used to capture operator semantics in language. To apply RNN to relation classification, they find the path in the parse tree between the two entities and apply compositions bottom up. Hashimoto et al. (2013) follow the same design but introduce a different composition function. They make use of word-POS pairs and use untied weights based on phrase categories of the pair. Socher et al. (2014) introduce a dependencybased RNN that extracts features from a dependency graph whose composition function has major differences from ours. Their function consists of a linear sum of unary compositions, while our function is a binary composition of children. Our work is also related to (Bunescu and Mooney, 2005), where the similarity between the words on the path connecting two entities in the dependency graph is used to devise a Kernel function.
+
+[arg1] child
+
+was
+
+carefully
+
+into cradle [arg2]
+
+the
+
+the
+Figure 1: DG: the child was carefully wrapped into the cradle.
+
+We apply compositions on the words on the shortest path between entities. From a linguistic point of view, this type of composition is related to the concept of chain or dependency constituent unit in DGs (Osborne, 2005). Chain: The words A ... B ... C ... (order irrelevant) form a chain iff A immediately dominates (is the parent of) B and C, or if A immediately dominates B and B immediately dominates C.
+
+1245
+
+

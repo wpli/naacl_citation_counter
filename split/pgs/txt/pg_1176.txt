@@ -1,0 +1,23 @@
+i.e., first-order dependencies on predicted facts are ignored. Instead we would like to include a loss term for the logical formulae directly in the matrix factorization objective, thus jointly optimizing embeddings to reconstruct factual training data as well as obeying to first-order logical background knowledge. 3.2.1 Training Objective Here we first present a learning objective that unifies ground atoms (facts) and logical background knowledge by treating both as logic formulae (atomic or complex), and define a loss function over this general representation. We then define the loss function for ground atoms and simple implications, along with a brief sketch of how the loss can be defined for arbitrarily complex logic formulae. As introduced in §2.1, let R be the set of all relations/predicates and P be the set of all entitypairs/constants. Furthermore, let F be a training set of logic formulae F , and L a loss function. The training objective (omitting 2 regularization on v(·) for simplicity) is min
+V F F
+
+ding v(ei ,ej ) and relation embedding vrm are  [F ]/ v(ei ,ej ) = [F ](1 - [F ])vrm  [F ]/ vrm = [F ](1 - [F ])v(ei ,ej )  L([F ])/ v(ei ,ej ) = -[F ]
+-1
+
+(2) (3) (4) (5)
+
+ [F ]/ v(ei ,ej )
+
+ L([F ])/ vrm = -[F ]-1  [F ]/ vrm .
+
+L([F ])
+
+(1)
+
+First-order Logic Crucially, and in contrast to the log-likelihood loss for matrix factorization, we can inject more expressive logic formulae than just ground atoms. We briefly outline how to recursively compute the probability of the formula [F ] and the gradients of the loss L([F ]) for any first-order formula F . Again, note that the probabilities of ground atoms in our model are independent conditioned on embeddings. This means that for any two formulae A and B , the marginal probability of [A  B ] can be computed as [A][B ] (known as product t-norm), provided both formula concern non-overlapping sets of ground atoms. In combination with [¬ A] := 1 - [A] and the [ ] operator as defined for ground atoms earlier, we can compute the probability of any propositional formula recursively, e.g., [A  B ] = [A] + [B ] - [A][B ] [A  B] = [A]([B ] - 1) + 1 [A  ¬ B  C ] = ([A](1 - [B ]))([C ] - 1) + 1. Note that for statements [F ]  {0, 1}, we directly recover logical semantics. First-order formulae in finite domains can be embedded through explicit grounding. For universal quantification we can get [x, y : F (x, y )] = [ x,y F (x, y )]. If we again assume non-overlapping ground atoms in each of the arguments of the conjunction, we can simplify this to x,y [F (x, y )]. When arguments do overlap we can think of this simplification as an approximation. Since [F (x, y )] is defined recursively, we can back-propagate the training signal through the structure of [F ] to compute  [F (x, y )]/ vrm and  [F (x, y )]/ vei ,ej for any nested formula. Implications A particularly useful family of formulae for relation extraction are universally quantified first-order formula over a knowledge base such as F = x, y : rs (x, y )  rt (x, y ). Assuming a finite domain, such a formula can be unrolled into a conjunction of propositional statements of the form Fij = rs (ei , ej )  rt (ei , ej ), one for
+
+where V is the set of all relation and entity-pair embeddings, and [F ] is the marginal probability p(w|V) that the formula F is true under the model. In this paper we use the logistic loss: L([F ]) := - log([F ]). The objective thus prefers embeddings that assign formulae a high marginal probability. To optimize this function we need the marginal probabilities [F ], and the gradients of the losses L([F ]) for every F  F with respect to entitypair and relation embeddings, i.e.,  L([F ])/ vrm and  L([F ])/ v(ei ,ej ) . Below we discuss how these quantities can be computed or approximated for arbitrary first-order logic formulae, with details provided for ground atoms and implications. Ground Atoms Due to the conditional independence of ground atoms in the distribution p(w|V), the marginal probability of a ground atom F = ei ,ej rm (ei , ej ) is [F ] = m =  (vrm · vei ,ej ). Hence when only ground atoms (or literals) are used, objective (1) reduces to the standard log-likelihood loss. The gradients of the loss for the entity-pair embed-
+
+1122
+
+

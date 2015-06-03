@@ -1,0 +1,26 @@
+5.3
+
+Bilingual word translation
+
+The second experiment focuses on bilingual word translation. We select 6000 frequent words in English and employ the online Google's translation service to translate them to Spanish. The resulting 6000 English-Spanish word pairs are used to train and test the bilingual transform in the way of cross validation. Specifically, the 6000 pairs are randomly divided into 10 subsets, and at each time, 9 subsets are used for training and the rest 1 subset for testing. The average of the results of the 10 tests is reported as the final result. Note that not all the words translated by Google are in the vocabulary of the target language; the vocabulary coverage is 99.5% in our test. 5.3.1 Results with linear transform We first reproduce Mikolov's work with the linear transform. A number of dimension settings are experimented with and the results are reported in Table 1. The proportions that the correct translations are in the top 1 and top 5 candidate list are reported as P@1 and P@5 respectively. As can be seen, the best dimension setting is 800 for English and 200 for Spanish, and the corresponding P@1 and P@5 are 35.36% and 53.96%, respectively. These results are comparable with the results reported in (Mikolov et al., 2013b). D-EN 300 500 700 800 D-ES 300 500 700 200 P@1 30.43% 25.76% 20.69% 35.36% P@5 49.43% 44.29% 39.12% 53.96%
+
+transform are consistently better than those reported in Table1 which are based on the linear transform. This confirms our conjecture that bilingual translation can be largely improved by the normalized embedding and the accompanied orthogonal transform. D-EN 300 500 700 800 D-ES 300 500 700 200 P@1 38.99% 39.91% 41.04% 40.06% P@5 59.16% 59.82% 59.38% 60.02%
+
+Table 2: Performance on word translation with normalized embedding and orthogonal transform. `D-EN' and `D-ES' denote the dimensions of the English and Spanish vector spaces, respectively.
+
+6
+
+Conclusions
+
+We proposed an orthogonal transform based on normalized word vectors for bilingual word translation. This approach solves the inherent inconsistence in the original approach based on unnormalized word vectors and a linear transform. The experimental results on a monolingual word similarity task and an English-to-Spanish word translation task show clear advantage of the proposal. This work, however, is still preliminary. It is unknown if the normalized embedding works on other tasks such as relation prediction, although we expect so. The solution to the orthogonal transform between vector spaces with mismatched dimensions is rather ad-hoc. Nevertheless, locating word vectors on a hypersphere opens a door to study the properties of the word embedding in a space that is yet less known to us.
+
+Table 1: Performance on word translation with unnormalized embedding and linear transform. `D-EN' and `D-ES' denote the dimensions of the English and Spanish vector spaces, respectively.
+
+Acknowledgement
+This work was conducted when CX & YYL were visiting students in CSLT, Tsinghua University. This research was supported by the National Science Foundation of China (NSFC) under the project No. 61371136, and the MESTDC PhD Foundation Project No. 20130002120011. It was also supported by Sinovoice and Huilan Ltd.
+
+5.3.2 Results with orthogonal transform The results with the normalized word vectors and the orthogonal transform are reported in Table 2. It can be seen that the results with the orthogonal
+
+1010
+
+

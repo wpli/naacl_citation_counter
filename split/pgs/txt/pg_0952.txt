@@ -1,0 +1,23 @@
+Figure 3: Weighting of Precision and Recall ( = 0.833)
+
+Figure 4: Overall accuracies Riedel dataset
+
+due to over-fitting the data, as the performance on the training datasets were very high. One more interesting observation of MM-F-loss is that it is fairly balanced w.r.t both precision and recall which the other approaches do not exhibit. Tuning towards Precision/Recall: Often we come across situations where either precision or recall is important for a given application. This is modeled by the notion of F (van Rijsbergen, 1979). One of the main advantages of using a non-decomposable loss function like F is the ability to vary the learning algorithm to factor such situations. For instance we can tune the objective to favor precision more than recall by "up-weighting" precision in the F -score. For instance, in the previous case we observed that MM-F-loss has a marginally poorer precision compared to Hoffmann. Suppose we increase the weight of precision,  = 0.833, we observe a dramatic increase in precision from 65.83% to 86.59%. As expected, due to the precision-recall trade-off, we observe a decrease in recall. The results are shown in Figure 3. Local vs. Exhaustive Grid Search: As we described in Section 3.3, we devise a simple yet efficient local search strategy to search the space of (F P, F N ) grid-points. This enables a speed up of three orders of magnitude in solving the dual-optimization problem. In Table 2, we compare the average time per iteration and the F1 -score when each of these techniques is used for training on a sub-sample dataset. We observe that there 898
+
+Local Search Exhaustive Search
+
+avg. time per iter. 0.09s 630s
+
+F1 58.322 58.395
+
+Table 2: Local vs. Exhaustive Search.
+
+is a significant decrease in training time when we use local search (almost 7000 times faster), with a negligible decrease in F1 -score (0.073%). 4.2 The Overall Results
+
+Figure 4 and Table 3 present the overall results of our approaches compared to the baseline on the positive dataset. We observe that MM-F-loss has an increase in F1 -score to the tune of 8% compared to the baseline. This confirms our observation on the sub-sample datasets we saw earlier. By assigning more weight to precision, we are able to improve over the precision of Hoffmann by 1.6% (Table 4). When precision is tuned with a higher weight during training of MM-F-loss, we see an improvement in precision without much dip in recall. Precision 75.436 76.839 65.991 Recall 46.615 50.462 65.211 F1 57.623 60.918 65.598
+
+Hoffmann MM-Hamming MM-F-loss
+
+Table 3: Overal results on the positive dataset.
+
+

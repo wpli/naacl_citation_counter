@@ -1,0 +1,33 @@
+ing word vectors as linear combinations of sense vectors, and by pushing the sense vectors towards their neighbors in the semantic network. This intuition leads to a constrained optimization problem, for which we present an approximate algorithm. We applied the algorithm to derive vectors for the senses in a Swedish semantic network, and we evaluated their quality extrinsically by using them as features in a semantic classification task ­ mapping senses to their corresponding FrameNet frames. When using the sense vectors in this task, we saw a large improvement over using word vectors.
+
+2
+
+Embedding a Semantic Network
+
+variables correspond to the occurrence probabilities of the senses, but strictly speaking this is only the case when the vectors are built using simple context counting. Since the mix gives an estimate of which sense is the most frequent in the corpus, we get a strong baseline for word sense disambiguation (McCarthy et al., 2007) as a bonus; see our followup paper (Johansson and Nieto Pi~ na, 2015) for a discussion of this. We can now formalize the intuition above: the weighted sum of distances between each sense and its neighbors is minimized, while satisfying the mix constraint for each lemma. We get the following constrained optimization program: minimize
+E,p i,j,k
+
+The goal of the algorithm is to embed the semantic network in a geometric space: that is, to associate each sense sij with a sense embedding, a vector E (sij ) of real numbers, in a way that reflects the topology of the semantic network but also that the vectors representing the lemmas are related to those corresponding to the senses. We now formalize this intuition, and we start by introducing some notation. For each lemma li , there is a set of possible senses si1 , . . . , simi for which li is a surface realization. Furthermore, for each sense sij , there is a neighborhood consisting of senses semantically related to sij . Each neighbor nijk of sij is associated with a weight wijk representing the degree of semantic relatedness between sij and nijk . How we define the neighborhood, i.e. our notion of semantical relatedness, will obviously have an impact on the result. In this work, we simply assume that it can be computed from the network, e.g. by picking a number of hypernyms and hyponyms in a lexicon such as WordNet. We then assume that for each lemma li , we have a Ddimensional vector F (li ) of real numbers; this can be computed using any method described in Section 1. Finally, we assume a distance function (x, y ) that returns a non-negative real number for each pair of vectors in RD . The algorithm maps each sense sij to a sense embedding, a real-valued vector E (sij ) in the same vector space as the lemma embeddings. The lemma and sense embeddings are related through a mix constraint: F (li ) is decomposed as a convex combination j pij E (sij ), where the {pij } are picked from the probability simplex. Intuitively, the mix 1429
+
+wijk (E (sij ), E (nijk )) pij E (sij ) = F (li )
+j
+
+subject to
+
+i i i, j
+
+(1)
+
+pij = 1
+j
+
+pij  0
+
+The mix constraints make sure that the solution is nontrivial. In particular, a very large number of words are monosemous, and the procedure will leave the embeddings of these words unchanged. 2.1 An Approximate Algorithm The difficulty of solving the problem stated in Equation (1) obviously depends on the distance function . Henceforth, we focus on the case where  is the squared Euclidean distance. This is an important special case that is related to a number of other distances or similarities, e.g. cosine similarity and Hellinger distance. In this case, (1) is a quadratically constrained quadratic problem, which is NP-hard in general and difficult to handle with off-the-shelf optimization tools. We therefore resort to an approximation; we show empirically in Sections 3 and 4 that it works well in practice. The approximate algorithm works in an online fashion by considering one lemma at a time. It adjusts the embeddings of the senses as well as their mix in order to minimize the loss function Li =
+jk
+
+wijk E (sij ) - E (nijk ) 2 .
+
+(2)
+
+

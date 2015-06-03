@@ -1,0 +1,19 @@
+Hierarchic syntax improves reading time prediction
+Marten van Schijndel William Schuler Department of Linguistics The Ohio State University {vanschm,schuler}@ling.osu.edu
+
+Abstract
+Previous work has debated whether humans make use of hierarchic syntax when processing language (Frank and Bod, 2011; Fossum and Levy, 2012). This paper uses an eye-tracking corpus to demonstrate that hierarchic syntax significantly improves reading time prediction over a strong n-gram baseline. This study shows that an interpolated 5-gram baseline can be made stronger by combining n-gram statistics over entire eye-tracking regions rather than simply using the last n-gram in each region, but basic hierarchic syntactic measures are still able to achieve significant improvements over this improved baseline.
+
+The present study builds on this finding by showing that cumulative n-gram probabilities significantly improve an n-gram baseline to better capture sequential frequency statistics. Further, this study shows that measures of hierarchic structural frequencies (as captured by PCFG surprisal) significantly improve reading time predictions over that improved sequential baseline. First, this work defines a stronger n-gram baseline than that used in previous studies by replacing a bigram baseline computed from 101 million words with an interpolated 5-gram baseline computed over 2.96 billion words. Second, while previous work has used n-grams from the end of each eye-movement region to model reading times in that region, this paper finds that such models can be significantly improved by combining n-gram statistics over the entire region (Section 3). Even when this improved baseline is combined with a standard n-gram baseline, this paper demonstrates that PCFG surprisal is a significant predictor of reading times (Section 4). This paper also applies region accumulation to total surprisal and finds that it is not significantly better than non-accumulated total surprisal. In fact, cumulative surprisal is shown not to be a significant predictor of reading times at all when a cumulative ngram factor is included in the baseline. Finally, this paper compares two different models of hierarchic syntax: the Penn Treebank (PTB) representation (Marcus et al., 1993) and the psycholinguisticallymotivated Nguyen et al. (2012) Generalized Categorial Grammar (GCG). Each model of syntax is shown to provide orthogonal improvements to reading time predictions (Section 5).
+
+1
+
+Introduction
+
+In NLP, a concern exists that models of hierarchic syntax may be increasingly used exclusively to compensate for n-gram sparsity (Lease et al., 2006). In the context of psycholinguistic modeling, Frank and Bod (2011) find that hierarchic measures of syntactic processing are not as good at predicting reading times as sequential part-of-speech-based models of processing.1 Fossum and Levy (2012) follow up on this finding and show that, when better n-gram information is present in the models, measures of hierarchic syntactic processing cost (PCFG surprisal; Hale, 2001; Levy, 2008) are as good at predicting reading times as the sequential models presented by Frank and Bod.
+1 Frank and Bod (2011) find that hierarchic measures significantly improve the descriptive linguistic accuracy of models but that such measures are unable to improve upon a strong linear baseline when predicting reading times.
+
+1597
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1597­1605, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

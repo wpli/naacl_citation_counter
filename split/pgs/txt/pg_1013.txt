@@ -1,0 +1,19 @@
+Model maxFscore maxPrecision maxRecall
+
+F-score .469 .398 .431
+
+Precision .533 .781 .353
+
+Recall .418 .267 .552
+
+Table 2: Automatic prosodic boundary annotation performance on the CSJ corpus.
+
+Figure 4: Colloc3-Syll based grammars scores on the LUCID dataset, comparing results without prosodic annotation, with those obtained by automatic prosodic boundaries that maximize precision, added at different levels in the grammar.
+
+slightly, at the expense of a significantly lower recall, and thus a lower overall F-score. This oversegmentation trait was instead much more pronounced for the BU corpus, where the increase in precision was accompanied only by a slight decrease in recall, brought the two measures closer together, and thus has maximized the F-score. 5.2 Japanese The same procedure for parameter detection as for the BU corpus was applied and the best cues obtained were pause + onset, while the best combination of conjunction of cues was pause+f 0Reset. Table 2 illustrates the prosodic boundary results obtained on the CSJ evaluation set, for the systems maximizing F-score, precision and recall, respectively. Since oracle prosodic information was available for this corpus, we were able to compare the performance of the baseline to that of the oracle and automatic boundaries enhanced system. This comparison is displayed in Figure 2, right hand side. Having a sizable corpus, the results are more similar to the state-of-the-art for Japanese, reported in (Fourtassi et al., 2013) (55%). Increases in performance can be observed when hand-labelled prosody is introduced (12.3% absolute value), and also when automatic boundaries (maxP recision) are employed (10% absolute value). Similarly to the previous experiments, we display in Figure 5 the comparison between the baseline and the best system employing automatic boundaries (maxP recision), for the different levels where the information is added. It shows that prosody helps, regardless of the level where prosody is used, although it appears to favour the lower collocation levels.
+
+performance, due to the relatively small size of the corpus. For this reason, we chose to test on a bigger English corpus, LUCID. While this corpus is indeed larger, it has the disadvantage of not being prosodically annotated. Thus, we investigated only the cases when automatically determined prosodic boundaries are employed. The detection of prosodic boundaries used the same parameters obtained on the BU corpus but, since no prosodic annotation exists, we were not able to perform the same evaluation of the boundaries, as we did for BU. The token F-scores for the best prosodic boundary setting (maxP recision) are displayed in Figure 4. These results are closer to the state-of-the-art for English, which stand at 87% token F-score. Contrary to the results on the BU corpus, the prosody enhanced system improves over the baseline only when the boundary information is added at Colloc2 or Colloc3 level (best gain: 0.8% absolute value). While the improvements brought here tend to be quite small, compared to those obtained for BU, we are closer to ceiling value on LUCID and also the quality of the automatic boundaries might be lower, due to the different type of speech on which the parameters of the model were found. With the Adaptor Grammar tending to slightly over-segment the results, the inclusion of prosody at W ord or Colloc1 has increased the precision
+
+959
+
+

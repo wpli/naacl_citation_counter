@@ -1,0 +1,44 @@
+(a water) cannon. On the contrary, if the Patient is cat then the Agent is more likely to be dog than police. In turn, the dot product (Cv,ri uai )T Cv,rj uaj is large if these expectations are met for the argument pair (ai , aj ), and small otherwise. Intuitively, this objective corresponds to scoring argument tuples according to h(a, r , v, C, u) =
+i=j T uT ai Cv,ri Cv,rj uaj ,
+
+(2)
+
+lemmas. We use existing techniques to address both challenges. In order to deal with the first challenge, we use a basic mean-field approximation. Namely, instead of computing an expectation of p(ai |a-i , r ,v,C,u) under p(r |x, w), as in (3), we use the posterior distributions µis = p(ri = s|x, w) and score the argument predictions as p(ai |a-i , µ,v,C,u) = i (ai , a-i ) = uT ai ( exp (i (ai , a-i )) Z (µ, v, i) (4)
+
+hinting at connections to (coupled) tensor and matrix factorization methods (Nickel et al., 2011; Yilmaz et al., 2011; Bordes et al., 2011; Riedel et al., 2013) and distributional semantics (Mikolov et al., 2013; Pennington et al., 2014). Note also that the reconstruction model does not have access to any features of the sentence (e.g., argument order or syntax), forcing the roles to convey all the necessary information. This factorization can be thought of as a generalization of the notion of selection preferences. Selectional preferences characterize the set of arguments licensed for a given role of a given predicate: for example, Agent for the predicate charge can be police or dog but not table or idea. In our generalization, we model soft restrictions imposed not only by the role itself but also by other arguments and their assignment to roles. In practice, we extend the model slightly: (1) we introduce a word-specific bias (a scalar ba for every a  A) in the argument prediction model (equation (1)); (2) we smooth the model by using a sum of predicate-specific and cross-predicate projection matrices (Cv,r + Cr ) instead of just Cv,r . 3.4 Learning Parameters of both model components (w, u and C ) are learned jointly: the natural objective associated with every sentence would be the following:
+N
+
+µis Cv,s )T
+s
+
+×
+j =i
+
+(
+s
+
+µjs Cv,s )uaj ,
+
+where µ are the posteriors for all the arguments, and i (a, a-i ) is the score associated with predicting lemma a for the argument i. In order to address the second problem, the computation of Z (µ, v, i), we use a negative sampling technique (see, e.g., Mikolov et al. (2013)). More specfically, we get rid of the softmax in equation (4) and optimize the following sentence-level objective:
+N
+
+[log  (i (ai , a-i ))
+i=1
+
+-
+a S
+
+log  (i (a , a-i ))], (5)
+
+log
+i=1 r
+
+p(ai |a-i , r , v, C, u)p(r |x, w).
+
+(3)
+
+However optimizing this objective is not practical in its exact form for two reasons: (1) marginalization over r is exponential in the number of arguments; (2) the partition function Z (r , v, i) requires summation over the entire set of potential argument 5
+
+where S is a random sample of n elements from the unigram distribution of lemmas, and  is the logistic sigmoid function. Assuming that the posteriors µ can be derived in a closed form, the gradients of the objective (5) with respect to parameters of both the encoding component (w) and the reconstruction component (C , u and b) can be computed using back propagation. In our experiments, we used the AdaGrad algorithm (Duchi et al., 2011) to perform the optimization. The learning algorithm is quite efficient, as the reconstruction computation is bilinear, whereas the computation of the posteriors µ (and the computation of their gradients) from the semantic roler labeling component (encoder) is not much more expensive than discriminative supervised learning of
+
+

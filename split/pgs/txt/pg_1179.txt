@@ -1,0 +1,38 @@
+0.6
+
+1 Joint MF Mintz09 Yao11 Surdeanu12 Riedel13-F
+
+0.8
+
+0.4 wMAP
+
+0.2
+
+MF Joint Pre Post Inf
+
+Precision
+
+0.6
+
+0.4
+
+0.2
+
+0 0 0.1 0.2 0.3 0.4 0.5
+0 0.1 0.2 0.3 0.4 0.5 Recall 0.6 0.7 0.8 0.9 1
+
+Fraction of Freebase training facts
+
+Figure 2: Relations with Few Distant Labels: Weighted mean average precisions of the various methods as the fraction of Freebase training facts is varied. For 0% Freebase training facts we get the zero-shot relation learning results presented in Table 2. matrix factorization (MF) performs poorly since embeddings cannot be learned for the Freebase relations without any observed cells. Scores higher than zero for matrix factorization are caused by random predictions. Logical inference (Inf) is limited by the number of known facts that appear as premise in one of the implications. Although post-factorization inference (Post) is able to achieve a large improvement over logical inference, explicitly injecting logic formulae into the embeddings (i.e. learning low-rank logic embeddings) using pre-factorization inference (Pre) or joint optimization (Joint) gives superior results. Last, we observe that joint optimization is able to best combine logic formulae and textual patterns for accurate, zero-shot learning of relation extractors. 5.2 Relations with Few Distant Labels In this section we study the scenario of learning relations that have only a few distant supervision alignments, in particular, we observe the behavior of the various methods as the amount of distant supervision is varied. We run all methods on training data that contains different fractions of Freebase training facts (and therefore different degrees of relation/text pattern alignment), but keep all textual patterns in addition to the set of extracted formulae. Figure 2 summarizes the results. The performance of pure logical inference does not depend on the amount of distant supervision data, since it does not take advantage of the correlations in the data. Ma-
+
+aged precision/recall curve demonstrating that the "Joint" method outperforms existing factorization approaches ("MF" and "Riedel13-F"). The formulae used by our approach have been extracted only from the training data.
+
+Figure 3: Comparison on Complete Data: Aver-
+
+trix factorization ignores logic formulae, and thus is the baseline performance when only using distant supervision. For the factorization based methods, only a small fraction (15%) of the training data is needed to achieve around 0.50 wMAP performance, thus demonstrating that they are efficiently exploiting correlations and generalizing to unobserved facts. Pre-factorization inference, however, does not outperform post-factorization inference, and is on par with matrix factorization for most of the curve. This suggests that it is not an effective way of injecting logic into embeddings when ground facts are also available. In contrast, joint optimization leads to low-rank logic embeddings that outperform all other methods in the 0 to 30% Freebase training data interval. Beyond 30% there seem to be sufficient Freebase facts for matrix factorization to encode these formulae, thus yielding diminishing returns. 5.3 Comparison on Complete Data
+
+Although the focus of this paper is injection of logical knowledge for relations without sufficient alignments to the knowledge base, we also present an evaluation on the complete distant supervision data as used by Riedel et al. (2013). Compared to the Riedel et al.'s "F" model, our matrix factorization implementation ("MF") achieves a lower wMAP (64% vs 68%) and a higher MAP (66% vs 64%). We attribute this difference to the different loss function (logistic loss in our case vs. ranking loss). We show the PR curve
+
+1125
+
+

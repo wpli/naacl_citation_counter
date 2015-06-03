@@ -1,0 +1,26 @@
+are a special case of multiple sequence alignment, a well-known string matching problem in computational biology (Mount, 2004). We generate an exact (globally optimal) alignment using a dynamic programming implementation of the Sum of Pairs (SP) alignment (Carrillo and Lipman, 1988), shown in Listing 2. Under this model, the score of a multiple alignment is the sum of the scores of each pairwise alignment, so that a globally optimal alignment has minimum SP score. Time and space complexity of the dynamic programming implementation for k strings of length n is O(nk ), which is acceptable for three average-length sentences but can quickly become impractical for a larger number of sequences. In computational biology, edit costs are defined in terms of mutation probabilities, which are irrelevant to our task. However, we can find new optimal costs by defining a set of constraints that are meaningful for error correction: (a) Matches have zero cost (cmatch = 0). (b) Gaps (insertions or deletions) are more costly than matches (cgap > cmatch ). (c) Mismatches (substitutions) are set to be more costly than gaps (insertions or deletions) so as to maximise matches (cmis > cgap ). Given these constraints, we can set cgap = 1 and cmis = 2; however, they will not necessarily keep gaps aligned (see Table 4). To ensure this, we must place a new constraint on the SP algorithm so that a gap-aligned version (desired alignment) has a lower cost than a gap-unaligned version (initial alignment):
+cost(A,­) + ... + cost(B,­)
+
+Initial alignment A B ­ C A ­
+
+Desired alignment A B C ­ A ­
+
+Table 4: Initial and desired alignments showing differences in the distribution of gaps.
+
+/* Initialisation */ cmatch := cost of match cmis := cost of mismatch cgap := cost of gap D[0, 0, 0] := 0 D1,2 [i, j] := edit_distance(S1 [1..i], S2 [1..j]) D1,3 [i, k] := edit_distance(S1 [1..i], S3 [1..k]) D2,3 [j, k] := edit_distance(S2 [1..j], S3 [1..k]) /* Recurrences for boundary cells */ D[i, j, 0] := D1,2 [i, j] + (i + j) * cgap , D[i, 0, k] := D1,3 [i, k] + (i + k) * cgap , D[0, j, k] := D2,3 [j, k] + (j + k) * cgap , /* Recurrences for non-boundary cells */ for i := 1 to n1 do for j := 1 to n2 do for k := 1 to n3 do begin if (S1 [i] = S2 [j]) then cij := cmatch else cij := cmis ; if (S1 [i] = S3 [k]) then cik := cmatch else cik := cmis ; if (S2 [j] = S3 [k]) then cjk := cmatch else cjk := cmis ; d1 d2 d3 d4 d5 d6 d7 := := := := := := := D[i-1, j-1, k-1] D[i-1, j-1, k] + D[i-1, j, k-1] + D[i, j-1, k-1] + D[i-1, j, k] + 2 D[i, j-1, k] + 2 D[i, j, k-1] + 2 + cij + cij + 2 cik + 2 cjk + 2 * cgap ; * cgap ; * cgap ; cik + cjk; * cgap ; * cgap ; * cgap ;
+
+> cost(A,C) + ... + cost(B,­)
+
+cgap + ... + cgap > cmis + ... + cgap 4cgap + cmis > 2cmis + 2cgap 2cgap > cmis Therefore 2cgap > cmis > cgap > cmatch . For our implementation, we adopted cgap = 2 and cmis = 3. There can be more than one optimal alignment for a given set of strings. Some of these alignments will look more intuitive than others (see Table 5) but they are equally optimal for our evaluation method and will produce the same final results. 581
+
+D[i, j, k] := Min(d1,d2,d3,d4,d5,d6,d7); end;
+
+Listing 2: The Sum of Pairs dynamic programming algorithm for the alignment of three sequences, S1 , S2 and S3 (adapted from Gusfield (1997)).
+
+2.3
+
+Metrics
+
+Once we have an optimal alignment between a source, a hypothesis and a reference, we compute a number of metrics that measure different aspects of performance and can be used for ranking systems.
+
+

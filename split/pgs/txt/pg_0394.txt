@@ -1,0 +1,25 @@
+Gold Set
+
+Selected Correctness Labels cg cs qq    ListQ        IsA        WikiC    
+
+Average presence of any interpretations with any of the selected correctness labels @1 @3 @5 @10 @20 0.790 0.860 0.870 0.880 0.880 0.750 0.810 0.830 0.840 0.840 0.720 0.780 0.790 0.800 0.800 0.030 0.160 0.360 0.450 0.460 0.750 0.800 0.810 0.830 0.830 0.710 0.770 0.790 0.800 0.800 0.650 0.690 0.710 0.710 0.720 0.060 0.220 0.350 0.480 0.520 0.810 0.900 0.920 0.930 0.930 0.750 0.830 0.860 0.860 0.870 0.640 0.730 0.750 0.750 0.760 0.110 0.210 0.370 0.520 0.560
+
+Presence of Multiple Bracketings Vocabulary ListQ IsA Fraction of Noun Phrases 0.110 0.124
+
+WikiC 0.051
+
+Table 8: Fraction of noun phrases that have some extracted interpretation(s) and contain at least 3 tokens, whose interpretations induce multiple (rather than single) bracketings over interpreted noun phrases. The presence of multiple bracketings for a noun phrase is equivalent to the presence of multiple pairs of a head and a modifier, as induced by the top 10 interpretations extracted for the noun phrase
+Noun Phrase  Extracted Interpretations beatles songs  (songs)H sung by the (beatles)M , (songs)H about the (beatles)M company accounts  (accounts)H maintained by the (company)M , (accounts)H owed to a (company)M florida insurance companies  (insurance companies)H headquartered in (florida)M , (insurance companies)H insuring in (florida)M german food  (food)H eaten in (germany)M , (food)H produced in (germany)M , (food)H that originated in (germany)M math skills  (skills)H needed for (math)M , (skills)H learned in (math)M , (skills)H gained from studying (math)M michael jackson song  (song)H written by (michael jackson)M , (song)H sung by (michael jackson)M , (song)H about (michael jackson)M
+
+Table 6: Average of scores indicating the presence or absence of any interpretations annotated with a correctness label from a particular subset of correctness labels. Computed over interpretations extracted up to various ranks in the ranked lists of extracted interpretations (cg=correct generic; cs=correct specific; qq=okay)
+Noun Phrase  Multiple-Bracketing Interpretations african american women writers  (writers)H who wrote about (african american)M women, (women writers)H who are (african american)M , (writers)H who cover (african american)M women struggles chinese traditional instruments  (traditional instruments)H of (china)M , (instruments)H used in (chinese traditional)M music elementary math manipulatives  (manipulatives)H for (elementary math)M , (math manipulatives)H in the (elementary)M classroom, (manipulatives)H used in (elementary math)M , (math manipulatives)H for (elementary)M level global corporate tax rates  (corporate tax rates)H around the (world)M , (tax rates)H on (global corporate)M profits
+
+Table 9: Sample of alternative relevant interpretations extracted among the top 20 interpretations for noun phrases from the ListQ gold set (H=head; M=modifier)
+
+Table 7: Sample of noun phrases from the ListQ gold set, whose top 10 extracted interpretations induce multiple pairs of a head and a modifier of the noun phrases (H=head; M=modifier)
+
+portion in Table 6, the scores at rank 5 are 0.830 for ListQ, 0.790 for IsA and 0.860 for WikiC. Alternatively, in the fourth rows of each vertical portion, the scores at rank 5 are 0.360, 0.350 and 0.370 respectively. The scores indicate that at least one of the top 5 interpretations is correct and specific for about a third of the noun phrases in the gold sets. Induced Modifiers, Heads and Interpretations: When a candidate interpretation is extracted for a noun phrase, the interpretation effectively induces a particular bracketing over the noun phrase, as it splits it into a modifier and a head. For an ambiguous 340
+
+noun phrase, multiple bracketings may be possible, each corresponding to a different interpretation. Interpretations extracted from queries do capture such multiple bracketings, even for phrases from the gold sets, as illustrated in Table 7. Over all noun phrases from the input vocabularies that have some extracted interpretations and contain at least 3 tokens, about 10% (ListQ and IsA) and 5% (WikiC) of the noun phrases have multiple bracketings induced by their top 10 interpretations, as shown in Table 8. Table 9 shows examples of noun phrases with multiple extracted interpretations that induce identical bracketings, but capture distinct interpretations. Impact of Variants: Variants of modifiers provide alternatives in extracting candidate interpretations, even when the modifiers from the noun phrases are not present in their original form in the interpretations. For example, the adj-noun variant ethiopia of the modifier ethiopian leads to the extraction of the interpretation "runners from ethiopia" for the noun phrase "ethiopian runners". Similarly, wiki-
+
+

@@ -1,0 +1,20 @@
+(2006) first utilize information in a knowledge base (Wikipedia) to disambiguate names, by calculating similarity between the context of a name mention and the taxonomy of a KB node. Later research, such as Cucerzan (2007) and Milne and Witten (2008) extends this line by exploring richer feature sets, such as coherence features between entities. Global coherence features have therefore been widely used in NED research (see e.g. (Ratinov et al., 2011), (Hoffart et al., 2011), and (Cheng and Roth, 2013)) and have been applied successfully in TAC shared tasks (Cucerzan, 2011). These methods often involve optimizing an objective function that contains both local and global terms, and thus requires training on an annotated or distantly annotated dataset. Our system performs collective NED using a random walk algorithm that does not require supervision. Random walk algorithms such as PageRank (Page et al., 1999) and Personalized PageRank (Jeh and Widom, 2003) have been successfully applied to NLP tasks, such as Word Sense Disambiguation (WSD: (Sinha and Mihalcea, 2007; Agirre and Soroa, 2009)). Alhelbawy and Gaizauskas (2014) successfully apply the PageRank algorithm to the NED task. Their work is the closest in spirit to ours and performs well without supervision. We try to further improve their model by using a PPR model to better utilize local features, and by adding constraints to the random walk to reduce noise.
+
+United F.C. is based in Lincolnshire and participates
+in the sixth tier of English football. The striker Devon White joined this football club in 1985.
+Lincoln_United_F.C.,0.5 Devon_White (footballer), 0.5 Devon_White (baseball), 0.5 Boston_United_F.C.,0.5 Lincolnshire,0.4 Lincoln,_Lincolnshire, 0.3 Boston, _Lincolnshire, 0.3
+
+Figure 1: A toy document graph for three entity mentions: United F.C., Lincolnshire, Devon White. Candidates and their initial similarity scores are generated for each entity mention. 3.1 Vertices
+
+3
+
+The Graph Model
+
+We construct a graph representation G(V, E ) from the document D with pre-tagged named entity textual mentions M = {m1 , ..., mk }. For each entity mention mi  M there is a list of candidates in KB i Ci = {ci 1 , ..., cni }. Vertices V are defined as pairs
+i V = { (mi , ci j ) | mi  M, cj  Ci },
+
+Candidates. Given named entity mentions M in the document, we need to generate all possible candidates for every mention m  M . We first perform coreference resolution on the whole document and expand m to the longest mention in the coreference chain. We then add a Wikipedia entry c to the candidate set Ci for mention mi if 1) the title of c is the same as the expanded form of mi , or 2) string mi redirects to page c, or 3) c appears in a disambiguation page with title mi . Initial Similarity. Initial similarity iSim for vertex (m, c) describes how similar entity mention m to candidate c is. It is independent from other candidates in the graph G. We experiment with the local measure (localSim), based on the local information about the entity in the text, and the global measure (popSim), based on the global importance of the entity. Initial similarity scores of all candidates for a single named entity mention are normalized to sum to 1. · localSim: The local similarity score is produced by a MaxEnt model trained on the TAC2014 EDL training data (LDC2014E15). MaxEnt features include string similarity between the title of the Wikipedia entry and the entity mention, such as edit distance, whether the text mention starts or ends with the Wikipedia title, etc; and whether they have the same type (e.g. person, organization, location, etc).
+
+corresponding to the set of all possible KB candidates for different mentions in M . Edges are undirected and exist between two vertices if the two candidates are directly linked in the knowledge base, but no edge is allowed between candidates for the same named entity. Every vertex (m, c) is associated with an initial similarity score between entity mention m and candidate c (Figure 1). 239
+
+

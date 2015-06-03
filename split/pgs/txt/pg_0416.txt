@@ -1,0 +1,24 @@
+Figure 5: Two figures on the left: varying the amount of training data. L(1): Spearman. L(2): Kendall. Two figures on the right: varying the amount of features. R(1): Spearman. R(2): Kendall. Datasets Meme Finance (pre2009) Finance (2009) Finance (post2009) Meme Finance (pre2009) Finance (2009) Finance (post2009) No Dropout 0.625 0.416 0.412 0.377 0.491 0.307 0.302 0.282 With Dropout 0.754* 0.482* 0.445* 0.409* 0.580* 0.349* 0.318* 0.297* Top 1-10 paul/PER xcomp(tell,mean) possessive('s,it) yo daw pobj(vegas,in) ups/ORG into so you're FE Cognizer i yo . Top 11-20 FE party you dep(when,but) ... : FE Theme i on a FE Exp. they FE Entity you <start> how of the pobj(life,of) Top 21-30 new FE Entity it bruce/PER FE party we FE Food fat <start> make so you penci/PER y winehouse/PER
+
+Table 2: The effects of dropout training for NPNs on meme and other datasets. The best results of each row are highlighted in bold. * indicates p < .001 comparing to the no dropout setting.
+
+Table 3: Top-30 linguistic features that are highly correlated with the popular votes.
+
+captures the dependency relation of the popular meme series "You mean to tell me...". Interestingly, the transitional dependency feature dep(when,but) plays an important role in the language of memes. The object of a preposition, such as pobj(vegas,in) and pobj(life,of), also made the list. Bigrams are shown to be important features as usual. For example, "Yo daw" is a popular meme based on rapper Xzibit's famous reality car show "Pimp My Ride", where the rapper customizes people's car according to personal preferences. This viral meme follows the pattern8 of "Yo daw(g), I herd you like X (noun), so I put an X in your Y (noun) so you can W (verb) while you Z (verb)." The use of pronouns, captured by frame semantics features, is associated with popular memes. We hypothesize that by using pronouns such as "i", "you", "we", and "they", the meme recalls personal experiences and emotions, thus connects better with the audience. Finally, we see that the punctuation bigram "... :" is an important feature in the language
+8
+
+of memes, and Web dialect such as "y" (why) also exhibits high correlation with the popular votes.
+
+6
+
+Generation Experiments
+
+In this section, we investigate the performance of our meme generation system using 50 test meme images. To quantitatively evaluate our system, we compare with both unsupervised and supervised baselines. For the unsupervised baselines, we compare with a compact recurrent neural network language model (RNNLM) (Mikolov, 2012) trained on the 3,008 text descriptions of our meme training set, as well as a full model of RNNLM trained on a large meme corpus of 269K sentences9 . For the supervised baselines, all models are trained on the 3,008 training image-description pairs with labels. All these models can be viewed as different re-ranking methods for the retrieved candidate descriptions. We use BLEU score (Papineni et al., 2002) as the evaluation metric, since the generation task can be viewed as translating raw images into sentences, and it is
+Note that there are no image features feeding to the unsupervised RNN models.
+9
+
+http://knowyourmeme.com/memes/xzibit-yo-dawg
+
+362
+
+

@@ -1,0 +1,23 @@
+Word1 aimed aimed achieving achieving
+
+Word2 aims achieve aims achieve
+
+Affix1 X :ed X :imed X :chieving X :ing
+
+Affix2 X :s X :chieve X :ims X :e
+
+Stem aim a a achiev
+
+(7) is X :ed at Y :ing  X :s to Y :e Thanks to the above filtering mechanism, spurious patterns, such as (8), are not generated. (8) is X :imed at Y :chieving  Y :ims to X :chieve 3.2 Step 2. Harvesting New Paraphrase Pairs Given a set of paraphrase patterns, e.g., (4c) and (7), new paraphrase pairs are harvested from monolingual corpora. In this process, each paraphrase pattern is used as a template such that the expressions that match both sides of the patterns are collected. Unlike IDENT 's patterns, e.g., (4b), LEXVAR also collects corresponding pairs of lexical variants designated by each pattern. However, affix pattern alone cannot guarantee the semantic relation between a corresponding pair of words that each paraphrase pattern implicitly requires. For instance, the pattern (9b) is learned from (9a), where a definite relation is assumed between the two elements of ("X :", "X :an"). (9) a. countries of Europe  European nations b. countries of X :  X :an nations
+
+Table 1: Candidate pairs of lexical variants and corresponding affix patterns extracted from (6). Affix1 X :chieve X :chieving X :ed X :ing Affix2 X :imed X :ims X :s X :e # of unique stems length length 5 <5 0 1 0 1 69 22 330 70 Result Eliminated Eliminated Retained Retained
+
+Table 2: Filtering affix patterns (# of unique stems taken from our experimental result of Europarl setting).
+
+pairs of lexical variants and extract the longest common prefix/suffix as their corresponding affix patterns. From a paraphrase pair (6), for instance, we separately extract four pairs of words and their corresponding affix patterns, as shown in Table 1. (6) is aimed at achieving  aims to achieve Our candidate affix patterns are then filtered using the following criterion (Gaussier, 1999). An affix pattern is retained iff it is associated with at least n unique stems that are at least k characters in length. This criterion relies on two parameters, n and k . The parameter n assesses whether a pattern is sufficiently productive. The other (k ) is more linguistically motivated: a genuine pattern is more likely to be used for long stems, as affixation is a general operation for producing lexical derivations in many languages. In particular, we set k = 5 and n = 2, as proposed in (Gaussier, 1999). Table 2 presents examples of filtering affix patterns eliminated and retained with this setting. 3.1.2 Generating Paraphrase Patterns Using the affix patterns acquired in the previous step, paraphrase patterns are generated from the seed paraphrase pairs in SSeed . In this step, we exhaustively consider all the combinations of word forms and lexical variants that match one of the affix patterns. From the paraphrase pair (6), the following pattern is generated.
+
+Word pairs inappropriate for this pattern, e.g., ("uncle", "unclean") and ("beg", "began"), would be extracted alongside appropriate ones, e.g., ("Haiti", "Haitian") and ("suburb", "suburban"). Nonetheless, we suppose that the other surface parts of each paraphrase pair, e.g., "countries of" and "nations" in (9b), can effectively constrain instances, guaranteeing the existence of each entire phrase of the pair. Pattern matching alone can generate pairs that are not suitable as paraphrases in any context. Thus, we assess the reliability of each pair by calculating contextual similarity between two phrases in the same manner as cleaning SSeed : a pair of phrases is eliminated, if the phrases are used in completely dissimilar contexts. 3.3 Limitation While LEXVAR exploits a kind of generality of paraphrases exhibited by pairs of lexical variants, it does not exploit paraphrase pairs comprising completely different surface forms such as those pairs in (10). (10) a. look like  resemble b. burst into tears  cry
+
+634
+
+

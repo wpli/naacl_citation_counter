@@ -1,0 +1,59 @@
+0.0 0.2 0.4 0.6 0.8
+
+Multinomial HMM Multinomial Featurized HMM
+
+Multinomial CRF Autoencoder Gaussian HMM
+
+Gaussian CRF Autoencoder
+
+0.0 0.2 0.4 0.6 0.8
+
+HMM (standard skip-gram) CRF Autoencoder (standard skip-gram)
+
+HMM (structured skip-gram) CRF Autoencoder (structured skip-gram)
+
+V-measure
+
+Arabic
+
+Basque
+
+Danish
+
+Greek Hungarian Italian
+
+Turkish
+
+Zulu
+
+Average
+
+V-measure
+
+Arabic
+
+Basque
+
+Danish
+
+Greek Hungarian Italian
+
+Turkish
+
+Zulu
+
+Average
+
+Figure 1: POS induction results. (V-measure, higher is better.) Window size is 1 for all word embeddings. Left: Models which use standard skip-gram word embeddings (i.e., Gaussian HMM and Gaussian CRF Autoencoder) outperform all baselines on average across languages. Right: comparison between standard and structured skip-grams on Gaussian HMM and CRF Autoencoder. discussed in (Ammar et al., 2014), CRF autoencoder with Gaussian reconstructions were initialized uniformly at random in [-1, 1]. All HMM models were also randomly initialized. We tuned all hyperparameters on the English PTB corpus, then fixed them for all languages. Evaluation. We use the V-measure evaluation metric (Rosenberg and Hirschberg, 2007) to evaluate the predicted syntactic classes at the token level. 10 Results. The results in Fig. 1 clearly suggest that we can use word embeddings to improve POS induction. Surprisingly, the feature-less Gaussian HMM model outperforms the strong feature-rich baselines: Multinomial Featurized HMM and Multinomial CRF Autoencoder. One explanation is that our word embeddings were induced using larger unlabeled corpora than those used to train the POS induction models. The best results are obtained using both word embeddings and feature-rich models using the Gaussian CRF autoencoder model. This set of results suggest that word embeddings and hand-engineered features play complementary roles in POS induction. It is worth noting that the CRF autoencoder model with Gaussian reconstructions did not require careful initialization. 11
+10We found the V-measure results to be consistent with the many-to-one evaluation metric (Johnson, 2007). We only show one set of results for brevity. 11In (Ammar et al., 2014), we found that careful initialization for the CRF autoencoder model with multinomial reconstructions is necessary.
+
+4.2
+
+Choice of Embeddings
+
+Standard skip-gram vs. structured skip-gram. On Gaussian HMMs, structured skip-gram embeddings score moderately higher than standard skipgrams. And as context window size gets larger, the gap widens (as shown in Fig. 2.) The reason may be that structured skip-gram embeddings give each position within the context window its own project matrix, so the smearing effect is not as pronounced as the window grows when compared to the standard embeddings. However the best performance is still obtained when window size is small. 12 Dimensions = 20 vs. 200. We also varied the number of dimensions in the word vectors ( d  {20, 50, 100, 200} ) . The best V-measure we obtain is 0.504 (d = 20) and the worst is 0.460 (d = 100). However, we did not observe a consistent pattern as shown in Fig. 3. Window size = 1 vs. 16. Finally, we varied the window size for the context surrounding target words ( w  {1, 2, 4, 8, 16} ) . w = 1 yields the best average V-measure across the eight languages as shown in Fig. 2. This is true for both standard and structured
+12In preliminary experiments, we also compared standard skipgram embeddings to SENNA embeddings (Collobert et al., 2011) (which are trained in a semi-supervised multi-task learning setup, with one task being POS tagging) on a subset of the English PTB corpus. As expected, the induced POS tags are much better when using SENNA embeddings, yielding a V-measure score of 0.57 compared to 0.51 for skip-gram embeddings. Since SENNA embeddings are only available in English, we did not include it in the comparison in Fig. 1.
+
+1314
+
+

@@ -1,0 +1,25 @@
+PAS (T.PARSER+features, this paper) (Du et al., 2014) (Martins and Almeida, 2014) (DSR, this paper) (Thomson et al., 2014) (S&T, this paper) (DSR, this paper, no feat) (S&T, this paper, no feat) 92.11 92.04 91.76 90.13 89.63 87.5 87.02 84.18
+
+DM 89.70 89.40 89.16 85.66 83.97 83.84 83.91 81.17
+
+Table 10: Comparison with the State-of-the-Art.
+
+the second-order features is reduced by half when used jointly with our feature set (+1.09 vs +0.57 with them). However, although we could assess that the need of second order models is thus alleviated, the conjunction of both types of features still improves the parser performance by an overall gain of 1.62 points on DM (1.18 on PAS), suggesting that both feature sets contribute to different types of "structures". In short, the use of syntactic features is also relevant with a strong baseline, as they provide a global view to graph-based models, establishing a new state-of-the-art on these corpora.
+-S YNT. F EAT. DM, baseline +grandparent +co-parents PAS, baseline +grandparent +co-parents 86.99 87.66 88.08 89.73 90.15 90.93 +S YNT. F EAT. 89.13 89.43 89.7 91.68 91.92 92.11  +2.14 +1.77 +1.62 +1.95 +1.77 +1.18
+
+do not form connected graphs by themselves, as they only cover argument identification and nominal predicates. The range of phenomena they describe is also limited, compared to a full predicate-argument analysis as provided by DM and PAS (Oepen et al., 2014). More importantly, as pointed out by Yi et al. (2007), being verb-specific, Propbank's roles do not generalize well beyond the A RG 0 argument (i.e. the subject/agent role) leading to inconsistencies. However, the advent of such semantic-based resources have ignited a fruitful line of research, of which the use of heterogeneous sources of information to boost parsing performance has been investigated over the past decade (Chen and Rambow, 2003; Tsuruoka et al., 2004) with a strong regain of interest raised by the work of Moschitti et al. (2008), Henderson et al. (2008), Sagae (2009).
+
+8
+
+Conclusion
+
+Table 11: LF Results for T.PARSER (test set). Baseline = arc-factored + siblings
+
+Related Work A growing interest for semantic parsing has emerged over the past few years, with the availability of resources such as PropBank and NomBank (Palmer et al., 2005; Meyers et al., 2004) built on top of the Penn Treebank. The shallow semantic annotations they provide were among the targets of successful shared tasks on semantic role labeling (Surdeanu et al., 2008; Carreras and Màrquez, 2005). Actually, the conjoint use of such annotations with surface syntax dependencies bears some resemblance with predicate-argument structure parsing like we presented here. However, they diverge in that Propbank/Nombank annotations 72
+
+We described the use and combination of several kinds of syntactic features to improve predicateargument parsing. To do so, we tested our approach of injecting surface-syntax features by thoroughly evaluating their impact on one transitionbased graph parser, then validating on two more efficient parsers, over two deep syntax and semantic treebanks. Results of the syntax-enhanced semantic parsers exhibit a constant improvement, regardless of the annotation scheme and the parser used. The question is now to establish whether will this be verified in other semantic data sets? From the parsing of deep syntax treebanks a la Meaning Text Theory (Ballesteros et al., 2014), to Framenet semantic parsing (Das et al., 2014) or data-driven approaches closer to ours (Flanigan et al., 2014), it is difficult to know which models will predominate from this bubbling field and what kind of semantic data sets will benefit the most from syntax.
+
+Acknowledgements
+We would like to thank Kenji Sagae and André F. T. Martins for making their parsers available and for kindly answering our questions. We also thank our anonymous reviewers for their comments. This work was partly funded by the Program "Investissements d'avenir" managed by Agence Nationale de la Recherche ANR-10-LABX-0083 (Labex EFL).
+
+

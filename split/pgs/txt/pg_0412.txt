@@ -1,0 +1,30 @@
+2. Elkan K-means Clustering is the clustering method (Elkan, 2003) that we use to obtain the vocabulary for visual words. Comparing to other variants of K-means, this method quickly constructs the codebook from PHOW keypoints. 3. Bag-of-Words Histograms are used to represent each image. We match the PHOW keypoints of each image with the vocabulary that we extract from the previous step, and generate a 1 × 200 sized visual bag-of-words vector. 3.2 The Theory of Copula In the Statistics literature, copula is widely known as a family of distribution function. The idea behind copula theory is that the cumulative distribution function (CDF) of a random vector can be represented in the form of uniform marginal cumulative distribution functions, and a copula that connects these marginal CDFs, which describes the correlations among the input random variables. However, in order to have a valid multivariate distribution function regardless of n-dimensional covariates, not every function can be used as a copula function. The central idea behind copula, therefore, can be summarize by the Sklar's theorem and the corollary. Theorem 1 (Sklar's Theorem (1959)) Let F be the joint cumulative distribution function of n random variables X1 , X2 , ..., Xn . Let the corresponding marginal cumulative distribution functions of the random variable be F1 (x1 ), F2 (x2 ), ..., Fn (xn ). Then, if the marginal functions are continuous, there exists a unique copula C , such that F (x1 , ..., xn ) = C [F1 (x1 ), ..., Fn (xn )]. (1) Furthermore, if the distributions are continuous, the multivariate dependency structure and the marginals might be separated, and the copula can be considered independent of the marginals (Joe, 1997; Parsa and Klugman, 2011). Therefore, the copula does not have requirements on the marginal distributions, and any arbitrary marginals can be combined and their dependency structure can be modeled using the copula. The inverse of Sklar's Theorem is also true in the following: Corollary 1 If there exists a copula C : (0, 1)n and marginal cumulative distribution functions F1 (x1 ), F2 (x2 ), ..., Fn (xn ), then 358
+
+C [F1 (x1 ), ..., Fn (xn )] defines cumulative distribution function. 3.3 The Nonparanormal
+
+a
+
+multivariate
+
+To model multivariate text and vision variables, we choose the nonparanormal (NPN) as the copula function in this study, which can be explained in the following two parts. The Nonparametric Estimation Assume we have n random variables of vision and text features X1 , X2 , ..., Xn . The problem is that text features are sparse, so we need to perform nonparametric kernel density estimation to smooth out the distribution of each variable. Let f1 , f2 , ..., fn be the unknown density, we are interested in deriving the shape of these functions. Assume we have m samples, the kernel density estimator can be defined as: 1 ^ f h (x) = m =
+m
+
+Kh (x - xi )
+i=1 m
+
+(2) (3)
+
+1 mh
+
+K
+i=1
+
+x - xi h
+
+Here, K (·) is the kernel function, where in our case, we use the Box kernel2 K (z ): 1 K (z ) = , |z |  1, 2 = 0, |z | > 1. (4) (5)
+
+Comparing to the Gaussian kernel and other kernels, the Box kernel is simple, and computationally inexpensive. The parameter h is the bandwidth for smoothing3 . Now, we can derive the empirical cumulative distribution functions ^ ^ ^ ^X (f ^ ^ F 1 (X1 )), FX2 (f2 (X2 )), ..., FXn (fn (Xn )) 1 of the smoothed covariates, as well as the dependent variable y (which is the reciprocal rank of the pop^(y )). The ^y (f ular votes of a meme) and its CDF F
+It is also known as the original Parzen windows (Parzen, 1962). 3 In our implementation, we use the default h of the Box kernel in the ksdensity function in Matlab.
+2
+
+

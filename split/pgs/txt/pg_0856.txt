@@ -1,0 +1,40 @@
+semantic context of a discourse connective through a unigram distribution over words in its two arguments, with Arg1 and Arg2 combined. We use Jensen-Shannon Divergence (JSD) as a metric for measuring the difference between the contexts of a discourse connective in implicit and explicit discourse relations. Computing a context differential of the discourse connective therefore involves fitting a unigram distribution from all implicit discourse relations bound by that discourse connective and fitting another from all explicit discourse relations bound by the same discourse connective. We choose this method because it has been shown to be exceptionally effective in capturing similarities of discourse connectives (Hutchinson, 2005) and statistical language analysis in general (Lee, 2001; Ljubesic et al., 2008). The Jensen-Shannon Divergence (JSD) metric for difference between Po , the semantic environments (unigram distribution of words in Arg1 and Arg2 combined) in implicit discourse relations, and Pr , the semantic environments in explicit discourse relations, is defined as: JSD(Po ||Pr ) = 1 1 D(Po ||M ) + D(Pr ||M ) 2 2
+
+that the omission is frequent and insensitive to the context. "Because" and "in particular" in (4) and (5) are such connectives. Dropping them has minimal impact on the understanding the discourse relation between their two arguments and one might argue they even make the sentences sound more natural. (4) We cleared up questions and inconsistencies very quickly because the people who had the skills and perspective required to resolve them were part of the task team. (WSJ0562) (5) Both companies are conservative marketers that rely on extensive market research. P&G, in particular, rarely rolls out a product nationally before extensive test-marketing. (WSJ0589)
+
+2.4.2
+
+Omissible discourse connectives
+
+where M = 1 2 (Po + Pr ) is a mixture of the two distributions and D(.||.) is Kullback-Leibler divergence function for discrete probability distributions: D(P ||Q) =
+i
+
+They are connectives whose usage in implicit and explicit discourse relations is indistinguishable, yet they are not often omitted because the discourse relation might be hard to interpret without them. These connectives are defined as having low omission rate and low context differential. For example, (6) Such problems will require considerable skill to resolve. However, neither Mr. Baum nor Mr. Harper has much international experience. (WSJ0109) One can infer from the discourse that the problems require international experience, but Mr. Baum and Mr. Harper don't have that experience even without the discourse connective "however". In other words, the truth value of this proposition is not affected by the presence or absence of this discourse connective. The sentence might sound a bit less natural, and the discourse relation seems a bit more difficult to infer if "however" is omitted.
+
+ln(
+
+P (i) )P (i) Q(i)
+
+2.4
+
+Discourse Connective Classification
+
+Using the two metrics, we can classify discourse connectives into the following classes: 1. 2. 3. 4. 5. Freely omissible: High OR and low JSD Omissible: Low non-zero OR and low JSD. Alternating I: High OR and high JSD. Alternating II: Low non-zero OR and high JSD. Non-omissible: Zero OR. JSD cannot be computed because the connectives are never found in any implicit discourse relations.
+
+2.4.3
+
+Alternating discourse connectives
+
+Classifying the connectives into these classes allow us to empirically investigate which explicit discourse relations are useful as supplemental training data for determining the sense of implicit discourse relations. We discuss each type of connectives below.
+
+They are connectives whose usage in implicit and explicit discourse relations is substantially different and they are defined as having high context differential. Having high context differential means that the two arguments of an explicit discourse connective differ substantially from those of an implicit discourse. An example of such discourse connectives is "nevertheless" in (7). If the discourse connective is dropped, one might infer E XPAN SION or C ONTINGENCY relation instead of C OMPARI SON indicated by the connective. (7) Plant Genetic's success in creating genetically engineered male steriles doesn't automatically mean it would be simple to create hybrids in all crops. Nevertheless, he said, he is negotiating with Plant Genetic to acquire the technology to try breeding hybrid cotton. (WSJ0209)
+
+2.4.1
+
+Freely omissible discourse connectives
+
+These are connectives whose usage in implicit and explicit discourse relations is indistinguishable and therefore suitable as a source of supplemental training data. These connectives are defined as having high omission rate and low context differential. This definition implies
+
+802
+
+

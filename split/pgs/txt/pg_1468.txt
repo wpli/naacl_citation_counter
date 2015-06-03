@@ -1,0 +1,24 @@
+Model 1-stage 1-stage semi 2-stage U N E DITOR: 2-stage semi
+
+Prec 70.9 71.7 83.3 76.8
+
+Rec 49.0 52.8 47.6 52.2
+
+F1 57.9 60.8 60.6 62.2
+
+Acknowledgments
+This work was supported in part by DARPA grant FA8750-12-2-0347. The authors thank the anonymous reviewers for their valuable feedback to improve the clarity of paper. The authors also thank Sangyun Hahn for his contribution in the two-stage model. The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of DARPA or the U.S. Government.
+
+Table 5: Baseline, two-stages and self-training methods, comparison: baseline self-training method is trained on ...., all the rest methods are trained on A NNOT OYEZ and T RANSF S WBD. Our method, U N E DITOR combines selftraining and two-stage models.
+
+provement using the full U N E DITOR system com- References paring to the model trained on the O RIG S WBD [Bulyko et al.2007] I. Bulyko, M. Ostendorf, M. Siu, dataset.
+
+6
+
+Conclusion
+
+In this paper we present a framework for disfluency detection in non-careful transcripts. Experiments are based on the OYEZ archive of transcriptions of Supreme Court oral arguments. To address the problem of lack of annotated data, we first transfer disfluency annotations from careful transcripts of a few cases to the less precise OYEZ transcripts. Next, we transform Switchboard transcripts to make them more similar to the target domain. In addition, we introduce a two-stage model and self-training to further improve performance. Experiments show improvement in disfluency detection on Supreme Court oral arguments. Starting from baselines of training from carefully annotated in-domain data (F1=26.1) or Switchboard data (F1=39.7), we achieve a substantial improvement to (F1=62.2) with our best case system U N E DITOR, which corresponds to an improvement of nearly 23% over the stronger baseline. Possible extensions of this work include exploring graph-based semi-supervised approaches (e.g., (Subramanya et al., 2010)) and combining the text-based approach with flexible ASR forced alignment allowing optional insertion of filled pauses and words that are common as repetitions. In addition, the availability of the automatically annotated disfluencies makes it possible to study the variation in rates for different cases and speakers over an extended time period. 1414
+
+T. Ng, A. Stolcke, and O. Cetin. 2007. Web resources for language modeling in conversational speech recognition. IEEE-TSLP, 5(1). [Charniak and Johnson2001] E. Charniak and M. Johnson. 2001. Edit detection and parsing for transcribed speech. In Proc. NAACL, pages 118­126. [Georgila et al.2010] K. Georgila, N. Wang, and J. Gratch. 2010. Cross-domain speech disfluency detection. In Proc. Annual SIGdial Meeting on Discourse and Dialogue. [Georgila2009] K. Georgila. 2009. Using integer linear programming for detecting speech disfluencies. In Proc. NAACL-HLT. [Godfrey et al.1992] J. J. Godfrey, E. C. Holliman, and J. McDaniel. 1992. Switchboard: Telephone speech corpus for research and development. In Proc. ACL, volume I, pages 517­520. [Hale et al.2006] John Hale, Izhak Shafran, Lisa Yung, Bonnie Dorr, Mary Harper, Anna Krasnyanskaya, Matthew Lease, Yang Liu, Brian Roark, Matthew Snover, and Robin Stewart. 2006. PCFGs with syntactic and prosodic indicators of speech repairs. In Proc. COLING-ACL. [Honnibal and Johnson2014] Matthew Honnibal and Mark Johnson. 2014. Joint incremental disfluency detection and dependency parsing. TACL, 2(1):131­142. [Johnson and Charniak2004] M. Johnson and E. Charniak. 2004. A tag-based noisy channel model of speech repairs. In Proc. ACL. [Kahn et al.2005] Jeremy G Kahn, Matthew Lease, Eugene Charniak, Mark Johnson, and Mari Ostendorf. 2005. Effective use of prosody in parsing conversational speech. In Proc. EMNLP-HLT, pages 233­240. [Lease et al.2006] Matthew Lease, Mark Johnson, and Eugene Charniak. 2006. Recognizing disfluencies in conversational speech. IEEE-TASLP, 14(5):169­177.
+
+

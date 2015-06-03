@@ -1,0 +1,40 @@
+(a)
+
+rec.autos vs. sci.electronics (full doc.)
+
+(b)
+
+rec.autos vs. sci.electronics (1/16 doc.)
+
+(c)
+
+rec.autos vs. rec.motorcycles (full doc.)
+
+(d)
+
+rec.autos vs. rec.motorcycles (1/16 doc.)
+
+Figure 1: Accuracy of dataless classification using ESA and Dense-ESA with different numbers of concepts.
+
+SM (x, y) uses only one-to-many term mapping. SA (x, y) can introduce small and noisy similarity values between terms. While SM (x, y) essentially aligns each term in x with it's best match in y, we run the risk that multiple components of x will select the same element in y. To ensure that all the non-zero terms in x and y are matched, we propose to constrain this metric by disallowing many-to-one mapping. We do that by using a similarity metric based on the Hungarian method (Papadimitriou and Steiglitz, 1982). The Hungarian method is a combinatorial optimization algorithm that solves the bipartite graph matching problem by finding an optimal assignment matching the two sides of the graph on a one-to-one basis. Assume that we run the Hungarian method on the the pair {x, y}, and let h(ai ) = bj denote the outcome of the algorithm, that is ai is aligned with bj . (We assume here, for simplicity, that nx = ny ; we can always achieve that by adding some zero weighted terms that are not aligned). The we define the similarity as: SH (x, y) = 1 ||x|| · ||y||
+nx i=1
+
+as five). For each word, we finally obtained a 200 dimensional vector. If the term is a phrase, we simply average words' vectors of each phrase to obtain the representation following the original word2vec approach (Mikolov et al., 2013a; Mikolov et al., 2013b). We use two vectors a and b to represent the vectors for the two terms. To evaluate the similarity between two terms, for the average approach as Eq. (2), we use the RBF kernel over the two vectors exp{-||a - b||2 /(0.03 ·||a||·||b||)} as the similarity for all the experiments, since this will have a good property to cut the terms with small similarities. For the max and Hungarian approach as Eqs. (3) and (4), we simply use the cosine similarity between the two word2vec vectors. In addition, we cut off all similarities below threshold  and map them to zero.
+
+3
+
+Experiments
+
+xai yh(ai ) (ai , h(ai )). (4)
+
+2.2
+
+Term Similarity Measure
+
+We experiment on three data sets. We use dataless classification (Chang et al., 2008; Song and Roth, 2014) over 20-newsgroups data set to verify the correctness of our argument of short text problems, and use two short text data sets to evaluate document similarity measurement and event classification for sentences. 3.1 Dataless Classification
+
+To evaluate the term similarity (·, ·), we use local contextual similarity based on distributed representations. We adopt the word2vec (Mikolov et al., 2013a; Mikolov et al., 2013b) approach to obtain a dense representation of words. The representation of each word is predicted based on the context word distribution in a window around it. We trained word2vec on the Wikipedia dump data using the default parameters (CBOW model with window size 1277
+
+Dataless classification uses the similarity between documents and labels in an enriched "semantic" space to determine in which category the given document is. In this experiment, we used the label descriptions provided by (Chang et al., 2008). It has been shown that ESA outperforms other representations for dataless classification (Chang et al., 2008; Song and Roth, 2014). Thus, we chose ESA as our
+
+

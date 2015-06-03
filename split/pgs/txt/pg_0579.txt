@@ -1,0 +1,5 @@
+Jason Weston, Samy Bengio, and Nicolas Usunier. 2011. Wsabie: Scaling up to large vocabulary image annotation. In International Joint Conference on Artificial Intelligence. Xuchen Yao and Benjamin Van Durme. 2014. Information extraction over structured data: Question answering with freebase. In Association for Computational Linguistics. Limin Yao, Sebastian Riedel, and Andrew McCallum. 2013. Universal schema for entity type prediction. In Proceedings of the 2013 Workshop on Automated Knowledge Base Construction.
+
+525
+
+

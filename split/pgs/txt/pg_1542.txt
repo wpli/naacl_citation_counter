@@ -1,0 +1,24 @@
+Dataset CORPS星 CORPSP Movie星 MovieP Slogan星 SloganP Twitter星 TwitterP
+
+^rh (t) F 0.025 0.033** 0.018 0.041*** 0.005 0.055*** 0.006 0.012***
+
+^al (t) F 0.012 0.023** 0.011 0.025*** 0.003 0.043*** 0.003 0.008***
+
+^pl (t) F 0.362 0.415*** 0.397 0.363 0.460 0.410*** 0.385 0.364**
+
+^ho (t) F 0.394 0.363 0.092 0.173*** 0.011 0.018*** 0.377 0.449***
+
+Table 4: Probability of examples above threshold, - ***, p < .001; **, p < .01; *, p < .05; , not significant
+
+we compare them in terms of empirical Complementary Cumulative Distribution Functions (CCDFs) of the persuasive/non-persuasive pairs in various datasets. These functions are commonly used to analyze online social networks in terms of growth in size and activity (see for example (Ahn et al., 2007; Jiang et al., 2010; Leskovec, 2008)) and also for measuring content diffusion, e.g. the number of retweets of a given content (Kwak et al., 2010). Here, we use CCDFs to account for the probability P that the score of a phonetic device d will be greater than n indicating it with ^d (n). For example, the probability of having a F text with more than .75 rhyme score is indicated ^rh (.75) = P(#rhyme > .75). To aswith F sess whether the CCDFs of the several types of texts we take into account show significant differences, we use the Kolmogorov-Smirnov goodnessof-fit test, which specifically targets cumulative distribution functions. In particular, for each phonetic device and dataset, we use a two-tailed KolmogorovSmirnov test (again with Bonferroni correction) to test whether the number of examples above the threshold is higher in the persuasive sentences than in their non-persuasive counterparts for that device. Since we do not have a theoretical way to define such thresholds, we resort to empirically define them by using a specific dataset of euphonic sentences. Even if it might seem reasonable to consider poems as paradigmatic examples of "euphonic" writing, we discard them as the phonetic devices used in poems may span across sentences. Instead, we resort to tongue twisters as a gold reference of how a euphonic sentence should be. Accordingly, we collected a set of 534 tongue twisters from various on1488
+
+line resources. Then, for each phonetic index we defined our thresholds as the average of the phonetic scores in this data, in particular: trh = 0.55 for rhyme, tal = 0.58 for alliteration, tpl = 0.20 for plosives and tho = 0.68 for homogeneity. In Table 4, we report the results of our CCDF analysis. After analyzing the "extreme cases", where euphony is granted, we see that the trends found in Table 3 on the correlation between persuasiveness and euphony are confirmed and strengthened. The number of persuasive sentences with a rhyme score above threshold is 30% more than the non-persuasive ones in CORPS, while the difference is 90% in Twitter4 . The ratio of persuasive sentences above threshold to non-persuasive ones is very high in movies and slogans (more than 2 and 10 respectively). All results are either highly significant or significant. For comparison, in Table 3 these differences are not significant for CORPS and only slightly significant (p < .05) for movies. Concerning alliteration, there are 85% more cases above threshold in the persuasive sentences of CORPS than the non-persuasive ones. For movie quotes and Twitter, the persuasive sentences above threshold are more than two times as many as the non-persuasive ones, while the ratio is more than 13 for slogans. All results are either highly significant or significant in line with the results of Table 3. Instead, for plosive scores we observe a negative or no correlation with persuasiveness, the only exception being CORPS. Regarding homogeneity, for CORPS the difference between persuasive and non-persuasive sentences is not significant (in Table 3 it was significantly in favor of non-persuasive sentences), while for the other datasets there is a highly significant difference in favor of persuasive sentences (between 20% and 80%). As a whole, these results confirm our intuition that phonetic features play a significant role with respect to persuasiveness. In the next section we will validate this claim by means of prediction experiments.
+
+6
+
+Prediction Experiments
+
+In this section, we describe the prediction tasks (both within and across datasets) that we carried out to inIn the following the ratios are computed on the real values while Table 4 presents the rounded values.
+4
+
+

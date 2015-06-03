@@ -1,0 +1,53 @@
+a) wj c) wj
+L R
+
+sbj obj
+
+b)
+sub-L obj-R
+
+wi d)
+obj
+
+wj
+
+wi e) wk V wj V
+
+wk
+L R
+
+wi N
+
+wk
+
+wj N
+
+wi
+
+wi
+
+wk V
+
+lang NO EN DA CA HR FI
+
+train 13.7k/209k 3.6k/70k 4.2k/74k 3.9k/73k 3.1k/79k 9.1k/123k
+
+test 5.8k/96.7k 1.0k/20.3k 1.2k/23.4k 1.7k/34.4k 1.3k/35.5k 3.9k/54.4k
+
+l 29 30 31 27 26 45
+
+p 19 44 25 11 27 12
+
+Figure 1: Factorizations: a) L ABEL, b) L ABEL D; c) C HILD P OS D, d) H EAD P OS and e) H EAD P OS D. Red and green depict different choices by annotators A1 and A2 .
+
+Table 1: Data statistics: number of sentences/tokens, dependency labels l, POS tags p for NO (Norwegian), EN (English), DA (Danish), CA (Catalan), Croatian (HR) and Finnish (FI); =canonical test split available.
+
+3
+
+Cost-sensitive updates
+
+a) L ABEL: disagreement over label pairs, regardless of attachment (h1 ,h2 ). That is, h1 , l1 and h2 , l2 count as disagreement, iff l1 = l2 . b) L ABEL D, same as L ABEL, but incorporating edge direction. That is, h1 , l1 and h2 , l2 count as disagreement, for any j, k  h1 , h2 , iff hj < i < hk or l1 = l2 . c) C HILD P OS D, i.e., disagreement on attachment direction given POS(i). That is, for POS(i), h1 , l1 and h2 , l2 count as disagreement, iff hj < i < h k . d) H EAD P OS: disagreement on head POS. That is, h1 , l1 and h2 , l2 count as disagreement, iff POS(h1 )=POS(h2 ). e) H EAD P OS D, i.e., H EAD P OS, plus direction. That is, h1 , l1 and h2 , l2 count as disagreement, iff POS(h1 )=POS(h2 ) or hj < i < hk . Each factorization yields a symmetric confusion matrix. In our Norwegian data (§4), for instance, for L ABEL there are 834 words that have been labeled as ATR (attribute) by both annotators, while there are 44 cases where one annotator has given the ATR label and the other has given the ADV (adverbial) label. For L ABEL D, there are 968 words that have been labeled as ADV where both annotators agree on the head being on the left side of the word, whereas there are 9 cases where the annotators agree on ADV label but not on the direction of the head. These 9 cases count as disagreements for L ABEL D but not for L ABEL. 1358
+
+We use the cost-sensitive perceptron classifier, following Plank et al. (2014a), but extend it to transition-based dependency parsing, where the predicted values are transitions (Goldberg and Nivre, 2012). Given a gold yi and predicted label y ^i (POS tags or transitions), the loss is weighted by  (^ yi , yi ): Lw (^ yi , yi ) =  (^ yi , yi ) max(0, -yi w · xi ) Whenever a transition has been wrongly predicted, we retrieve the predicted edge and compare it to the gold dependency to calculate  .  (yi , yj ) is then the inverse of the confusion probability estimated from our sample of doubly-annotated data. For example, using the factorization L ABEL, if the parser predicts wi to be S UBJECT and the gold annotation is O B JECT , the confusion probability is the number of times one annotator said S UBJECT while the other said O BJECT out of the times one annotator said one of them. In L ABEL D, A1 and A2 can disagree even if both say the grammatical function of some word wi is S UBJECT, namely if one says the subject is left of wi , and the other says it is right of wi . The confusion probability is then the count of disagreements over the total number of cases where both annotators said a word was S UBJECT. In our baseline model,  (^ yi , yi ) = 1. The values for our cost-sensitive systems (L ABEL , L ABEL D, C HILD P OS D, H EAD P OS , H EAD P OS D) are never above 1, which means that we are selectively underfitting the parser for specific syntactic phenomena. In other words, we use the doubly-annotated data to regularize our model, hopefully preventing overfitting to annotators' biases.
+
+

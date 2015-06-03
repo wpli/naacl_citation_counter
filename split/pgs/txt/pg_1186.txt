@@ -1,0 +1,34 @@
+tions. Note that while we only evaluate linking of PER, ORG, and GPE entities, collaborators may be of any type. We also outline preliminary efforts to use AMR to create sets of coherent entity mentions. In each of the following subsections we describe elements of AMR useful for context representation in EL. For each element we explain how our current system makes use of it (primarily, by using it to add entity mentions to a particular entity mention's set of collaborators). In doing so, we mainly refer to several examples from political discussion forums about "Mitt Romney", "Ron Paul" and "Gary Johnson". Their AMR graphs are depicted in Figure 1. 3.1 Entity Nodes Each AMR node represents an entity mention, and contains its canonical name as inferred from sentential context. This property is called name expansion. Consider the following sentence: "Indonesia lies in a zone where the Eurasian, Philippine and Pacific plates meet and occasionally shift, causing earthquakes and sometimes generating tsunamis.". Here, the nodes representing the three plates will be labeled as "Eurasian Plate", "Philippine Plate" and "Pacific Plate" respectively, even though these strings do not occur in the sentence. Note that these labels may be recovered primarily by appealing to syntactic reasoning, without consulting a KB. In our implementation we consider these expanded names as mentions (these strings supersede raw mentions as input to the salience based candidate enumeration (Section 5.2)). Because the initial enumeration of entity candidates depends heavily on the mention's surface form, independent of context, name expansion will help us link "Philippine" to "Philippine Sea Plate" as opposed to the country. An AMR node also contains an entity type. AMR defines 8 main entity types (Person, Organization, Location, Facility, Event, Product, Publication, Natural object, Other) and over one hundred finegrained subtypes. For example, company, government organization, military, criminal organization, political party, school, university, research institute, team and league are subtypes of organization. The fine-grained entity types defined in AMR help us restrict KB entity candidates for a given mention by encouraging entity type matching. For exam1132
+
+instance :ARG0 anticipate-01
+
+:ARG1
+
+instance
+
+:time :ARG1
+
+instance polarity
+
+:ARG0
+
+i instance :year date-entity 2012
+
+nominate-01 person Mitt Romney political-party GOP
+
+(a) I am cautiously anticipating the GOP nominee in 2012 not to be Mitt Romney.
+:ARG0-of person Romney :ARG2 :ARG1 instance have-org-role-91 instance governor state Massachusetts
+
+(b) Romney was the Governor of Massachusetts...
+:ARG2 :ARG1 instance have-rel-role-91 :mod instance great grandson instance :mod pioneer religious-group Mormon person Romney :ARG0
+
+(c) Romney is the great-great-grandson of a Mormon pioneer...
+instance :mod candidate political-party Republican person Paul person Romney :op2 :op1 :op3 instance and person Johnson :example
+
+(d) Republican candidates like Romney, Paul, and Johnson...
+
+Figure 1: AMR for the Walk-through Example
+
+ple, in "The Yuri dolgoruky is the first in a series of new nuclear submarines to be commissioned this
+
+

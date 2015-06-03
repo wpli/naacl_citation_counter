@@ -1,0 +1,28 @@
+Benchmark best best-m oot oot-m GAP test GAP all
+
+Orig 12.7 21.7 36.3 52.0 55.2 55.1
+
+1000 12.1 20.9 34.8 50.4 52.0 51.8
+
+100 11.2 19.7 32.5 46.4 50.9 50.7
+
+Table 7: The effect of context clustering on our model's performance on LS07. Orig stands for best configuration of our model with no clustering, and 1000/100 stand for the same configuration with that number of clusters.
+
+6.4
+
+Computational efficiency and clustering
+
+tors in Cu into either 100 or 1000 clusters. Then, instead of Cu , we used the collection of its cluster centroids, pruned to their top-100 entries. Table 7 shows the results when applying this to our best performing configurations on the LS07 dataset. The results show relative performance degradation when fewer clusters are used, indicating that some relevant information may be lost in this process. However, absolute performance remains competitive, suggesting that this is a viable option when memory consumption is a concern. The results on the LS14 dataset show similar trends.
+
+To generate our in-context paraphrase predictions for an instance of a target word u, our model performs a weighted average over all of its context substitute vectors in Cu . The run-time complexity of this procedure is reasonably efficient at O(|Cu |·n), where n is the vector pruning factor. This is comparable to the complexity of the state-of-the-art algorithm before this work (Thater et al., 2011) and even to word2vec's dense vector computations. As a point of reference, in our experiments it took 300 msec to generate an in-context paraphrase vector for a given word instance on a modest single core, which was only about 3 times slower than the word2vec computation. Memory consumption of our model is not an issue when operating in an `offline' mode. In this mode all the target word instances in a test set (such as LS07 or LS14), can first be sorted according to their word type. Then, while processing all instances of the same word type u one after the other, only the substitute vectors in Cu need to be loaded into memory. In contrast, in an `online' mode, to be ready for any arbitrary word instance input, our model would need to keep in memory substitute vectors for all the word types in the vocabulary V . The space complexity in this case is O(|Cu |·n · |V |), which can easily reach memory consumptions in the order of 100 GB or more, requiring a large-scale server. To address this challenge, we present a more coarse-grained variant of our model, where for each word type u we keep only k substitute vectors instead of all individual context vectors, thereby bounding the memory consumption to O(k · n · |V |). To this end, for each word type u we used spherical k -means to cluster the 20,000 substitute vec480
+
+7
+
+Discussion and Future Work
+
+We proposed a model for word meaning in context whose main novelty is in representing contexts as substitute vectors. Our model outperformed stateof-the-art baselines in both predicting and ranking paraphrases of words in context in two different lexical substitution tasks. As another potential contribution, the context similarity measures used in our model performed well on a targeted evaluation, suggesting that they may be useful as a component in other applications as well. Substitute vectors were successfully used earlier for performing part-of-speech and word sense induction tasks (Baskaya et al., 2013; Yatbaz et al., 2014), not addressed in this work. These works took a different approach, embedding words in a low dimensional space, based on target-substitute pairs sampled from substitute vectors. It would be interesting to explore how our approach applies to these tasks. Finally, a preliminary qualitative analysis showed that low quality substitute vectors may be a factor limiting our model's performance. This suggests that generating substitute vectors with better language models, such as neural language models, is a potential path to further improvements.
+
+Acknowledgments
+We thank our reviewers for their helpful remarks. This work was partially supported by the Israel Science Foundation grant 880/12, the German Research Foundation through the German-Israeli Project Cooperation (DIP, grant DA 1600/1-1), and the European Community's Seventh Framework Programme (FP7/2007-2013) grant 287923 (EXCITEMENT).
+
+

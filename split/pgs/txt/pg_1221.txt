@@ -1,0 +1,21 @@
+of recipes does not suggest that the textual order is the only order of events that would yield the same outcome. We compute the Kendall's Tau correlation, a standard measure for information ordering (Lapata, 2006), between the temporal and linear orderings for each recipe. In cases of several events that happen simultaneously (including disjunctions), we take their ordinals to be equal. For instance, for three events where the last two happen at the same time, we take their ordering to be (1,2,2) in our analysis. We find that indeed temporal and textual orderings are in very high agreement, with 6 recipes of the 19 perfectly aligned. The average Kendall's Tau between the temporal ordering and the linear one is 0.924.
+
+i monotonically increasing k -tuples of indices is m k . The k -wise (micro-averaged) accuracy of T with respect to  is:
+
+acck (, T) =
+
+N i=1
+
+N mi i=1 k
+
+conc(i , i )
+
+7
+
+Experimental Setup
+
+Evaluation. We compute the accuracy of our algorithms by comparing the predicted order to the one in which the events are written. We first compute the number of exact matches, denoted with E XACT, namely the percentage of recipes in which the predicted and the textual orders are the same. For a more detailed analysis of imperfect predictions, we compute the agreement between subsequences of the orderings. We borrow the notion of a "concordant pair" from the definition of Kendall's Tau and generalize it to capture agreement of longer sub-sequences. Two k -tuples of integers (x1 , ..., xk ) and (y1 , ..., yk ) are said to "agree in order" if for every 1  i < j  k , xi < xj iff yi < yj . Given two orderings of the same recipe O1 = (e (1) , ..., e (m) ) and O2 = (e(1) , ..., e(m) ) (where  and  are permutations over [m] = {1, . . . , m}) and given a sequence of k monotonically increasing indices t = (i1 , ..., ik ), t is said to be a "concordant k -tuple" of O1 and O2 if ( (i1 ), ...,  (ik )) and ( (i1 ), ...,  (ik )) agree in order, as defined above. Denote the unordered recipes of the test data as i i {Ri }N i=1 , where Ri = {e1 , ..., emi }  U for all i, and their target orderings  = {i }N i=1 , where i is a permutation over [mi ]. Assume we wish to evaluate a set of predicted orderings for this test data T = {i }N i=1 , where again i is a permutation over [mi ]. Denote the number of concordant k -tuples of i and i as conc(i , i ). The total number of of 1167
+
+Any k -tuples containing the start node s or the end node f are excluded, as their ordering is trivial. Recipes of length less than k are discarded when computing acck . A micro-averaged accuracy measure is used so as not to disproportionately weigh short recipes. However, in order to allow comparison to mean Kendall's Tau, commonly used in works on order learning, we further report a macroaveraged acc2 by computing acc2 for each recipe separately, and taking the average of resulting accuracy levels. Average Kendall's Tau can now be computed by 2acc2 - 1 for the macro-averaged acc2 score. Data. We randomly partition the text into training, test and development sets, taking an 80-10-10 percent split. We do not partition the individual files so as to avoid statistical artifacts introduced by recipe duplications or near-duplications. The training, development and test sets contain 58038, 7667 and 7779 recipes respectively. The total number of feature template instantiations in the training data is 8.94M. Baselines and Algorithms. We compare three learning algorithms. G LOBAL -P RC is the structured perceptron algorithm that uses ILP inference. G REEDY-P RC is a structured perceptron in which inference is done greedily. G REEDY-L OG L IN is the locally normalized log-linear model with greedy inference. R ANDOM randomly (uniformly) selects a permutation of the recipe's events. Experimental Settings. The structured perceptron algorithms, G LOBAL -P RC and G REEDY-P RC, are run with a learning rate of 0.1 for 3 iterations. To avoid exceedingly long runs, we set a time limit in seconds  on the running time of each ILP inference stage used in G LOBAL -P RC. We consider two training scenarios: 4K, which trains on the first 4K recipes of the training set, and 58K, which trains on the full training data of 58K recipes. In G LOBAL -P RC we set  to be 30 seconds for the 4K
+
+

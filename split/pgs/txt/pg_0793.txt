@@ -1,0 +1,34 @@
+Data Fin10 (Train) Fin10Dev (Test) Rit11 (Test) Fro14 (Test) CoNLL (Train) Unlabeled Tweets
+
+Lines 1,000 1,975 2,394 1,545 14,041 98M
+
+Types 4,865 7,734 8,686 5,392 20,752 57M
+
+Tokens 17,276 33,770 46,469 20,666 203,621 1,995M
+
+# PER 192 325 454 390 6,601 ­
+
+# LOC 143 279 377 163 7,142 ­
+
+# ORG 172 287 280 200 6,322 ­
+
+Table 3: Details of our NER-annotated corpora. A line is a tweet in Twitter and a sentence in newswire.
+
+4
+
+Experimental Design
+
+enizer,3 but is otherwise unnormalized. 4.1 Hyper-parameter Configuration Our NER system is trained for 10 epochs with its regularization parameter C set to 0.01. We train our word vectors with an in-house implementation of word2vec (Mikolov et al., 2013), with vector size set to 300, a hierarchical soft-max objective, down-sampling frequent words at a rate of 0.001, a window-size of 10 tokens, and a minimum frequency count of 10. When run on our unannotated tweets, this produces vector representations for 2.5M types. We generate a random vector, with each component sampled from the standard normal, to use as the representation for any word that did not occur in our unlabeled data, including begin- and end-of-sentence markers. We do not scale the vectors before using them as NER features. We train Brown clusters on the same data using the implementation by Liang (2005), with 1,000 clusters and a minimum frequency of 10, resulting in cluster assignments for the same 2.5M types.
+
+Vital statistics for all of our data sets are shown in Table 3. For in-domain NER data, we use three collections of annotated tweets: Fin10 was originally crowd-sourced by Finin et al. (2010), and was manually corrected by Fromreide et al. (2014), while Rit11 (Ritter et al., 2011) and Fro14 (Fromreide et al., 2014) were built by expert annotators. We divide Fin10 temporally into a training set and a development set, and we consider Rit11 and Fro14 to be our test sets. This reflects a plausible training scenario, with train and dev drawn from the same pool, but with distinct tests drawn from later in time. These three data sets were collected and unified by Plank et al. (2014), who normalized the tags into three entity classes: person (PER), location (LOC) and organization (ORG). The source text has also been normalized; notably, all numbers are normalized to NUMBER, and all URLs and Twitter @user names have been normalized to URL and @USER respectively. In the gold-standard, we choose to reverse a tagging normalization performed by Plank et al. (2014), who had post-processed the data so that all @user names are tagged as PER. These tags are trivial to replicate, and we found that they inflate scores quite dramatically. Therefore, all @user names are untagged in both the gold standard and our system outputs. We use the CoNLL 2003 newswire training set as a source of out-of-domain NER annotations (Tjong Kim Sang and De Meulder, 2003). The source text has been normalized to match the Twitter NER data, and we have removed the MISC tag from the goldstandard, leaving PER, LOC and ORG. Finally, we also use a large corpus of unannotated tweets, collected from between May 2011 and April 2012. It has been tokenized by the CMU Twok739
+
+5
+
+Results
+
+We evaluate our various NER taggers using the CoNLL 2003 metrics: phrase-level precision, recall, and balanced F-measure (F1). We begin by testing our system on the CoNLL newswire task, both to confirm that our implementation is reasonable, and to help situate the Twitter results that appear later. We train on the unmodified CoNLL training corpus, and report F1 on the CoNLL development and test sets. We compare our baseline to the baseline from Ratinov and Roth (2009) (RR09), and we compare our representationenhanced system (+Reps) to their "All External
+3
+
+http://www.ark.cs.cmu.edu/TweetNLP/
+
+

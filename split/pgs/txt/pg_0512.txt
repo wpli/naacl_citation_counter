@@ -1,0 +1,42 @@
+most frequent baseline most frequent per temporal anchor baseline
+
+lexical features
+
+lexical + syntactic features
+
+lexical + semantic features
+
+all features
+
+certYES other labels weighted avg. certYES probYES probNO other labels weighted avg. certYES probYES certNO probNO UNK weighted avg. certYES probYES certNO probNO UNK weighted avg. certYES probYES certNO probNO UNK weighted avg. certYES probYES certNO probNO UNK weighted avg.
+
+P 0.11 0.00 0.01 0.00 0.00 0.38 0.00 0.14 0.13 0.39 0.00 0.39 0.00 0.31 0.41 0.53 0.33 0.38 1.00 0.48 0.18 0.48 0.00 0.35 0.00 0.33 0.50 0.51 0.33 0.40 1.00 0.49
+
+Before R 1.00 0.00 0.11 0.00 0.00 1.00 0.00 0.38 0.20 0.34 0.00 0.53 0.00 0.35 0.47 0.34 0.10 0.64 0.12 0.43 0.20 0.42 0.00 0.51 0.00 0.37 0.20 0.36 0.10 0.72 0.12 0.44
+
+F 0.20 0.00 0.02 0.00 0.00 0.55 0.00 0.21 0.16 0.36 0.00 0.45 0.00 0.32 0.44 0.41 0.15 0.48 0.22 0.41 0.19 0.44 0.00 0.41 0.00 0.34 0.29 0.42 0.15 0.51 0.22 0.41
+
+P 0.74 0.00 0.54 0.75 0.00 0.00 0.00 0.57 0.74 0.00 0.00 0.00 0.00 0.54 0.74 0.00 0.00 0.00 1.00 0.61 0.74 0.00 0.00 0.00 0.00 0.54 0.76 0.50 0.00 0.00 0.33 0.61
+
+During R 1.00 0.00 0.74 1.00 0.00 0.00 0.00 0.75 1.00 0.00 0.00 0.00 0.00 0.74 0.99 0.00 0.00 0.00 0.12 0.74 1.00 0.00 0.00 0.00 0.00 0.74 0.97 0.14 0.00 0.00 0.12 0.73
+
+F 0.85 0.00 0.63 0.86 0.00 0.00 0.00 0.65 0.85 0.00 0.00 0.00 0.00 0.63 0.85 0.00 0.00 0.00 0.22 0.64 0.85 0.00 0.00 0.00 0.00 0.63 0.85 0.22 0.00 0.00 0.18 0.65
+
+P 0.26 0.00 0.07 0.00 0.45 0.00 0.00 0.20 0.53 0.56 0.00 0.00 0.00 0.44 0.27 0.54 0.00 0.00 1.00 0.42 0.65 0.57 0.00 0.00 0.00 0.47 0.50 0.56 0.00 0.00 0.50 0.46
+
+After R 1.00 0.00 0.26 0.00 1.00 0.00 0.00 0.45 0.29 0.90 0.00 0.00 0.00 0.56 0.09 0.90 0.00 0.00 0.12 0.51 0.31 0.92 0.00 0.00 0.00 0.57 0.14 0.93 0.00 0.00 0.12 0.54
+
+F 0.42 0.00 0.11 0.00 0.62 0.00 0.00 0.28 0.37 0.69 0.00 0.00 0.00 0.47 0.13 0.67 0.00 0.00 0.22 0.41 0.42 0.70 0.00 0.00 0.00 0.49 0.22 0.70 0.00 0.00 0.20 0.45
+
+P 0.37 0.00 0.14 0.75 0.45 0.38 0.00 0.50 0.63 0.51 0.00 0.39 0.00 0.47 0.67 0.54 0.25 0.38 1.00 0.57 0.67 0.54 0.00 0.35 0.00 0.49 0.73 0.55 0.11 0.39 0.50 0.56
+
+All R 1.00 0.00 0.37 0.62 0.56 0.62 0.00 0.53 0.75 0.63 0.00 0.37 0.00 0.55 0.72 0.63 0.04 0.44 0.12 0.56 0.76 0.66 0.00 0.35 0.00 0.56 0.70 0.66 0.04 0.50 0.12 0.57
+
+F 0.54 0.00 0.20 0.68 0.50 0.47 0.00 0.50 0.69 0.56 0.00 0.38 0.00 0.50 0.70 0.58 0.06 0.41 0.22 0.53 0.71 0.60 0.00 0.35 0.00 0.52 0.71 0.60 0.05 0.44 0.20 0.55
+
+Table 6: Results obtained with two baselines, and training with several feature combinations. Models are trained with all instances (before, during and after). mantic roles xpred and ypred have, and features 60­ 99 capture the index of each role (first, second, third, etc.) and its syntactic node (NP, PP, SBAR, etc.). Finally, features 100 and 101 capture the semantic role of xpred and ypred which fully contain y and x respectively, if such roles exists. These features are especially designed for our inference task and are exemplified in Figure 5. dicts probNO, certYES and probYES for instances with temporal anchor before, during and after respectively. The most frequent baseline obtains a weighted F-measure of 0.20, and most frequent per temporal anchor baseline 0.50. Results with supervised models are better, but we note that always predicting certYES for during instances obtains the same F-measure than using all features (0.65). The bottom block of Table 6 presents results using all features. The weighted F-measure is 0.55, and the highest F-measures are obtained with labels certYES (0.71) and probYES (0.60). Results with certNO and probNO are lower (0.05 and 0.44), we believe this is due to the fact that few instances are annotated with this labels (8.72% and 19.75%, Ta-
+
+5 Experiments and Results
+Results obtained with the test set using two baselines and models trained with several feature combinations are presented in Table 6. The most frequent baseline always predicts certYES, and the most frequent per temporal anchor baseline pre458
+
+

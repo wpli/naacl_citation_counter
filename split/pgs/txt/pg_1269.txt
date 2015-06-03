@@ -1,0 +1,26 @@
+Distributed Representations of Words to Guide Bootstrapped Entity Classifiers
+Sonal Gupta Department of Computer Science Stanford University sonal@cs.stanford.edu Christopher D. Manning Department of Computer Science Stanford University manning@stanford.edu
+
+Abstract
+Bootstrapped classifiers iteratively generalize from a few seed examples or prototypes to other examples of target labels. However, sparseness of language and limited supervision make the task difficult. We address this problem by using distributed vector representations of words to aid the generalization. We use the word vectors to expand entity sets used for training classifiers in a bootstrapped pattern-based entity extraction system. Our experiments show that the classifiers trained with the expanded sets perform better on entity extraction from four online forums, with 30% F1 improvement on one forum. The results suggest that distributed representations can provide good directions for generalization in a bootstrapping system.
+
+1
+
+Introduction
+
+Bootstrapped or distantly-supervised learning is a form of semi-supervised learning, in which supervision is provided by seed examples. Supervised machine learning systems, on the other hand, require hand-labeling sufficient data to train a model, which can be costly and time consuming. Bootstrapped information extraction (IE) has become even more pertinent with the ever-growing amount of data coupled with the emergence of open IE systems (Carlson et al., 2010; Fader et al., 2011) and shared tasks like TAC-KBP.1 Limited supervision provided in bootstrapped systems, though an attractive quality, is also one of
+1
+
+its main challenges. When seed sets are small, noisy, or do not cover the label space, the bootstrapped classifiers do not generalize well. We use a major guiding inspiration of deep learning: we can learn a lot about syntactic and semantic similarities between words in an unsupervised fashion and capture this information in word vectors. This distributed representation can inform an inductive bias to generalize in a bootstrapping system. In this paper, we present a simple approach of using the distributed vector representations of words to expand training data for entity classifiers in a bootstrapped system (see Algorithm 1). To improve the step of learning an entity classifier, we first learn vector representation of entities using the continuous bag of words model (Mikolov et al., 2013a). We then use k NN to expand the training set of the classifier by adding unlabeled entities close to seed entities in the training set. The key insight is to use the word vector similarity indirectly by enhancing training data for the entity classifier. We do not directly label the unlabeled entities using the similarity between word vectors, which we show extracts many noisy entities. We show that classifiers trained with expanded sets of entities perform better on extracting drug-and-treatment entities from four online health forums from MedHelp.2
+
+2 Related Work
+Bootstrapping has many variants, such as self-training, co-training, and label propagation. Yarowsky's style of self-training algo2
+
+http://www.nist.gov/tac/2014/KBP
+
+http://www.medhelp.org
+
+1215
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1215­1220, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

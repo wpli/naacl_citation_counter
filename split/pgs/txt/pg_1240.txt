@@ -1,0 +1,39 @@
+population we could directly compute the true mean score for a translation segment. This is of course not possible, but thanks to the law of large numbers we can make the following assumption: Given a sufficiently large assessment sample for a given translation, the mean of assessments will provide a very good estimate of the true mean score of the translation sourced from the entire assessor population. What the law of large numbers does not tell us, however, is, for our particular case of translation quality assessment, precisely how large the sample of assessments needs to be, so that the mean of scores provides a close enough estimate to the true mean score for any translation. For a sample mean for which the variance is known, the required sample size can be computed for a specified standard error. However, due to the large number of distinct translations we deal with, the variance in sample score distributions may change considerably from one translation to the next. In addition, the choice as to what exactly is an acceptable standard error in sample means would be somewhat arbitrary. On the one hand, if we specify a standard error that's lower than is required, and subsequently collect more repeat assessments than is needed, we would be wasting resources that could, for example, be targeted at the annotation of additional translation segments. Our solution is to empirically investigate the impact on sample size of repeat assessments on the mean score for a given segment, and base our determination of sample size on the findings. Since we later motivate the use of Pearson's correlation to measure the linear association between human and metric scores (see Section 4), we base our investigation on Pearson's correlation. We collect multiple assessments per segment to create score distributions for segments for a fixed set per language pair. This is repeated twice over the same set of segments to generate two distinct sets of annotations: one set is used to estimate the true mean score, and the second set is randomly downsampled to simulate a set of assessments of fixed sample size. We measure the Pearson correlation between the true mean score and different numbers of 1186
+
+Language pair es-en en-es en-ru en-de
+
+# translations 280 140 140 140
+
+# assessments per translation 40 19 15 14
+
+Table 1: Datasets used to assess translation assessment sample size
+
+0.6
+
+0.8
+
+1.0
+
+raw es-en en-es en-ru en-de
+
+z-score es-en en-es en-ru en-de
+
+0.2 0
+
+0.4
+
+10
+
+20 N
+
+30
+
+40
+
+Figure 1: Correlation (r) of translation quality estimates between the initial and repeat experiment runs for each of the four language pairs from W MT-13, for sample size N and based on raw and standardized (z ) scores.
+
+assessments for a given assessment, to ask the question: how many assessments must be collected for a given segment to obtain mean segment scores that truly reflects translation quality? Scores are sampled according to annotation time to simulate a realistic setting. 3.1 Translation Assessment Sample Size
+
+MTurk was used to collect large numbers of translation assessments, in sets of 100 translations per assessment task (or "HIT" in MTurk parlance). The HITS were structured to include degraded translations and repeat translations, and rated on a continuous Likert scale with a single translation assessment displayed to the assessor at one time (Graham et al., 2014a; Graham et al., 2013). This supports accurate quality-control as well as normalisation of translation scores for each assessor. The assessment
+
+

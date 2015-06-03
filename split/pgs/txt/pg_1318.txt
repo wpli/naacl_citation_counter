@@ -1,0 +1,27 @@
+fined density threshold. Note that we set the density threshold following (Rodriguez and Laio, 2014), which attempts to exclude the sentences holding lower similarity with the current sentence. 3.3 Diversity Scoring Most of the previous work handles diversity via reduce redundancy in a post processing module after the sentences are ranked. In this work, we measure diversity in the ranking model. Diversity score of a sentence is measured by computing the minimum distance between the sentence si and any other sentences with higher density score. In order to reflect the above observation, we define the following function to calculate the diversity score sDIV (i): sDIV (i) = 1 -
+j :sREP (j )>sREP (i)
+
+The motivation to propose the length score is, shorter sentences with better representativeness score and diversity score are more favorable for the final summaries. Furthermore, as we use the Boolean scheme to measure sentence similarity, we only count unique words as effective sentence length. sLEN (i) = el(si ) × log maxK j =1 el(sj ) maxK j =1 rl(sj ) rl(si ) ,
+
+(5) where el(si ) returns the effective length of sentence si , and rl(si ) the real length of sentence si . 3.5 Unified Sentence Scoring
+
+max
+
+simij .
+
+(3)
+
+Now we integrate representativeness score, diversity score and length score in the following unified sentence scoring function: sDPSC (i) = sREP (i) × sDIV (i) × sLEN (i). (6)
+
+For the sentence with the highest density, we conventionally take sDIV (i) = 1 - min simij .
+j =i
+
+(4)
+
+The proposed diversity score looks similar to the famous Maximum Marginal Relevance (MMR) (Carbonell and Goldstein, 1998), which is widely used in removing redundancy by using a greedy algorithm to remove sentences that are too similar to the already selected ones. The difference lies that MMR selects a sentence by comparing it to those selected sentences while we compare it to all the other sentences in the dataset, thus it can enhance the diversity globally. 3.4 Length Scoring It is widely accepted that summarization task has an important constraint, i.e., summary length. In order to satisfy this constraint, the length of selected sentences should be as short as possible. Based on this analysis, we propose the length score, which has relationship with the effective length and real length. The real length is defined as the number of word occurrences that a sentence contains. We then define the effective length as how many unique nonstop terms a sentence contains. We finally define the following function to calculate the length score sLEN (i). 1264
+
+The assumption is obviously that we need those sentences which are as representative, diversified as possible and contain unique terms as many as possible within a limited length. In calculation, we simply apply logarithm since: sDPSC (i)  log sREP (i) + log sDIV (i) + log sLEN (i) (7) 3.6 Summary Generation
+
+As three scores above including the representativeness, diversity and length constraint are measured in a unified sentence scoring model, generating a summary with out method is basically achieved by selecting the higher ranking sentences. In other words, our summary contains more representative and diversified information in the limited length. Complexity Analysis: Suppose K is the total number of sentences in the document collection. The complexity in calculating the sentence similarity matrix is O(K 2 ). As the complexity in the function of representativeness scoring, diversity scoring and length scoring are all O(K ), the total time complexity of our DPSC method is O(K 2 ) + O(K ) + O(K )  O(K 2 ).
+
+

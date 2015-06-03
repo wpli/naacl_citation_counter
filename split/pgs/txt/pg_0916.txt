@@ -1,0 +1,20 @@
+Sentence segmentation of aphasic speech
+Kathleen C. Fraser1,3 , Naama Ben-David1 , Graeme Hirst1 , Naida L. Graham2,3 , Elizabeth Rochon2,3 1 Department of Computer Science, University of Toronto, Toronto, Canada 2 Department of Speech-Language Pathology, University of Toronto, Toronto, Canada 3 Toronto Rehabilitation Institute, Toronto, Canada
+{kfraser,naama,gh}@cs.toronto.edu, {naida.graham,elizabeth.rochon}@utoronto.ca
+
+Abstract
+Automatic analysis of impaired speech for screening or diagnosis is a growing research field; however there are still many barriers to a fully automated approach. When automatic speech recognition is used to obtain the speech transcripts, sentence boundaries must be inserted before most measures of syntactic complexity can be computed. In this paper, we consider how language impairments can affect segmentation methods, and compare the results of computing syntactic complexity metrics on automatically and manually segmented transcripts. We find that the important boundary indicators and the resulting segmentation accuracy can vary depending on the type of impairment observed, but that results on patient data are generally similar to control data. We also find that a number of syntactic complexity metrics are robust to the types of segmentation errors that are typically made.
+
+turning to politics for al gore and george w bush another day of rehearsal in just over forty eight hours the two men will face off in their first of three debates for the first time voters will get a live unfiltered view of them together Turning to politics, for Al Gore and George W Bush another day of rehearsal. In just over forty-eight hours the two men will face off in their first of three debates. For the first time, voters will get a live, unfiltered view of them together.
+
+Figure 1: ASR text before and after processing. clear that for such systems to be practical in the real world they must use automatic speech recognition (ASR). One issue that arises with ASR is the introduction of word recognition errors: insertions, deletions, and substitutions. This problem as it relates to impaired speech has been considered elsewhere (Jarrold et al., 2014; Fraser et al., 2013; Rudzicz et al., 2014), although more work is needed. Another issue, which we address here, is how ASR transcripts are divided into sentences. The raw output from an ASR system is generally a stream of words, as shown in Figure 1. With some effort, it can be transformed into a format which is more readable by both humans and machines. Many algorithms exist for the segmentation of the raw text stream into sentences. However, there has been no previous work on how those algorithms might be applied to impaired speech. This problem must be addressed for two reasons: first, sentence boundaries are important when analyzing the syntactic complexity of speech, which can be a strong indicator of potential impairment.
+
+1
+
+Introduction
+
+The automatic analysis of speech samples is a promising direction for the screening and diagnosis of cognitive impairments. For example, recent studies have shown that machine learning classifiers trained on speech and language features can detect, with reasonably high accuracy, whether a speaker has mild cognitive impairment (Roark et al., 2011), frontotemporal lobar degeneration (Pakhomov et al., 2010b), primary progressive aphasia (Fraser et al., 2014), or Alzheimer's disease (Orimaye et al., 2014; Thomas et al., 2005). These studies used manually transcribed samples of patient speech; however, it is 862
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 862­871, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

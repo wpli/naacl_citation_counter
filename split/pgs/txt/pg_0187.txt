@@ -1,0 +1,28 @@
+HEADS: Headline Generation as Sequence Prediction Using an Abstract Feature-Rich Space
+Carlos A. Colmenares Google Inc. Brandschenkestrasse 110 8002 Zurich, Switzerland
+crcarlos@google.com
+
+Marina Litvak Shamoon College of Engineering Beer Sheva, Israel
+marinal@sce.ac.il
+
+Amin Mantrach Fabrizio Silvestri Yahoo Labs. Avinguda Diagonal 177 08018 Barcelona, Spain
+{amantrach,silvestr}@yahoo-inc.com
+
+Abstract
+Automatic headline generation is a sub-task of document summarization with many reported applications. In this study we present a sequence-prediction technique for learning how editors title their news stories. The introduced technique models the problem as a discrete optimization task in a feature-rich space. In this space the global optimum can be found in polynomial time by means of dynamic programming. We train and test our model on an extensive corpus of financial news, and compare it against a number of baselines by using standard metrics from the document summarization domain, as well as some new ones proposed in this work. We also assess the readability and informativeness of the generated titles through human evaluation. The obtained results are very appealing and substantiate the soundness of the approach.
+
+on hand-held devices (Buyukkokten et al., 2001), generation of TV captions (Linke-Ellis, 1999), digitization of newspaper articles that have uninformative headlines (De Kok, 2008), and headline generation in one language based on news stories written in another (Banko et al., 2000; Zajic et al., 2002). In general terms, a headline of a news article can be defined as a short statement that gives a reader a general idea about the main contents of the story it entitles (Borko and Bernier, 1987; Gattani, 2007). The objective of our study is to develop a novel technique for generating informative headlines for news articles, albeit to conduct experiments we focused on finance articles written in English. In this work we make a number of contributions concerning statistical models for headline generation, training of the models, and their evaluation, specifically: · We propose a model that learns how an editor generates headlines for news articles, where a headline is regarded as a compression of its article's text. Our model significantly differs from others in the way it represents possible headlines in a feature-rich space. The model tries to learn how humans discern between good and bad compressions. Furthermore, our model can be trained with any monolingual corpus consisting of titled articles, because it does not request special conditions on the headlines' structure or provenance. · We suggest a slight change of the Margin Infused Relaxed Algorithm (Crammer and Singer, 2003) to fit our model, which yields better empirical results.
+
+1
+
+Introduction
+
+Document summarization, also known as text summarization, is the process of automatically abridging text documents. Although traditionally the final objective of text summarization is to produce a paragraph or abstract that summarizes a rather large collection of texts (Mani and Maybury, 1999; Das and Martins, 2007; Nenkova and McKeown, 2012), the task of producing a very short summary comprised of 10­15 words has also been broadly studied. There have been many reported practical applications for this endeavor, most notably, efficient web browsing
+
+
+Work done during an internship at Yahoo Labs.
+
+133
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 133­142, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

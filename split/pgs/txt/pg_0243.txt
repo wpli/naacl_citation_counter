@@ -1,0 +1,34 @@
+Typically,  is set to maximize the likelihood of a labeled training set. Instead, we will optimize the objective defined in Mann and McCallum (2007), using only unlabeled data and constraints. Let U = {U1 . . . Uk } be a set of sets, where Uj consists of unlabeled feature vectors x. The elements of U may be overlapping. Let p ~j be the expected label distribution of Uj . E.g., p ~j = {.9, .1} would indicate that 90% of examples in Uj are expected to have class label 0. The combination of (Uj , p ~j ) is called a constraint. Our goal, then, is to set  so that the predicted label distribution matches p ~j , for all j . Since using the predicted class counts results in an objective that is non-differentiable, Mann and McCallum (2007) instead use the model's posterior distribution: q ^j (y ) =
+xUj
+
+We set C to 1.3e10 in our experiments. Mann and McCallum (2007) compute the gradient of crossentropy as follows:  H (~ pj , p ^j ) = - p (y |x)xk k y x Uj   p ~ ( y ) p ~ ( y ) × p ( y | x ) j j   × - p ^j (y ) p ^j (y )
+y
+
+p (y |x) q ^j (y ) ^j (y ) y q
+
+p ^j (y ) =
+
+where p ^j is the normalized form of q ^j . Then, we want to set  such that p ^j and p ~j are close. Mann and McCallum (2007) use KL-divergence, which is equivalent to augmenting the likelihood with a Dirichlet prior over expectations where values for the priors are proportional to p ~j . KL-divergence can be factored into two parts: =-
+y
+
+The gradient for k is then a sum of the gradients for each constraint j . In order to minimize the objective function, we use gradient descent with LBFGS (Byrd et al., 1995). (While the objective is not guaranteed to be convex, this approximation has worked well in prior work.) To help reduce overfitting, we use early-stopping (10 iterations). Temperature: Mann and McCallum (2007) find that sometimes label regularization returns a degenerate solution. For example, for a three class problem with constraint p ~j (y ) = {.5, .35, .15}, it may find a solution such that p (y ) = {.5, .35, .15} for every instance and as a result all of the instances are assigned the same label. To avoid this behavior Mann and McCallum (2007) introduce a temperature parameter T into the classification function as follows: p (y |x) = exp(y · x/T ) y exp(y · x/T )
+
+p ~j (y ) log p ^j (y ) +
+y
+
+p ~j (y ) log p ~j (y )
+
+= H (~ pj , p ^j ) - H (~ pj ) where H (~ pj ) is constant for each j, and so we need to minimize H (~ pj , p ^j ) in order to minimize KLdivergence, where H (~ pj , p ^j ) is the cross-entropy of the hypothesized distribution and the expected distribution for Uj . We additionally use L2 regularization, resulting in our final objective function: J ( ) =
+j
+
+In practice we find that we can set T to two for binary classification and ten for multi-class problems. While the approach described above closely follows Mann and McCallum (2007), we note two important distinctions: we use no labeled data in our objective, and we consider a set of hundreds of noisy, overlapping constraints (as opposed to only a handful of precise constraints). 4.1 Constraint Selection As described above, our proposed constraints are undoubtedly inexact. For example, it is generally accepted that social media users are not a representative sample of the population. E.g., younger, urban and minority populations tend to be overrepresented on Twitter (Mislove et al., 2011; Lenhart and Fox, 2009), and Latino users tend to be underrepresented on Facebook (Watkins, 2009). Thus, it is incorrect to
+
+1 H (~ pj , p ^j ) + 
+
+y
+
+||y ||2 2
+
+In practice we find that  does not need tuning for each data set. We set it simply to: = C j |Uj | 189
+
+

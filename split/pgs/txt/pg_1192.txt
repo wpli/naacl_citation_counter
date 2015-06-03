@@ -1,0 +1,20 @@
+Type General Knowledge External Knowledge
+
+Source [Christies]m denial of marriage privledges to gays will alienate independents and his "I wanted to have the people vote on it" will ring hollow. Translation out of hype-speak: some kook made threatening noises at [Brownback]m and go arrested.
+
+Knowledge Base [Chris Christie]e has said that he favoured New Jersey's law allowing same-sex couples to form civil unions, but would veto any bill legalizing same-sex marriage in New Jersey. [Samuel Dale "Sam" Brownback]e (born September 12, 1956) is an American politician, the 46th and current Governor of Kansas.
+
+Table 4: Examples of Knowledge Gap
+
+that our system does not correctly link. In the first example, if we don't already know that Christie is the topic of discussion, as humans we might use our general knowledge that "governors veto bills" to pick the correct entity. Using this type of knowledge presents interesting challenges (e.g., governors don't always veto bills, nor are they the only ones who can do so). In the second example, the rumor about this politician is not important enough to be reported in his Wikipedia page. We might first figure out, using cross-document coreference techniques, that a news article with the headline "Man Accused Of Making Threatening Phone Call To Kansas Gov. Sam Brownback May Face Felony Charge..." is talking about the same rumor. Then we might use biographical facts (e.g., Brownback is the governor of Kansas) from the article to enrich Brownback's knowledge network on the source side. Sometimes helpful neighbor concepts are omitted because the current collaborator selection criteria are too restricted. For example, "armed" and "conflicts" are informative words for linking "The Stockholm Institute" to Stockholm International Peace Research Institute in the following sentence "The Stockholm Institute stated that 23 of 25 major armed conflicts in the world in 2000 occurred in impoverished nations.", but they were not selected as context collaborators. In addition, our cross-sentence coreference resolution is currently limited to proper names. Expanding it to include nominals could further enrich context collaborators to overcome some remaining errors. For example, in the sentence, "The first woman to serve on SCOTUS", if we know "The first woman" is coreferential with "Sandra Day O'Connor" in the previous sentence, we can link "SCOTUS" to Supreme Court of the United States instead of Scotus College. 1138
+
+7
+
+Conclusions and Future Work
+
+EL requires a representation of the relations among entities in text. We showed that the Abstract Meaning Representation (AMR) can better capture and represent the contexts of entity mentions for EL than previous approaches. We plan to improve AMR representation as well as automatic annotation. We showed that AMR enables EL performance comparable to the supervised state of the art using an unsupervised, non-collective approach. We plan to combine collaborator and coherence methods into a unified approach, and to use edge labels in knowledge networks for context comparison (note that the last of these is quite challenging due to normalization, polysemy, and semantic distance issues). We have only applied a subset of AMR representations to the EL task, but we aim to explore how more AMR knowledge can be used for other more challenging Information Extraction and Knowledge Base Population tasks.
+
+Acknowledgments
+This work was supported by the U.S. DARPA DEFT Program No. FA8750-13-2-0041 and FA8750-132-0045, DARPA BOLT Program No. HR0011-12C-0014, ARL NS-CTA No. W911NF-09-2-0053, NSF Awards IIS-0953149 and IIS-1523198, AFRL DREAM project, DHS CCICADA, gift awards from IBM, Google, Disney and Bosch. The views and conclusions contained in this document are those of the authors and should not be interpreted as representing the official policies, either expressed or implied, of the U.S. Government. The U.S. Government is authorized to reproduce and distribute reprints for Government purposes notwithstanding any copyright notation here on.
+
+

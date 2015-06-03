@@ -1,0 +1,38 @@
+1 0.95 0.9 0.85 0.8 Precision 0.75 0.7 0.65 0.6 0.55 0.5 0.45 0 0.05 0.1 0.15 0.2 Recall
+
+DS-CRF aggr DS -CRF comb DS -CRF
+
+System DS-CRF DSaggr -CRF DScomb -CRF MA-CRF
+
+Prec. 68.4 70.1 69.2 69.1
+
+Rec. 21.3 26.6 31.2 37.9
+
+F1 32.5 38.6  43.1  48.9
+
+0.25
+
+0.3
+
+0.35
+
+Figure 2: Test: P/R curves for DS-CRF, feature aggregation and combination with approximate DS (lenient evaluation).
+
+Table 5: Test: Results for regular DS (DS-CRF), DS with feature aggregation (DSaggr -CRF), and the DS model that combines feature aggregation and approximate matching (DScomb -CRF), with lenient evaluation.  indicates statistically significant improvement over DS-CRF (p < 0.05). We include the results of the CRF trained on manual annotations (MA-CRF) as a performance ceiling for this task.
+
+is a trivial process for discrete similarities, but requires some care for continuous similarity functions, which are triggered for numeric arguments. In this situation, numeric entities are considered as positive examples only if their similarity function returns a value over a certain threshold with a known argument in the KB. If a numeric mention has more than one matching argument in the KB, the algorithm chooses the argument label with the highest similarity value; if all have the same similarity, the algorithm chooses the most frequent label in training. We tuned the threshold hyper parameter for numeric values over the training dataset using 5-fold cross validation, which yielded 0.95 as the optimal value. Table 4 shows the results for the test partition using this threshold, and Figure 1 shows the corresponding P/R curves. Both results are generated using the proposed lenient evaluation. The results in the table show that, despite its simplicity, the proposed alignment algorithm yields considerable, statistically-significant improvements. The P/R curves show that the improvement holds for all recall points14 .
+
+insufficient local context with a method inspired by work in relation extraction, where relation instances between identical entities are classified jointly using the conjunction of features from all instances (Mintz et al., 2009). We adapt this idea to our sequence tagging EE model as follows: 1: We focus on location, date and temporal entities (both earthquake time and duration) which are argument candidates that are often ambiguous, i.e., they may be classified as more than one argument type. For example, a location entity may be labeled as country, region, country-affected, etc. We exclude numeric entities due to potential feature collisions between different argument types: we observed that, in training, several earthquakes had different numeric arguments with the same value. For example, the magnitude and depth of the 2012 Zohan earthquake were 5.6. Applying feature aggregation to examples of these arguments would lead to collisions between features from different classes.15 2: For each token that appears in one of these named entities, we identify all its instances across the relevant tweets, and share features across all these token instances. For example, for the tweets in the second block in Table 1, our approach identifies Peru as an argument mention candidate. All three instances of Peru are then classified using the same shared features, e.g., using three values for the feaInitial experiments confirmed this hypothesis: feature aggregation did not improve results for numeric arguments in development. In future work, we will explore multi-instance multi-label algorithms to handle this situation (Surdeanu et al., 2012).
+15
+
+6
+
+Feature aggregation
+
+The second block in Table 1 illustrates a common scenario on Twitter, where a short, ambiguous tweet derails the extraction. We address this problem of
+The curves for the strict evaluation are similar, and were omitted for brevity.
+14
+
+647
+
+

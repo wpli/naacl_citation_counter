@@ -1,0 +1,26 @@
+Continuous Adaptation to User Feedback for Statistical Machine Translation
+Fr´ ed´ eric Blain, Fethi Bougares, Amir Hazem, Lo¨ ic Barrault and Holger Schwenk LIUM - University of Le Mans (France) firstname.surname@lium.univ-lemans.fr
+
+Abstract
+This paper gives a detailed experiment feedback of different approaches to adapt a statistical machine translation system towards a targeted translation project, using only small amounts of parallel in-domain data. The experiments were performed by professional translators under realistic conditions of work using a computer assisted translation tool. We analyze the influence of these adaptations on the translator productivity and on the overall post-editing effort. We show that significant improvements can be obtained by using the presented adaptation techniques.
+
+1
+
+Introduction
+
+Language service providers (LSP) and human professional translators currently use machine translation (MT) technology as a tool to increase their productivity. For this, MT is closely integrated into computer-assisted translation (CAT) tool. The MT system suggests an automatic translation of the input sentence which is then post-edited by the human professional translators. They generally work on a project-based pace, i.e. a set of documents (the project) have to be translated in a certain period of time. It is well know that an MT system has to be adapted to the target task and domain in order to achieve the best performances. This process of adaptation can be separated into two different steps. First, an adaptation is performed before the beginning of the translation process,. This aims to specialize the system to the targeted domain: we will to this adaptation as domain adaptation. 1001
+
+Then, another adaptation is performed during the translation process with the aim of iteratively integrating users' feedback into the MT system. The adaptation can be performed at two different frequencies: (i) the system can continuously learn from post-edited segments, the models being immediately updated, or (ii) all the available project-specific data is used after each day of work to adapt the MT engine. This scheme is more related to document level adaptation; we will refer to it as project adaptation. The experimental work described in this paper fits into the latter adaptation scheme. As part of the M ATE C AT project1 , we analyze project adaptation performed over several days. All experiments were performed with professional human translators under realistic conditions of work. The motivations of this work are detailed in section 2 and related work is discussed. In sections 3 and 4 we present both the experimental protocol and framework before presenting the corresponding results in section 5.
+
+2
+
+Motivations
+
+This work is a continuation of earlier research on adaptation of a statistical MT (SMT) system Cettolo et al., 2014). More precisely, it was motivated by remaining opened questions. First, what does the learning curve look like for an iterative usage of the daily adaptation procedure? Even if the efficiency of the project adaptation scheme has been established, it has not been tested yet over multiple days. Does it reaches a plateau or do the translation
+1
+
+www.matecat.com
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1001­1005, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

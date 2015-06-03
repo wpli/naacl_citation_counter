@@ -1,0 +1,48 @@
+In particular, each diagonal entry T ii holds the probability of mapping a source symbol back onto itself, a quantity we intuitively believe should be high. We therefore (initially) consider maximizing the trace of T : Tr[T ] =
+i
+
+whereas in the non-parallel data setting, the probability is defined as:
+n p2 (xn 2 ; 2 ) = p(e ; 2 ). n p1 (xn 1 ; 1 ) = p(f ; 1 )
+
+T ii =
+e f
+
+t1 ( f | e) t2 (e | f ).
+
+We further note that Tr[T ] = Tr[T 1 T 2 ] = Tr[T 2 T 1 ], so that the trace captures equally well how much the target symbols map onto themselves. Since T is stochastic, setting it to the identity matrix I maximizes its trace. In other words, the more T 1 and T 2 behave as (pseudo-)inverses of each other, the higher the trace is. This exactly fits with our intuition regarding invertibility. Unfortunately, the trace is not concave in both T 1 and T 2 , a property which will become desirable in optimization. We therefore modify the trace regularizer by applying the entrywise square root operator on T 1 , T 2 and denote the new term R: R(t1 , t2 ) = Tr =
+e f
+
+Using the above definitions and the MIR regularizer R (Eq. 3), we formulate an optimization program for maximizing the regularized log-likelihoods of the observed data: max R(t1 , t2 ) +
+Nk k{1,2} n=1
+
+1 ,2
+
+log pk (xn k ; k )
+
+(4)
+
+where   0 is a tunable hyperparameter (note that, in the parallel case, N = N1 = N2 ). We defer discussion on the relationship and merits of our approach with respect to ABA (Liang et al., 2006) and PostCAT (Ganchev et al., 2008) to Section 4. 3.3 Optimization Procedure
+
+T1 T2 t1 ( f | e) t2 (e | f ). (3)
+
+  Note that R is maximized when T 1 T 2 = I . Concavity of R in both t1 , t2 (or equivalently T 1 , T 2 ) follows by observing that it is a sum of concave functions ­ each term in the summation is a geometric mean, which is concave in its parameters. 3.2 Joint Objective Function We apply MIR in two data scenarios: In the parallel data setting, we observe N sequence pairs {xn 1 }n = n , e n )} . {(en , f n )}n or, equivalently, {xn } = { ( f n n 2 In the non-parallel setting, two monolingual datasets are observed: N1 source sequences {xn 1 }n = n} . {en }n and N2 target sequences {xn } = { f n 2 n The probability of the nth sample under the kth model k (for k  {1, 2}) is denoted pk (xn k ; k ). Specifically, in the parallel data setting, the proba1 bility of xn k under its model is:
+n n p1 (xn 1 ; 1 ) = p(f | e ; 1 )
+
+Using our concave regularizer, MIR optimization (Eq. 4) neatly falls under the MAP-EM framework (Dempster et al., 1977) and inherits the convergence properties of the underlying algorithms. MAPEM follows the same structure as standard EM: The E-step remains identical to the standard E-step, while the M-step maximizes the complete-data loglikelihood plus the regularization term. In the case of MIR, the E-step can be carried out independently for each model. The only extra work is in the Mstep, which optimizes a single (concave) objective function. Specifically, let zn denote the missing data, where, in the parallel data setting, only the alignment is n missing (zn k = ak ) and in the non-parallel data setting, both alignment and source symbol are missing n n n n n (zn 1 = (a1 , e ), z2 = (a2 , f )). In the E-step, each model k (for k  {1, 2}) is held fixed and its posterior distribution over the missing data zn k is computed per each observation, xn : k
+n n n qk (zn k , xk ) := pk (zk | xk ; k ).
+
+p2 (xn 2 ; 2 )
+
+= p(e | f ; 2 )
+
+n
+
+n
+
+1 This slight notational abuse helps represent both data scenarios succinctly.
+
+In the M-step, the computed posteriors are used to define a convex optimization program that max-
+
+611
+
+

@@ -1,0 +1,34 @@
+English EN model projection/ tree align [4]
+
+SSTb
+
+Crowdsourcing of HeiST [3]
+
+SVM [3.2] RNTN baseline [3.2] RNTN + clusters [6]
+
+German
+
+Google Translate
+
+HeiST (train)
+
+DE model
+
+clusters split [6] evaluation HeiST (test)
+
+lexicon [5]
+
+Figure 1: Plan to the experiments described in this paper
+
+fashion from datasets that only have document-level sentiment annotation. On the same dataset as Socher et al., Wang and Manning (2012) later demonstrated that unigram and bigram features in an SVM-based classification framework can reach a greater accuracy than the earlier recursive neural network approach of Socher et al. (2011, 2012), which calls into question the assumption that sentiment composition can be learned purely from sentence-level annotations. Compositionality through Tensors In subsequent work, Socher et al. (2013) introduce the Stanford Sentiment Treebank, which contains detailed annotations of sentiment values for individual syntactic phrases in a binarized tree, and an approach based on recursive neural tensor networks (RNTN) which yields significant improvements over the earlier approaches using token-level features. The RNTN represents the contribution of individual nodes as vectors of reals and achieves its precision by using a tensor V [1:d]  R2d×2d×d as well as a matrix W  R2d×d to capture second-order dependencies between the two children of a node in the tree (with vectors a, b), yielding first a vector h by hi = a b
+T
+
+V [i ]
+
+a a + Wi b b
+
+then using a monotonic nonlinear function on h (here: tanh) to yield the vector for this node. The 695
+
+sentiment label of a node is then gained by multiplying these hidden vectors by a matrix Ws , yielding a five-dimensional vector with the classification. Using hidden vectors for each node and capturing second-order interaction between the two child vectors a and b, the RNTN model achieves descriptive power greater than that of TreeCRFs (Nakagawa et al., 2010), and similar to latent-variable models that have been very successful in syntactic parsing (Petrov et al., 2006). In later work, Zhu et al. (2014) show that the RNTN's lexicalized modeling of negators and their behaviour leads to increased descriptive power of the model, which results in an improved treatment of negation. Dong et al. (2014) introduce an approach that chooses between multiple composition tensors (AdaMC-RNTN), which yields further gains with respect to RNTN performance. In contrast to the lexicalized and highdimensional RNTN model, there are several lines of work that attempt to work in a more data-scarce setting. Lexicon-based approaches The classical approach for performing sentiment classification in a setting where training data is sparse can be seen in the SO-CAL approach of Taboada et al. (2011): Using a manually curated dictionary with sentiment values for multiple parts of speech, and a set of heuristics that predict how intensifiers, nega-
+
+

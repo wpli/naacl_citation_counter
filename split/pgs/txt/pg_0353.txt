@@ -1,0 +1,29 @@
+en-fr/ar 1.0 42 42 40 40 0.8 38 38 0.6 36 36 34 34 0.4 32 32 0.2 30 30 0.0 28 28 0.0 0 2k 10k 40k 200k 1M0.2 3.5M 0
+
+en-fr/ru en-fr/zh 42 42 40 40 38 38 36 36 34 34 32 32 -LM2 30 30 +LM2 28 28 2k 10k 40k 200k 0.4 1M 3.5M 0 2k 10k 0.6 40k 200k 1M 3.5M 0 0.82k 10k 40k 200k 1M 3.5M 1.0 Sentences
+
+en-fr/es
+
+BLEU
+
+Figure 4: BLEU scores for different T1 LM sizes without (-LM2) or with (+LM2) an LM for the second target.
+
+T2 ar es ru zh
+
+SCFG 223M
+
++T2Al 46.5M 134M 70.8M 26.0M
+
+6.3
+
+Effect of T1 Language Model Strength
+
+Table 2: Differences in rule table sizes for a T1 of French.
+
+and in the cases involving Russian or Chinese, there is often even a drop in accuracy compared to the baseline SCFG. The reason for this can be seen by examining the results for SCFG+T2Al and MSCFGT2LM. It can be seen that in the cases where there is an overall decrease in accuracy, this decrease can generally be attributed to a decrease when going from SCFG to SCFG+T2Al (indicating that rule extraction suffers from the additional constraints imposed by T2), or a decrease from SCFG+T2Al to MSCFG-LM2 (indicating that rule extraction suffers from fragmentation of the T1 translations by adding the T2 translation). On the other hand, we can see that in the majority of cases, going from MSCFGLM2 to MSCFG results in at least a small gain in accuracy, indicating that a T2 LM is generally useful, after discounting any negative effects caused by a change in the rule table. In Table 2 we show additional statistics illustrating the effect of adding a second language on the number of rules that can be extracted. From these results, we can see that all languages reduce the number of rules extracted, with the reduction being greater for languages with a larger difference from English and French, providing a convincing explanation for the drop in accuracy observed between these two settings. 299
+
+The motivation for multi-target translation stated in the introduction was that information about T2 may give us hints about the appropriate translation in T1. It is also a reasonable assumption that the less information we have about T1, the more valuable the information about T2 may be. To test this hypothesis, we next show results of experiments in which we vary the size of the training data for the T1 LM in intervals from 0 to 3.5M sentences. For T2, we either use no LM (MSCFG-T2LM) or an LM trained on 3.5M sentences (MSCFG). The results for when French is used as T1 are shown in Figure 4. From these results, we can see that this hypothesis is correct. When no T1 LM is used, we generally see some gain in translation accuracy by introducing a strong T2 LM, with the exception of Chinese, which never provides a benefit. When using Spanish as T2, this benefit continues even with a relatively strong T1 LM, with the gap closing after we have 400k sentences of data. For Arabic and Russian, on the other hand, the gap closes rather quickly, with consistent gains only being found up to about 20-40k sentences. In general this indicates that the more informative the T2 LM is in general, the more T1 data will be required before the T2 LM is no longer able to provide additional gains. 6.4 Effect of Rule Pruning
+
+Next we examine the effect of the rule pruning methods explained in Section 4.4. We set T1 to either French or Chinese, and use either the naive pruning criterion using T1+T2, or the criterion that picks the top translations in T1 along with their most probable T2 translation. Like previous experiments, we
+
+

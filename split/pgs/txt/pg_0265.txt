@@ -1,0 +1,18 @@
+Aligning Sentences from Standard Wikipedia to Simple Wikipedia
+
+William Hwang, Hannaneh Hajishirzi, Mari Ostendorf, and Wei Wu {wshwang, hannaneh, ostendor, weiwu}@u.washington.edu University of Washington
+
+Abstract
+This work improves monolingual sentence alignment for text simplification, specifically for text in standard and simple Wikipedia. We introduce a method that improves over past efforts by using a greedy (vs. ordered) search over the document and a word-level semantic similarity score based on Wiktionary (vs. WordNet) that also accounts for structural similarity through syntactic dependencies. Experiments show improved performance on a hand-aligned set, with the largest gain coming from structural similarity. Resulting datasets of manually and automatically aligned sentence pairs are made available.
+
+standard and simple articles can be written independently so they are not strictly parallel, and have very different presentation ordering. A few studies use editor comments attached to Wikipedia edit logs to extract pairs of simple and difficult words (Yatskar et al., 2010; Woodsend and Lapata, 2011). Other methods use text-based similarity techniques (Zhu et al., 2010; Coster and Kauchak, 2011; Kauchak, 2013), but assume sentences in standard and simple articles are ordered relatively. In this paper, we align sentences in standard and simple Wikipedia using a greedy method that, for every simple sentence, finds the corresponding sentence (or sentence fragment) in standard Wikipedia. Unlike other methods, we do not make any assumptions about the relative order of sentences in standard and simple Wikipedia articles. We also constrain the many-to-one matches to cover sentence fragments. In addition, our method takes advantage of a novel word-level semantic similarity measure that is built on top of Wiktionary (vs. WordNet) which incorporates structural similarity represented in syntactic dependencies. The Wiktionary-based similarity measure has the advantage of greater word coverage than WordNet, while the use of syntactic dependencies provides a simple mechanism for approximating semantic roles. Here, we report the first manually annotated dataset for evaluating alignments for text simplification, develop and assess a series of alignment methods, and automatically generate a dataset of sentence pairs for standard and simple Wikipedia. Experiments show that our alignment method significantly outperforms previous methods on the hand-aligned
+
+1
+
+Introduction
+
+Text simplification can improve accessibility of texts for both human readers and automatic text processing. Although simplification (Wubben et al., 2012) could benefit from data-driven machine translation, paraphrasing, or grounded language acquisition techniques, e.g. (Callison Burch and Osborne, 2003; Fung and Cheung, 2004; Munteanu and Marcu, 2005; Smith et al., 2010; Ganitkevitch et al., 2013; Hajishirzi et al., 2012; Kedziorski et al., 2014), work has been limited because available parallel corpora are small (Petersen and Ostendorf, 2007) or automatically generated are noisy (Kauchak, 2013). Wikipedia is potentially a good resource for text simplification (Napoles and Dredze, 2010; Medero and Ostendorf, 2009), since it includes standard articles and their corresponding simple articles in English. A challenge with automatic alignment is that 211
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 211­217, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

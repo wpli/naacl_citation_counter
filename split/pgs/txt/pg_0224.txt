@@ -1,0 +1,21 @@
+4.5
+
+Latent Variables to Map Blobs to Nouns
+
+Given a sentence Xi,n and a video segment Yi,m , we further introduce additional latent variables to map each blob in Yi,m to one of the nouns in Xi,n . These latent variables are similar to the IBM Model 1 latent variables of Naim et al. (2014). Instead of turning on the (noun, blob) co-occurrence feature for every noun and blob in Xi,n and Yi,m , the latent variables map each blob to one of the nouns only. For LCRF, we sum over all the latent variables for estimating the expectations. For LSP and LSSVM, the (noun,blob) feature with maximum feature weight triggers for each blob.
+
+gain, while significantly increasing the computation time, as the number of features increased drastically. Therefore, we did not include these features in our final experiments. 5.2 Alignment Path Features Alignment path features depend on the current alignment state h[n] = m, and the previous alignment states h[n - 1] = m . These features do not depend on the nouns and verbs in the sentences and the blobs in the video segments. We used the following alignment path features: · Jump Size: Since we allow monotonic jumps only, the jump sizes can be either zero or one. Therefore, we added two features for these two jump sizes. · Positional Features: we added positional features (Dyer et al., 2011) to discourage alignment states that are too far from the diagonal. For each alignment state (m, n), we estimate normalized distance from the diagonal m n as | m -n |. Again we used boolean features i i by assigning this normalized distance to five equally spaced bins. The alignment features are not updated by the LSPorced C and LSSVM-C methods, as they assume hF i ^ and hi to be identical.
+
+5
+
+Feature Design
+
+The features used in our discriminative models can be grouped in two categories: (1) co-occurrence features, and (2) alignment path features. The cooccurrence features depend only on a protocol sentence and the video segment it aligns to. The alignment path features, on the other hand, do not depend on the co-occurrence of sentence and video segment, and instead capture general alignment properties, e.g., jump size and the distance of an alignment state from the diagonal. 5.1 Co-occurrence Features The co-occurrence features included in our experiments are: · Co-occurrence of Nouns and Blobs: For each noun in the input protocols and each blob in the videos, we add a boolean feature (noun, blob), which is turned on if we align a sentence containing that noun with a video segment containing that blob. · Co-occurrence of Verbs and Blobs: For each verb in the input protocols and each blob in the videos, we add a boolean feature. This feature captures the observation that certain verbs are more likely to occur with certain objects (e.g., `write' co-occurs with `pen', `aspirate' co-occurs with `pipette'). We experimented with co-occurrence features of the form: (noun, verb, blob) triplets. However, including these features did not provide any noticeable 170
+
+6
+
+Results
+
+Our dataset contains 12 wetlab experiment videos, for 3 different protocols (4 videos per protocol). Each protocol contains natural language instructions for an actual biological experiment. On average, each protocol has 9 steps, and 24 sentences. The videos are recorded using an RGB-D Kinect camera, in a mock wetlab setup. The average video length is  5 minutes. There are 34 unique nouns and 25 unique verbs in the protocols, and 22 distinct blobs in the videos. We follow the same data pre-processing technique as described by Naim et al. (2014). The number of blobs is assumed to be known apriori. We oversegment each frame into many superpixels using the SLIC Superpixels algorithm (Achanta et al., 2012). We combine multiple adjacent superpixels into a blob, based on a pre-trained Gaussian mixture
+
+

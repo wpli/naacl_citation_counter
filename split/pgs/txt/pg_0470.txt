@@ -1,0 +1,46 @@
+N Past Present Future validation conscientiousness 1520 .02 -.08 .12 age 1520 .30 -.30 .15 gender 1520 .10 -.15 .14 exploration openness 1520 .05 .04 -.12 extraversion 1520 -.04 .03 .00 agreeableness 1520 .00 -.02 .04 neuroticism 1520 -.01 -.01 .04 satisfaction w/ life 1565 .00 -.05 .08 depression 268 -.14 .21 -.17 IQ 898 .14 -.14 .05 # of friends 1000 -.15 .13 -.05
+Table 5: Correlations between user temporal orientation and human attributes. The attributes conscientiousness, age, and gender are well-established in previous literature to be associated with temporal orientation. Gender is coded as 0 = male, 1 = female. bold: p < .01 after Benjamini-Hochberg multiple comparison correction; N : number of users; results controlled for age and gender.
+
+Attribute
+
+0.06
+
+future
+0.05
+
+women men past
+
+0.04
+
+Density
+
+0.03
+
+present
+
+0.02
+
+0.01
+
+0.00
+
+0
+
+Proportions of users' messages
+
+.25
+
+.50
+
+.75
+
+1
+
+Figure 1: Kernel density estimates of user-level proportions of past, present, and future classified messages, broken down by gender. Vertical bars represent means. openness to experience was correlated with lower future orientation (beyond conscientiousness, there was no support in the literature for any of the five personality factors to correlate with temporal orientation). This is surprising when considering openness to experience is characterized by creativity and intellect (McCrae and John, 1992), yet IQ instead correlates with less present and more past orientation, suggesting future orientation characterizes a difference between the two.8 We found a modest yet significant positive correlation between future orientation and satisfaction with life, with future orientation associated with higher life satisfaction. On the other hand, we found a stronger negative correlation between future orientation and depression as well as a positive correlation between present orientation and depression. As previously noted, past literature was conflicting on the relationship between these factors, so our study weighs in with a behavior-based assessment in support of a future-oriented people being more satisfied in life and less depressed. Lastly, we consider whether the use of our languagebased measure of temporal orientation can track changes over time. As a proof-of-concept, we focus on patterns around birthdays; excluding messages containing birthday terms and users turning 21, we calculated the standardized proportion of messages which were futureOne interpretation is that our classifier may be more accurate on messages authored by those with higher IQ (i.e. more grammatical sentences); however no significant difference in error was found when spitting messages by the authors' IQ, age, or gender.
+8
+
+temporal orientation and other variables. In our age and gender stratified sample (1520 users), we calculate Pearson correlations between temporal orientation and age, gender, and measures of openness, conscientiousness, extraversion, agreeableness, and neuroticism. Because fewer users completed measures of satisfaction with life, IQ, and number of friends, we were not able to produce sufficient stratified samples, so we used ordinary least squares linear regression to fit the standardized outcome of interest to standardized temporal orientation also including standardized age and gender as covariates to adjust for their effects. The coefficient, often denoted  , for temporal orientation then represents the strength of the relationship, controlled for age and gender. Table 5 lists the correlation coefficients between temporal orientation and user attributes. We found the strongest effects for age, with patterns that are consistent with the psychological literature (Steinberg et al., 2009). Figure 2 illustrates trends from age 13 to 60. Most notably, present orientation decreases steadily across age; past orientation steadily increases, and future orientation increases quickly throughout adolescence, slows in early adulthood, and finally levels off in late adulthood. Female users were significantly more futureoriented, slightly more past-oriented, and significantly less present-oriented than males. For personality, we found the expected patterns of correlations with conscientiousness, but more interestingly,
+
+416
+
+

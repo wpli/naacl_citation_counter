@@ -1,0 +1,50 @@
+cs de en es hu la cs de es hu la
+
+Baseline ID OOD 99.00 96.80 97.87 92.21 96.92 91.12 98.62 96.70 97.49 92.79 95.80 81.92 93.89 78.52 90.26 84.19 98.22 93.62 96.07 89.83 86.44 67.47
+
+ACT ID OOD 99.11 97.03 98.00 92.92 96.97 91.47 98.79 97.09 97.84 93.15 96.17 83.40 94.16 78.75 90.56 84.78 98.38 93.92 96.25 90.07 86.96 68.61
+
+MarLiN ID OOD 99.19 97.26 98.10 93.44 97.01 91.71 98.87 97.97 97.98 93.36 96.91 87.24 94.35 79.14 90.78 85.58 98.48 95.15 96.60 90.64 87.87 72.08
+
+MA ID OOD 99.18 97.25 98.00 92.87 96.99 91.57 98.87 97.89 98.12 93.77 96.81 86.31 94.48 79.41 90.75 85.75 98.56 95.43 96.83 91.14 88.40 73.23
+
+SVD ID OOD 99.11 97.09 98.09 92.88 97.00 91.75 98.80 97.16 97.86 93.30 96.36 85.01 94.14 78.94 90.69 85.15 98.40 94.18 96.46 90.50 87.45 70.81
+
+morph
+
+pos
+
+Table 4: Tagging results for the baseline and four different representations
+Baseline ID OOD 98.88 96.43 97.32 91.10 97.36 89.81 98.66 97.94 96.84 92.11 93.02 81.35 93.93 77.50 88.41 82.78 98.30 95.65 94.82 88.82 82.09 65.59 MarLiN ID OOD 99.11 96.94 97.73 92.00 97.58 90.65 98.94 98.33 97.08 92.95 95.20 87.58 94.33 78.12 89.18 83.91 98.53 95.92 95.46 89.98 84.67 71.25 MA ID OOD 99.06 96.95 97.60 91.49 97.47 90.51 98.87 98.38 97.46 93.25 95.11 86.45 94.50 78.37 89.32 84.09 98.54 96.33 95.85 90.46 85.91 72.42
+
+cs de morph es hu la
+
+cs de en es hu la cs de es hu la
+
+MarLiN MA MarLiN MA MarLiN MA MarLiN MA MarLiN MA
+
+gen 0.70 gen 0.85 gen 1.23 gen 1.37 sub 1.49 sub 1.34 cas 0.71 cas 0.88 pos 5.19 pos 4.68
+
+cas 0.41 cas 0.51 pos 1.14 pos 0.63 gen 1.21 gen 1.24 sub 0.66 sub 0.84 cas 3.46 gen 3.85
+
+pos 0.35 pos 0.31 num 0.62 num 0.59 pos 1.07 pos 1.10 pos 0.52 pos 0.76 gen 3.25 cas 3.01
+
+Table 5: Test set results for: baseline, MarLiN, MA cs de morph es hu la MarLiN MA MarLiN MA MarLiN MA MarLiN MA MarLiN MA f =0 0.29 0.37 1.02 0.85 1.36 1.50 0.62 1.07 3.76 4.98 0 < f < 10 0.22 0.35 0.17 0.29 0.15 0.27 0.18 0.20 0.80 0.69 f >= 10 0.11 0.16 0.19 0.42 0.02 0.04 0.00 0.03 0.06 0.09
+
+morph
+
+pos
+
+Table 7: Improvement compared to the baseline for different features
+
+Table 6: Improvement compared to the baseline for different frequency ranges of words on OOD
+
+6
+
+Analysis
+
+We now analyze why MarLiN and MA perform better than the baseline. First we compare the improvements in absolute error rate over the baseline by grouping word forms by their training set frequency f . The number are shown in Table 6. We find that most of the improvement comes from OOV words. Rare words (frequency <10) show a smaller, but still important contribution while the contribution of fre533
+
+quent words can be almost neglected for four languages. The exception is German where frequent words contribute more to the error reduction than rare words. This could be caused by syncretisms such as in plural noun phrases where the gender is not marked in determiner and adjective and can only be derived from the head noun; e.g., the adjectives in schwere Schulf¨ acher `difficult school subjects' and verd¨ achtige Personen `suspect persons' are unmarked for gender and the correct genders (neuter vs. feminine) cannot be inferred from distributional information or suffixes for the nouns (although gender is easy to infer distributionally for singular forms of nouns). Looking at the morphological features with the highest improvement in absolute error rate (Table 7) we find, that the features with the highest improvement are POS, SUB-POS (a finer division of POS, e.g., nouns are split into proper / common nouns), gender, case and number. For all languages POS and ­ if part of the annotation ­ SUB-POS are among the
+
+

@@ -1,0 +1,23 @@
+Movie Script Summarization as Graph-based Scene Extraction
+Philip John Gorinski and Mirella Lapata Institute for Language, Cognition and Computation School of Informatics, University of Edinburgh 10 Crichton Street, Edinburgh EH8 9AB P.J.Gorinski@sms.ed.ac.uk, mlap@inf.ed.ac.uk
+
+Abstract
+In this paper we study the task of movie script summarization, which we argue could enhance script browsing, give readers a rough idea of the script's plotline, and speed up reading time. We formalize the process of generating a shorter version of a screenplay as the task of finding an optimal chain of scenes. We develop a graph-based model that selects a chain by jointly optimizing its logical progression, diversity, and importance. Human evaluation based on a question-answering task shows that our model produces summaries which are more informative compared to competitive baselines.
+
+We can't get a good glimpse of his face, but his body is plump, above average height; he is in his mid 30's. Together they easily lift the chair into the truck. MAN (O.S.) Let's slide it up, you mind? CUT TO: INT. THE PANEL TRUCK - NIGHT He climbs inside the truck, ducking under a small hand winch, and grabs the chair. She hesitates again, but climbs in after him. MAN Are you about a size 14? CATHERINE (surprised) What? Suddenly, in the shadowy dark, he clubs her over the back of her head with his cast.
+
+1
+
+Introduction
+Figure 1: Excerpt from "The Silence of the Lambs". The scene heading INT. THE PANEL TRUCK - NIGHT denotes that the action takes place inside the panel truck at night. Character cues (e.g., MAN, CATHERINE) preface the lines the actors speak. Action lines describe what the camera sees (e.g., We can't get a good glimpse of his face, but his body. . . ).
+
+Each year, about 50,000 screenplays are registered with the WGA1 , the Writers Guild of America. Only a fraction of these make it through to be considered for production and an even smaller fraction to the big screen. How do producers and directors navigate through this vast number of scripts available? Typically, production companies, agencies, and studios hire script readers, whose job is to analyze screenplays that come in, sorting the hopeful from the hopeless. Having read the script, a reader will generate a coverage report consisting of a logline (one or two sentences describing the story in a nutshell), a synopsis (a two- to three-page long summary of the script), comments explaining its appeal or problematic aspects, and a final verdict as to whether the script merits further consideration. A script excerpt
+writers.
+1 The WGA is a collective term representing US TV and film
+
+from "Silence of the Lambs", an American thriller released in 1991, is shown in Figure 1. Although there are several screenwriting tools for authors (e.g., Final Draft is a popular application which automatically formats scripts to industry standards, keeps track of revisions, allows insertion of notes, and writing collaboratively online), there is a lack of any kind of script reading aids. Features of such a tool could be to automatically grade the quality of the script (e.g., thumbs up or down), generate
+
+1066
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1066­1076, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,17 @@
+A Compositional and Interpretable Semantic Space
+Alona Fyshe,1 Leila Wehbe,1 Partha Talukdar,2 Brian Murphy,3 and Tom Mitchell1 1 Machine Learning Department, Carnegie Mellon University, Pittsburgh, USA 2 Indian Institute of Science, Bangalore, India 3 Queen's University Belfast, Belfast, Northern Ireland afyshe@cs.cmu.edu, lwehbe@cs.cmu.edu, ppt@serc.iisc.in, brian.murphy@qub.ac.uk, tom.mitchell@cs.cmu.edu
+
+Abstract
+Vector Space Models (VSMs) of Semantics are useful tools for exploring the semantics of single words, and the composition of words to make phrasal meaning. While many methods can estimate the meaning (i.e. vector) of a phrase, few do so in an interpretable way. We introduce a new method (CNNSE) that allows word and phrase vectors to adapt to the notion of composition. Our method learns a VSM that is both tailored to support a chosen semantic composition operation, and whose resulting features have an intuitive interpretation. Interpretability allows for the exploration of phrasal semantics, which we leverage to analyze performance on a behavioral task.
+
+1
+
+Introduction
+
+Vector Space Models (VSMs) are models of word semantics typically built with word usage statistics derived from corpora. VSMs have been shown to closely match human judgements of semantics (for an overview see Sahlgren (2006), Chapter 5), and can be used to study semantic composition (Mitchell and Lapata, 2010; Baroni and Zamparelli, 2010; Socher et al., 2012; Turney, 2012). Composition has been explored with different types of composition functions (Mitchell and Lapata, 2010; Mikolov et al., 2013; Dinu et al., 2013) including higher order functions (such as matrices) (Baroni and Zamparelli, 2010), and some have considered which corpus-derived information is most useful for semantic composition (Turney, 2012; Fyshe et al., 2013). Still, many VSMs act 32
+
+like a black box - it is unclear what VSM dimensions represent (save for broad classes of corpus statistic types) and what the application of a composition function to those dimensions entails. Neural network (NN) models are becoming increasingly popular (Socher et al., 2012; Hashimoto et al., 2014; Mikolov et al., 2013; Pennington et al., 2014), and some model introspection has been attempted: Levy and Goldberg (2014) examined connections between layers, Mikolov et al. (2013) and Pennington et al. (2014) explored how shifts in VSM space encodes semantic relationships. Still, interpreting NN VSM dimensions, or factors, remains elusive. This paper introduces a new method, Compositional Non-negative Sparse Embedding (CNNSE). In contrast to many other VSMs, our method learns an interpretable VSM that is tailored to suit the semantic composition function. Such interpretability allows for deeper exploration of semantic composition than previously possible. We will begin with an overview of the CNNSE algorithm, and follow with empirical results which show that CNNSE produces: 1. more interpretable dimensions than the typical VSM, 2. composed representations that outperform previous methods on a phrase similarity task. Compared to methods that do not consider composition when learning embeddings, CNNSE produces: 1. better approximations of phrasal semantics, 2. phrasal representations with dimensions that more closely match phrase meaning.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 32­41, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

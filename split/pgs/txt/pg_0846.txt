@@ -1,0 +1,29 @@
+Model L EX CKY D EP CKY P RUNE 1 P RUNE 2 P RUNE 1+2
+
+Complexity n5 |G| |L ( h)||R(h)||G| h |L ( h )||R(h)||GT | h ­ ­
+
+Sent./s. 0.25 71.2 336.0 96.6 425.1
+
+Ora. F1 100.0 92.6 92.5 92.5 92.5
+
+Table 1: Comparison of three parsing setups: L EX CKY is the complete lexicalized c-parser on Y (x), but limited to only sentences less than 20 words for tractability, D EP CKY is the constrained c-parser on Y (x, d), P RUNE 1, P RUNE 2, and P RUNE 1+2 are combinations of the pruning methods described in Section 3.2. The oracle is the best labeled F1 achievable on the development data (§22, see Section 7).
+
+We also explored binarization using horizontal and vertical markovization to include additional context of the tree, as found useful in unlexicalized approaches (Klein and Manning, 2003). Preliminary experiments showed that this increased the size of the grammar, and the runtime of the algorithm, without leading to improvements in accuracy. Phrase-structure trees also include unary rules of  . To handle unary rules we modify the form A  1 the parsing algorithms in Figure 3 to include a unary completion rule, ( i, j , h, 1 ) ( i, j , h, A) for all indices i  h  j that are consistent with the dependency parse. In order to avoid unary recursion, we limit the number of applications of this rule at each span (preserving the runtime of the algorithm). Preliminary experiments looked at collapsing the unary rules into the nonterminal symbols, but we found that this hurt performance compared to explicit unary rules.
+
+pruning contributes even greater speed-ups. The oracle experiments show that the d-parse constraints do contribute a large drop in oracle accuracy, while pruning contributes a relatively small one. Still, this upper-bound on accuracy is high enough to make it possible to still recover c-parses at least as accurate as state-of-the-art c-parsers. We will return to this discussion in Section 7. 3.3 Binarization and Unary Rules We have to this point developed the algorithm for a strictly binary-branching grammar; however, we need to produce trees have rules with varying size. In order to apply the algorithm, we binarize the grammar and add productions to handle unary rules. Consider a non-binarized rule of the form A   . Relative to the head 1 . . . m with head child k child k the rule has left-side 1 . . . k-1 and rightside k+1 . . . m . We replace this rule with new binary rules and non-terminal symbols to produce each side independently as a simple chain, left-side first. The transformation introduces the following ¯ , A ¯  i A ¯ for i  new rules:5 A  1 A ¯A ¯ i for i  {k, . . . , m}. {2, . . . , k }, and A As an example consider the transformation of a rule with four children:
+S NP VP NP NP  NP ¯ S VP NP S ¯ S NP
+
+4
+
+Structured Prediction
+
+We learn the d-parse to c-parse conversion using a standard structured prediction setup. Define the linear scoring function s for a conversion as s(y ; x, d, ) =  f (x, d, y ) where  is a parameter vector and f (x, d, y ) is a feature function that maps parse productions to sparse feature vectors. While the parser only requires a d-parse at prediction time, the parameters of this scoring function are learned directly from a treebank of c-parses and a set of head rules. The structured prediction model, in effect, learns to invert the head rule transformation. 4.1 Features The scoring function requires specifying a set of parse features f which, in theory, could be directly adapted from existing lexicalized c-parsers. However, the structure of the dependency parse greatly limits the number of decisions that need to be made, and allows for a smaller set of features. We model our features after two bare-bones parsing systems. The first set is the basic arc-factored features used by McDonald (2006). These features include combinations of: rule and top nonterminal,
+
+These rules can then be reversed deterministically to produce a non-binary tree.
+5
+
+These rules are slightly modified when k = 1.
+
+5 792
+
+

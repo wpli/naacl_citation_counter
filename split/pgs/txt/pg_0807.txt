@@ -1,0 +1,21 @@
+Model ANCHOR and SUP ANCHOR
+
+ANCHOR
+
+Anchor Words and Top Words in Topics pizza burger sushi ice garlic hot amp chicken pork french sandwich coffee cake steak beer fish wine wine restaurant dinner menu nice night bar table meal experience hour wait hour people minutes line long table waiting worth order late night late ive people pretty love youre friends restaurant open favorite decent line love favorite ive amazing delicious restaurant eat menu fresh awesome pretty didnt restaurant ordered decent wasnt nice night bad stars line wait people long tacos worth order waiting minutes taco
+
+SUP ANCHOR
+
+Table 3: Comparing topics generated for the YELP dataset: anchor words shared by both ANCHOR and SUP ANCHOR are listed. Unique anchor words for each algorithm are listed along with the top ten words for that topic. For clarity, we pruned words which appear in more than 3000 documents as these words appear in every topic. The distinct anchor words reflect positive ("favorite") and negative ("line") sentiment rather than less sentiment-specific qualities of restaurants (e.g., restaurants open "late").
+
+"pizza" or "burger", and characterize the YELP dataset well. The similarity of these shared topics explains why both ANCHOR and SUP ANCHOR achieve similar topic interpretability scores. To explain the predictive power of SUP ANCHOR we must examine the anchor words and topics unique to both algorithms. The anchor words which are unique to ANCHOR include a general topic about wine, and two somewhat coherent topics related to time. By adding supervision to the model we get three new anchor words which identify sentiment ranging from extremely positive reviews mentioning a favorite restaurant to extremely negative reviews complaining about long waits. This general trend is seen across each of the datasets. For example, ANCHOR and SUP ANCHOR both discover shared topics describing consumer goods, but SUP ANCHOR replaces two topics discussing headphones with topics describing "frustrating" products and "great" products. Similarly, in the TRIPADVISOR data, both ANCHOR and SUP AN CHOR share topics about specific destinations, but only SUP ANCHOR discovers a topic describing "disgusting" hotel rooms.
+
+These insights have also improved supervised topic models. For example, Zhu et al. (2013) train the max-margin supervised topic models MEDLDA (Zhu et al., 2009) by reformulating the model such that the hinge loss is included inside a collapsed Gibbs sampler, rather than being applied externally on the sampler using costly SVMs. Using insights from Smola and Narayanamurthy (2010), the samplers run in parallel to train the model. While these advancements improve the scalability of max-margin supervised topic models, the improvement is limited by the fact that the sampling algorithm grows with the number of tokens. In contrast, this paper explores a different vein of research that focuses on using efficient representations of summary statistics to estimate statistical models. While this has seen great success in unsupervised models (Cohen and Collins, 2014), it has increasingly also been applied to supervised models. Wang and Zhu (2014) show how to use tensor decomposition to estimate the parameters of SLDA instead of sampling to find maximum likelihood estimates. In contrast, anchor-based methods rely on non-negative matrix factorization. We found that a discriminative classifier did not always perform best on the downstream classification task. Zhu et al. (2009) make a comprehensive comparison between MEDLDA, SLDA, and SVM + LDA, and they show that SVM + LDA performs worse than MEDLDA and SLDA on binary classification. It could be that better feature preprocessing could improve our performance.
+
+6
+
+Related Work
+
+Improving the scalability of statistical learning has taken many forms: creating online approximations of large batch algorithms (Hoffman et al., 2013; Zhai et al., 2014) or improving the efficiency of sampling (Yao et al., 2009; Hu and Boyd-Graber, 2012; Li et al., 2014). 753
+
+

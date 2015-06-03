@@ -1,0 +1,16 @@
+Figure 1: Experimental setup to determine the impact of translation on sentiment. We compare sentiment labels between Ar(Manl.Sent.) (shown in a shaded box) and other datasets shown on the right side of the figure. Ar(Manl.Sent.) is the original Arabic text manually annotated for sentiment.
+
+· Manually annotate all English datasets [En(Manl.Trans.) and En(Auto.Trans.)] for sentiment, creating En(Manl.Trans., Manl.Sent.) and En(Auto.Trans., Manl.Sent.), respectively. · Run a state-of-the-art Arabic sentiment analysis system on Ar, creating Ar(Auto.Sent.) · Run a state-of-the-art English sentiment analysis system on all the English datasets [En(Manl.Trans.) and En(Auto.Trans.)], creating En(Manl.Trans., Auto.Sent.) and En(Auto.Trans., Auto.Sent.), respectively. Figure 1 depicts this setup. Once the various sentiment-labeled datasets are created, we can compare pairs of datasets to draw inferences. For example, comparing the labels for Ar(Manl.Sent.) and En(Manl.Trans., Manl.Sent.) will show how different the sentiment labels tend to be when text is translated from Arabic to English. The comparison will also show, for example, whether positive tweets tend to often be translated into neutral tweets, and to what extent. The results will also show how feasible it is to first translate Arabic text into English and then use automatic sentiment analysis (Ar(Manl.Sent.) vs. En(Auto.Trans., Auto.Sent.)). In Section 8, we provide an analysis of several such comparisons for two different Arabic social media datasets. DATA: Since manual translation of text from Arabic to English is a costly exercise, we chose, for our experiments, an existing Arabic social media dataset that has already been translated ­ the BBN Arabic770
+
+Dialect/English Parallel Text (Zbib et al., 2012).2 It contains about 3.5 million tokens of Arabic dialect sentences and their English translations. We use a randomly chosen subset of 1200 Levantine dialectal sentences, which we will refer to as the BBN posts or BBN dataset, in our experiments. Additionally, we also conduct experiments on a dataset of 2000 tweets originating from Syria (a country where Levantine dialectal Arabic is commonly spoken). These tweets were collected in May 2014 by polling the Twitter API. We will refer to this dataset as the Syrian tweets or Syrian dataset. Note, however, that manual translations of the Syrian dataset are not available. The experimental setup described above involves several component tasks: generating translations manually and automatically (Section 4), manually annotating Arabic and English texts for sentiment (Section 5), automatic sentiment analysis of English texts (Section 6), and automatic sentiment analysis of Arabic texts (Section 7).
+
+4
+
+Generating English Translations
+
+The BBN dialectal Arabic dataset comes with manual translations into English. We generate automatic translations of the Arabic BBN posts and the Syrian tweets, by training a multi-stack phrase-based machine translation system to translate from Arabic to English. Our in-house system is quite similar to Cherry and Foster (2012). This statistical machine translation (SMT) system is trained on data from OpenMT 2012. We preprocess the training data by
+2
+
+https://catalog.ldc.upenn.edu/LDC2012T09
+
+

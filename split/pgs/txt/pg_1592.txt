@@ -1,0 +1,28 @@
+Noun
+1469 PERSON 1202 ARTIFACT 971 COGNITION 771 FOOD 766 ACT 700 LOCATION 638 TIME 530 EVENT 431  COMMUNIC . 417 POSSESSION 339 ATTRIBUTE 205 QUANTITY 102 ANIMAL 88 BODY 87 STATE 56 NATURAL OBJ . 54 RELATION 35 SUBSTANCE 34 FEELING 34 PROCESS 28 MOTIVE 25 PHENOMENON 23 SHAPE 6 PLANT 5 OTHER 2 all 26 NSSTs 9018
+GROUP
+
+Verb
+place STATIVE 2922 is people COGNITION 1093 know  car COMMUNIC . 974 recommend way SOCIAL 944 use food MOTION 602 go service POSSESSION 309 pay area CHANGE 274 fix day EMOTION 249 love experience PERCEPTION 143 see review CONSUMPTION 93 have price BODY 82 get. . . done quality CREATION 64 cook amount CONTACT 46 put dog COMPETITION 11 win hair WEATHER 0 -- pain all 15 VSSTs 7806 flower portion N/A (see §3.2) oil `a 1191 have discomfort ` 821 anyone process `j 54 fried reason  result COMMUNIC . is short for square COMMUNICATION tree stuff
+
+Table 1: Summary of noun and verb supersense categories. Each entry shows the label along with the count and most frequent lexical item in the STREUSLE corpus.
+
+enrich the MWE annotations of the CMWE corpus1 (Schneider et al., 2014b), are publicly released under the name STREUSLE.2 This includes new guidelines for verb supersense annotation. Our open-source tagger, implemented in Python, is available from that page as well.
+
+The 26 noun and 15 verb supersense categories are listed with examples in table 1. Some of the names overlap between the noun and verb inventories, but they are to be considered separate categories; hereafter, we will distinguish the noun and verb categories with prefixes, e.g. N : COGNITION vs. V: COGNITION. Though WordNet synsets are associated with lexical entries, the supersense categories are unlexicalized. The N : PERSON category, for instance, contains synsets for both principal and student. A different sense of principal falls under N : POSSESSION. As far as we are aware, the supersenses were originally intended only as a method of organizing the WordNet structure. But Ciaramita and Johnson (2003) pioneered the coarse word sense disambiguation task of supersense tagging, noting that the supersense categories provided a natural broadening of the traditional named entity categories to encompass all nouns. Ciaramita and Altun (2006) later expanded the task to include all verbs, and applied a supervised sequence modeling framework adapted from NER. Evaluation was against manually sensetagged data that had been automatically converted to the coarser supersenses. Similar taggers have since been built for Italian (Picca et al., 2008) and Chinese (Qiu et al., 2011), both of which have their own WordNets mapped to English WordNet. Although many of the annotated expressions in existing supersense datasets contain multiple words, the relationship between MWEs and supersenses has not received much attention. (Piao et al. (2003, 2005) did investigate MWEs in the context of a lexical tagger with a finer-grained taxonomy of semantic classes.) Consider these examples from online reviews: (1) IT IS NOT A HIGH END STEAK HOUSE (2) The white pages allowed me to get in touch with parents of my high school friends so that I could track people down one by one HIGH END functions as a unit to mean `sophisticated, expensive'. (It is not in WordNet, though
+NLTK (Bird et al., 2009) returns a synset's lexicographer file. A subtle difference is that a special file called noun.Tops contains each noun supersense's root synset (e.g., group.n.01 for N : GROUP) as well as a few miscellaneous synsets, such as living_thing.n.01, that are too abstract to fall under any single supersense. Following Ciaramita and Altun (2006), we treat the latter cases under an N : OTHER supersense category and merge the former under their respective supersense.
+
+2
+
+Background: Supersense Tags
+
+WordNet's supersense categories are the top-level hypernyms in the taxonomy (sometimes known as semantic fields) which are designed to be broad enough to encompass all nouns and verbs (Miller, 1990; Fellbaum, 1990).3
+1 2
+
+http://www.ark.cs.cmu.edu/LexSem/
+
+Supersense-Tagged Repository of English with a Unified Semantics for Lexical Expressions 3 WordNet synset entries were originally partitioned into lexicographer files for these coarse categories, which became known as "supersenses." The lexname function in WordNet/
+
+1538
+
+

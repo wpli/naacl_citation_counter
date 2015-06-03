@@ -1,0 +1,22 @@
+Shift-Reduce Constituency Parsing with Dynamic Programming and POS Tag Lattice
+Haitao Mi  T.J. Watson Research Center IBM hmi@us.ibm.com Abstract
+We present the first dynamic programming (DP) algorithm for shift-reduce constituency parsing, which extends the DP idea of Huang and Sagae (2010) to context-free grammars. To alleviate the propagation of errors from part-of-speech tagging, we also extend the parser to take a tag lattice instead of a fixed tag sequence. Experiments on both English and Chinese treebanks show that our DP parser significantly improves parsing quality over non-DP baselines, and achieves the best accuracies among empirical linear-time parsers.
+
+Liang Huang  Queens College & Graduate Center City University of New York liang.huang.sh@gmail.com
+shift-reduce constituency parser which always finishes in same number of steps, eliminating the complicated asynchronicity issue in previous work (Zhu et al., 2013; Wang and Xue, 2014), and then develop dynamic programming on top of that. Secondly, to alleviate the error propagation from POS tagging, we also extends the algorithm to take a tagging sausage lattice as input, which is a compromise between pipeline and joint approaches (Hatori et al., 2011; Li et al., 2011; Wang and Xue, 2014). Our DP parser achieves state-of-the-art performances on both Chinese and English treebanks (at 90.8% on PTB and 83.9% on CTB, the latter being the highest in literature).
+
+1
+
+Introduction
+
+2
+
+Odd-Even Shift-Reduce CFG Parser
+
+Incremental parsing has gained popularity in both dependency (Nivre, 2004; Zhang and Clark, 2008) and constituency parsing (Zhu et al., 2013; Wang and Xue, 2014). However, the greedy or beam search algorithms used in these parsers can only explore a tiny fraction of trees among exponentially many candidates. To alleviate this problem, Huang and Sagae (2010) propose a dynamic programming (DP) algorithm, reducing the search space to a polynomial size by merging equivalent states. This idea has been extended by Kuhlmann et al. (2011) and Cohen et al. (2011) to other dependency parsing paradigms. In constituency parsing, however, DP has not yet been applied to incremental parsing, and the bigger search space in constituency parsing suggests a potentially even bigger advantage by DP. However, with unary rules and more-than-binary branchings, constituency parsing presents challenges not found in dependency parsing that must be addressed before applying DP. Thus, we first present an odd-even 1030
+
+One major challenge in constituency parsing is unary rules. Unlike dependency parsing where shiftreduce always finishes in 2n-1 steps, existing incremental constituency parsers (Zhu et al., 2013; Wang and Xue, 2014) reach the goal state (full parse tree) in different steps due to different number of unary rules. So we propose a new, synchronized, "oddeven" system to reach the goal in the same 4n - 2 steps. A state is notated p = S, Q , where S is a stack of trees ..., s1 , s0 , and Q is a queue of wordtag pairs. At even steps (when step index is even) we can choose one of the three standard actions · sh: shift the head of Q, a word-tag pair (t, w), onto S as a singleton tree t(w); · rex : combine the top two trees on the stack and replace them with a new tree x(s1 , s0 ), x being the root nonterminal, headed on s0 ; · rex : similar to rex but headed on s1 ; and at odd steps we can choose two new actions:
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1030­1035, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

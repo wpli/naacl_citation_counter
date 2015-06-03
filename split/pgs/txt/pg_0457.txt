@@ -1,0 +1,41 @@
+Model Model 4 (ref.) Baseline Latent
+
+Model 4 (ref.) Baseline Latent
+
+Model 4 (ref.) Baseline Latent
+
+Prec. 1 Million 71.56 66.95 Pharmacy 67.85 Legal 67.57 Hardware 69.41 Legal + Hardware + Software 69.64 2 Million 74.13 68.34 Pharmacy 68.85 Legal 69.98 Hardware 69.45 Legal + Hardware + Software 71.51 4 Million 75.53 69.37 Pharmacy 69.69 Legal 70.51 Hardware 71.75 Legal + Hardware + Software 72.16
+
+Domain Prior
+
+ +0.90 +0.62 +2.46 +2.69 +0.51 +1.64 +1.11 +3.17 +0.32 +1.14 +2.38 +2.79
+
+Rec. 64.59 61.29 61.72 62.29 63.58 63.30 65.30 61.58 62.58 64.01 63.23 63.87 65.95 64.30 62.80 63.94 64.44 64.30
+
+ +0.43 +1.00 +2.29 +2.01 +1.00 +2.43 +1.65 +2.29 -1.50 -0.36 +0.14 ±0.0
+
+AER 32.10 36.00 35.36 35.17 33.63 33.68 30.56 35.22 34.43 33.13 33.81 32.53 29.58 33.26 33.94 32.93 32.10 31.99
+
+ -0.64 -0.83 -2.37 -2.32 -0.79 -2.09 -1.41 -2.69 +0.68 -0.33 -1.16 -1.27
+
+Table 1: Alignment accuracy over heterogeneous corpora.
+
+7
+
+Word Alignment Experiment
+
+For alignment accuracy evaluation, we use a data set of 100 sentence pairs with their "golden" alignment from Graca et al. (2008). Here, the golden alignment consists of sure links (S ) and possible links (P ) for each sentence pair. Counting the set of generating alignment links (A), we report the word alignment P | |AS | accuracy by precision ( |A |P | ), recall ( |S | ), align-
+
+gel, 2008), we run 5 iterations for training Model 1, 3 iterations for training the HMM alignment model, Model 3 and Model 4. 7.1 Learning with Single Domain
+
+P |+ |A  S | ment error rate (AER) (1 - |A ) (Och and | A |+ |S | 9 Ney, 2003). For all experiments, we use the same training configuration for both the baseline/the latent domain alignment model: 5 iterations for IBM model 1/the latent domain model; 3 iterations for HMM alignment model/the latent domain model. For evaluation, we first align the sentence pairs in both directions and then symmetrize them using the growdiag-final heuristic (Koehn et al., 2003). For reference we also report the performance of a considerably more expressive Model 4, capable of capturing more structure, but at the expense of intractable inference. Using MGIZA++ (Gao and Vo-
+
+Note that better results correspond to larger Precision, Recall and to smaller AER.
+
+9
+
+We first examine the binary case, where we are given domain information in advance for each kind of samples only, e.g., Legal, or Pharmacy, or Hardware. For the different sizes of the heterogeneous data (1M , 2M and 4M ) the seed sample size is thus 10%, 5% and 2.5% respectively. Note that in such cases, training the latent domain alignment model induces two domain-conditioned statistics: in-domain vs. out-domain (D1 and D2 respectively). Once the model is trained, we combine the induced domain-conditioned statistics together (Eq. 5) and examine the produced word alignment output. Table 1 presents the results. Most importantly, it shows that as long as providing domain information for reasonably large enough data, learning the latent domain alignment model notably improves the word alignment accuracy. For instance, given in advance the domain information for a sample of 10%, and 5% of the heterogeneous corpora, our model consistently improves the word alignment accuracy in
+
+403
+
+

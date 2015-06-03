@@ -1,0 +1,23 @@
+results in worse models, presumably by introducing too much noise. However, for low-resource languages or domains with longer sentences and no available newswire data, this might be a viable alternative.
+
+6
+
+Related Work
+
+scripts and search queries, we see some improvements, but find that extending the dictionaries with clusters has less of an effect than for Twitter. Our method can provide a viable alternative to costly annotation when adapting to new domains where unlabeled data and dictionaries are available.
+
+Our approach is similar to mining high-precision items. However, previous approaches on this in NLP have mainly focused on well-defined classification tasks, such as PP attachment (Pantel and Lin, 2000; Kawahara and Kurohashi, 2005), or discourse connective disambiguation (Marcu and Echihabi, 2002). In contrast, we mine for sequences of unambiguous tokens in a structured prediction task. While we use the same dictionaries as in Li et al. (2012) and T¨ ackstr¨ om et al. (2013), our approach differs in several respects. First, we use Wiktionary to mine for training data, rather than as type constraints, and second, we use Brown clusters to extend Wiktionary. We did experiment with different ways of doing this, including using various forms of word embeddings, leading to models similar to the baseline models in Socher et al. (2013), but the approach based on Brown clusters led to the best results on our development data. ?) use a different approach to distant supervision to improve tagging accuracy for Twitter. They use hyperlinks to fetch additional un-annotated training data that can be used in a self-training loop. Our approach differs in that it produces annotated data and is more readily applicable to various domains.
+
+Acknowledgements
+We would like to thank the anonymous reviewers for valuable comments and feedback, as well as Chris Biemann for help with the Twitter data, and Hector Martinez Alonso for the annotation. This research is funded by the ERC Starting Grant LOWLANDS No. 313695.
+
+References
+Tetske Avontuur, Iris Balemans, Laura Elshof, Nanne van Noord, and Menno van Zaanen. 2012. Developing a part-of-speech tagger for dutch tweets. Computational Linguistics in the Netherlands Journal, 2:34­51. Michael Bendersky, Bruce Croft, and David Smith. 2010. Structural annotation of search queries using pseudorelevance feedback. In CIKM. John Blitzer, Ryan McDonald, and Fernando Pereira. 2006. Domain adaptation with structural correspondence learning. In EMNLP. P.F. Brown, P.V. Desouza, R.L. Mercer, V.J. DellaPietra, and J.C. Lai. 1992. Class-based n-gram models of natural language. Computational linguistics, 18(4):467­ 479. Hal Daume III. 2007. Frustratingly easy domain adaptation. In ACL. Jennifer Foster, Ozlem Cetinoglu, Joachim Wagner, Josef Le Roux, Joakim Nivre, Deirde Hogan, and Josef van Genabith. 2011. From news to comments: Resources and benchmarks for parsing the language of Web 2.0. In IJCNLP. Kevin Gimpel, Nathan Schneider, Brendan O'Connor, Dipanjan Das, Daniel Mills, Jacob Eisenstein, Michael Heilman, Dani Yogatama, Jeffrey Flanigan, and Noah A. Smith. 2011. Part-of-Speech Tagging for Twitter: Annotation, Features, and Experiments. In ACL. John J Godfrey, Edward C Holliman, and Jane McDaniel. 1992. Switchboard: Telephone speech corpus for research and development. In Acoustics, Speech, and Signal Processing, 1992. ICASSP-92., 1992 IEEE International Conference on, volume 1, pages 517­520. IEEE.
+
+7
+
+Conclusion
+
+We have presented a domain adaptation approach to POS tagging by augmenting newswire data with automatically mined unambiguous instances. We demonstrate our approach on Twitter (in several languages), spoken language transcripts, and search queries. We use dictionaries extended with Brown clusters to collect labeled training data from unlabeled data, saving additional annotation work. Our models perform significantly better on heldout data than both off-the-shelf taggers and models trained on newswire data only. Improvements hold across several languages (English, Spanish, Portuguese, and Dutch). For spoken language tran1260
+
+

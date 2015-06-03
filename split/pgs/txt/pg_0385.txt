@@ -1,0 +1,20 @@
+A LC -C AT A LC -C ONT Proposed
+
+purity .500 .557 .503 .557 .522 .572
+
+WALS subtree .608 .626 .630 .630 .603 .651
+
+outlier .343 .330 .343 .330 .351 .346
+
+Ethnologue outlier .358 .398 .353 .395 .356 .394
+
+Table 2: Results of the reconstruction of known family trees. Macro-averages are followed by microaverages. report macro- and micro-averages. Only non-trivial family trees (trees with more than two children) were considered. Purity and subtree scores compare inferred trees with gold-standard class labels. In WALS, genera were treated as class labels because they were the only intermediate layer between families and leaves. By contrast, Ethnologue provided more complex trees and we were unable to assign one class label to each language. For this reason, only outlier fraction scores are reported for Ethnologue. 6.1.4 Results Table 2 shows the scores for reconstructed family trees. The proposed method outperformed the baselines in 5 out of 8 metrics. Three methods performed almost equally for Ethnologue. We suspect that typological features reflect long term trends in comparison to Ethnologue's fine-grained classification. For WALS, the proposed method was beaten by average-link agglomerative clustering only in the macro-average of subtree scores. One possible explanation is randomness of the proposed method. Apparently, random sampling distributed errors more evenly than deterministic clustering. It was penalized more often by subtree scores because they required that all leaves of an internal node belonged to the same class. 6.2 Reconstruction of a Common Ancestor of the World's Languages We reconstructed a single tree that covers the world. To do this, we build a binary tree on top of known language families, a product of historical linguistics. It is generally said that historical linguistics cannot go far beyond 6,000­7,000 years (Nichols, 2011). Here we attempt to break the brick wall. It is no surprise that this experiment is full of problems and difficulties. No quantitative evaluation is possible. Underlying assumptions are questionable. No one knows for sure if there was such a thing as one common ancestor of all modern lan25 20 frequency 15 10 5 0 0 0.02 0.04 0.06 variance 0.08 0.1
+
+Figure 5: Histogram of posterior variances  2 = n /n of the 4,000th sample.
+1 2nd smallest component 0.8 0.6 0.4 0.2 0 0 0.2 leaves internal root 0.4 0.6 0.8 smallest component 1
+
+Figure 6: Scatter plot of languages using the components with the two smallest variances. guages. Moreover, language capacity of humans, in addition to languages themselves, is likely to have evolved over time (Nichols, 2011). This casts doubt on the applicability of the typology evaluator, which is trained on modern languages, to languages of far distant past. Nevertheless, it is fascinating to make inference on the world's ancestral languages. We used Ethnologue as the known tree topologies. For Gibbs sampling, we ran 3,000 burn-in iterations after which we collected 100 samples at an interval of 10 iterations. Figure 4 shows a reconstructed tree. To summarize multiple sample trees, we constructed a maximum clade credibility tree. For each clade (a set of all leaves that share a common ancestor), we calculated the fraction of times it appears in the collected samples, which we call a support in this pa-
+
+331
+
+

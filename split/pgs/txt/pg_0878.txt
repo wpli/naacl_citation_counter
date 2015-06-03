@@ -1,0 +1,35 @@
+Model KenLM NLM
+
+fren 33.01 (120.446) 31.55 (115.119)
+
+encs 19.11 18.56
+
+ende 19.75 18.33
+
+Normalisation Unnormalised Class Factored Tree Factored
+
+fren 33.89 33.87 33.69
+
+encs 20.06 19.96 19.52
+
+ende 20.25 20.25 19.87
+
+Table 4: A comparison between standard back-off n-gram models and neural language models. The perplexities for the English language models are shown in parentheses.
+
+Table 5: Qualitative analysis of the proposed normalisation schemes with an additional back-off n-gram model.
+
+network. This operation is especially problematic when the neural language model is incorporated as a feature in the decoder, as the language model is queried several hundred thousand times for any sentence of average length. Previous publications on neural language models in machine translation have approached this problem in two different ways. Vaswani et al. (2013) and Devlin et al. (2014) simply ignore normalisation when decoding, albeit Devlin et al. (2014) alter their training objective to learn self-normalised models, i.e. models where the sum of the values in the output layer is (hopefully) close to 1. Vaswani et al. (2013) use noise contrastive estimation to speed up training, while Devlin et al. (2014) train their models with standard gradient descent on a GPU. The second approach is to explicitly normalise the models, but to limit the set of words over which the normalisation is performed, either via class-based factorisation (Botha and Blunsom, 2014; Baltescu et al., 2014) or using a shortlist containing only the most frequent words in the vocabulary and scoring the remaining words with a back-off n-gram model (Schwenk, 2010). Tree factored models follow the same general approach, but to our knowledge, they have never been investigated in a translation system before. These normalisation techniques can be successfully applied both when training the models and when using them in a decoder. Table 4 shows a side by side comparison of out of the box neural language models and back-off n-gram models. We note a significant drop in quality when neural language models are used (roughly 1.5 BLEU for fren and ende and 0.5 BLEU for en cs). This result is in line with Zhao et al. (2014) and shows that by default back-off n-gram models are much more effective in MT. An interesting observation is that the neural models have lower perplexities than the n-gram models, implying that BLEU scores 824
+
+Normalisation Unnormalised Class Factored Tree Factored
+
+fren 30.98 31.55 30.37
+
+encs 18.57 18.56 17.19
+
+ende 18.05 18.33 17.26
+
+Table 6: Qualitative analysis of the proposed normalisation schemes without an additional back-off n-gram model.
+
+and perplexities are only loosely correlated. Table 5 and Table 6 show the impact on translation quality for the proposed normalisation schemes with and without an additional n-gram model. We note that when KenLM is used, no significant differences are observed between normalised and unnormalised models, which is again in accordance with the results of Zhao et al. (2014). However, when the n-gram model is removed, class factored models perform better (at least for fren and ende), despite being only an approximation of the fully normalised models. We believe this difference in not observed in the first case because most of the language modelling is done by the n-gram model (as indicated by the results in Table 4) and that the neural models only act as a differentiating feature when the n-gram models do not provide accurate probabilities. We conclude that some form of normalisation is likely to be necessary whenever neural models are used alone. This result may also explain why Zhao et al. (2014) show, perhaps surprisingly, that normalisation is important when reranking n-best lists with recurrent neural language models, but not in other cases. (This is the only scenario where they use neural models without supporting n-gram models.) Table 5 and Table 6 also show that tree factored models perform poorly compared to the other candidates. We believe this is likely to be a result of the artificial hierarchy imposed by the tree over the vocabulary.
+
+

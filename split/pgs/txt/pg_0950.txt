@@ -1,0 +1,64 @@
+Algorithm 2 Loss-Augmented Inference
+1: procedure OPT-L OSS AUG(w, X, Y ) 2: Initialize (0) and set t = 0 3: repeat 4: Y := opt-LossLag(, Y) // Eq (14) 5: Y := opt-ModelLag(, X) // Eq (15) 6: if Y = Y then 7: return Y 8: 9: 10: 11: 12:
+
+Algorithm 3 Finding Y : Local Search
+
+for i := 1 to N do for := 1 to L do
+i
+(t+1) (t)
+
+1: procedure OPT-L OSS L AG(, Y ) n 2: (idxn 1 . . . idx#neg )  Sort  (i ( )) // FPs n n 3: (idx1 . . . idx#pos )  Sort  (i ( )) // FNs 4: Initialise (f p, f n) on the grid 5: repeat 6: for ((f p , f n )  Neigbours(f p, f n) do 7: loss(f p ,f n ) = (f p , f n ) + sorted 3
+
+( ) := i ( ) -  (t) (y
+
+i,
+
+-y
+
+i,
+
+)
+
+until some stopping condition is met return Y
+
+8: 9: 10: 11: 12: 13:
+
+if loss(f p,f n) > loss(f p ,f n break else (f p, f n) = (f p , f n ) until loss(f p,f n)  loss(f p ,f n
+
+loss(f p
+
+,f n )
+
+= arg max(f p
+
+,f n )
+
+loss(f p
+
+)
+
+then
+
+,f n )
+
+)
+
+The DD algorithm to compute the loss-augmented inference is outlined in Algorithm 2. Now the challenge is how to solve the above two optimization problems, which is the subject of the following section. 3.3 Effective Optimization of the Dual The two optimization problems involved in the dual are hard in general. More specifically, the optimization of the affine-augmented model score (in Eq. 15) is as difficult as the MAP inference in the underlying graphical model, which can be challenging for loopy graphs. For the graphical model underlying distant supervision of relation extraction (Fig 1), we formulate the inference as an ILP (integer linear program). Furthermore, we relax the ILP to LP to speed up the inference, in the expense of trading exact solutions with approximate solutions2 . Likewise, the optimization of the affineaugmented multivariate loss (in Eq. 14) is difficult. This is because we have to search over the entire space of Y  Y , which is exponentially large O(2N L ). However, if the loss term  can be expressed in terms of some aggregate statistics over Y , such as false positives (FPs) and false negatives (FNs), the optimization can be performed efficiently. This is due to the fact that the number of FPs can range from zero to the size of negative labels, and the number of FNs can range from zero to the number of positive labels. Therefore, the loss term can take O(N 2 L2 ) different values which can
+We observed in our experiments that relaxing the ILP to LP does not hurt the performance, but significantly speeds up the inference.
+2
+
+14: return { Y corresponding to (f p, f n) }
+
+be represented on a two-dimensional grid. Fixing FPs and FNs to a grid point,  · Y is maximized with respect to Y . The grid point which has the best value for (Y, Y ) +  · Y will then give the optimal solution for Eq (14). Exhaustive search in the space of all possible grid points is not efficient as soon as the grid becomes large. Therefore, we have to adapt the techniques proposed in previous work (Ranjbar et al., 2012; Joachims, 2005). We propose a simple but effective local search strategy for this purpose. The procedure is outlined in Algorithm 3. We start with a random grid point, and move to the best neighbour. We keep hill climbing until there is no neighbour better than the current point. We define the neighbourhood by a set of exponentially-spaced points in all directions around the current point, to improve the exploration of the search space. We present some analysis on the benefits of using this search strategy vis-a-vis the exhaustive search in the Experiments section.
+
+4
+
+Experiments
+
+Dataset: We use the challenging benchmark dataset created by Riedel et al. (2010) for distant supervision of relation extraction models. It is created by aligning relations from Freebase4 with the sentences in New York Times corpus (Sandhaus, 2008). The labels for the datapoints come from the Freebase
+For a given (f p, f n), we set y by picking the sorted unary terms that maximize the score according to y. 4 www.freebase.com
+3
+
+896
+
+

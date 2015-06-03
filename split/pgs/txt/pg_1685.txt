@@ -1,0 +1,11 @@
+Figure 1: A few strongly connected components of a GV M orph graph for English.
+
+e.g. createdcreatecreated in Table 2). We use the notation GV M orph to denote such a graph. V GM orph usually contains many strongly connected components, with components representing families of morphological variations. As an illustration, we present in Figure 1 a few strongly connected components obtained for an English embedding space (for illustration purposes, we show only a maximum of 2 directed edges between any two nodes in this multigraph, even though more may exist). 1631
+
+3.2
+
+Inducing 1-to-1 Morphological Mappings
+
+The induced graph GV M orph encodes a lot of information about words and how they relate to each other. For some applications, however, we want to normalize away morphological diversity by mapping to a canonical surface form. This amounts to selecting, from among all the candidate morphological transformations generated, specific 1-to-1 mappings. In graph terms, this means building a labeled, V weighted, acyclic, directed graph DM orph starting
+
+

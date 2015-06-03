@@ -1,0 +1,31 @@
+yields no further improvement. Previous studies evaluated their models on the related problem of distinguishing randomly permuted and correctly ordered chains of events (§2). In this paper we generalize this task to complete event ordering. In order to demonstrate the relative difficulty of the tasks, we apply our highest scoring model (4K, Fr + Le) to the binary task (without re-training it). We do so by computing the percentage of cases in which the correct ordering obtains a higher score than an average ordering. The high resulting accuracy of 93%, as opposed to considerably lower accuracies obtained under ordering evaluation measures, reflects the relative difficulty of the tasks. The proposed edge-factored model can easily capture pair-wise ordering relations between events, but is more limited in accounting for relations between larger sets of events. A simple way of doing so is by adding the feature e P (ei |e)P (e|ej ) between events ei and ej (in addition to the regular transition probabilities P (ei |ej )). However, preliminary experimentation with this technique did not yield improved performance. Future work will address higher-order models that straightforwardly account for such long-distance dependencies. To qualitatively assess what generalizations are learned by the model, we apply G LOBAL -P RC to the development data and look at what event pairs obtained either particularly high or particularly low results. For each pair of predicates and their first 2 2 arguments (a1 ,c1 1 ), (a ,c1 ), we compute the average weight of an edge connecting events of these types, discarding pairs of frequency less than 20. The 20 highest scoring edges contain pairs such as ("add," "mixing after addition"), ("beat whites," "fold into mixture") and ("cover for minutes," "cook"), in addition to a few noisy pairs resulting from parser errors. The 20 lowest scoring edges contain event pairs that are likely to appear in the opposite order. 11 of the cases include as a first argument the predicates "serve," "cool" or "chill," which are likely to occur at the end of a recipe. 3 other edges linked duplications (e.g., ("reduce heat," "reduce heat")), which are indeed unlikely to immediately follow one another. These findings suggest the importance of detecting both lexical pairs that are unlikely to follow one another, in addition to those that are likely to. 1169
+
+9
+
+Conclusion
+
+We addressed the problem of lexical event ordering, and developed an edge-factored model for tackling it. We rely on temporally aligned texts, using a new dataset of cooking recipes as a test case, thereby avoiding the need for costly and error-prone manual annotation. We present results of a pair-wise accuracy of over 70% using a basic set of features, and show the utility of the structured perceptron algorithm over simpler greedy and local approaches. The setup we explore, which uses a discriminative model and an ILP formulation, is easy to extend both in terms of features and in terms of more complex formal constraints and edge dependencies, as was done in graph-based dependency parsing (McDonald et al., 2005). Future work will address the extension of the feature set and model, and the application of this model to temporal semantics and planning tasks. We will further address the application of semi-supervised variants of the proposed techniques (e.g., self-training) to other domains, where no sizable corpora of temporally aligned data can be found.
+
+Acknowledgments
+We would like to thank Nathan Schneider, Roy Schwartz, Bonnie Webber and the members of the Probmodels group at the University of Edinburgh for helpful comments. This work was supported by ERC Advanced Fellowship 249520 GRAMPLUS.
+
+Appendix A: Maximal Hamiltonian Path
+Let G(S ) = (S  {s, f }, E (S )) be an almostcomplete directed graph with E = E (S ) = (S  {s}) × (S  {f }). Let cij  R be weights for its edges ((i, j )  E ). A Hamiltonian path between s, f  V can be found by solving the following program, returning P = {(i, j )|xij = 1}.
+n xij {0,1} : (i,j )E ui Z : iV n
+
+max
+
+cij xij
+i=j n
+
+s.t.
+i=0,i=j
+
+xij = 1 j = s;
+j =0,j =i
+
+xij = 1 i = e;
+
+ui - uj + |V |xij  |V | - 1 (i, j )  E
+
+

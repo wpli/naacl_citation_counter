@@ -1,0 +1,31 @@
+Multi-Task Word Alignment Triangulation for Low-Resource Languages
+Tomer Levinboim and David Chiang Department of Computer Science and Engineering University of Notre Dame {levinboim.1,dchiang}@nd.edu Abstract
+We present a multi-task learning approach that jointly trains three word alignment models over disjoint bitexts of three languages: source, target and pivot. Our approach builds upon model triangulation, following Wang et al., which approximates a source-target model by combining source-pivot and pivot-target models. We develop a MAP-EM algorithm that uses triangulation as a prior, and show how to extend it to a multi-task setting. On a low-resource Czech-English corpus, using French as the pivot, our multi-task learning approach more than doubles the gains in both Fand Bleu scores compared to the interpolation approach of Wang et al. Further experiments reveal that the choice of pivot language does not significantly affect performance.
+
+train these three models and then interpolate the source-target model with an approximate sourcetarget model, constructed by combining the sourcepivot and pivot-target models. Pretending that Czech-English is low-resource, we conduct word alignment and MT experiments (§4). With French as the pivot, our approach significantly outperforms the interpolation method of Wang et al. (2006) on both alignment F- and Bleu scores. Somewhat surprisingly, we find that our approach is insensitive to the choice of pivot language.
+
+2
+
+Triangulation and Interpolation
+
+1
+
+Introduction
+
+Word alignment (Brown et al., 1993; Vogel et al., 1996) is a fundamental task in the machine translation (MT) pipeline. To train good word alignment models, we require access to a large parallel corpus. However, collection of parallel corpora has mostly focused on a small number of widely-spoken languages. As such, resources for almost any other pair are either limited or non-existent. To improve word alignment and MT in a lowresource setting, we design a multitask learning approach that utilizes parallel data of a third language, called the pivot language (§3). Specifically, we derive an efficient and easy-to-implement MAP-EM-like algorithm that jointly trains sourcetarget, source-pivot and pivot-target alignment models, each on its own bitext, such that each model benefits from observations made by the other two. Our method subsumes the model interpolation approach of Wang et al. (2006), who independently 1221
+
+Wang et al. (2006) focus on learning a word alignment model without a source-target corpus. To do so, they assume access to both source-pivot and pivot-target bitexts on which they independently train a source-pivot word alignment model sp and a pivot-target model pt . They then combine the two models by marginalizing over the pivot language, resulting in an approximate source-target model st . This combination process is referred to as triangulation (see §5). In particular, they construct the triangulated source-target t-table tst from the source-pivot and pivot-target t-tables tsp , tpt using the following approximation: tst (t | s) = 
+p
+
+t(t | p, s) · t( p | s)
+p
+
+tpt (t | p) · tsp ( p | s)
+
+(1)
+
+Subsequently, if a source-target corpus is available, they train a standard source-target model st , and tune the interpolation ^ st = interp tst + (1 - interp )tst t with respect to interp to reduce alignment error rate (Koehn, 2005) over a hand-aligned development set.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1221­1226, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

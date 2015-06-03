@@ -1,0 +1,18 @@
+Discriminative Phrase Embedding for Paraphrase Identification
+¨ Wenpeng Yin and Hinrich Schutze Center for Information and Language Processing University of Munich, Germany wenpeng@cis.lmu.de
+
+Abstract
+This work, concerning paraphrase identification task, on one hand contributes to expanding deep learning embeddings to include continuous and discontinuous linguistic phrases. On the other hand, it comes up with a new scheme TF-KLD-KNN to learn the discriminative weights of words and phrases specific to paraphrase task, so that a weighted sum of embeddings can represent sentences more effectively. Based on these two innovations we get competitive state-of-the-art performance on paraphrase identification.
+
+continuous phrase "side effects" and the discontinuous phrase "pick . . . off". The better we can discover and represent such components, the better the compositional sentence vector should be. We use the term unit to refer to single words, continuous phrases and discontinuous phrases. Ji and Eisenstein (2013) show that not all words are equally important for paraphrase identification. They propose TF-KLD, a discriminative weighting scheme to address this problem. While they do not represent sentences as vectors composed of other vectors, TF-KLD is promising for a vector-based approach as well since the insight that units are of different importance still applies. A shortcoming of TF-KLD is its failure to define weights for words that do not occur in the training set. We propose TF-KLD-KNN, an extension of TF-KLD that computes the weight of an unknown unit as the average of the weights of its k nearest neighbors. We determine nearest neighbors by cosine measure over embedding space. We then represent a sentence as the sum of the vectors of its units, weighted by TFKLD-KNN. We use (Madnani et al., 2012) as our baseline system. They used simple features ­ eight different machine translation metrics ­ yet got good performance. Based on above new sentence representations, we compute three kinds of features to describe a pair of sentences ­ cosine similarity, element-wise sum and absolute element-wise difference ­ and show that combining them with the features from Madnani et al. (2012) gets state-of-the-art performance on the Microsoft Research Paraphrase (MSRP) corpus (Dolan et al., 2004).
+
+1
+
+Introduction
+
+This work investigates representation learning via deep learning in paraphrase identification task, which aims to determine whether two sentences have the same meaning. One main innovation of deep learning is that it learns distributed word representations (also called "word embeddings") to deal with various Natural Language Processing (NLP) tasks. Our goal is to use and refine embeddings to get competitive performance. We adopt a supervised classification approach to paraphrase identification like most top performing systems. Our focus is representation learning of sentences. Following prior work (e.g., Blacoe and Lapata (2012)), we compute the vector of a sentence as the sum of the vectors of its components. But unlike prior work we use single words, continuous phrases and discontinuous phrases as the components, not just single words. Our rationale is that many semantic units are formed by multiple words ­ e.g., the
+
+1368
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1368­1373, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

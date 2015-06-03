@@ -1,0 +1,32 @@
+s ... l r ... b ...
+
+l ... s ...
+
+r ... b ...
+
+(a) Right-Arc: s would have been in a register, and the Right-Arc
+would have violated R1  / (1 , 1 )  R2  / (1 , 1 ).
+
+(b) Store(right): s would be on the stack when the registers were
+cleared, so Clear would have violated 2 < R1  1  / (R1, R2).
+
+l ... s ... r ... b ...
+(c) Register-Stack(k, to-stack): If s was on the stack, then if s > R2, Register-Stack(k, t-stack) would have violated 2 < R2; if s < R2, then s  (R1, R2), and Clear would have violated 2 < R1  1  / (R1, R2). If s instead was in R2 (not shown), then it would get covered by (l, r) and reduced by Clear.
+
+s ... l
+
+r ... b ...
+
+(d) Register-Stack(k, to-register): s must have been in R2. s
+would get covered by (l, r) and reduced by Clear.
+
+Figure 4: If a stack-buffer arc (s, b) is added in the two-registers system, there cannot have been an earlier arc (l, r) with l < s < r < b, since it would then be impossible to keep s unreduced without violating the preconditions.
+
+the registers being cleared, and subsequent actions cannot introduce crossed arcs to the last token or to its left (by the 1 > last and 1 > last preconditions on storing and register-stack arcs, respectively). Thus, each set of tokens that were in registers simultaneously defines a crossing interval. Condition (a) of Definition 3 is satisfied, since all crossed arcs are incident to registers and at most two vertices are in registers at the same time. Assume that a vertex h, h  / {R1, R2}, has a child m on the far side of its parent g (i.e., either h < g < m or m < g < h). The edge (h, m) is guaranteed to be crossed and so was added through a register-stack arc (Lemma 1). The ordering h < g < m is not possible, since if (g, h) had been added through a left-arc, then h would have been reduced, and if (g, h) and (h, m) were both added through register-stack arcs, then one of them would have violated the (Rclose , 1 )  / A or the (1 , Rf ar )  / A precondition. Similar reasoning can rule out m < g < h. Thus Condition (b) of Definition 3 is also satisfied. 5.2 Completeness: 2-Crossing Interval trees  Two-Registers System
+
+Proof. The portions of a 2-Crossing Interval tree inbetween the crossing intervals can be constructed using the transitions from arc-eager. For a particular crossing interval [l, r] and a particular choice of two vertices a and b incident to all all crossed arcs in the interval (l  a < b  r), a and b divide the interval into: L = [l, a), a, M = (a, b), b, R = (b, r]. 667
+
+All arcs incident to neither a nor b must lie entirely within L, M , or R.4 The parser begins by adding all arcs with both endpoints in L, using the standard arc-eager Shift/Reduce/Left-Arc/Right-Arc. It then shifts until a is at the front of the buffer and stores a. It then repeats the same process to add the arcs lying entirely in M until b reaches the front of the buffer, adding the parent of a with a Register-Stack(1, to-register) transition if the parent is in M and the arc is uncrossed. b is then stored, adding the arc between a and b if necessary. Throughout this process, the precondition R1  / (1 , 1 )  R2  / (1 , 1 ) for left and right arcs is satisfied. Next, the parser will repeatedly take RegisterStack transitions, interspersed with Reduce transitions, to add all the arcs with one endpoint in {a, b} and the other in L or M , working right-to-left from b (i.e., from the top of the stack downwards). No shifts are done at this stage, so the 2 < R2 precondition on Register-Stack arcs is always satisfied. The 1 > last precondition is also always satisfied since all vertices in the crossing interval will be to the right of the previous crossing interval boundary point. After all these arcs are done, if there are any uncrossed arcs incident to a to the left that go outside of the crossing interval, they are added now with a Register-Stack transition.5
+4 E.g., if there were an arc not incident to a or b with one endpoint left of a and one endpoint right of a, then this arc must be crossed or lie outside of the crossing interval. 5 Only possible in the case l = a, in which case ¬I S C OVERED(a) and the transition is allowed.
+
+

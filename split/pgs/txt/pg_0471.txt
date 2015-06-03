@@ -1,0 +1,101 @@
+.5
+
+.50
+
+past
+
+.4
+
+Standardized Temporal Orientation
+
+younger men older men
+
+.25
+
+.3
+
+daily future orientation
+60
+
+0
+
+future
+
+.2
+
+.1
+
+-.25
+
+0
+
+present
+-.1
+
+-.50
+
+13
+
+20
+
+30
+
+User age
+
+40
+
+50
+
+-.2 -14
+
+-12
+
+days until birthday
+
+-10
+
+-8
+
+-6
+
+-4
+
+-2
+
+0
+
+2
+
+days after birthday
+
+4
+
+6
+
+8
+
+10
+
+12
+
+14
+
+Figure 2: Standardized temporal orientation of users over their age. Shaded area indicates ±1 standard error around loess smoothed estimates. oriented over two weeks before and after one's birthday. We controlled for individual differences and date effects (e.g. if more people happen to be born near a holiday) by standardizing users' future orientation over all their messages and standardizing daily future orientation scores over all messages from each day. Figure 3 shows the patterns for men < 23 and  23, suggesting that younger men look forward to their birthdays while older men do not (patterns were less pronounced for women).
+
+Figure 3: Daily proportion of future-oriented messages leading up to and following birthdays. Younger men: < 23, N = 423; Older men:  23, N = 402. messages might provide more nuanced profiles of user orientation. Another simplification was our binning of temporal relations into past, present, and future. One might want to instead use a continuous measure of temporal distance, indicating how far into the past or future a message is oriented, providing a more detailed profile of individual orientations. Among the future-oriented, for example, there may be important differences between those who plan for tomorrow versus those who plan years in advance. Assessing additional characteristics of messages, such as sentiment, may also allow further insight and more nuanced characterizations (e.g. "I will be fine" vs. "I will never be ok"). Whereas prior computational linguistics work with temporal relations has focused on classifying events, we focus on people and open many avenues for social scientific investigations that were previously not very feasible. For instance, temporal orientation was generally treated as a stable trait (with little change through the lifetime); For men, we found age differences in temporal orientation leading up to one's birthday. Learning how, why, and when people become more future-oriented may inform planning and risk assessment interventions, and lead to better understanding of health and economic prosperity.
+
+7
+
+Conclusions
+
+This is, to our knowledge, the first study to automatically assess individual temporal orientation through language, and it constitutes one of the largest (perhaps the largest) studies of temporal orientation. Our messagelevel past, present, and future classifier achieved an accuracy of 71.8%, well-above most frequent sense, pastsof-speech only, and time expression only baselines. The associations we found between user-level temporal orientation and conscientiousness, gender, and age validated our novel method against well-established correlates. We then explored novel links with other personality factors, satisfaction with life, depression, IQ, and number of friends. Our automatic labeling of temporal orientation yielded strong accuracy. There are, however, several ways in which our analysis might be improved or extended. We used a coding scheme that did not allow a "no temporal orientation" class. Separate handling of "non-temporal"
+
+8
+
+Acknowledgments
+
+We thank George Wan for his assistance running prototype classifiers. This work was supported by the Templeton Religion Trust under grant #TRT0048.
+
+417
+
+

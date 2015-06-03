@@ -1,0 +1,24 @@
+Paradigm classification in supervised learning of morphology
+Malin Ahlberg Spr° akbanken University of Gothenburg
+malin.ahlberg@gu.se
+
+Markus Forsberg Spr° akbanken University of Gothenburg
+markus.forsberg@gu.se
+
+Mans Hulden Department of Linguistics University of Colorado Boulder
+mans.hulden@colorado.edu
+
+Abstract
+Supervised morphological paradigm learning by identifying and aligning the longest common subsequence found in inflection tables has recently been proposed as a simple yet competitive way to induce morphological patterns. We combine this non-probabilistic strategy of inflection table generalization with a discriminative classifier to permit the reconstruction of complete inflection tables of unseen words. Our system learns morphological paradigms from labeled examples of inflection patterns (inflection tables) and then produces inflection tables from unseen lemmas or base forms. We evaluate the approach on datasets covering 11 different languages and show that this approach results in consistently higher accuracies vis-` a-vis other methods on the same task, thus indicating that the general method is a viable approach to quickly creating highaccuracy morphological resources.
+
+proposed as a method for supervised and semisupervised induction of morphological processing tools from labeled data (Ahlberg et al., 2014). Also, the argument that the LCS shared by different inflected forms of a word--even if discontinuous within a word--corresponds strongly to a crosslinguistic notion of a `stem' has later been advanced independently on grounds of descriptive economy and minimum description length (Lee and Goldsmith, 2014). We used this idea in (Ahlberg et al., 2014) to create a relatively simple-to-implement system that learns paradigms from example inflection tables and is then able to reconstruct inflection tables for unseen words by comparing suffixes of new base forms to base forms seen during training. The system performs well on available datasets and results in human-readable and editable output. The longest common subsequence strategy itself shows little bias toward any specific morphological process such as prefixation, suffixation, or infixation. Using the model, we argued, a selection of ready-inflected tables could be quickly provided by a linguist, allowing rapid development of morphological resources for languages for which few such resources exist. Potentially, however, the model's commitment to a simple suffix-based learner is a weakness. To assess this, we evaluate a similar LCS-based generalization system with a more refined discriminative classifier that takes advantage of substrings in the example data and performs careful feature selection. We show that much higher accuracies can be achieved by combining the LCS paradigm generalization strategy with such a feature-based classi-
+
+1
+
+Introduction
+
+Use of detailed and sophisticated morphological features has been found to be crucial for many downstream NLP tasks, including part-of-speech tagging and parsing (Tseng et al., 2005; Spoustov´ a et al., 2007). However, creating an accurate widecoverage morphological analyzer for a new language that can be used in tandem with other higherlevel analyses is an arduous task. Learning word inflection patterns by organizing related word-forms into morphological paradigms based on the longest common subsequence (LCS) found in an inflection table has recently been 1024
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1024­1029, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

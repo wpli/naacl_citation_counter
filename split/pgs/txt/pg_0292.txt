@@ -1,0 +1,23 @@
+Personalized Page Rank for Named Entity Disambiguation
+Maria Pershina Yifan He Ralph Grishman Computer Science Department New York University New York, NY 10003, USA {pershina,yhe,grishman}@cs.nyu.edu
+
+Abstract
+The task of Named Entity Disambiguation is to map entity mentions in the document to their correct entries in some knowledge base. We present a novel graph-based disambiguation approach based on Personalized PageRank (PPR) that combines local and global evidence for disambiguation and effectively filters out noise introduced by incorrect candidates. Experiments show that our method outperforms state-of-the-art approaches by achieving 91.7% in micro- and 89.9% in macroaccuracy on a dataset of 27.8K named entity mentions.
+
+1
+
+Introduction
+
+Name entity disambiguation (NED) is the task in which entity mentions in a document are mapped to real world entities. NED is both useful on its own, and serves as a valuable component in larger Knowledge Base Construction systems (Mayfield, 2014). Since the surge of large, publicly available knowledge bases (KB) such as Wikipedia, the most popular approach has been linking text mentions to KB nodes (Bunescu and Pas ¸ca, 2006). In this paradigm, the NED system links text mentions to the KB, and quite naturally utilizes information in the KB to support the linking process. Recent NED systems (Cucerzan, 2007; Ratinov et al., 2011; Alhelbawy and Gaizauskas, 2014) usually exploit two types of KB information: local information, which measures the similarity between the text mention and the a candidate KB node; and global information, which measures how well the candidate entities in a document are connected to each other, with the assumption that entities appearing in the same document should be coherent. Both types of features have their 238
+
+strengths and drawbacks: local features better encode similarity between a candidate and a KB node, but overlook the coherence between entities; global features are able to exploit interlinking information between entities, but can be noisy if they are used by their own, without considering information from the text and the KB (cf. Section 4). In this paper, we propose to disambiguate NEs using a Personalized PageRank (PPR)-based random walk algorithm. Given a document and a list of entity mentions within the document, we first construct a graph whose vertices are linking candidates and whose edges reflects links in Wikipedia. We run the PPR algorithm on this graph, with the constraint that we only allow the highest scored candidate for each entity to become the start point of a hop. As all candidates but the correct one are erronous and probably misleading, limiting the random walk to start from the most promising candidates effectively filters out potential noise in the Personalized PageRank process. Our method has the following properties: 1) as our system is based on a random walk algorithm, it does not require training model parameters ; 2) unlike previous PageRank based approaches in NED (Alhelbawy and Gaizauskas, 2014) which mainly rely on global coherence, our method is able to better utilize the local similarity between a candidate and a KB node (Section 3); and 3) we tailor the Personalized PageRank algorithm to only focus on one high-confidence entity at a time to reduce noise (Section 4).
+
+2
+
+Related Work
+
+Early attempts at the NED tasks use local and surface level information. Bunescu and Pas ¸ca
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 238­243, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

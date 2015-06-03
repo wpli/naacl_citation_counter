@@ -1,0 +1,47 @@
+where T (G) is the set of triads in the graph G. The first term of Equation 3 represents a normalizing constant. The second term includes weights  , which apply to network features f (yij , i, j, G). This can include features like the number of mutual friends between nodes i and j , or any number of more elaborate structural features (Liben-Nowell and Kleinberg, 2007). For example, the feature weights  could ensure that the edge label Yij = + is especially likely when nodes i and j have many mutual friends in G. However, these features cannot consider any edge labels besides yij . In the third line of Equation 3, each weight yij ,yjk ,yik corresponds to a signed triad type, invariant to rotation. In a binary signed network, structural balance theory would suggest positive weights for +++ (all friends) and +-- (two friends and a mutual enemy), and negative weights for ++- (two enemies and a mutual friend) and --- (all enemies). In contrast, a status-based network theory would penalize non-transitive triads such as >>< . Thus, in an unsupervised model, we can examine the weights to learn about the semantics of the induced edge types, and to see which theory best describes the signed network configurations that follow from the linguistic signal. This is a natural next step from prior work that computes the frequency of triads in explicitly-labeled signed social networks (Leskovec et al., 2010b).
+
+The expected log-prior EQ [log P (y )] is computed from the prior distribution defined in Equation 3, and therefore involves triads of edge labels,
+EQ [log P (y ;  ,  )] = - log Z ( ,  ; G) +
+i,j G y
+
+qij (y ) f (y , i, j, G) qij (y )qjk (y )qik (y )y,y ,y .
+i,j,k T (G) y,y ,y
+
++
+
+We can reach a local maximum of the variational bound by applying expectationmaximization (Dempster et al., 1977), iterating between updates to Q(y ), and updates to the parameters  ,  ,  . This procedure is summarized in Table 1, and described in more detail below. 3.1 E-step In the E-step, we sequentially update each qij , taking the derivative of Equation 4:  LQ = log P (xij | Yij = y ;   ) qij (y ) + log P (xij | Yij = y ;   ) + EQ(y-(ij ) ) [log P (y | Yij = y ;  ,  )] - log qij (y ) - 1. (5) After adding a Lagrange multiplier to ensure that y qij (y ) = 1, we obtain a closed-form solution for each qij (y ). These iterative updates to qij can be viewed as a form of mean field inference (Wainwright and Jordan, 2008). 3.2 M-step In the general case, the maximum expected likelihood solution for the content parameter  is given by the expected counts,  y 
+i,j G
+
+3
+
+Inference and estimation
+
+Our goal is to estimate the parameters ,  , and  , given observations of network structures G(t) and linguistic content x(t) , for t  {1, . . . , T }. Eliding the sum over instances t, we seek to maximize the variational lower bound on the expected likelihood, LQ =EQ [log P (y , x;  ,  , G)] - EQ [log Q(y )] =EQ [log P (x | y ;  )] + EQ [log P (y ; G,  ,  )] - EQ [log Q(y )]. The first and third terms factor across edges,
+EQ [log P (x | y ;  )] =
+i,j G y Y
+
+(4)
+
+qij (y )xij qij (y )xij .
+i,j G
+
+(6) (7)
+
+qij (y
+
+)xij log   y
+
+ y
+
+
+
++qij (y )xij log   y EQ [log Q(y )] =
+i,j G y Y
+
+qij (y ) log q (y ).
+
+As noted above, we are often interested in special cases that require parameter tying, such as   y =  ,  y . This can be handled by simply computing y expected counts across the tied parameters.
+
+1618
+
+

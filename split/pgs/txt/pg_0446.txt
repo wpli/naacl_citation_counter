@@ -1,0 +1,20 @@
+Figure 4: Workflow of the Data-Driven Generator.
+[ NN(deep), DT]
+
+For each deep, i.e., DSyntS, PoS tag (which can be one of the following four: N (noun), V (verb), Adv (adverb), A (adjective)), a separate multi-class classifier is defined.10 For instance, in the case of N, the N-classifier will use the above features to assign to the a DSynt-node with PoS N the most appropriate (most likely) hypernode--in this case, [NN(deep), DT]. 3.2.2 Lemma Generation
+
+3.2.3 Intra-hypernode Dependency Generation Given a hypernode and its lemmas provided by the two previous stages, the dependencies (i.e., the dependency attachments and dependency labels) between the elements of the created SSyntS hypernodes must be determined (and thus also the governors of the hypernodes). For this task, the intrahypernode dependency generation SVMs use the following features:
+lemmas included in the hypernode, PoS-tags of the lemmas in the hypernode, voice of the head h of the hypernode, deep dependency relation to h.
+
+Once the hypernodes of the SSyntS under construction have been produced, the functional nodes that have been newly introduced in the hypernodes must be assigned a lemma label. The lemma generation SVMs use the following features of the deep nodes nd in the hypernodes to select the most likely lemma:
+verbal finiteness (finite, infinitive, gerund, participle) and aspect (perfective, progressive), degree of definiteness of nouns, PoS of nd , lemma of nd , PoS of the head of nd
+
+Again, for each surface PoS tag, a separate classifier is defined. Thus, the DT-classifier would pick for the hypernode [NN(deep), DT] the most likely lemma for the DT-node (optimally, a determiner).
+10 As will be seen in the discussion of the results, the strategy proposed by Ballesteros et al. (2014b) to define a separate classifier for each linguistic category here and in the other stages largely pays off because it reduces the classification search space enormously and thus leads to a higher accuracy.
+
+For each kind of hypernode, dynamically a separate classifier is generated.11 In the case of the hypernode [NN(deep), DT], the corresponding classifier will create a link between the determiner and the noun, with the noun as head and the determiner as dependent because it is the best link that it can find; cf. Figure 5 for illustration. We ensure that the output of the classifiers is a tree by controlling that every node (except the root) has one and only one governor. The DSynt input is a tree; in the case of hypernodes of cardinality one, the governor/dependent relation is maintained; in the case of hypernodes of higher cardinality, only one node receives an incoming arc and only one can govern another hypernode. 3.2.4 Inter-hypernode Dependency Generation Once the individual hypernodes have been converted into connected dependency subtrees, the hyThis implies that the number of classifiers varies depending on the training set. For instance, during the intra-hypernode dependency creation for Spanish, 108 SVMs are generated.
+11
+
+392
+
+

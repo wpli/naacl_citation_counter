@@ -1,0 +1,31 @@
+Algorithm 1 Joint training of st , sp , pt Parameters: ,  > 0
+(0) (0) · Initialize (0) st , sp , pt
+
+· Initialize {Cs }, {Cp }, {Ct } as in Eq. 6 · For each EM iteration i: Estimate hyperparameters : (i-1) i) i-1) 1. Compute t( from t( sp and tpt (Eq. 1) st
+i-1) E: collect expected counts E [c(·)](i) from ( st i) (i) 2. Set ( st := C s · tst (t | s) + 1
+
+why, consider that tst (t | s) is non-zero whenever there is a pivot word p that co-occurs with both s and t. This is very likely to occur, for example, if p is a function word. To adjust for both density and noise, we propose a simple product-of-experts re-estimation that relies on the available source-target parallel data. The two experts are the triangulated t-table as defined by Eq. 1 and the exponentiated pointwise mutual information (PMI), derived from simple token co-occurrence statistics of the source-target bitext. That is, we adjust: tst (t | s) := tst (t | s) · p( s, t) p( s) p(t)
+
+i) (i) (i) M: Update ( st using E [c(·)] and st (Eq. 3)
+
+Repeat for
+
+(i) i) ( sp , pt
+
+using Eq. 7 as required
+
+the models in a MAP-EM like manner, updating both the model parameters and their prior hyperparameters at each iteration. Roughly, this approach aims at maximizing the posterior likelihood of the three models with respect to both model parameters and their hyperparameters (see Appendix). Procedurally, the idea is simple: In the E-step, expected counts E [c(·)] are collected from each model as usual. In the M-step, each t-table is updated according to Eq. 3 using the current expected counts E [c(·)] and an estimate of  from the triangulation of the most recent version of the other two models. See Algorithm 1. Note, however, that we cannot obtain the triangulated t-tables tsp , tpt by simply applying the triangulation equation (Eq. 1). For example, to construct tsp we need both source-to-target and target-to-pivot distributions. While we have the former in tst , we do not have ttp . To resolve this issue, we simply approximate ttp from the reverse t-table tpt  pt as follows: ttp ( p | t) := c( p)tpt (t | p) p c( p)tpt (t | p) (7)
+
+and normalize the result to form valid conditional distributions. Note that the sparsity pattern of the adjusted ttable matches that of a co-occurrence t-table. We applied this adjustment in all of our experiments.
+
+4
+
+Experimental Results
+
+Pretending that Czech-English is a low-resource pair, we conduct two experiments. In the first, we set French as the pivot language and compare our fixedprior (Sec. §3.1) and joint training (Sec. §3.2) approaches against the interpolation method of Wang et al. and a baseline HMM word alignment model (Vogel et al., 1996). In the second, we examine the effect of the pivot language identity on our joint training approach, varying the pivot language over French, German, Greek, Hungarian, Lithuanian and Slovak. 4.1 Data
+
+where c( p) denotes the unigram frequency of the word p. A similar transformation is done on tsp to obtain tps , which is then used in computing tpt . 3.3 Adjustment of the t-table Note that a t-table resulting from the triangulation equation (Eq. 1) is both noisy and dense. To see 1223
+
+For word alignment, we use the Czech-English News Commentary corpus, along with a development set of 460 hand aligned sentence pairs. For the MT experiments, we use the WMT10 tuning set (2051 parallel sentences), and both WMT09/10 shared task test sets. See Table 1. For each of the 6 pivot languages, we created Czech-pivot and pivot-English bitexts of roughly the same size (ranging from 196k sentences for EnglishGreek to 223k sentences for Czech-Lithuanian). Each bitext was created by forming a Czech-pivotEnglish tritext, consisting of about 500k sentences
+
+

@@ -1,0 +1,70 @@
+Arc-Eager · Initial configuration: ({0}, {1, . . . , n}, {}) · Terminal configurations (, {}, A) Transition Left-Arc Right-Arc Shift Reduce Store(arc)  m..2 m..1 |1 m..1 |1 m..2 m..1
+Where:
+
+Two-Registers · Initial configuration: ({}, {0, . . . , n}, null, null, {}) · Terminal configurations: (, {}, null, null, A) R1 R1 R1 R1 R1 R1 R2 R2 R2 R2 R2 R2 A A  {(1 , 1 )} A  {(1 , 1 )} A A A  B
+
+ 1..n 2..n 2..n 1..n 2..n
+
+Arc-Eager
+
++ Two-Registers
+
+Clear
+
+m..2 |
+Where:
+
+arc  {left, right, no-arc} B := {(1 , R1)} if arc=left, {(R1, 1 )} if arc=right, and  otherwise. R1 := (R1 = null) ? 1 : R1; R2 := (R1 = null) ? R2 : 1 .
+
+ |1..n
+
+null
+
+null
+
+A
+
+Register-Stack(k, dir)
+
+m..2 |
+Where:
+
+ := (1 = 1 - 1) ? 1 : (R2 = 1 - 1) ? R2 : null  := {1 }  N otCovered(R1)  N otCovered(R2) - { } in left-to-right order, where NotCovered(x) := x if no edges in A cover x and  otherwise.
+
+1..n
+
+R1
+
+R2
+
+A  B
+
+k  {1, 2} and dir  {to-register, to-stack} B := (dir = to-register) ? {(1 , Rk)} : {(Rk, 1 )}  := (dir = to-stack  1 < Rk) ? null : 1
+
+Table 2: Transitions and the resulting state after each is applied to the configuration (m..2 |1 , 1 |2..n , R1, R2, A).
+
+Transition ... Store(no-arc) Store(right) Register-Stack(2, to-stack) Register-Stack(1, to-stack) Register-Stack(1, to-stack) Register-Stack(1, to-register) Clear
+
+ [that we Hans house] [that we Hans house] [that we Hans house] [that we Hans] [that we] [that] [that] [that]
+
+ [helped paint] [paint] [] [] [] [] [] [paint]
+
+R1 null helped helped helped helped helped helped null
+
+R2 null null paint paint paint paint paint null
+
+A {(house, the)}  {(helped, paint)}  {(paint, house)}  {(helped, Hans)}  {(helped, we)}  {(that, helped)}
+
+Table 3: An excerpt from a gold standard derivation of the sentence in Figure 3. The two words paint and house are added to the registers and then crossed arcs are added between them and the top of the stack.
+
+Transition Left-Arc, Right-Arc Store(·) Clear Register-Stack(k, ·) Register-Stack(k, to-register) Register-Stack(k, to-stack)
+
+Precondition R1  / (1 , 1 )  R2  / (1 , 1 ) (R1 = null  R2 = null)  (1 > last) (R1 = null)  (R2 = null  1 = null)  (2 < R1)  (1  / (R1, R2)) (1 > last)  (k = 1  ¬IsCovered(R1)) 2 < Rright (Rclose , 1 )  /A (1 , Rf ar )  /A
+
+Type (2) (1) (1) (1) (2) (3) (3)
+
+Table 4: Preconditions that ensure the 2-Crossing Interval property for trees output by the two-registers transition system, applied to a configuration (m..1 , 1..n , R1, R2, A). If 1 < R1, Rclose := R1 and Rf ar := R2; otherwise, Rclose := R2 and Rf ar := R1. Rright := (R2 = null) ? R1 : R2. Preconditions of type (1) ensure each pair of registers defines a disjoint crossing interval; type (2) that only edges incident to registers are crossed; and type (3) that only registers can have children on the far side of their parent.
+
+665
+
+

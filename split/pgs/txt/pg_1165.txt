@@ -1,0 +1,19 @@
+covers all areas of academic knowledge, we focus on questions about literature from Boyd-Graber et al. (2012), as annotation standards are more straightforward. Our webapp (Figure 3) allows users to annotate a question by highlighting a phrase using their mouse and then pressing a number corresponding to the coreference group to which it belongs. Each group is highlighted with a single color in the interface. The webapp displays a single question at a time, and for some questions, users can compare their answers against gold annotations by the authors. We provide annotators the ability to see if their tags match the gold labels for a few documents as we need to provide a mechanism to help them learn the annotation guidelines as the annotators are crowdsourced volunteers. This improves inter-annotator agreement. The webapp was advertised to quiz bowl players before a national tournament and attracted passionate, competent annotators preparing for the tournament. A leaderboard was implemented to encourage competitiveness, and prizes were given to the top five annotators. Users are instructed to annotate all authors, characters, works, and the answer to the question (even if the answer is not one of the previously specified types of entities). We consider a coreference to be the maximal span that can be replaced by a pronoun.5 As an example, in the phrase this folk sermon by James Weldon Johnson, the entire phrase is marked, not just sermon or this folk sermon. Users are asked to consider appositives as separate coreferences to the same entity. Thus, The Japanese poet Basho has two phrases to be marked, The Japanese poet and Basho, which both refer to the same group.6 Users annotated prepositional phrases attached to a noun to capture entire noun phrases. Titular mentions are mentions that refer to entities with similar names or the same name as
+5 We phrased the instruction in this way to allow our educated but linguistically unsavvy annotators to approximate a noun phrase. 6 The datasets, full annotation guide, and code can be found at http://www.cs.umd.edu/~aguha/ qbcoreference.
+
+Number of . . . documents7 sentences tokens mentions singletons8 anaphora nested ment.
+
+Quiz bowl 400 1,890 50,347 9,471 2,461 7,010 2,194
+
+OntoNotes 1,667 44,687 955,317 94,155 0 94,155 11,454
+
+Table 2: Statistics of both our quiz bowl dataset and the OntoNotes training data from the CoNLL 2011 shared task.
+
+a title, e.g., "The titular doctor" refers to the person "Dr. Zhivago" while talking about the book with the same name. For our purposes, all titular mentions refer to the same coreference group. We also encountered a few mentions that refer to multiple groups; for example, in the sentence Romeo met Juliet at a fancy ball, and they get married the next day, the word they refers to both Romeo and Juliet. Currently, our webapp cannot handle such mentions. To illustrate how popular the webapp proved to be among the quiz bowl community, we had 615 documents tagged by seventy-six users within a month. The top five annotators, who between them tagged 342 documents out of 651, have an agreement rate of 87% with a set of twenty author-annotated questions used to measure tagging accuracy. We only consider documents that have either been tagged by four or more users with a predetermined degree of similarity and verified by one or more author (150 documents), or documents tagged by the authors in committee (250 documents). Thus, our gold dataset has 400 documents. Both our quiz bowl dataset and the OntoNotes dataset are summarized in Table 2. If coreference resolution is done by pairwise classification, our dataset has a total of 116,125 possible mention pairs. On average it takes about fifteen minutes to tag a document because often the annotator will not know which mentions co-refer
+7 8
+
+This number is for the OntoNotes training split only. OntoNotes is not annotated for singletons.
+
+1111
+
+

@@ -1,0 +1,35 @@
+prior approach here since it will serve as a baseline. Here semantic lexicons play the role of a prior on Q which we define as follows:   p(Q)  exp -
+n
+
+Lexicon PPDB WordNetsyn WordNetall FrameNet
+
+Words 102,902 148,730 148,730 10,822
+
+Edges 374,555 304,856 934,705 417,456
+
+ij qi - qj
+i=1 j :(i,j )E
+
+2
+
+(2) Here,  is a hyperparameter that controls the strength of the prior. As in the retrofitting objective, this prior on the word vector parameters forces words connected in the lexicon to have close vec^ tor representations as did (Q) (with the role of Q being played by cross entropy of the empirical distribution). This prior can be incorporated during learning through maximum a posteriori (MAP) estimation. Since there is no closed form solution of the estimate, we consider two iterative procedures. In the first, we use the sum of gradients of the log-likelihood (given by the extant vector learning model) and the log-prior (from Eq. 2), with respect to Q for learning. Since computing the gradient of Eq. 2 has linear runtime in the vocabulary size n, we use lazy updates (Carpenter, 2008) for every k words during training. We call this the lazy method of MAP. The second technique applies stochastic gradient ascent to the log-likelihood, and after every k words applies the update in Eq. 1. We call this the periodic method. We later experimentally compare these methods against retrofitting (§6.2).
+
+Table 1: Approximate size of the graphs obtained from different lexicons.
+
+and are of length 300.1 Skip-Gram Vectors (SG). The word2vec tool (Mikolov et al., 2013a) is fast and currently in wide use. In this model, each word's Huffman code is used as an input to a log-linear classifier with a continuous projection layer and words within a given context window are predicted. The available vectors are trained on 100 billion words of Google news dataset and are of length 300.2 Global Context Vectors (GC). These vectors are learned using a recursive neural network that incorporates both local and global (document-level) context features (Huang et al., 2012). These vectors were trained on the first 1 billion words of English Wikipedia and are of length 50.3 Multilingual Vectors (Multi). Faruqui and Dyer (2014) learned vectors by first performing SVD on text in different languages, then applying canonical correlation analysis (CCA) on pairs of vectors for words that align in parallel corpora. The monolingual vectors were trained on WMT-2011 news corpus for English, French, German and Spanish. We use the Enligsh word vectors projected in the common English­German space. The monolingual English WMT corpus had 360 million words and the trained vectors are of length 512.4
+
+3
+
+Word Vector Representations
+
+We now describe the various publicly available pretrained English word vectors on which we will test the applicability of the retrofitting model. These vectors have been chosen to have a balanced mix between large and small amounts of unlabeled text as well as between neural and spectral methods of training word vectors. Glove Vectors. Global vectors for word representations (Pennington et al., 2014) are trained on aggregated global word-word co-occurrence statistics from a corpus, and the resulting representations show interesting linear substructures of the word vector space. These vectors were trained on 6 billion words from Wikipedia and English Gigaword 1608
+
+4
+
+Semantic Lexicons
+
+We use three different semantic lexicons to evaluate their utility in improving the word vectors. We include both manually and automatically created lexicons. Table 1 shows the size of the graphs obtained
+http://www-nlp.stanford.edu/projects/ glove/ 2 https://code.google.com/p/word2vec 3 http://nlp.stanford.edu/~socherr/ ACL2012_wordVectorsTextFile.zip 4 http://cs.cmu.edu/~mfaruqui/soft.html
+1
+
+

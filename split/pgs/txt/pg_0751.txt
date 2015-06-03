@@ -1,0 +1,32 @@
+Experiment A: Features, Confidence SentiWS SentiWS+Regression SentiWS+Regression, @50% SentiWS+Regression+POS SentiWS+Regression+POS, @50% Experiment B: Classifier (@50%) Linear SVM Random Forest Gradient Boosting
+
+Prec 0.882 0.894 0.935 0.912 0.978 Prec 0.975 0.984 0.978
+
+Recl 0.959 0.967 0.985 0.960 0.997 Recl 0.980 0.992 0.997
+
+Table 1: Filtering out objective phrases
+
+System Node Acc. HeiST, only pos+neg sentences supervised RNTN (tuned) 0.776 SVM (unigrams, coarse) 0.850 SVM (unigrams, fine) 0.835 cross-lingual CLSA (simple feat.) 0.823 CLSA (complex feat.) 0.810 Comparison: HeiST, all sentences supervised RNTN (tuned) 0.803
+
+Root Acc.
+
+0.687 0.774 0.735 0.737 0.738 0.703
+
+The HeiST treebank, as well as the code used in these experiments, are available for research purposes.1 3.1 Selecting Subjective Phrases One possible approach to reduce annotation effort would be to annotate only those phrases that a classification model deems to have sentiment content in the first place. As a more extreme example of such an approach, consider the MLSA sentiment dataset for German, where 270 sentences were selected that already contained two words from an existing sentiment lexicon (Clematide et al., 2012), with the goal of getting sentences with interesting interactions between sentiment words. Given the potential benefits (getting more data for the same annotation effort), an approach that filters out non-interesting (confidently objective) phrases would be highly appealing. For the pre-classification experiment, we used cross-validation on 20 to assess the potential impact of strategies for saving. For the corresponding classifier, we used features from a German generaldomain sentiment lexicon, a regression model for document-level sentiment (see section 5.2), as well as part-of-speech tag features in a gradient boosting classifier. As seen in table 1, the sentiment lexicon, especially in conjunction with the regression model and a POS-based filter, would allow to detect uninteresting (objective) phrases with high accuracy. We limit ourselves to the 50% of most confident classifications, and as a measure of caution, the filter is bypassed for any phrase that contains a word in one of several sentiment dictionaries (see section 5). The classifier has a precision of 96.5% for objective
+1 http://www.cl.uni-heidelberg.de/ versley/HeiST/ ~
+
+*/**: significantly better than RNTN (p < 0.05 / p < 0.005)
+
+Table 2: HeiST baseline, cross-lingual projection, SVM.
+System Node Acc. Root Acc. Comparison: SSTb sample, pos+neg sentences lexicon-based General Inquirer 0.824 0.715 SubjectivityClues 0.820 0.695 supervised RNTN, 500 sent. 0.704 0.526 RNTN, 1000 sent. 0.738 0.539 RNTN, 1500 sent. 0.756 0.569 SVM, 500 sent. 0.803 0.652 SVM, 1000 sent. 0.814 0.675 SVM, 1500 sent. 0.823 0.683 RNTN, 6920 sent.a 0.876 0.854 SVM, 6920 sent.a 0.846 0.794
+a
+
+: published figures from Socher et al. (2013)
+
+Table 3: Comparison figures on subsets of the Stanford Sentiment Treebank
+
+phrases while catching about 66.7% of all objective nodes. While this would correspond to substantial savings (about a quarter of all nodes would be assigned the "neutral" label and not annotated), we would also lose a fraction of non-neutral phrase and introduce an unwanted bias (towards lexicon-based resources) into our dataset. 3.2 Baseline results We use the existing RNTN implementation of Socher et al. (2013) to train and test supervised learning for sentiment composition, using crossvalidation. For parameter tuning, we varied the number of vector dimensions as well as the size of the minibatches used in training, and found that the resulting classifier yields very sensible results compared to a similarly-sized sample from SSTb (see
+
+697
+
+

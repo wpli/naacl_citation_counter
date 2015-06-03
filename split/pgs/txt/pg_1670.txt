@@ -1,0 +1,20 @@
+"You're Mr. Lebowski, I'm the Dude": Inducing Address Term Formality in Signed Social Networks
+Vinodh Krishnan College of Computing Georgia Institute of Technology Atlanta, GA 30308 krishnan.vinodh@gmail.com Jacob Eisenstein School of Interactive Computing Georgia Institute of Technology Atlanta, GA 30308 jacobe@gatech.edu
+
+Abstract
+We present an unsupervised model for inducing signed social networks from the content exchanged across network edges. Inference in this model solves three problems simultaneously: (1) identifying the sign of each edge; (2) characterizing the distribution over content for each edge type; (3) estimating weights for triadic features that map to theoretical models such as structural balance. We apply this model to the problem of inducing the social function of address terms, such as Madame, comrade, and dude. On a dataset of movie scripts, our system obtains a coherent clustering of address terms, while at the same time making intuitively plausible judgments of the formality of social relations in each film. As an additional contribution, we provide a bootstrapping technique for identifying and tagging address terms in dialogue.1
+
+but -- with a few notable exceptions -- computation has had little to contribute to our understanding of language's social dimension. Yet there is a rich theoretical literature on social structures and dynamics. In this paper, we focus on one such structure: signed social networks, in which edges between individuals are annotated with information about the nature of the relationship. For example, the individuals in a dyad may be friends or foes; they may be on formal or informal terms; or they may be in an asymmetric power relationship. Several theories characterize signed social networks: in structural balance theory, edge signs indicate friendship and enmity, with some triads of signed edges being stable, and others being unstable (Cartwright and Harary, 1956); conversely, in status theory (Leskovec et al., 2010b), edges indicate status differentials, and triads should obey transitivity. But these theoretical models can only be applied when the sign of each social network connection is known, and they do not answer the sociolinguistic question of how the sign of a social tie relates to the language that is exchanged across it. We present a unified statistical model that incorporates both network structure and linguistic content. The model connects signed social networks with address terms (Brown and Ford, 1961), which include names, titles, and "placeholder names," such as dude. The choice of address terms is an indicator of the level of formality between the two parties: for example, in contemporary North American English, a formal relationship is signaled by the use of titles such as Ms and Mr, while an informal relationship is signaled by the use of first names and
+
+1
+
+Introduction
+
+One of the core communicative functions of language is to modulate and reproduce social dynamics, such as friendship, familiarity, formality, and power (Hymes, 1972). However, large-scale empirical work on understanding this communicative function has been stymied by a lack of labeled data: it is not clear what to annotate, let alone whether and how such annotations can be produced reliably. Computational linguistics has made great progress in modeling language's informational dimension,
+Code and data for this paper is available at https:// github.com/vinodhkris/signed-social.
+1
+
+1616
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1616­1626, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

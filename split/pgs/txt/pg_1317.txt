@@ -1,0 +1,31 @@
+cluster centers, within and across clusters at the same time. Experimental results on the DUC2004 demonstrate that our method outperforms the best method in DUC04 and yields close results compared to the state-of-the-art unsupervised MDS methods. The major contributions of this work are twofold: Firstly, a unified sentence scoring model is proposed to consider representativeness, diversity and conciseness at the same time. Secondly, the density peaks clustering algorithm is first applied in the MDS task. We further revise the clustering algorithm to address the summary length constraint.
+
+time.
+
+3
+
+Method
+
+In this work, the density peaks sentence clustering (DPSC) method is designed for multi-document summarization. 3.1 Density Peaks Sentence Clustering The density peaks clustering (DPC) algorithm is achieved upon the object similarity matrix. Objects are finally assigned density values and minidistance values. In this work, we consider sentences as objects and follow the framework to calculate representativeness score and diversity score of each sentence in a unified model. To construct the sentence similarity matrix for the DPC algorithm, we first segment documents into sentences and remove the non-stop words in the sentences. We then represent the sentences using bag-of-words vector space model, thus the cosine equation is applicable to calculate sentence similarity. The terms can be weighted with different schemes such as boolean (occurring or not), tf (term frequency) and tf  isf (term frequency inverse sentence frequency). We finally choose the boolean scheme in our experiments because it performs best in our empirical study. 3.2 Representativeness Scoring For document summarization, we need a representative score to quantify the degree how much a sentence is important in the documents. Enlightened by the DPC algorithm, we assume that when a sentence has more similar sentences (i.e., higher density), it will be considered more important or more representative. Thus we define the following function to calculate the representativeness score sREP (i) for each sentence si : sREP (i) = 1 K
+K
+
+2
+
+Related Work
+
+A vast number of methods are reported in literatures on MDS. The MDS methods can be generally categorized into abstractive and extractive. The extractive MDS can be also categorised into supervised and unsupervised. Several supervised learning methods have been developed for training accurate model for extract-based summarization. The unsupervised methods, on the other hand, also contribute a lot to MDS. In this work, we put our contributions in context of the sentence ranking-based extractive MDS under the unsupervised framework. Several clustering-based MDS methods have also been proposed. For example, ClusterHITS is proposed to incorporate the cluster-level information into the process of sentence ranking(Wan and Yang, 2008). RankClus is proposed to update sentence ranking and clustering interactively and iteratively with frequency relationships between two sentences, or sentences and terms (Cai et al., 2010). Some kinds of matrix factorization methods are also explored in MDS methods(Gong and Liu, 2001; Lee et al., 2009; Wang et al., 2008; Wang et al., 2011; Shen et al., 2011). For example, matrix factorization methods is adopted to generate sentence clusters, in which non-negative factorization is performed on the term-document matrix using the term-sentence matrix as the base so that the document-topic and sentence-topic matrices could be constructed(Wang et al., 2008). We follow the idea of clustering-based sentence ranking. Different from the previous work, we attempt to design a unified sentence scoring model to rank sentences and reduce redundancy at the same 1263
+
+(simij -  ),
+j =1,j =i
+
+(1)
+
+(x) =
+
+1 if x > 0 0 otherwise
+
+(2)
+
+where simij denotes the similarity value between the i-th and j -th sentence, and K denotes the number of sentences in the datasets.  denotes a prede-
+
+

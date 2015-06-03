@@ -1,0 +1,68 @@
+Bayes classifier where each annotation is a fully trusted label. 3.3 A Generative-Discriminative Pair M OM R ESP and L OG R ESP are a generativediscriminative pair, meaning that they belong to the same parametric model family but with parameters fit to optimize joint likelihood and conditional likelihood, respectively. This relationship is seen via the equivalence of the conditional probability of L OG R ESP pL (y, a|x) and the same expression according to M OM R ESP pM (y, a|x). For simplicity in this derivation we omit priors and consider  ,  , and  to be known values. Then pM (y, a|x) = p(y) p(x|y) p(a|y) y a p(y ) p(x|y ) p(a |y ) p(y) p(x|y) · p(a|y) = y p(y ) p(x|y ) = exp[ewy x+z ]
+T T
+
+expect that we would achieve the same results if our comparison used variational BP algorithms for both M OM R ESP and L OG R ESP, although such an additional comparison is beyond the scope of this work. Broadly speaking, variational approaches to posterior inference transform inference into an optimization problem by searching within some family of tractable approximate distributions Q for the distribution q  Q that minimizes distributional divergence from an intractable target posterior p . In particular, under the mean-field assumption we confine our search to distributions Q that are fully factorized. 4.1 L OG R ESP Inference We approximate L OG R ESP's posterior p ( ,  , y|x, a) using the fully factorized approximation q( ,  , y) =  j k q( jk ) k q(k ) i q(yi ). Approximate marginal posteriors q are disambiguated by their arguments. Algorithm. Initialize each q(yi ) to the empirical distribution observed in the annotations ai . The Kullback-Leibler divergence KL(q|| p ) is minimized by iteratively updating each variational distribution in the model as follows: q( jk ) 
+k K
+
+(4) (5) (6) (7)
+
+k exp[ewk x+z ] = pL (y, a|x)
+
+· p(a|y)
+
+Equation 4 follows from Bayes Rule and conditional independence in the model. In Equation 5 p(a |y) sums to 1. The first term of Equation 6 is the posterior p(y|x) of a na¨ ive Bayes classifier, known to have the same form as a logistic regression classifier where parameters w and z are constructed from  and  .2
+
+  jkk
+
+b jkk +iN ai jk q(yi =k)-1
+
+( )
+
+= Dirichlet ( jk )
+
+( )
+
+T -1 T q(k )  exp k  k +  q(yi = k)k xi iN
+
+4
+
+Mean-field Variational Inference (MF)
+
+q(yi ) 
+
+kK
+
+ exp   ai jk Eq(
+jJ k K
+k
+
+jk )
+
+[log  jkk ]+
+
+In this section we present novel mean-field (MF) variational algorithms for L OG R ESP and M OM R ESP. Note that Liu et al. (2012) present (in an appendix) variational inference for L OG R ESP based on belief propagation (BP). They do not test their algorithm for L OG R ESP; however, their comparison of MF and BP variational inference for the I TEM R ESP model indicates that the two flavors of variational inference perform very similarly. Our MF algorithm for L OG R ESP has not been designed with the idea of outperforming its BP analogue, but rather with the goal of ensuring that the generative and discriminative model use the same inference algorithm. We
+gives a proof of this property in the continuous case and hints about the discrete case proof.
+2 http://cs.cmu.edu/ tom/mlbook/NBayesLogReg.pdf ~
+
+f F
+
+ xi f Eq( ) [k f ]
+(y)1(yi =k)
+
+1(yi =k)
+(y)
+
+
+
+kK
+
+ ik
+
+= Categorical (i )
+
+Approximate distributions are updated by calculating variational parameters  (·) , disambiguated by a superscript. Because q( jk ) is a Dirichlet distribution the term Eq( jk ) [log  jkk ] appearing in q(yi ) is computed analytically as  ( jkk ) -  (k  jkk ) where  is the digamma function. The distribution q(k ) is a logistic normal distribution. This means that the expectations Eq(k ) [k f ] that appear in q(yi ) cannot be computed analytically. Following Liu et al. (2012), we approximate the distribution q(k ) with the point estimate
+( ) ( )
+
+885
+
+

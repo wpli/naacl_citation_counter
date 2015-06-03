@@ -1,0 +1,31 @@
+Call: Predict: Scan: Publish: Suspend: Resume:
+
+S  [S ]S S  0,0 0,0  0,1 0,2  ret [0,1 ]ret  0,2 [0,0 ]0,2  0,1 [0,2 ] 0,1 [0,2 ]  [0,1 ]1,0
+a
+
+0,0  [0,0 ]A A  0,0 1,1  1,2 1,2  ret [1,0 ]ret  1,1 [0,0 ]0,1  0,1 [0,1 ] 0,1 [0,1 ]  [0,1 ]1,0
+a
+
+0,1  [0,1 ]A A  0,0 0,0  0,1 1,1  ret [0,1 ]0,2  0,2 [0,2 ] 1,0 [0,2 ]  [1,0 ]1,0
+a
+
+1,0  1,1 [0,1 ]0,1  0,2 [0,1 ] 1,0 [0,1 ]  [1,0 ]1,0
+
+b
+
+Figure 2: TA transitions for the LCFRS from figure 1
+
+is an argument of the j th RHS non-terminal); and  is a finite set of transitions. Every transition has a the form    with a  T  {} and they roughly indicate that in the thread store,  can be replaced with  while scanning a. Square brackets in  and  indicate parts that do not belong to the active thread. This will be made more precise below.  contains the following transitions (see figure 2): · Call transitions start a new thread, either for the start symbol or for a daughter non-terminal. They move down in the parse tree. S  [S ]S (initial call), k,i  [k,i ]A if A = rhs (, j - 1) and lhs (, k, i) = rhs (, j - 1, 0) where j =  (k,i ). · Predict transitions predict a new rule for a nonterminal A: A  0,0 if A = lhs ( ). · Scan reads a LHS terminal while scanning the next input symbol: k,i  k,i+1 if lhs (, k, i)  T . · Publish marks the completion of a production, i.e., its full recognition: k,j  ret if dim (lhs ( )) = k + 1 and j = |lhs (, k )|. · Suspend suspends a daughter thread and resumes the parent. i.e., moves up in the parse tree. There are two cases: (i) The daughter is completely recognized: [k,i ]ret  k,i+1 if lhs (, k, i) = rhs (,  (k,i ) - 1, dim (rhs ( (k,i ) - 1)) - 1). (ii) The daughter is not yet completely recognized, we have only finished one of its components: [k,i ]l,j  k,i+1 [l,j ] if dim (lhs ( )) > l + 1, |lhs (, l)| = j , lhs (, k, i) = rhs (,  (k,i ) - 1, l) and rhs (,  (k,i ) - 1) = lhs ( ). · Resume resumes an already present daughter thread, i.e., moves down into some daughter that
+lhs (,k,i)
+
+has already been partly recognized. k,i [l,j ]  [k,i ]l+1,0 if lhs (, k, i) = rhs (,  (k,i ) - 1, l + 1), rhs (,  (k,i ) - 1) = lhs ( ) and l,j +1  / C. This is not exactly the TA for LCFRS proposed in Villemonte de la Clergerie (2002) but rather the one from Kallmeyer (2010), which is close to the Earley parser from Burden and Ljungl¨ of (2005). The set of configurations for a given input w  T  is then defined by the deduction rules in figure 3 (the use of set union S1  S2 in these rules assumes that S1  S2 = ). The accepting state of the automaton for some input w is |w|, 1, { : S , 1 : ret} . 2.3 LR Parsing In an LR parser, the parser actions are guided by an automaton, resp. a parse table which is compiled offline. Consider the context-free case. An LR parser for CFG is a guided shift-reduce parser, in which we first build the LR automaton. Its states are sets of dotted productions closed under prediction, and its transitions correspond to having recognized a part of the input, e.g., to moving the dot over a RHS element after having scanned a terminal or recognized a non-terminal. Given an automaton with n states, we build the parse table with n rows. Each row i, 0  i < n, describes the possible parser actions associated with the state qi , i.e., for each state and each possible shift or reduce operation, it tells us in which state to go after the operation.
+
+3
+
+LR for LCFRS
+
+3.1 Intuition The states in the automaton are predict and resume closures of TA thread stores. In order to keep them finite, we allow the addresses to be regular expressions. A configuration of the parser consists of a
+
+1252
+
+

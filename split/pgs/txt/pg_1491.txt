@@ -1,0 +1,23 @@
+Skip-gram RW SGRAM RW CBOW PPV
+
+SL999 0.442 0.520 0.486 0.493
+
+WS353 0.686 0.683 0.591 0.683
+
+Table 1: Spearman correlation results for our methods (RW SGRAM, RW CBOW) on WordNet random walks, compared to just random walks (PPV), and Skip-gram on text corpora. window size 5. In order to check how many iterations of the random walk algorithm are needed to learn good word representations, we produced up to 70 · 106 contexts. The the damping factor () of the random walk algorithm was set to 0.85, a usual value (Agirre et al., 2010). All parameters were thus set to default, and we only explored different corpus sizes. The word representations were evaluated on WS353 (Finkelstein et al., 2001) and SL999 (Hill et al., 2014b), two datasets on word relatedness and word similarity, respectively. In order to compute the similarity of two words, it suffices to calculate the cosine between the respective word representations. The evaluation measure computes the rank correlation (Spearman) between the human judgments and the system values. In order to contrast our results with the two related techniques, we used UKB5 , a publicly available implementation of Personalized PageRank (Agirre et al., 2014), and ran it over the same graph as our proposed methods. We used it out-of-the-box with a damping value of 0.85. We also downloaded the embeddings learnt by (Mikolov et al., 2013a) using Skip-gram over a large text corpus 6 . We used the same cosine algorithm to compute similarity with all word representations. To distinguish one word representation from the other, we will call our models RW CBOW and RW SGRAM respectively (RW for random-walk), in contrast to the original Personalized PageRank algorithm (PPV) and the corpusbased embeddings learned using Skip-grams (Skipgram). Figures 2 and 3 show the learning curves on the WS353 and SL999 datasets relative to the number
+5 6
+
+(a) RW SGRAM (b) PPV (c) Skip-gram (a+b) (a+c) (a+b+c) Best
+
+SL999 0.518 0.493 0.442 0.535 0.533 0.552 0.520
+
+WS353 0.683 0.683 0.686 0.700 0.748 0.759 0.800
+
+Table 2: Combinations and best published results: SL999 (Hill et al., 2014a), WS353 (Radinsky et al., 2011). of contexts produced by the random walks on WordNet. The results show that WordNet representations grow quickly (around 7 million contexts), converging around 70M, obtaining practically the same results as PPV for WS353, and better results for SL9997 . The results at convergence are shown in Table 1, together with those of PPV and Skip-gram. Regarding SL999, we can see that the best results are obtained with RW SGRAM, improving over PPV and Skip-gram. Regarding WS353, all methods except RW SGRAM obtain similar results. The results show that our methods are able to effectively capture the information in WordNet, performing on par to the original PPV algorithm, and better than the corpusbased Skip-gram on the SL999 dataset. Note that the best published results for WS353 using WordNet are those of (Agirre et al., 2010) using PPV, which report 0.685. In order to see if the word representations that we learn are complementary to those of PPV and Skipgram, we combined the scores produced by each word representation. Given the potentially different scales of the similarity values, we assigned to each item the average of the ranks of the pair in each output. The top part of Table 2 repeats the three relevant systems. The (a+b) row reports an improvement in both datasets, showing that RW SGRAM on WordNet is complementary to PPV in WordNet, and is thus a different representation, even if both use the same knowledge base. The (a+b) and (a+b+c) show that corpus-based Skip-grams are also complemenWe tried larger context sizes, up to 700M confirming that convergence was around 70M.
+7
+
+http://ixa2.si.ehu.eus https://code.google.com/p/word2vec/
+
+1437
+
+

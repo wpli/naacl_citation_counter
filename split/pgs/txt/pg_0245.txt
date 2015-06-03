@@ -1,0 +1,47 @@
+heuristic logistic all-const cnt fol nam cnt fol cnt nam fol nam cnt fol nam imp-greedy cnt fol nam cnt fol cnt nam fol nam cnt fol nam
+
+race 43.7 81.0 61.9 67.3 79.4
+
+age 56.0 83.3 45.5 61.4 55.6 45.5 44.1 55.9 44.0 76.6 66.1 68.3 75.2 79.2 68.1 75.2
+
+pol 89.4 93.8 58.1 93.8 79.3
+
+pol-f 65.4 68.7 60.6 60.7 67.9
+
+avg 63.6 81.7 56.5 70.8 68.0
+
+Race Age Politician Politic-fol Average
+
+all 77.9 48.4 84.0 61.8 68.0
+
+grdy 82.5 82.8 98.7 79.1 85.7
+
+semi 82.5 84.3 96.0 77.0 85.0
+
+imp 82.8 82.6 99.3 79.5 86.0
+
+grsp 82.8 84.3 96.7 77.0 85.2
+
+selection algorithms on the tuning set. all uses all possible constraints. poorly; only using the fol constraints surpasses the heuristic baseline. We suspect that this is in part due to the greater noise in age constraints -- Twitter users are particularly non-representative of the overall population according to age. To summarize our answer to RQ1, label regularization appears to perform quite well under a moderate amount of constraint noise, but can still fail under excessive noise. We next consider the effect of the constraint selection algorithms. Table 2 compares the four different constraint selection algorithms, along with the model that selects all constraints. We report the accuracy for each approach considering all constraint types (county, follow, and name, where applicable). Importantly, this accuracy is computed on the tuning set, not the test set. The goal here is to determine which search algorithm is able to find the best approximate solution. By comparing with all, we can see that constraint selection can significantly improve accuracy on the tuning set (by 18% absolute on average). The differences among the selection algorithms do not appear to be significant. Figure 1 plots the accuracy at each iteration of constraint select for three of the datasets. The main conclusion we draw from these figures is that high accuracy can be achieved with only a small number of constraints, provided they are carefully chosen. Each method is very close to convergence after using only 20 constraints (selected from hundreds). When examining which constraints are selected, we find that those that apply to many users are often preferred, presumably because there is more data to inform the final model. Returning to Table 1, we have also listed the accuracy of the imp-greedy selection method (which performed best on the tuning set), further strati-
+
+Table 2: Comparison of the accuracy of constraint
+
+80.1 76.6 82.3
+
+65.6 86.8 88.1
+
+58.9 69.1 74.3
+
+70.3 74.7 80.0
+
+no constraint selection; imp-greedy selects constraints to maximize accuracy on the tuning set using the Improved-greedy algorithm. Features: For all models, we use a standard bagof-words representation consisting of a binary term vector for the 200 tweets of each user, their description field, and their name field. We differentiate between terms used in the description, tweet text, and name field, and also indicate hashtags. Finally, we include additional features indicating the accounts followed by each user.
+
+Table 1: Accuracy on the testing set. all-const does
+
+6
+
+Results
+
+Table 1 shows the classification accuracy on the test set for each of the four tasks (F1 results are similar). We begin by comparing heuristic and logistic to the all-const results, which is our proposed label regularization approach using no constraint selection (i.e., no user-labeled data). We can see that for three of the four tasks (race, pol, pol-f), label regularization accuracy is either the same as logistic or within 2%. That is, using no user-annotated data, we can obtain accuracy competitive with logistic regression. For age, however, label regularization does quite 191
+
+

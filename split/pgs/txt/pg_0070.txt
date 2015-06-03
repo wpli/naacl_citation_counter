@@ -1,0 +1,35 @@
+The score function for an alignment uses three types of terms: weights, features, and alignment variables. When we decode, we take the product of the weights and the features to get the costs for the ILP (e.g. s = w · f ()). When we optimize our SVM objective, we take the product of the alignment variables and the features to get modified features for the SVM: f (z ) =
+ij
+
+items and cF N for predicting no alignment for two aligned items. We fixed cF P = 1 and tuned cF N  {1, 2, 3, 4} on dev data. Additionally we found it useful to tune the scale of the loss function across {1 2 , 1, 2, 4}. Previous work, such as Joachims et al. (2009), use a hand-chosen constant for the scale of the Hamming loss, but we observe some sensitivity in this parameter and choose to optimize it. Decoding Following Wolfe et al. (2013), we tune the threshold for classification  on dev data to maximize F1 (via linesearch). For SVMs  is typically fixed at 0: this is not necessarily good practice when your training loss differs from test loss (Hamming vs F1). In our case this extra parameter is worth allocating a portion of training data to enable tuning. Tuning  addresses the same problem as using an asymmetric Hamming loss, but we found that doing both led to better results.4 Since we are using a global scoring function rather than a set of classifications,  is implemented as a test-time unary factor on every alignment.
+
+zij f (zij ) +
+
+
+z f ()
+
+(11)
+
+Since we cannot iterate over the exponentially many margin constraints, we solve for this optimization using the cutting-plane learning algorithm. This algorithm repeatedly asks the "separation oracle" for the most violated SVM constraint, which finds this constraint by solving: arg max
+z ^ 1 ...z^ N
+
+w · f (z ^i ) + (zi , z ^i )
+i
+
+(12)
+
+subject to the constraints defined by the joint factors. When the separation oracle returns a constraint that is not violated or is already in the working set, then we have a guarantee that we solved the original SVM problem with exponentially many constraints. This is the most time-consuming aspect of learning, but since the problem decomposes over document alignments, we cache solutions on a per document alignment basis. With caching, we only call the separation oracle around 100-300 times. We implement the separation oracle using an ILP solver, CPLEX,3 due to complexity of the discrete n optimization problem: there are 2m possible alignments for and m × n alignment grid. In practice this is solved very efficiently, taking less than a third of a second per document alignment on average. We would like  to be F1, but we need a decomposable loss to include it in a linear objective (Taskar et al., 2003). Instead, we use Hamming loss as a surrogate, as in Lacoste-Julien et al. (2006). Our training data is heavily biased towards negative examples, performing poorly on F1 since precision and recall are unbalanced. We use an asymmetric version of Hamming loss that incurs cF P cost for predicting an alignment for two unaligned
+http://www-01.ibm.com/software/ commerce/optimization/cplex-optimizer/
+3
+
+6
+
+Experiments
+
+Data We consider two datasets for evaluation. The first is a cross-document entity and event coreference resolution dataset called the Extended Event Coref Bank (EECB) created by Lee et al. (2012) and based on a corpus from Bejan and Harabagiu (2010). The dataset contains clusters of news articles taken from Google News with annotations about coreference over entities and events. Following the procedure of Wolfe et al. (2013), we select the first document in every cluster and pair it with every other document in the cluster. The second dataset (RF) comes from Roth and Frank (2012). The dataset contains pairs of news articles that describe the same news story, and are annotated for predicate links between the document pairs. Due to the lack of annotated arguments, we can only report predicate linking performance and the psa and asp factors do not apply. Lastly, the size of the RF data should be noted as it is much smaller than EECB: the test set has 60 document pairs and the dev set has 10 document pairs.
+Only tuning  performed almost as well as tuning  and the Hamming loss, but not tuning  performed much worse than only tuning the Hamming loss at train time.
+4
+
+16
+
+

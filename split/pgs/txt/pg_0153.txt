@@ -1,0 +1,80 @@
+Single Domain (CCAT) 10 8 6 4 2
+1
+
+WekaSVM LIBSVM NaiveBayes
+4 3
+
+9.5
+
+9 8.5 6.5
+
+9.5 8.5 7
+
+10 9 8 8
+
+6.5 5.5 5
+
+6 5.5
+
+5 3 2.5
+
+3.5 3 2.5
+
+prefix
+
+suffix
+
+spaceprefix
+
+spacesuffix
+
+multiword
+
+wholeword
+
+midword
+
+begpunct
+
+midpunct
+
+endpunct
+
+Cross Domain (Guardian) 10 8 6 4 2 prefix suffix
+6.8 5 3.9 8.2 6.9 5.7 6.2 4.1 2.6 9.2 8.9 8.5 7 6.4 6.1 7.1 6.7 5.9 3.8 2.5 1.6
+
+7.8 7.5
+
+6 4.9 3.7
+
+4.4
+
+3.2 2.9 1.6
+
+spaceprefix
+
+spacesuffix
+
+multiword
+
+wholeword
+
+midword
+
+begpunct
+
+midpunct
+
+endpunct
+
+Figure 2: Average rank of the performance of each n-gram category across different types of classifiers on the single-domain CCAT task (top) and the cross-domain Guardian task (bottom).
+
+5.3
+
+Are Some Character N -grams Irrelevant?
+
+In the previous sections, we have seen that some types of character n-grams are more predictive than others - affix n-grams performed well in both single domain and cross-domain settings and punctuation n-grams performed well in cross-domain settings. In general, word n-grams were not as predictive as other types of n-grams (with the one exception being mid-word n-grams in the single domain setting). Given this poor performance of word n-grams, a natural question is: could we exclude these features entirely and achieve similar performance? Our goal then is to compare a model trained on affix n-grams and punct n-grams against a model trained on "all" n-grams. We consider two definitions of "all": all-untyped The traditional approach to extracting n-grams where n-gram types are ignored (e.g., `the' as a whole word is no different from `the' in the middle of a word) 99
+
+all-typed The approach discussed in this paper, where n-grams of different types are distinguished (equivalent to the set of all affix+punct+word n-grams). We compare these models trained on all the n-grams to our affix+punct model. Table 7 shows this analysis. For either definition of "all", the model that discards all word features achieves performance as high or higher than the model with all of the features, and does so with only about two thirds of the features. This is not too surprising in the cross-domain Guardian tasks, where the word n-grams were among the worst features. On the single-domain CCAT tasks this result is more surprising, since we have discarded the mid-word n-grams, which was one of the best single-domain n-gram types. This indicates that whatever information mid-word is capturing it is also being captured in other ways via affix and punct n-grams. Of all 1024 possible combinations of features, we tried a
+
+

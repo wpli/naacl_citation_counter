@@ -1,0 +1,63 @@
+that the sum of projection matrices can be expressed ~M ~ where as M = M ~ = [A1 T1 . . . AJ TJ ]  RN ×mJ . M Therefore, eigenvectors of matrix M , i.e. the matrix G that we are interested in finding, are the left ~ , i.e. M ~ = GSV . These singular vectors of M left singular vectors can be computed by using In~ may be too cremental PCA (Brand, 2002) since M large to fit in memory. 3.1 Computing SVD of mean centered Xj
+
+rows.1 The objective now becomes:
+J
+
+arg min
+G,Uj j =1
+
+Kj (G - Xj Uj )
+
+2 F
+
+(10)
+
+subject to G G = I, where [Kj ]ii = 1 if row i of view j is observed and zero otherwise. Essentially Kj is a diagonal rowselection matrix which ensures that we optimize our representations only on the observed rows. Note that Xj = Kj Xj since the rows that Kj removed were already zero. Let, K = j Kj then the optima of the objective can be computed by modifying equation (7) as: M =K - 2 (
+1
+
+Recall that we assumed Xj to be mean centered matrices. Let Zj  RN ×dj be sparse matrices containing mean-uncentered cooccurrence counts. Let fj = nj  tj be the preprocessing function that we apply to Zj : Yj =fj (Zj ), Xj =Yj - 1(1 Yj ). (8) (9)
+
+J j =1
+
+Pj )K - 2 .
+
+1
+
+(11)
+
+In order to compute the SVD of mean centered matrices Xj we first compute the partial SVD of uncentered matrix Yj and then update it (Brand (2006) provides details). We experimented with representations created from the uncentered matrices Yj and found that they performed as well as the mean centered versions but we would not mention them further since it is computationally efficient to follow the principled approach. We note, however, that even the method of mean-centering the SVD produces an approximation. 3.2 Handling missing rows across views
+
+Again, if we regularize and approximate the GCCA solution we get G as the left singular vectors of 1 ~ . We mean center the matrices using only K- 2 M the observed rows. Also note that other heuristic weighting schemes could be used here. For example if we modify our objective as follows then we would approximately recover the objective of Pennington et al. (2014):
+J
+
+minimize:
+G,Uj j =1
+
+Wj Kj (G - Xj Uj )
+
+2 F
+
+(12)
+
+subject to: G G = I where [Wj ]ii = and wi =
+k
+
+wi wmax
+
+3 4
+
+if wi < wmax else 1,
+
+[Xj ]ik .
+
+With real data it may happen that a term was not observed in a view at all. A large number of missing rows can corrupt the learnt representations since the rows in the left singular matrix become zero. To counter this problem we adopt a variant of the "missing-data passive" algorithm from Van De Velden and Bijmolt (2006) who modified the GCCA objective to counter the problem of missing 558
+
+4
+
+Data
+
+Training Data We used the English portion of the Polyglot Wikipedia dataset released by Al-Rfou et
+A more recent effort, by van de Velden and Takane (2012), describes newer iterative and non-iterative (TestEquating Method) approaches for handling missing values. It is possible that using one of those methods could improve performance.
+1
+
+

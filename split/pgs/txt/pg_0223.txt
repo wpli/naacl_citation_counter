@@ -1,0 +1,36 @@
+where P is the pruned set of blobs and co (Xi,m , S ) is a vector containing only the co-occurrence features, and wco contains their corresponding weights. The detailed algorithm is described in Algorithm 2. Finally, we update the weight vector w:
+orced ^ i) ^i, h w(new) = w(old) +(xi , yi , hF )-(xi , y i
+
+LSP variant as LSP-C. The modified weight update rule is:
+orced w(new) = w(old) + (xi , yi , hF )- i Constr orced ^i (xi , y , hF ) i
+
+Algorithm 3 Perceptron Constrained-Decoding
+Input: Input protocol xi , set of all blobs VY , number of video orced chunks ni , forced alignment hF , weight vector w. i 1: P  {S : S  VY , |S |  3, S = } 2: for n = 1 to ni do orced 3: m  hF [n] i Constr T ^i,n 4: Y  arg maxS P wco co (Xi,m , S ) Constr Constr Constr ^i,1 ^i,n 5: Return y ^i = [Y ,...,Y ] i
+
+Algorithm 2 Perceptron Full Decoding
+Input: Input protocol xi , set of all blobs VY , number of video chunks ni , weight vector w. 1: mi  length(xi ) 2: D[m, n]  - for 0  m  mi and 0  n  ni 3: B [m]   for 0  m  mi 4: D[0, 0]  0 5: P  {S : S  VY , |S |  3, S = } // precompute the pruned list of subsets of blobs 6: for m = 1 to mi do T 7: B [m]  arg maxS P wco co (Xi,m , S ) 8: for n = 1 to ni do 9: for each (m , n - 1)  Predecessors(m, n) do 10:   create-features(Xi,m , B [m], m, n, m ) 11: if D[m , n - 1] + wT  > D[m, n] then 12: D[m, n]  D[m , n - 1] + wT  13: Backpointer[m, n]  m ^ i  Backtrack(D, Backpointers) 14: h ^ i,1 ], . . . , B [h ^ i,n ]] ^ i  [B [h 15: y i ^ ^i 16: Return hi , y
+
+4.4
+
+Latent Structured SVM
+
+Structured SVM can be formulated by extending structured perceptron with two simple modifications: (1) incorporating a large-margin regularization term, and (2) incorporating a general loss function, instead of the zero-one loss of perceptron. The regularization reduces overfitting by keeping feature weights relatively small. Let the loss-augmented full decoding be: ^ i ) = arg max wT (xi , y, h) + Li (y, h), (^ yi , h
+y ,h
+
+4.3
+
+Constrained Decoding ^ i, y ^ i ), we have no inDuring the full decoding of (h
+
+formation regarding how many video chunks to assign to each sentence. As a result, the full decoding is unlikely to predict the correct video sequence, no matter how many training iterations performed. In practice, the unconstrained full decoding often ends up aligning too many video chunks to one of the protocol sentences. To address this problem, we modified the perceptron update rule. Instead of performing unconstrained full decoding, we constrain the alignment ^ i to be same as the forced alignment hF orced , and h i Constr un^i infer the best sequence of video chunks y der this constraint:
+Constr orced ^i y = arg max wT (xi , y, hF ) i y
+
+where Li (y, h) is the loss function for the ith observation. LSSVM minimizes the following objective function: C (w) = 1 N
+N i=1 orced wT (xi , yi , hF ) + i
+
+^ i ) + Li (^ ^ i )- ^i, h wT (xi , y yi , h  w 2, 2
+
+which is non-convex and non-differentiable, and optimized utilizing the subgradient method (Ratliff et al., 2007). We perform online learning, and the subgradient in each iteration is: ^ i ) - (xi , yi , hF orced ) + w. ^i, h gi (w) = (xi , y i Similar to LSP-C, we can obtain a constrained variant LSSVM-C, by replacing loss-augmented decod^ i to ing with a constrained variant, where we fix h F orced forced alignment hi .
+
+We refer to this decoding step as "constrained decoding" (Algorithm 3), and refer to this constrained 169
+
+

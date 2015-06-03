@@ -1,0 +1,17 @@
+for P (R|U ) (as, according to Bayes' rule, P (U |R) is equal to P (R|U )P (U ) P (1R) , which, plugged in into formula (2), cancels out P (1U ) ; further assuming the P (R) is uniform, we can directly replace P (U |R) with P (R|U ) here). On the language side (the variable U in the model), we used n-grams over Japanese characters (we attempted tokenisation of the REs into words, but found that using characters worked just as well in the held-out set). P(I) The prior P (I ) is the posterior of the previously computed increment. In the first increment, it can simply be set to a uniform distribution. Here, we apply a more informative prior based on saliency. We learn a context model which is queried when the first word begins, taking information about the context immediately before the beginning of the RE into account, producing a distribution over objects, which becomes P (I ) of the first increment in the RE. The context model itself is a simple application of the SIUM, where instead of being a word, U is a token that represents saliency. The context model thus learns what properties are important to the preRE context and provides an up-to-date distribution over the objects as a RE begins. 5.1 Example
+
+has during the utterance. Table 5 shows the full application of the model by summing over the properties for the product P (U |R)P (R|I ) and multiplying by the prior P (I ), the posterior of the previous step. Included in this example is how the initial prior is computed from the context model.
+property small big triangle square left center right most gazed recent move mouse pointed small .87 .01 .04 .04 .06 .04 .04 .07 .03 .08 triangle .02 .08 .88 .01 .07 .03 .06 .09 .1 .05 square .4 .02 .01 .9 .06 .04 .05 .07 .04 .06 context .04 .05 .09 .09 .09 .07 .03 .6 .56 .71
+
+Table 3: Applications of P (U |R), for some values of U and R; we assume that this model is learned from data (rows are excerpted from a larger distribution over all the words in the vocabulary)
+property small big triangle square left center right most gazed recent move mouse pointed 1 0.25 0 0.25 0 0.25 0 0 0.25 0 0 2 0.33 0 0 0.33 0 0 0.33 0 0 0 3 0 0.2 0.2 0 0 0.2 0 0 0.2 0.2
+
+Table 4: P (R|I ), for our example domain. The probability mass is distributed over the number of properties that a candidate object actually has.
+
+Figure 3: Example scene with two triangles and one square, 1 is being looked at by the SV, 3 was recently moved and the mouse pointer is still over it.
+
+We will now give a simple example of how the model is applied to the REX data using a subset of the above properties for the RE small triangle. Table 3 shows a simple normalised co-occurrence count of how many times properties were observed as belonging to a referred object (the basis for P (U |R)). Figure 3 shows the current toy scene, and Table 4 shows the properties that each object in the scene 277
+
+Before the RE even begins, the prior saliency yields that 3 is the most likely object to be referred; it was the most salient in that it was the most recently moved object and the mouse pointer was still over it. However, initial prior information alone is not enough to resolve the intended object; for that the RE is needed. After the word small is uttered, 1 is the most likely referred object. After triangle, 1 remains the highest in the distribution. With the RE alone, in this case there would have been enough information to infer that 1 was the referred object, but adding the prior information provided additional evidence.
+
+

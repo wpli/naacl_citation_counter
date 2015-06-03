@@ -1,0 +1,40 @@
+avg. V-measure 0.30 0.45
+
+standard skip-gram
+
+structured skip-gram
+
+1
+
+2
+
+4 Window size
+
+8
+
+16
+
+V-measure 0.30 0.45
+
+20
+
+50 100 Dimension size
+
+200
+
+Figure 2: Effect of window size and embeddings type on POS induction over the languages in Fig. 1. d = 100. The model is HMM with Gaussian emissions. skip-gram models. Notably, larger window sizes appear to produce word embeddings with less syntactic information. This result confirms the observations of Bansal et al. (2014). 4.3 Discussion
+
+Figure 3: Effect of dimension size on POS induction on a subset of the English PTB corpus. w = 1. The model is HMM with Gaussian emissions. behavior. However, the verbs nearest our centroid all seem rather abstract. In English, the nearest 5 words in the verb category are entails, aspires, attaches, foresees, deems. This may be because these words seldom serve functions other than verbs; and placing the centroid around them incurs less penalty (in contrast to physical verbs, e.g. bite, which often also act as nouns). Therefore one should be cautious in interpreting what is prototypical about them.
+
+We have shown that (re)generating word embeddings does much better than generating opaque word types in unsupervised POS induction. At a high level, this confirms prior findings that unsupervised word embeddings capture syntactic properties of words, and shows that different embeddings capture more syntactically salient information than others. As such, we contend that unsupervised POS induction can be seen as a diagnostic metric for assessing the syntactic quality of embeddings. To get a better understanding of what the multivariate Gaussian models have learned, we conduct a hill-climbing experiment on our English dataset. We seed each POS category with the average vector of 10 randomly sampled words from that category and train the model. Seeding unsurprisingly improves tagging performance. We also find words that are the nearest to the centroids generally agree with the correct category label, which validate our assumption that syntactically similar words tend to cluster in the high-dimensional embedding space. It also shows that careful initialization of model parameters can bring further improvements. However we also find that words that are close to the centroid are not necessarily representative of what linguists consider to be prototypical. For example, Hopper and Thompson (1983) show that physical, telic, past tense verbs are more prototypical with respect to case marking, agreement, and other syntactic 1315
+
+5
+
+Conclusion
+
+We propose using a multivariate Gaussian model to generate vector space representations of observed words in generative or hybrid models for POS induction, as a superior alternative to using multinomial distributions to generate categorical word types. We find the performance from a simple Gaussian HMM competitive with strong feature-rich baselines. We further show that substituting the emission part of the CRF autoencoder can bring further improvements. We also confirm previous findings which suggest that smaller context windows in skip-gram models result in word embeddings which encode more syntactic information. It would be interesting to see if we can apply this approach to other tasks which require generative modeling of textual observations such as language modeling and grammar induction.
+
+Acknowledgements
+This work was sponsored by the U.S. Army Research Laboratory and the U.S. Army Research Office under contract/grant numbers W911NF-11-2-0042 and W911NF-10-1-0533. The statements made herein are solely the responsibility of the authors.
+
+

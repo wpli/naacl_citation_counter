@@ -1,0 +1,37 @@
+does differentiate between genres, and that the combined indicators of style and topic are highly effective in describing genre in a way consistent with human judgements.
+
+3
+
+Evaluation
+
+We first assess the intrinsic quality of the scores returned by our method by comparing against subjective human judgements of stylistic properties. Phrase-level human judgements For each of our style dimensions, we take a random sample of 1,000 phrases from our corpora. We show each phrase to 7 workers on Amazon Mechanical Turk (MTurk) and ask the worker to indicate using a sliding bar (corresponding to a 0 to 100 scale) where they feel each word falls on the given style spectrum (e.g. casual to formal). Workers were given a high-level description of each style (like those given at the beginning of Section 2) and examples to guide their annotation.
+Formal exchange proceedings scrutiny his speech in return for of the series Casual , uh all that stuff pretty much radio are really to move into Complex per capita referendum proportional mid japan os Simple is not the night up possible center of sets
+
+2
+
+Method
+
+We focus on two style dimensions: formality and complexity. We define formal language as the way one talks to a superior, whereas casual language is used with friends. We define simple language to be that used to talk to children or non-native English speakers, whereas more complex language is used by academics or domain experts. We use the Europarl corpus of parliamentary proceedings as an example of formal text and the Switchboard corpus of informal telephone conversations as casual text. We use articles from Wikipedia and simplified Wikipedia (Coster and Kauchak, 2011) as examples of complex and simple language respectively. For each style dimension, we subsample sentences from the larger corpus so that the two ends of the spectrum are roughly balanced. We end up with roughly 300K sentences each for formal/casual text and about 500K sentences each for simple/complex text.1 Given examples of language at each end of a style dimension, we score a phrase by the log ratio of the probability of observing the word in the reference corpus (REF) to observing it in the combined corpora (ALL). For formality the reference corpus is Europarl and the combined data is Europarl and Switchboard together. For complexity, the reference corpus is normal Wikipedia and the combined data is normal and simplified Wikipedia together. Specifically, we map a phrase w onto a style dimension via: P (w | REF ) . P (w | ALL)
+
+Low  High 
+
+Table 2: Phrases with high and low levels of annotator agreement, measured by the variance of the human raters' scores (Low  = high agreement).
+
+We estimate inter-annotator agreement by computing each rater's correlation with the average of the others. The inter-annotator correlation was reasonably strong on average ( = 0.65). However, not all phrases had equally strong levels of human agreement. Table 2 shows some examples of phrases which fell "obviously" on one end of a style spectrum (i.e. the variance between humans' ratings was low) and some other examples which were less clear. Quality of automatic scores We compute the correlation of our method's score with the average human rating for each phrase. The results are summarized in Table 4. The log-ratio score correlates with the human score significantly above chance, even matching inter-human levels of correlation on the formality dimension.
+
+FORMALITY (w )
+
+= log
+
+We assign formality scores to phrases up to three words in length that occur at least three times total in ALL, regardless of whether they occur in both corpora. Phrases which do not occur at all in REF are treated as though they occurred once.
+1 Number of words: casual (2MM), formal (7MM), simple (9MM), complex (12MM).
+
+4
+
+Applications
+
+We evaluate the acquired style mappings in two tasks: finding paraphrase pairs with differences in style and characterizing genre variation.
+
+219
+
+

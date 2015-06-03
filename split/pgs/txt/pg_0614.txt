@@ -1,0 +1,36 @@
+Acronym MEN RW SCWS SIMLEX WS MTURK WS-REL WS-SEM RG MC AN-SYN AN-SEM TOEFL
+
+Size 3000 2034 2003 999 353 287 252 203 65 30 10675 8869 80
+
+0.5 0 .01 4.2 5.1 5.1 7.3 12.3 13.7 14.6 16.2 28.6 41.7 -
+
+0.7 0 .01 3.2 3.9 4.0 5.7 9.5 10.6 11.3 12.6 22.3 32.7 -
+
+0.9 0 .01 1.8 2.3 2.3 3.2 5.5 6.1 6.5 7.3 12.9 19.0 0.95 1.03 8.13
+
+0.5 0 .05 3.0 3.6 3.6 5.2 8.7 9.7 10.3 11.5 20.6 30.6 -
+
+0.7 0 .05 2.3 2.8 2.8 4.0 6.7 7.5 8.0 8.9 16.0 23.9 -
+
+0.9 0 .05 1.3 1.6 1.6 2.3 3.9 4.3 4.6 5.1 9.2 13.8 0.68 0.74 6.63
+
+Reference (Bruni et al., 2012) (Luong et al., 2013) (Huang et al., 2012) (Hill et al., 2014b) (Finkelstein et al., 2001) (Radinsky et al., 2011) (Agirre et al., 2009) -Same-As-Above(Rubenstein and Goodenough, 1965) (Miller and Charles, 1991) (Mikolov et al., 2013a) -Same-As-Above(Landauer and Dumais, 1997)
+
+r Table 2: List of test datasets used. The columns headed p contain MRDS values. The rows for accuracy based test 0 sets contain p0 which does not depend on r. See § 4.1 for details.
+
+items, produced respectively by algorithms A and B , and then a list of gold ratings T . Let rAT , rBT and rAB denote the Spearman correlations between A : T , B : T and A : B respectively. Let r ^AT , r ^BT , r ^AB be their empirical estimates and assume that r ^BT > r ^AT without loss of generality. r as the For word similarity datasets we define p 0 MRDS, such that it satisfies the following proposition:
+r (rAB < r)  (|r ^BT - r ^AT |<p ) = pval > p0 0
+
+Steiger's test predicate which satisfies the following: stest-p(^ rAT , r ^BT , rAB , p0 , n) = pval < p0 Once we define this predicate then we can use it to set up an optimistic problem where our aim is to find r by solving the following: p 0
+r p = min{ | 0<r <1 stest-p(r , min(r +, 1), r, p0 , n)} 0
+
+. Here pval is the probability of the test statistic under the null hypothesis that rAT = rBT found using the Steiger's test (Steiger, 1980). The above constraint ensures that as long as the correlation between the competing methods is less than r and the difference between the correlations of the scores of the competing methods to the gold ratings is less r , then the pvalue of the null hypothesis will than p 0 be greater than p0 . We can then ask what we consider a reasonable upper bound on the agreement of ratings produced by competing algorithms: for instance two algorithms correlating above 0.9 might not be considered meaningfully different. That leaves us with the second part of the predicate which ensures that as long as the difference between the correlations of the competing algorithms to the gold r then the null hypothesis is scores is less than p 0 more likely than p0 . r as follows: Let stest denote We can find p 0 560
+
+Note that MRDS is a liberal threshold and it only guarantees that differences in correlations below that threshold can never be statistically significant (under the given parameter settings). MRDS might optimistically consider some differences as significant when they are not, but it is at least useful in reducing some of the noise in the evaluations. The values of r are shown in Table 2. p 0 For the accuracy based test-sets we found MRDS= p0 that satisfied the following:
+^B -  ^A ) < p = p(B  A ) > p0 0 < ( 0
+
+Specifically, we calculated the posterior probability p(B  A ) with a flat prior of  (1, 1) to solve the following:4 p0 = min{ | 0<< min(1-, 0.9) ^A =,  ^B = + , n) < p0 } Here A and B p(B A |
+This instead of using McNemar's test (McNemar, 1947) since the Bayesian approach is tractable and more direct. A calculation with  (0.5, 0.5) as the prior changed 0.5 from 6.63 to 6.38 for the TOEFL dataset but did not affect MRDS for the AN-SEM and AN-SYN datasets.
+4
+
+

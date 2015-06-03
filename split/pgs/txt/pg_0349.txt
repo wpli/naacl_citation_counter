@@ -1,0 +1,42 @@
+an LM, as is standard in SMT, we perform a modified version of CKY+ that approximately explores the search space using a method such as cube pruning (Chiang, 2007).
+
+4.1
+
+SCFG Rule Extraction
+
+3
+
+Multi-Synchronous CFGs
+
+In this section, we present the basic formalism that will drive our attempts at multi-target translation. Specifically, we propose a generalization of SCFGs, which we will call multi-synchronous context free grammars (MSCFGs). In an MSCFG, the elementary structures are rewrite rules containing not a source and target, but an arbitrary number M of strings X  1 , ..., M , (3) where X is the head of the rule and m is a string of terminal and non-terminal symbols.4 In this paper, for notational convenience, we will use a specialized version of Equation 3 in which we define a single  as the source side string, and 1 , ...N as an arbitrary number N of target side strings: X  , 1 , ..., N . (4)
+
+First, we briefly outline rule extraction for SCFGs in the standard two-language case, as proposed by Chiang (2007). We first start by preparing two corpora in the source and target language, F and E , and obtaining word alignments for each sentence automatically, using a technique such as the IBM models implemented by GIZA++ (Och and Ney, 2003). We then extract initial phrases for each sentence. J , target eI , and alignment A = Given a source f1 1 { i1 , i 1 , . . . , i|A| , i |A| } where i and i represent indices of aligned words in F and E respectively. First, based on this alignment, we extract all pairs of
+BP | BP | 1 , . . . , fi||BP phrases BP = { fij11 , ei 1 , ei ||BP }, | |
+
+j
+
+j
+
+j
+
+J spanning from i to where fij11 is a substring of f1 1
+1 j1 , and ei 1 is analogous for the target side. The
+
+j
+
+Therefore, at each derivation step, one non-terminal in  is chosen and all the nonterminals with same indices in 1 , ..., N will be rewritten using a single rule. Figure 2 (b) gives an example of generating sentences in three languages using MSCFGs. Translation can also be performed by using the CKY+ algorithm to parse the source side, and then generate targets in not one, but multiple languages. It can be noted that this formalism is a relatively simple expansion of standard SCFGs. However, the additional targets require non-trivial modifications to the standard training and search processes, which we discuss in the following sections.
+
+can be excriterion for whether a phrase fij , ej i tracted or not is whether there exists at least one alignment in A that falls within the bounds of both fij and ej i , and no alignments that fall within the bounds of one, but not the other. It is also common to limit the maximum length of phrases to be less than a constant S (in our experiments, 10). The phrase-extract algorithm of Och (2002) can be used to extract phrases that meet these criteria. Next, to create synchronous grammar rules, we cycle through the phrases in BP , and extract all potential rules encompassed by this phrase. This is done by finding all sets of 0 or more non-overlapping sub-phrases of initial phrase fij , ej i , and replacing them by non-terminals to form rules. In addition, it is common to limit the number of non-terminals to two and not allow consecutive non-terminals on the source side to ensure search efficiency, and limit the number of terminals to limit model size (in our experiments, we set this limit to five). 4.2 MSCFG Rule Extraction
+
+4
+
+Training Multi-Synchronous Grammars
+
+This section describes how, given a set of parallel sentences in N languages, we can create translation models (TMs) using MSCFGs.
+4 We will also make the restriction that indices are linear and non-deleting, indicating that each non-terminal index present in any of the strings will appear exactly once in all of the strings. Thus, MSCFGs can also be thought of as a subset of the "generalized multi-text grammars" of Melamed et al. (2004).
+
+In this section, we generalize the rule extraction process in the previous section to accommodate multiple targets. We do so by first independently creating alignments between the source corpus F , and each of N target corpora {E1 , . . . , EN }. Given a particular sentence we now have source F , N target strings {E1 , . . . , EN }, and N alignments {A1 , . . . , AN }. We next in-
+
+295
+
+

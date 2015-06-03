@@ -1,0 +1,23 @@
+Data
+
+Per table accuracy SVM AFH14 68.0 76.5 96.0 92.5 85.0 D&DN13 85.0 79.5 95.0 87.5 83.5
+
+Per form accuracy SVM 98.11 89.88 99.92 97.14 93.68 AFH14 97.04 87.81 99.52 96.36 91.91 D&DN13 96.19 88.94 99.67 96.43 93.41
+
+Oracle acc. per form (table) 99.70 (198/200) 100.00 (200/200) 100.00 (200/200) 99.00 (195/200) 100.00 (200/200)
+
+DE - VERBS ES - VERBS FI - VERBS
+
+DE - NOUNS
+
+FI - NOUNS - ADJS
+
+91.5 80.5 99.0 94.0 85.5
+
+Table 1: Results on experiment 1. Here AFH14 stands for Ahlberg et al. (2014) and D&DN for Durrett and DeNero (2013). The SVM-columns show the results of the current method.
+
+the best learned paradigm for an unseen base form. In experiment 2, where the correct forms may consist of several alternatives, we only count a form as correct if all alternatives are given and all are correct. For example, the verb dream in English lists two alternative past participles, dreamed and dreamt, which both must be reconstructed for the past participle form to count as being correct. Experiment 1 The accuracies obtained on the first three-language comparison experiment are shown in Table 1. Here, we see a consistent improvement upon the maxsuff -strategy (AFH14) that simply picks the longest matching suffix among the base forms seen and assigns the unseen word to the same paradigm (breaking ties by paradigm frequency), as well as improvement over other learning strategies (D&DN13). Particularly marked is the improved accuracy on German verbs. We assume that this is because German verb prefixes, which are ignored in a suffix-based classifier, contain information that is useful in classifying verb behavior. German verbs that contain socalled inseparable prefixes like miss-, ver-, widerdo not prefix a ge- in the past participle form. For example: kaufen  gekauft, brauchen  gebraucht, legen  gelegt, but verkaufen  verkauft, widerlegen  widerlegt, missbrauchen  missbraucht, reflecting the replacement of the standard ge- by the inseparable prefix. There are many such inseparable prefixes that immediately trigger this behavior (although some prefixes only occasionally show inseparable behavior), yet this information is lost when only looking at suffixes at classification time. This analysis is supported by the fact that, during feature 1027
+
+selection, German verbs was the only dataset in this first experiment where word prefixes were not removed by the feature selection process. Experiment 2 The results of the second experiment are given in tables 2 (per table accuracy) and 3 (per form accuracy). The tables contain information about how many inflection tables were input on average over 5 folds to the learner (#tbl), how many paradigms this reduced to (#par), and how many forms (slots) each paradigm has (#forms). The mfreq column is a baseline where the classifier always picks the most populated paradigm, i.e. the paradigm that resulted from combining the largest number of different inflection tables by the LCS process. The AFH14 shows the performance of a maximal suffix matching classifier, identical to that used in Ahlberg et al. (2014). Discussion Overall, the results support earlier claims that the LCS-generalization appears to capture paradigmatic behavior well, especially if combined with careful classification into paradigms. There is a clear and consistent improvement over baselines that use the same data sets. In addition, the SVM-classifier yields results comparable, and in many cases better, to using a maximum suffix classifier and additionally having access to raw corpus data in the language, a semi-supervised experiment reported separately in Ahlberg et al. (2014). In this work we have not attempted to extend the current method to such a semi-supervised scenario, although such an extension seems both interesting and possible.
+
+

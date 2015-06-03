@@ -1,0 +1,35 @@
+to a sequence of nodes S  V connected via hyperedges e ending in goal node g . Each edge e is associated with a synchronous grammar rule r(e), and corresponding feature values (r(e)). The weight of hyperedge e is defined as W (e; w) = wT (r(e)). The quantity in (1) is efficiently computed using dynamic programming under the proper semiring. A commutative semiring K is a tuple K, , , ¯ 0, ¯ 1, of a set K, an associative and commutative addition operator , an associative multiplication operator , and their "neutral" elements ¯ 0 and ¯ 1, respectively (Dyer, 2010). The Inside algorithm over the topologically sorted, acyclic hypergraph H under the tropical R, max, ×, -, 0 semiring (Goodman, 1999; Mohri, 2009) computes the inside score  of the Viterbi hypothesis, i.e. the weight of its sequence of nodes ending in goal node g : arg maxP (h|q )  (g )
+hEq
+
+dl ) + tf (t, d)) a saturated tf (t, d)/(k1 ((1 - b) + b avdl term frequency weight of term t in document d, taking into account (average) document lengths dl and avdl2 . We fire the Okapi bm25 term weight for each derivation term t  h w.r.t. document d in collection C . The sum of feature values for all derivation terms ti  h equals the regular BM 25 score BM 25(h, d) = th bm25(t, d). Weights wir for this type of features are interpretable as additional, general term weights.
+
+Additionally, we report experiments using sparse alignment features that fire an indicator for each alignment, insertion, or deletion of words in source and target. They allow the model to adapt lexical choice and dropping of function words for retrieval. Default Retrieval Weights & Self-Translation. To enforce a ranking over documents, we define an IR default weight v , wir = 1v . Intuitively, v controls the model's disposition to diverge from the SMT Viterbi path. If IR features fire in other regions of the search space than the SMT Viterbi path, this weight compensates for the loss incurred for not producing the Viterbi hypothesis. Furthermore, the default weight allows the model to generalize to unseen data: If an unknown query word, for example a named entity, causes an IR feature to fire at test time, the decoder will simply pass through the source word to any derivation, and the IR feature can contribute to the retrieval score with v > 0. Multi-Sentence Queries. Specialized retrieval tasks such as patent prior art search may exhibit long, coherent search queries that contain multiple sentences. If multiple sentences of query q = (s1 , . . . , sm ) are processed independently, we need to combine the sentence-wise rankings to obtain a final ranking. We model this task from a product of experts perspective (Hinton, 2002) and multiply scores score(·, d) of document d in all m sentence rankings, re-sorting the final output. If d is not in the top-k ranking of a sentence, we take the minimum score of that top-k ranking as a smoothing value to prevent the product to become zero.
+2
+
+=
+hHq eh
+
+W (e; wsmt ),
+
+T  where W (e; wsmt ) = wsmt smt (r (e)) assigns weights given parameters and features of the translation model. For Bag-of-Words Forced Decoding, we extend W with another set of parameters wir for local IR features ir :
+
+arg maxP (h|q, d)  (g )
+hEq
+
+=
+hHq eh
+
+W (e, d; wsmt , wir ),
+
+(4)
+
+T  with W (e, d; wsmt , wir ) = wsmt smt (r (e)) + T wir ir (r(e), d). Note that ir depends on both translation rule r(e) and document d, while smt solely depends on source and target side of r(e).
+
+Decomposable Retrieval Features. We use sparse, lexicalized, real-valuead IR features that relate derivations h to document d using Okapi bm25 term weights (Robertson and Zaragoza, 2009): bm25(t, d) = rsj (t, C ) · tfbm25 (t, d),
+df (t,C )+0.5 where rsj (t, C ) = log |C|- is a condf (t,C )+0.5 stant term weight approximated on document frequencies for collection C , and tfbm25 (t, d) =
+
+bm25 parameters were fixed at k1 = 1.2 and b = 0.75
+
+1175
+
+

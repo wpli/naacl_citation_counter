@@ -1,0 +1,23 @@
+6
+
+Related Work
+
+Gasser (1975), Crawford and Aycock (2008), and Shay et al. (2012) describe systems that produce meaningless but pronounceable passwords, such as "tufritvi" . However, their systems can only assign  230 distinct passwords. Jeyaraman and Topkara (2005) suggest generating a random sequence of characters, and finding a mnemonic for it in a text corpus. A limited corpus means they again have a small space of systemassigned passwords. We propose a similar method in Section 2.2, but we automatically synthesize a new mnemonic word sequence. Kurzban (1985) and Shay et al. (2012) use a method similar to XKCD with small dictionaries. This leads to longer nonsense sequences that can be difficult to remember.
+
+7
+
+Conclusion
+
+We introduced several methods for generating secure passwords in the form of English word sequences. We learned that long sentences are seemingly easy to remember, but actually hard to reproduce, and we also learned that our poetry method produced relatively short, memorable passwords that are liked by users.
+
+Acknowledgments
+We would like to thank James Bedell, Aliya Deri, Tomer Levinboim, Jonathan May, Nima Pourdamghani and the anonymous reviewers for their very helpful comments. This work was supported in part by DARPA contract FA-8750-13-2-0045.
+
+Dmitriy Genzel, Jakob Uszkoreit, and Franz Och. 2010. Poetic statistical machine translation: rhyme and meter. In Proceedings of the 2010 Conference on Empirical Methods in Natural Language Processing, pages 158­166. Association for Computational Linguistics. Erica Greene, Tugba Bodrumlu, and Kevin Knight. 2010. Automatic analysis of rhythmic poetry with applications to generation and translation. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 524­533. Association for Computational Linguistics. Sundararaman Jeyaraman and Umut Topkara. 2005. Have your cake and eat it too­infusing usability into text-password based authentication systems. In Proceedings of ACSAC. Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran, Richard Zens, et al. 2007. Moses: Open source toolkit for statistical machine translation. In Proceedings of the 45th Annual Meeting of the ACL, Demo and Poster Sessions, pages 177­180. Association for Computational Linguistics. Stanley A Kurzban. 1985. Easily remembered passphrases: a better approach. ACM SIGSAC Review, 3(2-4):10­21. Claude E. Shannon. 1951. Prediction and entropy of printed English. Bell System Technical Journal, 30(1):50­64. Richard Shay, Patrick Gage Kelley, Saranga Komanduri, Michelle L Mazurek, Blase Ur, Timothy Vidas, Lujo Bauer, Nicolas Christin, and Lorrie Faith Cranor. 2012. Correct horse battery staple: Exploring the usability of system-assigned passphrases. In Proceedings of the Eighth Symposium on Usable Privacy and Security, page 7. ACM. Andreas Stolcke. 2002. SRILM-an extensible language modeling toolkit. In INTERSPEECH, pages 901­904.
+
+References
+Heather Crawford and John Aycock. 2008. Kwyjibo: automatic domain name generation. Software: Practice and Experience, 38(14):1561­1567. Dinei Florencio and Cormac Herley. 2007. A largescale study of web password habits. In Proceedings of the 16th international conference on World Wide Web, pages 657­666. ACM. Morrie Gasser. 1975. A random word generator for pronounceable passwords. Technical report, Electronic Systems Division, Air Force Systems Command, USAF.
+
+1575
+
+

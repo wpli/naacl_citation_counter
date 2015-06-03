@@ -1,0 +1,22 @@
+Figure 1: Mention Frequency Distribution.
+
+Figure 2: Distribution of time since previous mention of the same entity (gap). Each bar represents 24 hours.
+
+This covers a diverse selection of people including: `Roger Federer' (tennis player) and `Jessie J' (the singer whose real name is `Jessica Cornish') as well as less popular entities such as porn stars and journalists1 . Some statistics of the dataset are summarized in table 1. We also plot the mention frequency (how often each entity was mentioned) distribution in figure 1 which shows a clear power law distribution similar to what Rao et al. (2010) reported on the New York Times annotated corpus. We show that recency and distant reference are important aspects by plotting the time since previous mention of the same entity (gap) for each mention in figure 2. The gap is often less than 24 hours demonstrating the importance of recency. There are also plenty of mentions with much larger gaps, demonstrating the need to be able to resolve distant references. Source Roger Jessica All Mentions 5,794 10,543 16,337 Entities 137 129 266 Wiki Page Exists 69% 46% 58%
+
+Table 1: Mention/entity counts and percentage of entities that have a Wikipedia page.
+
+7
+
+Experiments
+
+approximately one week. Parameters are set using a standard grid search on one block then we progress to the next block to evaluate. The first block is reserved for setting the linking threshold prior to our rolling evaluation. We report the average over the remaining blocks. For all sampling techniques that have a randomized component we report an average over 10 runs. As the sample size will have a large effect on performance we evaluate using various sample sizes. We base our sample size on the average amount of mentions per day (78,450) and evaluate our system with sample sizes of 0.25,0.5,1,2 times the average amount of mentions per day. We evaluate using CEAFe (Luo, 2005), it is the only coreference evaluation metric that can be trivially adapted to datasets with a sample of annotated entities. With no adaption it measures how well a small amount of entities align with a system output over a large amount. To make the evaluation more representative we only use response clusters that contain an annotated mention. This scales precision and maintains interpretability. We determine if observed differences are significant by using a Wilcoxon signed-rank test with a p value of 5% over the 9 testing points. Results are shown in table 2. · Window: This shows the performance that can be achieved by only considering recency. · Uniform Reservoir Sampling (Uniform-R): This shows the performance achieved by using an uninformed technique to store a diverse set of older mentions.
+
+As we are processing a stream we use a rolling evaluation protocol. Our corpus is split up into 11 constant sized temporally adjacent blocks each lasting
+1
+
+The annotations, including links to Wikipedia pages when available, can be downloaded from https://sites. google.com/site/lukeshr/.
+
+1394
+
+

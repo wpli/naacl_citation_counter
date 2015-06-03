@@ -1,0 +1,42 @@
+Vector representation Combined
+
+Weighting scheme specificity tf-idf specificity tf-idf specificity tf-idf specificity
+
+Vector comparison WO cosine WO cosine WO cosine WO cosine WO cosine WO cosine WO
+
+Word similarity MC-30 0.91 0.88 0.85 0.79 0.90 0.86 0.86 0.83 0.91 0.90 0.86 0.71
+
+
+Sense clustering 500-pair 84.6% 76.2% 60.4% 81.4% 82.0% 73.2% 78.4% 79.2% 78.8% 79.8% 37.2% 79.4%
+
+
+RG-65 0.91 0.89 0.87 0.84 0.91 0.88 0.87 0.87 0.90 0.88 0.85 0.80
+
+
+WS-Sim 0.74 0.75 0.73 0.70 0.73 0.72 0.72 0.71 0.75 0.75 0.73 0.66
+
+
+SemEval 88.4% 83.6% 67.8% 86.1% 85.0% 83.4% 82.6% 84.4% 83.8% 85.0% 41.1% 85.0%
+
+
+Word-based
+
+Synset-based Word-based
+
+0.86
+
+0.87
+
+0.71
+
+80.0%
+
+85.1%
+
+Table 3: Performance of NASARI and its individual vector representations for different weight computation schemes, i.e., lexical specificity and tf-idf, and for different vector comparison techniques, i.e., cosine and Weighted Overlap (WO), in terms of Pearson correlation (word similarity) and accuracy (sense clustering). The scores highlighted by are the ones obtained using our default NASARI setting, and the ones highlighted by  correspond to the setting of our system using Wikipedia as its only knowledge source.
+
+tors by outperforming cosine in most cases. The reason behind the lower performance of WO for the synset-based vectors on the task of sense clustering can be explained by the nature of the corresponding datasets. Since the synset-based vectors and their overlapping dimensions are small, their cosine similarity scores also tend to be relatively low, unlike WO whose range of values is not affected by the number of overlapping dimensions. Given that in the experiments the threshold is fixed to the middle point of the scale (cf. Section 4.2.2), generally low similarity values lead to a high-precision, low-recall system, which is rewarded by higher accuracy performance in datasets in which a large portion of instances are negative. In fact, for the synsetbased vector representation weighted using specificity, the F1 performance of the cosine is significantly lower than WO. On the SemEval dataset the F1 performance of WO is 60.1%, whereas cosine attains 37.1%. Similarly, on the 500-pair dataset, WO leads cosine by 16.8%: 68.5% vs. 51.7%. As far as the weighting scheme is concerned, lexical specificity outperforms tf-idf on both tasks, irrespective of the vector comparison technique and representation. We attribute the better performance of lexical specificity to the probabilistic nature of 574
+
+weights in its vectors. The tf-idf weighting scheme, in contrast, suffers from insensitivity to the relative size of the contextual information. Thus, subsequently, specificity-based vectors provide the advantage of accurately reducing the vectors' dimension, unlike the tf-idf scheme in which the size-insensitive weights are not comparable across vectors. As a result, the specificity-based vectors are substantially smaller in size, bringing about better space utilization and faster running time. In our experiments the vectors obtained by using lexical specificity were, on average, almost nine times (2505 vs. 21825) and four times (335 vs. 1311) smaller than the tf-idf based vectors for the word-based and synset-based vector representations, respectively. We were also interested in verifying the advantage gained by combining the complementary knowledge of Wikipedia and WordNet. To this end, we carried out an experiment in which NASARI uses Wikipedia as its only knowledge source (i.e., without using WordNet). The last row in the Table (highlighted by ) shows the results for this setting. Note that since WordNet is not used in this setting, we are constrained to the word-based vector representation only. The results show that the combination of the types of resource leads to a consistent performance
+
+

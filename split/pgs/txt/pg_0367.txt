@@ -1,0 +1,5 @@
+Joe Pater, Robert Staubs, Karen Jesney, and Brian Smith. 2012. Learning probabilities over underlying representations. In Proceedings of the Twelfth Meeting of the ACL-SIGMORPHON: Computational Research in Phonetics, Phonology, and Morphology, pages 62­71. Joe Pater. 2009. Weighted constraints in generative linguistics. Cognitive Science, 33:999­1035. Mark A. Pitt, Laura Dilley, Keith Johnson, Scott Kiesling, William Raymond, Elizabeth Hume, and Eric Fosler-Lussier. 2007. Buckeye corpus of conversational speech. Alan Prince and Paul Smolensky. 2004. Optimality Theory: Constraint Interaction in Generative Grammar. Blackwell. Paul Smolensky and G´ eraldine Legendre. 2005. The Harmonic Mind: From Neural Computation To Optimality-Theoretic Grammar. The MIT Press.
+
+313
+
+

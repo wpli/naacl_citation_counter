@@ -1,0 +1,56 @@
+Mao et al., 2014; Socher et al., 2014). These methods rely on necessarily limited collections of captioned images as sources of multimodal evidence, whereas we automatically enrich a very large corpus with images to induce general-purpose multimodal word representations, that could be used as input embeddings in systems specifically tuned to caption processing. Thus, our work is complementary to this line of research.
+
+=
+the cute little sat on the mat CAT
+
+maximize context prediction
+
+maximize similarity
+
++
+
+map to visual space
+
+3
+3.1
+
+Multimodal Skip-gram Architecture
+Skip-gram Model
+
+cat
+
+We start by reviewing the standard S KIP - GRAM model of Mikolov et al. (2013a), in the version we use. Given a text corpus, S KIP - GRAM aims at inducing word representations that are good at predicting the context words surrounding a target word. Mathematically, it maximizes the objective function:   1 T
+T
+
+Figure 1: "Cartoon" of MMS KIP - GRAM -B. Linguistic context vectors are actually associated to classes of words in a tree, not single words. S KIP GRAM is obtained by ignoring the visual objective, MMS KIP - GRAM -A by fixing M uv to the identity matrix. visual representation of the concepts they denote (just like in a conversation, where a linguistic utterance will often be produced in a visual scene including some of the word referents). The visual representation is also encoded in a vector (we describe in Section 4 below how we construct it). We thus make the skip-gram "multimodal" by adding a second, visual term to the original linguistic objective, that is, we extend Equation 1 as follow: 1 T
+T
+
+
+-cj c,j =0
+
+log p(wt+j |wt )
+
+(1)
+
+t=1
+
+where w1 , w2 , ..., wT are words in the training corpus and c is the size of the window around target wt , determining the set of context words to be predicted by the induced representation of wt . Following Mikolov et al., we implement a subsampling option randomly discarding context words as an inverse function of their frequency, controlled by hyperparameter t. The probability p(wt+j |wt ), the core part of the objective in Equation 1, is given by softmax: p(wt+j |wt ) = e
+uwt+j T uwt
+T
+
+(Lling (wt ) + Lvision (wt ))
+t=1
+
+(3)
+
+W uw w =1 e
+
+uwt
+
+(2)
+
+where uw and uw are the context and target vector representations of word w respectively, and W is the size of the vocabulary. Due to the normalization term, Equation 2 requires O(|W |) time complexity. A considerable speedup to O(log |W |), is achieved by using the hierarchical version of Equation 2 (Morin and Bengio, 2005), adopted here. 3.2 Injecting visual knowledge We now assume that word learning takes place in a situated context, in which, for a subset of the target words, the corpus contexts are accompanied by a 155
+
+where Lling (wt ) is the text-based skip-gram objective -cj c,j =0 log p(wt+j |wt ), whereas the Lvision (wt ) term forces word representations to take visual information into account. Note that if a word wt is not associated to visual information, as is systematically the case, e.g., for determiners and non-imageable nouns, but also more generally for any word for which no visual data are available, Lvision (wt ) is set to 0. We now propose two variants of the visual objective, resulting in two distinguished multi-modal versions of the skip-gram model. 3.3 Multi-modal Skip-gram Model A One way to force word embeddings to take visual representations into account is to try to directly increase the similarity (expressed, for example, by the cosine) between linguistic and visual rep-
+
+

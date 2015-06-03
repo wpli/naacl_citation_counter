@@ -1,0 +1,35 @@
+an n-gram corpus (Kudo and Kazawa, 2007) for the textual patterns including "A is longer than B ".3 3.3.3 Implicit relative clues People tend not to write out clues explicitly when most readers are expected to have the relevant knowledge. Since absolute clues and comparative sentences are explicit, we cannot expect a sufficient amount of such clues. We argue that people unintentionally put many pieces of common knowledge into some specific textual patterns. The sentence "I put my wallet into the pocket" suggests that `pocket > wallet' holds for the numerical attribute. We collect from the n-gram corpus such textual patterns (A in B , put A in B , take A out of B , store A in B , put A on B , drop A from B , A go into B , and A go out of B ).
+
+relative clues are incorporated into the training by means of ranking framework. We henceforth use the combined regression and ranking. Our formalization is similar to the combined regression and ranking model developed by Sculley (2010). Let Da and Dr denote respectively the training datasets consisting of absolute clues and relative clues. Each element in Da is represented as a pair of a feature vector x and its average size y . Each element in Dr is represented as a tuple of feature vectors x1 and x2 , and the order relation z ; z indicates whether x1 is larger (z = +1), or x2 is larger (z = -1). We minimize the following function: (1 - )La (w, Da ) + Lr (w, Dr ) +  ||w||2 , (1) 2
+
+4
+
+Bringing together the clues
+
+4.1 Feature representation and linear model To bring together the clues introduced in Section 3, we first represent physical objects with feature vectors and employ a linear model in which the size f (w, x) is represented as the inner product w · x of feature vector x and weight vector w. We use the following features: the synsets that are ancestors of the target synset (i.e., synsets that can be found by traversing up through hypernym-hyponym relations or instance-of relations), the synsets that the target synset is a member of (hmem in WordNet), the hypernym synsets of the target synset (hype in WordNet), the synsets that the target synset is an instance of (inst in WordNet), the synsets that the target synset has as a component (mprt in WordNet), the synsets that the target synset is a component of (hprt in WordNet), the head word in the gloss in a dictionary, and the synonyms in the target synset. 4.2 Formalization We discuss how to estimate weight vector w. Some physical objects are given absolute clues. If multiple absolute clues are found for an object, we regard their average (actually, its logarithm) as the approximate size used for training. Since the size is a real number, the machine learning framework to be employed should be regression. Additionally,
+3
+
+where  is a trade-off parameter between regression loss La (w, Da ) and pairwise loss Lr (w, Dr ). (/2)||w||2 is the regularization term. The regression loss La (w, Da ) is decomposed as 1 |Da | 
+(x,y )Da
+
+la (y, f (w, x)),
+
+(2)
+
+where la (y, f (w, x)) is the loss of the pair (x, y ) under the model w, and is represented by squared loss (y - f (w, x))2 , indicating the difference between the target value and the model output. The pairwise loss Lr (w, Dr ), is decomposed as 1 |Dr | 
+(x1 ,x2 ,z )Dr
+
+lr (z, x1 , x2 , w),
+
+(3)
+
+where lr (z, x1 , x2 , w) is the loss of the tuple (x1 , x2 , z ) under the model w, and is represented by hinge loss, max(0, 1 - z · f (w, x1 - x2 )). While a single type of loss function was used for the regression loss and the pairwise loss in the previous work (Sculley, 2010), the current framework relies on two different types of loss functions, i.e., squared loss and hinge loss, so that both absolute and relative clues can be used in the model.
+
+5 Experiments
+5.1 Experimental setting We followed the process in Section 3.1 and eliminated infrequent ones from the obtained synsets. For
+
+We also used "shorter", "larger", and "smaller".
+
+1307
+
+

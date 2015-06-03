@@ -1,0 +1,33 @@
+ROOT see-01 i person
+1
+
+Merging
+dog run-02 garden dog
+2
+
+chase-01 cat
+
+Collapsing
+
+name "Joe"
+
+Graph Expansion
+
+pansion increases the average number of edges by a factor of 15, to 3,292. Fig. 3 illustrates the motivation. Document-level expansion covers the goldstandard summary edge "chase-01"  "garden," yet the expansion is computationally prohibitive; sentence-level expansion adds an edge "dog"  "garden," which enables the prediction of a structure with similar semantic meaning: "Joe's dog was in the garden chasing a cat." 4.2 Subgraph Prediction
+
+Sentence A: I saw Joe's dog, which was running in the garden. Sentence B: The dog was chasing a cat.
+
+Figure 3: A source graph formed from two sentence AMR graphs. Concept collapsing, merging, and graph expansion are demonstrated. Edges are unlabeled. A "ROOT" node is added to ensure connectivity. (1) and (2) are among edges added through the optional expansion step, corresponding to sentence- and document-level expansion, respectively. Concept nodes included in the summary graph are shaded. Summary Edge Coverage (%) Expand Labeled Unlabeled Sent. Doc. Train Dev. Test 64.8 77.3 63.0 67.0 78.6 64.7 75.5 85.4 75.0 84.6 91.8 83.3
+
+Table 2: Percentage of summary edges that can be covered by an automatically constructed source graph.
+
+We pose the selection of a summary subgraph from the source graph as a structured prediction problem that trades off among including important information without altering its meaning, maintaining brevity, and producing fluent language (Nenkova and McKeown, 2011). We incorporate these concerns in the form of features and constraints in the statistical model for subgraph selection. Let G = (V, E ) denote the merged source graph, where each node v  V represents a unique concept and each directed edge e  E connects two concepts. G is a connected, directed, node-labeled graph. Edges in this graph are unlabeled, and edge labels are not predicted during subgraph selection. We seek to maximize a score that factorizes over graph nodes and edges that are included in the summary graph. For subgraph (V , E ): score (V , E ;  ,  ) =  f (v )+
+v V eE
+
+ g(e) (1)
+
+graph (§4.2). In Table 2, columns one and two report labeled and unlabeled edge coverage. `Unlabeled' counts edges as matching if both the source and destination concepts have identical labels, but ignores the edge label. In order to improve edge coverage, we explore expanding the source graph by adding every possible edge between every pair of concepts within the same sentence. We also explored adding every possible edge between every pair of concepts in the entire source graph. Edges that are newly introduced during expansion receive a default label `null'. We report unlabeled edge coverage in Table 2, columns three and four, respectively. Subgraph prediction became infeasable with the document-level expansion, so we conducted our experiments using only sentence-level expansion. Sentence-level graph ex1080
+
+where f (v ) and g(e) are the feature representations of node v and edge e, respectively. We describe node and edge features in Table 3.  and  are vectors of empirically estimated coefficients in a linear model. We next formulate the selection of the subgraph using integer linear programming (ILP; §4.2.1) and describe supervised learning for the parameters (coefficients) from a collection of source graphs paired with summary graphs (§4.2.2). 4.2.1 Decoding We cast decoding as an ILP whose constraints ensure that the output forms a connected subcomponent of the source graph. We index source graph concept nodes by i and j , giving the "ROOT" node
+
+

@@ -1,0 +1,37 @@
+be applied to sequence alignment without parallel data. Second, a single implementation seamlessly extends to all IBM models, including the fertility based models. Furthermore, since MIR follows the MAP-EM framework, it inherits its desirable convergence guarantees. The key idea facilitating the easy extension to complex models and to non-parallel data settings is in our regularizer, which operates on the model parameters as opposed to their inferences. Specifically, MIR was designed to reward model pairs whose translation tables respect the invertibility intuition. We tested MIR against competitive baselines on two sequence alignment tasks: word alignment (with parallel data) and back-transliteration decipherment (without parallel data). On Czech-English and Chinese-English word alignment (Section 5), restricted to the HMM model, MIR attains F- and Bleu score improvements that are comparable to those of ABA and PostCAT. We further apply MIR beyond HMM, on the fertility-based IBM Models, showing further gains in F-score compared to the baseline, ABAandPostCAT. Interestingly, the HMM alignments obtained by ABA and MIR are qualitatively different, so that combining the two yields additive gains over each method by itself. On English-Japanese back-transliteration decipherment (Section 6), we apply MIR to the cascade of wFSTs approach proposed by Ravi and Knight (2009). Using MIR, we are able to reduce the wholename error-rate relative to a model trained on parallel data by 33%, as well as significantly outperform the joint model proposed by Mylonakis et al. (2007).
+
+where  denotes the model parameters and a denotes a hidden variable that corresponds to unknown choices taken in the generative process. In the non-parallel data setting, only the target sequence f is observed and the source sequence e is hidden. The model assigns the following probability to the observed data: p(f ; ) =
+e
+
+p(e)
+a
+
+p(a, f | e).
+
+(2)
+
+That is, the sequence f can arise from any sequence e by first selecting e  p(e) and then proceeding according to the parallel-data generative story (Eq. 1). Unsupervised training of such models entails maximizing the data log-likelihood L(): arg max L() = arg max
+  x X
+
+log p(x; )
+
+where X = {(en , f n )}n in the parallel data setting and X = {(f n )}n in the non-parallel data setting. Although the structure of  is unspecified, in practice, most models that follow these generative stories contain a word translation table (t-table) denoted t, with each parameter t( f | e) representing the conditional probability of mapping a given source symbol e to a target symbol f .
+
+3
+
+Model Invertibility Regularization
+
+2
+
+Background
+
+In this section we propose a method for jointly training two word alignment models, a source-to-target model 1 and a target-to-source model 2 , by regularizing their parameters to respect the invertibility of the alignment task. We therefore name our method Model Invertibility Regularization (MIR). 3.1 Regularizer Our regularizer operates on the t-table parameters t1 , t2 of the two models, as follows: Let matrices T 1 , T 2 denote the t-tables t1 , t2 in matrix form and consider their multiplication T = T 1 T 2 . The resulting matrix T is a stochastic square matrix of dimension |V1 | × |V1 | where |V1 | denotes the size of the source-language vocabulary. Each entry T i j represents the total probability mass mapped from source word ei to source word e j by first applying the source-to-target mapping T 1 and then the targetto-source mapping T 2 .
+
+We are concerned with learning generative models that describe transformations of a source-language sequence e = (e1 , . . . , eI ) to a target-language sequence f = ( f1 , . . . , f J ). We consider two different data scenarios. In the parallel data setting, each sample in the observed data consists of a pair (e, f ). The generative story assigns the following probability to the event that f arises from e: p(f | e; ) =
+a
+
+p(a, f | e; )
+
+(1) 610
+
+

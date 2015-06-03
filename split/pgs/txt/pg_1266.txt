@@ -1,0 +1,54 @@
+Tradition Parzival(PAML) Parzival(MV) Notre Besoin(PAML) Notre Besoin(MV)
+
+WTE 0.91 0.96 0.95 0.97
+
+PVE 0.73 0.88 0.9 0.94
+
+ASD 51.38 54.95
+
+Table 3: Evaluation of the archetypes by PAML and majority-vote (MV). ML trees evaluated with ASD.
+
+(P/NB) MW(P) RA(P) MA(P) MW(NB) RA(NB) MA(NB)
+
+WTE 0.68 0.8 0.96 0.52 0.76 0.98
+
+PVE 0 0.38 0.87 0 0.49 0.95
+
+sition of variation evaluation (PVE). Formally, both WTE and PVE can be represented by
+1Ci (ai ) n i=0 |Ci |
+
+Table 4: Evaluation of archetypes.  as used in philology denotes the archetype. We evaluated the majority archetypes (MA), the averaged random archetypes (RA) and the maximally wrong archetypes (MW) for the Parzival (P) and Notre Besoin (NB) traditions.
+
+n
+
+, 1Ci (ai ) =
+
+1 0
+
+if ai  Ci if ai  / Ci
+
+(1)
+
+where n is either the number of words in the alignment (WTE) or the number of positions of variation (PVE), a is the archetype, ai the i-th token in the archetype, and Ci the set of variants of the PA at the i-th position.
+
+(MW), which is the one archetype that has a nonarchetypical variant at each position where variation occurred. Note that none of these automatically produced archetypes requires a stemma beforehand. The results are displayed in Table 4. The RAs are considerably better than the MWs, but are clearly outperformed by both reconstructions and the MAs.
+
+5
+
+Results
+
+6
+
+Discussion
+
+We evaluated the PAs (rule-based and statistical) with WTE and PVE and additionally evaluated the initial ML trees against the true stemma by means of the graph-based Average Sign Distance (ASD),1 a measure of distance of genealogical trees using vertex triple distances as described in (Roos and Heikkil¨ a, 2009). In order to achieve this, we converted the stemmas automatically from the Newick output format by PAML into the required format of the ASD. Results are displayed in Table 3. The philological reconstruction outperformed the PAML one in both cases. In order to assess the quality of these results, we produced the majority archetype (MA), which at each position carried the majority variant. Additionally, we produced a random archetype (RA), where a randomizer as implemented in the Java programming language chose one variant at random for every place of variation. The RA was then evaluated. This procedure was repeated 1000 times and then we averaged over the RA evaluation results. As a point of orientation, we additionally provide the evaluation score of the maximally wrong archetype
+For details, data sets and evaluation scripts, browse http: //www.cs.helsinki.fi/u/ttonteri/casc.
+1
+
+The MA and MV archetypes are the most accurate ones. Hence, the true distribution of variants considering all manuscripts is such that the majority variant in the majority of cases is the archetypical one. Whether this conclusion holds for historical corpora remains to be shown. The PAMLgenerated archetypes performed well and were considerably better than the random condition. Note that the ML tree's ASD score was relatively low as compared to other algorithms evaluated in (Roos and Heikkil¨ a, 2009). The limitation of the current reconstruction is that at each position the reconstructed text can only carry one of the variants of the extant manuscripts. This makes any reconstruction with many reconstructed internodes, such as the MVs or the PAML reconstructions by definition quite similar to the MAs. 6.1 Comparing Stemma and Archetype Production
+
+From a bad stemma, disambiguation rules can nevertheless produce an accurate archetype and vice versa. One stemma can correspond to several possible archetypes and one archetype can be consistent with several different stemmas. The two tasks
+
+1212
+
+

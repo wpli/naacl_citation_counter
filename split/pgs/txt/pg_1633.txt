@@ -1,0 +1,52 @@
+Categories
+
+(k1) bouquet scarf slipper coat hat veil hair cape glove cap fur...
+
+(k2) buzzard penguin toad emu duck bird pheasant chickadee crocodile...
+
+(k3) broccoli cantaloupe cauliflower yam potato blueberry spinach...
+
+(k4) dresser apartment shack gate basement garage curtain cabinet...
+
+Feature types
+
+(g1) wear cover veil woman coat glove hair cap face head
+
+(g2) white black color brown dark spot red hair colour yellow
+
+(g3) bird eat animal food rodent rabbit rat mouse mammal dog
+
+(g4) ant insect butterfly wasp larva nest beetle egg caterpillar moth
+
+Figure 3: Example of categories (top) and feature types (bottom) inferred by the BCF model. Connecting lines indicate a strong association between the category and the respective feature type. ated with the stimuli. Exact inference in the BCF model is intractable, so we turn to approximate posterior inference to discover the assignments of latent variables that best explain our data. We construct a Gibbs sampler (Geman and Geman, 1984) which iteratively re-assigns single variables based on the current assignments of all other variables. One Gibbs iteration for our model consists of one sweep through the input stimuli, resampling feature type assignments from:
+d - c P(gdcd = i|g- , f , k , , ) cd k k
+d
+
+4
+
+Experimental Design
+
+In this section we outline our experimental set-up for assessing the performance of the BCF model described above. We present our data set, briefly introduce the models used for comparison with our approach, and explain how system output was evaluated. We then report results on a series of experiments which evaluate the quality of the categories and feature types learnt by BCF. Data Our experiments used basic-level target concepts (e.g., cat or chair ) from two norming studies (McRae et al., 2005; Vinson and Vigliocco, 2008). In these studies, humans were presented with concepts and asked for each concept to produce a set of characteristic features. In a subsequent study (Fountain and Lapata, 2010), the concepts were classified into 41 categories (with possible multi-category membership), 34 of which we use as a goldstandard in our categorization experiments (comprising 492 concepts in total). We excluded very general categories such as THING or STRUCTURE, based on the intuition that it is difficult to identify characteristic features for them. As a heuristic concepts were excluded if they were close to the root of WordNet (e.g., with depth 2 or 4). To obtain the input stimuli for the BCF model, we used a subset of the Wackypedia corpus (Baroni et al., 2009), an automatically extracted and POS tagged dump of the English Wikipedia. For each target concept, we identified one corresponding article in Wackypedia. Next, we extracted a set of stimuli which consists of (a) every sentence from the concept's corresponding article, and (b) any sentence in a different article which mentions the concept. This resulted in a data set of 63,076 stimuli which we split into 60% training, 20% development and 20% test.
+
+(2)
+k
+
+
+
+P(gdcd k
+
+d c , k , ) × P( f d |f- , gdcd = i, ), = i|g- cd k
+
+d
+
+followed by one sweep through the concept types, resampling category assignments from: P(k = j|gk , k- , , )  P(k = j|k
+k -
+
+(3) = j, ),
+
+, ) × P(gk |g- ,k k
+d
+
+where gdcd denotes the feature type assignment to stimulus d given the category kc of d 's observed target concept cd . k refers to the category assignment of concept type , gk refers to the feature type associations of category k , and f d refers to the observed features in stimulus d . The superscript - indicates the absence of the variable assignment(s) which are currently resampled from the current representation of the model state. Figure 3 illustrates example output produced by our model, in terms of learnt categories, learnt feature types and their associations. Connecting lines indicate category-feature type associations. Feature types are shared across categories, e.g., categories CLOTHING (k1), BIRDS (k2), and FOOD (k3) are all associated with feature type color (g2). 1579
+
+

@@ -1,0 +1,22 @@
+3. Evaluate quality of candidate rules in E n 4. Generate lexicalized morphological transformations We provide more detailed descriptions next. Extract candidate rules from V Starting from (w1 , w2 )  V 2 , the algorithm extracts all possible prefix and suffix substitutions from w1 to w2 , up to a specified size1 . We denote such substitutions using triplets of the form type:from:to. For instance, triplet suffix:ed:ing denotes the substitution of suffix ed with suffix ing; this substitution is supported by many word pairs in an English vocabulary, e.g. (bored, boring), (stopped, stopping), etc. We call these triplets candidate rules, because they form the basis of an extended set from which the algorithm extracts morphological rules. At this stage, the candidate rules set contains both rules that reflect true morphology phenomena, e.g. suffix:s: (replace suffix s with the null suffix, extracted from (stops, stop), (weds, wed), etc.), or prefix:un: (replace prefix un with the null prefix, from (undone, done), etc.), but also rules that simply reflect surface-level coincidences, e.g. prefix:S: (delete S at the beginning of a word, from (Scream, cream), (Scope, cope), etc.). Train embedding space Using a large monolingual corpus, we train a word-embedding space E n of dimensionality n for all words in V using the SkipGram model (Mikolov et al., 2013a). For the experiments reported in this paper, we used our own implementation of this model (which varies only slightly from the publiclyavailable word2vec implementation2 ). Evaluate quality of candidate rules The extracted candidate rules set is evaluated by using, for each proposed rule r, its support set: Sr = {(w1 , w2 )  V 2 |w1 - w2 } The notation w1  w2 means that rule r applies to word w1 (e.g., for rule suffix:ed:ing, word w1
+1 2
+
+rule suffix:er:o suffix:ton: prefix:S: prefix: :in suffix:ly: prefix: :re prefix:un:re suffix:st:sm suffix:ted:te suffix:ed:ing suffix:y:ies suffix:t:ts suffix:sed:zed
+
+hit rate 0.8 1.1 1.6 28.8 32.1 37.0 39.0 52.5 54.9 68.1 69.6 73.0 80.1
+
+Example dw dVoter dGaleton dSDK d competent dofficially d sited dunmade degoist dimitated dprocured dfoundry dpugilist dserialised
+
+Table 1: Candidate rules evaluated in E n .
+
+ends with suffix ed), and the result of applying the rule to word w1 is word w2 . To speed up computation, we downsample the sets Sr to a large-enough number of word pairs (1000 has been used in the experiments in this paper). We define a generic evaluation function Ev F over paired couples in Sr × Sr , using a function F : Rn × Rn  R, as follows: Ev F ((w1 , w2 ), (w, w )) = FE (w2 , w1 +  dw ) (1) (w1 , w2 ), (w, w )  Sr ,  dw = w - w Word-pair combinations in Sr × Sr are evaluated using Eq. 1 to assess the meaning-preservation property of rule r. We use as FE function rankE , the cosine-similarity rank function in E n . We can quantitatively measure the assertion "car is to cars what dog is to dogs", as rankE (cars , car +ddog ). We use a single threshold t0 rank to capture meaning preservation (all the experiments in this paper use t0 rank = 100): for each proposed rule r , we compute a hit rate based on the number of times Eq. 1 scores above t0 rank , over the number of times it has been evaluated. In Table 1 we present some of these candidate rules and their hit rate. We note that rules that are non-meaning­ preserving receive low hit rates, while rules that are morphological in nature, such as suffix:ed:ing (verb change from past/participle to presentcontinuous) and suffix:y:ies (pluralization of y­ending nouns), receive high hit rates.
+
+r
+
+r
+
+A maximum size of 6 is used in our experiments. At code.google.com/p/word2vec.
+
+1629
+
+

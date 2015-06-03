@@ -1,0 +1,29 @@
+Seed Tables 50 100
+
+DE Basic Full 89.9 90.9 91.5 92.2
+
+DDN Factored Joint 89.6 90.5 91.4 92.3
+
+Ours Basic Full 89.7 90.9 92.0 92.6
+
+Table 8: Prediction accuracy on German verb forms after training on a small number of seed inflection tables.
+
+Finnish errors tend to fall into one of three types. First, words that involve harmonically neutral vowels, such as "e" and "i" occasionally cause errors in vowel harmony. Second, all three systems have difficulty identifying syllable and compound boundaries, and make errors predicting vowels near boundaries. Finally, consonant gradation, which alternates consonants in open and closed syllables, causes a relatively large number of errors; for example, our system predicts *heltempien, instead of the correct hellempien as the genitive singular of the comparative adjective hellempi "more affectionate".
+
+6
+
+Conclusion
+
+We have proposed an alternative method of generating inflected word-forms which is based on discriminative string transduction and reranking. We have conducted a series of experiments on nine datasets involving six languages, including four new datasets that we created. The results demonstrate that our method is not only highly accurate, but also robust against incomplete or limited inflection data. In the future, we would like to apply our method to nonEuropean languages, with different morphological systems. We also plan to investigate methods of extracting morphological tags from a corpus, including differentiating syncretic forms in context.
+
+Acknowledgments
+We thank Mans Hulden and Aki-Juhani Kyr¨ ol¨ ainen for their assistance in analyzing Finnish errors.. This research was supported by the Natural Sciences and Engineering Research Council of Canada, and the Alberta Innovates Technology Futures.
+
+References
+Malin Ahlberg, Markus Forsberg, and Mans Hulden. 2014. Semi-supervised learning of morphological paradigms and lexicons. In Proceedings of the 14th
+
+Conference of the European Chapter of the Association for Computational Linguistics, pages 569­578, Gothenburg, Sweden, April. Association for Computational Linguistics. Harald R. Baayen, Richard Piepenbrock, and Leon Gulikers. 1995. The CELEX Lexical Database. Release 2 (CD-ROM). Linguistic Data Consortium, University of Pennsylvania, Philadelphia, Pennsylvania. Alena B¨ ohmov´ a, Jan Haji c, Eva Haji cov´ a, and Barbora Hladk´ a. 2003. The Prague dependency treebank. In Treebanks, pages 103­127. Springer. Ann Clifton and Anoop Sarkar. 2011. Combining morpheme-based machine translation with postprocessing morpheme prediction. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1, pages 32­42. Association for Computational Linguistics. Markus Dreyer and Jason Eisner. 2011. Discovering morphological paradigms from plain text using a dirichlet process mixture model. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 616­627. Association for Computational Linguistics. Greg Durrett and John DeNero. 2013. Supervised learning of complete morphological paradigms. In Proceedings of NAACL-HLT, pages 1185­1195. Rong-En Fan, Kai-Wei Chang, Cho-Jui Hsieh, Xiang-Rui Wang, and Chih-Jen Lin. 2008. LIBLINEAR: A library for large linear classification. The Journal of Machine Learning Research, 9:1871­1874. Alexander Fraser, Marion Weller, Aoife Cahill, and Fabienne Cap. 2012. Modeling inflection and wordformation in SMT. In Proceedings of the 13th Conference of the European Chapter of the Association for Computational Linguistics, pages 664­674. Association for Computational Linguistics. Sittichai Jiampojamarn, Grzegorz Kondrak, and Tarek Sherif. 2007. Applying many-to-many alignments and hidden markov models to letter-to-phoneme conversion. In Human Language Technologies 2007: The Conference of the North American Chapter of the Association for Computational Linguistics; Proceedings of the Main Conference, pages 372­379, Rochester, New York, April. Association for Computational Linguistics.
+
+930
+
+

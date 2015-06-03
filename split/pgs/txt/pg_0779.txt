@@ -1,0 +1,20 @@
+Incorporating Word Correlation Knowledge into Topic Modeling
+Pengtao Xie School of Computer Science Carnegie Mellon University Pittsburgh, PA 15213, USA pengtaox@cs.cmu.edu Diyi Yang School of Computer Science Carnegie Mellon University Pittsburgh, PA 15213, USA diyiy@cs.cmu.edu Eric P. Xing School of Computer Science Carnegie Mellon University Pittsburgh, PA 15213, USA epxing@cs.cmu.edu
+
+Abstract
+This paper studies how to incorporate the external word correlation knowledge to improve the coherence of topic modeling. Existing topic models assume words are generated independently and lack the mechanism to utilize the rich similarity relationships among words to learn coherent topics. To solve this problem, we build a Markov Random Field (MRF) regularized Latent Dirichlet Allocation (LDA) model, which defines a MRF on the latent topic layer of LDA to encourage words labeled as similar to share the same topic label. Under our model, the topic assignment of each word is not independent, but rather affected by the topic labels of its correlated words. Similar words have better chance to be put into the same topic due to the regularization of MRF, hence the coherence of topics can be boosted. In addition, our model can accommodate the subtlety that whether two words are similar depends on which topic they appear in, which allows word with multiple senses to be put into different topics properly. We derive a variational inference method to infer the posterior probabilities and learn model parameters and present techniques to deal with the hardto-compute partition function in MRF. Experiments on two datasets demonstrate the effectiveness of our model.
+
+1
+
+Introduction
+
+Probabilistic topic models (PTM), such as probabilistic latent semantic indexing(PLSI) (Hofmann, 1999) and latent Dirichlet allocation(LDA) (Blei et al., 2003) have shown great success in documents 725
+
+modeling and analysis. Topic models posit document collection exhibits multiple latent semantic topics where each topic is represented as a multinomial distribution over a given vocabulary and each document is a mixture of hidden topics. To generate a document d, PTM first samples a topic proportion vector, then for each word w in d, samples a topic indicator z and generates w from the topic-word multinomial corresponding to topic z . A key limitation of the existing PTMs is that words are assumed to be uncorrelated and generated independently. The topic assignment for each word is irrelevant to all other words. While this assumption facilitates computational efficiency, it loses the rich correlations between words. In many applications, users have external knowledge regarding word correlation, which can be taken into account to improve the semantic coherence of topic modeling. For example, WordNet (Miller, 1995a) presents a large amount of synonym relationships between words, Wikipedia1 provides a knowledge graph by linking correlated concepts together and named entity recognizer identifies the categories of entity mentions. All of these external knowledge can be leveraged to learn more coherent topics if we can design a mechanism to encourage similar words, correlated concepts, entities of the same category to be assigned to the same topic. Many approaches (Andrzejewski et al., 2009; Petterson et al., 2010; Newman et al., 2011) have attempted to solve this problem by enforcing hard and topic-independent rules that similar words should have similar probabilities in all topics, which is
+1
+
+https://www.wikipedia.org/
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 725­734, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

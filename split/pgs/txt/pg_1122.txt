@@ -1,0 +1,71 @@
+Drama Thriller Comedy Action
+
+# Movies 665 451 378 288
+
+AvgLines 4484.53 4333.10 4303.02 4255.56
+
+AvgScenes 79.77 91.84 66.13 101.82
+
+AvgChars 60.94 52.59 57.51 59.99
+
+s1
+
+s2
+
+s3
+
+s4
+
+s5
+
+s6
+
+s7
+
+...
+
+Figure 2: ScriptBase corpus statistics. Movies can have multiple genres, thus numbers do not add up to 1,276.
+
+s1
+
+s2
+
+s3
+
+s4 //
+
+s5
+
+s6
+
+s7
+
+...
+
+social interactions, and interests. Lu and Grauman (2013) present a summarization model which extracts subshot sequences while finding a balance of important subshots that are both diverse and provide a natural progression through the video, in terms of prominent visual objects (e.g., bottle, mug, television). We adapt their technique to our task, and show how to estimate character-scene correlations based on linguistic analysis. We also interpret movies as social networks and extract a rich set of features from character interactions and their sentiment which we use to guide the summarization process.
+
+Figure 3: Example of consecutive chain (top). Squares represent scenes in a screenplay. The bottom chain would not be allowed, since the connection between s3 and s5 makes it non-consecutive.
+
+for training/development and 65 movies for testing.
+
+4
+
+The Scene Extraction Model
+
+3
+
+ScriptBase: A Movie Script Corpus
+
+We compiled ScriptBase, a collection of 1,276 movie scripts, by automatically crawling web-sites which host or link entire movie scripts (e.g., imsdb.com). The retrieved scripts were then cross-matched against Wikipedia2 and IMDB3 and paired with corresponding user-written summaries, plot sections, loglines and taglines (taglines are short snippets used by marketing departments to promote a movie). We also collected metainformation regarding the movie's genre, its actors, the production year, etc. ScriptBase contains movies comprising 23 genres; each movie is on average accompanied by 3 user summaries, 3 loglines, and 3 taglines. The corpus spans years 1909­2013. Some corpus statistics are shown in Figure 2. The scripts were further post-processed with the Stanford CoreNLP pipeline (Manning et al., 2014) to perform tagging, parsing, named entity recognition and coreference resolution. They were also annotated with semantic roles (e.g., ARG0, ARG1), using the MATE tools (Bj¨ orkelund et al., 2009). Our summarization experiments focused on comedies and thrillers. We randomly selected 30 movies
+2 http://en.wikipedia.org 3 http://www.imdb.com/
+
+As mentioned earlier, we define script summarization as the task of selecting a chain of scenes representing the movie's most important content. We interpret the term scene in the screenplay sense. A scene is a unit of action that takes place in one location at one time (see Figure 1). We therefore need not be concerned with scene segmentation; scene boundaries are clearly marked, and constitute the basic units over which our model operates. Let M = (S, C) represent a screenplay consisting of a set S = {s1 , s2 , . . . , sn } of scenes, and a set C = {c1 , . . . , cm } of characters. We are interested in finding a list S = {si , . . . sk } of ordered, consecutive scenes subject to a compression rate m (see the example in Figure 3). A natural interpretation of m in our case is the percentage of scenes from the original script retained in the summary. The extracted chain should contain (a) important scenes (i.e., critical for comprehending the story and its development); (b) diverse scenes that cover different aspects of the story; and (c) scenes which highlight the story's progression from beginning to end. We therefore find the chain S maximizing the objective function Q(S ) which is the weighted sum of three terms: the story progression P, scene diversity D, and scene importance I : S = arg max Q(S )
+S S
+
+(1) (2)
+
+Q(S ) = P P(S ) + D D(S ) + I I (S )
+
+In the following, we define each of the three terms. 1068
+
+

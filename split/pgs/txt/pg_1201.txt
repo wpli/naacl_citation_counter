@@ -1,0 +1,30 @@
+The inter-annotator agreement on the three metrics, measured as the intraclass correlation (ICC), was strong (Cicchetti, 1994; Hallgren, 2012). More precisely, the observed ICC scores (with 0.95 confidence intervals) were 0.71 [0.70, 0.72] for cohesiveness, 0.71 [0.70, 0.73] for relatedness and 0.66 [0.64, 0.67] for readability. For the evaluation, from each model we selected enough clusters to achieve an overall size (number of distinct event patterns) comparable to N EWS S PIKE's. For H EADY and I DEST, the stopping condition in Figure 4 was modified accordingly. Table 1 shows the outcome of the annotation. As expected, using a global model (that can merge patterns from different EECs into single clusters) and using the whole news dataset both led to larger clusters. At the same time, we observe that using R E V ERB extractions generally led to smaller clusters. This is probably because R E V ERB produced fewer extractions than sentence compression from the same input documents. On R E V ERB extractions, N EWS S PIKE outperformed I DEST in terms of cohesiveness and relatedness, but N EWS S PIKE's lowest cluster size and lexical diversity makes it difficult to prefer any of the two models only w.r.t. the quality of the clusters. On the other hand, the patterns retained by I DEST-ReVNS were generally more readable (65.16 vs. 56.66). On the same original news data, using I DEST with sentence compression produced comparable results to I DEST-ReV-NS, Cohesiveness being the only metric that improved significantly. More generally, in terms of readability all the models that rely on global optimization (i.e., all but N EWS S PIKE) showed better readability than N EWS S PIKE, supporting the intuition that global models are more effective in filtering out noisy extractions. Also, the more data was available to I DEST, the better the quality across all metrics. I DEST model using all data, i.e, I DEST-Comp-All, was significantly better (with 0.95 confidence) than all other configurations in terms of cluster size, cohesiveness and pattern readability. Pattern relatedness was higher, though not significantly better, than N EWS S PIKE, whose clusters were on average more than ten times smaller. We did not evaluate N EWS S PIKE on the whole news dataset. Being a local model, extending the 1147
+
+System H EADY N EWS S PIKE I DEST I DEST I DEST
+
+Ext Comp ReV ReV Comp Comp
+
+Data All NS NS NS All
+
+Size 3.40! 3.62b 5.54bc 44.09 12.66bcd
+
+Coh(%) 56.20ac 40.00 50.31ac 87.93 34.40!
+
+Rel(%) 66.42acd 47.10a 46.58a 68.28acd 27.70!
+
+Read(%) 60.70 56.66 65.16b 66.04b 80.13
+
+Table 1: Results of the manual evaluation, averaged over all the clusters produced by each configuration listed. Extraction algorithms: ReV = R E V ERB; Comp = Compression; Data sets: NS = NewsSpike URLs; All = news 2008-2014. Quality metrics: Size: average cluster size; Coh: cohesiveness; Rel: relatedness; Read: readability. Statistical significance: a : better than H EADY; b : better than N EWS S PIKE; c : better than I DEST-ReV-NS; d : better than I DEST-Comp-NS;  : better than all others; ! : worse than all others (0.95 confidence intervals, bootstrap resampling).
+
+dataset to cover six years of news would only lead to many more EECs, but it would not affect the reported metrics as each final cluster would still be generated from one single EEC. It is interesting to see that, even though they were trained on the same data, I DEST outperformed H EADY significantly across all metrics, sometimes by a very large margin. Given the improvements on cluster quality, it would be interesting to evaluate I DEST performance on the headline-generation task for which H EADY was initially designed, but we leave this as future work.
+
+6
+
+Conclusions
+
+We described I DEST, a new approach based on neural networks to map event patterns into an embedding space. We show that it can be used to construct high quality pattern clusters based on neighborhood in the embedding space. On a small dataset, I DEST produces comparable results to N EWS S PIKE, but its main strength is in its ability to generalize extractions into a single global model. It scales to hundreds of millions of news, leading to larger clusters of event patterns with significantly better coherence and readability. When compared to H EADY, I DEST outperforms it significantly on all the metrics tried.
+
+Acknowledgments
+The first author was partially supported by the German Federal Ministry of Education and Research, project ALL SIDES (contract 01IW14002).
+
+

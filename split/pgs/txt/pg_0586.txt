@@ -1,0 +1,43 @@
+cs de es hu la
+
+MarMoT (1) ID OOD 93.27 77.83 88.90 82.74 98.21 93.24 96.11 89.78 86.09 67.90
+
+MarMoT (2) ID OOD 93.89 78.52 90.26 84.19 98.22 93.62 96.07 89.83 86.44 67.47
+
+MarMoT (3) ID OOD 93.86 78.55 90.54 84.30 98.16 93.42 95.92 89.70 86.47 67.40
+
+Morfette ID OOD 91.48 76.56 85.89 80.28 97.95 93.97 95.47 89.18 83.68 65.06
+
+SVMTool ID OOD 91.06 75.41 85.98 78.08 97.96 91.36 94.72 88.44 84.09 65.65
+
+Table 1: Baseline experiments comparing MarMoT models of different orders with Morfette and SVMTool. Numbers denote average accuracies on ID and OOD development sets on the full morphological tagging task. A result significantly better than the other four ID (resp. OOD) results in its row is marked with .
+Brownflat ID OOD 99.19 97.25 98.08 93.42 96.99 91.67 98.84 97.91 97.95 93.40 96.78 86.49 94.20 78.95 90.71 85.39 98.47 95.08 96.60 90.57 87.53 71.69 Brownpath ID OOD 99.18 97.21 98.07 93.47 97.02 91.71 98.84 97.97 97.89 93.39 96.62 86.60 94.23 79.01 90.75 85.44 98.47 95.12 96.52 90.54 87.44 71.60 MarLiN ID OOD 99.19 97.26 98.10 93.44 97.01 91.71 98.87 97.97 97.98 93.36 96.91 87.24 94.35 79.14 90.78 85.58 98.48 95.15 96.60 90.64 87.87 72.08 mkcls ID OOD 99.21 97.26 98.11 93.64 97.03 91.86 98.84 97.90 97.99 93.42 96.95 87.19 94.32 79.11 90.68 85.47 98.48 95.13 96.61 90.66 87.67 71.88 Baseline ID OOD 99.00 96.80 97.87 92.21 96.92 91.12 98.62 96.70 97.49 92.79 95.80 81.92 93.89 78.52 90.26 84.19 98.22 93.62 96.07 89.83 86.44 67.47 MarLiN ID OOD 99.16 97.06 98.03 93.35 97.05 91.72 98.79 97.82 97.94 93.30 96.35 85.52 94.23 78.91 90.54 85.08 98.44 94.97 96.47 90.60 86.95 70.30 CW ID OOD 99.12 97.00 98.03 93.02 97.00 91.86 98.80 97.31 97.88 93.40 95.88 84.50 94.10 78.80 90.59 85.21 98.44 94.32 96.48 90.95 86.76 69.32
+
+morph
+
+cs de en es hu la cs de es hu la
+
+cs de en es hu la cs de es hu la
+
+pos
+
+morph
+
+morph
+
+pos
+
+Table 2: Tagging results for LM-based models
+
+Table 3: Tagging results for CW
+
+els Brownflat , mkcls and MarLiN. The runtime of the Brown algorithm depends quadratically on the number of clusters while mkcls and MarLiN have linear complexity. This is reflected in the training times: For German the Brown algorithm takes  5000 min, mkcls  2000 min and MarLiN  500 min. Table 2 shows that the absolute differences between systems are small, but overall MarLiN and mkcls are better.11 We conclude that systems based on the algorithm of Martin et al. (1998) are slightly more accurate for tagging and are several times faster than the more frequently used version of Brown et al. (1992). We thus use MarLiN for the remainder of this paper. Neural Network Representations. We compare MarLiN with the implementation of CW by Al-Rfou et al. (2013). They extracted 64-dimensional representations for only the most frequent 100,000 word forms. To make the comparison fair, we use the intersection of our and their representation vocabularies.12 The results in Table 3 show that MarLiN is
+Brownpath reaches the same performance as MarLiN in one case: pos/es/OOD. 12 We also use representations from Wikipedia (instead of Corpus Corporum) for Latin to increase the similarity of the
+11
+
+best in 15 out of 22 cases and significantly better in eight. CW is best in 9 out of 22 cases and significantly better in two. We conclude that LM-based representations are more suited for tagging as they can be induced faster, are smaller and give better results. SVD and ACT Representations. For the SVDbased representation we use feature ranks out of {500, 1000} and dimensions out of {50, 100, 200, 500}. We found that l1-normalizing the vectors before and after the SVD improved results slightly. For the accumulated tag counts (ACT) we annotate the data with our baseline model and extract wordtag probabilities. The probabilities are then used as sparse real-valued features. Table 4 shows that all representations outperform the baseline. Improvements are biggest for Latin. Overall, SVD outperforms ACT and is outperformed by MarLiN and MA. MarLiN gives the best representations for POS tagging while MA outperforms MarLiN in MORPH tagging. Table 5 shows that the findings for the baseline, MarLiN and MA also hold for the test set.
+training data.
+
+532
+
+

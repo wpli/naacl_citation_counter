@@ -1,0 +1,28 @@
+whether the following word begins with a consonant or a vowel. Our model handles this dependency by learning a conditional model over surface/underlying form pairs (s, u)  X that depends on the phonological context c: P(s, u | c, ) = Zc =
+(s,u)X
+
+1 exp( · f (s, u, c)), where: Zc exp( · f (s, u, c))
+
+Because our model is a MaxEnt model, we have considerable freedom in the choice of features, and as Berg-Kirkpatrick et al. (2010) emphasise, the choice of features directly determines the kinds of generalisations the model can learn. The features f (s, u, c) of a surface form s, underlying form u and context c we use here are inspired by OT. We describe our features using an example where s = [l.ih.v], u = /l.ih.v.t/ and c = C (i.e., the word is followed by a consonant). Underlying form lexical features: A feature for each underlying form u. In our example, the feature is <U l ih v t>. These features enable the model to learn language-specific lexical entries. There are 4,803,734 underlying form lexical features (one for each possible substring in the training data). Surface markedness features: The length of the surface string (<#L 3>), the number of vowels (<#V 1>) (this is a rough indication of the number of syllables), the surface suffix (<Suffix v>), the surface prefix and suffix CV shape (<CVPrefix CV> and <CVSuffix VC>), and suffix+context CV shape (<CVContext _C> and <CVContext C _C>). There are 108 surface markedness features. Faithfulness features: A feature for each divergence between underlying and surface forms (in this case, <*F t>). There are two faithfulness features. We used L1 regularisation here, rather than the L2 regularisation used by Berg-Kirkpatrick et al. (2010), in the hope that its sparsity-inducing "feature selection" capabilities would enable it to "learn" lexical entries for the language, as well as precisely which markedness features are required to account for the data. However, we found that the choice of L1 versus L2 regression makes little difference, and the model is insensitive to the value of the regulariser constant  (we set to  = 1 in the experiments below). We developed a specially modified version of the LBFGS-OWLQN optimisation procedure for optimising L1 -regularised loss functions (Andrew and
+
+In our experiments below, the set of possible contexts is C = {C, V, #}, encoding whether the following word begins with a consonant, a vowel or is the end of the utterance respectively. We leave for future research the exploration of other sorts of contextual conditioning. Note that the set X is the same for all contexts c; we show below that restricting attention to just those surface/underlying pairs appearing in the context c degrades the model's performance. In other words, the model benefits from the implicit negative evidence provided by underlying/surface pairs that do not occur in a given context. We define the probability of a surface form s  S in a context c  C by marginalising out the underlying form: P(s | c, ) =
+u:(s,u)X
+
+P(s, u | c, )
+
+We optimise a penalised log likelihood QD (), with the word length penalty term d applied to the underlying form u. Q(s | c, ) =
+u:(s,u)X
+
+P(s, u | c, ) exp(-|u|d ) Q(sj | c, )
+
+Q(w | ) =
+
+s1 ...s j =1 s.t.s1 ...s =w n i=1
+
+QD () =
+
+log Q(wi | ) -  ||||1
+
+We are somewhat cavalier about the conditional contexts c here: in our model below the context c for a word is determined by the following word, so one can view our model as a generative model that generates the words in an utterance from right to left. 307
+
+

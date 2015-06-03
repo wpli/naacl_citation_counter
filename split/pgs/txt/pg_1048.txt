@@ -1,0 +1,16 @@
+and vocabulary may restrict it to be basic and precise to explain a certain concept with fewer presumptions of what the readers already know, and it is suggested by the analysis that such style is also reflected in full Wikipedia, leading to the domination of general knowledge over specific facts.
+
+7
+
+Conclusion
+
+This paper has shown vectorial representations derived from substantially smaller explanatory text datasets such as Wikipedia and Simple Wikipedia preserve enough lexical semantic information to make these kinds of category judgments with equal or better accuracy than news corpora. Analysis shows these results may be driven by a prevalence of commonsense facts in explanatory text. These positive results for small datasets suggest vectors derived from slower but more accurate analysis of these resources may be practical for lexical semantic applications, and we hope by providing this result, future researchers may be more aware of the viability of smaller-scale resources like Simple English Wikipedia (or presumably Wikipedia in other languages which are substantially smaller in size than English Wikipedia), that can still produce high quality vectors despite a much smaller size.
+
+Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient estimation of word representations in vector space. ICLR Workshop Papers Napoles, C., & Dredze, M. (2010). Learning simple Wikipedia: A cogitation in ascertaining abecedarian language. NAACL HLT Pennington, J., & Socher, R. (2014). Glove: Global vectors for word representation. EMNLP. Qiu, L., Cai, Y., Nie, Z., & Rui, Y. (2014). Learning Word Representation Considering Proximity and Ambiguity (pp. 1572­1578). AAAI Conference on Artificial Intelligence. Rehurek, R., & Sojka, P. (2010). Software Framework for Topic Modelling with Large Corpora. LREC Workshop on New Challenges for NLP Frameworks, 45­50.
+
+References
+Agirre, E., Alfonseca, E., Hall, K., Kravalova, J., Pasca, M., & Soroa, A. (2009). A study on similarity and relatedness using distributional and WordNet-based approaches (pp. 19­27). Association for Computational Linguistics. Coster, W., & Kauchak, D. (2011). Learning to simplify sentences using Wikipedia (pp. 1­9). Association for Computational Linguistics. Dumais, S. T., Furnas, G. W., Landauer, T. K., Deerwester, S., & Harshman, R. (1988). Using latent semantic analysis to improve access to textual information. the SIGCHI conference (pp. 281­285). New York, New York, USA: ACM. doi:10.1145/57167.57214 Gabrilovich, E., & Markovitch, S. (2007). Computing Semantic Relatedness Using Wikipedia-based Explicit Semantic Analysis. IJCAI. Lehmann, J., Isele, R., Jakob, M., & Jentzsch, A. (2014). DBpedia­A large-scale, multilingual knowledge base extracted from Wikipedia. Semantic Web. Levy, O., & Goldberg, Y. (2014). Dependency-Based Word Embeddings. Association for Computational Linguistics.
+
+994
+
+

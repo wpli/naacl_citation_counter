@@ -1,0 +1,26 @@
+Reserating the awesometastic: An automatic extension of the WordNet taxonomy for novel terms
+David Jurgens School of Computer Science McGill University jurgens@cs.mcgill.ca Mohammad Taher Pilehvar Department of Computer Science Sapienza University of Rome pilehvar@di.uniroma1.it
+
+Abstract
+This paper presents C ROWN, an automatically constructed extension of WordNet that augments its taxonomy with novel lemmas from Wiktionary. C ROWN fills the important gap in WordNet's lexicon for slang, technical, and rare lemmas, and more than doubles its current size. In two evaluations, we demonstrate that the construction procedure is accurate and has a significant impact on a WordNet-based algorithm encountering novel lemmas.
+
+1
+
+Introduction
+
+Semantic knowledge bases are an essential, enabling component of many NLP applications. A notable example is WordNet (Fellbaum, 1998), which encodes a taxonomy of concepts and semantic relations between them. As a result, WordNet has enabled a wide variety of NLP techniques such as Word Sense Disambiguation (Agirre et al., 2014), information retrieval (Varelas et al., 2005), semantic similarity (Pedersen et al., 2004; B¨ ar et al., 2013), and sentiment analysis (Baccianella et al., 2010). However, semantic knowledge bases such as WordNet are expensive to produce; as a result, their scope and domain are often constrained by the resources available and may omit highly-specific concepts or lemmas, as well as new terminology that emerges after their construction. For example, WordNet does not contain the nouns "stepmom," "broadband," and "prequel." Because of the coverage limitations of WordNet, several approaches have attempted to enrich WordNet with new relations and concepts. One group of approaches has enriched WordNet by aligning its structure with that of other resources such as Wikipedia or Wiktionary (RuizCasado et al., 2005; Navigli and Ponzetto, 2012; Miller and Gurevych, 2014; Pilehvar and Navigli, 2014). However, because these approaches identify corresponding lemmas with identical lexicalizations, they are often unable to directly add novel lemmas to the existing taxonomic structure. The second group of approaches performs taxonomy induction to learn hypernymy relation-
+
+ships between words (Moro and Navigli, 2012; Meyer and Gurevych, 2012). However, these approaches often produce separate taxonomies from WordNet, which are also generally not readily accessible as resources. We introduce a new resource C ROWN (CommunityenRiched Open WordNet) that extends the existing WordNet taxonomy, more than doubling the existing number of synsets, and attaches these novel synsets to their appropriate hypernyms in WordNet. Novel sense data is extracted from Wiktionary, a large-scale collaboratively-constructed dictionary, and attached using multiple heuristics. C ROWN fills an important gap in WordNet's limited coverage of both domain-specific lemmas and slang terminology and idioms.1 In two experiments, we demonstrate that (1) our construction process accurately associates a novel sense with its correct hypernym and (2) the resulting resource has an immediate benefit for existing WordNet-based applications. Importantly, C ROWN v1.0 is publicly available and released in WordNet format, making it seamlessly integratable with all existing WordNet libraries and tools.
+
+2
+
+Wiktionary
+
+Wiktionary is a multilingual online dictionary that, as of May 2014, contains more than 470K English gloss definitions. Thanks to its collaboratively-constructed nature, Wiktionary provides a high coverage of novel domainspecific, idiomatic and slang terms or meanings, across all parts of speech, while featuring a wide variety of linguistic information such as morphology, etymology, pronunciation and alternative lexicalizations of a lemma. Given these characteristics, Wiktionary is an ideal resource for improving the coverage of hand-crafted lexicons, such as WordNet. In addition to definitions, Wiktionary contains two sources of semantic relations. First, the Wiktionary entry
+example, "reserate" is correctly included in C ROWN as a hypernym of unlock%2:35:00:: (to open the lock of) and "awesometastic" as a synonym of fantastic%3:00:00:extraordinary:00 (extraordinarily good or great).
+1 For
+
+1459
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1459­1465, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

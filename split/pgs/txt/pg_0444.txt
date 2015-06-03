@@ -1,0 +1,23 @@
+2.3.2 English Treebank For the validation of the generator on English, we use the dependency Penn TreeBank (about 1,000,000 tokens), which we extend by a DSynt layer defined by the same deep dependency relations, features and node correspondences as the Spanish DSynt layer. The Penn TreeBank DSynt layer is obtained by a rule-based graph transducer. The transducer removes definite and indefinite determiners, auxiliaries, THAT complementizers, TO infinitive markers, and a finite list of functional prepositions. The functional prepositions have been manually compiled from the description and examples of the roles in the PropBank and NomBank annotations of the 150 most frequent predicates of the corpus. A dictionary has been built, which contains for each of the 150 predicates the argument slots (roles) and the prepositions associated to it, such that given a predicate and a preposition, we know to which role it corresponds. Consider, for illustration, Figure 2, which indicates that for the nominal predicate plan 01, a dependent introduced by the preposition to corresponds to the second argument of plan 01, while a dependent introduced by for is its third argument.
+
+For instance, in the sentence Sony announced its plans to hire Mr. Guber, to is a dependent of plan with the SSyntS dependency NMOD. NMOD is by default mapped onto the deep relation ATTR, but since in the dictionary entry of plan it is stated that a dependent introduced by to is mapped to `II' (cf. Figure 2), II is the relation that appears in the DSyntS-annotation. The features definiteness, voice, tense, aspect in the FEATS column of the CoNLL format capture the information conveyed by determiners and auxiliaries. The conversion procedure maps surface dependency relations as found in the Penn TreeBank onto the restricted set of deep dependency relations as described in Section 2.1.1. The nodes in the original (surface-oriented) and deep annotations are connected through their IDs. In the FEATS column of the output CoNLL file, id0 indicates the deep identifier of a word, while id1 indicates the ID of the surface node it corresponds to. There are less nodes in DSyntSs than in SSyntSs since SSyntSs contain all the words of a sentence. Hence, a DSynt-node can correspond to several SSyntS nodes. Multiple correspondences are indicated by the presence of the id2 (id3, id4, etc) feature in the FEATS column.
+
+3
+Figure 2: A sample (partial) mapping dictionary entry
+
+Deep Generation
+Baselines
+
+3.1
+
+For each possible surface dependency relation between a governor and a dependent, a default mapping is provided, which is applied if (i) The syntactic structure fulfills the conditions of the default mapping (e.g., `subject' is by default mapped onto `I ' unless it is the subject of a passive verb, in which case it is mapped to the second argument `II '), and (ii) The pair governor­dependent is not found in the dictionary; that is, if the dependent of the SSyntS dependency relation is a preposition found in the governor's entry in the dictionary, the information provided in the dictionary is used instead of the default mapping.8
+8
+
+Since no available data-driven generator uses as input DSyntSs, we developed as baselines two rulebased graph transducer generators which produce for English respectively Spanish the best possible SSyntSs, using only the information contained in the starting DSyntS. The two baseline generators are structured similarly: both contain around 50 graph transducer rules, separated into two clusters. The first cluster maps DSyntS-nodes onto SSyntS-nodes, while the second one handles the introduction of SSyntS dependency relations between the generated SSyntS-nodes. For instance, in English, one rule maps DSyntS-nodes that have a one-to-one correspondence in the SSyntS
+external and internal arguments, such that for some predicates the arguments are numbered starting from `0', and for other starting from `1'. This has been normalized in order to make all arguments start from `1' for all predicates.
+
+In the PropBank annotation, a distinction is made between
+
+390
+
+

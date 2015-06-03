@@ -1,0 +1,23 @@
+Representation Learning Using Multi-Task Deep Neural Networks for Semantic Classification and Information Retrieval
+Xiaodong Liu , Jianfeng Gao , Xiaodong He , Li Deng , Kevin Duh and Ye-yi Wang Nara Institute of Science and Technology, 8916-5 Takayama, Ikoma, Nara 630-0192, Japan  Microsoft Research, One Microsoft Way, Redmond, WA 98052, USA xiaodong-l@is.naist.jp, {jfgao,xiaohe,deng}@microsoft.com kevinduh@is.naist.jp, yeyiwang@microsoft.com
+
+
+
+Abstract
+Methods of deep neural networks (DNNs) have recently demonstrated superior performance on a number of natural language processing tasks. However, in most previous work, the models are learned based on either unsupervised objectives, which does not directly optimize the desired task, or singletask supervised objectives, which often suffer from insufficient training data. We develop a multi-task DNN for learning representations across multiple tasks, not only leveraging large amounts of cross-task data, but also benefiting from a regularization effect that leads to more general representations to help tasks in new domains. Our multi-task DNN approach combines tasks of multiple-domain classification (for query classification) and information retrieval (ranking for web search), and demonstrates significant gains over strong baselines in a comprehensive set of domain adaptation.
+
+representations learned from large corpora. Further, since these representations are usually in a lowdimensional vector space, they result in more compact models than those built from surface-form features. A recent successful example is the parser by (Chen and Manning, 2014), which is not only accurate but also fast. However, existing vector-space representation learning methods are far from optimal. Most previous methods are based on unsupervised objectives such as word prediction for training (Mikolov et al., 2013c; Pennington et al., 2014). Other methods use supervised training objectives on a single task, e.g. (Socher et al., 2013), and thus are often constrained by limited amounts of training data. Motivated by the success of multi-task learning (Caruana, 1997), we propose in this paper a multi-task DNN approach for representation learning that leverages supervised data from many tasks. In addition to the benefit of having more data for training, the use of multi-task also profits from a regularization effect, i.e., reducing overfitting to a specific task, thus making the learned representations universal across tasks. Our contributions are of two-folds: First, we propose a multi-task deep neural network for representation learning, in particular focusing on semantic classification (query classification) and semantic information retrieval (ranking for web search) tasks. Our model learns to map arbitrary text queries and documents into semantic vector representations in a low dimensional latent space. While the general concept of multi-task neural nets is not new, our model is novel in that it successfully combines tasks as disparate as operations necessary for classifica-
+
+1
+
+Introduction
+
+Recent advances in deep neural networks (DNNs) have demonstrated the importance of learning vector-space representations of text, e.g., words and sentences, for a number of natural language processing tasks. For example, the study reported in (Collobert et al., 2011) demonstrated significant accuracy gains in tagging, named entity recognition, and semantic role labeling when using vector space word
+
+
+This research was conducted during the author's internship at Microsoft Research.
+
+912
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 912­921, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

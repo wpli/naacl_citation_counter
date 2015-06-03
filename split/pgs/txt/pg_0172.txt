@@ -1,0 +1,41 @@
+Algorithm 3: G ET P OSSIBLE ACTIONS for full tree linearization, where C is a full tree
+Input: A state s = ([ |j i], , A) and gold tree C Output: A set of possible transition actions T T  if s. is empty then for k  s. do T  T  (S HIFT, P OS, k ) else if j, j  (D ESCENDANTS(i)  s.) then for j  (D ESCENDANTS(i)  s.) do T  T  (S HIFT, P OS, j ) else if {j  i}  C then T  T  (R IGHTA RC) else if {j  i}  C then T  T  (L EFTA RC) else for k  (S IBLINGS(i)  H EAD(i))  s. do T  T  (S HIFT, P OS, k )
+0.45
+
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+BLEU
+
+0.40
+
+beamsize 0.35 0 10
+
+X1 20
+
+X4 30
+
+X16
+
+X64 40
+
+X128 50
+
+iteration
+
+Figure 7: Dev. results with different beam sizes. nal sections 2­21 for training, 22 for development testing and 23 for final testing. Gold-standard dependency trees are derived from bracketed sentences in the treebank using Penn2Malt1 , and base noun phrases are treated as a single word (Wan et al., 2009; Zhang, 2013). The BLEU score (Papineni et al., 2002) is used to evaluate the performance of linearization, which has been adopted in former literals (Wan et al., 2009; White and Rajkumar, 2009; Zhang and Clark, 2011b) and recent shared-tasks (Belz et al., 2011). We use our implementation of the best-first system of Zhang (2013), which gives the state-of-the-art results, as the baseline. 4.1 Influence of Beam size We first study the influence of beam size by performing free word ordering on the development test data. BLEU score curves with different beam sizes are shown in Figure 7. From this figure, we can see that the systems with beam 64 and 128 achieve the best results. However, the 128-beam system does not improve the performance significantly (48.2 vs 47.5), but runs twice slower. As a result, we set the beam size to 64 in the remaining experiments. 4.2 Input Syntactic Constraints To test the effectiveness of G ET P OSSIBLE ACTIONS under different input constraints, we follow Zhang (2013) and feed different amounts of POS-tags and dependencies to our transition-based linearization system. Input syntactic constraints are obtained by randomly sampling POS and dependencies from the gold dependency tree. Nine development experiments under different inputs are performed, and the
+1
+
+17
+
+return T
+
+3.2.3 Full Tree Constraints Algorithm 2 can also be used with full-tree constraints, which are a special case of partial-tree constraints. However, there is a conceptually simpler algorithm that leverages full-tree constraints. Because tree linearization is frequently studied in the literature, we describe this algorithm in Algorithm 3. When the stack is empty, we can freely move any word in the buffer  onto the stack (line 2-4). If not all the descendants of the stack top i have been processed, the next transition actions should move them onto the stack, so that arcs can be constructed between i and these words (line 6-8). If all the descendants of i have been processed, the next action should eagerly build arcs between top two words i and j on the stack (line 10-13). If no arc exists between i and j , the next action should shift the parent word of i or a word in i's sibling tree (line 14-16).
+
+4 Experiments
+We follow previous work and conduct experiments on the Penn Treebank (PTB), using Wall Street Jour-
+
+http://stp.lingfil.uu.se/~nivre/research/Penn2Malt.html
+
+118
+
+

@@ -1,0 +1,27 @@
+in which dense representations are learned for individual words based on their neighbors (Turian et al., 2010; Xiao and Guo, 2013), but rather than learning a single embedding for each word, we learn embeddings for each feature. This means that the embedding of, say, `toughness' will differ depending on whether it appears in the current-word template or the previous-word template (see Table 6). This provides additional flexibility for the downstream learning algorithm, and the increase in the dimensionality of the overall dense representation can be offset by learning shorter embeddings for each feature. In Section 4, we show that feature embeddings convincingly outperform word embeddings on two partof-speech tagging tasks. Our feature embeddings are based on the skip-gram model, trained with negative sampling (Mikolov et al., 2013a), which is a simple yet efficient method for learning word embeddings. Rather than predicting adjacent words, the training objective in our case is to find feature embeddings that are useful for predicting other active features in the instance. For the instance n  {1 . . . N } and feature template t  {1 . . . T }, we denote fn (t) as the index of the active feature; for example, in the instance shown in Figure 2, fn (t) = `new' when t indicates the previous-word template. The skip-gram approach induces distinct "input" and "output" embeddings for each feature, written ufn (t) and vfn (t) , respectively. The role of these embeddings can be seen in the negative sampling objective,
+n
+
+on the union of the source and target data sets; we consider the extension to multiple domains in the next section. The dense feature vector for each instance is obtained by concatenating the feature embeddings for each template. Finally, since it has been shown that nonlinearity is important for generating robust representations (Bengio et al., 2013), we follow Chen et al. (2012) and apply the hyperbolic tangent function to the embeddings. The augmented (aug) representation xn of instance n is the concatenation of the original feature vector and the feature embeddings, x(aug) = xn  tanh[ufn (1)  · · ·  ufn (T ) ], n where  is vector concatenation.
+
+3
+
+Feature embeddings across domains
+
+1 = T
+
+T
+
+T
+
+t=1 t =t
+
+log  (ufn (t) vfn (t ) ) (1)
+
++k EiP (n) log  (-ufn (t) vi ) ,
+t
+
+where t and t are feature templates, k is the num(n) ber of negative samples, Pt is a noise distribution for template t , and  is the sigmoid function. This objective is derived from noise-contrastive estimation (Gutmann and Hyv¨ arinen, 2012), and is chosen to maximize the unnormalized log-likelihood of the observed feature co-occurrence pairs, while minimizing the unnormalized log-likelihood of "negative" samples, drawn from the noise distribution. Feature embeddings can be applied to domain adaptation by learning embeddings of all features 674
+
+We now describe how to extend the feature embedding idea beyond a single source and target domain, to unsupervised multi-attribute domain adaptation (Joshi et al., 2013). In this setting, each instance is associated with M metadata domain attributes, which could encode temporal epoch, genre, or other aspects of the domain. The challenge of domain adaptation is that the meaning of features can shift across each metadata dimension: for example, the meaning of `plant' may depend on genre (agriculture versus industry), while the meaning of `like' may depend on epoch. To account for this, the feature embeddings should smoothly shift over domain graphs, such as the one shown in Figure 1; this would allow us to isolate the domain general aspects of each feature. Related settings have been considered only for supervised domain adaptation, where some labeled data is available in each domain (Joshi et al., 2013), but not in the unsupervised case. More formally, we assume each instance n is augmented with a vector of M binary domain attributes, z n  {0, 1}M . These attributes may overlap, so that we could have an attribute for the epoch 1800-1849, and another for the epoch 1800-1899. We define zn,0 = 1 as a shared attribute, which is active for all instances. We capture domain shift (m) by estimating embeddings hi for each feature i crossed with each domain attribute m. We then compute the embedding for each instance by summing across the relevant domain attributes, as shown
+
+

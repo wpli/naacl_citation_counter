@@ -1,0 +1,64 @@
+b( )
+
+ yi ai j
+jJ iN
+
+
+b( )  jk
+kK jJ
+
+k yi xi
+
+b( )
+kK
+
+ yi
+
+b( )  jk
+
+b( ) k
+kK
+
+b( )  jk ai j
+jJ iN kK jJ
+
+ai j
+jJ iN
+
+kK jJ
+
+xi
+
+(a) I TEM R ESP
+
+(b) L OG R ESP
+
+(c) M OM R ESP
+
+Figure 1: Directed graphical model depictions of the models discussed in this paper. Round nodes are variables with distributions. Rectangular nodes are hyperparameters (without distributions). Shaded nodes have known values (although some a values may be unobserved). 3.1 Log-linear data model (L OG R ESP) fer to the model as M OM R ESP, shown in Figure 1c. p( , ,  , y, x, a) = p( )
+kK iN
+
+One way to make I TEM R ESP data-aware is by adding a discriminative log-linear data component (Raykar et al., 2010; Liu et al., 2012). For short, we refer to this model as L OG R ESP, illustrated in Figure 1b. Concretely, p( ,  , y, a|x) =
+kK
+
+  p( jk )
+jJ kK jJ
+
+(3)
+
+ p(k )  p(yi | ) p(xi |yi ,  )  p(ai j | j , yi )
+
+  p( jk )
+jJ kK iN jJ
+
+(2)
+
+ p(k )  p(yi |xi ,  )  p(ai j | j , yi )
+
+where xi f is the value of feature f in data instance i (e.g., a word count in a text classification problem), k f is the probability of feature f occurring in an instance of class k, k  Normal (0, ), and yi |xi ,   LogLinear(xi ,  ). That is, p(yi |xi ,  ) = T x ]/ T x ]. exp[y k exp[k i i i In the special case that each  j is the identity matrix (each annotator is perfectly accurate), L OG R ESP reduces to a multinomial logistic regression model. Because it is a conditional model, L OG R ESP lacks any built-in capacity for semi-supervised learning. 3.2 Multinomial data model (M OM R ESP)
+
+An alternative way to make I TEM R ESP data-aware is by adding a generative multinomial data component (Lam and Stork, 2005; Felt et al., 2014). We re884
+
+where k f is the probability of feature f occurring ( ) in an instance of class k, k  Dirichlet (bk ), xi  Multinomial (yi , Ti ), and Ti is a number-of-trials parameter (e.g., for text classification Ti is the number of words in document i). Ti = |xi |1 is observed during posterior inference p( ,  ,  , y|x, a). Because M OM R ESP is fully generative over the data features x, it naturally performs semisupervised learning as data from unannotated instances NU inform inferred class labels yA of annotated instances via  . This can be seen by observing that p(x) terms prevent terms involving yU from summing out of the marginal distribution p( ,  ,  , yA , x, a) = yU p( ,  ,  , yA , yU , x, a) = p( ,  ,  , yA , xA , a) yU p(yU | ) p(xU |yU ). When N = NU (the unsupervised setting) the posterior distribution p( ,  ,  , yU |x, a) = p( ,  , yU |x) is a mixture of multinomials clustering model. Otherwise, the model resembles a semi-supervised na¨ ive Bayes classifier (Nigam et al., 2006). However, na¨ ive Bayes is supervised by trustworthy labels whereas M OM R ESP is supervised by imperfect annotations mediated by inferred annotator error characteristic  . In the special case that  is the identity matrix (each annotator is perfectly accurate), M OM R ESP reduces to a possibly semi-supervised na¨ ive
+
+

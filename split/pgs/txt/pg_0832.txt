@@ -1,0 +1,28 @@
+Using External Resources and Joint Learning for Bigram Weighting in ILP-Based Multi-Document Summarization
+Chen Li1 , Yang Liu1 , Lin Zhao2 1 Computer Science Department, The University of Texas at Dallas Richardson, Texas 75080, USA 2 Research and Technology Center, Robert Bosch LLC Palo Alto, California 94304, USA {chenli,yangl@hlt.utdallas.edu} {lin.zhao@us.bosch.com} Abstract
+Some state-of-the-art summarization systems use integer linear programming (ILP) based methods that aim to maximize the important concepts covered in the summary. These concepts are often obtained by selecting bigrams from the documents. In this paper, we improve such bigram based ILP summarization methods from different aspects. First we use syntactic information to select more important bigrams. Second, to estimate the importance of the bigrams, in addition to the internal features based on the test documents (e.g., document frequency, bigram positions), we propose to extract features by leveraging multiple external resources (such as word embedding from additional corpus, Wikipedia, Dbpedia, WordNet, SentiWordNet). The bigram weights are then trained discriminatively in a joint learning model that predicts the bigram weights and selects the summary sentences in the ILP framework at the same time. We demonstrate that our system consistently outperforms the prior ILP method on different TAC data sets, and performs competitively compared to other previously reported best results. We also conducted various analyses to show the contributions of different components.
+
+whether or not a sentence is in the summary, or unsupervised methods such as graph-based approaches to rank the sentences. Recently global optimization methods such as integer linear programming (ILP) have been shown to be quite powerful for this task. For example, Gillick et al. (2009) used ILP to achieve the best result in the TAC 09 summarization task. The core idea of this summarization method is to select the summary sentences by maximizing the sum of the weights of the language concepts that appear in the summary. Bigrams are often used as these language concepts because Gillick et al. (2009) stated that the bigrams gave consistently better performance than unigrams or trigrams for a variety of ROUGE measures. The association between the language concepts and sentences serves as the constraints. This ILP method is formally represented as below (see (Gillick et al., 2009) for more details): max s.t.
+i wi ci
+
+(1) (2) (3) (4) (5) (6)  ci
+
+sj Occij  ci
+j sj Occij j lj sj
+
+L
+
+ci  {0, 1} i sj  {0, 1} j
+
+1
+
+Introduction
+
+Extractive summarization is a sentence selection problem: identifying important summary sentences from one or multiple documents. Many methods have been developed for this problem, including supervised approaches that use a classifier to predict
+
+ci and sj are binary variables that indicate the presence of a concept and a sentence respectively. lj is the sentence length and L is maximum length of the generated summary. wi is a concept's weight and Occij means the occurrence of concept i in sentence j . Inequalities (2)(3) associate the sentences
+
+778
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 778­787, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

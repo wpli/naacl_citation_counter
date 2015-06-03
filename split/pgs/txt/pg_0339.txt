@@ -1,0 +1,28 @@
+Transaction Type Property Type
+
+A listing can have one or more of the following transaction types: sale, lease, investment. A listing can have one or more of the following property types: retail, office, industrial, land, multi-family.
+
+3
+3.1
+
+Method
+Dataset
+
+Table 1: Types and descriptions of flyer categories.
+
+scriptions are summarized in Table 2. The named entities represent a typical set of attributes collected by commercial real estate listing services. They are 1) one or more brokers representing the property and their contact information; 2) the full address of the property broken down into individual address fields; 3) one or more spaces including their sizes and types (e.g. sizes of available units in a shopping mall, the sizes of a warehouse building and associated office building, etc.).
+
+Broker Name Broker Email Broker Phone Company Name Street City Neighborhood State Zip Space Size and Type
+
+The contact information of all listing brokers, including full name, email address, phone number. The brokerage company name. The address information of the listing address including street or intersection, city, state, and, zip code. Size and attributes of relevant spaces (e.g. 27,042 SF building, 4.44 acres site, etc.); Includes the numeric value, unit of measure, whether the value is a part of a range (min or max) or exact value, as well as the space type (unit, building,lot); Excludes size information of non-essential listing attributes (e.g. basement size or parking lot size).
+
+The dataset consists of 2,269 commercial real estate flyers submitted to a listing service3 over a period of one year. It represents over 450 US locations, over 90 commercial real estate companies and over 800 commercial real estate brokers. The flyers were generated using different tools and formats and represent a wide variety of styles. Typically, the same broker can represent properties of various categories and transaction types. The text categorization was evaluated using the full dataset of 2,269 flyers with 5-fold cross validation. For the NER task, we used 60 percent of the flyers for training (a total of 1,361 flyers), and the remaining 40 percent for testing (a total of 908 flyers). All flyers (PDF and HTML) were converted to a common format (HTML)4 . The flyers were converted to text using an HTML parser and extracting DOM5 text elements while preserving some of the white space formatting. In some cases, text was presented inside embedded images within the flyer. Since the majority of flyers, however, were mostly in text format, OCR6 was not used and text within images was discarded. The median number of characters, tokens, and sentences for flyers are 2106, 424, and 72 respectively. 3.2 Training Data Transformation
+
+Table 2: Types and descriptions of named entities relevant to extracting listing information from commercial real estate flyers.
+
+In previous work, we have created a tool used to annotate HTML flyers and evaluated the NER task on a subset of 800 manually annotated flyers. However, the manual annotation proved a laborious task (the same listing attribute typically appears multiple times in the document) and resulted in moderate inter-annotator agreement. In this work, instead of manually annotating the full set of 2,269 flyers, we used listing data entered by professional data enc BrokerSavant Inc. PDFs were converted to HTML using the PDFTOHTML conversion program http://pdftohtml. sourceforge.net/. While the open-source tool occasionally misaligned text, performance was satisfactory and the use of more accurate commercial PDF-to-HTML5 conversion tool was deemed unnecessary. 5 Document Object Model. 6 Optical Character Recognition.
+4 3
+
+The problem of automatically extracting structured information from real estate flyers was then implemented as a combination of the text categorization and NER tasks. 285
+
+

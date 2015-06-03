@@ -1,0 +1,26 @@
+Unsupervised Multi-Domain Adaptation with Feature Embeddings
+Yi Yang and Jacob Eisenstein School of Interactive Computing Georgia Institute of Technology Atlanta, GA 30308 {yiyang+jacobe}@gatech.edu
+
+Abstract
+Representation learning is the dominant technique for unsupervised domain adaptation, but existing approaches have two major weaknesses. First, they often require the specification of "pivot features" that generalize across domains, which are selected by taskspecific heuristics. We show that a novel but simple feature embedding approach provides better performance, by exploiting the feature template structure common in NLP problems. Second, unsupervised domain adaptation is typically treated as a task of moving from a single source to a single target domain. In reality, test data may be diverse, relating to the training data in some ways but not others. We propose an alternative formulation, in which each instance has a vector of domain attributes, can be used to learn distill the domain-invariant properties of each feature.1 Narrative Letters Dissertation Theatre
+
+1800 1750 1700 1650 1600 1550 1500 s t
+
+Figure 1: Domain graph for the Tycho Brahe corpus (Galves and Faria, 2010). Suppose we want to adapt from 19th Century narratives to 16th Century dissertations: can unlabeled data from other domains help?
+
+1
+
+Introduction
+
+Domain adaptation is crucial if natural language processing is to be successfully employed in highimpact application areas such as social media, patient medical records, and historical texts. Unsupervised domain adaptation is particularly appealing, since it requires no labeled data in the target domain. Some of the most successful approaches to unsupervised domain adaptation are based on representation learning: transforming sparse high-dimensional surface features into dense vector representations,
+Source code and a demo are available at https:// github.com/yiyang-gt/feat2vec
+1
+
+which are often more robust to domain shift (Blitzer et al., 2006; Glorot et al., 2011). However, these methods are computationally expensive to train, and often require special task-specific heuristics to select good "pivot features." A second, more subtle challenge for unsupervised domain adaptation is that it is normally framed as adapting from a single source domain to a single target domain. For example, we may be given partof-speech labeled text from 19th Century narratives, and we hope to adapt the tagger to work on academic dissertations from the 16th Century. This ignores text from the intervening centuries, as well as text that is related by genre, such as 16th Century narratives and 19th Century dissertations (see Figure 1). We address a new challenge of unsupervised multidomain adaptation, where the goal is to leverage this additional unlabeled data to improve performance in the target domain.2
+Multiple domains have been considered in supervised domain adaptation (e.g., Mansour et al., 2009), but these approaches are not directly applicable when there is no labeled data outside the source domain.
+2
+
+672
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 672­682, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

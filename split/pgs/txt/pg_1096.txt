@@ -1,0 +1,21 @@
+Matching Citation Text and Cited Spans in Biomedical Literature: a Search-Oriented Approach
+Arman Cohan, Luca Soldaini, Nazli Goharian Georgetown University, Information Retrieval Lab, Computer Science Department {arman, luca, nazli}@ir.cs.georgetown.edu Abstract
+Citation sentences (citances) to a reference article have been extensively studied for summarization tasks. However, citances might not accurately represent the content of the cited article, as they often fail to capture the context of the reported findings and can be affected by epistemic value drift. Following the intuition behind the TAC (Text Analysis Conference) 2014 Biomedical Summarization track, we propose a system that identifies text spans in the reference article that are related to a given citance. We refer to this problem as citance-reference spans matching. We approach the problem as a retrieval task; in this paper, we detail a comparison of different citance reformulation methods and their combinations. While our results show improvement over the baseline (up to 25.9%), their absolute magnitude implies that there is ample room for future improvement. Reference Article
+(Voorhoeve et al., 2006): "These miRNAs neutralize p53-mediated CDK inhibition, possibly through direct inhibition of the expression of the tumor suppressor LATS2."
+
+Citing Article
+(Okada et al., 2011): "Two oncogenic miRNAs, miR-372 and miR373, directly inhibit the expression of Lats2, thereby allowing tumorigenic growth in the presence of p53 (Voorhoeve et al., 2006)."
+
+Figure 1: Example of epistemic value drift from (De Waard and Maat, 2012). The claim in (Voorhoeve et al., 2006) becomes fact in (Okada et al., 2011).
+
+1
+
+Introduction
+
+The size of scientific literature has increased dramatically during recent decades. In biomedical domain for example, PubMed ­ the largest repository of biomedical literature ­ contains more than 24 million articles. Thus, there is a need for concise presentation of important findings in the scientific articles being published. Text summarization of scientific articles is a method for such presentation. One obvious form of scientific summaries, is the abstract of the articles. Another type of scientific summaries relates to citance-based summaries which are summaries created using the set of citations to a reference article. This kind of summary covers some aspects of the reference article which might not be present in its abstract (Elkiss et al., 2008). Citances often cover important and novel insights about findings or aspects of a paper that others 1042
+
+have found interesting; thus, they capture contributions that had an impact on the research community (Elkiss et al., 2008; Qazvinian and Radev, 2008). In the past, many have focused on citance extraction and citance-based summarization. Example of citance extraction include (Siddharthan and Teufel, 2007), who used a machine learning approach with linguistic, lexical, statistical and positional features, and (Kaplan et al., 2009), who studied a coreference resolution based approach. Citance extraction has been also studied in the context of automatic summarization. For example, (Qazvinian and Radev, 2010) proposed a framework based on probabilistic inference to identify citances, while (Abu-Jbara and Radev, 2011) approached the problem as a classification task. In the biomedical domain, the use of citances was first studied by (Nakov et al., 2004). While useful, citances by themselves lack the appropriate evidence to capture the exact content of the original paper, such as circumstances, data and assumptions under which certain findings were obtained. Citance-based summaries might also modify the epistemic value of a claim presented in the cited work (De Waard and Maat, 2012); that is, they might report a preliminary result or a claim as a definite fact (example in figure 1). Recently, a new track at TAC has been introduced to explore ways to generate better citance-based
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1042­1048, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

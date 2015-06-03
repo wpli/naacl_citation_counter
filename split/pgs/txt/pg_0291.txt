@@ -1,0 +1,5 @@
+Xuchen Yao, Benjamin Van Durme, Chris CallisonBurch, and Peter Clark. 2013. Semi-markov phrasebased monolingual alignment. In Proceedings of EMNLP. Wen-tau Yih, Ming-Wei Chang, Christopher Meek, and Andrzej Pastusiak. 2013. Question answering using enhanced lexical semantic models. In Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (ACL).
+
+237
+
+

@@ -1,0 +1,59 @@
+Below we discuss implementation techniques to mitigate this problem. To facilitate the discussion we rewrite the dot-product computation as follows: f (x, y ) =
+p y
+
+^ f  x, p
+
+(3) 
+
+where: ^ f  x, p =
+i,j
+
+ ij 
+pyi1
+
+Algorithm 1 PA Algorithm for Template Kernels Input: S = {(xi , K (xi ))}n i=1 , N umIters, Aggressiveness parameter C 1: i, j ij  0,  ¯ ij  0; T  n × N umIters 2: for t = 1 to T do 3: i  t mod n 4: j  argmax fw, (xi , yij )
+5: 6: 7:
+j : yij K(xi ) f (x,yij )-fw, (x,yi1 )+ yi1 -yij t  min C, w, ( xi ,yij )-(xi ,yi1 ) 2 ij  ij + t
+1
+
+k p, p -
+pyij
+
+k p, p 
+
+Reducing Prediction Runtime From Equation 3 we note several facts. First, prediction involves calculating k (p, p ) for every combination of a part p from the support instances (i.e., those for which ij > 0) and part p from the instances in the k-best list. Our implementation thus maintains its support as a set of parts rather than a set of instances. Second, parts that appear in both yi1 and yij do not affect the result of f (x, y ) since they cancel each other out. Our implementation thus only updates the support set with parts that belong exclusively to either yi1 or yij . This improves performance significantly since the number of nonoverlapping parts in yi1 and yij is typically much smaller than the total number of parts therein. Another important performance gain is obtained ^ by caching the results of f  (x, p ) when calculating f (x, y ) for the different instances in the k-best list. This avoids recalculating the summation for parts that occur multiple times in the k-best list. Once again, this amounts to a considerable gain, as the number of distinct parts in the k-best list is much smaller than the total number of parts therein. Reducing Training Runtime We greatly improve training speed by caching the results of f (xi , yij ) between training iterations so that on each repeating invocation of the function, only the support parts added since the previous iteration need to be considered. Since the predictions of the learning algorithm become increasingly more accurate, the number of added support parts decreases sharply between iterations6 , and so does the runtime. In practice, all iterations from the 3rd onwards have negligible runtime compared to the first and second iterations. This technique allows us to comfortably train the kernel
+On correct predictions, t at line 5 of Alg 1 is 0, so no update is taking place and no support parts are added.
+6
+
+ ¯ ij   ¯ ij + t (T - t + 1) ( t +1) 8: w  w(t) + t (g (xi , yi1) - g (xi , yij)) 9: end for
+10:
+
+i, j,  ¯ ij 
+
+ ¯ ij T ,
+
+Output: predictor:
+
+t=1 argmax (fw ¯ , ¯ (x, y )) y K(x)
+
+¯ = w
+
+1 T
+
+T
+
+w(t)
+
+predictor on large datasets.
+
+5
+
+Experimental Setup
+
+Datasets We test our system on 4 languages from the CoNLL 2006 shared task, all with rich morphological features.7 The properties provided for each word in these datasets are its form, part of speech (pos), coarse part of speech (cpos), lemma and morph features (number, gender, person, etc. around 10-20 feats in total). We use 20-fold jackknifing to create the k-best lists for the reranker (Collins and Duffy, 2002). Base Parser The base parser used in experiments was the sampling parser of Lei et al. (2014), augmented to produce the k-best trees encountered during sampling. The parser was set to use feature templates over third order part types, but its tensor component and global templates were deactivated. Features The manual features g were based on first to third order templates from Lei et al. (2014). For the kernel features k we annotated the nodes and edges in each tree with the properties in Table 1. We used a first order template kernel to train a model using all the the possible combinations of head, edge and modifier properties. Our kernel also produces all the property combinations of the head and modifier words (disregarding the edge properties).
+Our property combination approach is less relevant for treebanks that do not specify morphological properties. This is the
+7
+
+1425
+
+

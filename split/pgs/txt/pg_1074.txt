@@ -1,0 +1,53 @@
+Following Lee and Lin (2014), we define the loss (or, error) of any sentence s as the sum of its pairwise squared hinge losses: Ls w =
+(i,j )P s s 2 max(0, 1 - hs i + hj )
+
+making use of quantities that can be precomputed efficiently (Airola et al. (2011), Lee and Lin (2014)). Definitions. Let us define those quantities. For a given sentence s, let the set Q contain all members of P that contribute a positive loss to the overall loss term: Q = {(i, j ) : (i, j )  P  (1 - hi + hj > 0)} (4) We also define an index notation into Q: Qi· = {(i, j )  Q, j } qi· = |Qi· | Q·j = {(i, j )  Q, i} q·j = |Q·j | ri· =
+(i,j )Qi·
+
+(2)
+
+That is, no loss is contributed by preference pairs for which the classification score correctly prefers the first element by a large-enough margin, i.e., s hs i  hj +1; all other preference pairs contribute some loss. We seek to find a weight vector that minimizes the regularized overall loss: 1 w = argmin Rw + C · N w
+1 T 2w w
+
+(5) (6) (7)
+
+s
+
+Ls w
+
+(3)
+
+hj
+
+where Rw = is a Gaussian regularizer to prevent overfitting and C a constant controlling the relative regularization amount. We divide by N = s ks to account for the increasing sizes of accumulated k -best lists between tuning iterations, which leads to increased sentence losses. If this were not done, the relative amount of regularization would decrease in subsequent iterations of tuning. Any gradient-based optimization method can be used to find w . Since the loss is convex, the weights we find given a particular k -best list are optimal. This is different from P RO and Bazrafshan et al. (2012), where the resulting weights depend on the pairs sampled; M IRA, where they depend on the order of sentences processed; and M ERT, where optimization is greedy and depends on initial weights. 4.2 Efficient Computation Ls w
+
+The bullet (·) can be read as any. Example: Q·3 contains pairs  Q whose second element is translation 3. qi· and q·j denote corresponding set sizes. Rearrangement. We use these definitions to express the loss as a sum over only O(k ) elements. First, we simplify the loss expression by summing only over elements from Q, i.e., pairs from P that contribute a positive loss, so the max becomes unnecessary: Lw =
+(i,j )P
+
+max(0, 1 - hi + hj )2 (1 - hi + hj )2
+(i,j )Q
+
+(8) (9)
+
+= =
+(i,j )Q
+
+How do we efficiently compute per sentence? In this and the following subsection, we leave out all sentence indices s for ease of notation; it is understood that we operate on a given sentence. A straightforward algorithm to compute Lw would iterate over all preference pairs (i, j )  P and add up their losses (Joachims, 2002). However, since there are O(k 2 ) pairs per sentence, with potentially thousands of sentences, this would be extremely inefficient. P RO's solution to this problem is subsampling. The alternative solution we apply is to make the sums over translation pairs efficient by carefully rearranging the terms of the sentence loss, 1020
+
+2 h2 i - 2hi +1+ hj +2hj - 2hi hj (10)
+
+We then use the precomputed quantities defined above to rewrite the sum over O(k 2 ) pairs to a sum over just O(k ) elements:
+k
+
+Lw =
+i=1
+
+2 qi· (h2 i - 2hi +1)+ q·i (hi +2hi )
+
+- 2 ri· hi
+
+(11)
+
+This step is described in detail below. Our new formulation is simpler but equivalent to Lee and Lin
+
+

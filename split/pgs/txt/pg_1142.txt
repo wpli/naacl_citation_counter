@@ -1,0 +1,38 @@
+O
+
+X
+
+X
+
+s3: [ Microsoft ]S got a [ licensing fee ]O every time [ IBM ]S sold a [ PC ]O.
+
+$50,000, which marketed it as [ PC-DOS ]X. s2: [ Gates' smartest move ]S was retaining [ ownership of the source code ]O of what he and [ Allen ]X would develop as [ MS-DOS ]X. s3: [ Microsoft ]S got a [ licensing fee ]O every time [ IBM ]S sold a [ PC ]O.
+s1 s2 s3
+
+Gates 86-DOS
+
+s1: In 1980, [ Gates ]S licensed [ 86-DOS ]O from [ Tim Paterson ]X for
+
+Paterson PC-DOS Move Ownership Source Code MS-DOS Microsoft Fee Time IBM PC
+
+S O X X - - - - - - - - - S - - - S O O O O - - - - - - - - - - - - - S O X S O
+
+s1 s2 s3
+
+(a) A fragment of news text
+
+(b) The corresponding entity grid
+
+Figure 1: A news text fragment with its corresponding entity grid constructed following B&L (2008). Although s2 and s3 share no entity, their transition is still coherent, because Gates and Microsoft are semantically related by the knowledge Gates-create-Microsoft. We wish to incorporate semantic relatedness between different entities into existing models to tackle the problem described above. In particular, we propose to capture such semantic relatedness between different entities with world knowledge represented as triples, e.g., Gates-create-Microsoft. Given a text to be evaluated, we first retrieve relevant world knowledge from multiple sources. For the unsupervised framework of G&S, we integrate knowledge into the original graph-based document representation, in which sentences are the nodes and edges are formed by shared entities and our world knowledge. Then, we adopt a dynamic programming algorithm to produce a coherence score for the text. For the supervised framework of B&L, we incorporate the world knowledge as a novel set of features into the original entity-based model, and train a model to discriminate different degrees of text coherence. To evaluate the impact of incorporating semantic relatedness, we conduct experiments on two datasets, each of which resembles a real sub-task in the text coherence modeling: sentence ordering and summary coherence rating. On both tasks, across two frameworks, supervised and unsupervised, we perform a direct comparison between our enhanced model and the original one. On both tasks, our models are shown to be more powerful than the models relying on entity matching only. Moreover, for sentence ordering, world knowledge is shown to be especially useful on short documents. a canonical order of how entities occur in the text. Therefore, we can model text coherence by measuring how mentions of various entities are distributed within the text. Specifically, for a given document d, an entity grid is constructed in which the rows represent the sentences and the columns represent entities. Each grid cell ri j corresponds to the syntactic role of entity e j in sentence si : subject (S ), object (O), other (X ), or nothing (-). For example, Figure 1b shows the entity grid of the text shown in Figure 1a. If an entity serves multiple syntactic roles in a sentence, its grammatical role is resolved according to the priority order: S O X -. Based on the entity grid representation, a local coherence transition is defined as a sequence {S , O, X, -}n , representing the grammatical roles or absence of a particular entity across n adjacent sentences. Then, the document is encoded as a feature vector (d) = ( p1 (d), p2 (d), . . . , pm (d)), where pt (d) is the normalized frequency of the transition t in the entity grid, and m is the number of predefined transitions. pt (d) is computed as the number of occurrences of transition t among all entities in the entity grid, divided by the total number of transitions of the same length. Using this feature encoding, the model is then trained as a preference ranking problem between documents of different degrees of coherence. 2.2 Graph-based local coherence modeling
+
+2
+2.1
+
+Background
+Entity-based local coherence modeling
+
+The initial entity-based model was developed by B&L. It is based on the intuition that there exists 1088
+
+As mentioned previously, most extensions to the entity-based local coherence model focus on enriching the feature set (Filippova and Strube, 2007; Elsner and Charniak, 2011; Lin et al., 2011; Feng et al., 2014), all of which follow a supervised learning framework. To the best of our knowledge, the only exception is the unsupervised method proposed by
+
+

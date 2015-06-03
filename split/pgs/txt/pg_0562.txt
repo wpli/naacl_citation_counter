@@ -1,0 +1,83 @@
+Rank by image similarity
+2. How well does  fits into  ?
+
+Rerank by neighborhood-based affinity  , 
+ : Sunset 1 over the sea
+
+1
+
+ : Pelicans fly in formation
+
+
+
+Reading a book
+
+...
+
+...
+Query image q
+6
+
+...
+
+
+ : Sunset over the sea
+
+
+
+
+
+ , 
+
+1. Can  describe ?  : Visual Neighborhood of c
+
+
+
+ : Pelicans fly in formation 90
+... Final ranking
+
+...
+(a) (b)
+Original ranking
+
+
+
+...
+
+Figure 4: (a) Using the association structure, we retrieve a caption for which the query image is likely to be a
+
+prototypical visual rendering. We hypothesize that there can be multiple visual prototypes of a caption. (b) Reranking by visual neighborhood proximity.
+
+and the visual information. Also, we hypothesize that there could be several diverse visual prototypes of any given textual description c, so we focus on only the top  nearest members of Nc . We apply the neighborhood-based affinity for image captioning via reranking (Figure 4b): first we retrieve a pool of K candidate captions by finding top K closest images based on their direct visual similarity to the query image, then compute the neighborhood-based affinity to rerank the captions.5 The proposed approach is similar in spirit to the nonparametric K nearest neighbor approach of (Boiman et al., 2008) in modeling image-to-concept similarity rather than image-to-image similarity, but differs in that our work is in the context of image description generation rather than classification.
+
+method I NSTANCE
+KCCA ASSOC gi w/ all ASSOC g+t w/ all ASSOC ti ASSOC gi w/  ASSOC g+t w/  ASSOC ti
+
+BLEU
+
+METEOR
+
+w/ all w/ 
+
+0.125 0.118 0.130 0.133 0.126 0.172 0.159 0.184
+
+0.029 0.024 0.031 0.030 0.029 0.033 0.033 0.034
+
+Table 6: Automatic evaluation for image captioning:
+
+The superscripts denote the image feature for reranking; gi: GIST; ti: Tinyimage; g+t:= gi + ti. We report the best setting (gt) for I NSTANCE and KCCA. Results statistically significant compared to I NSTANCE with two-tailed t-test are indicated with * (p < 0.05) and ** (p < 0.005).
+
+4
+
+Experiments: Association Structure Improves Image Captioning
+
+Baselines: The proposed approach (to be referred as ASSOC) requires one-to-many mappings between captions and images at scale -- a unique property of our dataset. We compare against two baselines: instance-based retrieval of (Ordonez et al., 2011) (I NSTANCE) and Kernel Canonical Correlation Analysis (KCCA) (Hardoon et al., 2004; Hodosh et al., 2013). We implement KCCA with Hardoon's code6 . We use a linear kernel since non-linear kernels like RBF showed worse performance.
+We set K = 100 and choose parameter  using a held-out development set of 300 images. If there are less than  available images, we use them all.
+http://www.davidroihardoon.com/Professional/ Code_files/kcca_package.tar.gz
+6 5
+
+Configurations: For image features, we follow (Ordonez et al., 2011) to experiment with two global image descriptors and their combination: a) the GIST feature that represents the dominant spatial structure of a scene (Oliva and Torralba, 2001); b) the Tinyimage feature that represents the overall color of an image (Torralba et al., 2008); c) a combination of the two. We compute the similarity as sim(Q, I ) = - Q - I 2 . The I NSTANCE and the KCCA approaches use the feature combination. The ASSOC approach also use the combination for preparing candidate captions, but can use different features for reranking. Dataset: We randomly sample 1000 images with unique captions as test set. The rest of the corpus is the pool of caption retrieval after discarding: (1) the original caption c and all of its associated images, to avoid potential unfair advantage toward ASSOC and (2) the 10K captions used for training KCCA and all
+
+508
+
+

@@ -1,0 +1,34 @@
+Bigram Count
+
+excluded and the system uses all the other features. This set of experiments again shows that the external features like Word Embedding model based on large corpus and Wiki resource are very useful. Without using them, the system has the biggest performance degradation compared to the best result.
+-Internal -Word Embedding -Wiki -LM -DBpedia -WordNet -SentiWordNet 2008 11.34 11.29 11.35 11.40 11.50 11.67 11.75 2009 12.41 12.25 12.38 12.39 12.47 12.64 12.67 2010 11.42 11.36 11.38 11.42 11.47 11.64 11.70 2011 13.71 13.55 13.58 13.61 13.71 13.80 13.90
+
+40 35 30 25 20 15 10 5 0 Top10
+
+Internal Features Word Embedding Features Internal and Word Embedding Features Full Features
+
+Top30
+
+Top50
+
+Top80
+
+Figure 2: Distribution of correct bigrams in Top-n weighted bigrams from four systems.
+
+Table 6: ROUGE-2 results when leaving out each feature type.
+
+5.2.4 Distribution of Correct Bigrams After Feature Weighting In the next experiment we analyze the distribution of the correct bigrams from the ranked bigrams using different features in order to better evaluate their impact on bigram weighting. We rank all the bigrams in descending order according to the estimated weight, then calculate the number of correct bigrams (i.e., the bigrams in human generated summary) in Top10, 30, 50 and 80. The more correct bigrams appear on the top of the list, the better our features estimate the importance of the bigrams. We conducted this experiment using four systems: the system only with internal features, only with Word Embedding features, with combination of internal and Word Embedding features, and with all the features. Figure 2 shows the results of this experiment on TAC 2008 data. The pattern is similar on the other three years' data. The results show that systems with better ROUGE-2 value indeed can assign higher weights to correct bigrams, allowing the ILP decoding process to select these bigrams, which leads to a better sentence selection. 5.2.5 Joint Learning Results Finally we evaluate the effectiveness of our proposed joint learning approach. For comparison, we implement a pipeline method, where we use the bigram's document frequency as the target value to train a regression model, and during testing use the
+
+model's predicted value as the weight in the ILP framework. Table 7 compares the results using the joint learning method and this pipeline approach. We only show the results using the system with all the features due to limited space. We can see that our joint method outperforms the pipeline system based on ROUGE-2 measurement, indicating that weights are better learned in the joint process that takes into account both bigram and sentence selection. System Pipeline System Joint Model 2008 11.60 11.84 2009 12.64 12.77 2010 11.56 11.78 2011 13.65 13.97
+
+Table 7: ROUGE-2 results using different training strategies.
+
+6
+
+Conclusions
+
+In this paper, we adopt the ILP based summarization framework, and propose methods to improve bigram concept selection and weighting. We use syntactic information to filter and select bigrams, various external resources to extract features, and a joint learning process for weight training. Our experiments in the TAC data sets demonstrate that our proposed methods outperform other state-ofthe-art results. Through the analysis, we found the external resources are helpful to estimate the bigram importance and thus improve the summarization performance. While in summarization research, optimization-based methods have already rivaled other approaches in performance, the task is
+
+785
+
+

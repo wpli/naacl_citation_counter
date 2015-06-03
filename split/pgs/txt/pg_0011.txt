@@ -1,0 +1,6 @@
+Program Committee
+Program Committee Co-chairs Joyce Chai, Michigan State University, USA Anoop Sarkar, Simon Fraser University, Canada Area Chairs Dialogue and Interactive Systems Jason D. Williams, Microsoft Research Discourse and Pragmatics Ani Nenkova, University of Pennsylvania Vincent Ng, University of Texas at Dallas Generation and Summarization Chris Callison-Burch, University of Pennsylvania Fei Liu, Carnegie Mellon University Information Extraction and Question Answering Alan Ritter, The Ohio State University Bowen Zhou, IBM Research Information Retrieval David Smith, Northeastern University Language and Vision Julia Hockenmaier, University of Illinois at Urbana-Champaign Language Resources and Evaluation Will Lewis, Microsoft Research Sameer Pradhan, Harvard University Linguistic and Psycholinguistic Aspects of CL William Schuler, The Ohio State University Machine Learning for NLP Amarnag Subramanya, Google Research Tong Zhang, Baidu Inc. and Rutgers University Machine Translation Bill Byrne, Cambridge University Hany Hassan, Microsoft Research Kevin Knight, Information Sciences Institute, University of Southern California Haitao Mi, IBM Research NLP for Web, Social Media and Social Sciences Brendan O'Connor, University of Massachusetts Philip Resnik, University of Maryland
+
+xi
+
+

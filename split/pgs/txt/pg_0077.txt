@@ -1,0 +1,19 @@
+Verb advise advise confuse confuse eat eat kill kill kill kill
+
+Noun doctor doctor baby baby lunch lunch lion lion man man
+
+Semantic role agent patient agent patient agent patient agent patient agent patient
+
+Score 6.8 4.0 3.7 6.0 1.1 6.9 2.7 4.9 3.4 5.4
+
+2.2
+
+Distributional Semantics
+
+Table 1: Sample of judgements from Pad´ o (2007).
+
+2.2.1 Distributional Memory Our semantic modeling technique comes from Baroni and Lenci (2010), who developed an explicitly multifunctional, i.e. not tightly bound to a particular task, framework for recording distributional information about linguistic co-occurrence. Distributional Memory (DM) records frequency information about links between words in a sentence as a third order tensor, in which words or lemmata are represented as two of the tensor axes and the syntactic or semantic link between them is the third axis. The following corpora were used to construct the Baroni and Lenci (2010) version of DM: · ukWaC, a corpus of about two billion words collected by crawling the .uk web domain (Ferraresi et al., 2008). · WackyPedia, a snapshot selection of Wikipedia articles. · The British National Corpus (BNC), a 100million word corpus including documents such as books and periodicals. The sentences from these sources were first run through MaltParser (Nivre et al., 2007). The dependency links (e.g. SBJ, NMOD) were run through a set of hand-crafted patterns to identify higher-level lexicalized links (e.g. as-long-as, in-a-kind-of). They then counted link type frequencies, so that links that involve the same lexical item (e.g. long, kind, as in the lexicalized links just mentioned) were collapsed into a single link, and the number of surface form realizations was used as the frequency count. All words were lemmatized and stored with basic part of speech information. All these counts were then adjusted by Local Mutual Information (Baroni and Lenci, 2010), which is given by Oijk (1) Eijk where i, j are words, k is the link between them, O is the observed frequency, and E is the expected frequency under independence. Tuples with nonpositive LMI values were removed. They called this tensor TypeDM . LM I (i, j, k ) = Oijk log
+
+In order to model thematic roles, we use the insight that thematic fit correlates with human plausibility judgements (Pad´ o et al., 2009; Vandekerckhove et al., 2009). Therefore, we can use datasets of human plausibility judgements to evaluate computational thematic fit estimates. One such dataset by Pad´ o (2007) includes 18 verbs with up to 12 candidate nominal arguments and totals 414 verb-nounrole triples. The words were chosen based on their frequencies in the Penn Treebank and FrameNet. Human participants were asked to rate the appropriateness of given nouns as agents and as patients for given verbs on a scale from 1 to 7. The judgements were then averaged. We provide a small sample of these judgements in Table 1. We use three other datasets as well. Ferretti et al. (2001) provide two datasets, one with 248 verbinstrument pairs and one with 274 verb-location pairs. Additionally, McRae et al. (1998) give a dataset of 1444 more agent/patient judgements. We write agent/patient as such because like Pad´ o (2007), the agent plausibility and patient plausibility are given in the same dataset, albeit separately. Once again, human participants were asked to rate the appropriateness of given nouns as locations, instruments, and agents/patients, respectively, of the verbs in each dataset on a scale from 1 to 7. We will make use of these in our evaluation in order to see how well the models and algorithms we propose apply to various thematic roles, not just the most commonly tested and to-date most accurately estimated roles of agent and patient. 23
+
+

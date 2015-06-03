@@ -1,0 +1,26 @@
+2.3 Annotation Study Four people (co-authors) annotated a random sample of 1000 instances from the devset, to further characterize the filtered corpus and to assess the automated extraction of gold standard labels. This random subset is composed of 47% #WhyIStayed and 53% #WhyILeft gold standard samples. Overall agreement overlap was 77% and Randolph's freemarginal multirater kappa (Warrens, 2010) score was 0.72. According to the annotations in this random sample, on average 36% of the instances are reasons for staying (S), 44% are reasons for leaving (L), 12% are meta comments (M), 2% are jokes (J), 2% are ads (A), and 4% do not match prior categories (O). Table 1 shows that most related directly to S or L, with annotators identifying more clearly L. Of interest are examples in which annotators did not agree, as these are indicative of problems in the data, and are samples that a classifier will likely label incorrectly. The tweet because i was slowly dying anyway was marked by two annotators as S and two annotators as L. Did the victim have no hope left and decide to stay? Or did the victim decide that since they were "slowly dying anyway" they could attempt to leave despite the possibility of potentially being killed in the attempt? The ground truth label is #WhyILeft. Another example with two annotators labeling as S and two as L is two years of bliss, followed by uncertainty and fear. This tweet's label is #WhyIStayed. The limited context from these samples makes it difficult to interpret fully, and causes human annotators to fail; however, most cases contain clear enough reasoning to interpret correctly. #L #S #L #S #L #S #L #S A .01 .01 .02 .03 .00 .01 .02 .03 J .01 .03 .01 .01 .02 .04 .01 .01 L .78 .10 .72 .07 .77 .06 .75 .16 M .11 .21 .06 .16 .09 .21 .05 .12 O .03 .02 .09 .10 0 0 .04 .05 S .07 .63 .10 .63 .11 .68 .14 .63
+
+3
+3.1
+
+Methods for Exploring Reasons
+Cleaning and Classifier Tuning
+
+All experiments used the same cleaned data: removing hashtags, replacing URLs with the token url and user mentions with @mention, and replacing common emoticons with a sentiment indicator: emotsent{p|n|neut} for positive/negative/neutral. Informal register was expanded to standard English forms using a slang dictionary.7 Classifier tuning involved 5-fold cross-validation and selecting the best parameters based on the mean accuracy. For heldout data testing the full devset was used for training. 3.2 Analysis of Vocabulary
+
+We examined the vocabulary in use in the data of the two hashtag sets by creating a frequency distribution of all unigrams after stoplisting and lowercasing. The wordcloud unigrams in Figure 2 are weighted by their relative frequency. These wordclouds hint at the reasons; however, decontextualized unigrams lead to confusion. For example, why does left appear in both? Other experiments were done to provide context and expand analysis.
+
+A1 A2 A3 A4
+
+Figure 2: A wordcloud of unigrams, weighted by unigram frequencies, for (top) #WhyIStayed instances and (bottom) #WhyILeft instances.8
+
+Table 1: Confusion matrices of all 4 annotators, compared to the gold standard. Annotators mostly identified reasons for staying or leaving, and only a small fraction were unrelated. #L=#WhyILeft, #S=#WhyIStayed.
+
+http://www.noslang.com/ Created using http://amueller.github.io/ word_cloud/
+8
+
+7
+
+1283
+
+

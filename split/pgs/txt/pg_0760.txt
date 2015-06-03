@@ -1,0 +1,26 @@
+acceptable translations and unacceptable ones. (2) We reduce the number of workers we hire, and retain only high quality translators by quickly identifying and filtering out workers who produce low quality translations. Our work stands in contrast with Zaidan and Callison-Burch (2011) who always solicited and paid for a fixed number of translations for each source sentence, and who had no model of annotator quality. In this paper we demonstrate that: · Our model can predict whether a given translation is acceptable with high accuracy, substantially reducing the number of redundant translations needed for every source segment. · Translators can be ranked well even when observing only small amounts of data. Compared with a gold standard ranking, we achieve a correlation of 0.94 after seeing the translations of only 20 sentences from each worker. Therefore, bad workers can be filtered out quickly. · We can achieve a similar BLEU score as Zaidan and Callison-Burch (2011) at half the cost using our cost optimizing methods.
+
+2
+
+Problem Setup
+
+We start with a corpus of source sentences to be translated, and we may solicit one or more translation for every sentence in the corpus. Our targeted task is to assemble a single high quality translation for each source sentence while minimizing the associated cost. This process can be repeated to obtain multiple high quality translations. We study the data collected by Zaidan and Callison-Burch (2011) through Amazon's Mechanical Turk. They hired Turkers to translate 1792 Urdu sentences from the 2009 NIST Urdu-English Open Machine Translation Evaluation set1 . A total of 52 Turkers contributed translations. Turkers also filled out a survey about their language skills and their countries of origin. Each Urdu sentence was translated by 4 non-professional translators (the Turkers) and 4 professional translators hired by the LDC. The cost of non-professional translation was $0.10 per sentence and we estimate the cost of professional
+1
+
+translation to be approximately $0.30 per word (or $6 per sentence, with 20 words on average). Following Zaidan and Callison-Burch (2011), we use BLEU (Papineni et al., 2002) to gauge the quality of human translations. We can compute the expected quality of professional translation by comparing each of the professional translators against the other 3. This results in an average BLEU score of 42.38. In comparison, the average Turker translations score only 28.13 without quality control. Zaidan and Callison-Burch trained a MERT (Och, 2003; Zaidan, 2009) model to select one nonprofessional translation out of the four and pushed the quality of crowdsourcing translation to 38.99, closer to the expected quality of professional translation. They used a small amount of professional translations (10%) as calibration data to estimate the goodness of the non-professional translation. The component costs of their approach are the 4 nonprofessional translations for each source sentence, and the professional translations for the calibration data. Although Zaidan and Callison-Burch demonstrated that non-professional translation was significantly cheaper than professionals, we are interested in further reducing the costs. Cost reduction plays an important role if we want to assemble a large enough parallel corpus to train a statistical machine translation system which typically require millions of translated sentences. Here, we introduce several methods for reducing the number of nonprofessional translations while still maintaining high quality.
+
+3
+
+Estimating Translation Quality
+
+We use a linear regression model2 to predict a quality score (score(t)  R) for an input translation t. score(t) = w · f (t) where w is the associated weight vector and f (t) is the feature vector of the translation t. We replicate the feature set used by Zaidan and Callison-Burch (2011) in their MERT model: · Sentence-level features: 9 features based on
+We used WEKA package: waikato.ac.nz/ml/weka/
+2
+
+LDC Catalog number LDC2010T23
+
+http://www.cs.
+
+706
+
+

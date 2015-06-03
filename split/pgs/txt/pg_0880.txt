@@ -1,0 +1,29 @@
+Contexts Full Diagonal
+
+Perplexity 114.113 115.119
+
+BLEU 31.43 31.55
+
+Training time 3.64 days 1.20 days
+
+Table 11: A side by side comparison of class factored models with and without diagonal contexts trained with noise contrastive estimation on the fren data.
+
+for machine translation.
+
+6
+
+Diagonal Context Matrices
+
+In this section, we investigate diagonal context matrices as a source for reducing the computational cost of calculating the projection vector. In the standard definition of a neural language model, this cost is dominated by the softmax step, but as soon as tricks like noise contrastive estimation or tree or class factorisations are used, this operation becomes the main bottleneck for training and querying the model. Using diagonal context matrices when computing the projection layer reduces the time complexity from O(D2 ) to O(D). A similar optimization is achieved in the backpropagation algorithm, as only O(D) context parameters need to be updated for every training instance. Devlin et al. (2014) also identified the need for finding a scalable solution for computing the projection vector. Their approach is to cache the product between every word embedding and every context matrix and to look up these terms in a table as needed. Devlin et al. (2014)'s approach works well when decoding, but it requires additional memory and is not applicable during training. Table 11 compares diagonal and full context matrices for class factored models. Both models have similar BLEU scores, but the training time is reduced by a factor of 3 when diagonal context matrices are used. We obtain similar improvements when decoding with class factored models, but the speed up for unnormalised models is over 100x!
+
+Figure 2: A graph highlighting the quality vs. memory trade-off between traditional n-gram models and neural language models.
+
+ing more and more common for these devices to include reasonably powerful GPUs, supporting the idea that further scaling is possible if necessary. On the other hand, fitting back-off n-gram models on such devices is difficult because these models store the probability of every n-gram in the training data. In this section, we seek to gain further understanding on how these models perform under such conditions. In this analysis, we used Heafield (2011)'s triebased implementation with quantization for constructing memory efficient back-off n-gram models. A 5-gram model trained on the English monolingual data introduced in section 3 requires 12 GB of memory. We randomly sampled sentences with an acceptance ratio ranging between 0.01 and 1 to construct smaller models and observe their performance on a larger spectrum. The BLEU scores obtained using these models are reported in Figure 2. We note that the translation quality improves as the amount of training data increases, but the improvements are less significant when most of the data is used. The neural language models we used to report results throughout this paper are roughly 400 MB in size. Note that we do not use any compression techniques to obtain smaller models, although this is technically possible (e.g. quantization). We are interested to see how these models perform for various memory thresholds and we experiment with setting the size of the word embeddings between 100
+
+7
+
+Quality vs. Memory Trade-off
+
+Neural language models are a very appealing option for natural language applications that are expected to run on mobile phones and commodity computers, where the typical amount of memory available is limited to 1-2 GB. Nowadays, it is becom826
+
+

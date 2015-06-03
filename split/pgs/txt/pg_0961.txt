@@ -1,0 +1,13 @@
+Figure 2: Partition methods in dynamic pooling. Original matrix with size 4 × 5 is mapped into matrix with size 3 × 3 and matrix with size 6 × 7, respectively. Each dynamic pool is distinguished by a border of empty white space around it.
+
+Figure 3: Unsupervised architecture: CNN-LM
+
+sizes are 10 × 10, 10 × 10, 6 × 6, 2 × 2 for unigram, short ngram, long ngram and sentence, respectively. For training, we employ mini-batch of size 70, L2 regularization with weight 5 × 10-4 and Adagrad (Duchi et al., 2011). 5.2 Unsupervised pretraining
+
+One of the key contributions of this paper is the architecture CNN-LM shown in Figure 3. CNN-LM is used to pretrain the convolutional filters on unlabeled data. This addresses sparseness and limited training data for paraphrase identification. The convolution sentence model CNN-SM (Section 3) is part of CNN-LM ("CNN-SM" in Figure 3). The input to CNN-SM is the entire sentence ("the cat sat on the mat"); its output ("sentence representation" in the leftmost rectangle in Figure 3 and the
+
+two grids labeled "sentence representation" in the top layer of the top block in Figure 1) is concatenated with a history consisting of the embeddings of the h = 3 preceding words ("the", "cat", "sat") as the input of a fully connected layer to generate a predicted representation for the next word ("on"). We employ noise-contrastive estimation (NCE) (Mnih and Teh, 2012; Mnih and Kavukcuoglu, 2013) to compute the cost: the model learns to discriminate between true next words and noise words. NCE allows us to fit unnormalized models making the training time effectively independent of the vocabulary size. In experiments, CNN-LM is trained on unlabeled MSRP data and an additional 100,000 sentences from English Gigaword (Graff et al., 2003). In principle, sentences from any source, not just English Gigaword, can be used to train this model. In NCE, 20 noise words are sampled for each true example. So training has two parts: unsupervised, CNNLM (Figure 3) and supervised, Bi-CNN-MI (Figure 1). In the first phase, the unsupervised training phase, we adopt a language modeling approach because it does not require human labels and can use large corpora to pretrain word embeddings and convolution weights. The goal is to learn sentence features that are unbiased and reflect useful attributes of the input sentence. More importantly, pretraining is useful to relieve overfitting, which is a severe problem when building deep NNs on small corpora like MSRP (cf. Hu et al. (2014)). In the second phase, the supervised training phase, pretrained word embeddings and convolution
+
+907
+
+

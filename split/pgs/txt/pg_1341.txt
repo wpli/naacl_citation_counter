@@ -1,0 +1,23 @@
+Morphological Word-Embeddings
+Ryan Cotterell1,2 Department of Computer Science1 Johns Hopkins University, USA ryan.cotterell@jhu.edu Hinrich Schütze2 Center for Information and Language Processing2 University of Munich, Germany inquiries@cislmu.org
+
+Abstract
+Linguistic similarity is multi-faceted. For instance, two words may be similar with respect to semantics, syntax, or morphology inter alia. Continuous word-embeddings have been shown to capture most of these shades of similarity to some degree. This work considers guiding word-embeddings with morphologically annotated data, a form of semisupervised learning, encouraging the vectors to encode a word's morphology, i.e., words close in the embedded space share morphological features. We extend the log-bilinear model to this end and show that indeed our learned embeddings achieve this, using German as a case study.
+
+1
+
+Introduction
+
+Word representation is fundamental for NLP. Recently, continuous word-embeddings have gained traction as a general-purpose representation framework. While such embeddings have proven themselves useful, they typically treat words holistically, ignoring their internal structure. For morphologically impoverished languages, i.e., languages with a low morpheme-per-word ratio such as English, this is often not a problem. However, for the processing of morphologically-rich languages exploiting wordinternal structure is necessary. Word-embeddings are typically trained to produce representations that capture linguistic similarity. The general idea is that words that are close in the embedding space should be close in meaning. A key issue, however, is that meaning is a multifaceted concept and thus there are multiple axes, along which two words can be similar. For example, 1287
+
+ice and cold are topically related, ice and fire are syntactically related as they are both nouns, and ice and icy are morphologically related as they are both derived from the same root. In this work, we are interested in distinguishing between these various axes and guiding the embeddings such that similar embeddings are morphologically related. We augment the log-bilinear model (LBL) of Mnih and Hinton (2007) with a multi-task objective. In addition to raw text, our model is trained on a corpus annotated with morphological tags, encouraging the vectors to encode a word's morphology. To be concrete, the first task is language modeling-- the traditional use of the LBL--and the second is akin to unigram morphological tagging. The LBL, described in section 3, is fundamentally a language model (LM)--word-embeddings fall out as low dimensional representations of context used to predict the next word. We extend the model to jointly predict the next morphological tag along with the next word, encouraging the resulting embeddings to encode morphology. We present a novel metric and experiments on German as a case study that demonstrates that our approach produces wordembeddings that better preserve morphological relationships.
+
+2
+
+Related Work
+
+Here we discuss the role morphology has played in language modeling and offer a brief overview of various approaches to the larger task of computational morphology. 2.1 Morphology in Language Modeling Morphological structure has been previously integrated into LMs. Most notably, Bilmes and Kirch-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1287­1292, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

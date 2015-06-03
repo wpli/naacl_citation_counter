@@ -1,0 +1,36 @@
+fier that assigns unknown words to the LCS-learned paradigm based on substring features taken from word edges. This holds in particular for languages where paradigmatic behavior is triggered by material in the beginning of a word (e.g. German verbs). We present experiments on 18 datasets in 11 languages varying in morphological complexity. In all the experiments, the task is to reconstruct a complete inflection table from a base form, which usually corresponds to the lemma or dictionary form of a noun, verb, or adjective. The experiments are divided into two sets. In the first, we use an earlier dataset (Durrett and DeNero, 2013) of Finnish, German, and Spanish to compare against other methods of paradigm learning. In the second, we use a more comprehensive and complex dataset we have developed for 8 additional languages. This new dataset is less regular and intended to be more realistic in that it also features defective or incomplete inflection tables and inflection tables containing various alternate forms, naturally making the classification task substantially more difficult.1 Overall, supervised and semi-supervised learning of morphology by generalizing patterns from inflection tables is an active research field. Recent work sharing our goals includes Toutanova and Cherry (2009), Dreyer and Eisner (2011), which works with a fully Bayesian model, Dinu et al. (2012), Eskander et al. (2013), which attempts to learn lexicons from morphologically annotated corpora, and Durrett and DeNero (2013), who train a discriminative model that learns transformation rules between word forms. We directly compare our results against the last using the same dataset. The paper is organized as follows: section 2 contains the experimental setup, section 3 the datasets, and section 4 the results and discussion.
+
+inection tables
+
+paradigms
+
+inection table
+
+höfn höfn höfn hafnar hafnir generalize hafnir höfnum hafna
+
+x1 ö x1 ö x1 ö x1 a x1 a x1 a x1 ö x1 a
+
+x2 x2 x2 gjöf? x2 ar x2 ir classify & x2 ir reconstruct x2 um x2 a
+
+gjöf gjöf gjöf gjafar gjafir gjafir gjöfum gjafa
+
+Figure 1: General overview of the system, exemplified using Icelandic nouns. First, a large number of inflection tables are generalized into a smaller number of paradigms; the generalization of the table for h¨ ofn `harbor' into a paradigm is illustrated here. At classification time, an unknown base form is classified into one of the learned paradigms and its inflection table is reconstructed, illustrated here by gj¨ of `present'.
+
+2
+
+Method
+
+As a first step, our system converts inflection tables into paradigms using a procedure given in Hulden (2014). The system generalizes concrete inflection tables by associating the common symbol subsequences shared by the words (the LCS) with variThe data and the code is available at our website https://svn.spraakbanken.gu.se/clt/naacl/ 2015/extract
+1
+
+ables. These variables represent abstractions that at table reconstruction time can correspond to any sequence of one or more symbols. As many inflection tables of different words are identical after assigning the common parts to `variables,' this procedure results in a comparatively small number of paradigms after being input a large number of inflection tables. The process is illustrated in Figure 1. During generalization, the forms that gave rise to a particular paradigm are stored and later used for training a classifier to assign unknown base forms to paradigms. Having a number of paradigms at our disposal by this generalization method, the task of reconstructing an inflection table for an unseen base form in effect means picking the correct paradigm from among the ones generalized, a standard classification task of choosing the right/best paradigm. After seeing a number of inflection tables generalized into abstract paradigms as described above, the task we evaluate is how well complete inflection tables can be reconstructed from only seeing an unknown base form. To this end, we train a "one-vsthe-rest" linear multi-class support vector machine (SVM).2 For each example base form wbi that is a member of paradigm pj , we extract all substrings from wbi from the left and right edges, and use those as binary features corresponding to the paradigm pj .
+Using LIBLINEAR regularization.
+2
+
+(Fan et al.,
+
+2008) with L2-
+
+1025
+
+

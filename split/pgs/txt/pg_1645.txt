@@ -1,0 +1,37 @@
+Minute Tweet 0 0 0 12 12 12 73 130 178 It's finally here! #WorldSeries #WorldSeries Play Ball IDEA: @mayoredlee, #SanFrancisco can pledge to throw our @SFGiants an #OrangeOctober parade regardless of #WorldSeries outcome! #SFGiants The guy with the Marlins sweater is behind home plate again. #worldseries The Giants 3-0! #WorldSeries Something about Hunter Pence really, really bothers me. Don't ask me what, cause I havent figured it out, but I don't like him. #WorldSeries Three HORRIBLE at-bats (mixed in with Cain's walk) prevent Royals from breaking through in the third. #WorldSeries As Hardy Boy #2, Joe Panik just pulled the mask off of Vargas and discovered it's Old Man Withers from down the street. #WorldSeries #WorldSeries it's funny the non body names have a great hits. Frm now n on consider the Postseson as Cinderla run. No names needed, #MLB
+Table 1: Example tweets, grouped by minutes since the first pitch.
+Log tweet rate vs. per-tweet entropy
+130
+q q q q q q q qq q q qq q q q q qq q q q q q q qq q qq qq qq q qq q q q qq q q q qqq q qq q q q q q q q q qqq q q q q q q q q q qq qq q q q q q q q q q q q q qq q q q q q q q q q q q q q q q q qq q q q qq q q q q q qq q q q q q q q q qq q q q q q q q q q q q q q qq q q qq q q q q q q q q q q q q q qq q q q q q q q q q q q q q q q q q q q q q q q q q qq q q q q q q q q q q q qq qq q qq qq q q q q q qq q qq q q q qq q q q q q q q q q q q q q q q qq q q q q q q q q q q qq q q q q q q q q q q q q q q q q q q qq q q q q q qq qq q q qq q q q q q q qqq q q q q q qq q qq qq q q q q qq qq q q q q q q q q q q q q q q q q q q qq q q q q qq q qq qq q q qq q q q q q q qq q q q q q qq qq q qq q q q q qq q q q q q qq q qq q q qq q q q q q qqq q q q q q q q q q q qq q q q q q q q q q q q q q qq q q q q q q q q qq q q q qq q q q q qq q q q qq qq q q
+
+Per-word entropy 4.74 4.96 8.20 4.26 5.43 6.64 9.39 8.12 10.04
+
+Per-tweet entropy
+
+110
+
+Time (hrs) 3 2
+q
+
+90
+q
+
+1
+
+70
+
+q
+
+q
+
+50 1.0 1.5 2.0 2.5 3.0
+
+in-game events and linguistic complexity, with examples of consecutive tweets from high-rate and low-rate at-bats, along with their information content. The top triplet comes from one of the highestrate at-bats, in which Gregor Blanco committed a crucial error in the last inning of the last game. The bottom triplet comes from a low-rate at-bat, midgame, with one team well ahead of the other; in this case, tweets all refer to different events as there is no single salient shared event. We quantified the predicted relationship by again fitting a mixed-effect linear regression model, in this case using the logarithm of per-minute tweet rate as a predictor of tweet entropy. Given its significance in the previous model, we included log(time) as a control factor in this analysis, and added bygame random intercepts and slopes for log(rate) and log(time). The log of the tweet rate had a significant negative effect on per-word and per-tweet entropy by likelihood-ratio tests (per-word-entropy: -.333 ± .073; p < .001, 2 (4) = 59.37, per-tweetentropy: -21.82 ± 2.43; p < .001, 2 (4) = 194.6). Log(time) retained significance (p < .001) as a predictor for both entropy measures even when rate was accounted for, showing evidence for both
+
+Log_10 Tweet Rate
+
+Figure 2: Total tweet entropy plotted against log tweet rate. Color reflects in-game time; line shows loess fit with 95% confidence intervals.
+
+sponses, suggesting that the number of tweets per unit time can serve as a proxy for the information content of an event. This relationship is captured by Equation 2, in which unexpected events have large information content, so linguistic information content should be reduced correspondingly to maintain constant entropy. Our next set of analyses test this relationship. The examples shown in Table 2 provide anecdotal evidence for the hypothesized relationship between 1591
+
+

@@ -1,0 +1,53 @@
+Node Features
+
+Concept Freq Depth Position Span Entity Bias Label Freq Position Nodes IsExpanded Bias
+
+Identity feature for concept label Concept freq in the input sentence set; one binary feature defined for each frequency threshold  = 0/1/2/5/10 Average and smallest depth of node to the root of the sentence graph; binarized using 5 depth thresholds Average and foremost position of sentences containing the concept; binarized using 5 position thresholds Average and longest word span of concept; binarized using 5 length thresholds; word spans obtained from JAMR Two binary features indicating whether the concept is a named entity/date entity or not Bias term, 1 for any node First and second most frequent edge labels between concepts; relative freq of each label, binarized by 3 thresholds Edge frequency (w/o label, non-expanded edges) in the document sentences; binarized using 5 frequency thresholds Average and foremost position of sentences containing the edge (without label); binarized using 5 position thresholds Node features extracted from the source and target nodes (all above node features except the bias term) A binary feature indicating the edge is due to graph expansion or not; edge freq (w/o label, all occurrences) Bias term, 1 for any edge
+
+Edge Features
+
+Table 3: Node and edge features (all binarized).
+
+index 0. Let N be the number of nodes in the graph. Let vi and ei,j be binary variables. vi is 1 iff source node i is included; ei,j is 1 iff the directed edge from node i to node j is included. The ILP objective to be maximized is Equation 1, rewritten here in the present notation:
+N
+
+The AMR representation allows graph reentrancies (concept nodes having multiple parents), yet reentrancies are rare; about 5% of edges are reentrancies in our dataset. In this preliminary study we force the summary graph to be tree-structured, requiring that there is at most one incoming edge for each node: ei,j  1,
+j
+
+vi  f (i) +
+i=1
+
+ei,j  g(i, j )
+(i,j )E
+
+(2) j  N. (7)
+
+node score
+
+edge score
+
+Note that this objective is linear in {vi , ei,j }i,j and that features and coefficients can be folded into node and edge scores and treated as constants during decoding. Constraints are required to ensure that the selected nodes and edges form a valid graph. In particular, if an edge (i, j ) is selected (ei,j takes value of 1), then both its endpoints i, j must be included: vi - ei,j  0, vj - ei,j  0, i, j  N (3) Connectivity is enforced using a set of singlecommodity flow variables fi,j , each taking a nonnegative integral value, representing the flow from node i to j . The root node sends out up to N units of flow, one to reach each included node (Equation 4). Each included node consumes one unit of flow, reflected as the difference between incoming and outgoing flow (Equation 5). Flow may only be sent over an edge if the edge is included (Equation 6). f0,i -
+i i
+
+Interestingly, the formulation so far equates to an ILP for solving the prize-collecting Steiner tree problem (PCST; Segev, 1987), which is known to be NP-complete (Karp, 1972). Our ILP formulation is modified from that of Ljubi´ c et al. (2006). Flow-based constraints for tree structures have also previously been used in NLP for dependency parsing (Martins et al., 2009) and sentence compression (Thadani and McKeown, 2013). In our experiments, we use an exact ILP solver,5 though many approximate methods are available. Finally, an optional constraint can be used to fix the size of the summary graph (measured by the number of edges) to L: ei,j = L
+i j
+
+(8)
+
+vi = 0, j  N, i, j  N.
+
+(4) (5) (6) 1081
+
+fi,j -
+i k
+
+fj,k - vj = 0,
+
+The performance of summarization systems depends strongly on their compression rate, so systems are only directly comparable when their compression rates are similar (Napoles et al., 2011). L is supplied to the system to control summary graph size.
+5
+
+N · ei,j - fi,j  0,
+
+http://www.gurobi.com
+
+

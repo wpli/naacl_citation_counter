@@ -1,0 +1,30 @@
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11)
+
+S S S S S RR RR RR S RR RL
+
+[ [ [ [ [ [ [ [ [ [ [
+
+NPJohn NPJohn NPJohn NPJohn NPJohn NPJohn NPJohn NPJohn NPJohn NPJohn Slikes
+
+(S\NP)/NPlikes (S\NP)/NPlikes (S\NP)/NPlikes (S\NP)/NPlikes (S\NP)/NPlikes (S\NP)/NPlikes S\NPlikes S\NPlikes S\NPlikes
+
+NPmangoes NPmangoes NPmangoes NPmangoes NPmangoes
+
+(NP\NP)/NPf rom (NP\NP)/NPf rom NP\NPf rom
+
+(11) NPIndia John
+
+(10) (8) mangoes madly (7) from (6) India
+
+likes
+
+(S\NP)\(S\NP)madly
+
+Figure 2: NonInc - Sequence of actions with parser configuration and the corresponding dependency graph. Though the performance of these greedy parsers is less accurate than related parsers using a beam (Zhang and Nivre, 2011), greedy parsers are interesting as they are very fast and are practically useful in large-scale applications such as parsing the web and online machine translation or speech recognition. In this work, we develop a new greedy transition-based algorithm for incremental CCG parsing, which is more incremental than Zhang and Clark (2011) and Xu et al. (2014) and more accurate than Hassan et al. (2009). Our algorithm is not strictly incremental as we only produce derivations which are compatible with the Strict Competence Hypothesis (Steedman, 2000) (details in §3.2.3). application, composition etc., and punctuation rules). In this action the right node is the head and hence the left node is reduced. · Reduce Right - X (RR) : This action is similar to the RL (Reduce Left -X) action, except that in this action the right node is reduced since the left node is the head. · Unary - X (U) : Pops the top node from the stack, converts it into a new node with category X and pushes it back on the stack. The head remains the same in this action. This action corresponds to unary rules in the CCGbank (unary type-changing and type-raising rules). Figure 1 shows a normal-form CCG derivation for an example sentence `John likes mangoes from India madly'. Figure 2 shows the sequence of steps using the NonInc algorithm for parsing the sentence. For simplicity and space reasons, unary productions leading to NP are not described. From step 1 through step 5, the first five words in the sentence (John, likes, mangoes, from, India) are shifted with corresponding categories using shift actions (S). In step 6, (NP\NP)/NP:from and NP:India are combined using the Reduce-Right (RR) action to form NP\NP:from which is combined with NP:mangoes in step 7 to form NP:mangoes. Step 8 combines (S\NP)/NP:likes with NP:mangoes to form S\NP:likes using RR action. Then the next word `madly' is shifted in step 9, which is then combined with S\NP:likes in step 10. In step 11, NP:John and S\NP:likes are combined using Reduce-Left (RL) action leading to S:likes. The parsing process terminates at this step as there are no more tokens in the input buffer and as there is only a single node left in the stack.
+
+3 Algorithms
+We first describe the Zhang and Clark (2011) style shift-reduce algorithm for CCG parsing. Then we explain our incremental algorithm based on the "revealing" technique for shift-reduce CCG parsing. 3.1 Non Incremental Algorithm (NonInc) This is our baseline algorithm and is similar to Zhang and Clark (2011)'s algorithm (henceforth NonInc). It consists of an input buffer and a stack and has four major parsing actions. · Shift - X (S) : Pushes a word from the input buffer to the stack and assigns a CCG category X. This action performs category disambiguation as well, as X can be any of the categories assigned by a supertagger. · Reduce Left - X (RL) : Pops the top two nodes from the stack, combines them into a new node and pushes it back onto the stack with a category X. This corresponds to binary rules in the CCGbank (e.g. CCG combinators like function
+
+55
+
+

@@ -1,0 +1,19 @@
+task-independent phoneme recognizer as input. For this purpose, NL comments contained in the dataset were read by a speaker. By contrast, in this paper we explore how grammars for speech recognition and understanding can be built from textual input in a weakly supervised setting, and subsequently be applied for recognition and parsing of speech input. Hence, we explore a 4-fold cross-validation scenario in which for each fold learning is performed using the written ambiguous training data for three games, while the spoken gold standard of the forth game is used for testing, i.e. for performing both speech recognition and subsequent parsing of the resulting ASR transcriptions; spoken data are the same as in Gaspers and Cimiano (2014). For application with the ASR we normalized training data which mainly comprised lowercasing and replacement of numbers in player names, e.g. "pink4"  "pink four". Some statistics for the normalized dataset are presented in Table 1.1
+Total number of comments Comments having correct mr Average number of events per comment Maximum number of events per comment SD in number of events per comment Mean utterance length # Types # Tokens
+
+icon comprises lexical units, i.e. words or short sequences of words, along with their mapping to semantic referents, e.g. "pink goalie"  pink 1. Each syntactic construction consists of a syntactic pattern, e.g. "X1 kicks to X2 ", along with an associated semantic frame, e.g. pass(ARG1 , ARG2 ), and a mapping which maps slots in the syntactic pattern to argument slots in the semantic frame, e.g. X1  ARG1 , X2  ARG2 . Slots in syntactic patterns represent positions in which a lexical unit from the parser's lexicon can be inserted. For instance, in the previous pattern "pink goalie" can be inserted at position X1 or X2 . When applied to written text, parser induction is performed by applying the following learning steps: 1. acquisition of an initial lexicon 2. computation of alignments between NLs and ambiguous context representations, and 3. estimation of co-occurrence frequencies at different levels. This work flow is illustrated in Fig 1.
+
+Table 1: Dataset statistics.
+
+1,872 1,539 2.5 12 1.8 7.39 355 13,838
+
+3.2 The applied semantic parsing algorithm For semantic parser induction we applied the algorithm presented in Gaspers and Cimiano (2014), which is mainly designed to work with the output of a phoneme recognizer. The algorithm is also applicable to textual input and has been shown to achieve state-of-the-art performance on written input (cf. Gaspers and Cimiano (2014)). The induced parser is represented in the form of a lexicon and an inventory containing syntactic constructions and thus well-suited to be transformed into a rulebased speech recognition grammar. The learned lexNumbers for mean utterance length and number of tokens and types are computed only for comments included in the training dataset. Regarding the total number of comments we use one more per game than Chen et al. (2010) in line with B¨ orschinger et al. (2011).
+1
+
+Figure 1: The algorithm's work flow.
+
+In step 1, initial lexical knowledge is learned by computing co-occurrence frequencies between all bi- and unigrams appearing in the NL data and all semantic referents appearing in the MR data. In step 2, this knowledge is used to compute alignments for each example between its NL and all mri  M R observed with it, i.e. lexical knowledge is used to segment NL such that all semantic referents observed in an mr are expressed by individual sequences, and hypotheses concerning a mapping between NL and
+
+875
+
+

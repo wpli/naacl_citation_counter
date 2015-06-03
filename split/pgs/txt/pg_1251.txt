@@ -1,0 +1,43 @@
+Pivot Language 1. 2. 3. 4. 5. 6. 7. 8. Direct Chinese Korean Esperanto Paite Marathi Kannada Telugu
+
+Sentence Strategy 23.53 26.30 22.43 19.40 15.68 16.94 14.15
+
+Standalone
+
+28.89 28.92 28.73 26.64 21.80 24.15 21.31
+
+Linear Linear Interpolate (1) Interpolate (2) With Direct With Direct 33.86 34.03 34.61 34.65 34.18 34.63 34.55 34.17 34.40 33.88 33.80 33.74 34.13 33.81 33.85
+
+Fill Interpolate With Direct 34.31 34.64 35.32 34.66 33.83 34.87 34.04
+
+MDP With Direct 35.66 35.60 35.74 35.22 34.03 35.52 34.57
+
+Table 1: Japanese-Hindi Results Using Single Pivots
+
+Pivot Language 1. 2. 3. 4. 5. 6. 7. 8. Direct Chinese Korean Esperanto Paite Marathi Kannada Telugu
+
+Sentence Strategy 27.93 30.68 26.67 23.37 20.59 23.21 19.01
+
+Standalone
+
+30.97 32.67 30.80 29.17 26.21 26.96 25.22
+
+Linear Linear Interpolate (1) Interpolate (2) With Direct With Direct 37.47 35.90 38.47 35.99 38.72 36.07 37.82 35.89 37.73 35.89 37.57 35.84 38.05 37.25 36.98
+
+Fill Interpolate With Direct 38.41 38.55 37.85 37.39 37.72 37.79 37.11
+
+MDP With Direct 39.49 39.49 39.14 38.19 38.30 38.05 37.04
+
+Table 2: Hindi-Japanese Results Using Single Pivots
+
+Of all the scores, the ones obtained using Korean and Chinese as pivots stand out as the best and it is known that Korean and Japanese share many similarities. Although this gives reason to believe that languages belonging to the same language group should act as good choices of pivots, the languages Kannada, Telugu and (especially) Marathi should have helped improve Hindi to Japanese translation. Moreover, languages like Paite and Esperanto which are relatively distant from both Hindi and Japanese gave better performance than the Indian Languages. Remember that the Chinese and Korean corpora were character segmented9 and that Esperanto and Paite are not so morphologically rich. The Indian pivot languages have agglutinative features which is one of the main causes of poor quality SMT. This clearly indicates that morphological similarity to source and target is another equally important as9
+
+pect that affects the translation quality. Had this not been the case, the Indian Languages would have acted as good pivots. This shows that experiments involving forcing the morpheme to morpheme ratio, of the source to pivot to target sentences, to be the same, must be conducted. Henceforth, it is to be expected that the most significant improvements will be obtained when Chinese, Korean and Esperanto (in a number of cases) are used as pivots. 4.2.2 On the Linear and Fill Interpolation Methods
+
+Hangul blocks were space separated in the Korean case.
+
+Single pivots: All the interpolation methods (columns 4, 5 and 6 of Tables 1 and 2) gave small improvements in BLEU in most cases compared to the baselines for both language pairs. The results do not show drastic improvements, which is expected since the baseline and pivots based phrase tables are constructed from the same multilingual
+
+1197
+
+

@@ -1,0 +1,21 @@
+are certainly possible.17 For example, one stricter variant of our proposed measure would assign partial credit only for predicted values that have a similarity of 0.95 or higher with the gold truth (inline with our approximate DS training process). For example, for the same gold numeric value g , the measure assigns partial credit only for predicted values in the interval [0.95g, 1.05g ]. We repeated the experiments in Table 5 using this alternate evaluation measure. The result are summarized in Table 6. The results reported in Table 5 do not alter the findings of the paper. In fact, under this stricter evaluation measure, our results are stronger: DScomb -CRF, which combines both our ideas, approaches with nearly 1 F1 point MA-CRF, which trains on manually annotated data.
+
+In addition, we devised a lenient evaluation measure which incorporates the similarity between the extracted argument values and the gold truth, rather than considering as correct only the extractions that exactly match the gold values. We show that this evaluation models the event extraction task better, and, furthermore, is more realistic, especially in view of imperfect knowledge bases. Lastly, we release a dataset containing an event knowledge base constructed from Wikipedia information on earthquakes, which contains 108 earthquakes, 20 different argument types, and 1,116 argument values. The dataset also includes a collection of relevant tweets about these earthquakes, totaling 7,841 tweets. The dataset is publicly available.18
+
+9
+
+Conclusions
+
+Acknowledgements
+This work was partially funded by MINECO (CHIST-ERA READERS project ­ PCIN-2013002-C02-01, EXTRECM project ­ TIN2013-46616C2-1-R, SKaTeR project ­ TIN2012-38584-C0602), and the European Commission (QTLEAP ­ FP7-ICT-2013.4.1-610516). Ander Intxaurrondo is supported by a PhD grant from the Basque Country Government. The IXA group is funded by the Basque Government (A type Research Group).
+
+To our knowledge, this is one of the first works that analyzes the problem of distantly supervised complex event extraction on microblogs. This near realtime data source is challenging, with inaccurate information and short, ambiguous texts, as shown by our empirical analysis of the dataset. We proposed two simple techniques to address these problems: (a) a novel distant supervision paradigm, which implements an alignment algorithm that allows text snippets that are similar but not identical to argument values in the knowledge base to be annotated (thus producing better training data); and (b) a feature aggregation strategy that provides richer information across tweets to cope with ambiguity. Our results on earthquake-related tweets show that each improvement yields 19% significant improvement when applied on top of a strong system based on sequence tagging (CRFs). We show that these contributions are complementary: a model that combines both performs better than each of the above individual models, with an improvement of 33% over the baseline. All in all, our approach attains approximately 88% of the ceiling performance for this task, which is obtained by a system trained on manuallyannotated tweets, validating the hypothesis that distant supervision is useful for a complex event extraction task.
+17
+
+We thank the anonymous reviewer for the suggestion.
+
+18 http://ixa.eus/Ixa/Argitalpenak/ Artikuluak/1425465524/publikoak/ earthquake-kb-dataset.zip
+
+649
+
+

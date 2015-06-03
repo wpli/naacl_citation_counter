@@ -1,0 +1,79 @@
+The normalized posterior translation probability p (E |F ) from source sentence F to target sentence E approximates a maximum entropy model normalized on sentence level: e-f (E,F ) -f (E ,F ) E E (F ) e
+
+And the derivative of the expected B LEU is    1 =  N =- -
+E En N
+
+ (E )
+n=1 E En
+
+p (E |Fn ) 
+
+p (E |F ) =
+
+(8)
+
+1 N
+
+N
+
+p (E |F ) (E )# (E, F )
+n=1 E En
+
+p (E |F ) (E ) · p (E |F )# (E, F ) (12)
+
+The denominator of this probability does not depend on the output sentence. Thus, the arg max of Equation 8 is equal to the arg max of the translation score in Equation 1. Maximum Entropy models tend to generalize poorly, which can be circumvented by regularization. He and Deng (2012) use Kullback-Leibler regularization, raising the need of having normalized models hm, (E, F ). We employ the more general L2 -regularization and the objective function is defined as O() = log  - ·
+ 
+
+E En
+
+This can be more compactly expressed by local expectations · n of the B LEU score and the feature count # :    1 =-  N
+N
+
+(  #
+n=1
+
+n
+
+- 
+
+n
+
+# n )
+
+In our implementation, # is moved to the front of the equation to obtain common factors that can be used by all parameter updates:    1 =  N
+N
+
+
+
+2
+
+(9)
+
+# (E, F )·
+n=1 E En n
+
+including the hyper parameter  controlling the degree of regularization. The derivative of the objective function, which is needed for the gradient-based training methods, directly follows: O()    1 · = - · 2 +    
+h (E,F )
+
+p (E |F )(  5.2 Leave-one-out
+
+-  (E ))
+
+(13)
+
+(10)
+
+ With m, = # (E, F ) the number of times feature  fires in the derivation for translation hypothesis E given source sentence F , the derivative of p (E |F ) is defined as (for ease of notation E (Fn ) is represented by En )
+
+p (E |F ) = -p (E |F )·  # (E, F ) -
+E En
+
+(11)
+
+p (E |F )# (E , F )
+
+Although He and Deng (2012) claim that it is not necessary, we apply a leave-one-out heuristic similar to (Wuebker et al., 2010) when generating the n-best lists on the training data. The authors have shown this to effectively counteract over-fitting effects and we argue that it helps to bring out the full potential of our discriminative training procedure. When we decode the training data of our translation model, very long and rare phrases can be used to translate the sentence. The translation probability for these phrases, which are often singletons, are generally over-estimated by the heuristic count model. When they are too dominant in the n-best lists they effectively render the training data useless, as they are unlikely to generalize to unseen data. The idea of leave-one-out is that for decoding each sentence, the global counts of the relative frequency estimates are reduced by the local counts extracted from the current sentence pair. This way, the
+
+1520
+
+

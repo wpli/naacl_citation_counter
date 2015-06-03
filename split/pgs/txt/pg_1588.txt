@@ -1,0 +1,37 @@
+Training Set 500 1,000 5,000 25,000
+
+Hit Rate: Freq 0.87 0.6 0.42 0.4
+
+Hit Rate: Infreq. 0 0.01 0.07 0.05
+
+Table 4: Quality of global linear projection measured by the ratio that GLP can fetch the most possible translation in the 200-nearest neighbors.
+
+Baseline SLP w/ PMI SLP w/ Cont. Repr. LLP
+
+Tune 26.32 27.26 27.34 27.06
+
+Test 27.41 27.89 27.73 27.98
+
+Time (hr) 7,000 100+103 30+103
+
+Source                    
+
+Generated target the humanitarian obligations humanitarian commitments both these two groups these two communities building their institutions certainly efforts efforts must healthier youth services special community development
+
+Figure 4: Examples of the generated rules from LLP.
+
+Table 5: Urdu-English translation accuracy (cf. Table 3).
+
+ing amount of training data and measure its accuracy on two test sets (Table 4). The first test set contains the 100 most frequent source phrases and their translations. The second test set contains less frequent examples; we choose the 50,000 to 50,100 most frequent source phrases. The training data uses the l most frequent source phrases and their translations which are not already contained in the first test. The projection quality is measured by the ratio of how many times the correct translation is one of the 200nearest neighbors of the projected point computed by GLP. The results in Table 4 clearly show that GLP can find the best translation for very frequent source phrases which is in line with previous work Mikolov et al. (2013a). However, the accuracy for infrequent phrases is poor. This explains why GLP helps relatively little in our translation experiments because our setup requires a method that can find good translations for infrequent source phrases. 5.5 Evaluation on Urdu-English
+
+pected, the translation quality improvement on small corpora is not as significant as on large corpora like Arabic, since the monolingual data in Urdu is much smaller than for Arabic (75m tokens vs. 5b tokens) which makes it more difficult to learn good representations. In general, with continuous representations, SLP and LLP achieve similar performance to PMIbased SLP but the projection based methods are orders of magnitudes faster. 5.6 Analysis of Output Figure 4 shows some examples of the translation rules produced by our system. The first five examples are for the Arabic-English system, while the last five are for the Urdu-English system. All source phrases are unknown to the baseline system which usually results in sub-optimal translations. Our system on the other hand, managed to generate translation rules for them. The Arabic-English examples show mostly morphological variants of phrases which did not appear in the parallel data; this can be helpful for highly inflected languages since most of the inflectional variations are underrepresented in the parallel data. The Urdu-English examples show mostly unknown phrases since there is much less parallel data than for Arabic.
+
+Resources for Urdu are limited compared to Arabic (§5.1) which results in fewer word vectors and fewer source phrases. This will also affect the quality of the word vectors in Urdu, since more training data usually results in better representations. Table 5 shows that the improvements of both SLP and LLP in Urdu-English are not as significant as for Arabic-English. Our reimplementation of SLP is  1 BLEU better on the tuning set than the baseline, and  0.5 BLEU better on the test set. As ex1534
+
+6
+
+Conclusion and Future Work
+
+In this work, we showed how simple continuous representations of phrases can be successfully used to induce translation rules for infrequent phrases and demonstrated substantial gains in translation accuracy. Continuous representations not only increase the speed of the semi-supervised approach of Saluja et al. (2014) by two orders of magnitude but also improve its accuracy at the same time. Simpler
+
+

@@ -1,0 +1,5 @@
+and Development in Information Retrieval (SIGIR'12), Portland, Oregon. Jinxi Xu, Ralph Weischedel, and Chanh Nguyen. 2001. Evaluating a probabilistic model for cross-lingual information retrieval. In Proceedings of the 24th annual international ACM SIGIR conference on Research and development in information retrieval (SIGIR'01), New Orleans, Louisiana. Heng Yu, Liang Huang, Haitao Mi, and Kai Zhao. 2013. Max-violation perceptron and forced decoding for scalable mt training. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP'13), Seattle, Washington. Matthew D. Zeiler. 2012. ADADELTA: An adaptive learning rate method. Computing Research Repository (CoRR'2012), abs/1212.5701. Kai Zhao, Liang Huang, Haitao Mi, and Abe Ittycheriah. 2014. Hierarchical mt training using max-violation perceptron. In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (ACL'14), Baltimore, Maryland.
+
+1182
+
+

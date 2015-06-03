@@ -1,0 +1,40 @@
+demonstrator Reconstructed input x ~ 2 Rm Reconstruction Latent representation Argument prediction ( = Reconstruction) "Argument prediction" model Hidden
+
+p(ai |a i , r, v, )
+
+charge(Agent: police, Patient: demonstrator, Instrument: baton) Semantic role prediction ( = Encoding) Feature-rich model
+
+y2R
+
+p
+
+Encoding Input
+
+p(r|x, w)
+
+x 2 Rm
+
+Feature representation of "The police charged... " ( x )
+
+(a)
+Figure 1: (a) An autoencoder from Rm to Rp (typically p < m). minimization framework.
+
+(b)
+(b) Modeling roles within the reconstruction-error
+
+· the reconstruction component may be focused on recovering a part of x rather than the entire x, and, in doing so, can rely not only on y but on the remaining part of x. These observations are crucial as they allow us to implement our desiderata. More specifically, the encoding model will be a feature-rich classifier which predicts semantic roles for a sentence, and the reconstruction model is the model which predicts an argument given its role, and given the rest of the arguments and their roles. The idea of training linear models by minimizing the reconstruction error was previously explored by Daum´ e (2009) and very recently by Ammar et al. (2014). 3.3 Modeling semantics within the reconstruction-error framework
+
+resentation r . Any model can be used here as long as the posterior distributions of roles ri can be efficiently computed or approximated (we will see why in Section 3.4). In our experiments, we used a model which factorizes over individual arguments (i.e. a set of independent logistic regression classifiers). The reconstruction component predicts an argument (e.g., the ith argument ai ) given the semantic roles r , the predicate v and other arguments a-i = (a1 , . . . , ai-1 , ai+1 , . . . , aN ) with a bilinear softmax model: p(ai |a-i , r ,v,C,u) =
+T exp(uT ai Cv,ri j =i Cv,rj uaj)
+
+Z (r , v, i)
+
+,
+
+(1)
+
+There are several possible ways to translate the ideas above into a specific method, and we consider one of the simplest instantiations. For simplicity, in the discussion (but not in our experiments), we assume that exactly one predicate is realized in each sentence x. As we mentioned above, we focus only on argument labeling: we assume that arguments a = (a1 , . . . , aN ), ai  A, are known, and only their roles r = (r1 , . . . , rN ), ri  R need to be induced. For the encoder (i.e. the semantic role labeler), we use a log-linear model: p(r |x, w)  exp(wT g (x, r )), where g (x, r ) is a feature vector encoding interactions between sentence x and the semantic role rep4
+
+ua  Rd (for every a  A) and Cv,r  Rk×d (for every verb v and every role r  R) are model parameters, Z (r , v, i) is the partition function ensuring that the probabilities sum to one. Intuitively, embeddings ua , when learned from data, will encode semantic properties of an argument: for example, embeddings for the words demonstrator and protestor should be somewhere near each other in Rd space, and further away from that for the word cat. The product Cv,r ua is a k -dimensional vector encoding beliefs about other arguments based on the argument-role pair (a, r). For example, seeing the argument demonstrator in the Patient position for the predicate charge, one would predict that the Agent is perhaps the word police, and the role Instrument is filled by the word baton or perhaps
+
+

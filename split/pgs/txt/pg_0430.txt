@@ -1,0 +1,29 @@
+The Geometry of Statistical Machine Translation
+Aurelien Waite, William Byrne Department of Engineering, University of Cambridge, UK aaw35@cam.ac.uk, wjb31@cam.ac.uk
+
+Abstract
+Most modern statistical machine translation systems are based on linear statistical models. One extremely effective method for estimating the model parameters is minimum error rate training (MERT), which is an efficient form of line optimisation adapted to the highly nonlinear objective functions used in machine translation. We describe a polynomial-time generalisation of line optimisation that computes the error surface over a plane embedded in parameter space. The description of this algorithm relies on convex geometry, which is the mathematics of polytopes and their faces. Using this geometric representation of MERT we investigate whether the optimisation of linear models is tractable in general. Previous work on finding optimal solutions in MERT (Galley and Quirk, 2011) established a worstcase complexity that was exponential in the number of sentences, in contrast we show that exponential dependence in the worst-case complexity is mainly in the number of features. Although our work is framed with respect to MERT, the convex geometric description is also applicable to other error-based training methods for linear models. We believe our analysis has important ramifications because it suggests that the current trend in building statistical machine translation systems by introducing a very large number of sparse features is inherently not robust.
+
+search for translation hypotheses under a linear combination of weighted features: a source language sentence f is translated as ^(f ; w) = argmax{wh(e, f )} e
+e
+
+(1)
+
+where translation scores are a linear combination of the D × 1 feature vector h(e, f )  RD under the 1 × D model parameter vector w. Convex geometry (Ziegler, 1995) is the mathematics of such linear equations presented as the study of convex polytopes. We use convex geometry to show that the behaviour of training methods such as MERT (Och, 2003; Macherey et al., 2008), MIRA (Crammer et al., 2006), PRO (Hopkins and May, 2011), and others converge with a high feature dimension. In particular we analyse how robustness decreases in linear models as feature dimension increases. We believe that severe overtraining is a problem in many current linear model formulations due to this lack of robustness. In the process of building this geometric representation of linear models we discuss algorithms such as the Minkowski sum algorithm (Fukuda, 2004) and projected MERT (Section 4.2) that could be useful for designing new and more robust training algorithms for SMT and other natural language processing problems.
+
+2
+
+Training Linear Models
+
+1
+
+Introduction
+
+The linear model of Statistical Machine Translation (SMT) (Och and Ney, 2002) casts translation as a
+
+Let f1 . . . fS be a set of S source language sentences with reference translations r1 . . . rS . The goal is to estimate the model parameter vector w so as to minimize an error count based on an automated metric, such as BLEU (Papineni et al., 2002), assumed to be
+
+376
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 376­386, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,20 @@
+tribution over trees GX , X  N  W . If X  / A, then GX is defined exactly as for a PCFG: GX =
+X Y1 ...Yn RX
+
+Sentence  Colloc3+ Colloc3  Colloc2+ Colloc2  Colloc1+ Colloc1  W ord+ W ord  StructSyll where the rule Colloc2  Colloc1+ is implemented by: Colloc2  Collocs1 Collocs1  Colloc1 Collocs1  Colloc1 Collocs1 W ord splits into general syllables and initial- or final- specific syllables in StructSyll. In English, syllables consist of onsets or codas (producing consonants), and nuclei (vowels). Onsets, nuclei and codas are adapted, thus allowing this model to memorize sequences or consonants or sequences of vowels, dependent on their position in the word. Consonants and vowels are the pre-terminals, their derivation is specified in the grammar into phonemes of the language. In Japanese, syllables are adapted and are composed either of (Consonant-)Vowel(-Nasal) or Nasal. Phonemes are annotated either as consonant, vowel, or nasal (the moraic nasal /N/). To allow for these grammars to use the prosodic information, we modify them so that prosodic boundaries are considered as breaks at a given level of collocations (or words). For instance we describe below how we change a Colloc3-Syll grammar to make use of the prosodic boundaries information at the lower level of collocations (Colloc1), by using the terminal symbols "|" (the rest is unchanged): Colloc2  Collocs1 Collocs1  Colloc1 Collocs1  Colloc1 | Collocs1 Collocs1  Colloc1 Collocs1 Colloc1  W ord+ We produced and tested grammars which incorporated these prosodic boundary annotations at different levels, from Collocs3 down to W ord level.
+
+X Y1 ...Yn TDX (GY1 . . . GYn )
+
+With TDX (G1 . . . Gn ) the distribution over trees with root node X and each subtree ti  Gi i.i.d. If X  A, then there is an additional indirection (composition) with the distribution HX : GX =
+X Y1 ...Yn RX
+
+X Y1 ...Yn TDX (HY1 . . . HYn ) HX  CX (GX )
+
+We used CX adaptors following the Pitman-Yor process (PYP) (Perman et al., 1992; Teh, 2006) with parameters a and b. The PYP generates (Zipfian) type frequencies that are similar to those that occur in natural language (Goldwater et al., 2011). Metaphorically, if there are n customers and m tables, the n + 1th customer is assigned to table zn+1 according to (k is the Kronecker delta function): zn+1 |z1 . . . zn 
+m ma + b nk - a m+1 + k n+b n+b k=1
+
+For an AG, this means that adapted non-terminals (X  A) either expand to a previously generated subtree (T (X )k ) with probability proportional to how often it was visited (nk ), or to a new subtree (T (X )m+1 ) generated through the PCFG with probability proportional to ma + b. 3.2 Grammars including prosodic information The baseline that we are using is commonly called the "Colloc3-Syll" model (Johnson and Goldwater, 2009) and is reported at 87% token F-score on the standard Brent version of the Bernstein-Ratner corpus corpus. It posits that sentences are composed of 3 hierarchical levels of collocations, the lower level being collocations of words, and words are composed of syllables. Goldwater et al. (2009) showed how an assumption of independence between words (a unigram model) led to under-segmentation. So, above the W ord level, we take the collocations (cooccurring sequences) of words into account.
+
+956
+
+

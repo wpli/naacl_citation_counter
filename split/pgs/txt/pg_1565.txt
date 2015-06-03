@@ -1,0 +1,33 @@
+Mike is kicking the ball nsubj,aux,verb,det,dobj
+
+The plane is flying in the sky det,nsubj,aux,verb,prep, det,pobj
+
+Table 3: Sample scenes with human-written descriptions and corresponding templates.
+
+5
+
+Model Comparison
+
+We evaluated the model described above through comparison to four alternatives, representing different modeling paradigms in the literature. Our first comparison model is based on templates, which are commonly used to produce descriptions for images (Elliott and Keller, 2013; Kulkarni et al., 2011). Rather than manually creating template rules we induce them from dependency-parsed scene descriptions. We represent each description in the data as a sequence of typed dependencies. The scene descriptions are relatively simple, and many sentences have similar structure. Overall, 20 templates represent the syntactic structure of more than 44% of all scene descriptions. Examples of scenes, their descriptions, and corresponding templates are shown in Table 3 (template nsubj,aux,verb,det,dobj is the most frequent in the data). We train a logistic regression classifier (Yu et al., 2011) on scene-template pairs, and learn to assign a template for a new unseen scene. The "templatepredictor" uses variety of features based on the alignment between clip-art objects and POS-tags as well as objects and dependency roles. The alignments were computed using MI as described in Section 4.1. We also used visual features based on the absolute and relative distance between objects, their co-occurrence, spatial location, depth ordering, facial expression and poses (see Zitnick et al. (2013) for details). In order to transform the templates into natural language sentences we train a "wordpredictor" which fills the most likely word for every grammatical function slot in a given template (again using logistic regression and the same feature space 1511
+
+as for the template predictor). The word predictor uses a vocabulary of 70 frequently occurring words (attested no less than 150 times in the corpus). For a new scene, candidate templates are predicted and subsequently expanded to descriptions by predicting words for every function slot in the templates. Candidate descriptions are ranked using a trigram language model to ensure grammatical coherence. We also implemented two sentence-based retrieval approaches. Our first system is conceptually similar to the model proposed by Farhadi et al. (2010). In their work, images and descriptions seen at training time are mapped into a shared meaning space M using a function f . Given an unseen image , the description closest to f () in M is retrieved and returned by the model. We used the word-predictor described above as a simple way of annotating an unseen scene  with the words that most saliently describe it. These keywords then used as a TFIDF search query against the set H of human scene descriptions seen during training: TFIDF(q, d ) = TF(w, q) =
+wq
+
+ TF(w, d )IDF(w),
+w q
+
+ 1w=w ,
+H 1+  
+d H w d
+
+IDF(w) = 1 + log
+
+1w=w
+
+.
+
+(15)
+
+where H is the set of all human descriptions seen at training time, · is the set-norm, q is a search query, d is any description in H and 1w=w an indicator variable set to 1 if w and w are the same word and 0 otherwise. The human description maximizing the TFIDF similarity with the predicted keywords is returned as the description for the new scene. Our third baseline exploits image similarity (Ordonez et al., 2011). Given an unseen scene , we retrieve from the training set  , the scene most similar to it, and return one of  's human descriptions selected at random. We used locality sensitivity hashing to find the subset of candidate scenes similar to . Scenes were represented with the same visual features used for the word and template predictors and their similarity was computed with the cosine metric. Finally, we also trained a multimodal log-bilinear model (Kiros et al., 2014) on the abstract scenes
+
+

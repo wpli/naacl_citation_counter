@@ -1,0 +1,50 @@
+4.3 4.2 4.1 Average difference 4.0 3.9 3.8 3.7 3.6 3.5 3.4 3.3 0 0.02 0.04 0.06 Alpha
+
+Average difference
+
+300 500 800 1000
+
+5.4 5.2 5.0 4.8 4.6 4.4 4.2 4.0
+
+300 500 800 1000
+
+0.08
+
+0.10
+
+0
+
+0.02
+
+0.04 0.06 Alpha
+
+0.08
+
+0.10
+
+(a) All types of clues and features are used
+
+(b) WordNet-based clues and features are excluded except for the glosses
+
+Figure 1: Average difference between the estimated size and the manually determined size (log of centimeter).
+81 80 79 Accuracy (%) 78 77 76 75 74 0 0.02 0.04 0.06 Alpha 300 500 800 1000 0.08 0.10 Accuracy (%) 75 74 73 72 71 70 69 68 67 66 0 0.02 0.04 0.06 Alpha 300 500 800 1000 0.08 0.10
+
+(a) All types of clues and features are used
+
+(b) WordNet-based clues and features are excluded except for the glosses
+
+Figure 2: Accuracy of order relation classification
+
+6
+
+Conclusion
+
+We addressed the task of automatically extracting numerical attributes of physical objects. We propose representing the sizes of objects using a linear function. We used the combined regression and ranking model with both absolute and relative clues. Currently, many features are extracted from a thesaurus WordNet. If we can extract effective features from other resources, we would be able to apply our method to the objects that are not in the thesaurus. Future work also includes the following: · more accurately collecting physical objects, · sense disambiguation of words in clues,
+
+· use of superlative sentences, · filtering out descriptions of rare events, · a more effective way of using glosses, · application to other attributes, e.g., weight, · handling idioms.
+
+Acknowledgment This work was partially supported by Microsoft Research (CORE Project 9).
+
+1309
+
+

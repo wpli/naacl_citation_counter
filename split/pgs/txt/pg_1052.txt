@@ -1,0 +1,23 @@
+annotation pipeline: the Stanford parser (de Marneffe et al., 2006) (version 3.3.1) and the Macaon parser (Nasr et al., 2014). The latter is an implementation of graph-based parsing (McDonald et al., 2005) where a projective dependency tree maximizing a score function is sought in the graph of all possible trees using dynamic programming. It uses a 1st-order decoder, which is more robust to speech input as well as out-of-domain training data. The features implemented reflect those of (Bohnet, 2010) (based on lexemes and part-of-speech tags). The parser was trained on Penn-Treebank data transformed to match speech (lower-cased, no punctuation), with one iteration of self-training on the Transtac training set. We also use the combination of both parsers, where source words are only tagged if the tags derived independently from each parser agree with each other.
+
+Parser Baseline Stanford Macaon Combined
+
+BLEU std bo 16.8 N/A 16.9 17.0 17.0 17.1 17.1 17.1
+
+Acc (%) std bo 37.1 N/A 60.1 59.4 67.1 62.9 59.4 57.3
+
+Table 2: BLEU scores on Transtac eval set 1 and accuracy of verbal morphological features on manual eval set. std = standard, bo = backed-off system.
+
+6
+
+Experiments and Results
+
+5
+
+Data and Baseline Systems
+
+Development experiments were carried out on the Transtac corpus of dialogs in the military and medical domain. The number of sentence pairs is 762k for the training set, 6.9k for the dev set, 2.8k for eval set 1, and 1.8k for eval set 2. Eval set 1 has one reference per sentence, eval set 2 has four references. For the development experiments we used a phrase-based Moses SMT system with a hierarchical reordering model, tested on Eval set 1. The language model was a backoff 6-gram model trained using Kneser-Ney discounting and interpolation of higher- and lower-order n-grams. In addition to automatic evaluation we performed manual analyses of the accuracy of verbal features in the IA translations on a subset of 65 sentences (containing 143 verb forms) from the live evaluations described above. This analysis counts a verb form as correct if its morphological features for person and number are correct, although it may have the wrong lemma (e.g., wrong word sense). The development experiments were designed to identify the setup that produces the highest verbal inflection accuracy. For final testing we used a more advanced SMT engine on Eval set 2.This system is the one used in the real-time dialog system; it contains a hierarchical phrase-based translation model, sparse features, and a neural network joint model (NNJM) (Devlin et al., 2014). 998
+
+Results in Table 2 show the comparison between the baseline, different parsers, and the combined system. We see that verbal inflection accuracy increases substantially from the baseline performance and is best for the Macaon parser. Improvements over the baseline system without morphology are statistically significant; differences between the individual parsers are not (not, however, that the sample size for manual evaluation was quite small). BLEU is not affected negatively but even increases slightly - thus, data fragmentation does not seem to be a problem overall. This may be due to the nature of the task and domain, which is results in fairly short, simple sentence constructions that can be adequately translated by a concatenation of shorter phrases rather than requiring longer phrases. Back-off systems (indicated by bo) and the combined system improve BLEU only trivially while decreasing verbal inflection accuracy by varying amounts. For testing within the dialog system we thus choose the Macaon parser and utilize a standard translation model rather than a backoff model. An added benefit is that the Macaon parser is already used in other components in the dialog system. Using this setup we ran two experiments with dialog system's SMT engine: first, we re-extracted phrases and rules based on the morph-tagged data and reoptimized the feature weights. In the second experiment, we additionally applied the NNJM to the morph-tagged source text. To this end we include all the morphological variants of the original vocabulary that was used for the NNJM in the untagged baseline system. Table 3 shows the results. The morph-tagged data improves the BLEU score under both conditions: in Experiment 1, the improve-
+
+

@@ -1,0 +1,45 @@
+Row # 1 2 3 4 5
+
+Kernel Linear Linear Linear Linear RBF
+
+Feature Set
+Garcia et al. (2014)
+
+BOW LING TOPIC SNA
+
+Fail Test 3 P R F1 0.39 0.70 0.50 0.40 0.37 0.38 0.39 0.37 0.37 0.28 0.29 0.27 0.42 0.84 0.56
+
+Pass Test 3 P R F1 0.84 0.57 0.67 0.74 0.76 0.75 0.75 0.76 0.75 0.71 0.70 0.70 0.90 0.55 0.68
+
+Macro F1 0.62 0.57 0.57 0.50 0.68
+
+Table 4: Results for Test 3: "do these women talk to each other about something besides a man?" Column two specifies the kernel used with the SVM classifier.
+
+Kernel Linear RBF
+
+Feature
+Garcia et al. (2014)
+
+SNA
+
+Fail Test 3 P R F1 0.72 0.93 0.81 0.80 0.91 0.85
+
+Pass Test 3 P R F1 0.81 0.47 0.60 0.83 0.66 0.73
+
+Macro Macro-F1 0.73 0.80
+
+Table 5: Results on the unseen test set on the end task: does a movie passes the Bechdel Test?
+
+ber of dialogues in a movie}. BM was the ratio of {dialogues between male characters that did not contain mentions of women} over {the total number of dialogues in a movie}. 7.2 Evaluation and Results
+
+There were 60 movies that failed and 153 movies that passed the third test (see Table 1). We experimented with Logistic Regression and Support Vector Machines (SVM) with the linear and RBF kernels. Out of these SVM with linear and RBF kernels performed the best. Table 4 reports the averaged 5-fold cross-validation F1-measures for the best combinations of classifiers and feature sets. For each fold, we penalized a mistake on the minority class by a factor of 2.55 (153/60), while penalizing a mistake on the majority class by a factor of 1. This was an important step and as expected had a significant impact on the results. A binary classifier that uses a 0-1 loss function optimizes for accuracy. In a skewed data distribution scenario where F1-measure is a better measure to report, classifiers optimizing for accuracy tend to learn a trivial function that classifies all examples into the same class as the majority class. By penalizing mistakes on the minority class more heavily, we forced the classifier to learn a non-trivial function that achieved a higher F1-measure. Results in Table 4 show that the features derived from social network analysis metrics (SNA) outperform linguistic features (BOW, LING, and TOPIC) 837
+
+by a significant margin. SNA features also outperform the features proposed by Garcia et al. (2014) by a significant margin (0.68 versus 0.62). Various feature combinations did not outperform the SNA features. In fact, all the top feature combinations that performed almost as well as the SNA features included SNA as one of the feature sets.
+
+7.3
+
+Evaluation on the End Task
+
+We used the I MDB G MAP + S TAN G MAP gender resource for the first test, the C ONSECUTIVE approach for creating an interaction network for the second test, and compared the performance of the baseline versus the best feature set for the third test. Table 5 presents the results for the evaluation on our unseen test set of 52 movies that failed and 38 movies that passed the Bechdel test. As the results show, our best feature and classifier combination outperforms the baseline by a significant margin (0.73 versus 0.80). Note that the end evaluation is easier than the evaluation of each individual test. Consider a movie that fails the first test (and thus fails the Bechdel test). At test time, lets say, the movie is mis-predicted and passes the first two tests. However, the classifier for the third test correctly predicts the movie to fail the Bechdel test. Even though the errors propagated all the way to the third level, these errors are not penalized for the purposes of evaluating on the end task.
+
+

@@ -1,0 +1,68 @@
+document and yet it might not be the rationale for the label of another document. Hence, the feature weightings are done at the document level, rather than globally. To illustrate this concept, we provide an example dataset below with three documents. In these documents, the words that are returned as rationales are underlined. Document 1: This is a great movie. Document 2: The plot was great, but the performance of the actors was terrible. Avoid it. Document 3: I've seen this at an outdoor cinema; great atmosphere. The movie was terrific. As these examples illustrate, the word "great" appears in all three documents, but it is marked as a rationale only for Document 1. Hence, we do not weight the rationales globally; rather, we modify only the labeled document using its particular rationale. Table 1 illustrates both the Lw/oR and LwR representations for these documents.
+Table 1: The Lw/oR binary representation (top) and its LwR transformation (bottom) for Documents 1, 2, and 3. Stop words are removed. LwR multiplies the rationales with r and other features with o.
+
+for wj of feature fj for logistic regression with l2 regularization (assuming y is binary with 0/1):  wj = C ×
+xl L l fj × (y l - P (y = 1|xl )) - wj (2)
+
+where C is the complexity parameter that balances between fit to the data and the model complexity. With our rationales framework, the gradient for wj will be:  wj =   C ×
+l R(xl ) xl L:fj
+
+l r × fj × (y l - P (y l = 1|xl ))
+
+
+
++
+l xl L:fj / R(xl )
+
+ l o × fj × (y l - P (y l = 1|xl )) (3)
+
+- wj
+
+Lw/oR Representation (binary) D1 1 D2 1 D3 1 D1 r D2 o D3 o 1 1 o o 1 1 1 1 1
+
+1
+
+1
+
+1
+
+1
+
+LwR Transformation of the binary Lw/oR repr. o o o r r
+
+o
+
+o
+
+o
+
+r
+
+This approach is simple, intuitive, and classifieragnostic. As we will show later, it is quite effective empirically as well. To gain a theoretical understanding of this approach, consider the work on regularization: the aim is to build a sparse/simple model that can capture the most important features of the training data and thus have large weights for important features and small/zero weights for irrelevant features. For example, consider the gradient 443
+
+In the above equation, a feature fj contributes more to the gradient of its weight wj when a document in which it is marked as a rationale is misclassified. When fj appears in another document xk but is not a rationale, it's contribution to the gradient is muted by o. And hence, when r > o, this framework implicitly provides more granular (per instance-feature combination) regularization by placing a higher importance on the contribution of the rationales versus non-rationales in each document.1 Note that in our framework the rationales are tied to their own documents; that is, we do not weight rationales and non-rationales globally. In addition to providing more granular regularization, this approach has the benefit of allowing different rationales to contribute differently to the objective function of the trained classifier. For example, consider the case where the number of documents in which one word fj (e.g., "excellent") is marked as a rationale is much more than the number of documents where another word fk (e.g., "good") is marked as
+1 The justification for our approach is similar for support vector machines. The idea is also similar for multinomial na¨ ive Bayes with Dirichlet priors j . For a fixed Dirichlet prior with 1 , 2 , · · · , n setting, when o < 1 for a feature fj , its counts are smoothed more.
+
+performance
+
+outdoor
+
+atmosphere
+
+cinema
+
+terrible
+
+terrific
+
+movie
+
+great
+
+actor
+
+plot
+
+avoid
+
+

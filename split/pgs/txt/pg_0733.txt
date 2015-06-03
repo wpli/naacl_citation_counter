@@ -1,0 +1,35 @@
+Embedding
+WORD 2 VEC
+
+Q=5 47.64 68.54 55.34 57.13 70.63
+
+Q = 10 46.17 66.93 54.18 55.78 69.60
+
+Q = 50 41.96 62.36 50.41 52.04 65.95
+
+Q = 100 40.09 59.94 48.39 49.97 63.91
+
+`new' F EMA-current F EMA-prev F EMA-next WORD 2 VEC `toughness' F EMA-current F EMA-prev F EMA-next
+WORD 2 VEC
+
+F EMA-current F EMA-prev F EMA-next F EMA-all
+
+Table 5: Label consistency of the Q-most similar words in each embedding. F EMA-all is the concatenation of the current, previous, and next-word F EMA embeddings.
+
+nephew, news, newlywed, newer, newspaper current, local, existing, international, entire real, big, basic, local, personal current, special, existing, newly, own tightness, trespass, topless, thickness, tenderness underside, firepower, buzzwords, confiscation, explorers aspirations, anguish, pointers, organisation, responsibilities parenting, empathy, ailment, rote, nerves amd, announced, afnd, anesthetized, anguished or, but, as, when, although or, but, without, since, when but, while, which, because, practically
+
+also used to obtain the most common tag for each word. Table 5 shows that the F EMA embeddings are more consistent with the type-level POS tags than WORD 2 VEC embeddings. This is not surprising, since they are based on feature templates that are specifically designed for capturing syntactic regularities. In simultaneously published work, Ling et al. (2015) present "position-specific" word embeddings, which are an alternative method to induce more syntactically-oriented word embeddings. Table 6 shows the most similar words for three query keywords, in each of four different embeddings. The next-word and previous-word embeddings are most related to syntax, because they help to predict each other and the current-word feature; the current-word embedding brings in aspects of orthography, because it must help to predict the affix features. In morphologically rich languages such as Portuguese, this can help to compute good embeddings for rare inflected words. This advantage holds even in English: the word `toughness' appears only once in the SANCL data, but the FEMA-current embedding is able to capture its morphological similarity to words such as `tightness' and `thickness'. In WORD 2 VEC, the lists of most similar words tend to combine syntax and topic information, and fail to capture syntactic regularities such as the relationship between `and' and `or'.
+
+`and' F EMA-current F EMA-prev F EMA-next WORD 2 VEC
+
+Table 6: Most similar words for three queries, in each embedding space.
+
+6
+
+Related Work
+
+Representation learning Representational differences between source and target domains can be a major source of errors in the target domain (BenDavid et al., 2010). To solve this problem, crossdomain representations were first induced via auxiliary prediction problems (Ando and Zhang, 2005), such as the prediction of pivot features (Blitzer et 679
+
+al., 2006). In these approaches, as well as in later work on denoising autoencoders (Chen et al., 2012), the key mechanism is to learn a function to predict a subset of features for each instance, based on other features of the instance. Since no labeled data is required to learn the representation, target-domain instances can be incorporated, revealing connections between features that appear only in the target domain and features that appear in the source domain training data. The design of auxiliary prediction problems and the selection of pivot features both involve heuristic decisions, which may vary depending on the task. F EMA avoids the selection of pivot features by directly learning a low-dimensional representation, through which features in each template predict the other templates. An alternative is to link unsupervised learning in the source and target domains with the label distribution in the source domain, through the framework of posterior regularization (Ganchev et al., 2010). This idea is applied to domain adaptation by Huang and Yates (2012), and to cross-lingual
+
+

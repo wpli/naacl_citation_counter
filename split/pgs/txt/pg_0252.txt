@@ -1,0 +1,61 @@
+The model architecture is parameterized by three weight matrices, RNN = Win , Wout , Whh : an input matrix Win , a recurrent matrix Whh and an output matrix Wout , which are usually initialized randomly. The rows of the input matrix Win  RV ×K contain the K -dimensional embeddings for each word in the language vocabulary of size V . Let us denote by st both the vocabulary token and its one-hot representation, i.e., a zero vector of dimensionality V with a 1 corresponding to the index of the st token. The embedding for st is then obtained by st Win . The recurrent matrix Whh  RK ×K keeps a history of the subsequence that has already been processed. The output matrix Wout  RK ×V projects the hidden state ht into the output layer ot , which has an entry for each word in the vocabulary V . This value is used to generate a probability distribution for the next word in the sequence. Specifically, the forward pass proceeds with the following recurrence, for t = 1, . . . , T : ht =  (st Win + ht-1 Whh ), ot = ht Wout (2) where  is a non-linear function applied elementwise, in our case the logistic sigmoid. The recurrence is seeded by setting h0 = 0, the zero vector. The probability distribution over the next word given the previous history is obtained by applying the softmax activation function: P (st = w|s1 , . . . , st-1 ) = exp(otw ) . V v =1 exp(otv ) (3)
+
+ot
+Wout Whh Wout
+
+ot
+ht
+Whh Win Win
+
+ot+1
+ht+1
+
+ht
+
+st
+
+st
+
+st+1
+
+Figure 2: Compact representation of an RLM (left) and unrolled representation for two time steps (right).
+
+the message m and response r. The context c represents a sequence of past dialog exchanges of any length; then B emits a message m to which A reacts by formulating its response r (see Figure 1). We use three context-based generation models to estimate a generation model of the response r, r = r1 , . . . , rT , conditioned on past information c and m:
+T
+
+p(r|c, m) =
+t=1
+
+p(rt |r1 , . . . , rt-1 , c, m).
+
+(5)
+
+These three models differ in the manner in which they compose the context-message pair (c, m). 4.1 Tripled Language Model
+
+The RLM is trained to minimize the negative loglikelihood of the training sentence s:
+T
+
+L(s) = -
+t=1
+
+log P (st |s1 , . . . , st-1 ).
+
+(4)
+
+The recurrence is unrolled backwards in time using the back-propagation through time (BPTT) algorithm (Rumelhart et al., 1988), and gradients are accumulated over multiple time-steps.
+
+4
+
+Context-Sensitive Models
+
+In our first model, dubbed RLMT, we straightforwardly concatenate each utterance c, m, r into a single sentence s and train the RLM to minimize L(s). Given c and m, we compute the probability of the response as follows: we perform the forward propagation over the known utterances c and m to obtain a hidden state encoding useful information about previous utterances. Subsequently, we compute the likelihood of the response from that hidden state. An issue with this simple approach is that the concatenated sentence s will be very long on average, especially if the context comprises multiple utterances. Modelling such long-range dependencies with an RLM is difficult and is still considered an open problem (Pascanu et al., 2013). We will consider RLMT as an additional context-sensitive baseline for the models we present next. 4.2 Dynamic-Context Generative Model I
+
+We distinguish three linguistic entities in a conversation between two users A and B : the context1 c,
+In this work, the context is purely linguistic, but future work might integrate further contextual information, e.g., geographical location, time information, or other forms of grounding.
+1
+
+The above limitation of RLMT can be addressed by strengthening the context bias. In our second model (DCGM-I), the context and the message are encoded
+
+198
+
+

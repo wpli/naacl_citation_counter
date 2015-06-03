@@ -1,0 +1,28 @@
+1) Student 2) Teacher 3) Student 4) Student 5) Student 6) Teacher 7) Student 8) Student 9) Teacher
+
+
+
+Original Mandarin
+Ø  Ø 
+
+Ø  ,  ?
+
+  Ø  4     Ø 
+
+English Translation How are you, Teacher Chen? I am fine. You have not left yet? I have been back for a month. I didn't dare to chat with you. Not yet. I have gone through 4 rounds of interviews for the American (company). Why? The last round of interview is with the general manager. There are also two online tests. Are you still in the interview phase?
+
+Label 2v 1v, 2v 1v, 1v 1h 1v 2h 3v 3h 2v
+
+Table 1: Sample Chinese SMS conversation with English translation and derived labels.
+
+However, there are plenty of utterances (e.g., Table 1 lines 4 and 6) in which the English translation does not contain an overt subject. This can happen in English in imperative constructions, (some) questions, and general informal communication.3 In these cases, we introduce "hidden" person labels whose role is to carry forward the focus from the previous utterance. For instance, in utterance 4, even though there is no subject on the English side, we carry forward the fact that the most-recent referent was "first person" and denote this with "1h." Because we are jointly modeling the focus shift and the pronoun realization aspects, when the speaker shifts, the "hidden" person must flip. For example, in utterance (5) the Student overtly refers to herself, yielding a label of "1v." The next utterance is by the Teacher but lacks an English subject. The focus remains on the Student and therefore this utterance is labeled "2h" meaning that the focus is on the other speaker, and it is non-overt in English. 1h: subject being continued is first person 2h: subject being continued is second person 3h: subject being continued is anything else Finally, we introduced a seventh label for instances in which no overt subject pronoun appears on the English side, and no focus has yet been established from prior clauses (this applies only at the beginning of a discourse). None: no subject and no focus yet established
+This can also happen due to imperfect zero pronoun identification (Section 4.1).
+3
+
+In Table 1, the rightmost column shows the label assignment for the sample SMS exchange. (The utterances on lines 2 and 3 contain two clauses each, and thus two labels each.) 3.2 Features
+
+We included in our model the following features. Note that these features are based solely on the Chinese side. Linguistic motivations for each feature category are described. Subject continuation: a value indicating the person (1, 2, 3) of the most recent overt NP that was a direct descendent of an IP node (the most recent overt NP in structural subject position--including, if overt, the subject of the current clause). The most recent overt NP subject is a strong candidate for coreference with a zero pronoun. This feature comes closest to attempting antecedent selection. Verb: the first verb in the VP that is sister to the subject NP (the VP of which that NP is the subject). The nature of the verb can provide information relevant to inferring the identity of deictic forms. For example: the Chinese verb guji ("reckon") is intuitively biased toward first-person subject; our training data accordingly show 68% of clauses with guji as verb feature were assigned first-person subject labels. Participant index: a value indicating the index of the conversational participant. To capture regularities, if any exist, in the pronoun use of a speaker. Participant switch: a binary value indicating whether the current utterance represents a change of speaker relative to the previous clause. Switches in
+
+497
+
+

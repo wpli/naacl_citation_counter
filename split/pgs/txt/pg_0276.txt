@@ -1,0 +1,32 @@
+Formal Formal Casual Casual Complex Complex Simple Simple
+
+Low  High  Low  High  Low  High  Low  High 
+
+whereupon, the proceedings were adjourned at 4:20 p.m. mr. president , you have 90 seconds is she, what grade is she in? they bring to you and your loved ones. let me abuse the playwright and dismiss the penultimate scene revealing to you my family 's secret because my late dad 's burial is over. you 're not the only one facebook can get you fired , dumped , and yes , evicted
+
+Table 7: Style ratings of sentences with high and low levels of human agreement, measured by the variance of the human raters' scores (Low  = high agreement).
+
+more phrases to its left than to its right). We then score the overall formality of the text as the proportion of times a formal phrase was chosen when a more casual paraphrase could have been chosen instead. The intuition is captured in Figure 2: when an author is writing about a given topic, she encounters words for which there exist a range of paraphrases. Her lexical choice in these cases signals the style independent of the topic. Table 8 shows how well our two scoring methods correlate with the human judgements of sentences' styles. The "all words" method performs very well, correlating with humans nearly as well as humans correlate with each other. Interestingly, when using paraphrases only we maintain significant correlations. This ability to differentiate stylistic variation without relying on cues from topic words could be especially important for tasks such as bias detection (Recasens et al., 2013) and readability (Callan, 2004; Kanungo and Orr, 2009).
+Formality Sent. Genre 0.47 ­ 0.44 0.77 0.18 0.63 Complexity Sent. Genre 0.48 ­ 0.43 0.80 0.23 0.45
+
+tasks, capturing style information in a way that is portable across topics and applications. An interesting open question is the extent to which style is defined at the lexical level versus at the sentential level: how strongly are human perceptions of style influenced by topic and context as opposed to by lexical choice? One interesting phenomenon we observe is that inter-annotator correlations are lower at the sentence level (  0.5) than at the wordand phrase-level (  0.65). Tables 7 offers some insight: for many of the sentences for which human agreement is low, there seems to be some mismatch between the topic and the typical style of that topic (e.g. talking formally about family life, or talking in relatively complex terms about Facebook). When humans are making judgements at the lexical level, such contextual mismatches don't arise, which might lead to higher overall agreements. Interesting future work will need to explore how well humans are able to separate style from topic at the sentenceand document-level, and how the lexical choice of the author/speaker affects this distinction.
+
+Inter-anno. All words PP only
+
+6
+
+Conclusion
+
+Table 8: Spearman  of automatic rankings with human rankings. Genres are the concatenation of sentences from that genre. In "all words," a text's score is the average log-ratio style score of its words. In "PP only," a text's score is the proportion of times a formal term was chosen when more casual paraphrases existed, effectively capturing style independent of topic.
+
+5
+
+Discussion
+
+We present a simple and scalable method for learning fine-grained stylistic variation of phrases. We demonstrate good preliminary results on two relevant applications: identifying stylistic differences in paraphrase, and characterizing variations between genres. Our method offers a simple and flexible way of acquiring stylistic annotations at web-scale, making it a promising approach for incorporating nuanced linguistic information into increasingly complex language applications.3
+All human and log-ratio scores discussed are available at http://www.seas.upenn.edu/nlp/resources/ style-scores.tar.gz
+3
+
+Characterization of style at the lexical level is an important first step in complex natural language 222
+
+

@@ -1,0 +1,22 @@
+ti,1 2 Ti,1 = {C, P RT } ti,2 2 Ti,2 = {V }
+
+sample a dependency tree y from the parse space. Based on this random starting point, we iteratively ti,1 2 S Ti, si = w + kAn i 1 = {C, P RT } w/C hill-climb t and y in a bottom-up order.2 In our An/N si,1 = w earlier work (Zhang et al., 2014b), we showed this w/C ti, 2 Ti, = {V } ti1 2 2 =i { C ,T PRT } An/C ti, { C, P RT } =  Ti, ,1 2 Ti,1 T i,1 2 strategy guarantees that we can climb to any target k/P tree in a finite number of steps. We repeat the sampling and the hill-climbing processes above until we Figure 1: Example lattice structures for Arabic ti,2 2 Ti,the V } Si 2 ={ token "wkAn". It has two candidate segmentations: do not find a better solution for K iterations. We introduce the details of this process below. w+kAn or w+k+An. The first segmentation consists Si Ti = Ti,1  Ti,2 of two morphemes. The first morpheme w has two SampleSeg and SamplePOS: Given a sentence candidate POS. x , we first draw segmentations s and POS tags t(0) Ti = Ti,1  Ti,2 from the first-order distribution using the current tags for each sentence, token and morpheme. We learned parameter values. For segmentation, firstuse y to denote a dependency tree over morphemes, order features only depend on each token x and its i and yi,j to denote the head of morpheme si,j . Dur- morphemes s . Similarly, for POS, first-order feai,j ing training, the algorithm is provided with tuples tures are defined based on s and t . The sami,j i,j that specify ground truth values for all the variables pling process is straightforward due to the fact that ^, y D = {(x, s ^, t ^)}. the candidate sets |Si | and |Ti,j | are both small. We We also assume access to a morphological ana- can enumerate and compute the probabilities proporlyzer and a POS tagger that provide candidate anal- tional to the exponential of the first-order scores as yses. Specifically, for each token xi , the algorithm is follows.3 provided with candidate segmentations Si , and canp(si )  exp{ · f (x, si )} didate POS tags Ti and Ti,j . These alternative anal(2) p(ti,j )  exp{ · f (x, si , ti,j )} yses are captured in the lattice structure (see Figure 1 for an example). Finally, we use Y to denote SampleTree: Given a random sample of the segthe set of all valid dependency trees defined over mentations s and the POS tags t(0) , we draw a ranmorphemes. dom tree y (0) from the first-order distribution using Wilson's algorithm (Wilson, 1996).4 3.2 Decoding
+kAn/V
+
+w/PRT
+
+xi = wkAn
+
+We parameterize the scoring function as score(x, s, t, y ) =  · f (x, s, t, y ) (1)
+
+where  is the parameter vector and f (x, s, t,1 y ) is 1 the feature vector associated with the sentence and all variables. The goal of decoding is to find a set of valid val1 ues for (s, t, y )  S × T × Y that maximizes the score defined in Eq. 1. Our randomized greedy algorithm finds a high scoring assignment for (s, t, y ) via a hill-climbing process with multiple random restarts. (Section 3.3 describes how the parameters  are learned.) Figure 2 shows the framework of our randomized greedy algorithm. First, we draw a full path from the lattice structure in two steps: (1) sampling a morphological segmentation s from S ; (2) sampling POS tags t for each morpheme. Next, we 44
+
+HillClimbPOS: After sampling the initial values s, t(0) and y (0) , the hill-climbing algorithm improves the solution via locally greedy changes. The hillclimbing algorithm iterates between improving the POS tags and the dependency tree. For POS tagging, it updates each ti,j in a bottom-up order as follows ti,j  arg max score(x, s, ti,j , t-(i,j ) , y )
+ti,j Ti,j
+
+(3)
+
+where t-(i,j ) are the rest of the POS tags when we update ti,j .
+2 We do not hill-climb segmentation, or else we have to jointly find the optimal t and y , and the resulting computational cost is too high. 3 We notice that the distribution becomes significantly sharper after training for several epochs. Therefore, we also smooth the distribution by multiplying the score with a scaling factor. 4 We also smooth the distribution in the same way as in segmentation and POS tagging.
+
+

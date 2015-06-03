@@ -1,0 +1,34 @@
+Tables 2 and 3). We evaluate our results as in Socher et al. (2013): we consider the recall of positive and negative nodes while ignoring both neutral nodes and the difference between positive (+) and strongly positive (++) or between negative (-) and strongly negative (--) nodes, respectively. Socher et al. remove sentences with neutral overall sentiment in training as well as in testing, which seems to worsen the RNTN performance on our dataset (see Table 2), although other methods seem to be less affected by it. For comparability reasons, all other reported figures are based on Socher's non-neutral-sentencesonly setting. In comparison results on SSTb (see Table 3), classification experiments from the English data also show poor results for the RNTN classifier at small data sizes, in parallel with anecdotal evidence on recurrent neural networks having trouble with small dataset sizes.2
+
+System Vote-only Klenner et al. GermanPolarityClues SentiWS SentiMerge [0.0] SentiMerge [0.23] SentiMerge [0.4] Amazon+Lasso Vote-and-flip Klenner et al. GermanPolarityClues SentiWS SentiMerge [0.0] SentiMerge [0.23] SentiMerge [0.4] Amazon+Lasso
+
+Node Acc. 0.769 0.815 0.815 0.660 0.718 0.724 0.499 0.780 0.802 0.807 0.653 0.717 0.723 0.471
+
+Root Acc. 0.646 0.648 0.711 0.577 0.604 0.604 0.426 0.646 0.680 0.665 0.582 0.607 0.603 0.413
+
+Table 4: Lexicon-based phrase labeling
+
+4
+
+Crosslingual Projection for Compositional Sentiment
+
+Our crosslingual approach follows Banea et al. (2013) in assuming that machine translation of the target documents to the source language, then applying a source-language sentiment analysis, and finally projecting the result back to the target side will yield usable sentiment classification. In difference to previous approaches for cross-lingual sentiment analysis, however, our annotation transfer concerns not just analysis results for the complete sentence, but for individual syntactic nodes. After translating the target-language trees using the Google Translate API, we parsed the sentences using the English model of the Stanford parser, and applied the RNTN model of Socher et al. (2013) trained on the English Stanford Sentiment Treebank, yielding a labeling for each syntactic node with a sentiment value. We then performed word alignment using the PostCAT word aligner (Ganchev et al., 2008) with a model trained on the OPUS version of the EuroParl corpus (Tiedemann, 2012), and alignment of syntactic nodes using the Lingua::Align toolbox for tree alignment Tiedemann (2010) with a model trained on the Smultron parallel treebank (Volk et al., 2010).
+general-sequence-learning-using-recurrent-neural-nets/
+
+Using the word alignment and our Lingua::Align model, we are able to map 98.6% of the target-language nodes to a corresponding node on the source (English) side, whereas the remaining nodes are assigned the same sentiment label as the root. As can be seen in table 2, a model that uses simpler features for Lingua::Align works less well than the full feature model. Considering that the RNTN on the Stanford Sentiment Treebank reaches 87.6% node accuracy and 85.4% root accuracy, we see that the crosslingual projection step induces a loss in accuracy, but still performs well in comparison to the approaches that use the HeiST training data.
+
+5
+
+Lexicon-based Approaches
+
+Considering that the size of HeiST creates a sparse data problem for the RNTN learner, it is natural to ask whether we can improve the generalization capabilities of the system by either using a lesssupervised approach or by generalizing over individual word forms to alleviate the sparse data problem. 5.1 General-domain lexicon
+
+Alec Radford (2015): General Sequence Learning using Recurrent Neural Nets, https://indico.io/blog/
+
+2
+
+Several general-domain sentiment lexicons exist for German, including those of Klenner et al. (2009), Waltinger (2010a), Remus et al. (2010), and Emerson and Declerck (2014).
+
+698
+
+

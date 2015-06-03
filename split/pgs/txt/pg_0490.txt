@@ -1,0 +1,49 @@
+Row 1 2 3 4 5 6 7 8
+
+N 1.38 2.00 2.00 2.00 1.38 1.69 1.83 2.00
+
+L 1.50 2.02 1.29 1.70 1.92 2.02 2.40 1.70
+
+U 0.37 1.55 2.52 2.74 0.88 2.58 1.46 3.16
+
+NLRD 1.31 2.33 1.37 1.77 1.94 1.89 2.81 1.73
+
+NLRDU MT AFS 0.40 0.00 1.86 1.54 1.98 1.64 2.49 2.51 2.41 1.14 1.33 1.80 2.50 2.60 3.00 3.40
+
+Arg1 everyone has the freedom of speech gay people should be able to marry a person of their choice and get equal rights Constitutional right to be opposed to gay marriage as well as gay people themselves people should not pick and choose what they want equal rights on. the Republicans creating another Holocaust homosexuals have all the same rights as heterosexuals There was prejudice against gays in 1909 just as there is now homosexual relationships should not compare to heterosexual marriages because only heterosexuals are legally allowed to marry it is prejudice as opposed to religious or moral beliefs which fuel the anti-gay agenda; gay people should be able to marry a person of their choice and get equal rights. Paul Cameron is the voice of the Republicans in opening this opportunity for gay marriage, the definition of marriage will change AIDs was initially spread in the United States primarily by homosexuals.
+
+Arg2 service in the military referring to namecalling and violence from the original post that was opposing gay rights arguing about marriage benefits between single people and married people did not want gay marriage No republican in leadership would call for the extermination of gays Opposition to equal rights for gay couples. it is prejudice as opposed to religious or moral beliefs which fuel the anti-gay agenda; marriage should be between a heterosexual couple
+
+9 10 11 12
+
+2.00 2.94 2.14 2.63
+
+2.70 2.02 1.50 3.63
+
+2.09 2.93 2.91 2.60
+
+2.83 2.18 2.08 3.75
+
+3.03 2.70 2.62 3.57
+
+3.50 3.50 3.60 4.17
+
+13
+
+4.23
+
+2.72
+
+2.26
+
+4.82
+
+4.12
+
+4.50
+
+when people claim religion in doing prejudice they are actually abandoning their morals Gay couples are unable to get any benefits that married people do. Conversation about Paul Cameron opponents of homosexual marriage tend to argue that a change to marriage law would make it too open ended No one argues the point that AIDs was spread in the United States by homosexuals.
+
+Table 4: Predicted Scores for each model and the Mechanical Turk AFS gold standard for selected argument pairs from the pairs dataset. Best performing model for each pair is shown in bold. The table is sorted by the AFS score (gold standard). The argument pairs shown in bold are cases where UMBC by itself beats our proposed model. KEY: Feature sets model. N = NGRAM, U = UMBC STS tool, L = Linguistic Inquiry and Word Count; R = Rouge, D = DISCO, AFS= Mean of Mechanical Turker AFS scores, our gold standard. For example, NLRD means a combination of NGRAM, LIWC, ROUGE and DISCO. It is also interesting to examine the differences in model scores for particular argument pairs as shown in Table 4. The best performing model for each row is in bold in Table 4. As described in the HIT instructions in Fig. 6, values of AFS near 0 (Row 1) indicate different topics and no similarity. Values near 1 indicate same topic but different arguments (Rows 2,3). Values of 3 and above indicate same FACET (Rows 7,8), and values near 5 are same facet and very similar argument (Rows 12 and 13). Both Arg1 and Arg2 in Row 10 makes the same argument but Arg1 includes additional argumentation. In Row 12, there is very low Ngram overlap, but strong AFS 436 and NLRD performs better than the other models, and LIWC performs well by itself. In Row 1, UMBC performs the best with a predicted score of 0.37 as opposed to an AFS score of 0.00. Other rows where UMBC on its own provides the best performance are highlighted in the table with Arg1 and Arg2 in bold. The top performance of NLRD in Row 5 without UMBC perhaps arises from the semantic information that extermination and holocau are somehow related. NGRAM overlap does the best in Row 13 despite the fact that the phrase No one argues the point that does not participate in the NGRAM overlap.
+
+

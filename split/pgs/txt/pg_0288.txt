@@ -1,0 +1,30 @@
+Feature Group Alignment Models Global Alignment Probability Jenson-Shannon Distance (JSD)
+
+Feature Descriptions p(Q|A) according to IBM Model 1 (Brown et al., 1993) Pairwise JSDs were found between the probability distribution of each content word in the question and those in the answer. The mean, minimum, and maximum JSD values were used as features. Additionally, composite vectors were formed which represented the entire question and the entire answer and the overall JSD between these two vectors was also included as a feature. See Fried et. al (In press) for additional details. Similar to Jansen et al. (2014), we include as features the maximum and average pairwise cosine similarity between question and answer words, as well as the overall similarity between the composite question and answer vectors.
+
+RNNLM
+
+Cosine Similarity
+
+Table 1: Feature descriptions for alignment models and RNNLM baseline.
+
+hoo! community question answering corpus and divided: 50% for training, 25% for development, and 25% for test. Candidate answers for a given question are selected from the corresponding answers proposed by the community (each question has an average of 9 answers). Biology QA (Bio): 183 how and 193 why questions in the cellular biology domain were hand-crafted by a domain expert, and paired with gold answers in the Campbell's Biology textbook (Reece et al., 2011). Each paragraph in the textbook was considered as a candidate answer. As there were few questions, five fold cross-validation was used with three folds for training, one for development, and one for test. Alignment Corpora: To train the alignment models we generated alignment pairs from two different resources: Annotated Gigaword (Napoles et al., 2012) for YA, and the textbook for Bio. Each was discourse parsed with the RST discourse parser described in Section 3, which is implemented in the FastNLPProcessor toolkit10 , using the MaltParser11 for syntactic analysis. 5.1 Results and Discussion Figure 2 shows the performance of the discourse models against the number of documents used to train the alignment model.12 We used the standard implementation for P@1 (Manning et al., 2008) with the adaptations for Bio described in Jansen et al. (2014). We address the following questions.
+http://answers.yahoo.com http://github.com/sistanlp/processors 11 http://www.maltparser.org/ 12 For space reasons the graph for Bio how is not shown, but the pattern is essentially identical to Bio why.
+10 9
+
+Answers9
+
+YA
+
+Bio
+
+Figure 2: Overall performance for the two discourse-based
+
+alignment models, compared against the CR baseline, random baselines, and a RNNLM-based reranker. The x axis indicates the number of training documents used to construct all models. Each point represents the average of 10 samples of training documents.
+
+How does the performance of the RST and SEQ models compare? Comparing the two principal alignment models, the RST-based model significantly outperforms the SEQ model by about 0.5% P@1 in both domains (p < 0.001 for Bio and p < 0.01 for YA)13 . This shows that deep discourse analAll reported statistics were performed at the endpoints, i.e., when all training data is used, using bootstrap resampling with
+13
+
+234
+
+

@@ -1,0 +1,46 @@
+103 ZDD time (ms) ZDD time (ms) 102 101 100 10-1 -1 10 100 101 102 103 Gurobi time (ms)
+
+103 102 101 100 10-1 -1 10 100 101 102 103 Gurobi time (ms) ZDD time (ms)
+Construction time (ms) 4 2 0 0 50 100 Numer of tree nodes 150
+
+103 102 101 100 10-1 -1 10 100 101 102 103 Gurobi time (ms)
+
+(a) Sentence extraction
+
+(b) Sentence compression
+
+(c) Extraction & compression
+
+Figure 4: Performance comparison between the proposed method and Gurobi
+Construction time (ms) Construction time (ms) 0.08 0.06 0.04 0.02 0.00 0 100 200 300 Numer of tree nodes 400 0.3 0.2 0.1 0.0 0
+
+500 1000 1500 Numer of tree nodes
+
+2000
+
+(a) Sentence extraction
+
+(b) Sentence compression
+
+(c) Extraction & compression
+
+Figure 5: ZDD construction time with number of input tree nodes
+400 ZDD size ZDD size 300 200 100 0 0 100 200 300 Number of tree nodes 400 300 200 100 0 0 50 100 Number of tree nodes 150
+
+6000 ZDD size 4000 2000 0 0 500 1000 1500 Number of tree nodes 2000
+
+(a) Sentence extraction
+
+(b) Sentence compression
+
+(c) Extraction & compression
+
+Figure 6: ZDD sizes with number of input tree nodes trimming problem since it is the most complex problem. We make a large artificial nested tree by concatenating outer-trees of the nested trees of 30 RSTDT datasets. The results are shown in Fig. 7, and it shows that out method scales well with large inputs comparing with Gurobi. to solve optimization problems efficiently. These problems can be solved by using ILP solvers, however, they may fail to find optimal solutions and they have no guarantee on the running time. Since the proposed method is a DP algorithm and it has a theoretical guarantee, it always find an optimal solution in time proportional to the size of the input tree. Our method also can be seen as a kind of fast text summarization algorithm. Previous fast algorithms are approximate algorithms (Qian and Liu, 2013; Lin and Bilmes, 2010; Lin and Bilmes, 2011; Davis et al., 2012), while our algorithm is an exact algorithm. Of course, there is a difference in task hardness since previous methods were designed for multi-document summarization and ours for single document summarization. Those works suggest
+
+9
+
+Related Work
+
+Recently proposed text summarization and sentence compression methods solve a task by formulating it as a combinatorial optimization problem (McDonald, 2007; Woodsend and Lapata, 2010; Martins and Smith, 2009; Clarke and Lapata, 2008). These combinatorial optimization-based formulations enable flexible models that can reflect the properties required. However, their complexity makes it difficult 469
+
+

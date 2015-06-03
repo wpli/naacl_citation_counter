@@ -1,0 +1,31 @@
+Arabic Sentiment Labeled Dataset sentiment classes number of instances Most frequent class baseline Human agreement benchmark Mourad and Darwish Arabic SA system Our Arabic SA system
+
+MD pos, neg 1111 66.06 72.50 74.62
+
+RR pos,neg 2681 68.92 85.23
+
+BBN pos, neg, neu 1199 47.95 73.82 63.89
+
+Syria pos, neg, neu 2000 67.50 79.05 78.65
+
+Table 2: Accuracy (in percentage) of sentiment analysis (SA) systems on various Arabic social media datasets. BBN data a. Ar(Auto.Sent) b. En(Manl.Trans., Auto.Sent) c. En(Auto.Trans., Auto.Sent) Syria data d. Ar(Auto.Sent) e. En(Auto.Trans., Auto.Sent) pos neg neu
+
+39.78 60.05 0.17 43.12 55.63 1.25 42.87 56.05 1.08 20.60 75.30 4.10 24.75 69.75 5.50
+
+Table 3: Class distribution (in percentage) resulting from automatic sentiment analysis.
+
+7.2
+
+Evaluation
+
+We tested the Arabic sentiment system on two existing Arabic datasets (Mourad and Darwish (2013) (MD) and Refaee and Rieser (2014a) (RR)) and two newly sentiment-annotated Arabic datasets (BBN and Syria). Table 2 shows results of ten-fold crossvalidation experiments on each of the datasets. For MD and RR, the presented results are for the twoclass problem (positive vs. negative) to allow for comparison with prior published results. For BBN and Syria, the results are shown for the case where the system has to identify one of three classes: positive, negative, or neutral. Human agreement scores are shown where available. Note that the accuracy of our system is higher than previously published results on the MD dataset. The only previously published results on the RR dataset are on a small subset (about 1000 instances) for which Refaee and Rieser (2014a) obtained an accuracy of 87%. The results in Table 2 are for a larger dataset and so not directly comparable.
+
+8
+
+Sentiment After Translation
+
+Using the methods and systems described in Sections 4, 5, 6, and 7, we generated all the manually and automatically labeled datasets mentioned in Section 3's Experimental Setup. Table 3 shows the distribution of positive, negative, and neutral classes 773
+
+in datasets that have been automatically labeled with sentiment. These percentages can be compared with those in Table 1 (rows a and d) which show the true sentiment distribution in the BBN and Syria datasets. Observe that the automatic system has difficulty in assigning neutral class to posts. This is probably because of the small percentage (about 10%) of neutral tweets in the training data. Also notice that the system predominantly guesses negative, which is also a reflection of the distribution in the training data. The strong bias to negatives is lessened in the English translations. Main Result: Tables 4 and 5 show how similar the sentiment labels are across various pairs of datasets for the BBN posts and the Syrian posts, respectively. For example, row a. in Table 4 shows the comparison between Arabic tweets that were manually annotated for sentiment and those that were automatically labeled for sentiment by our Arabic sentiment analysis system. Column 2 shows the percentage of instances where the sentiment labels match across the two datasets being compared. For row a. the match percentage of 63.89% represents the accuracy of the automatic sentiment analysis system on the Arabic BBN posts. Row b. shows the difference in labels when text is manually translated from Arabic to English, even though sentiment labeling in both Arabic and English is done manually. Observe that the two labels match only 71.31% of the time. However, the agreement among human sentiment annotators on original Arabic texts was only 73.8%. So, the English translation does affect sentiment, but not dramatically. Row c. shows results for when the manually translated text is run through an English sentiment analysis system and the labels are compared against Ar(Manl.Sent.) Observe that the match for this pair is 68.65%, which is not too much lower than 71.31% obtained by manual sentiment labeling. This shows
+
+

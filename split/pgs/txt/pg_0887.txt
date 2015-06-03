@@ -1,0 +1,32 @@
+the literature (Turetsky and Dimitrova, 2004; Weng et al., 2009; Gil et al., 2011), is not well equipped to handle anomalies in the structure of screenplays. Our supervised models outperformed the regular expressions based baseline by a large and significant margin (0.69 versus 0.96 macro-F1 measure for the five classes). We use these parsed screenplays for the purposes of this paper. Many of our features designed to automate the Bechdel test rely on the definition of a scene and a conversation. We define them here: Scene: A scene is the span of screenplay that lies between two scene boundaries (tag "S"). Conversation: A conversation between two or more characters is defined as their dialogue exchange in one scene.
+
+B. Test 1 B. Test 2 B. Test 3 Overall
+
+Train & Dev. Set Fail Pass 26 341 128 213 60 153 214 153
+
+Test Set Fail Pass 5 85 32 53 15 38 52 38
+
+Table 1: Distribution of movies for the three tests over the training/development and test sets. B. stands for Bechdel.
+
+4
+
+Data
+
+The website bechdeltest.com has reviewed movies from as long ago as 1892 and as recent as 2015. Over the years, thousands of people have visited the website and assigned ratings to thousands of movies: movies that fail the first test are assigned a rating of 0, movies that pass the first test but fail the second test are assigned a rating of 1, movies that pass the second test but fail the third test are assigned a rating of 2, and movies that pass all three tests are assigned a rating of 3. Any visitor who adds a new movie to the list gets the opportunity to rate the movie. Subsequent visitors who disagree with the rating may leave comments stating the reason for their disagreement. The website has a webmaster with admin rights to update the visitor ratings. If the webmaster is unsure or the visitor comments are inconclusive, she sets a flag (called the "dubious" flag) to true. For example, niel (webmaster) updated the rating for the movie 3 Days to Kill from 1 to 3.2 The dubious flag does not show up on the website interface but is available as a meta-data field. Over the course of the project, we noticed that the dubious flag for the movie Up in the Air changed from false to true.3 This provided evidence that the website is actively maintained and moderated by its owners.
+http://bechdeltest.com/view/5192/3_ days_to_kill/ 3 http://bechdeltest.com/view/578/up_in_ the_air/
+2
+
+We crawled a total of 964 movie screenplays from the Internet Movie Script Database (IMSDB). Out of these, only 457 were assigned labels on bechdeltest.com. We decided to use 367 movies for training and development and 90 movies (about 20%) for testing. Table 1 presents the distribution of movies that pass/fail the three tests in our training and test sets. The distribution shows that a majority of movies fail the test. In our collection, 266 fail while only 191 pass the Bechdel test.
+
+5
+
+Test 1: are there at least two named women in the movie?
+
+A movie passes the first test if there are two or more named women in the movie. We experiment with several name-to-gender resources for finding the character's gender. If, after analyzing all the characters in a movie, we find there are two or more named women, we say the movie passes the first test, otherwise it does not. 5.1 Resources for Determining Gender I MDB G MAP: The Internet Movie Database (IMDB) provides a full list of the cast and crew for movies. This list specifies a one-to-one mapping from character names to the actors who perform that role. Actors are associated with their gender through a meta-data field. Using this information, we created an individual dictionary for each movie that mapped character names to their genders. SSA G MAP: The Social Security Administration (SSA) of the United States has created a publicly available list of first names given to babies born in a given year, with counts, separated by gender.4 Sugimoto et al. (2013) used this resource for assigning genders to authors of scientific articles. Prabhakaran
+4
+
+http://www.ssa.gov/oact/babynames/limits.html
+
+833
+
+

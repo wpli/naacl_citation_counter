@@ -1,0 +1,25 @@
+LSA is not applicable to our setting because, due to the usage of lexical specificity, our vectors are relatively small in size and different vectors usually have few overlapping dimensions. Moreover, unlike LSA, in which the size-reduced vectors have opaque conflations of multiple words as their dimensions, our new semantic space has human- and machinereadable synsets as its dimensions. Our generalization procedure produces three advantages: (1) it maps the vectors from a word-based semantic space to a lower-dimensional space of synsets, (2) while merging multiple words into a single synset an implicit disambiguation of context words takes place, providing better means for sense distinction, and (3) the dimensionality reduction tackles the potential noise and sparsity, resulting in smoother vectors.
+
+Algorithm 1 NASARI-based word similarity
+Input: words w1 and w2 Output: Sim, similarity score 1: for each synonym set H  S 2: if w1  H & w2  H then 3: return Sim = 1 4: for each word wi  {w1 , w2 } 5: Cwi  , set of concepts associated with wi 6: if wi  WordNet & wi not Named Entity then 7: for each sense s  WordNet senses (wi ) 8: Cwi  Cwi  {s} 9: else 10: for each page p  piped links (wi ) 11: Cwi  Cwi  {p} 12: Vi  , set of representations for concepts in Cwi 13: for each concept c  Cwi 14: vwrd NASARI word-based rep. of c 15: vsyn NASARI synset-based rep. of c 16: v  (vwrd , vsyn ) 17: Vi  Vi  {v }
+18: Sim  maxvV1 ,v 19: return Sim
+V2 WO(vwrd ,vwrd )+WO(vsyn ,vsyn ) 2
+
+3
+
+N ASARI for Semantic Similarity
+
+So far we have explained how NASARI constructs two types of representations, i.e., word-based and synset-based, for arbitrary WordNet synsets and Wikipedia pages. In this section we provide a method that leverages NASARI representations for effective measurement of concept and word similarity. Semantic similarity between a pair of lexical items (e.g., words or concepts) lies at the core of many applications in NLP and hence it has received a considerable amount of research interest, leading to a wide range of semantic similarity measures (Mohammad and Hirst, 2012). 3.1 Concept similarity
+
+weights the overlaps between the two vectors: W O(v1 , v2 ) =
+2 -1 1 q O (rq + rq ) |O | -1 i=1 (2i)
+
+(1)
+
+Given a pair of concepts, we first use the procedure described in Section 2 to obtain for each concept the two corresponding vector representations, i.e., word-based and synset-based. For each representation type, we then compute the similarity of the two concepts by comparing their corresponding vectors. This results in two similarity scores, one for each representation type. The final similarity is computed as the average of the two similarity scores. We use Weighted Overlap for comparing vectors. Weighted Overlap. Proposed by Pilehvar et al. (2013), Weighted Overlap (WO) first sorts the elements of each vector vi and then harmonically 570
+
+where O is the set of overlapping dimensions bej is the rank of dimentween the two vectors and rq sion q in the vector vj . Given that our vectors are significantly smaller than those in the original setting of WO, the overlaps are also generally smaller in size. Hence, we apply a square root operation to the computed value in order to obtain a more uniformly-distributed range of scores across the similarity scale, i.e., [0, 1]. In our experiments we show the advantage we gain by using WO in comparison to the conventional cosine measure. 3.2 Word similarity
+
+Algorithm 1 shows the procedure we devised for measuring semantic similarity between two words. There are three main steps: 1. Given a pair of words w1 and w2 the algorithm first checks whether they are synonymous according to our synonym set collection S . In Section 3.2.1, we explain how we obtain this set. If the words are defined as synonyms in S ,
+
+

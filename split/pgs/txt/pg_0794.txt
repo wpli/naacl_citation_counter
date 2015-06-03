@@ -1,0 +1,28 @@
+System RR09 Baseline Our Baseline RR09 Base + All External Our Base + Reps
+
+Dev F1 89.2 90.4 92.5 91.6
+
+Test F1 83.6 84.3 88.6 88.0
+
+System CoNLL Fin10 CoNLL+Fin10 +Weights
+
+Prec 43.0 75.3 66.0 73.8
+
+Rec 49.8 50.2 58.0 55.4
+
+F1 46.2 60.2 61.8 63.3
+
+Table 4: Performance on newswire (CoNLL) data.
+
+System Fin10Dev Rit11 Fro14 Avg CoNLL 27.3 27.1 29.5 28.0 + Brown 38.4 39.4 42.5 40.1 + Vector 40.8 40.4 42.9 41.4 + Reps 42.4 42.2 46.2 43.6 Fin10 36.7 29.0 30.4 32.0 + Brown 59.9 53.9 56.3 56.7 + Vector 61.5 56.4 58.4 58.8 + Reps 64.0 58.5 60.2 60.9 CoNLL+Fin10 44.7 39.9 44.2 42.9 + Brown 54.9 52.9 58.5 55.4 58.9 55.2 59.9 58.0 + Vector + Reps 58.9 56.4 61.8 59.0 + Weights 64.4 59.6 63.3 62.4
+Table 5: Impact of our components on Twitter NER performance, as measured by F1, under 3 data scenarios.
+
+Table 6: Precision, recall and F1 on the Fro14 test set with the Base+All Reps feature set.
+
+Knowledge" system. Both use Brown clusters, but RR09 uses Wikipedia gazetteers where we use word vectors. Results are shown in Table 4. We achieve broadly comparable scores in both settings. Our external knowledge features are not as useful as theirs, which may be due to our lack of Wikipedia gazetteers, or due to a domain mismatch in our unannotated training data. Their clusters are trained on the 1996 Reuters corpus, a superset of the CoNLL data, matching it in both era and domain. Conversely, our clusters and vectors are both trained on tweets from 2011, so it is somewhat surprising that they help to the extent that they do. 5.1 Performance on Twitter
+
+Our primary results are shown in Table 5, where we compare our word representation and data weighting techniques under three scenarios: training on out-ofdomain data only (CoNLL), on in-domain data only (Fin10), and on both. Our data weighting technique (+Weights, see Section 3.2) only applies when we use both training sets. We used Fin10Dev to deter740
+
+mine our importance weights, selecting  = 0.01 for CoNLL and  = 1 for Fin10. For these experiments, we test Brown clusters (+Brown), word vectors (+Vector), and both together (+Reps). Our Twitter NER results are much lower than the newswire results from Table 4, with our best Twitter system scoring more than 25 F1 below our best CoNLL system. But the picture would look much worse without word representations, which boost performance in every training scenario. Our best representation-free system lags nearly 20 F1 behind our best system that uses representations. Looking across scenarios, we note that CoNLL+Reps outperforms CoNLL+Fin10 on 2 out of 3 tests. This is interesting, as it shows that, given the hypothetical choice between collecting 100 million unannotated tweets for word representations, and collecting one thousand annotated tweets for NER training, we are better served by the unannotated data. Of course, it is even better to use both; their combined benefit in CoNLL+Fin10+Reps is more than additive. Across all data scenarios and test sets, Brown clusters help less than word vectors. This contradicts the observations from Turian et al. (2010), who generally found Brown clusters to perform best. This may be because of our domain adaptation scenario, or it could be due to our use of word2vec, which did not exist at the time of the Turian study. The combination of Brown clusters and word vectors is consistently better than using either alone. The two representations track different sorts of information: our use of a large window leads word2vec to build topic-focused vectors (Turney, 2012), while Brown clustering is naturally more local, creating very syntactic, part-of-speech-like clusters. It is easy to see how both types of information can be useful to NER. Ritter et al. (2011) report that including out-of-
+
+

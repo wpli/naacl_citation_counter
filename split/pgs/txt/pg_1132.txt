@@ -1,0 +1,67 @@
+Sentence A: I saw Joe's dog, which was running in the garden. Sentence B: The dog was chasing a cat.
+1 ARG0
+
+see-01
+
+ARG1
+
+chase-01
+ARG0 ARG1
+
+i person
+name
+
+dog
+poss ARG0-of
+
+dog run-02
+location
+
+cat
+
+name
+2 op1
+
+garden
+
+"Joe" chase-01
+ARG0 location ARG1
+
+person
+name
+
+poss
+
+dog
+
+garden
+
+cat
+
+name
+op1 3
+
+"Joe"
+
+Summary: Joe's dog was chasing a cat in the garden.
+
+Figure 1: A toy example. Sentences are parsed into individual AMR graphs in step 1; step 2 conducts graph transformation that produces a single summary AMR graph; text is generated from the summary graph in step 3.
+
+graph expansion step, where additional edges are added to create a fully dense graph on the sentencelevel. These steps result in a single connected source graph. A subset of the nodes and arcs from the source graph are then selected for inclusion in the summary graph. Ideally this is a condensed representation of the most salient semantic content from the source. We briefly review AMR and JAMR (§2), then present the dataset used in this paper (§3). The main algorithm is presented in §4, and we discuss our simple generation step in §5. Our experiments (§6) measure the intrinsic quality of the graph transformation algorithm as well as the quality of the terms selected for the summary (using ROUGE-1). We explore variations on the transformation and the learning algorithm, and show oracle upper bounds of various kinds.
+
+Concepts can be English words ("dog"), PropBank event predicates ("chase-01," "run-02"), or special keywords ("person"). For example, "chase-01" represents a PropBank roleset that corresponds to the first sense of "chase". According to Banarescu et al. (2013), AMR uses approximately 100 relations. The rolesets and core semantic relations (e.g., ARG0 to ARG5) are adopted from the PropBank annotations in OntoNotes (Hovy et al., 2006). Other semantic relations include "location," "mode," "name," "time," and "topic." The AMR guidelines2 provide more detailed descriptions. Banarescu et al. (2013) describe AMR Bank, a 20,341-sentence corpus annotated with AMR by experts. Step 1 of our framework converts input document sentences into AMR graphs. We use a statistical semantic parser, JAMR (Flanigan et al., 2014), which was trained on AMR Bank. JAMR's current performance on our test dataset is 63% F -score.3 We will analyze the effect of AMR parsing errors by comparing JAMR output with gold-standard annotations of input sentences in the experiments (§6). In addition to predicting AMR graphs for each sentence, JAMR provides alignments between spans of words in the source sentence and fragments of its predicted graph. For example, a graph fragment headed by "date-entity" could be aligned to the tokens "April 8, 2002." We use these alignments in our simple text generation module (step 3; §5).
+
+3
+
+Dataset
+
+To build and evaluate our framework, we require a dataset that includes inputs and summaries, each with gold-standard AMR annotations.4 This allows us to use a statistical model for step 2 (graph summarization) and to separate its errors from those in step 1 (AMR parsing), which is important in determining whether this approach is worth further investment. Fortunately, the "proxy report" section of the AMR Bank (Knight et al., 2014) suits our needs. A
+2 http://www.isi.edu/~ulf/amr/help/ amr-guidelines.pdf 3 AMR parse quality is evaluated using smatch (Cai and Knight, 2013), which measures the accuracy of concept and relation predictions. JAMR was trained on the in-domain training portion of LDC2014T12 for our experiments. 4 Traditional multi-document summarization datasets, such as the ones used in DUC and TAC competitions, do not have gold-standard AMR annotations.
+
+2
+
+Background: Abstract Meaning Representation and JAMR
+
+AMR provides a whole-sentence semantic representation, represented as a rooted, directed, acyclic graph (Fig. 1). Nodes of an AMR graph are labeled with concepts, and edges are labeled with relations. 1078
+
+

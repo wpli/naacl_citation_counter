@@ -1,0 +1,28 @@
+(CFG) as a 4-tuple (N , G , T , r) where N is a set of nonterminal symbols (e.g. NP, VP), T is a set of terminal symbols, consisting of the words in the language, G is a set of binary rules of the form A  1 2 , and r  N is a distinguished root nonterminal symbol. Given an input sentence x1 , . . . , xn of terminal symbols from T , define the set of c-parses for the sentence as Y (x). This set consists of all binary ordered trees with fringe x1 , . . . , xn , internal nodes labeled from N , all tree productions A  1 2 consisting of members of G , and root label r. For a c-parse y  Y (x), we further associate a span v , v with each vertex in the tree. This specifies the subsequence {xv , . . . , xv } of the sentence covered by this vertex. 2.2 Dependency Parsing
+
+S(3) VP(3) NP(2) DT(1) The1 NN (2) automaker2 VBD (3) sold3 ...
+
+The1
+
+automaker2
+
+sold3
+
+...
+
+Figure 1: Illustration of c-parse to d-parse conversion with head rules {VP  NP VBD , NP  DT NN , . . .}. The c-parse is an ordered tree with fringe x1 , . . . , xn . Each vertex is annotated with a terminal or nonterminal symbol and a derived head index. The blue and red vertices have the words automaker2 and sold3 as heads respectively. The vertex VP(3) implies that automaker2 is a left-dependent of sold3 , and that 2  L(3) in the d-parse.
+
+Dependency parses provide an alternative, and in some sense simpler, representation of sentence structure. These d-parses can be derived through mechanical transformation from context-free trees. There are several popular transformations in wide use; each provides a different representation of a sentence's structure (Collins, 2003; De Marneffe and Manning, 2008; Yamada and Matsumoto, 2003; Johansson and Nugues, 2007). We consider the class of transformations that are defined through local head rules. For a binary CFG, define a collection of head rules as a mapping from each CFG rule to a head preference for its left or   and right child. We use the notation A  1 2  to indicate a left- or right-headed rule, A  1 2 respectively. The head rules can be used to map a c-parse to a dependency tree (d-parse). In a d-parse, each word in the sentence is assigned as a dependent to a head word, h  {0, . . . , n}, where 0 is a special symbol indicating the pseudo-root of the sentence. For each h we define L(h)  {1, . . . , h - 1} as the set of left dependencies of h, and R(h)  {h + 1, . . . , n} as the set of right dependencies. A d-parse can be constructed recursively from a c-parse and the head rules. For each c-parse vertex v with potential children vL and vR in bottom-up order, we apply the following procedure to both assign heads to the c-parse and construct the d-parse:
+
+1. If the vertex is leaf xm , then head(v ) = m.
+  then head(v ) = 2. If the next rule is A  1 2 head(vL ) and head(vR )  R(head(v )), i.e. the head of the right-child is a dependent of the head word.  then head(v ) = 3. If the next rule is A  1 2 head(vR ) and head(vL )  L(head(v )), i.e. the head of the left-child is a dependent of the head word.
+
+Figure 1 shows an example conversion of a c-parse to d-parse using this procedure. By construction, these dependencies form a directed tree with arcs (h, m) for all h  {0, . . . , n} and m  L(h)  R(h). While this tree differs from the original c-parse, we can relate the two trees through their spans. Define the dependency tree span h , h as the contiguous sequence of words reachable from word h in this tree.2 This span is equivalent to the maximal span v , v of any cparse vertex with head(v ) = h. This property will be important for the parsing algorithm presented in the next section.
+The conversion from a standard CFG tree to a d-parse preserves this sequence property, known as projectivity. We leave the question of non-projective d-parses and the related question of traces and co-indexation in c-parses to future work.
+2
+
+2
+
+789
+
+

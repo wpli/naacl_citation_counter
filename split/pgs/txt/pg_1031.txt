@@ -1,0 +1,18 @@
+A Word Embedding Approach to Predicting the Compositionality of Multiword Expressions
+Bahar Salehi, Paul Cook and Timothy Baldwin  NICTA Victoria Research Laboratory Department of Computing and Information Systems The University of Melbourne Victoria 3010, Australia  Faculty of Computer Science University of New Brunswick Fredericton, NB E3B 5A3, Canada
+bsalehi@student.unimelb.edu.au, paul.cook@unb.ca, tb@ldwin.net
+
+Abstract
+This paper presents the first attempt to use word embeddings to predict the compositionality of multiword expressions. We consider both single- and multi-prototype word embeddings. Experimental results show that, in combination with a back-off method based on string similarity, word embeddings outperform a method using count-based distributional similarity. Our best results are competitive with, or superior to, state-of-the-art methods over three standard compositionality datasets, which include two types of multiword expressions and two languages.
+
+2013a) and composition over distributed representations (Socher et al., 2012; Baroni et al., 2014). This paper is the first attempt to bring together the work on word embedding-style distributional analysis with compositionality prediction of MWEs. In the context of compositionality prediction, our primary research questions here are: RQ1: Are word embeddings superior to conventional count-based models of distributional similarity? RQ2: How sensitive to parameter optimisation are different word embedding approaches? RQ3: Are multi-prototype word embeddings empirically superior to single-prototype word embeddings? We explore these questions relative to three compositionality prediction datasets spanning two MWE construction types (noun compounds and verb particle constructions) and two languages (English and German), and arrive at the following conclusions: (1) consistent with recent work over other NLP tasks, word embeddings are superior to count­ based models of distributional similarity (and also translation-based string similarity); (2) the results are relatively stable under parameter optimisation for a given word embedding learning approach; and (3) based on two simple approaches to composition, single word embeddings are empirically slightly superior to multi-prototype word embeddings overall.
+
+1
+
+Introduction
+
+Multiword expressions (MWEs) are word combinations that display some form of idiomaticity (Baldwin and Kim, 2009), including semantic idiomaticity, wherein the semantics of the MWE (e.g. ivory tower) cannot be predicted from the semantics of the component words (e.g. ivory and tower). Recent NLP work on semantic idiomaticity has focused on the task of "compositionality prediction", in the form of a regression task whereby a given MWE is mapped onto a continuous-valued compositionality score, either for the MWE as a whole or for each of its component words (Reddy et al., 2011; Schulte im Walde et al., 2013; Salehi et al., 2014b). Separately in NLP, there has been a recent surge of interest in learning distributed representations of word meaning, in the form of "word embeddings" (Collobert and Weston, 2008; Mikolov et al., 977
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 977­983, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

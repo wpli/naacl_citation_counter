@@ -1,0 +1,27 @@
+Production Rule S  SBAR , NP VP . S  ADVP , NP VP . S  CC NP VP .
+
+Example Sentence If you have spare time, you'll think of shopping. Therefore, the online studying system is really convenient for me. But I'm not good at English. / But it wasn't comfortable and cosy.
+
+Table 4: The top 3 cross-corpus production rule features for Japanese L1 with example lexicalizations.
+
+Overuse however though cannot therefore such into
+
+Underuse perhaps somebody everything behind upon between
+
+Table 5: English function words overused and underused by Japanese learners in their writing.
+
+ers. It represents a third person verb, such as is or has followed by an adjective and a noun. A brief analysis reveals that this is commonly observed in Japanese learner texts because the sequence is missing a determiner before the noun phrase.8 This likely stems from the fact that Japanese learners have difficulty with English articles, often failing to use them (Butler, 2002; Thomas, 1989). Its prominence in the ranked list shows that it is a common issue across distinct learners and genres. The top overused and underused function words are listed in Table 5. The words however and therefore are highly relevant; Japanese writers often use these to start sentences, possibly due to the abovementioned production rules. The word into is also predictive and seems to be used in places where in is more appropriate. This may be due to the Japanese words for in, to and into being similar.9 In the underuse list, perhaps is never used by Japanese learners. Other words here are low-frequency in Japanese L1 texts in both corpora.
+
+8
+
+Discussion
+
+In this work we presented the first application of one of the largest and newest publicly available learner corpora to NLI. Cross-validation experiments mirrored the performance of other corpora and demonstrated its utility for the task. We believe this will motivate future work by equipping researchers with a large-scale corpus that is highly suitable for NLI.
+Example lexicalizations from E F C AM DAT include "She wears black top" and "This area is famous park." 9 All use the particle ni, see Takenobu et al. (2005)
+8
+
+Next, results from the largest cross-corpus NLI evaluation to date were presented, providing strong evidence for the presence of transfer features that generalize across learners, corpora, topics and genres. However, the fact that the cross-corpus accuracy is lower than within-corpus cross-validation highlights that a large portion of the features are highly corpus-specific. This suggests that NLI models are not entirely portable across corpora. Practical applications of NLI to forensic linguistics or SLA must be robust to input from numerous sources and their associated variations, and this finding highlights the need for a cross-corpus approach. To demonstrate how this methodology could be used for SLA, an examination of the cross-corpus features effective in classifying texts of Japanese learners was conducted. Through feature analysis, we were able to link these patterns of syntactic productions, article use and lexical choices to L1-based SLA hypotheses. Our output lists hundreds of features, not included or examined here due to space limitations, whose analysis would allow SLA researchers to explore and generate new hypotheses, specially by combining multiple syntactic feature types. A shortcoming here is that we did not balance texts by proficiency to match the T OEFL11. We expect that a more even sampling of proficiency or using proficiency-segregated models will yield higher accuracy and features more representative of students at each proficiency level. Directions for future work are manifold. The next phase of this research will focus on developing tools to derive and browse ranked lists of the most discriminative cross-corpus features, which will then be used to formulate SLA hypotheses. Subject to availability of data, this could be expanded to a multiple cross-corpus methodology, using three or more corpora. Its application to other languages besides English is also of interest. NLI is a young but rapidly growing field of research and this study is but a first step in shifting efforts towards a more interpretive approach to the task. We hope that the new dataset and directions presented here will galvanize future work.
+
+1407
+
+

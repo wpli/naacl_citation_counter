@@ -1,0 +1,18 @@
+Prosodic boundary information helps unsupervised word segmentation
+Bogdan Ludusan, Gabriel Synnaeve and Emmanuel Dupoux Laboratoire de Sciences Cognitives et Psycholinguistique EHESS / ENS / CNRS 29 rue d'Ulm, 75005 Paris, France bogdan.ludusan@ens.fr, gabriel.synnaeve@gmail.com, emmanuel.dupoux@gmail.com
+
+Abstract
+It is well known that prosodic information is used by infants in early language acquisition. In particular, prosodic boundaries have been shown to help infants with sentence and wordlevel segmentation. In this study, we extend an unsupervised method for word segmentation to include information about prosodic boundaries. The boundary information used was either derived from oracle data (handannotated), or extracted automatically with a system that employs only acoustic cues for boundary detection. The approach was tested on two different languages, English and Japanese, and the results show that boundary information helps word segmentation in both cases. The performance gain obtained for two typologically distinct languages shows the robustness of prosodic information for word segmentation. Furthermore, the improvements are not limited to the use of oracle information, similar performances being obtained also with automatically extracted boundaries.
+
+evidence of parsing utterances into prosodic units, and show 'surprise' when a pause is inappropriately inserted inside as opposed to between these units (Jusczyk et al., 1992; Gerken et al., 1994). Ten to 13 month olds show evidence of using prosodic units to parse utterances into words, as they fail to recognize a familiar word if it appears to straddle a prosodic boundary (Gout et al., 2004). Curiously enough, however, prosody is not used very much in unsupervised models of language acquisition, and in particular, in models of word segmentation. Most such models use text as input, and apply some form of lexical optimization. For instance, Brent and Cartwright (1996) used a Minimal Description Length Principle to optimize the size of the description of a corpus. State of the art systems use hierarchical Bayesian models (Goldwater et al., 2009) which parse a corpus into words or other linguistic units with a bias to reuse previously parsed elements. Adaptor Grammars is a generic framework which enables to formulate such Bayesian models within an overarching architecture based on probabilistic context free grammars (Johnson et al., 2007). Such models have been used to study the role of linguistic information such as syllabic structure (Johnson and Goldwater, 2009), morphology (Johnson, 2008), function words (Johnson et al., 2014), as well as the role of non-linguistic context (Synnaeve et al., 2014). To our knowledge, only one paper studied the role of prosodic information (B¨ orschinger and Johnson, 2014). In this study, the authors used the role of word stress in constraining word segmentation (as in stress languages, there is only one main stress per word).
+
+1
+
+Introduction
+
+Prosodic information is thought to play a fundamental role in early language acquisition, and provide infants with rich structural information about their language (Christophe et al., 1997). In particular, prosody has been claimed to help infants find word boundaries (Christophe and Dupoux, 1996). Newborns are able discriminate between disyllables that contains vs. does not contain a phonological phrase boundary (Christophe et al., 1994; Christophe et al., 2001), showing that they are able to encode the corresponding prosodic cues. Nine-month olds show
+
+953
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 953­963, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

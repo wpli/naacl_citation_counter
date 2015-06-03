@@ -1,0 +1,26 @@
+06 s 3s.png hb0 10s.png hb1 19s png c 9s.png c 5s.png t 4s.png
+
+4
+0 3 467 24 2 1 2 10 145 182 0 1 3 19 323 188 0 1 5 9 161 116 0 1 7 4 43 172 0 0 7 4 43 173 0 0
+
+Problem Formulation
+
+"Jenny is upset because Mike isn't sharing the soccer ball.", "Mike is wearing sunglasses.", "Jenny is wearing a silly hat.", "Mike is kicking the soccer ball away from Jenny.", "Jenny is chasing Mike to get the ball.", "Jenny is wearing a silly hat."
+
+Figure 2: Example of a scene, its rendering information (right), and human-written descriptions (bottom).
+
+ten description. By construction, the dataset encodes the objects in each scene, and their position. An example is shown in Figure 2. The table on the right-hand side specifies how the image was rendered. The top row contains the scene identifier (i.e., 0) and the number of pieces of clip art in the image (i.e., 6). The remaining rows encode rendering information for each individual piece of clipart, i.e., its name (column 1), type (column 2), attribute (column 3), position (columns 4­6), and whether or not it is horizontally flipped (column 7). Six human authored descriptions are shown the bottom. AMT participants were instructed to write simple descriptions using basic words that would appear in a book for young children ages 4­6. Participants who wished to use proper names in their descriptions were provided with names "Mike" and "Jenny" for the boy and girl. The vocabulary consists of 2,705 words, and the average sentence length is 6.3 words. As can be seen in Figure 2, subjects choose to focus on different aspects of the image (e.g., Mike and his sunglasses, the fact that Jenny is chasing Mike). Also notice that even though by design we know which visual objects are present in the image and their spatial relationships (see the right hand-side in Figure 2), the alignment between pieces of clipart and linguistic expressions is hidden. In other words, we do not know which actions the objects depict (e.g., playing, holding) and which words can be used to describe them (e.g., that t 4s.png is called a ball). 1507
+
+We formulate scene description generation as a translation problem from the visual to the linguistic modality. Our approach follows the general paradigm of SMT with two important differences. Firstly, the source side (i.e., scene) is fundamentally different from the target (i.e., linguistic descriptions) both in terms of representation and structure. Secondly, the scene and its corresponding descriptions constitute a very loose parallel corpus: not all visual objects are verbalized (note that no participant chose to mention the sun in Figure 2) and there are multiple valid descriptions for a single scene focusing on different objects and their relations. In the following we first describe how we create a parallel corpus representing the arrangement of objects in a scene and their linguistic realization and then we move on to present our generation model. 4.1 Parallel Corpus Creation As mentioned earlier, each scene in the dataset has six descriptions (on average). For each linguistic description we create its corresponding visual encoding. We initially ground words and phrases by aligning them to pieces of clipart. We parse the descriptions using a dependency parser, and identify expressions that function as arguments (e.g., subject, object). In our experiments we used the Stanford parser (Klein and Manning, 2003) but any parser with similar output could have been used instead. Next, we compute the mutual information (MI) between arguments and clip-art objects defined as: MI (X , Y ) =
+
+xX yY
+
+  p(x, y) log p(x) p(y)
+
+p(x, y)
+
+(1)
+
+where X is the set of clip-art objects and Y the set of arguments found in the dataset. We assume that the visual rendering of an argument is the clip-art object with which its MI value is highest. Figure 3 shows argument-clipart pairs with high MI values. Having identified which objects in the scene are talked about, we move on to encode their spatial relations. We adopt the relations outlined in Visual Dependency Grammar (VDG; Elliott and Keller (2013)). The latter are defined for pairs of image regions but can also directly apply to clip-art objects. VDR Relations are specified according to
+
+

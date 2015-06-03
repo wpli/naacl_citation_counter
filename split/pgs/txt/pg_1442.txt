@@ -1,0 +1,15 @@
+(a)
+Figure 1: t-SNE visualization of BARISTA embeddings trained with POS classes.
+
+use the CBOW model in word2vec for training the word embeddings.1 Both our POS tagging evaluation datasets, as well as the Wiktionaries,2 are mapped to Google's universal tagset (Petrov et al., 2011). We use the derived dictionaries for extracting bilingual POS equivalence classes. For SuS tagging, we only consider English-Danish and extract equivalence classes from Princeton WordNet and DanNet. For translation equivalents, we made use of Google Translate. 3.1 Qualitative Evaluation In our main experiments (§3.2­3.3), we use data from Wikipedia, but we first present a qualitative evaluation of English-German bilingual embeddings learned from the smaller Europarl corpus.3 Note that while this is parallel data, we do not exploit its parallel nature. POS classes The embeddings learned from English-German Europarl using POS classes from Wiktionary were visualized using the t-SNE technique (Van der Maaten and Hinton, 2008), and are shown in Fig 1. The model learns to cluster words very distinctively by their POS tag. Monolingual word embedding models with short context windows typically cluster by POS, but here we see the same effect for bilingual embeddings, i.e. words from both languages with the same POS tag cluster together. Individual words, on the other hand, do not appear to retain the fine-grained relationships we
+https://code.google.com/p/word2vec/ https://code.google.com/p/ wikily-supervised-pos-tagger/ 3 http://www.statmt.org/europarl/
+2 1
+
+(b)
+Figure 2: t-SNE visualizations of BARISTA embedding subspaces for (a) prepositions and (b) modals.
+
+normally observe in word embeddings (where similar words cluster closer together). The question thus is whether such embeddings are more or less useful for cross-language POS tagging than bilingual embeddings based on translation equivalencies. Translation classes Next, we induced EnglishGerman bilingual embeddings on Europarl using translations obtained from Google Translate. We derived a dictionary of the top 20k most frequent words in English, translated into German. The embeddings are shown in Fig 2. The visualizations show that the models are able to extract very finegrained bilingual relationships, and some clusters still correspond to POS. 3.2 Cross-language part-of-speech tagging Next we evaluated the embeddings in the context of unsupervised cross-language POS tagging (Das and Petrov, 2011). The goal is to train a tagger ­ in our case, we use S EARN (Daume et al., 2009), following (Johannsen et al., 2014)­ on labeled English data decorated with bilingual embeddings, and then evaluate the model on another target language. We use data from Danish, German, Spanish, Italian, Dutch, Portuguese, and Swedish. Training and test data, which are the same used in Das and Petrov (2011), were converted to use the same 12 universal parts of speech proposed by Petrov et al. (2011). All results in this section were obtained by training bilingual embedding models on the publicly-
+
+1388
+
+

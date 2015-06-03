@@ -1,0 +1,5 @@
+David Mimno, Hanna M. Wallach, Jason Naradowsky, David A. Smith, and Andrew McCallum. 2009. Polylingual topic models. In Proc. EMNLP, pages 880­889. Graham Neubig. 2013. Travatar: A forest-to-string machine translation engine based on tree transducers. In Proc. ACL Demo Track, pages 91­96. Franz Josef Och and Hermann Ney. 2001. Statistical multi-source translation. In Proc. MT Summit, pages 253­258. Franz Josef Och and Hermann Ney. 2003. A systematic comparison of various statistical alignment models. Computational Linguistics, 29(1):19­51. Franz Josef Och. 2002. Statistical machine translation: from single-word models to alignment templates. Ph.D. thesis, RWTH Aachen. Alicia P´ erez, M. Teresa Gonz´ alez, M. In´ es Torres, and Francisco Casacuberta. 2007. Speech-input multitarget machine translation. In Proc. WMT, pages 56­ 63.
+
+302
+
+

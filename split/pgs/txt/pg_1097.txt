@@ -1,0 +1,28 @@
+summaries1 . One way to achieve this, is to link citances to text spans in the reference article to obtain a more informative collection of sentences representing the reference article (figure 2). A framework designed to solve such problem requires two components: (i) a method to identify the most relevant spans of text in the reference text and (ii) a system to automatically generate a summary given a set of citances and reference spans. In this paper, we propose an information retrieval approach designed to address the first task. We explore the impact of several query reformulation techniques ­ some domain independent, others tailored to biomedical literature ­ on the performance of the system. Furthermore, we apply combined reformulations, which yields an additional improvement over any single method (25% over the baseline). As a related area, passage retrieval in biomedical articles has been studied in the context of the genomics track (Hersh et al., 2006; Hersh et al., 2007) and in following efforts (Urbain et al., 2008; Urbain et al., 2009; Chen et al., 2011). In these works, the goal is to find passages that relate to a given term or keyword (e.g. GeneRIF). In contrast, our system considers citances as queries, which are substantially longer than keyword-based queries and have a syntactical structure. In summary, our contributions are: (i) A search-based, unsupervised (thus easily scalable to other domains) approach to citance-reference spans matching and (ii) adaptation of various query reformulation techniques for the citatnce-refrence span matching.
+
+Citance Article Citing Article
+...There has been much interest recently in the revival of the suggestion that altered metabolism can contribute to, as well as respond to, oncogenic transformation. Several elegant studies have illustrated the importance of metabolic transformation in cancer development (FreedPastor et al., 2012; Locasale et al., 2011; Schafer et al., 2009; Ying et al., 2012), although there is limited information about how these metabolic changes may impact on tumorigenicity in vivo. The regulation of glucose metabolism by TIGAR may have several important consequences; while the contribution of TIGAR to antioxidant activity has been shown in several cell systems (Bensaad et al., 2006; Li and Jogl, 2009; Wanka et al., 2012)...
+
+Reference Article Reference Article
+...Indeed, shRNA knockdown of Myc in iKras PDAC cells significantly downregulated the expression of metabolism genes in the glycolysis, HBP, and nonoxidative PPP pathways (Figures S7E and S7F). Another possible candidate mediator of Kras-induced transcriptional changes of metabolism genes was HIF1. Although there was some enrichment of HIF1  promoter elements in the Kras transcriptional changes, knockdown of HIF1 had only minimal impact on metabolic enzyme expression (data not shown). Together, our data indicates that the MAPK pathway and Myc-directed transcriptional control play key roles for KrasG12D-mediated metabolic reprogramming in PDAC...
+
+(Cheung et al., 2013)
+
+(Ying et al., 2012)
+
+Figure 2: Example of a citance/reference article pair from the TAC training set1 . The text in the red box on the left is referred to as the citance text, while the text in the green boxes on the right is referred to as the reference text.
+
+2. Apply query reformulation to the given citance and retrieve the most relevant spans. 3. Rerank and merge the retrieved spans that correctly describe the citance. We will describe each step in the following sections. 2.1 Creating the index To create an index of spans, each reference article is tokenized at a sentence level using the Punkt tokenize (Kiss and Strunk, 2006). Because each relevant reference span in the reference text can be formed by several consecutive sentences (according to the annotation guidelines, each span can consist of one up to five consecutive sentences), we index text spans comprised of one up to five sentences. 2.2 Retrieval model We evaluated the performance of several retrieval models during experimentation, i.e. vector space model (Salton et al., 1975), probabilistic BM25 (Robertson and Zaragoza, 2009), divergence from randomness (DFR) (Amati and Van Rijsbergen, 2002), and language models (Ponte and Croft, 1998) with Dirichlet priors. All models showed very similar performances (with only DFR constantly underperforming all other models) and we did not observe any statistically significant differences between each set of runs. Therefore, we opted for the vector space model as our retrieval model. 2.3 Query reformulation We apply several query reformulation techniques to the citance to better retrieve the related text spans. We leverage both general and domain specific query reformulations for this purpose. Specifically,
+
+2
+
+Methodology
+
+The goal of the proposed system is to retrieve text spans from the reference paper that match the finding(s) each citance is referring to. We approach this problem as a search task. That is we consider the citance as a query and the reference text spans as documents. Then, using a retrieval model along with query reformulation, we find the most relevant text spans to a given citance. Our methodology consist of the following steps: 1. Create sentence level index from the reference article.
+1
+
+http://www.nist.gov/tac/2014/BiomedSumm/
+
+1043
+
+

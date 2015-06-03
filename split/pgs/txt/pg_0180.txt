@@ -1,0 +1,30 @@
+of citation summaries have been individually tested for their salience in a target paper's citation summary in succession. The significance level used to qualify a word as a keyword thus requires correction for multiple tests to reduce type I errors. However, we shall show that the rigid statistical significance is not crucial in our subsequent building of a keyword language model for a paper, and so we did not perform multiple tests corrections, but simply used the raw p-values in subsequent analysis. Another technicality is special handling of citation anchors. Cited authors' names, almost systematically appearing in citing sentences, are bound to be identified as salient keywords. We thus substituted all citation anchors appearing in a paper's citation summary with the pseudo token "targetanchor" if they refer to the target paper, and "otheranchor" if they refer to other co-cited papers. Furthermore, our keyword profiling approach allows for a flexible control of the level of selectiveness in its statistical procedure through the choice of the benchmarking collection C . For example, we can choose to use a heterogeneous collection of papers covering multiple domains. Words that are salient in characterising a domain may then evaluate to a high salience for a paper in C on that domain (e.g., word "parsing" for domain Dependency Parsing (DP)). We can also choose C to be a homogeneous collection of papers from the same domain. Only words that are salient in characterising a single paper will then be evaluated to a high salience for that paper (e.g., if C is on DP, "parsing" will not show up as a salient word for any paper in C ). Recall from Section 2.2 that we use as data papers from five domains. We exploited the homogeneity of this data and performed keyword profiling intradomain. This effectively made the keyword profiling all the more selective that the keywords identified for a paper only characterise its unique contributions w.r.t. its domain, using five highly cited papers. We shall show in the next section that it is this high selectiveness in keyword profiling that bestows our approach its high discriminative power. For paper P05-1013, Table 2 lists the top 10 keywords identified from its citation summary using our method, while Table 1 lists the humanly selected gold standard key facts (Qazvinian and Radev, 2008). It can be seen that our method is highly effective in identifying the paper's main contributions which closely mirror those picked by human experts. We term our word list ranked by p-values the keyword profile of the paper; it statistically and objec126
+
+tively captures words' salience (measured along the dimensions of over-representedness and exclusiveness) in characterising the paper's main contributions using the statistical surprise given by Hypergeometric tests. While only unigram keywords were considered here, our method can be easily extended to cope with higher order n-gram "key phrases". This is left for future work.
+Fact id Fact non-projective pseudo-projective projectivizing projective graphs projectivization transformation czech swedish data-driven training data maltparser nonterminal categories in constituency Occurence 15 6 1 1 1 6 5 4 2 4 1 8 6 4 1 Pyramid tier
+
+1
+
+19
+
+4 2 5 3
+
+Table 1: Gold standard key facts of P05-1013 (Qazvinian and Radev, 2008) ordered by importance. The pyramid tier might not be the sum of the occurrences of facts, as multiple facts can appear in the same sentence.
+
+Salience rank 1 2 3 4 5 6 7 8 9 10
+
+Word non-projective pseudo-projective transformation transformations maltparser swedish danish following arcs dependencies
+
+1.54e-08 5.61e-06 4.47e-05 1.26e-04 3.48e-04 7.53e-04 1.56e-03 2.64e-03 2.64e-03 4.43e-03
+
+P-value
+
+Table 2: Extracted keywords for P05-1013, ranked by decreasing Hypergeometric test significance.
+
+3.2
+
+Keyword Profile Language Model
+
+Each sentence in a paper's citation summary covers keywords (possibly none) that map to the paper's main contributions. Intuitively, a good summarisation should be short, and consist of citing sentences that maximise keywords coverage w.r.t. an arbitrarily imposed summary length limit (Qazvinian and Radev, 2008). A good summariser should thus pick citing sentences that contain as many non-redundant keywords as possible. We have shown in the last sec-
+
+

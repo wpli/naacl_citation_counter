@@ -1,0 +1,28 @@
+How to Make a Frenemy: Multitape FSTs for Portmanteau Generation
+Aliya Deri and Kevin Knight Information Sciences Institute Department of Computer Science University of Southern California {aderi, knight}@isi.edu
+
+Abstract
+A portmanteau is a type of compound word that fuses the sounds and meanings of two component words; for example, "frenemy" (friend + enemy) or "smog" (smoke + fog). We develop a system, including a novel multitape FST, that takes an input of two words and outputs possible portmanteaux. Our system is trained on a list of known portmanteaux and their component words, and achieves 45% exact matches in cross-validated experiments.
+
+W1 affluence anecdote chill flavor guess jogging sheep spanish zeitgeist
+
+W2 influenza data relax favorite estimate juggling people english ghost
+
+PM affluenza anecdata chillax flavorite guesstimate joggling sheeple spanglish zeitghost
+
+Table 1: Valid component words and portmanteaux.
+
+1
+
+Introduction
+
+Portmanteaux are new words that fuse both the sounds and meanings of their component words. Innovative and entertaining, they are ubiquitous in advertising, social media, and newspapers (Figure 1). Some, like "frenemy" (friend + enemy), "brunch" (breakfast + lunch), and "smog" (smoke + fog), express such unique concepts that they permanently enter the English lexicon. Portmanteau generation, while seemingly trivial for humans, is actually a combination of two complex natural language processing tasks: (1) choosing component words that are both semantically and phonetically compatible, and (2) blending those words into the final portmanteau. An end-to-end system that is able to generate novel portmanteaux
+
+Figure 1: A New Yorker headline portmanteau.
+
+with minimal human intervention would be not only a useful tool in areas like advertising and journalism, but also a notable achievement in creative NLP. Due to the complexity of both component word selection and blending, previous portmanteau generation systems have several limitations. The Nehovah system (Smith et al., 2014) combines words only at exact grapheme matches, making the generation of more complex phonetic blends like "frenemy" or ¨ "brunch" impossible. Ozbal and Strappavara (2012) blend words phonetically and allow inexact matches but rely on encoded human knowledge, such as sets of similar phonemes and semantically related words. Both systems are rule-based, rather than data-driven, and do not train or test their systems with real-world portmanteaux. In contrast to these approaches, this paper presents a data-driven model that accomplishes (2) by blending two given words into a portmanteau. That is, with an input of "friend" and "enemy," we want to generate "frenemy."
+
+206
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 206­210, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

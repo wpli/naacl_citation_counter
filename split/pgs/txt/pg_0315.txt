@@ -1,0 +1,30 @@
+Baseline AuToBI 3, 4 CRF ToBI Raw acoustic
+
+Disfluency Prec. Rec. F1 88.61 81.69 85.01 88.46 81.92 85.06 88.42 81.96 85.07 89.53 82.74 86.00
+
+Johnson and Charniak (2004) Qian and Liu (2013) Honnibal and Johnson (2014) CRF Semi-CRF Semi-CRF + Prosody
+
+Prec. - - - 88.7 90.1 90.0
+
+Rec. - - - 78.8 80.0 81.2
+
+F1 79.7 83.7 84.1 83.4 84.8 85.4
+
+Table 2: Disfluency results with predicted ToBI features on the development set. We compare our baseline semi-CRF system (Baseline) with systems that incorporate prosody via predictions from the AuToBI system of Rosenberg (2010) and from our CRF ToBI predictor, as well as the full system using raw acoustic features.
+
+Table 3: Disfluency prediction results on the test set; our base system outperforms that of Honnibal and Johnson (2014), a state-of-the-art system on this dataset, and incorporating prosody further improves performance.
+
+useful for this task (Shriberg et al., 1997). Moreover, the ToBI break specification (Hirschberg and Beckman, 1992) stipulates a category for strong disjuncture with a pause (2) as well as a pause marker (p), both of which correlate well with disfluencies on gold-annotated ToBI data. To investigate whether this correlation translates into a performance improvement for a disfluency detection system like ours, we add features targeting ToBI annotations as follows: for each word in a proposed disfluent span, we fire a feature indicating the break index on the fencepost following that word, conjoined with where that word is in the span (beginning, middle, or end). We try two different ways of generating the break indices used by these features. The first is using the AuToBI system of Rosenberg (2010), a state-ofthe-art automatic ToBI prediction systems based on acoustic information which focuses particularly on detecting occurrences of 3 and 4. Second, we use the subset of Switchboard labeled with ToBI breaks (Taylor et al., 2003) to train a CRF-based ToBI predictor. This model employs both acoustic and lexical features, which are both useful for ToBI prediction despite breaks being a seemingly more acoustic phenomenon (Rosenberg, 2010). The acoustic indicators that we use are similar to the ones described in Section 4 and our lexical features consist of a set of standard surface features similar to those used in Section 3.2.1. In Table 2 we see that neither source of predicted ToBI breaks does much to improve performance. In particular, the gains from using raw acoustic features are substantially greater despite the fact that the pre261
+
+dictions were made in part using similar raw acoustic features. This is somewhat surprising, since intuitively, ToBI should be capturing information very similar to what pauses and word durations capture, particularly when it is predicted based partially on these phenomena. However, our learned ToBI predictor only gets roughly 50 F1 on break prediction, so ToBI prediction is clearly a hard task even with sophisticated features. The fact that ToBI cannot be derived from acoustic features also indicates that it may draw on information posterior to signal processing, such as syntactic and semantic cues. Finally, pauses are also simply more prevalent in the data than ToBI markers of interest: there are roughly 40,000 pauses on the ToBI-annotated subset of the dataset, yet there are fewer than 10,000 2 or p break indices. The ToBI predictor is therefore trained to ignore information that may be relevant for disfluency detection.
+
+5
+
+Results and Conclusion
+
+Table 3 shows results on the Switchboard test set. Our final system substantially outperforms the results of prior work, and we see that this is a result of both incorporating span features via a semi-CRF as well as incorporating prosodic indicators.
+
+Acknowledgments
+This work was partially supported by BBN under DARPA contract HR0011-12-C-0014 and by a Facebook Fellowship for the second author. Thanks to the anonymous reviewers for their helpful comments.
+
+

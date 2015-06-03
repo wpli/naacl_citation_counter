@@ -1,0 +1,35 @@
+Figure 1. Top-down approach classification flow
+
+In the next section, we discuss the results of experiments conducted to show that such features can improve sentiment classification.
+
+5
+
+Experiment Results
+
+In this section, we compare the results achieved by using the top-down approach with those of the traditional bottom-up method.
+
+When we add local discourse context, the recall of positive and negative segments improves, as does the overall accuracy (to 0.6758). However, the local discourse classifier completely ignores the objective sentences, assigning polarity to them. The precision of the negative class and overall precision also gets lower, as some positive segments sandwiched between negative ones are assigned a negative label. Adding contrast discourse cues does not help to improve this situation, because it leads to overestimation of positive segments and lower accuracy (0.6620). In fact, the contrast classifier performs even worse than the local discourse one. It seems that lexical information introduces too much noise, and building up on such an unreliable basis does not produce expected results. The background classifier improves the performance, especially for objective sentences, classifying them with a high precision and at least some recall. It also improves the overall accuracy (to 0.6896). However, the most significant improvement is seen after adding the review scores (primary polarity) as features. It helps improve almost all scores, including accuracy, which reaches 0.7241.
+
+5.1
+
+Bottom-up Approach
+
+5.2
+
+Top-down Approach
+
+The lexical classifier results, used as a baseline in this study, are listed in Table 2 below. As can be seen from the results, the recall and precision of positive and especially objective segments is low, which shows that purely lexical classifier cannot reliably distinguish between objective and subjective sentences and between positive and negative ones. The accuracy of the classifier is also low (0.6138). Subjective Negative Positive Prec Rec Prec Rec 0.71 0.77 0.61 0.54 0.69 0.73 0.87 0.64 0.69 0.62 0.68 0.87 0.73 0.85 0.60 0.75 0.62 0.78 0.87 0.82
+
+The primary polarity classifier, which uses the review's rating to predict its overall polarity, has a high recall and an accuracy of 0.7379 (see Table 3). However, it again ignores the objective class, because it is distributed more or less evenly between reviews with different ratings and thus cannot be correlated with a particular review score.
+
+Objective Prec 0.29 0.00 0.00 1.00 1.00 Rec 0.27 0.00 0.00 0.12 0.12 Prec 0.60 0.55 0.55 0.74 0.77
+
+Total Rec 0.61 0.68 0.66 0.69 0.72 F1 0.61 0.61 0.60 0.65 0.68 Acc 0.6138 0.6758 0.6620 0.6896 0.7241
+
+Lexical Local discourse + Contrast + Background + Primary pol.
+
+Table 2. Precision, recall, F1 and accuracy scores for the bottom-up approach
+
+1566
+
+

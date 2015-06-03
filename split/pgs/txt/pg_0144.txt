@@ -1,0 +1,31 @@
+Domains CRF POCRF POHCRF POHCRF+
+
+games 74.21 77.23 78.93 79.28
+
+music 37.13 44.55 46.81 47.35
+
+movies 68.58 76.89 76.46 78.33
+
+AVG. 59.97 66.22 67.40 68.32
+
+Table 3: The F1 performance of variants of CRF across three domains, test on log data
+
+average perceptron. We did not see a significant difference between perceptron and LBFGS in accuracy, but perceptron is faster and thus favorable for training complex HUCRF models. We used 100 as the maximum iteration count and 1.0 for the L2 regularization parameter. The number of hidden variables per token is set to 300. The same features described in the previous section are used here. We perform experiments with the following CRF variants (see Section 2): · CRF: A fully supervised linear-chain CRF trained with manually labeled engineered samples. · POCRF: A partially observed CRF of T¨ ackstr¨ om et al. (2013) trained with both manually labeled engineered samples and click logs. · POHUCRF: A partially observed hidden unit CRF (Figure 2) trained with both manually labeled engineered samples and click logs. · POHUCRF+: POHUCRF with pre-training. Table 3 summarizes the performance of these CRF variants. All results were tested on log data only. A standard CRF without click log data yields 59.97% of F1 on average. By using click log data, POCRF consistently improves F1 scores across domains, resulting into 66.22% F1 measure. Our model POHUCRF achieves extra gains on games and music, achieving 67.4% F1 measure on average. Finally, the pre-training approach yields significant additional gains across all domains, achieving 68.32% average performance. Overall we achieve a relative error reduction of about 21% over vanilla CRFs. 90
+
+Domain alarm calendar communication note ondevice places reminder weather AVG.
+
+CRF 91.79 87.60 91.84 87.72 89.37 88.02 87.72 96.93 90.12
+
+HUCRF 91.79 87.65 92.49 88.48 90.14 88.64 89.21 97.38 90.75
+
+HUCRF+ 91.96 88.21 92.80 88.72 90.64 88.99 89.72 97.63 91.08
+
+Table 4: Performance comparison between HUCRF and HUCRF with pre-training.
+
+4.3
+
+Weakly-Supervised Learning without Projected Annotations via Pre-Training
+
+We also present experiments within Cortana personal assistant domain where the click log data is not available. The amount of training data we used was from 50K to 100K across different domains and the test data was from 5k to 10k. In addition, the unlabeled log data were used and their amount was from 100k to 200k. In this scenario, we have access to both engineered and log data to train a model. However, we do not have access to web search click log data. The goal of these experiments is to show the effectiveness of the HUCRF and pre-training method in the absence of weakly supervised labels projected via click logs. Table 4 shows a series of experiments on eight domains. For all domains other than alarm, using non-linear CRF (HUCRF) improve performance from 90.12% to 90.75% on average. Initializing HUCRF with pretraining (HUCRF+) boosts the performance up to 91.08%, corresponding to a 10% decrease in error relative to a original CRF. Notably in the weather and reminder domains, we have relative error reduction of 23 and 16%, respectively. We speculate that pretraining is helpful because it provides better initialization for training HUCRF: initialization is important since the training objective of HUCRF is non-convex. In general, we find that HUCRF delivers better performance than standard CRF: when the training procedure is initialized with pretraining (HUCRF+), it improves further.
+
+

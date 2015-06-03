@@ -1,0 +1,23 @@
+of i. We compute these statistics for a corpus consisting of English Gigaword (Graff et al., 2003) and Wikipedia. We set the maximal distance to 5 because discontinuous phrases are rarely separated by more than 5 tokens. If c1 is 10 times higher than (c2 + c3 + c4 + c5 )/4, we classify "A B" as continuous, otherwise as discontinuous. For example, [c1 , . . . , c5 ] is [1121, 632, 337, 348, 4052] for "pick off", so c1 is smaller than the average 1342.25 and "pick off" is set as "discontinuous"; [c1 , . . . , c5 ] is [14831, 16, 177, 331, 3471] for "Cornell University", c1 is 10 times larger than the average and this phrase is set to "continuous". We found that that this heuristic for distinguishing between continuous and discontinuous phrases works well and leave the development of a more principled method for future work. 3.3 Sentence reformatting Sentence ". . . A . . . B . . . " is · reformatted as ". . . A B . . . " if A and B form a continuous phrase and no word intervenes between them and · reformatted as ". . . A B . . . A B . . . " if A and B form a discontinuous phrase and are separated by 1 to 4 words. We replace each of the two component words with A B to make the context of both constituents available to the phrase in learning. This method of phrase detection will generate some false positives, e.g., if "pick" and "off" occur in a context like "she picked an island off the coast of Maine". However, our experimental results indicate that it is robust enough for our purposes. We run word2vec (Mikolov et al., 2013) on the reformatted Wikipedia corpus to learn embeddings for all units. Embedding size is set to 200.
+
+binary unit occurrence vectors for the sentences in the ith pair and ti  {0, 1} is the gold tag. Then, we define pk and qk as follows. · pk = P (uik |vik = 1, ti = 1). This is the probability that unit wk occurs in sentence ui given that wk occurs in its counterpart vi and they are paraphrases. · qk = P (uik |vik = 1, ti = 0). This is the probability that unit wk occurs in sentence ui given that wk occurs in its counterpart vi and they are not paraphrases. TF-KLD computes the discriminativity of unit wk as the Kullback-Leibler divergence of the Bernoulli distributions (pk , 1-pk ) and (qk , 1-qk ) TF-KLD has a serious shortcoming for unknown units. Unfortunately, the test data of the commonly used MSPR corpus in paraphrase task has about 6% unknown words and 62.5% of its sentences contain unknown words. It motivates us to design an improved scheme TF-KLD-KNN to reweight the features. TF-KLD-KNN weights are the same as TF-KLD weights for known units. For a unit that did not occur in training, TF-KLD-KNN computes its weight as the average of the weights of its k nearest neighbors in embedding space, where unit similarity is calculated by cosine measure.2 Word2vec learns word embeddings based on the word context. The intuition of TF-KLD-KNN is that words with similar context have similar discriminativities. This enables us to transfer the weights of features in training data to the unknown features in test data, greatly helping to address problems of sparseness.
+
+5
+5.1
+
+Experiments
+Data and baselines
+
+4
+
+Measure of unit discriminativity
+
+We will represent a sentence as the sum of the embeddings of its units. Building on Ji and Eisenstein (2013)'s TF-KLD, we want to weight units according to their ability to discriminate two sentences specific to the paraphrase task. TF-KLD assumes a training set of sentence pairs in the form ui , vi , ti , where ui and vi denote the
+
+We use the MSRP corpus (Dolan et al., 2004) for evaluation. It consists of a training set of 2753 true paraphrase pairs and 1323 false paraphrase pairs and a test set of 1147 true and 578 false pairs.
+Unknown words without embeddings (only seven cases in our experiments) are ignored. This problem can be effectively relieved by training embedding on larger corpora.
+2
+
+1370
+
+

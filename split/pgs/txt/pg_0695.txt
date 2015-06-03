@@ -1,0 +1,18 @@
+Diamonds in the Rough: Event Extraction from Imperfect Microblog Data
+Ander Intxaurrondo, Eneko Agirre, Oier Lopez de Lacalle, Mihai Surdeanu IXA NLP Group, University of the Basque Country University of Arizona {ander.intxaurrondo, e.agirre, oier.lopezdelacalle}@ehu.eus msurdeanu@email.arizona.edu
+
+Abstract
+We introduce a distantly supervised event extraction approach that extracts complex event templates from microblogs. We show that this near real-time data source is more challenging than news because it contains information that is both approximate (e.g., with values that are close but different from the gold truth) and ambiguous (due to the brevity of the texts), impacting both the evaluation and extraction methods. For the former, we propose a novel, "soft", F1 metric that incorporates similarity between extracted fillers and the gold truth, giving partial credit to different but similar values. With respect to extraction methodology, we propose two extensions to the distant supervision paradigm: to address approximate information, we allow positive training examples to be generated from information that is similar but not identical to gold values; to address ambiguity, we aggregate contexts across tweets discussing the same event. We evaluate our contributions on the complex domain of earthquakes, with events with up to 20 arguments. Our results indicate that, despite their simplicity, our contributions yield a statistically-significant improvement of 33% (relative) over a strong distantly-supervised system. The dataset containing the knowledge base, relevant tweets and manual annotations is publicly available.
+
+rather than traditional news articles. However, using this data comes with its own challenges: tweets tend to use colloquial speech, noisy syntax and discourse, and, more importantly, the information reported is often inaccurate (e.g., reporting a different but similar magnitude for an earthquake) and ambiguous (e.g., reporting multiple potential earthquake locations, with insufficient context to guess which is the correct one).1 The top rows in Table 1 show examples of these problems for an actual event in our dataset on earthquakes. This comes in contrast with "traditional" IE work on newswire documents, where information is considerably more accurate than microblog material, and none of the above observations hold (Grishman and Sundheim, 1996; Doddington et al., 2004). As an example of the benefits of event extraction from a near real-time social-media resource, the last row in Table 1 lists a motivating example, where our system extracts the correct depth of an earthquake from the text tweeted by the U.S. Geological Survey, which is novel information that is missing in our manually-curated knowledge base. In this work we take a classic event extraction (EE) task, where events are defined by templates containing a predefined set of arguments, and implement it using data from Twitter. We avoid the prohibitive cost of manual annotation through distant supervision (DS): we automatically generate trainWe focus on microblogs here because they commonly contain inaccurate and/or ambiguous information. However, we believe that our contributions extend beyond microblogs because these innacuracies, especially inaccurate information, may appear in news article as well.
+1
+
+1
+
+Introduction
+
+Twitter is an excellent source of near real-time data on recent events, motivating the need for information extraction (IE) systems that operate on tweets 641
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 641­650, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

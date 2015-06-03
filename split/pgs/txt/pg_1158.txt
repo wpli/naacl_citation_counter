@@ -1,0 +1,43 @@
+System Rote learning SinoCoreferencer Our model
+
+MUC R P 42.6 36.4 42.7 38.3 43.1 42.4
+
+F 39.3 40.4 42.8
+
+B3 R P 41.4 32.3 41.5 34.7 41.4 39.1
+
+F 36.3 37.8 40.2
+
+R 37.0 39.9 40.7
+
+CEAFe P 39.7 39.2 42.6
+
+F 38.3 39.5 41.6
+
+BLANC R P F 27.4 20.0 23.1 28.1 23.7 25.7 27.5 26.4 26.9
+
+CoNLL F 37.9 39.2 41.5
+
+Table 2: Five-fold cross-validation event coreference results on the ACE 2005 corpus.
+
+of the six context features. To investigate the contribution of each probability term to overall performance, we conduct ablation experiments. Specifically, in each ablation experiment, we remove exactly one term from the model and retrain it. Ablation results are shown in Table 3. Each row contains the F-scores obtained via the five evaluation measures. To facilitate comparison, the scores of the model in which all eight probability terms are used is shown in row 1. As we can see, Feature 1 is the most useful feature: its removal causes the CoNLL score to drop significantly by 5.3 points. A closer examination reveals that the drop in the CoNLL score is caused by a significant drop in recall w.r.t. all scorers. Recall that this feature encodes the conditions under which two triggers are likely to be coreferent. It is perhaps not surprising that its removal causes a significant drop in recall. The second most useful feature is P (c|k ), which places zero probability mass on candidate antecedents whose event subtypes are different from that of the active event mention. Its removal causes the CoNLL score to drop significantly by 1.6 points. The removal of each other feature resulted in a small, insignificant drop in the CoNLL score. 6.4 Error Analysis
+
+System Full model - P (et |ct ) - P (c|k ) - Feature 1 - Feature 2 - Feature 3 - Feature 4 - Feature 5 - Feature 6
+
+MUC 42.8 42.9 41.2 37.5 42.5 42.4 42.5 42.4 42.3
+
+B3 40.2 39.8 38.6 32.9 39.9 40.0 40.1 40.0 39.6
+
+CEAFe 41.6 40.9 39.8 38.2 41.4 41.3 41.7 41.4 40.9
+
+BLANCCoNLL 26.9 41.5 26.9 41.2 24.9 39.9 20.8 36.2 26.6 41.3 26.9 41.2 27.0 41.4 26.5 41.3 26.8 40.9
+
+Table 3: Ablation results in terms of F-scores.
+
+mention). Second, to understand how to improve event coreference, we identify the major sources of error made by both resolvers (Section 6.4.2). 6.4.1 Common Sources of Disagreement There are 323 candidate event mentions that are correctly handled by one model but not the other in our dataset. Among these 323 cases, 205 (50 anaphoric + 79 singletons + 76 non-event) are correctly handled by the unsupervised model, and 118 (42 anaphoric + 52 singletons + 24 non-event) are correctly handled by SinoCoreferencer. From these numbers, we can see that the unsupervised model performs far better than SinoCoreferencer in not resolving the singletons and the nonevent mentions. This is perhaps not surprising given the unsupervised model's relatively stricter conditions on resolving a candidate event mention. Specifically, it is unlikely to posit two candidate event mentions as coreferent unless (1) their triggers have a BV match or a large word2vec similarity value and (2) none of the non-coreference conditions are satisfied. Overall, these results explain why the unsupervised model has a much higher precision than SinoCoreferencer. Not only does the unsupervised model perform much better in not resolving singletons and nonevent mentions, but it is also slightly more accurate
+
+It is somewhat surprising that our unsupervised event coreference model outperforms the better supervised baseline, SinoCoreferencer. To understand why, we analyze the errors made by the two resolvers. Our analysis proceeds as follows. First, to gain insights into the differences between the two resolvers, we examine those candidate event mentions that are correctly handled by one model but not the other (Section 6.4.1). Specifically, we consider a candidate event mention e correctly handled if (1) e is a correctly resolved anaphoric event mention; (2) e is an unresolved singleton event mention; or (3) e is an unresolved non-event mention (i.e., not a true event
+
+1104
+
+

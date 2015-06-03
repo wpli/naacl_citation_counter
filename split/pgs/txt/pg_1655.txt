@@ -1,0 +1,19 @@
+Model Baseline Base+Surp Base+CumuSurp Base+Both
+
+First Pass Log-Likelihood AIC -1212260 2424627 -1212253 2424617 -1212259 2424627  -1212253 2424619
+
+Go-Past Log-Likelihood -1261488 -1261481 -1261487 -1261481
+
+AIC 2523084 2523072 2523085 2523073
+
+Baseline random slopes: sentpos, wlen, rlen, prevfix, 5-gram, cumu-5-gram, surp, cumusurp Baseline fixed effects: sentpos, wlen, rlen, prevfix, 5-gram, cumu-5-gram Table 5: Goodness of fit of hierarchic syntax models to reading times. Significance testing was done between each model and the models in the section above it. Significance for Base+Both applies only to improvement over the CumuSurp model.  p < .01 with the part of speech of the head of a category (e.g. V, N, A, etc., for phrases or clauses headed by verbs, nouns, adjectives, etc.), followed by one or more unsatisfied dependencies, each consisting of an operator (-a and -b for adjacent argument dependencies preceding and following a head, -c and -d for adjacent conjunct dependencies preceding and following a head, -g for filler-gap dependencies, -r for relative pronoun dependencies, and some others), followed by a dependent category type. For example, the category for a transitive verb would be V-aN-bN, since it is headed by a verb and has unsatisfied dependencies to satisfied noun-headed categories preceding and following it (for the subject and direct object noun phrase, respectively). As in other categorial grammars, inference rules for local argument attachment apply functors of category c-ad or c-bd to initial or final arguments of category d: d c-ad  c c-bd d  c (Aa) (Ab) and c, d  C : u-ad c  c c u-ad  c (Ma) (Mb)
+
+The Nguyen et al. (2012) GCG also uses distinguished inference rules to introduce, propagate, and bind missing non-local arguments, similar to the gap or slash rules of Generalized Phrase Structure Grammar (Gazdar et al., 1985) and Head-driven Phrase Structure Grammar (Pollard and Sag, 1994). Inference rules for gap attachment hypothesize gaps as initial arguments, final arguments, or modifiers, for c, d  C : c-ad  c-gd c-bd  c-gd c  c-gd (Ga) (Gb) (Gc)
+
+However, the Nguyen et al. (2012) GCG uses distinguished inference rules for modifier attachment, which allows modifier categories to be consolidated with categories for modifiers in other contexts (preverbal, post-verbal, etc.), and with certain predicative categories. This allows derivations in the training corpus involving different modifier types to also be consolidated, which increases the power of the extracted statistics. Inference rules for modifier attachment apply initial or final modifiers of category u-ad to modificands of category c, for u  U 1601
+
+Non-local arguments, using non-local operator and argument category  {-g, -h, -i, -r}×C , are then propagated to the consequent from all possible combinations of antecedents. For each rule d e  c  {Aa­b,Ma­b} : d e  c d e  c d e  c (Ac­d,Mc­d) (Ae­f,Me­f) (Ag­h,Mg­h)
+
+In order to consolidate relative and interrogative pronouns in different pied-piping contexts into just two reusable categories, this grammar uses distinguished inference rules for relative and interrogative pronouns as well as tough constructions (e.g. this
+
+

@@ -1,0 +1,13 @@
+deployment in real applications.
+
+Acknowledgments
+We thank the post-editors who took part to this experiment, as well as our anonymous reviewers for their feedback and suggestions. This work has been partially supported by the EC-funded project M ATE C AT (ICT-2011.4.2-287688).
+
+Snover, M., Madnani, N., Dorr, B., and Schwartz, R. (2009). Fluency, adequacy, or HTER? exploring different human judgments with a tunable MT metric. In Proceedings of the Fourth Workshop on Statistical Machine Translation, pages 259­268. Ter-Sarkisov, A., Schwenk, H., Bougares, F., and Barrault, L. (2014). Incremental adaptation strategies for neural network language models. Available at http://arxiv.org/abs/1412.6650.
+
+References
+Axelrod, A., He, X., and Gao, J. (2011). Domain adaptation via pseudo in-domain data selection. In Proceedings of the 2011 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 355­ 362. Cettolo, M., Bertoldi, N., Federico, M., Schwenk, H., Barrault, L., and Servan, C. (2014). Translation project adaptation for mt-enhanced computer assisted translation. Machine Translation, 28(2):127­150. Guerberof, A. (2009). Productivity and quality in mt post-editing. MT Summit XII-Workshop: Beyond Translation Memories: New Tools for Translators MT. Koehn, P., Hoang, H., Birch, A., Callison-Burch, C., Federico, M., Bertoldi, N., Cowan, B., Shen, W., Moran, C., Zens, R., et al. (2007). Moses: Open source toolkit for statistical machine translation. In Proceedings of the 45th Annual Meeting of the ACL on Interactive Poster and Demonstration Sessions, pages 177­180. Association for Computational Linguistics. Papineni, K., Roukos, S., Ward, T., and Zhu, W.-J. (2002). BLEU: a method for automatic evaluation of machine translation. In Proceedings of the 40th Annual Meeting on Association for Computational Linguistics, pages 311­318. Plitt, M. and Masselot, F. (2010). A productivity test of statistical machine translation post-editing in a typical localisation context. The Prague Bulletin of Mathematical Linguistics, 93(-1):7­16. Schwenk, H. (2010). Continuous space language models for statistical machine translation. In The Prague Bulletin of Mathematical Linguistics, number 93, pages 137­146. Schwenk, H. (2013). Cslm - a modular open-source continuous space language modeling toolkit. Interspeech. Snover, M., Dorr, B., Schwartz, R., Micciulla, L., and Makhoul, J. (2006). A study of translation edit rate with targeted human annotation. In Proceedings of the 7th Conference of the Association for Machine Translation in the Americas (AMTA), pages 223­231.
+
+1005
+
+

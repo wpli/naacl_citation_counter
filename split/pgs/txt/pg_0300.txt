@@ -1,0 +1,33 @@
+This follows immediately from the definition of a convex function, but provides a concrete example of a set for which  is normalizing: the solution set of Z (x;  ) = 1 has a simple geometric interpretation as a particular kind of smooth surface. An example is depicted in Figure 1. We cannot expect real datasets to be this well behaved, so seems reasonable to ask whether "goodenough" self-normalization is possible for datasets (i.e. distributions p(x)) which are only close to some exactly normalizable distribution. Definition 2. A context distribution p(x) is D-close to a set X if Ep
+x X
+
+different function class and a different loss, and need new analysis. Theorem 2. Consider a sample (X1 , X2 , . . . ), with all ||X ||  R, and  with each ||i ||  B . Ad^ = 1 ditionally define L i | log Z (Xi )| and L = n E| log Z (X )|. Then with probability 1 -  ,
+^ - L|  2 |L dk (log dBR + log n) + log 1 2  + 2n n
+
+(4)
+
+inf ||X - x || = D
+
+(3)
+
+Definition 3. A context distribution p(x) is approximately normalizable if Ep | log Z (X ;  )|  . Theorem 1. Suppose p(x) is D-close to {x : Z (x;  ) = 1}, and each ||i ||  B . Then p(x) is dBD-approximately normalizable. Proof sketch. 2 Represent each X as X  + X - , where X  solves the optimization problem in Equation 3. Then it is possible to bound the normalizer by ~ X - }, where  ~ maximizes the magnitude log exp { of the inner product with X - over  . In keeping with intuition, data distributions that are close to normalizable sets are themselves approximately normalizable on the same scale.3
+
+Proof sketch. Empirical process theory provides standard bounds of the form of Equation 4 (Kakade, 2011) in terms of the size of a cover of the function class under consideration (here Z (·;  )). In particular, given some , we must construct a finite set of ^ (·; ) such that some Z ^ is everywhere a distance Z of at most  from every Z . To provide this cover, ^ for  . If the  ^ are it suffices to provide a cover  spaced at intervals of length D, the size of the cover is (B/D)kd , from which the given bound follows. This result applies uniformly across choices of  regardless of the training procedure used--in particular,  can be found with NCE, explicit penalization, or the variant described in the next section. As hoped, sample complexity grows as the number of features, and not the number of contexts. In particular, skip-gram models that treat context words independently will have sample efficiency multiplicative, rather than exponential, in the size of the conditioning context. Moreover, if some features are correlated (so that data points lie in a subspace smaller than d dimensions), similar techniques can be used to prove that sample requirements depend only on this effective dimension, and not the true feature vector size. We emphasize again that this result says nothing about the quality of the self-normalized model (e.g. the likelihood it assigns to held-out data). We defer a theoretical treatment of that question to future work. In the following section, however, we provide experimental evidence that self-normalization does not significantly degrade model quality.
+
+4
+
+Why should self-normalization work?
+
+So far we have given a picture of what approximately normalizable distributions look like, but nothing about how to find normalizing  from training data in practice. In this section we prove that any procedure that causes training contexts to approximately normalize will also have log-normalizers close to zero in unseen contexts. As noted in the introduction, this does not follow immediately from corresponding results for classification with log-linear models. While the two problems are related (it would be quite surprising to have uniform convergence for classification but not normalization), we nonetheless have a
+Full proofs of all results may be found in the Appendix. Here (and throughout) it is straightforward to replace quantities of the form dB with B by working in 2 instead of  .
+3 2
+
+5
+
+Applications
+
+As noted in the introduction, previous approaches to learning approximately self-normalizing distributions have either relied on explicitly computing the
+
+246
+
+

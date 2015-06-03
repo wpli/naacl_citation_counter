@@ -1,0 +1,26 @@
+75-dimensional if the region is 5 × 5 and the number of channels is three (red, green, and blue). Conceptually, computation units are placed over the input image so that the entire image is collectively covered, as illustrated in Figure 2. The region stride (distance between the region centers) is often set to a small value such as 1 so that regions overlap with each other, though the stride in Figure 2 is set larger than the region size for illustration. A distinguishing feature of convolution layers is weight sharing. Given input x, a unit associated with the -th region computes  (W · r (x) + b), where r (x) is a region vector representing the region of x at location , and  is a predefined component-wise non-linear activation function, (e.g., applying  (x) = max(x, 0) to each vector component). The matrix of weights W and the vector of biases b are learned through training, and they are shared by the computation units in the same layer. This weight sharing enables learning useful features irrespective of their location, while preserving the location where the useful features appeared. We regard the output of a convolution layer as an `image' so that the output of each computation unit is considered to be a `pixel' of m channels where m is the number of weight vectors (i.e., the number of rows of W) or the number of neurons. In other words, a convolution layer converts image regions to m-dim vectors, and the locations of the regions are inherited through this conversion. The output image of the convolution layer is passed to a pooling layer, which essentially shrinks the image by merging neighboring pixels, so that higher layers can deal with more abstract/global information. A pooling layer consists of pooling units, each of which is associated with a small region of the image. Commonly-used merging methods are average-pooling and max-pooling, which respectively compute the channel-wise average/maximum of each region. 2.2 CNN for text Now we consider application of CNN to text data. Suppose that we are given a document D = (w1 , w2 , . . .) with vocabulary V . CNN requires vector representation of data that preserves internal locations (word order in this case) as input. A straightforward representation would be to treat each word 105
+
+as a pixel, treat D as if it were an image of |D| × 1 pixels with |V | channels, and to represent each pixel (i.e., each word) as a |V |-dimensional one-hot vector4 . As a running toy example, suppose that vocabulary V = { "don't", "hate", "I", "it", "love" } and we associate the words with dimensions of vector in alphabetical order (as shown), and that document D="I love it". Then, we have a document vector: x=[00100|00001|00010] 2.2.1 seq-CNN for text .
+
+As in the convolution layer for image, we represent each region (which each computation unit responds to) by a concatenation of the pixels, which makes p|V |-dimensional region vectors where p is the region size fixed in advance. For example, on the example document vector x above, with p = 2 and stride 1, we would have two regions "I love" and "love it" represented by the following vectors:            r0 (x) =        
+0 0 1 0 0 -- 0 0 0 0 1
+
+ hate   I  it   love    don t   hate   I  it
+love
+
+don t
+
+       r 1 ( x) =        
+
+0 0 0 0 1 -- 0 0 0 1 0
+
+ hate   I  it   love    don t   hate   I  it
+love
+
+don t
+
+The rest is the same as image; the text region vectors are converted to feature vectors, i.e., the convolution layer learns to embed text regions into lowdimensional vector space. We call a neural net with a convolution layer with this region representation seq-CNN (`seq' for keeping sequences of words) to distinguish it from bow-CNN, described next. 2.2.2 bow-CNN for text A potential problem of seq-CNN however, is that unlike image data with 3 RGB channels, the number of `channels' |V | (size of vocabulary) may be very large (e.g., 100K), which could make each region vector r (x) very high-dimensional if the region size
+Alternatively, one could use bag-of-letter-n-gram vectors as in (Shen et al., 2014; Gao et al., 2014) to cope with out-ofvocabulary words and typos.
+4
+
+

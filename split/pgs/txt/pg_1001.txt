@@ -1,0 +1,25 @@
+3.5
+
+Generalization
+
+Since we may need to leverage information from other sources, e.g., phonemes of supplemental transliterations, each training instance can be composed of a source word, a target word, and a list of supplemental strings. The size of the list is not fixed because we may not have access to some of the supplemental strings for certain source words. We first align all strings in each training instance by merging one-to-many pairwise alignments between the source word and every other string in the instance, as described in Section 3.2. The generalization of training is straightforward. For the scoring model, we extract the same set of features as before by pairing each supplemental string with the target word. Since the alignment is performed beforehand, the time complexity of the generalized search only increases linearly in the number of input strings with respect to the original complexity.
+
+Model Graphemes only Phonemes only Joint
+
+EnJa 58.0 52.4 63.6
+
+EnHi 42.6 39.4 46.1
+
+Table 1: Transliteration word accuracy depending on the source information.
+
+model described in Section 3. We evaluate each approach by computing the word accuracy. Table 1 presents the transliteration results. Even with gold-standard transcriptions, the phonemebased model is worse than the grapheme-based model. This demonstrates that it is incorrect to refer to the process of transliteration as phonetic translation. On the other hand, our joint generation approach outperforms both single-source models on both test sets, which confirms that transliteration requires a joint consideration of orthography and pronunciation. It is instructive to look at a couple of examples where outputs of the models differ. Consider the name Marlon, pronounced [mArl@n], which is transliterated into Japanese as  (MA-RO-N) (correct), and (MA-RE-N) (incorrect), by the orthographic and phonetic approaches, respectively. The letter bigram lo is always transliterated into  in the orthographic training data, while the phoneme bigram /l@/ has multiple correspondences in the phonetic training data. In this case, the unstressed vowel reduction process in English causes a loss of the orthographic information, which needs to be preserved in the transliteration. In the joint model, the phonetic information sometimes helps disambiguate the pronunciation of the source word, thus benefiting the transliteration process. For example, the outputs of the three models for haddock, pronounced [had@k], are  (HA-DA-KU) (phonetic),     (HA-DODO-K-KU) (orthographic), and (HA-DOK-KU) (joint, correct). The phonetic model is again confused by the reduced vowel [@], while the orthographic model mistakenly replicates the rendering of the consonant d, which is pronounced as a single phoneme.
+
+4
+
+Leveraging transcriptions
+
+In this section, we describe experiments that involve generating transliterations jointly from the source orthography and pronunciation. We test our method on the English-to-Hindi and English-to-Japanese transliteration data from the NEWS 2010 Machine Transliteration Shared Task (Li et al., 2010). We extract the corresponding English pronunciations from the Combilex Lexicon (Richmond et al., 2009). We split each transliteration dataset into 80% for training, 10% for development, 10% for testing. We limit the datasets to contain only transliterations that have phonetic transcriptions in Combilex, so that each entry is composed of a source English word, a source transcription, and a target Japanese or Hindi word. The final results are obtained by joining the training and development sets as the final training set. The final training/test sets contain 8,264/916 entries for English-to-Japanese, and 3,503/353 entries for English-to-Hindi. 4.1 Gold transcriptions
+
+We compare three approaches that use different sources of information: (a) graphemes only; (b) phonemes only; and (c) both graphemes and phonemes. The first two approaches use D I REC TL+, while the last approach uses our joint 947
+
+

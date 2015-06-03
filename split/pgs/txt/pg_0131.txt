@@ -1,0 +1,31 @@
+our knowledge, Topic-Link-LDA (Liu et al., 2009) is the only research which includes both author information and document content into a generative model in order to predict citations. Topic-LinkLDA estimates the probability of linking a reportsource pair according to the similarity between the documents' (1) author communities and (2) topic distributions ­ these two latent groups are linearly combined and weighted, and like the aforementioned systems, are inferred by a generative process. PMTLM (Zhu et al., 2013) is reported as the current state-of-the-art system. In short, it is equivalent to PLSA but extended by having a variable associated with each document, which represents that document's propensity to form a link. As mentioned, although Collaborative Filtering has been used towards citation prediction (McNee et al., 2002), there is little research which includes features based on the entire content (i.e., documents). Very recently, (Wilson et al., 2014) used topic modelling to help predict movie recommendations. Specifically, one feature into their system was the KL-divergence between candidate items' topic distributions, but applying this towards citation prediction has yet to be done. Most similar to our work, (Bethard and Jurafsky, 2010) used a classifier to predict citations, based on meta-data features and compressed topic information (e.g., one feature is the cosine similarity between a report-source pair's topic distribution). As explained in Section 4, we expand the topic information into a vector of length K , which not only improves performance but yields an estimate of the most important, "quality" topics. Further, our system also uses our LDA-Bayes baseline as a feature, which by itself yields excellent results compared to other systems on our large corpus. Notably, Bethard and Jurafsky's system (2010) also differs from ours in that (1) their system has an iterative process that alternates between retrieving candidate source documents and learning model weights by training a supervised classifier; and (2) they only assume access to the content of the abstract, not the entire documents. Nonetheless, we use their system's most useful features to construct a comparable system (which we name WSIC ­ "Who Should I Cite"), which we describe in more detail in Section 3.3 and show results for in Section 4.3. 77
+
+3
+3.1
+
+New Models
+LDA-Bayes
+
+For a baseline system, we first implemented LDA (Blei et al., 2003) topic modelling and ran it on our entire corpus. However, unlike past systems, after our model was trained, we performed citation prediction (i.e., P (s|r)) according to Equation 2. Notice, although LDA does not explicitly estimate P (s|z ), we can approximate it via Bayes Rule, and we consequently call our baseline LDA-Bayes. Doing so allows us to include the prior probability of the given source being cited (i.e., P (s)), according to the maximum-likelihood estimate seen during training.
+K
+
+P (s|r) =
+k
+
+P (s|zk )P (zk |r), P (zj |s)P (s) s P (zj |s )P (s ) (2)
+
+where P (s|zj ) =
+
+Of the past research which uses generative models for citation prediction, we believe LinkLDA is the only other system in which a source's prior citation probability plays any role in training the model. Specifically, in LinkLDA, the prediction metric is identical to ours in that the topics are marginalized over topics (Equation 3). It differs, however, in that their model directly infers P (s|zk ), for it treats each citation link as a word token. Although this does not explicitly factor in each source's prior probability of being cited, it is implicitly influenced by such, for the sources which are more heavily cited during training will tend to have a higher probability of being generated from topics.
+K
+
+P (s|r) =
+k
+
+P (s|zk )P (zk |r),
+
+(3)
+
+Note: the other generative models mentioned in Section 2, after inference, predict citations by sampling from a random variable (typically a Bernoulli or Poisson distribution) which has been conditioned on the topic distributions. 3.2 Logit-Expanded In attempt to combine the effectiveness of LDA in generating useful topics with the ability of dis-
+
+

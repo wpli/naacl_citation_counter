@@ -1,0 +1,22 @@
+Ay proprio vocablo de logr´ o, que es tetech tlaixtlapanaliztli, tetechtla miec caquixtiliztli, y para dezir di te a logro? Cuix tetech otitlaixFigure 2: A passage with Spanish/Nahuatl codeswitching, and our model's language-coded output. (Spanish in blue; Nahuatl in red/italics.)
+
+no variation handling handling variation
+
+mentira mentira
+
+merita m~ etira
+
+Figure 3: Two variants of the same word (mentira), pulled from the same page of text. The form mentira appears in the LM training corpus, but the shorthand m~ etira does not. Without special handling, the model does not know that m~ etira is valid. ing, falsely claiming "word" errors when all characters are correct. Use of spaces is not standardized across the printed books, or across the digitized LM training corpora, and is still in fact a contested issue among modern Nahuatl scholars. While it is important for the transcription process to insert spaces appropriately into the Spanish and Latin text (even when the printer left little, as with ypara in Figure 2), it is difficult to assess what it means for a space to be "correctly" inserted into Nahuatl text. Rinc´ on and Bautista contain relatively less Nahuatl text and are affected less by this problem. A final source of errors arises when our model "corrects" the original document to match modern conventions, as with diacritics, whose usages were less conventionalized at the time these books were printed. For example, the string numero is often transcribed as n´ umero, the correct modern spelling.
+
+transcribing documents, our system also implicitly assigns language labels to words, allowing their usage in downstream tasks. We have also presented a new corpus, with transcriptions, for the evaluation of multilingual historical OCR systems. Our system, as currently designed, attempts to faithfully transcribe text. However, for the purposes of indexability and searchability of these documents, it may be desirable to also produce canonicalized transcriptions, for example collapsing spelling variants to their modern forms. Fortunately, this can be done in our approach by running the variability rewrite rules "backward" as a post-processing step. Further technical improvements may be made by having the system automatically attempt to bootstrap the identification of spelling variants, a process that could complement our approach through an active learning setup. Additionally, since even our relatively simple unsupervised code-switch language modeling approach yielded improvements to OCR performance, it may be justified to attempt the adaptation of more complex code-switch recognition techniques (Solorio et al., 2014). The automatic transcription of the Primeros Libros collection has significant implications for scholars of the humanities interested in the role that inscription and transmission play in colonial history. For example, there are parallels between the way that the Spanish transformed indigenous languages into Latin-like writing systems (removing "noise" like phonemes that do not exist in Latin), and the way that the OCR tool transforms historical printed documents into unicode (removing "noise" like artifacts of the printing process and physical changes to the pages); in both instances, arguably important information is lost. We present some of these ideas at the American Comparative Literature Association's annual meeting, where we discuss the relationship between sixteenth century indigenous orthography and Ocular's code-switching language models (Alpert-Abrams and Garrette, 2015).
+
+7
+
+Conclusions and Future Work
+
+We have demonstrated an unsupervised OCR model that improves upon Berg-Kirkpatrick et al. (2013)'s state-of-the-art Ocular system in order to effectively handle the code-switching and orthographic variability prevalent in historical texts. In addition to 1040
+
+Acknowledgements
+We would like to thank Stephanie Wood, Kelly McDonough, Albert Palacios, Adam Coon, and Sergio Romero, as well as Kent Norsworthy for their input, advice, and assistance on this project.
+
+

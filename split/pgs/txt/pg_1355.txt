@@ -1,0 +1,34 @@
+output for a specific relative position to the center word. When making a prediction p(wo | wi ), we select the appropriate output matrix Oo-i to project the word embeddings to the output vector. Note, that the number of operations that must be performed for the forward and backward passes in the network remains the same, as we are simply switching the output layer O for each different word index. 3.2 Continuous Window Model
+
+CWINDOW
+input projection output
+
+Structured Skip-Ngram
+input projection output
+
+w-2 w-1 w1 w2
+O
+
+O-2 O-1 O1 O2
+
+w-2 w-1 w1 w2
+
+w0
+
+w0
+
+Figure 2: Illustration of the Structured Skip-gram and Continuous Window (CWindow) models.
+
+The Continuous Bag-Of-Words words model defines a window of words w-c , ..., wc with size c, where the prediction of the center word w0 is conditioned on the remaining words w-c , ..., w-1 , w1 , ..., wc . The prediction matrix O  (|V |)×d is fed with the sum of the embeddings of the context words. As such, the order of the contextual words does not influence the prediction of the center word. Our approach defines a different output predictor O  (|V |×2cd which receives as input a (2c × d)-dimensional vector that is the concatenation of the embeddings of the context words in the order they occur [e(w-c ), . . . , e(w-1 ), e(w1 ), . . . , e(wc )]. As matrix O defines a parameter for the word embeddings for each relative position, this allows the words to be treated differently depending on where they occur. This model, denoted as CWindow, is essentially the window-based model described in (Collobert et al., 2011), with the exception that we do not project the vector of word embeddings into a window embedding before making the final prediction. In both models, we are increasing the number of parameters of matrix O by a factor of c × 2, which can lead to sparcity problems when training on small datasets. However, these models are generally trained on datasets in the order of 100 millions of words, where these issues are not as severe.
+
+shown that pre-trained embeddings can be used to achieve better generalization (Collobert et al., 2011; Chen and Manning, 2014). 4.1 Building Word Vectors
+
+4
+
+Experiments
+
+We conducted experiments in two mainstream syntax-based tasks part-of-speech Tagging and Dependency parsing. Part-of-speech tagging is a word labeling task, where each word is to be labelled with its corresponding part-of-speech. In dependency parsing, the goal is to predict a tree built of syntactic relations between words. In both tasks, it has been 1301
+
+We built vectors for English in two very different domains. Firstly, we used an English Wikipedia dump containing 1,897 million words (60 million sentences), collected in September of 2014. We built word embeddings using the original and our proposed methods on this dataset. These embeddings will be denoted as WIKI(L). Then, we took a sample of 56 million English tweets with 847 million words collected in (Owoputi et al., 2013), and applied the same procedure to build the TWITTER embeddings. Finally, we also use the Wikipedia documents, with 16 million words, provided in the Word2Vec package for contrastive purposes, denoted as WIKI(S). As preprocessing, the text was lowercased and groups of contiguous digits were replaced by a special word. For all corpora, we trained the network with a c = 5, with a negative sampling value of 10 and filter out words with less than 40 instances. WIKI(L) and TWITTER have a vocabulary of 424,882 and 216,871 types, respectively, and embeddings of 50 dimensions. Table 1 shows the similarity for a few selected keywords for each of the different embeddings. We can see hints that our models tend to group words that are more syntactically related. In fact, for the word breaking, the CWindow model's top five words are exclusively composed by verbs in the continuous form, while the Structured Skip-gram model tends to combine these with other forms of the verb break. The original models tend to be less keen on
+
+

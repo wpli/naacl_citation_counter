@@ -1,0 +1,9 @@
+Wednesday, June 3, 2015 (continued) 14:00­15:15 14:00­14:25 14:25­14:50 14:50­15:15 Session 9B: NLP-enabled Technology (Long + TACL Papers) How to Memorize a Random 60-Bit String Marjan Ghazvininejad and Kevin Knight [TACL] Building a State-of-the-Art Grammatical Error Correction System Alla Rozovskaya and Dan Roth [TACL] Predicting the Difficulty of Language Proficiency Tests Lisa Beinborn, Torsten Zesch, and Iryna Gurevych Session 9C: Linguistic and Psycholinguistic Aspects of CL (Long Papers) A Bayesian Model for Joint Learning of Categories and their Features Lea Frermann and Mirella Lapata Shared common ground influences information density in microblog texts Gabriel Doyle and Michael Frank Hierarchic syntax improves reading time prediction Marten van Schijndel and William Schuler Break
+
+14:00­15:15 14:00­14:25 14:25­14:50 14:50­15:15
+
+15:15­15:45
+
+lii
+
+

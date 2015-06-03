@@ -1,0 +1,16 @@
+Figure 2: Spearman results on relatedness (WS353) for different corpus sizes (in sentences). ing factor 2 . In our experiments we used WordNet 3.0 with gloss relations3 , which has 117.522 nodes (synsets) and 525.356 edges (semantic relations). Regarding the dictionary, WordNet already contains links from words to concepts. The dictionary includes the probability of a concept being lexicalized by a specific word, as estimated by the WordNet team from their hand-annotated corpora. Both dictionary and graph are freely available4 . The method first chooses a vertex at random from the vertex set V , and performs a random walk starting from it. At each step, the random walk might terminate with probability (1 - ) or choose a neighbor vertex at random with probability . Each time the random walk reaches a vertex, a word is emitted at random using the probabilities in the inverse dictionary. When the random walk terminates, the sequence of emitted words forms the pseudo sentence which is fed to the NNLM architecture, and the process starts again choosing a vertex at random until a maximum number of pseudo sentences have been generated. Our method creates pseudo sentences like the following:
+2 3
+
+Figure 3: Spearman results on similarity (SL999) for different corpus sizes (in sentences). (1) amphora wine nebuchadnezzar bear retain long (2) graphology writer write scribble scrawler heedlessly in haste jot note notebook These examples give us clues of the kind of the implicit semantic information that is encoded in the generated pseudo-corpus. Example 1 starts with amphora following with wine (with which amphoras are usually filled with), nebuchadnezzar (a particular bottle size) and finishing with words that are related to wine storage, like bear,retain and long. Example 2 shows a similar phenomenom; it starts with graphology, follows with the closely related writer, then writer, finishing with names and adjectives of different variants of writing, such as scribble, scrawler, heedlessly, in haste and jot; finally, the context ends with note and notebook. Note that our method also produces multiword terms like in haste.
+
+4
+
+Experiments
+
+The damping factor is the only parameter of PageRank. http://wordnet.princeton.edu/glosstag.shtml 4 http://ixa2.si.ehu.eus/ukb
+
+We have trained two Neural Network models, CBOW and Skip-gram, with several iterations of random walks over WordNet. We trained both models with default parameters (Mikolov et al., 2013a): vector size 300, 3 iterations, 5 negative samples, and
+
+1436
+
+

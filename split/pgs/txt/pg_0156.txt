@@ -1,0 +1,5 @@
+E. Stamatatos, G. Kokkinakis, and N. Fakotakis. 2000. Automatic text categorization in terms of genre and author. Computational Linguistics, 26(4):471­495, December. E. Stamatatos. 2006. Authorship attribution based on feature set subspacing ensembles. International Journal on Artificial Intelligence tools, 15(5):823­838. E. Stamatatos. 2008. Author identification: Using text sampling to handle the class imbalance problem. Information Processing and Managemement, 44:790­799. E. Stamatatos. 2011. Plagiarism detection using stopword n-grams. Journal of the American Society for Information Science and Technology, 62(12):2512­2527. E. Stamatatos. 2013. On the robustness of authorship attribution based on character n-gram features. Journal of Law & Policy, 21(2):421 ­ 439. I. H. Witten and E. Frank. 2005. Data Mining: Practical Machine Learning Tools and Techniques. Morgan Kauffmann, 2nd edition. R. Zheng, Jiexun Li, Hsinchun Chen, and Zan Huang. 2006. A framework for authorship identification of online messages: Writing-style features and classification techniques. J. Am. Soc. Inf. Sci. Technol., 57(3):378­ 393, February.
+
+102
+
+

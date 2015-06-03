@@ -1,0 +1,50 @@
+the scores propagated from the semantic knowledge (t+1) (t+1) graph. Then Rs and Rw can be mutually updated by the latter parts in (10) iteratively. When the  as follows. algorithm converges, we have Rs
+ Rs
+
+locale by use building food origin
+
+type
+
+commerce scenario expensiveness range
+
+price range
+
+= (1 -
+
+(0) )Rs
+
+(11)
+
+speak on topic seeking desiring locating
+
+food part orientational direction addr locale part inner outer
+task
+
+area
+
+(0)  + Lss Lsw (1 - )Rw + Lww Lws Rs
+
+contacting
+sending
+
+phone postcode
+
+=
+
+(0) T (0) T (1 - )Rs e + (1 - )Lss Lsw Rw e
+
+  + 2 Lss Lsw Lww Lws Rs = M2 R s .  of (11) is the dominant The closed-form solution Rs eigenvector of M2 .
+
+Figure 5: The mappings from induced slots (within blocks) to reference slots (right sides of arrows).
+
+5
+
+Experiments
+
+typed syntactic dependencies (Socher et al., 2013) and set the dimensionality of embeddings d = 300 in all experiments. 5.2 Evaluation Metrics
+
+We evaluate our approach in two ways. First, we examine the slot induction accuracy by comparing the ranked list of induced slots with the reference slots created by system developers (Young, 2007). Secondly, with the ranked list of induced slots and their associated semantic decoders, we can evaluate the SLU performance. For the experiments, we evaluate both on ASR transcripts of the raw audio, and on the manual transcripts. 5.1 Experimental Setup In this experiment, we used the Cambridge University SLU corpus, previously used on several other SLU tasks (Henderson et al., 2012; Chen et al., 2013a). The domain of the corpus is about restaurant recommendation in Cambridge; subjects were asked to interact with multiple SDSs in an in-car setting. The corpus contains a total number of 2,166 dialogues, including 15,453 utterances (10,571 for selftraining and 4,882 for testing). The data is genderbalanced, with slightly more native than non-native speakers. The vocabulary size is 1868. An ASR system was used to transcribe the speech; the word error rate was reported as 37%. There are 10 slots created by domain experts: addr, area, food, name, phone, postcode, price range, signature, task, and type. For parameter setting, the damping factor for random walk  is empirically set as 0.9 for all experiments. For training the semantic decoders, we use SVM with a linear kernel to predict each semantic slot. We use Stanford Parser to obtain the collapsed 625
+
+To eliminate the influence of threshold selection when choosing induced slots, in the following metrics, we take the whole ranking list into account and evaluate the performance by the metrics that are independent of the selected threshold. 5.2.1 Slot Induction To evaluate the accuracy of the induced slots, we measure their quality as the proximity between induced slots and reference slots. Figure 5 shows the mappings that indicate semantically related induced slots and reference slots (Chen et al., 2013b). For example, "expensiveness  price", "food  food", and "direction  area" show that these induced slots can be mapped into the reference slots defined by experts and carry important semantics in the target domain for developing the task-oriented SDS. Since we define the adaptation task as a ranking problem, with a ranked list of induced slots and associated scores, we can use the standard average precision (AP) and the area under the precisionrecall curve (PR-AUC) as our metrics, where the induced slot is counted as correct when it has a mapping to a reference slot. 5.2.2 SLU Model While semantic slot induction is essential for providing semantic categories and imposing semantic constraints, we are also interested in understanding the performance of our unsupervised SLU models.
+
+

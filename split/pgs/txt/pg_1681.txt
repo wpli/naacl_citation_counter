@@ -1,0 +1,20 @@
+Unsupervised Morphology Induction Using Word Embeddings
+Radu Soricut Google Inc. rsoricut@google.com Franz Och Human Longevity Inc. och@humanlongevity.com
+
+Abstract
+We present a language agnostic, unsupervised method for inducing morphological transformations between words. The method relies on certain regularities manifest in highdimensional vector spaces. We show that this method is capable of discovering a wide range of morphological rules, which in turn are used to build morphological analyzers. We evaluate this method across six different languages and nine datasets, and show significant improvements across all languages.
+
+1
+
+Introduction
+
+Word representations obtained via neural networks (Bengio et al., 2003; Socher et al., 2011a) or specialized models (Mikolov et al., 2013a) have been used to address various natural language processing tasks (Mnih et al., 2009; Huang et al., 2014; Bansal et al., 2014). These vector representations capture various syntactic and semantic properties of natural language (Mikolov et al., 2013b). In many instances, natural language uses a small set of concepts to render a much larger set of meaning variations via morphology. We show in this paper that morphological transformations can be captured by exploiting regularities present in wordrepresentations as the ones trained using the SkipGram model (Mikolov et al., 2013a). In contrast to previous approaches that combine morphology with vector-based word representations (Luong et al., 2013; Botha and Blunsom, 2014), we do not rely on an external morphological analyzer, such as Morfessor (Creutz and La
+
+gus, 2007). Instead, our method automatically induces morphological rules and transformations, represented as vectors in the same embedding space. At the heart of our method is the SkipGram model described in (Mikolov et al., 2013a). We further exploit the observations made by Mikolov et al (2013b), and further studied by (Levy and Goldberg, 2014; Pennington et al., 2014), regarding the regularities exhibited by such embedding spaces. These regularities have been shown to allow inferences of certain types (e.g., king is to man what queen is to woman). Such regularities also hold for certain morphological relations (e.g., car is to cars what dog is to dogs). In this paper, we show that one can exploit these regularities to model, in a principled way, prefix- and suffix-based morphology. The main contributions of this paper are as follows: 1. provides a method by which morphological rules are learned in an unsupervised, languageagnostic fashion; 2. provides a mechanism for applying these rules to known words (e.g., boldly is analyzed as bold+ly, while only is not); 3. provides a mechanism for applying these rules to rare and unseen words; We show that this method improves state-of-the-art performance on a word-similarity rating task using standard datasets. We also quantify the impact of our morphology treatment when using large amounts of training data (tens/hundreds of billions of words). The technique we describe is capable of inducing transformations that cover both typical, regular morphological rules, such as adding suffix ed
+
+Work done at Google, now at Human Longevity Inc.
+
+1627
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1627­1637, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

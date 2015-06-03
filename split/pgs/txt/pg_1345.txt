@@ -1,0 +1,40 @@
+-0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00
+
+k=5
+
+k = 25
+
+-0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00
+
+k = 10
+
+k = 50
+
+What is of interest, however, is Morph-LBL's ability to robustly maintain morphological relationships only making use of the distributional signature, without word-internal features. This result shows that in large corpora, a large portion of morphology can be extracted through contextual similarity.
+
+MorphoSim
+
+MorphoSim
+
+7
+
+Conclusion and Future Work
+
+M-LBL LBL word2vec
+
+M-LBL LBL word2vec
+
+Figure 2: Results for the M ORPHO D IST measure for k  {5, 10, 25, 50}. Lower M ORPHO D IST values are better-- they indicate that the nearest neighbors of each word are closer morphologically.
+
+rect tag with  22% accuracy (not shown in the table). 6.2 Experiment 2: M ORPHO D IST
+
+We also evaluated the three types of embeddings using the M ORPHO D IST metric introduced in section 5.1. This metric roughly tells us how similar each word is to its neighbors, where distance is measured in the Hamming distance between morphological tags. We only evaluated on words that MorphLBL did not observe at training time to get a fair idea of how well our model has managed to encode morphology purely from the contextual signature. Figure 2 reports results for k  {5, 10, 25, 50} nearest neighbors. We see that the values of k studied do not affect the metric--the closest 5 words are about as similar as the closest 50 words. We see again that the Morph-LBL embeddings generally encode morphology better than the baselines. 6.3 Discussion
+
+We described a new model, Morph-LBL, for the semi-supervised induction of morphologically guided embeddings. The combination of morphologically annotated data with raw text allows us to train embeddings that preserve morphological relationships among words. Our model handily outperformed two baselines trained on the same corpus. While contextual signatures provide a strong cue for morphological proximity, orthographic features are also requisite for a strong model. Consider the words loving and eating. Both are likely to occur after is/are and thus their local contextual signatures are likely to be similar. However, perhaps an equally strong signal is that the two words end in the same substring ing. Future work will handle such integration of character-level features. We are interested in the application of our embeddings to morphological tagging and other tasks. Word-embeddings have proven themselves as useful features in a variety of tasks in the NLP pipeline. Morphologically-driven embeddings have the potential to leverage raw text in a way state-of-theart morphological taggers cannot, improving tagging performance downstream.
+
+Acknowledgements
+This material is based upon work supported by a Fulbright fellowship awarded to the first author by the German-American Fulbright Commission and the National Science Foundation under Grant No. 1423276. The second author was supported by Deutsche Forschungsgemeinschaft (grant DFG SCHU 2246/10-1). We thank Thomas Müller for several insightful discussions on morphological tagging and Jason Eisner for discussions about experimental design. Finally, we thank the anonymous reviewers for their many helpful comments.
+
+The superior performance of Morph-LBL over both the original LBL and WORD 2 VEC under both evaluation metrics is not surprising as we provide our model with annotated data at training time. That the LBL outperforms WORD 2 VEC is also not surprising. The LBL looks at a local history thus making it more amenable to learning syntactically-aware embeddings than WORD 2 VEC, whose skip-grams often look at non-local context. 1291
+
+

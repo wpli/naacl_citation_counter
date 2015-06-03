@@ -1,0 +1,48 @@
+2.3
+
+Most Frequent Sense Identification
+
+4
+
+Results and Discussions
+
+For a given word w, we obtain its word embedding and sense embeddings as discussed earlier. We treat the most frequent sense identification problem as finding the closest cluster centroid (i.e. sense embedding) with respect to a given word. We use the cosine similarity as the similarity measure. The most frequent sense is obtained by using the following formulation, MFSw = arg max cos(vec(w), vec(wSi ))
+wSi
+
+In this section, we present and discuss results of the experiments performed on Hindi and English WSD. Results of Hindi WSD on the newspaper dataset are given in Table 1, while English WSD results on SENSEVAL-2 and SENSEVAL-3 datasets are given in Table 2 and Table 3 respectively. The UMFS-WE approach achieves F-1 of 62% for the Hindi dataset and 52.34%, 43.28% for English SENSEVAL-2, SENSEVAL-3 datasets respectively. System UMFS-WE WFS P 62.43 61.73 R 61.58 59.31 F-1 62.00 60.49
+
+where, vec(w) is the word embedding for word w, wSi is the ith sense of word w and vec(wSi ) is the sense embedding for wSi . As seen in Figure 1, the word embedding of the word table is more closer to the centroid C2 as compared to the centroids C1 and C3 . Therefore, the MFS of the word table is chosen as S2 {a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs}.
+
+Table 1: Results of Hindi WSD on the newspaper dataset
+
+System UMFS-WE SemCor
+
+P 52.39 61.72
+
+R 52.27 58.16
+
+F-1 52.34 59.88
+
+3
+
+Experiments
+
+Table 2: Results of English WSD on the SENSEVAL-2 dataset
+
+Our approach, UMFS-WE achieves better performance for Hindi WSD as compared to the WFS baseline. We have used various WordNet based features for comparing results. It is observed that synset members alone are not sufficient for identifying the most frequent sense. This is because some of synsets have a very small number of synset mem3 SENSEVAL-2 and SENSEVAL-3 datasets are downloaded bers. Synset members along with gloss members from http://web.eecs.umich.edu/ mihalcea/downloads.html 4 ~ http://web.eecs.umich.edu/mihalcea/downloads.html#semcor improve results as gloss members are more direct in 1240
+
+We have performed several experiments to compare the accuracy of UMFS-WE for Hindi and English WSD. The experiments are restricted to only polysemous nouns. For Hindi, a newspaper sensetagged dataset of around 80,000 polysemous noun entries was used. This is an in-house data. For English, SENSEVAL-2 and SENSEVAL-3 datasets3 were used. The accuracy of WSD experiments was measured in terms of precision (P), recall (R) and F-Score (F-1). To compare the performance of UMFS-WE approach, we have used the WFS baseline for Hindi, while the SemCor4 baseline is used for English. In the WFS baseline, the first sense in the WordNet is used for WSD. For Hindi, the WFS is manually determined by a lexicographer based on his/her intuition. In SemCor baseline, the most frequent sense obtained from the SemCor sense tagged corpus is used for WSD. For English, the SemCor is considered as the most powerful baseline for WSD.
+
+System UMFS-WE SemCor
+
+P 43.34 66.57
+
+R 43.22 64.89
+
+F-1 43.28 65.72
+
+Table 3: Results of English WSD on the SENSEVAL-3 dataset
+
+We have performed several tests using various combinations of WordNet based features (refer Section 2.2) for Hindi and English WSD, as shown in Table 4 and Table 5 respectively. We study its impact on the performance of the system for Hindi and English WSD and present a detailed analysis below. 4.1 Hindi
+
+

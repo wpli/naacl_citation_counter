@@ -1,0 +1,56 @@
+disperse antonym garner
+
+synonym
+
+scatter
+
+WE-T (§ 2.1)
+
+disperse
+
+scatter
+
+WE-TD (§ 2.2)
+
+disperse
+
+scatter
+
+garner
+
+garner
+
+nucleate
+
+Relations in Thesauri
+
+Relations inferred by WE-T
+disperse co-occurrence garner nucleate scatter
+
+Relations inferred by WE-TD
+
+Distributional information
+
+Figure 1: Overview of our approach. When we use the thesauri directly, disperse and garner are known to be antonymous and disperse and scatter are known to be synonymous, but the remaining relations are unknown. WE-T infers indirect relations among words in thesauri. Furthermore, WE-TD incorporates distributional information, and the relatedness among in-vocabulary and out-of-vocabulary words (nucleate here) are obtained.
+
+2 Word embeddings for antonyms
+This section explains how we train word embeddings from synonym and antonym pairs in thesauri. We then explain how to incorporate distributional information to cover out-of-vocabulary words. Figure 1 illustrates the overview of our approach. 2.1 Word embeddings using thesauri information We first introduce a model to train word embeddings using thesauri information alone, which is called the WE-T model. We embed vectors to words in thesauri and train vectors to represent synonym and antonym pairs in the thesauri. More concretely, we train the vectors by maximizing the following objective function:  
+wV sSw
+
+function: sim(w1 , w2 ) = vw1 · vw2 + bw1 (2)
+
+log  (sim(w, s)) log  (-sim(w, a)) (1)
+
++
+
+ 
+
+vw is a vector embedded to a word w and bw is a scalar bias term corresponding to w. This similarity score ranges from minus infinity to plus infinity and the sigmoid function in Equation (1) scales the score into the [0, 1] range. The first term of Equation (1) denotes the sum of the similarities between synonym pairs. The second term of Equation (1) denotes the sum of the dissimilarities between antonym pairs. By maximizing this objective, synonym and antonym pairs are tuned to have high and low similarity scores respectively, and indirect antonym pairs, e.g., synonym of antonym, will also have low similarity scores since the embeddings of the words in the pairs will be dissimilar. We use AdaGrad (Duchi et al., 2011) to maximize this objective function. AdaGrad is an online learning method using a gradient-based update with automatically-determined learning rate. 2.2 Word embeddings using thesauri and distributional information Now we explain a model to incorporate corpusbased distributional information into the WE-T model, which is called the WE-TD model. We hereby introduce Skip-Gram with Negative Sampling (SGNS) (Mikolov et al., 2013a), which the WE-TD model bases on. Levy and Goldberg (2014) shows the objective function for SGNS can
+
+wV aAw
+
+V is the vocabulary in thesauri. Sw is a set of synonyms of a word w, and Aw is a set of antonyms of a word w.  (x) is the sigmoid function 1+1 .  is e-x a parameter to balance the effects of synonyms and antonyms. sim(w1 , w2 ) is a scoring function that measures a similarity between two vectors embedded to the corresponding words w1 and w2 . We use the following asymmetric function for the scoring
+
+985
+
+

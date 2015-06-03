@@ -1,0 +1,27 @@
+beneficial to measure the quality of the top k predictions of the model for bootstrapping and active learning scenarios (Lewis and Gale, 1994; Cucerzan and Yarowsky, 1999). We report G@k, GAP measured on the top k predictions (similarly to Precision@k and Hits@k). This metric can be reliably used to measure the overall quality of the top k predictions.
+
+NT (e, t)  {t |t  T, t = t, (e, t )  /  0 }. Let  be the model parameters, m = |NE (e, t)| and n = |NT (e, t)| be the number of negative examples and types considered for training respectively. For each entity-type pair (e, t), we define the scoring function of our model as s(e, t|).3 We define two loss functions one using negative entities and the other using negative types: LE (0 , ) = and LT (0 , ) = [s(e, t ) - s(e, t) + 1]k +,
+(e,t)0 ,t NT (e,t)
+
+4
+
+Global Objective for Knowledge Base Completion
+
+[s(e , t) - s(e, t) + 1]k +,
+
+We describe our approach for predicting missing entity types in a KB in this section. While we focus on recovering entity types in this paper, the methods we develop can be easily extended to other KB completion tasks. 4.1 Global Objective Framework
+
+(e,t)0 ,e NE (e,t)
+
+During training, only positive examples are observed in KB completion tasks. Similar to previous work (Mintz et al., 2009; Bordes et al., 2013; Riedel et al., 2013), we get negative training examples by treating the unobserved data in the KB as negative examples. Because the number of unobserved examples is much larger than the number of facts in the KB, we follow previous methods and sample few unobserved negative examples for every positive example. Previous methods largely neglect the sampling methods on unobserved negative examples. The proposed global object framework allows us to systematically study the effect of the different sampling methods to get negative data, as the performance of the model for different evaluation metrics does depend on the sampling method. We consider a training snapshot of the KB 0 , containing facts of the form (e, t) where e is an entity in the KB with type t. Given a fact (e, t) in the KB, we consider two types of negative examples constructed from the following two sets: NE (e, t) is the "negative entity set", and NT (e, t) is the "negative type set". More precisely, NE (e, t)  {e |e  E, e = e, (e , t)  / 0 }, and 519
+
+where k is the power of the loss function (k can be 1 or 2), and the function [·]+ is the hinge function. The global objective function is defined as min Reg () + CLT (0 , ) + CLE (0 , ),
+
+
+(1)
+
+where Reg () is the regularization term of the model, and C is the regularization parameter. Intuitively, the parameters  are estimated to rank the observed facts above the negative examples with a margin. The total number of negative examples is controlled by the size of the sets NE and NT . We experiment by sampling only entities or only types or both by fixing the total number of negative examples in Section 5. The rest of section is organized as follows: we propose three algorithms based on the global objective in Section 4.2. In Section 4.3, we discuss the relationship between the proposed algorithms and existing approaches. Let (e)  Rde be the feature function that maps an entity to its feature representation, and (t)  Rdt be the feature function that maps an entity type to its feature representation.4 de and dt represent the feature dimensionality of the entity features and the type features respectively. Feature representations of the entity types () is only used in the embedding model.
+We often use s(e, t) as an abbreviation of s(e, t|) in order to save space. 4 This gives the possibility of defining features for the labels in the output space but we use a simple one-hot representation for types right now since richer features did not give performance gains in our initial experiments.
+3
+
+

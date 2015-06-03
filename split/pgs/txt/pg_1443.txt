@@ -1,0 +1,34 @@
+Language Spanish German Danish Swedish Italian Dutch Portuguese Avg
+
+TC-Perc 80.6 80.4 63 71.6 80.1 74.5 76.9 75.3
+
+Random 81.8 82.7 68.9 73.7 81.3 77.2 78.1 77.7
+
+Klmtv 79.8 82.8 -
+
+POS-50 82.4 81.8 68.9 75 82.1 78.3 77.3 78
+
+POS-300 81 84.1 72.4 76 80.9 77.4 76.1 78.3
+
+Tr-50 81.6 82.6 71.8 75.4 82.1 78.7 80.6 79
+
+Tr-300 82.6 84.8 78.4 77.5 80.7 80.3 80.5 80.7
+
+DP 84.2 82.8 83.2 80.5 86.8 79.5 87.9 83.6
+
+B-K 80.2 81.3 69.1 70.1 68.1 65.1 78.4 73.2
+
+Table 1: Cross-language POS tagging. TC-Perc: type-constrained structured perceptron.
+
+available, pre-tokenized versions of Wikipedia,4 and then using the trained embeddings as features in a publicly available implementation of the structured perceptron.5 We use ortographic features, as well as the embedding vector of the target word. In addition, we use type constraints from Wiktionary to prune the search lattice during decoding (T¨ ackstr¨ om et al., 2013). We scaled the embedding features in the same way as Turian et al. (2010) with scaling parameter 0.01 (set on Spanish POS data). Our baseline method is a type-constrained structured perceptron with only ortographic features, which are expected to transfer across languages. We also experiment with using random embeddings, as well as the embeddings provided by Klementiev et al. (2012) (Klmtv).6 Our results are displayed in Table 1. POS-X refer to X -dimensional BARISTA embeddings trained with POS equivalence classes, and Tr-X is X -dimensional BARISTA embeddings trained using translation equivalence classes. We note that random embeddings improve over our baseline, suggesting that the random features act as regularizers. The embeddings provided by Klementiev et al. (2012) seem to lead to worse performance than random embeddings, presumably because they capture mostly semantic (topic) similarity. We also compare our results to those reported by Berg-Kirkpatrick et al. (2010) (B-K) and Das and Petrov (2011) (DP), but note that their approaches require in-sample unlabeled data, and in the latter case, also parallel bilingual data.
+4 https://sites.google.com/site/rmyeid/ projects/polyglot 5 https://github.com/coastalcph/rungsted 6 http://people.mmci.uni-saarland.de/ ~aklement/data/distrib/
+
+While training with POS classes improves over the random baseline, training with translation equivalence classes gives even better performance. For both approaches, using more embedding features improves the performance (500 dimensions did not improve significantly over 300). Our model is generally better than Berg-Kirkpatrick et al. (2010) ­ but worse than Das and Petrov (2011). 3.3 Cross-language super sense tagging
+
+Finally, we also tried using the BARISTAembeddings for English-Danish (with parameters still set on Spanish POS) on another task, namely super sense tagging (Ciaramita and Altun, 2006). We train a system on a mixture of 1000 randomly sampled sentences from English SemCor7 and 320 labeled Danish sentences (see below) and compare using bilingual embeddings trained with equivalence classes from English and Danish wordnets (WN-300), to embeddings trained using translation equivalence classes (Tr-300). We use 300 dimensional embeddings. We use a POS-sensitive most frequent sense baseline (MFS), as well as structured perceptron model trained only with ortographic and POS features, as well as MFS features (Johannsen et al., 2014). Our metric is a weighted average over F1 -scores for the (41) semantic classes. Note that using the knowledge base is superior to using translation equivalences, but both embeddings are superior to both our baselines. The Danish training (newswire only) and test data (six different domains) ­ is made publicly available.8
+http://web.eecs.umich.edu/~mihalcea/ downloads.html#semcor 8 https://github.com/coastalcph/noda2015_ sst
+7
+
+1389
+
+

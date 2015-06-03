@@ -1,0 +1,28 @@
+Dataset Train'13 Dev'13 Twitter'13 SMS'13 Twitter'14 Sarcasm'14 LiveJournal'14
+
+Size 9,728 1,654 3,813 2093 1,853 86 1,142
+
+Pos 38% 35% 41% 24% 53% 38% 37%
+
+Neg. 15% 21% 16% 19% 11% 47% 27%
+
+Neu. 47% 45% 43% 58% 36% 15% 36%
+
+Table 2: Datasets.
+
+ticipating systems correspondingly. The Semeval2013 task released the training set containing 9,728 tweets, dev and two test sets: Twitter'13 and SMS'13. We train our model on a combined train and dev sets4 . The Semeval-2014 re-uses the same training data and systems are evaluated on 5 test sets: two test sets from Semeval-2013 and three new test sets: LiveJournal'14, Twitter'14 and Sarcasm'14. The datasets are summarized in Table 3.1.
+n-grams · · · · · · · · · · · · · · Manual PMI ML Twitter'13 M B N hash s140 raw agg 63.53 64.96 (+1.43) 66.74 (+3.21) 64.21 (+0.68) 67.44 (+3.91) · · · · · · · · · · · · 68.47 (+4.94) 69.08 (+5.55) 70.06 (+6.53) 69.47 (+5.94) 69.89 (+6.36) 70.93 (+7.40) 71.32 (+7.79) 69.06
+
+sonably small, we filter entries with small weights. In particular, we found that selecting items with a weight greater than 1e - 6 did not cause any drop in accuracy, while the resulting lexicon is reasonably compact -- it contains about 3 million entries. Table 1 gives an example of top 10 lexicon entries with highest positive and negative scores. Interestingly, one would expect to find words such as amazing, cool, etc. as having the highest positive sentiment score. However, an SVM model assigns higher scores to bigrams containing negative words problem, bad, worries, to outweigh their negative impact. This helps to handle the inversion of the sentiment due to negations. It is important to note that our goal is different from constructing sentiment lexicons that are interpretable by humans, e.g., manually built lexicons, but, similar to (Mohammad et al., 2013), we build automatic lexicons to derive highly discriminative features improving the accuracy of our sentiment prediction models. 3.2 Setup Task. We focused on the Twitter Sentiment Analysis (Task 2) from Semeval-2013 (Nakov et al., 2013) and its rerun (Task 9) from Semeval-2014 (Rosenthal et al., 2014). Both tasks include two subtasks: an expression-level and a message-level subtasks. Being more general, we focus only on predicting the sentiment of tweets at the message level, where given a tweet, the goal is to classify whether it expresses positive, negative, or neutral sentiment. Evaluation. We used the official scorers from the Semeval 2013 & 2014, which compute the average between F-measures for the positive and negative classes. Data. We evaluated our models on both Semeval2013 and Semeval-2014 tasks with 44 and 42 par1400
+
+· · · · · · · · · · · · · · · · · · · · · · · · ·
+
+best Semeval'13 system
+
+Table 3: Results on Semeval-2013 test set. Used feature sets: n-grams; features from Manual lexicons using MPQA (M), BingLiu (B) and NRCEmoticon (N) lexicons; PMI lexicon extracted from NRC-hashtag and Emoticon140 (s140) datasets; our ML lexicon using raw and aggregate (agg) features. The numbers in parenthesis indicate absolute improvement w.r.t. baseline n-grams model.
+
+3.3 Results We report the results on two runs of the Twitter Sentiment Analysis challenge organized by Semeval from 2013 and 2014. 3.3.1 Semeval-2013 The n-grams model includes word and character n-grams, negation and various surface form features as described in Section 2. We use this feature set as a yardstick to assess the value of adding features
+While in the real setting it is also possible to include additional weakly labeled data, e.g. Emoticon140, for training a model, we stick to the constrained setting of the Semeval tasks, where training is allowed only on the train and dev sets.
+4
+
+

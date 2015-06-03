@@ -1,0 +1,19 @@
+given here, in each case we employ publicly available and widely used tools. 4.1 Parser Evaluation To examine the effect of normalization on dependency parsing, we employ the Stanford dependency parser3 (Marneffe et al., 2006). To produce the gold standard dependencies for comparison, the manually grammaticalized tweets (Section 3.3) were run through the parser. To compare the ablation results to the gold standard parses, we adopt a variation of the evaluation method used by Zhang et al. (2013). Given dependency parses from the gold standard and a candidate normalization, we define precision and recall as follows: precisionsov = recallsov = |SOV  SOVgold | |SOV | |SOV  SOVgold | |SOVgold | (1) (2)
+
+Configuration -ADDITION -PUNCT -WORD -BEVERB -DETERMINER -OTHER -SUBJECT -REPLACEMENT -PUNCT -WORD -CAPITALIZATION -CONTRACTION -OTHER -SLANG -REMOVAL -PUNCT -WORD -OTHER -TWITTER
+
+F-measure 0.790 0.919 0.842 0.948 0.980 0.959 0.903 0.710 0.907 0.754 0.950 0.945 0.947 0.872 0.866 0.959 0.887 0.952 0.925
+
+Per-token Error Rate 0.00021 0.00019 0.00028 0.00038 0.00019 0.00029 0.00055 0.00016 0.00030 0.00017 0.00008 0.00023 0.00030 0.00030 0.00022 0.00034 0.00023 0.00028 0.00023
+
+Table 2: Dependency Parser Results.
+
+Where SOV and SOVgold are the sets of subject, object, and verb dependencies in the candidate normalization and gold standard, respectively. While Zhang et al. chose to examine subjects and objects separately from verbs, we employ a unified metric to simplify interpretation. 4.1.1 Results Results of the ablation study are summarized in Table 2. As shown, the performance of a complex task such as dependency parsing is broadly impacted by a variety of normalization edits. Based on the raw F-measure, the more common word replacements proved to be the most critical, although failing to handle token addition and removal edits also resulted in substantial drops in performance. At the lowest level in the taxonomy, slang replacements and subject addition were the most critical edits. Although many replacement tasks were important in aggregate, on a per-token basis the most important edits were those that required token removal and addition. Perhaps unsurprisingly, failing to add subjects and verbs resulted in the largest issues, as the parser has little chance of identifying these dependencies if the terms simply do not appear in the sentence. However, not all word additions proved crit3
+
+ical, as failing to add in a missing determiner generally had little impact on the overall performance. Similarly, failing to correct capitalization did not cause substantial problems for the parser. Some word replacements did prove to be important, with slang and other word replacements showing some of the largest per-token error rates. Removing misleading punctuation or changing non-standard punctuation both proved important, but the per-token effect of punctuation addition was modest. In general, the results suggest that a complex task such as dependency parsing suffers substantially when the input data differs from formal text in any number of ways. With the exception of capitalization correction, performing almost every normalization edit is necessary to achieve results commensurate with those seen on formal text. 4.2 NER Evaluation In this section, we examine the effect of each normalization edit on a somewhat more shallow interpretation task, named entity recognition. Unlike dependency parsing which requires an understanding of every token in the text, NER must only determine whether a given token is a named entity, and if so, discover its associated entity type.
+
+Version 2.0.5
+
+425
+
+

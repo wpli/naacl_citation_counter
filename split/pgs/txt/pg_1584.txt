@@ -1,0 +1,21 @@
+3.3
+
+Structured Label Propagation with Continuous Representation
+
+4
+
+Fast Phrase Query with Continuous Representation
+
+Saluja et al. (2014) use Structured Label Propagation (SLP; Liu et al. 2012) to propagate candidate translations from frequent source phrases that are labeled to unlabeled neighbors that are infrequent. The algorithm works as follows: for a known translation rule (f , e ), SLP propagates the target side phrases e  N (e ), that are similar to e , to the unlabeled source phrases f  N (f ), that are similar to f , as new translation rules. This propagation runs for several iterations. At each iteration, the translation probability between known translations is fixed. More formally, for iteration t + 1 we have Pt+1 (e|f ) = T (f |f ) T (e|e )Pt (e |f ),
+
+f N (f )
+
+e H (f )
+
+where T (f |f ) is the probability that phrase f is propagated through phrase f , similarly for T (e|e ); H (f ) is the set of translation candidates for source phrase f , which is learned from the bilingual corpus. In Saluja et al. (2014), both T (f |f ) and T (e|e ) are based on the pairwise mutual information (PMI) between two phrases. Computing PMI statistics between any two phrases over a large corpus is infeasible and therefore the authors resort to a simple approximation that only considers co-occurrences with other phrases within a fixed-sized context window. Even after this simplification the running time of the SLP is vastly dominated by gathering similarity statistics and by constructing the resulting graph. However, once the PMI statistics are collected and the graph is constructed, actual label propagation is very fast. To speed up the algorithm, we replace the costly PMI statistics by continuous phrase representations and adopt the same similarity measure that we used for the global and local projections (see Equation 1). Moreover, we replace the static graph construction with on-demand graph expansion using the fast phrase query mechanisms described in the next section. These modifications allow us to dramatically speed up the original SLP algorithm as demonstrated in our experiments (§5). 1530
+
+The algorithms presented in the previous section require rapid retrieval of neighboring phrases in continuous space. Linear search over all n candidate phrases is impractical, particularly for the SLP algorithm (§3.3). SLP requires the construction of a graph encoding the nearest neighbors for each target phrase, be it online or offline. To construct this graph na¨ ively requires O(n2 ) comparisons which is clearly impractical for our setup where we have over one million target phrases (§5). For the linear projections, we still need to run at least one k -NN query in the target space for each infrequent foreign phrase. Various methods, e.g., k -d trees, were proposed for fast k -NN queries but most of them are not efficient enough in high dimensional space, such as our setting. We therefore investigate approximated k -NN query methods which sacrifice some accuracy for a large gain in speed. Specifically, we look into locality sensitive hashing (LSH; §4.1), a popular method, as well as redundant bit vectors (RBV; §4.2), which to our knowledge has not been previously used for natural language processing tasks. 4.1 Locality Sensitive Hashing One popular approximated method is Locality Sensitive Hashing (LSH; Indyk and Motwani, 1998), which has been used in many NLP tasks such as noun clustering (Ravichandran et al., 2005), topic detection (Petrovi´ c et al., 2010), and fast k -NN query for similar words (Goyal et al., 2012). For our particular task, assume each phrase is represented by a d-dimensional vector p of real values. The core of LSH is a set of hash functions. We choose p-stable distribution based functions (Datar et al., 2004) of the following form: hi (p) = xi · p + bi , 1  i  s. w
+
+This function can be viewed as a quantized random projection, where each element in xi is selected randomly from a Gaussian distribution N (0, 1), w is the width of the bin, bi is a linear bias selected from a uniform distribution U (0, w) (see Figure 3 (a)). By concatenating the results from hi , 1  i  s, phrase p is projected from d-dimensional space to
+
+

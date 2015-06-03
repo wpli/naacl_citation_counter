@@ -1,0 +1,17 @@
+Why Read if You Can Scan? Trigger Scoping Strategy for Biographical Fact Extraction
+Dian Yu and Heng Ji Computer Science Department Rensselaer Polytechnic Institute Troy, NY, USA {yud2,jih}@rpi.edu Sujian Li Peking University Key Laboratory of Computational Linguistics Beijing, China lisujian@pku.edu.cn Chin-Yew Lin Microsoft Research Asia Beijing, China cyl@microsoft.com
+
+Abstract
+The rapid growth of information sources brings a unique challenge to biographical information extraction: how to find specific facts without having to read all the words. An effective solution is to follow the human scanning strategy which keeps a specific keyword in mind and searches within a specific scope. In this paper, we mimic a scanning process to extract biographical facts. We use event and relation triggers as keywords, identify their scopes and apply type constraints to extract answers within the scope of a trigger. Experiments demonstrate that our approach outperforms state-of-the-art methods up to 26% absolute gain in F-score without using any syntactic analysis or external knowledge bases.
+
+1
+
+Introduction
+
+Extracting biographical information is an important task because it can help readers understand an ongoing event more easily by providing the background biographical information of participants in this event. In fact, this task has been part of the Text Analysis Conference (TAC) - Knowledge Base Population (KBP) Slot Filling (SF) Track (Ji et al., 2010; Ji et al., 2011; Surdeanu, 2013; Surdeanu and Ji, 2014) for years. Overall, state-of-the-art research still needs improvement. A typical approach is based on patterns which include triggers (e.g., (Sun et al., 2011; Li et al., 2012)). Here trigger is defined as the smallest extent of a text which most clearly expresses 1203
+
+an event occurrence or indicates a relation type. High-quality patterns yield quite high precision but relatively low recall. In addition, it's relatively expensive to maintain and update a set of extraction patterns. Furthermore, we carefully investigated the TACKBP SF 2012 ground truth corpus and find that 94.36% of the biographical facts are mentioned in a sentence containing indicative fact-specific triggers. For example, born is a trigger for extracting birthrelated facts. Triggers are crucial in predicting the type of facts (Aguilar et al., 2014). However, most previous studies only focused on using triggers to create more patterns (e.g., (Li et al., 2013)). Therefore the critical problem is how to make the most of triggers in biographical fact extraction? We observe that people tend to scan a document when they want to quickly find a biographical fact within limited time. According to Douglas and Frazier (2001), scanning is a strategy for quickly finding specific information (keywords or ideas) in a text while ignoring its broader meaning. Scanning involves skipping words, but the emphasis is that the reader knows what to look for and rapidly scans until words are found and closer reading can occur (Phipps, 1983). There are five steps in implementing scanning strategy according to Arnold (1999): 1. Keep in mind what you are searching for. 2. Anticipate in what form the information is likely to appear ­ number, proper nouns, etc. 3. Analyze the organization of the content before starting to scan.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1203­1208, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,33 @@
+Model Graphemes only Joint (gold phon.) Joint (generated phon.)
+
+EnJa 63.1 67.4 65.8
+
+EnHi 43.5 48.0 46.1
+
+Model Graphemes only Phonemes only Joint (suppl. phonemes)
+
+EnJa 53.3 19.2 54.8
+
+EnHi 46.4 10.4 50.0
+
+Table 2: Transliteration accuracy improvement with gold and generated phonetic transcriptions.
+
+Table 3: Transliteration accuracy with transcriptions generated from third-language transliterations.
+
+4.2
+
+Generated Transcriptions
+
+The training entries that have no corresponding transcriptions in our pronunciation lexicon were excluded from the experiment described above. When we add those entries back to the datasets, we can no longer apply the phonetic approach, but we can still compare the orthographic approach to our joint approach, which can handle the lack of a phonetic transcription in some of the training instances. The training sets are thus larger in the experiments described in this section: 30,190 entries for Englishto-Japanese, and 12,070 for English-to-Hindi. The test sets are the same as in Section 4.1. The results in the first two rows in Table 2 show that the joint approach outperforms the orthographic approach even when most training entries lack the pronunciation information.1 Gold transcriptions are not always available, especially for names that originate from other languages. Next, we investigate whether we can replace the gold transcriptions with transcriptions that are automatically generated from the source orthography. We adopt D IREC TL+ as a grapheme-to-phoneme (G2P) converter, train it on the entire Combilex lexicon, and include the generated transcriptions instead of the gold transcriptions in the transliteration training and test sets for the joint model. The test sets are unchanged. The third row in Table 2 shows the result of leveraging generated transcriptions. We still see improvement over the orthographic approach, albeit smaller than with the gold transcriptions. However, we need to be careful when interpreting these results. Since our G2P converter is trained on Combilex, the gen1 The improvement is statistically significant according to the McNemar test with p < 0.05. The differences in the baseline results between Table 1 and Table 2 are due to the differences in the training sets. The matching value of 46.1 across both tables is a coincidence. The comparison of results within any given table column is fair.
+
+erated transcriptions of words in the test set are quite accurate. When we test the joint approach only on words that are not found in Combilex, the improvement over the orthographic approach largely disappears. We interpret this result as an indication that the generated transcriptions help mostly by capturing consistent grapheme-to-phoneme correspondences in the pronunciation lexicon.
+
+5
+
+Leveraging transliterations
+
+In the previous section, we have shown that phonetic transcriptions can improve the accuracy of the transliteration process by disambiguating the pronunciation of the source word. Unfortunately, phonetic transcriptions are rarely available, especially for words which originate from other languages, and generating them on the fly is less likely to help. However, transliterations from other languages constitute another potential source of information that could be used to approximate the pronunciation in the source language. In this section, we present experiments of leveraging such supplemental transliterations through our joint model. 5.1 Third-language transcriptions An intuitive way of employing transliterations from another language is to convert them into phonetic transcriptions using a G2P model, which are then provided to our joint model together with the source orthography. We test this idea on the data from the NEWS 2010 shared task. We select Thai as the third language, because it has the largest number of the corresponding transliterations. We restrict the training and test sets to include only words for which Thai transliterations are available. The resulting English-to-Japanese and English-to-Hindi training/test sets contain 12,889/1,009, and 763/250 entries, respectively. We adopt D IREC TL+ as a G2P converter, and train it on 911 Thai spellingpronunciation pairs extracted from Wiktionary. Be-
+
+948
+
+

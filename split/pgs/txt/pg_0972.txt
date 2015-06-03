@@ -1,0 +1,24 @@
+95 95 90 AUC Score 85 80 75 3.0 2.5 2.0 1.5 1.0 Log10(Percentage of Training Data) SVM DNN2 DNN1 0.5 0.0 AUC Score 90 85 80 3.0 2.5 2.0 1.5 1.0 Log10(Percentage of Training Data) SVM DNN2 DNN1 0.5 0.0
+
+(a) Hotel
+94 92 90 88 86 84 82 80 78 3.0 75 AUC Score 70 65 60 55 3.0
+
+(b) Flight
+
+AUC Score
+
+2.5 2.0 1.5 1.0 Log10(Percentage of Training Data)
+
+SVM DNN2 DNN1 0.5 0.0
+
+2.5 2.0 1.5 1.0 Log10(Percentage of Training Data)
+
+SVM DNN2 DNN1 0.5 0.0
+
+(c) Restaurant
+
+(d) Nightlife
+
+Figure 5: Domain Adaptation in Query Classification. Comparison of different DNNs. high model compactness. The key to the compactness is the aggressive compression from the 500kdimensional bag-of-words input to 300-dimensional semantic representation l2 . This significantly reduces the memory/run-time requirements compared to systems that rely on surface-form features. The most expensive portion of the model is storage of the 50k-by-300 W1 and its matrix multiplication with l1 , which is sparse: this is trivial on modern hardware. Our multi-task DNN takes < 150KB in memory whereas e.g. SVM-Word takes about 200MB. Compactness is particularly important for query classification, since one may desire to add new domains after discovering new needs from the query logs of an operational system. On the other hand, it is prohibitively expensive to collect labeled training data for new domains. Very often, we only have very small training data or even no training data. To evaluate the models using the above criteria, we perform domain adaptation experiments on query classification using the following procedure: (1) Select one query classification task t . Train MTDNN on the remaining tasks (including Web Search 918 task) to obtain a semantic representation (l2 ); (2) Given a fixed l2 , train an SVM on the training data t , using varying amounts of labels; (3) Evaluate the AUC on the test data of t We compare three SVM classifiers trained using different feature representations: (1) SemanticRepresentation uses the l2 features generated according to the above procedure. (2) Word3gram uses unigram, bigram and trigram word features. (3) Letter3gram uses letter-trigrams. Note that Word3gram and Letter3gram correspond to SVMWord and SVM-Letter respectively in Table 2. The AUC results for different amounts of t training data are shown in Figure 4. In the Hotel, Flight and Restaurant domains, we observe that our semantic representation dominated the other two feature representations (Word3gram and Letter3gram) in all cases except the extremely large-data regime (more than 1 million training samples in domain t ). Given sufficient labels, SVM is able to train well on Word3gram sparse features, but for most cases Se-
+
+

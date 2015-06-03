@@ -1,0 +1,29 @@
+cepstral coefficients. We denote a single frame of input mel-cepstral coefficients as x. In order to produce the transformed signal, we simply predict frame-by-frame. Specifically, for a frame x of the input we predict a transformed frame y ^ as the mode of density p(y |x), which we estimate from training data. A naive approach would be to use a linear model: y = Ax + Here, is a Gaussian noise term, and the model is parameterized by the transformation matrix, A. For now, we assume training data are already framealigned (see Section 4). Let yi be frame i of the target signal in the training data. Similarly, let xi be the corresponding frame of the source signal in the training data. Thus, using this linear model, we would estimate the transformation as: ^ = argmin A
+A i
+
+with the input x. Specifically, p(y |x) is estimated as follows: y = A(x) · x + ^(x) = argmin A
+A i
+
+w(x, xi ) · yi - Axi
+
+2
+
+^ is a function of x, and is comThe transformation A puted by solving a weighted least squares problem that depends on x. w is a kernel function that measures similarity between the current input, x, and each of the source training frames, xi . We use a Gaussian kernel: w(x, xi ) = exp - x - xi 2 2
+2
+
+yi - Axi
+
+2
+
+Intuitively, for each input frame x we solve a separate least squares regression where each training datum is weighted by its similarity to the input. As the input varies, so will the weighting, and thus so will the linear transformation.
+
+This very simple approach works, to some extent, but, because it cannot capture important non-linear relationships between x and y , it is far from state-ofthe-art. A more popular approach is to use a Gaussian mixture model (GMM) to jointly generate both source and target cepstral features (Stylianou et al., 1998; Toda et al., 2007; Toda et al., 2005). This approach essentially learns different linear transformations for different regions of the input space, capturing some non-linearity. However, the GMM introduces a new problem: the posterior over the latent clusters learned by the GMM can be highly peaked (Popa et al., 2012) and as a result distortion is introduced by discontinuities at cluster boundaries. Thus, we adopt neither the simple linear approach nor the GMM. We instead the state-of-the-art fully non-parametric approach introduced by Popa et al. (2012). This method, described in the next section, learns transformations that capture non-linearity but vary smoothly as the input changes. 2.1 Local Regression Like Popa et al. (2012), we use local linear regression (LLR) (Cleveland, 1979) to estimate p(y |x). LLR is a non-parametric method that estimates p(y |x) as a linear transformation that varies slowly 1335
+
+3
+
+Inference
+
+Exact inference using LLR is too computationally expensive for most applications since it means solving a least squares problem over the entire training set for each input frame x. A common approach is to define a neighborhood function that, for each input frame x, selects K training frames xi that are ^(x) is computed by only most relevant to x. Then, A solving the least squares problem over this neighborhood. This approach can work well in practice since the support for each local least squares problem is relatively sparse. By choosing the right neighborhood function, work can be skipped without substantially impacting learning. 3.1 Inference on the CPU The standard approach when using a CPU is to let the neighborhood function pick out the indices of the K training frames xi that maximize w(x, xi ). We let this particular neighborhood function be called g (x), depicted in Figure 1. Using this approach, for ^(x) has the following closed form input frame x, A expression: ^(x) = H (x) W (x)G(x) G(x) W (x)G(x) A
+-1
+
+

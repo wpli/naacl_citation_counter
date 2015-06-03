@@ -1,0 +1,26 @@
+In summary, our first contribution lies in embedding learning of continuous and discontinuous phrases. Our second contribution is the weighting scheme TF-KLD-KNN. This paper is structured as follows. Section 2 reviews related work. Section 3 describes our method for learning embeddings of units. Section 4 introduces a measure of unit discriminativity that can be used for differential weighting of units. Section 5 presents experimental setup and results. Section 6 concludes.
+
+2
+
+Related work
+
+sentence. Socher et al. (2011) used recursive autoencoders to learn representations for words and word sequences on each layer of the sentence parsing tree, and then proposed dynamic pooling layer to form a fixed-size matrix as the representation of the two sentences. Other work representative of this line is by Kozareva and Montoyo (2006), Qiu et al. (2006), Ul-Qayyum and Altaf (2012). Our work, first learning unit embeddings, then adding them to form sentence representations, finally calculating pair features (cosine similarity, absolute difference and MT metrics) actually is a combination of above three lines.
+
+The key for good performance in paraphrase identification is the design of good features. We now discuss relevant prior work based on the linguistic granularity of feature learning. The first line is compositional semantics, which learns representations for words and then composes them to representations of sentences. Blacoe and Lapata (2012) carried out a comparative study of three word representation methods (the simple distributional semantic space (Mitchell and Lapata, 2010), distributional memory tensor (Baroni and Lenci, 2010) and word embedding (Collobert and Weston, 2008)), along with three composition methods (addition, point-wise multiplication, and recursive autoencoder (Socher et al., 2011)). They showed that addition over word embeddings is competitive, despite its simplicity. The second category directly seeks sentence-level features. Ji and Eisenstein (2013) explored unigrams, bigrams and dependency pairs as sentence features. They proposed TF-KLD to weight features and used non-negative factorization to learn latent sentence representations. Our method TF-KLDKNN is an extension of their work. The third line directly computes features for sentence pairs. Wan et al. (2006) used N-gram overlap, dependency relation overlap, dependency tree-edit distance and difference of sentence lengths. Finch et al. (2005) and Madnani et al. (2012) combined several machine translation metrics. Das and Smith (2009) presented a generative model over two sentences' dependency trees, incorporating syntax, lexical semantics, and hidden loose alignments between the trees to model generating a paraphrase of a given
+
+3
+
+Embedding learning for units
+
+As explained in Section 1, "units" in this work include single words, continuous phrases and discontinuous phrases. Phrases have a larger linguistic granularity than words and thus will in general contain more meaning aspects for a sentence. For example, successful detection of continuous phrase "side effects" and discontinuous phrase "pick · · · off" is helpful to understand the sentence meaning correctly. This section focuses on how to detect phrases and how to represent them. 3.1 Phrase collection
+
+Phrases defined by a lexicon have not been investigated extensively before in deep learning. To collect canonical phrase set, we extract two-word phrases defined in Wiktionary1 and Wordnet (Miller and Fellbaum, 1998) to form a collection of size 95,218. This collection contains continuous phrases ­ phrases whose parts always occur next to each other (e.g., "side effects") ­ and discontinuous phrases ­ phrases whose parts more often occur separated from each other (e.g., "pick . . . off"). 3.2 Identification of phrase continuity
+
+Wiktionary and WordNet do not categorize phrases as continuous or discontinuous. So we need a heuristic to determine this automatically. For each phrase "A B", we compute [c1 , c2 , c3 , c4 , c5 ] where ci , 1  i  5, indicates there are ci occurrences of A and B in that order with a distance
+1
+
+http://en.wiktionary.org
+
+1369
+
+

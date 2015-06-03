@@ -1,0 +1,21 @@
+Table 3: Topics Learned from NIPS Dataset LDA Topic 2 Topic 3 (Neural Net) (Speech) network hmm neural mlp feedforward hidden architecture context research model general recognition applied probabilities vol training paper markov introduction system Quad-LDA Topic 2 Topic 3 (Neural Net) (Speech) training speech set hmm network speaker learning acoustic net phonetic number vocabulary algorithm phone class utterance input utterances examples frames DF-LDA Topic 2 Topic 3 (Neural Net) (Speech) network speech system context connection speaker application frame artificial continuous input processing obtained number department dependent fixed frames techniques spectral MRF-LDA Topic 2 Topic 3 (Neural Net) (Speech) network hmm model speech learning acoustic function context input word neural phonetic set frames algorithm speaker system phone data vocabulary
+
+Topic 1 (Vision) image images pixel vision segment visual scene texture contour edge Topic 1 (Vision) image images pixel region vision scene surface texture local contour
+
+Topic 4 (Circuits) chip analog weight digital neural hardware bit neuron implement vlsi Topic 4 (Circuits) circuit analog chip voltage current vlsi neuron gate input transistor
+
+Topic 1 (Vision) images pixel view recognition face ica vision system natural faces Topic 1 (Vision) image images pixel disparity color intensity stereo scene camera detector
+
+Topic 4 (Circuits) analog chip vlsi implement digital hardware voltage bit transistor design Topic 4 (Circuits) chip synapse digital analog board charge synaptic hardware vlsi programmable
+
+topic are automatically labeled as irrelevant. Otherwise, annotators are asked to identify words that are relevant to this topic. Coherence measure (CM) is defined as the ratio between the number of relevant words and total number of candidate words. In our experiments, four graduate students participated the labeling. For each dataset and each method, 10% of topics were randomly chosen for labeling. Table 4 and 5 summarize the coherence measure of topics learned on 20-Newsgroups dataset and NIPS dataset respectively. As shown in the table, our method significantly outperforms the baseline methods with a large margin. On the 20-Newsgroups dataset, our method achieves an average coherence measure of 60.8%, which is two times better than LDA. On the NIPS dataset, our method is also much better than the baselines. In summary, we conclude that MRF-LDA produces much better results on both datasets compared to baselines, which demonstrates the effectiveness of our model in exploiting 732
+
+word correlation knowledge to improve the quality of topic modeling. To assess the consistency of the labelings made by different annotators, we computed the intraclass correlation coefficient (ICC). The ICCs on 20-Newsgroups and NIPS dataset are 0.925 and 0.725 respectively, which indicate good agreement between different annotators.
+
+5
+
+Conclusion
+
+In this paper, we propose a MRF-LDA model, aiming to incorporate word correlation knowledge to improve topic modeling. Our model defines a MRF over the latent topic layer of LDA, to encourage correlated words to be put into the same topic. Our model provides the flexibility to enable a word to be similar to different words under different topics, which is more plausible and allows a word to show up in multiple topics properly. We evaluate our model on two datasets and corroborate its effectiveness both qualitatively and quantitatively.
+
+

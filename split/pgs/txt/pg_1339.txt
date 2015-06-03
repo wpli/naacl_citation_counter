@@ -1,0 +1,30 @@
+of which can be seen in Table 3. Removed SVO TL E RT IR Remaining Features NG+E+IR+TL+RT+SVO NG+E+IR+TL+RT NG+E+IR+RT NG+IR+RT NG+IR NG % Acc 81.90 82.09 82.21 82.21 82.13 81.48
+
+gain support from friends or family (courage, support, help). Importantly, such reasons for staying are validated in the clinical literature (Buel, 1999).
+
+5
+
+Conclusion
+
+Table 3: Feature ablation study with an RBF SVM and no dimensionality reduction. NG = ngrams, E = emoticon replacement, IR = informal register replacement, TL = tweet length, RT = retweet count, SVO = subject-verbobject structures. % Acc is accuracy on the testset.
+
+Interestingly, the SVO features combined with ngrams worsened performance slightly, perhaps due to trigrams capturing the majority of SVO cases. The highest accuracy, 82.21% on the testset, could be achieved with a combination of ngrams, informal register replacement, and retweet count. However the vast majority of cases can be classified accurately with ngrams alone. Emoticons may not have contributed to performance since they were rare in the corpus. Standardizing non-standard forms presumably helped the SVM slightly by boosting the frequency counts of ngrams while removing nonstandard ngrams. Tweet length reduced accuracy slightly, while the number of retweets helped.
+
+We discuss and analyze a filtered, balanced corpus having the hashtags #WhyIStayed or #WhyILeft. Our analysis reveals micro-narratives in tweeted reasons for staying vs. leaving. Our findings are consistent across various methods, correspond to observations in the clinical literature, and affirm the relevance of NLP for exploring issues of social importance in social media. Future work will focus on improving SVO extraction, especially adding consideration for negations of predicate verbs. In addition we will analyse other hashtags in use in the trend and perform further analysis of the trend itself, implement advanced text normalization rather than relying on a dictionary, and determine the roles features from linked webpages and FrameNet or other semantic resources play in making sense of domestic abuse.
+
+6
+
+Acknowledgement
+
+This work was supported in part by a Golisano College of Computing and Information Sciences Kodak Endowed Chair Fund Health Information Technology Strategic Initiative Grant and NSF Award #SES1111016.
+
+4
+
+Discussion References
+Sarah M. Buel. 1999. Fifty obstacles to leaving, a.k.a, why abuse victims stay. The Colorado Lawyer, 28(10):19­28, Oct. Munmun De Choudhury, Scott Counts, Eric Horvitz, and Michael Gamon. 2013. Predicting depression via social media. In Proceedings of the 7th International AAAI Conference on Weblogs and Social Media (ICWSM), Cambridge, Massachusetts, July. Association for the Advancement of Artificial Intelligence. Kathleen C. Fraser, Graeme Hirst, Naida L. Graham, Jed A. Meltzer, Sandra E. Black, and Elizabeth Rochon. 2014. Comparison of different feature sets for identification of variants in progressive aphasia. In Proceedings of the Workshop on Computational Linguistics and Clinical Psychology: From Linguistic Signal to Clinical Reality, pages 17­26, Baltimore, Mary-
+
+From the analyses of SVO structures, wordclouds, and Linear SVM weights, interesting micronarratives of staying and leaving emerge. Victims report staying in abusive relationships due to cognitive manipulation, as indicated by a predominance of verbs including manipulate, isolate, convince, think, believe, felt while report leaving when experiencing or fearing physical violence, via predicates such as kill and kick. They also report staying when in dire financial straits (money), when attempting to keep the nuclear family united (family, marriage) or when experiencing shame about their situation (ashamed, shame). They report leaving when threats are made towards loved-ones (son, daughter), gain agency (choose, decide), realize their situation or self-worth (realize, learn, worth, deserve, finally, better), or
+
+1285
+
+

@@ -1,0 +1,39 @@
+TimeML (Pustejovsky et al., 2003), the format for specifying temporal relations, defines relations between predicates (e.g. immediately before and simultaneous), each with an inverse (e.g. immediately after and simultaneous respectively). We will refer to a relation as R and its inverse as R-1 . Suppose we had pa and pb in the source document, px and py in the target document, and pa R1 pb , px R2 py . Given this configuration the following alignments conflict with the in-doc relations: zax zby zay zbx In-Doc Relations * * 1 1 R1 = R2 -1 1 * * R1 = R2 1 where 1 means there is a link and * means there is a link or no link (wildcard). The simplest example that fits this pattern is: `a before b', `x before y', `a corefers with y', and `b corefers with x' implies a conflict. We introduce a factor that penalizes these conflicting configurations. In every instance where the predicted temporal relation for a pair of predicate alignments matches one of the conflict patterns above, we add a factor using ztemp : ztemp  zay zbx if pa R1 pb , px R2 py , R1 = R2 ztemp  zax zby
+-1 if pa R1 pb , px R2 py , R1 = R2
+
+def train(alignments): w = init_weights() working_set = set() while True: xi = solve_ILP(w, working_set) c = most_violated_constraint(w, alignments) working_set.add(c) if hinge(c, w) < xi: break def most_violated_constraint(w, alignments): delta_features = vector() loss = 0 for z in alignments: z_mv = make_ILP(z) for phi in factors: costs = dot(w, phi.features) z_mv.add_terms(costs, phi.vars) z_mv.add_constraints(phi.constraints) solve_ILP(z_mv) mu = (z.size + k) / (avg_z_size + k) delta_features += mu * (f(z) - f(z_mv)) loss += mu * Delta(z, z_mv) return Constraint(delta_features, loss) def hinge(c, w): return max(0, c.loss - dot(w, c.delta_features))
+
+Figure 2: Learning algorithm (caching and ILP solver
+not shown). The sum in each constraint is performed once when finding the constraint, and implicitly thereafter.
+
+(8)
+
+Thus stemp is the cost of disagreeing with the indoc temporal relations. This is a general technique for incorporating relational information into coreference decisions. It only requires specifying when two relations are incompatible, e.g. spouseOf and siblingOf are incompatible relations (in most states). We leave this for future work. Since CAEVO gives each relation prediction a probability, we incorporate this into the feature by indicating the probability of a conflict not arising: f (temp ) = log 1 - p(R1 )p(R2 ) + (9)
+
+coefficient on every alignment variable, and a joint factor similarity score on every quadratic variable. These quadratic variables are constrained by products of the original alignment variables. Decoding an alignment requires solving this quadratically constrained integer program; in practice is can be solved quickly without relations.
+
+5
+
+Inference
+
+Learning We use the supervised structured SVM formulation of Joachims et al. (2009). As is common in structure prediction we use margin rescaling and 1 slack variable, with the structural SVM objective: min||w||2 2 + C
+w
+
+s.t.   0
+N N
+
+avoids large negative values since CAEVO probabilities are not perfectly calibrated. We use = 0.1, allowing feature values of at most -2.3. Summary The objective is a linear function over binary variables. There is a local similarity score 15
+
++
+i=1
+
+w · f (zi ) 
+i=1
+
+w · f (z ^i ) + (zi , z ^i )
+
+(10) where Zi is the set of all possible alignments that have the same shape as zi .
+
+z ^i  Zi
+
+

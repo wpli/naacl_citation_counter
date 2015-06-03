@@ -1,0 +1,24 @@
+N1 N2 N3 N4 N5 P1 P2 P3 P4 P5 ing set.
+
+completely useless ., return policy . it won't even, but doesn't work product is defective, very disappointing ! is totally unacceptable, is so bad was very poor, it has failed works perfectly !, love this product very pleased !, super easy to, i am pleased 'm so happy, it works perfect, is awesome ! highly recommend it, highly recommended ! am extremely satisfied, is super fast
+
+were unacceptably bad, is abysmally bad, were universally poor, was hugely disappointed, was enormously disappointed, is monumentally frustrating, are endlessly frustrating best concept ever, best ideas ever, best hub ever, am wholly satisfied, am entirely satisfied, am incredicbly satisfied, 'm overall impressed, am awfully pleased, am exceptionally pleased, 'm entirely happy, are acoustically good, is blindingly fast,
+
+Table 5: Examples of predictive text regions in the trainIn Table 5, we show some of text regions learned by seq-CNN to be predictive on Elec. This net has one convolution layer with region size 3 and 1000 neurons; thus, embedding by the convolution layer produces a 1000-dim vector for each region, which (after pooling) serves as features in the top layer where weights are assigned to the 1000 vector components. In the table, Ni/Pi indicates the component that received the i-th highest weight in the top layer for the negative/positive class, respectively. The table shows the text regions (in the training set) whose embedded vectors have a large value in the corresponding component, i.e., predictive text regions. Note that the embedded vectors for the text regions listed in the same row are close to each other as they have a large value in the same component. That is, Table 5 also shows that the proximity of the embedded vectors tends to reflect the proximity in terms of the relations to the target classes (positive/negative sentiment). This is the effect of embedding, which helps classification by the top layer. With the bag-of-n-gram representation, only the n-grams that appear in the training data can participate in prediction. By contrast, one strength of CNN is that n-grams (or text regions of size n) can contribute to accurate prediction even if they did not appear in the training data, as long as (some of) their constituent words did, because input of embedding is the constituent words of the region. To see this point, in Table 6 we show the text regions from the test set, which did not appear in the training data, either entirely or partially as bi-grams, and yet whose embedded features have large values in the heavily-weighted (predictive) component thus contributing to the prediction. There are many more of these, and we only show a small part of them that 111
+
+Table 6:
+
+Examples of text regions that contribute to prediction. They are from the test set, and they did not appear in the training set, either entirely or partially as bi-grams.
+
+fit certain patterns. One noticeable pattern is (beverb, adverb, sentiment adjective) such as "am entirely satisfied" and "'m overall impressed". These adjectives alone could be ambiguous as they may be negated. To know that the writer is indeed "satisfied", we need to see the sequence "am satisfied", but the insertion of adverb such as "entirely" is very common. "best X ever' is another pattern that a discriminating pair of words are not adjacent to each other. These patterns require tri-grams for disambiguation, and seq-CNN successfully makes use of them even though the exact tri-grams were not seen during training, as a result of learning, e.g., "am X satisfied" with non-negative X (e.g., "am very satisfied", "am so satisfied") to be predictive of the positive class through training. That is, CNN can effectively use word order when bag-of-n-gram-based approaches fail.
+
+4
+
+Conclusion
+
+This paper showed that CNN provides an alternative mechanism for effective use of word order for text categorization through direct embedding of small text regions, different from the traditional bag-of-ngram approach or word-vector CNN. With the parallel CNN framework, several types of embedding can be learned and combined so that they can complement each other for higher accuracy. State-of-the-art performances on sentiment classification and topic classification were achieved using this approach.
+
+Acknowledgements
+We thank the anonymous reviewers for useful suggestions. The second author was supported by NSF IIS-1250985 and NSF IIS-1407939.
+
+

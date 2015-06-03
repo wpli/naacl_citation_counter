@@ -1,0 +1,45 @@
+many times is a used when A accepts v ?" Thus, f (v ) is again a vector of non-negative counts. Section 6 gives algorithms for this general setting. We implement the previous section as a special case, constructing A so that its arcs essentially correspond to the substrings in W . This encodes a variable-order Markov model as an FSA similarly to (Allauzen et al., 2003); see Appendix B.4 for details. In this general setting, E NCODE( ) just returns a weighted version of A where each arc or final state a has weight exp a in the (+, ×) semiring. Thus, this WFSA accepts each v with weight exp( · f (v )). 3.5 Adaptive featurization How do we choose W (or A)? Expanding W will allow better approximations to p--but at greater computational cost. We would like W to include just the substrings needed to approximate a given p well. For instance, if p is concentrated on a few highprobability strings, then a good W might contain those full strings (with positive weights), plus some shorter substrings that help model the rest of p. To select W at runtime in a way that adapts to p, let us say that  is actually an infinite vector with weights for all possible substrings, and define W = {w   : w = 0}. Provided that W stays finite, we can store  as a map from substrings to nonzero weights. We keep W small by replacing (2) with  = argmin D(p || q ) +  · ( ) (3)
+
+s ae h i n g r  e u  e
+
+F1
+
+V3
+
+e
+
+V1
+
+V2
+Feature c a t ca at ct Weight 1.04 .83 .86 .89 .91 -.96
+
+F3
+
+F2
+
+V4
+
+Figure 1: Information flowing toward V2 in EP (reverse flow not shown). The factors work with purple µ messages represented by WFSAs, while the variables work with green  messages represented by log-linear weight vectors. The green table shows a  message: a sparse weight vector that puts high weight on the string cat.
+
+EP is a variant in which all of these are forced to be log-linear functions from the same family, namely exp( · f V (v )). Here f V is the featurization function we've chosen for variable V .3 We can represent these functions by their parameter vectors-- let us call those  V F ,  F V , and  V respectively. 4.1 Passing messages through variables What happens to BP's update equations in this setting? According to BP, the belief bV is the pointwise product of all "incoming" messages to V . But as we saw in section 3.2, pointwise products are far easier in EP's restricted setting! Instead of intersecting several WFSAs, we can simply add several vectors: V =
+F N (V )
+
+where ( ) measures the complexity of this W or the corresponding A. Small WFSAs ensure fast finite-state operations, so ideally, ( ) should measure the size of E NCODE( ). Choosing  > 0 to be large will then emphasize speed over accuracy. Section 6.1 will extend section 6's algorithms to approximately minimize the new objective (3). Formally this objective resembles regularized loglikelihood. However, ( ) is not a regularizer-- as section 1 noted, we have no statistical reason to avoid "overfitting" p ^, only a computational one.
+
+F
+
+V
+
+(4)
+
+Similarly, the "outgoing" message from V to factor F is the pointwise product of all "incoming" messages except the one from F . This message  V F can be computed as  V -  F V , which adjusts (4).4 We never store this but just compute it on demand.
+A single graphical model might mix categorical variables, continuous variables, orthographic strings over (say) the Roman alphabet, and phonological strings over the International Phonetic Alphabet. These different data types certainly require different featurization functions. Moreover, even when two variables have the same type, we could choose to approximate their marginals differently, e.g., with bigram vs. trigram features. 4 If features can have - weight (footnote 1), this trick might need to subtract - from - (the log-space version of 0/0). That gives an undefined result, but it turns out that any result will do--it makes no difference to the subsequent beliefs.
+3
+
+4
+
+Expectation Propagation
+
+Recall from section 2.2 that for each variable V , the BP algorithm maintains several nonnegative functions that score V 's possible values v : the messages µV F and µF V (F  N (V )), and the belief bV . 935
+
+

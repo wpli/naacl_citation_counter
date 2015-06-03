@@ -1,0 +1,55 @@
+I 1 2 3 1 2 3 1 2 3
+
+U context small triangle
+
+ P (U |R)  P (R|I )
+.25(.04 + .09 + .09 + .6) .33(.04 + .09 + .03) .2(.05 + .09 + .07 + .56 + .71) .25(.87 + .04 + .06 + .07) .33(.87 + .04 + .04) .2(.01 + .04 + .04 + .03 + .08) .25(.02 + .88 + .07 + .09) .33(.02 + .01 + .06) .2(.08 + .88 + .03 + .1 + .05)
+
+P ( I |U ) .37 .095 .535 .65 .2 .15 .81 .028 .162
+
+Iida2011-combined
+80 %
+
+Iiida2011-separated
+
+SIUM
+
+77 % 71.6 % 69.9 % 71.5 %
+60 %
+
+72.5 %
+
+74 %
+
+62.7 % 61.8 % 63.4 %
+
+40 %
+
+Table 5: Application of RE small triangle, where 1 is the referred object
+
+20 %
+
+0 %
+
+Evaluation Metrics We report results of our evaluation in referential accuracy on utterances that were annotated as referring to a single object (references to group objects is left for future work). Going beyond Iida et al. (2011), our model computes a resolution hypothesis incrementally; for the performance of this aspect of the system we followed previously used metrics for evaluation (Schlangen et al., 2009; Kennington et al., 2013): first correct: how deep into the RE does the model predict the referent for the first time? first final: how deep into the RE does the model predict the correct referent and keep that decision until the end? edit overhead: how often did the model unnecessarily change its prediction (the only necessary prediction happens when it first makes a correct prediction)? We compare non-incremental results to three evaluations performed in Iida et al. (2011), namely when Ling is used alone, Ling+TaskSP used together, and Ling+TaskSp+Gaze. Furthermore, they show results of models where a separate part handled REs that used pronouns, as well as a part that handled the non-pronoun REs, and a combined model that handled both types of expressions.
+
+Ling
+
+Ling+TaskSp
+
+Ling+TaskSp+Gaze
+
+Figure 4: Comparison of model accuracies; our SIUM approach generally performs better over the combined model presented in Iida et al., (2011)
+
+6
+6.1
+
+Results
+Reference Resolution
+
+Results of our evaluation are shown in Figure 4. The SIUM model performs better than the combined approach of Iida et al. (2011), and performs better than their separated model--when not including gaze (there is a significant difference between SIUM and the separated models for Ling+TaskSp, though 278
+
+only got one more correct than the separated model). This is a welcome result, as it shows that our very simple incremental model that uses a basic classifier is comparable to a non-incremental approach that uses a more complicated classifier. It further shows that the SIUM model is robust to using TaskSp and Gaze features as properties, as long as those features are available immediately before the RE begins, or during the RE. The best-performing approach is the Iida2011separated model with gaze. This is the case for several reasons: first, their models use features that are not available to our incremental model (e.g., their model uses 14 gaze features, some of which were based on the entire RE, ours only uses 4 properties). Second, and more importantly, separated models means less feature confusion: in Iida et al. (2011) (Section 5.2), the authors give a comparison of the most informative features for each model; task and gaze features were prominent for the pronoun model, whereas gaze and language features were prominent for the non-pronoun model. We also tested SIUM under separated conditions to better compare with the approaches presented here. The separated models, however, did not improve. This, we assume, is because the model grounds language with properties (see Discussion below). An interactive dialogue system might not have the luxury of choosing between two models at runtime. We assume that a model that can sufficiently handle both
+SIUM
+
+

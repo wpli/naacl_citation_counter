@@ -1,0 +1,37 @@
+Data
+DE - N DE - V ES - V FI - N & A FI - V MT- V CA - N CA - V EN - V FR - N FR - V GL - N GL - V IT- N IT- V PT- N PT- V RU - N
+
+#tbl 2,210 1,621 3,243 4,000 4,000 826 4,000 4,000 4,000 4,000 4,000 4,000 3,212 4,000 4,000 4,000 4,000 4,000
+
+#par 66 125 90 233 204 200 49 164 161 57 95 24 101 39 115 68 92 260
+
+mfreq 18.99 52.77 70.42 26.52 43.04 10.68 44.12 60.44 77.12 92.16 81.52 88.36 45.21 83.84 63.96 74.52 62.00 15.76
+
+AFH14 76.09 65.02 92.25 83.20 91.88 18.83 94.00 90.76 89.40 91.60 93.72 90.48 58.92 92.32 89.68 88.12 76.96 64.12
+
+SVM 77.68 83.59 93.48 82.84 91.64 38.64 94.92 93.40 90.00 93.96 96.48 95.08 60.87 93.76 91.56 90.88 80.20 66.36
+
+Oracle 98.99 95.45 96.59 98.12 94.76 85.63 99.44 98.48 97.40 98.72 98.80 99.80 98.95 99.40 98.68 99.04 99.20 96.80
+
+In some cases, we see a significant drop between the per-form and the per-table accuracy. For example, in the case of Russian nouns, per table accuracy is at 66.36%, while the per-form accuracy is 89.35%. This effect is explained--not only in the Russian case but in many others--by the existence of similar paradigms that differ only in very few forms. If the classifier picks an incorrect, but closely related paradigm, most forms may be produced correctly although the entire reconstructed table counts as wrong if even a single form is incorrect. A few outliers remain. The Maltese verbs, which exhibit Semitic interdigitation in some paradigms, seem to generalize fairly well, and have a per form oracle score of 95.49 (shown in table 3). However, this is not reflected in the relatively low per form accuracy (61.15), which warrants further analysis. It may be an indication of that the correct paradigm is simply difficult to ascertain based only on the lemma form, or that additional features could be developed, perhaps ones that are discontinuous in the word. An obvious extension to the current method is to inspect a suggested reconstructed table holistically, i.e., not relying only on base form features. That is, one could avoid making a commitment to a particular paradigm based solely on the features of the base form, and instead also include features from all the forms that a paradigm would generate. Such features are of course available in the training data in the various forms in an inflection table. Features from the seen forms could be used to rate compatibility since an incorrect reconstruction of an inflection table may likely be identified by its tendency to produce phonotactic patterns rarely or never seen in the training data. With relatively few paradigms learned from collections of word forms, one can achieve fairly high coverage on unseen data. In principle, for example, the 13 most frequently used paradigms of Spanish verbs suffice to cover 90% of all verbs (per token). A useful application of this is rapid language resource development--one can elicit from a speaker a small number of well-chosen inflection tables, e.g. all forms of specific nouns, verbs, adjectives; generalize these inflection tables into paradigms; and use this information to deduce the possible morphological classes for a majority of unseen word forms.
+
+Table 2: Per table accuracy results on the second experiment. 5-fold cross-validation is used throughout. The #tbl-column shows the number of inflection tables input to the LCS-learner and the #par column shows the number of resulting unique paradigms. The mfreq-column illustrates a baseline of simply picking the most frequent paradigm, while AFH14 is the strategy of finding the longest suffix match to the base forms in the training data (Ahlberg et al., 2014). The SVM-column shows the results discussed in this paper.
+
+Data
+DE - N DE - V ES - V FI - N & A FI - V MT- V CA - N CA - V EN - V FR - N FR - V GL - N GL - V IT- N IT- V PT- N PT- V RU - N
+
+#forms 8 27 57 233 54 16 2 53 6 2 51 2 70 3 51 4 65 12
+
+mfreq 57.36 87.35 93.80 52.15 70.38 39.75 71.30 86.89 91.43 93.24 91.47 91.92 94.89 89.36 89.51 83.35 92.62 25.16
+
+AFH14 89.72 96.12 98.72 91.03 95.27 54.66 96.89 98.18 95.93 92.48 97.09 92.82 98.48 93.38 97.76 89.78 96.81 88.19
+
+SVM 90.25 95.28 98.83 91.06 95.22 61.15 97.33 98.89 96.16 94.68 98.33 95.38 98.32 94.59 98.21 91.97 97.20 89.35
+
+Oracle 99.69 99.20 99.47 98.95 96.76 95.49 97.93 99.77 99.28 99.08 99.02 99.78 99.67 97.44 99.64 98.60 99.68 99.15
+
+Table 3: Per form accuracy results on the second experiment. 5-fold cross-validation is used throughout. The #forms-column shows the number of different slots in the paradigms. Other columns are as in table 2.
+
+1028
+
+

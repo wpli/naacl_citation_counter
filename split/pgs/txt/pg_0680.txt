@@ -1,0 +1,19 @@
+Approach (a) (b) (c) (d) (e) Baseline (Frequency) Frequency Single Embedding Frequency Double Embedding
+
+ASR Slot Induction AP PR-AUC 56.69 54.67 63.88 62.05 69.04 68.25 56.83 55.31 71.48 70.84
+
+SLU Model WAP AF 35.82 43.28 41.67 47.38 46.29 48.89 32.64 44.91 44.06 47.91
+
+Manual Slot Induction SLU Model AP PR-AUC WAP AF 53.01 50.80 36.78 44.20 63.02 61.10 43.76 48.53 75.15 74.50 54.50 50.86 52.12 50.54 34.01 45.05 76.42 75.94 52.89 50.40
+
+Table 2: The performance of induced slots and corresponding SLU models (%)
+
+For each induced slot with the mapping to a reference slot, we can compute an F-measure of the corresponding semantic decoder, and weight the average precision with corresponding F-measure as weighted average precision (WAP) to evaluate the performance of slot induction and SLU tasks together. The metric scores the ranking result higher if the induced slots corresponding to better semantic decoders are ranked higher. Another metric is the average F-measure (AF), which is the average micro F-measure of SLU models at all cut-off positions in the ranked list. Compared to WAP, AF additionally considers the slot popularity in the dataset. 5.3 Evaluation Results Table 5.1 shows the results on both ASR and manual transcripts. Rows (a) is the baseline only considering the frequency of each slot candidate for ranking (Chen et al., 2013b). Rows (b) and (c) show performance after leveraging a semantic knowledge graph through random walk. Rows (d) and (e) are the results after combining two knowledge graphs. We find almost all results are improved by additionally considering inter-slot relations in terms of single- and double-graph random walk for both ASR and manual transcripts. 5.3.1 Slot Induction For both ASR and manual transcripts, almost all results outperform the baseline, showing that inter-slot relations significantly influence the performance of slot induction. The best performance is from the results of double-graph random walk with the embedding-based measurement, which integrate a semantic knowledge graph and a lexical knowledge graph together and jointly consider slot-to-slot, word-to-word, and word-to-slot relations when scor626
+
+ing the prominence of slot candidates to generate a coherent slot set. 5.3.2 SLU Model
+
+For both ASR and manual transcripts, almost all results outperform the baseline, which shows the practical usage for training dialogue systems. The best performance is from the results of single-graph random walk with the embedding-based measurement, which only use the semantic knowledge graph to involve the inter-slot relations. The semantic knowledge graph is not as precise as the lexical one and may be influenced by the performance of the semantic parser more. Although the row (e) does not show better performance than the row (c), doublegraph random walk may be more robust because it additionally includes the word relations to avoid only relying on the relations tied with the slot candidates. 5.4 5.4.1 Discussion and Analysis Comparing Frequency- and Embedding-Based Measurements
+
+Table 5.1 shows that all results with the embedding-based measurement perform better than those with the frequency-based measurement. The frequency-based measurement also brings large improvement for single-graph approaches, but does not for double-graph ones. The reason is probably that using observed frequencies in the lexical knowledge graph may result in overfitting issues due to the smaller dataset. Additionally including embedding information can smooth the edge weights and deal with data sparsity to improve the performance, especially for the lexical knowledge graph.
+
+

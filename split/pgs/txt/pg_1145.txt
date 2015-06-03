@@ -1,0 +1,24 @@
+mula 3 below. Note that the value of r(ei , e j ) is independent of the sentence in which ei and e j appear, so we denote it as r(ei , e j ) instead of r(eix , e jy ).  log n(ei , e j )       max log n(em , en ) r (e i , e j ) =  lmn Lk     0
+
+if n(ei , e j ) > 2, otherwise.
+
+(3) where n(ei , e j ) corresponds to the number of world knowledge instances relating ei and e j . For instance, Figure 1a contains an edge between Gates (e1 in s1 ) and Microsoft (e2 in s3 ), in which w(e11 , s1 ) and w(e23 , s3 ) are 3, and d(e11 , e23 ) is 2. Note that we consider the grammatical roles in both common edges and background knowledge edges because we treat them independently from each other. The grammatical information is important to both of these two kinds of edges. 4.1.2 Sentence graph
+
+Algorithm 1: Reachability score computation. Input: G = (V , Lm , Lk , Wm , Wk ). Output: The final reachability score S . 1 n  |V | 2 for j = 1  n do 3 score(v j )  0 4 for j = 1  n do 5 for i = 0  j - 1 do 6 if lm (i, j)  Lm then 7 score(v j )  score(vi ) + wm (i, j) 8 if lk (i, j)  Lk then 9 score(v j )  score(vi ) + wk (i, j) v j V out(v j )=0 score(v j ) 10 return S = |{v j : v j  V  out(v j ) = 0}|
+
+4.1.3
+
+Reachability score computation
+
+Figure 2d shows the sentence graph converted from the entity graph in Figure 2c. In our work, in order to incorporate world knowledge, we adopt an enriched representation of sentence graph, G = (V , Lm , Lk , Wm , Wk ), where V is the sentence nodes; Lm denotes the set of common-entity edges (solid lines); Lk denotes the set of world-knowledge edges (dashed lines), and Wm and Wk correspond to the weights associated with the edges in Lm and Lk . Intuitively, the semantic relatedness between two sentences can be measured as the total relatedness of each entity pair in the two sentences. Therefore, in our enhanced sentence graph representation, for a pair of sentences s x and sy , the weight of their common-entity edge, wm ( s x , sy ), is computed as wm ( s x , sy ) = ei Vxy wm (eix , eiy ), where V xy is the set of entities shared by two sentences s x and sy , and wm (eix , eiy ) is the weight of the corresponding common-entity edge in the entity graph (see Section 4.1.1). Similarly, the weight of their world-knowledge edge, wk ( s x , sy ), is computed as wk ( s x , sy ) = ei Vx ,e j Vy wk (eix , e jy ), where V x and Vy denote the set of entities in s x and sy respectively, and wk (eix , e jy ) is the weight of the corresponding world-knowledge edge in the entity graph. 1091
+
+Based on our sentence graph representation, we compute a reachability score for each sentence node. To produce a final coherence score for the text, we compute the average reachability score among those nodes whose out-degree is equal to 0 in the graph, rather than among all nodes, because of the intuition that, if a sentence node has no subsequent nodes, their reachability score therefore reflects the tightness between this sentence and the preceding part of the text. For a certain sentence node v j , its reachability score is defined as the sum of edge weights on all paths from the starting node (i.e., the first sentence) to v j , and the contribution of each path to the final reachability score depends on the total weight of that path as shown in Equation 4. score(v j ) =
+vi V ,vi v j
+
+(score(vi ) + wm (i, j) + wk (i, j))
+
+(4)
+
+where score(vi ) denotes the reachability score of vi , and wm (i, j) and wk (i, j) are the weights of the common-entity edge and the world-knowledge edge between vi and v j ; if there is no such edge in the graph, the corresponding weight is set to 0. Algorithm 1 summarizes our reachability score computation, in which the reachability score of each node is initially 0, and iteratively updated.
+
+

@@ -1,0 +1,84 @@
+Dataset A MAZON
+
+Measure Preprocessing ¯ /S Generating Q Training LDAC inference Classification Preprocessing ¯ /S Generating Q Training LDAC inference Classification
+
+SUP ANCHOR
+
+LDA
+
+SLDA
+
+32 29 33 38 (train), 13 (dev/test) <5 305 262 181 830 (train), 280 (dev/test) <5
+
+32 886 <5 305 8,158 <5
+
+32 4,762
+
+305 71,967
+
+T RIPADVISOR
+
+Table 2: Runtime statistics (in seconds) for the A MAZON and TRIPADVISOR datasets. Blank cells indicate a timing which does not apply to a particular model. SUP ANCHOR is significantly faster than conventional methods.
+
+method
+0.055 0.050
+
+q ANCHOR
+
+LDA
+
+SLDA
+
+SUP. ANCHOR AMAZON
+
+Topic Interpretability
+
+0.045
+
+q q
+
+q
+
+q
+
+q
+
+0.06 0.05
+
+q
+
+q
+
+q
+
+0.13 0.11 0.09
+q q q q
+
+each model using topic interpretability (Chang et al., 2009). Topic interpretability measures how human users understand topics presented by a topic modeling algorithm. We use an automated approximation of interpretability that uses a reference corpus as a proxy for which words belong together (Newman et al., 2010). Using half a million documents from Wikipedia, we compute the induced normalized pairwise mutual information (Lau et al., 2014, NPMI) on the top ten words in topics as a proxy for interpretability. Figure 6 shows the NPMI scores for each model. Unsurprisingly, unsupervised models (LDA) produce the best topic quality. In contrast, supervised models must balance metadata (i.e., response variable) prediction against capturing word meaning. Consequently, SLDA does slightly worse with respect to topic interpretability.
+SUP ANCHOR and ANCHOR produce the same topic quality consistently on all datasets. Since SUP ANCHOR and ANCHOR have nearly identical runtime, SUP ANCHOR is better suited for supervised tasks because it improves classification without sacrificing interpretability. It is possible that regularization would improve the interpretability of these topics; Nguyen et al. (2014a) show that adding regularization removes overly frequent words from anchordiscovered topics.
+
+TRIPADVISOR YELP
+
+20
+
+40
+
+60
+
+80
+
+Number Of Topics
+
+Figure 6: SUP ANCHOR and ANCHOR produce the same topic quality. LDA outperforms all other models and produces the best topics. Performance of SLDA degrades significantly as the number of topic increases.
+
+learning in around three minutes. The main bottleneck for SUP ANCHOR is learning the document distributions over topics, although even this stage is fast for known topic distributions. This result is far better than the twenty hours required by SLDA to train on TRIPADVISOR .
+
+5
+
+Inspecting Anchors and their Topics
+
+One important evaluation for topic models is how easy it is for a human reader to understand the topics. In this section, we evaluate topics produced by 752
+
+The topics produced by the ANCHOR and SUP AN CHOR algorithms have many similarities. In Table 3, nearly all of the anchor words discovered by AN CHOR are also used by SUP ANCHOR . These anchor words tend to describe general food types, such as
+
+

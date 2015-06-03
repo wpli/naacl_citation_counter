@@ -1,0 +1,24 @@
+describe the previous best-performing system. HK's system. We compare the performance of subsequence features against the SVM classifier system trained on the following word-similarity features from Hauer and Kondrak (2011): · Edit distance. · Length of longest common prefix. · Number of common bigrams. · Lengths of individual words. · Absolute difference between the lengths of the words. Cross-Validation experiment. As a first step, we perform a random ten-fold cross-validation of the dataset and report the accuracies for various values of  and p. The results of this experiment are
+
+on one set and test on the other. To replicate our dataset, we performed an alphabetical sort of the concepts and split the concepts into training and testing datasets with a ratio of 3 : 1. Now, we extract positive and negative examples from each subset of concepts; and train and test on each concepts' subset. We also performed a 3-fold cross-validation on the training set to tune c (SVM hyperparameter). We observed that the value of c did not effect the crossvalidation accuracy on the training dataset. Hence we fixed c at 1. We also experimented with radialbasis function kernel and polynomial kernels but did not find any improvement over the linear kernel classifier. The composition of the training and test sets is given in table 1.
+
+Figure 1: Ten-fold cross-validation accuracy for incremental  and p. The accuracy of the system of HK is 82.61%.
+
+Figure 2: F1 -score for different values of p and . The F1 -score of the system of HK is 0.46.
+
+shown in figure 1. The best results are obtained at  = 0.8, p = 3. The accuracies increase with an increment in the value of  until 0.8 for all p > 1 (non-unigram models). This experiment is mainly designed to test the robustness of subsequence features against random splits in the dataset which turns out to be robust. The subsequence features outperform HK-based classifier in this experiment.
+training test positive 111, 918 33, 227 negative 353, 957 120, 533
+
+In this experiment, we report the F1 -score, de2P R fined as P +R (Precision and Recall), for different values of  and p. The results of this experiment are shown in figure 2. The F1 -score of the system of HK is 0.46 whereas the best performing subsequence system ( = 0.7, p = 2) has a score of 0.5. Our system performs better than the system of HK in terms of cross-validation accuracy as well as F1 -score. Overall, all non-unigram models perform better than the system of HK at cross-validation and concepts experiments.
+
+Table 1: Number of positive and negative examples in the training and test sets. The ratio of positive to negative examples is 1 : 3.62.
+
+4
+
+Conclusion
+
+Concepts experiment. In this experiment, we split our dataset into two sets by concepts; and train 1230
+
+In this paper, we proposed a string kernel based approach for the purpose of cognate identification. We formulated an approach to integrate phonetic features of a phonetic symbol into the feature vector and showed that it beats the system of HK at cog-
+
+

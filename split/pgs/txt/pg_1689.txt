@@ -1,0 +1,41 @@
+SG SG+Morph
+
+EN (RW testset) |Unmapped| Spearman  Wiki1b News120b Wiki1b News120b 80 177 35.8 44.7 1 0 41.8 52.0
+
+DE (RG testset) |Unmapped| Spearman  WMT2b News20b WMT2b News20b 0 20 62.4 62.1 0 0 64.1 69.1
+
+Table 5: Comparison between models SG and SG+Morph at different training-data sizes.
+
+Lang EN DE FR ES RO AR UZ
+
+|V[1000,2000) | T1 T2 3421 10617 10778 21234 6435 9807 5724 7412 11905 9254 7913 5202 11772 9027
+
+Accuracy T1 T2 89.7% 89.6% 90.8% 93.1% 90.3% 90.4% 91.1% 90.3% 86.5% 85.3% 92.4% 69.0% 81.3% 84.1%
+
+Lang EN DE
+
+|Tokens| 120b 20b
+
+|V | 1.0m 1.8m
+
+|GV M orph | 2.9m 6.7m
+
+V |DM orph | 98,268 351,980
+
+Table 7: Statistics for large training-data sizes.
+
+Table 6: Accuracy of Rare&OOV analysis.
+
+the same setup. Count L = 1000 was chosen such VL that DM orph is reliable enough to be used as reference. The accuracy results are consistently high (in the 80-90% range) for both T1- and T2-words, even for morphologically-rich languages such as Uzbek. These results indicate that our method does well at both identifying a morphological analysis when appropriate, as well as not proposing one when not justified, and therefore provides accurate morphology analysis for rare and OOV words. 4.3 Morphology and Training Data Size
+
+crease in the training data for EN brings a 10-point increase in Spearman  (from 35.8 to 44.7, and from 41.8 to 52.0). The morphological analysis provides substantial gains at either level of training-data size: 6 points in  for Wiki1b (from 35.8 to 41.8), and 7.3 points for News120b EN (from 44.7 to 52.0). For German, the increase in training-data size does not bring visible improvements (perhaps due the high vocabulary cutoff), but the morphological treatment has a large impact under the large training-data condition (7 points for News20b DE, from 62.1 to 69.1).
+
+5
+
+Conclusions and Future Work
+
+We also evaluate the impact of our morphology analysis under a regime with substantially more training data. To this end, we use large collections of English and German News, harvested from the web and cleaned (boiler-plate removed, formatting removed, encoding made consistent). Statistics regarding the resulting vocabularies and the induced morphology are presented in Table 7 (vocabulary cutoffs of 400 for EN and 50 for DE). We present results using the word-similarity task using the same Stanford Rare-Word (RW) dataset for EN and RG dataset for DE, compared against the setup using only 1-2 billion training tokens. For SG+Morph, we use count thresholds of 3000 for EN and 100 for DE. The results are given in Table 5. For English, a 100x in1635
+
+We have presented an unsupervised method for morphology induction. The method derives a morphological analyzer from scratch, and only requires a monolingual corpus for training, with no additional knowledge of the language. Our evaluation shows that this method performs well across a large variety of language families, and we present here results that improve on current state-of-the-art for the morphologically-rich Stanford Rare-word dataset. We acknowledge that certain languages exhibit phenomena (such as word-compounds in German) that require a more focused approach for solving them. But techniques like the ones presented here have the potential to exploit vector-based word representations successfully to address such phenomena as well.
+
+

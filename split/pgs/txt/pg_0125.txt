@@ -1,0 +1,57 @@
+LP
+BASELINE BN + SPINES + PATHS BKY + BN + PATHS
+
+LR 42.53 50.55 50.90
+
+LF 47.95 56.57 57.05 +8.62 +9.10
+BASELINE BN + SPINES + PATHS BKY + BN + PATHS
+
+LP 90.00 96.02 96.07
+
+LR 48.57 53.65 54.29
+
+LF 63.09 68.84 69.37 +5.85 +6.28
+
+54.95 64.23 64.88
+
+(a) DM Corpus (dev. set).
+LP
+BASELINE ALL ( HPOS ) BKY + BN ( HPOS )+ PATHS
+
+(a) on DM (dev. set, 315 dependencies).
+LP
+BASELINE
+
+LR 50.17 57.58 58.95
+
+LF 57.23 64.78 65.86 +7.55 +8.73
+
+LR 61.48 64.78 65.09
+
+LF 75.41 77.96 78.41 +2.55 +3.00
+
+66.62 74.03 74.62
+
+97.51 97.86 98.57
+
+ALL ( HPOS )
+
+BKY + BN ( HPOS )+ PATHS
+
+(b) PAS Corpus (dev. set).
+
+(b) on PAS (dev. set, 636 dependencies).
+
+Table 8: Long-distance dependencies eval. (dev sets).
+
+Table 9: Shared subjects coordinations eval. (dev sets).
+
+based parsers to predict predicate-argument structures, especially for LDDs. Yet, compared to stateof-the-art systems, our results built on the S&T parser score lower than the top performers (Table 10). However, we are currently extending a more advanced lattice-aware transition-based parser (DSR) with beams (Villemonte De La Clergerie, 2013) that takes advantage of cutting-edge techniques (dynamic programming, averaged perceptron with early updates, etc. following (Goldberg et al., 2013; Huang et al., 2012)) 4 , which proves effective by reaching the state-of-the-art on PAS, outperforming Thomson et al. (2014) and second to the model of Martins and Almeida (2014). 5 The point here is that using the same syntactic features as our base system exhibits the same improvement over a now much stronger baseline. We can conjecture that the ambiguities added by the relative scarcity of the deep annotations is efficiently handled by a more complete exploration of the search space, made possible by beam optimization. We can also wonder whether the lower improvement brought to DM parsing by the PTB-based syntactic features does not come from the fact that the DM corpus and the PTB have divergent annotation
+It uses a different set of transitions, notably pop actions instead of left and right reduce, and a swap that allow limited amount of non-planarity. Such a set raises issues with beams (several paths leading to a same item, final items reached with paths of various lengths, . . . ), overcome by adding a 'noop' action only applied on final items to balance path lengths. 5 Leaving aside the multiple (19) ensemble models of Du et al. (2014), because of the impracticability of the approach.
+4
+
+schemes. In that aspect, PTB syntactic features may add some noise to the learning process, because they give more weight to conflicting decisions that led to correct structures in one but not in the other scheme. By using features which, to a certain extent, (i) extend the domain of locality available at a given node and (ii) generalize some structural and functional contexts otherwise unavailable, we tried to overcome the main issue of transition-based parsers: they remain local in the sense that they lack a global view of the whole sentence. Impact Beyond Transition-based Parser Of course, it can be argued that improving over a somewhat weak baseline is of limited interest. Our point was to investigate how the direct parsing of relatively sparse graph structures would benefit from the inclusion of more context via the use of topologically different syntactic pieces of information. However in that work, we mostly focused on transition based-parsing, which raises the question of the impact of our feature-set on a much more powerful and state-of-the-art model such as the T UR BO S EMANTIC PARSER developed by Martins and Almeida (2014). To this end, we extended the T.PARSER so that it could cope with our syntactic features and studied the interaction of our best feature set with second order features (i.e. grand-parents and co-parents). Results in Table 11 show that the gain brought by adding syntactic features (+2.14 on DM over the baseline) is higher than the sole use of second order ones (+1.09). Furthermore, the gain brought by
+
+71
+
+

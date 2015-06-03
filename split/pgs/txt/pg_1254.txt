@@ -1,0 +1,53 @@
+Direction 1. Jap-Hin 2. Hin-Jap
+
+Common 0.032 0.034
+
+Direct 1.404 1.528
+
+Chi 20.74 26.20
+
+Kor 18.65 20.26
+
+Esp 16.06 18.06
+
+Pai 23.85 28.83
+
+Kan 26.56 29.90
+
+Mar 30.92 36.98
+
+Tel 26.84 31.23
+
+Table 4: Unique phrase pairs in each table (in millions of pairs)
+
+Direction 1. Jap-Hin 2. Hin-Jap
+
+>0 267 275
+
+>0.1 108 124
+
+>0.2 36 60
+
+>0.3 12 24
+
+>0.4 6 12
+
+>0.5 4 4
+
+>0.6 2 1
+
+>0.7 0 1
+
+Table 5: Number of improved translations (out of 500) using sentence level BLEU difference at various cutoffs
+
+in BLEU and the number of improved sentences decreases with increasing cutoff. We manually verified a random sample and found that the improvements were commensurate with the reported differences. Finally, consider an example of improvement in Japanese to Hindi translation. Input:                                  (Sore kara, Yohane no deshi-tachi ga kiru, shitai o hikitoru homuru. Soshite, iesu no tokoro ni iku hokoku suru.) English equivalent: After that, John's disciples came and took his corpse away, buried it and then went to Jesus to give him the news. Direct translation: º Ê a u a u º Ú (Tab yohanna ke chelo ne aakar uss ki lotha le gaya; aura uske paas jaakar bata diya) Best translation using MDP: º Ê a u Ú a Ê Ú (Tab yohanna ke chelo ne aakar usa ki lotha ko le jaakar gaad diya aura jakar yesu ko samachara diya) Analysis: Note that in the direct translation the part about "burying the corpse" (gaad diya) and "Jesus" (yesu) is missing which is present in the MDP translation. Also the verb forms indicating the sequence of actions like "came and" (aakar) and "took his corpse away" (usa ki lotha ko le jaakar) are much better in the MDP translation. Instead of "samachara diya" (gave news) the preferred translation is "samachara di".
+
+5
+
+Conclusions and Future Work
+
+We have presented our work on leveraging a small sized multilingual parallel corpus using 7 pivot languages for SMT between Japanese and Hindi. Our main objective was to augment a phrase table on direct parallel corpus using many pivot language based phrase tables constructed from the same multilingual corpus. We confirm that this induces additional and improved phrase pairs which, under the Multiple Decoding Paths setting (MDP), leads to substantial improvements over the direct phrase tables. More importantly, we show that using multiple pivot languages simultaneously lead to large improvements in BLEU compared to the when a single pivot is used; which is the novel aspect of our work. This opens up many further research directions like a. How can one choose a set of good pivot languages amongst available choices? b. Does this multilingual leveraging help in a situation where we have large size corpora like Europarl corpora? c. How much of an impact can treatment (morphological or syntactic) of the pivot language help in improving translation quality? d. Can good reordering information be extracted by pivoting? e. Can multi source and multi pivot setting further enhance quality? f. How can the noise induced by pivoting be controlled by methods other than probability cutoffs? and finally g. Can simpler but more effective methods compared to triangulation be exploited in a multilingual scenario? The last 4 questions have long been ignored and deserve to be answered. We will pursue these directions in the future and attempt to provide satisfactory answers.
+
+1200
+
+

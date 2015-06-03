@@ -1,0 +1,19 @@
+Is Your Anchor Going Up or Down? Fast and Accurate Supervised Topic Models
+Jeff Lund, Jordan Boyd-Graber Thang Nguyen Kevin Seppi, Eric Ringger Computer Science iSchool and UMIACS Computer Science University of Colorado Boulder University of Maryland Brigham Young University and National Library of Medicine, Jordan.Boyd.Graber @colorado.edu {jefflund,kseppi}@byu.edu National Institutes of Health ringger@cs.byu.edu daithang@umiacs.umd.edu
+
+Abstract
+Topic models provide insights into document collections, and their supervised extensions also capture associated document-level metadata such as sentiment. However, inferring such models from data is often slow and cannot scale to big data. We build upon the "anchor" method for learning topic models to capture the relationship between metadata and latent topics by extending the vector-space representation of word-cooccurrence to include metadataspecific dimensions. These additional dimensions reveal new anchor words that reflect specific combinations of metadata and topic. We show that these new latent representations predict sentiment as accurately as supervised topic models, and we find these representations more quickly without sacrificing interpretability.
+
+Topic models were introduced in an unsupervised setting (Blei et al., 2003), aiding in the discovery of topical structure in text: large corpora can be distilled into human-interpretable themes that facilitate quick understanding. In addition to illuminating document collections for humans, topic models have increasingly been used for automatic downstream applications such as sentiment analysis (Titov and McDonald, 2008; Paul and Girju, 2010; Nguyen et al., 2013). Unfortunately, the structure discovered by unsupervised topic models does not necessarily constitute the best set of features for tasks such as sentiment analysis. Consider a topic model trained on Amazon product reviews. A topic model might discover a topic about vampire romance. However, we often want to 746
+
+go deeper, discovering facets of a topic that reflect topic-specific sentiment, e.g., "buffy" and "spike" for positive sentiment vs. "twilight" and "cullen" for negative sentiment. Techniques for discovering such associations, called supervised topic models (Section 2), both produce interpretable topics and predict metadata values. While unsupervised topic models now have scalable inference strategies (Hoffman et al., 2013; Zhai et al., 2012), supervised topic model inference has not received as much attention and often scales poorly. The anchor algorithm is a fast, scalable unsupervised approach for finding "anchor words"--precise words with unique co-occurrence patterns that can define the topics of a collection of documents. We augment the anchor algorithm to find supervised sentiment-specific anchor words (Section 3). Our algorithm is faster and just as effective as traditional schemes for supervised topic modeling (Section 4).
+
+1
+
+Anchors: Speedy Unsupervised Models
+
+The anchor algorithm (Arora et al., 2013) begins with ¯ of word co-occurrences, where V a V × V matrix Q is the size of the vocabulary. Each word type defines ¯ i,· of length V so that Q ¯ i,j encodes the cona vector Q ditional probability of seeing word j given that word i has already been seen. Spectral methods (Anandkumar et al., 2012) and the anchor algorithm are fast alternatives to traditional topic model inference schemes because they can discover topics via these summary statistics (quadratic in the number of types) rather than examining the whole dataset (proportional to the much larger number of tokens). The anchor algorithm takes its name from the idea
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 746­755, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

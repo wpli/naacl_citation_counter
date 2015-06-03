@@ -1,0 +1,22 @@
+that define PRO and so a feasible solution for PRO will also be feasible for LP-MERT; however the converse is not necessarily true. The constraints that define MIRA (Eqn. (7)) are similar to the LP-MERT constraints (5), although with the addition of slack variables and the  function to handle infeasible solutions. However, if a feasible solution is available for MIRA, then these extra quantities are unnecessary. With these quantities removed, then we recover a `hard-margin' optimiser, which utilises the same constraint set as in LP-MERT. In the feasible case, the solution found by MIRA is also a solution for LP-MERT. 2.1 Survey of Recent Work
+
+Why do such different methods give such remarkably `comparable' performance in research settings? And why is it so difficult to get general and unambiguous improvements through the use of high dimensional, sparse features? We believe that the explanation is in feasibility. If the oracle index vector ^ i is feasible then all training methods will find very similar solutions. Our belief is that as the feature dimension increases, the chance of an oracle index vector being feasible also increases.
+
+3
+
+Convex Geometry
+
+One avenue of SMT research has been to add as many features as possible to the linear model, especially in the form of sparse features (Chiang et al., 2009; Hopkins and May, 2011; Cherry and Foster, 2012; Gimpel and Smith, 2012; Flanigan et al., 2013; Galley et al., 2013; Green et al., 2013). The assumption is that the addition of new features will improve translation performance. It is interesting to read the justification for many of these works as stated in their abstracts. For example Hopkins and May (2011) state that: We establish PRO's scalability and effectiveness by comparing it to MERT and MIRA and demonstrate parity on both phrase-based and syntax-based systems Cherry and Foster (2012) state: Among other results, we find that a simple and efficient batch version of MIRA performs at least as well as training online. Along similar lines Gimpel and Smith (2012) state: [We] present a training algorithm that is easy to implement and that performs comparable to others. In defence of MERT, Galley et al. (2013) state: Experiments with up to 3600 features show that these extensions of MERT yield results comparable to PRO, a learner often used with large feature sets. Green et al. (2013) also note that feature-rich models are rarely used in annual MT evaluations, an observation they use to motivate an investigation into adaptive learning rate algorithms.
+
+We now build on the description of LP-MERT to give a geometric interpretation to training linear models. We first give a concise summary of the fundamentals of convex geometry as presented by (Ziegler, 1995) after which we work through the example in Cer et al. (2008) to provide an intuition behind these concepts. 3.1 Convex Geometry Fundamentals
+
+In this section we reference definitions from convex geometry (Ziegler, 1995) in a form that allows us to describe SMT model parameter optimisation. Vector Space The real valued vector space RD represents the space of all finite D-dimensional feature vectors. Dual Vector Space The dual vector space (RD ) are the real linear functions RD  R. Polytope The polytope Hs  RD is the convex hull of the finite set of feature vectors associated with the K hypotheses for the sth sentence, i.e. Hs = conv(hs,1 , . . . , hs,K ). Faces in RD Suppose for w  (RD ) that wh  maxh Hs wh ,  h  Hs . A face is defined as F = {h  Hs : wh = max wh }
+h Hs
+
+(8)
+
+Vertex A face consisting of a single point is called a vertex. The set of vertices of a polytope is denoted vert(Hs ). Edge An edge is a face in the form of a line segment between two vertices hs,i and hs,j in the polytope Hs . The edge can be written as [hs,i , hs,j ] = conv(hs,i , hs,j ). If an edge exists then the following
+
+378
+
+

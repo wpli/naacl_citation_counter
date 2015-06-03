@@ -1,0 +1,32 @@
+Notation An alignment between an item indexed by i in the source document and j in the target document is represented by variable zij  {0, 1}, where zij = 1 indicates that items i and j are aligned. In some cases, we will explicitly indicate when the two p items are predicates as zij ; an argument alignment a will be zij . We represent all alignments for a document pair as matrix z. For clarity, we omit any variable representing observed data when discussing feature functions; alignment variables are endowed with this information. For each pair of items we use "local" feature functions f (·) and corresponding parameters w, which capture the similarity between two items without the context of other alignments. sij = w · f (zij ) (1)
+
+which doesn't use global inference.2 These features are built on top of a variety of semantic resources (PPDB (Ganitkevitch et al., 2013), WordNet (Miller, 1995), FrameNet (Baker et al., 1998)) and methods for comparing mentions (tree edit distance (Yao et al., 2013), string transducer (Andrews et al., 2012)).
+
+4
+
+Joint Factors
+
+Our goal is to develop joint factors that improve over the feature rich local factors baseline by considering global information. Fertility A common mistake when making independent classification decisions is to align many source items to a single target item. While each link looks promising on its own, they clearly cannot all be right. Empirically, the training set reveals that many to one alignments are uncommon; thus many to one predictions are likely errors. We add a fertility factor for predicates and arguments, where fertility is defined as the number of links to an item. Higher fertilities are undesired and are thus penalized. Formally, for matrix z, the fertility of a row i or column j is the sum of that row or column. We discuss fertility in terms of rows below. We include two types of fertility factors. First, factor fert1 distinguishes between rows with at least one link from those with none. For row i, we add one instance of the linear factor fert1 with constraints zfert1  zij j (4)
+
+where sij is the score of linking items i and j . Using only local features, our system would greedily select alignments. To capture global aspects we add joint factors that capture effects between alignment variables. Each joint factor  is comprised of a constrained binary variable z associated with features f () that indicates when the factor is active. Together with parameters w these form additional scores s for the objective: s = w · f () (2)
+
+The full linear scoring function on alignments sums over both local similarity and joint factors: sij zij +
+ij 
+
+s  z .
+
+(3)
+
+Lastly, it is convenient to describe the local feature functions and their corresponding alignment variable as factors with no constraints, and we will do so when describing the full score function.
+
+3
+
+Local Factors
+
+Local factors encode features based on the mention pair, which include a wide variety of similarity measures, e.g. whether two headwords appear as synonyms in WordNet, gender agreement based on possessive pronouns. We adopt the features of Wolfe et al. (2013), a strong baseline system 13
+
+The cost associated with zfert1 , which we will refer to as sfert1 , will be incurred any time an item is mentioned in both documents. For data sets with many singletons, sfert1 more strongly penalizes nonsingleton rows, reflecting this pattern in the training data. We make sfert1 parametric, where the features of the fert1 factor allow us to learn different weights for predicates and arguments, as well as the size of the row, i.e. number of items in the pairing. The second fertility factory fert2 considers items with a fertility greater than one, penalizing items for having too many links. Its binary variable has the
+Some features inspect the apparent predicate argument structure, based on things like dependency parses, but the model may not inspect more than one of its own decisions (joint factors) while scoring an alignment.
+2
+
+

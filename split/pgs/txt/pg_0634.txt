@@ -1,0 +1,25 @@
+Source Machine is design to help people . System hypothesis The machine is designed for helping people . Machines is a design on the helping of the people .
+
+Gold edits (Machine  Machines), (is  are), (design  designed) System edits (Machine is  The machine is), (design  designed), (to help people  for helping people) (Machine  Machines), (is design to help  is a design on the helping of the) P 0.33 R 0.33 F0.5 0.33
+
+0.50
+
+0.33
+
+0.45
+
+Table 3: The M2 Scorer evaluates systems based on the number of edits, regardless of their length and their effect on the final corrected sentence. The first hypothesis is better than the second despite having a lower F0.5 -score.
+
+The following sections describe the three pillars of our method: a new annotation scheme, sentence alignment and metrics. 2.1 Annotation
+
+We define a gold standard format where each sentence is annotated with a set of errors and their possible corrections. A sentence can contain zero or more errors, each of which includes information such as type, a flag indicating whether a correction is required, and a list of alternative corrections corresponding to each of the annotators. An error is required to be corrected when all annotators provide a correction for it. Unlike in other annotation schemes, each error is defined by its locus (regardless of the position of the incorrect tokens in the sentence) and all its alternative corrections must be mutually exclusive. In other words, corrections are grouped whenever they refer to the same underlying error, even if the tokens involved are not contiguous. Listing 1 shows a sample XML annotation for the sentence in Table 1. Because all the correction alternatives are mutually exclusive, we can directly combine them to generate all possible valid gold standard references. The annotation in Listing 1 would produce the following list of references: These machines are designed for helping people . These machines are designed to help people . This machine is designed for helping people . This machine is designed to help people . 580
+
+<sentence id="1" numann="2"> <text> This machines is designed for help people . </text> <error-list> <error id="1" req="yes" type="SVA"> <alt ann="0"> <c start="0" end="1">These</c> <c start="2" end="3">are</c> </alt> <alt ann="1"> <c start="1" end="2">machine</c> </alt> </error> <error id="2" req="yes" type="Vform"> <alt ann="0"> <c start="5" end="6">helping</c> </alt> <alt ann="1"> <c start="4" end="5">to</c> </alt> </error> </error-list> </sentence>
+
+Listing 1: An example annotated sentence.
+
+By mixing and matching corrections from different annotators, we avoid the performance underestimation described in 1.(d). 2.2 Alignment
+
+In order to compute matches for detection and correction, we generate a token-level alignment between a source sentence, a system's hypothesis, and a gold standard reference. Three-way alignments
+
+

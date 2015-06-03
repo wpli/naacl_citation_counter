@@ -1,0 +1,62 @@
+DCGM-I ot
+Wout Whh
+L Wf
+
+DCGM-II
+
+following form: ht =  (ht-1 Whh + kL + st Win ) ot = ht Wout p(st+1 |s1 , . . . , st-1 , c, m) = softmax(ot ) (7a) (7b) (7c)
+
+ot
+Wout Whh
+
+ht
+L Wf
+
+ht
+Win
+1 Wf
+
+Win
+1 Wf
+
+st
+bc bm
+
+st
+
+bcm
+
+Figure 3: Compact representations of DCGM-I (left) and DCGM-II (right). The decoder RLM receives a bias from the context encoder. In DCGM-I, we encode the bag-ofwords representation of both c and m in a single vector bcm . In DCGM-II, we concatenate the representations bc and bm on the first layer to preserve order information.
+
+This model conditions on the previous utterances via biasing the hidden layer state on the context representation kL . Note that the context representation does not change through time. This is useful because: (a) it forces the context encoder to produce a representation general enough to be useful for generating all words in the response and (b) it helps the RLM decoder to remember context information when generating long responses. 4.3 Dynamic-Context Generative Model II
+
+into a fixed-length vector representation the is used by the RLM to decode the response. This is illustrated in Figure 3 (left). First, we consider c and m as a single sentence and compute a single bag-of-words representation bcm  RV . Then, bcm is provided as input to a multilayered non-linear forward architecture that produces a fixed-length representation that is used to bias the recurrent state of the decoder RLM. At training time, both the context encoder and the RLM decoder are learned so as to minimize the negative log-probability of the generated response. The parameters of the model are DCGM-I = L Win , Whh , Wout , {Wf }L =1 , where {Wf } =1 are the weights for the L layers of the feed-forward context networks. The fixed-length context vector kL is obtained by forward propagation of the network:
+1 k1 = bcm Wf
+
+Because DCGM-I does not distinguish between c and m, that model has the propensity to underestimate the strong dependency that holds between m and r. Our third model (DCGM-II) addresses this issue by concatenating the two linear mappings of the bag-ofwords representations bc and bm in the input layer of the feed-forward network representing c and m (see Figure 3 right). Concatenating continuous representations prior to deep architectures is a common strategy to obtain order-sensitive representations (Bengio et al., 2003; Devlin et al., 2014). The forward equations for the context encoder are:
+1 , b W 1 ], k1 = [bc Wf m f k =  (k -1 Wf ) for = 2, · · · , L
+
+(8)
+
+k =  (k
+
+-1 Wf )
+
+for = 2, · · · , L
+
+(6)
+
+where [x, y ] denotes the concatenation of x and y vectors. In DCGM-II, the bias on the recurrent hidden state and the probability distribution over the next token are computed as described in Eq. 7.
+
+1 contain the embeddings of the voThe rows of Wf cabulary.2 These are different from those employed in the RLM and play a crucial role in promoting the specialization of the context encoder to a distinct task. The hidden layer of the decoder RLM takes the
+
+5 Experimental Setting
+5.1 Dataset Construction For computational efficiency and to alleviate the burden of human evaluators, we restrict the context sequence c to a single sentence. Hence, our dataset is composed of "triples"   (c , m , r ) consisting of three sentences. We mined 127M context-messageresponse triples from the Twitter FireHose, covering the 3-month period June 2012 through August 2012.
+
+Notice that the first layer of the encoder network is linear. We found that this helps learning the embedding matrix as it reduces the vanishing gradient effect partially due to stacking of squashing non-linearities (Pascanu et al., 2013).
+
+2
+
+199
+
+

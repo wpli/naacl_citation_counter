@@ -1,0 +1,15 @@
+(b) dialog-level knowledge graph (dKG)
+
+(c) The dialog goal is to align Q and S (a) utterance-level knowledge graph (uKG)
+
+Figure 2: Every pair of concepts in each user utterance is related then aggressively pruned. (a) Utterance-level
+
+knowledge graphs represent individual utterances. Concepts (underlined, inset in nodes) are obtained by removing stopwords and stemming. An edge that either doesn't connect a question and support concept or else which connects concepts whose keywords in the user utterance have no intervening words (intexts) are pruned, indicated here with dashed lines. (b) The four remaining relations are stored in a dialog-level dKG.
+
+to a known fact, and other relations in the utterance are unintentional. For example, in the uKG for the first utterance in Figure 2(a), the edge between melt[ing] and heat is an alignment relation because melt[ing] is a concept in S and heat is a concept in Q. But the edge between because and heat is pruned (dashed lines) since because is not a concept in S. Adjacency is a simple, practical syntactic feature to reduce spurious relations. Users typically put words or intexts between concepts they intend to relate. The edge between melt[ing] and because is pruned since their keywords are adjacent in U1: it's melting because of heat, while U2 relates snow and ice with the intext has the same behavior as the. We find these constraints effective in practice, but at this point other pruning constraints can be deployed. A strength of our approach is that it welcomes aggressive pruning: just as in human-human interaction, users who initially fail to communicate their intention can try again later in the dialog. 3.1.2 Dialog-level KGs Each dialog focuses on a single question. K NOWBOT starts with an empty dialog-level knowledge graph (dKG). After each user turn, edges from that turn's uKG are added to the dKG, and K NOWBOT 854
+
+rescores each of the four answers according to equation (1) where the set of relations RQi ,Si,j is exactly the set of edges in the dKG. The dialog successfully terminates when the user's answer has the highest alignment score, indicating the "missing knowledge" has been successfully provided by the user. 3.1.3 The global knowledge graph The global knowledge graph (gKG) includes every relation learned from every K NOWBOT dialog. Because we do not use a fixed ontology or comprehensive dialog model, individual dialogs can result in noisy relations even after aggressive pruning. However, as K NOWBOT conducts more dialogs about the same problem, relations that more often re-occur are more likely to be salient to the problem. In this work, K NOWBOT takes advantage of redundancy with a simple filter: it ignores singleton relations originating in a single user utterance. We find even this simple filter increases performance. As K NOWBOT accumulates more dialogs, frequency can be incorporated in more sophisticated models. 3.2 Dialog strategies for knowledge acquisition
+
+We've described how a user's free text explanations are converted into knowledge graphs. Each user explanation is uttered in response to a system
+
+

@@ -1,0 +1,47 @@
+Past
+type
+POS ngrams lexica lengths ngrams
+
+P resent
+type
+POS lexica POS
+
+Future
+type
+lexica POS ngrams POS
+
+feature
+verb, past tense was num of tokens had
+
+feature
+verb, past tense relativity (in, on, at, ...) common present verbs verbs, 3rd pers singular
+
+feature
+relativity verb, base form tomorrow to
+
+time exs - num of timexs
+
+time exs num of timexs
+
+common present verbs lexica
+
+Table 4: Top five most correlated features for each of the temporal classes. `-' indicates negative correlations; positive otherwise. Correlation absolute strengths ranged from Pearson r = 0.08 to 0.40.
+Features mfc baseline ngrams alone time exs alone POS tags alone lexica alone lengths alone Accuracy Features all features w/o ngrams w/o time exs w/o POS tags w/o lexica w/o lengths Accuracy
+
+.528 .688 .586 .614 .684 .544
+
+.718 .672 .708 .712 .702 .718
+
+Table 3: Accuracy of our full past, present, future message classifier (top) and an ablation analysis of accuracies when removing each feature type (bottom). The most frequent class baseline (mfc) indicates accuracy if only predicting the present class. The full classifier significantly out-performed using time expressions alone (p < 0.05; bolded accuracy). We did feature ablation analyses as shown in Table 3. Every feature type produced improvement over the baseline and, with the exception of lengths, removing any feature resulted in reduced performance (though none strong enough to meet significance at p < 0.05). The limited reduction implies that while each feature type may contain temporal information, there is also substantial redundancy across the feature types. Results when using time-expression alone can be considered another baseline, representing a model based entirely on previous time expression work. A reason for the large advantage of using additional features is that many temporally indicative messages did not contain any time expressions (instead expressing orientation through verb tense or semantics). Indeed, we see from Table 4, which lists the top features for each class, that time expression features were very useful when then occurred. All feature types made it into these top ten lists. User-level temporal orientation is trivially defined: percentage of a given user's messages that are classified as past, present, or future oriented. Thus, accuracy for each proportion is directly tied to message accuracy. Still, we validate that our approach is in line with psychological theory (discussed in Section 2) by correlating user-level temporal orientations with outcomes whose
+
+associations have been previously established: conscientiousness, age, and gender number of users; results controlled for age and gender. In particular, future orientation should be positively correlated with conscientiousness, age, and being female, while present orientation should be negatively correlated. Our results which which are consistent with the literature, can be seen in the top half of Table 5. Among users with personality scores, we found positive correlations between future orientation and seemingly future-oriented questionnaire items: "I make plans and stick to them" (r = .16) and "I finish what I start" (r = .12). To the best of our knowledge, psychology literature has not established standard correlates of past orientation, so the correlation with age and past orientation, though not surprising, is somewhat novel. Correlations with questionnaire measures help to establish convergent validity -- i.e. our measure is empirically related to other measures in a way that is consistent with theory about the underlying constructs. However, self report questionnaires are often used for convenience, not necessarily because they are most valid (Paulhus and Vazire, 2007). In fact, more objective or behavior-based measures in social science have been called for (Baumeister et al., 2007).
+
+6
+
+Exploration
+
+Here we use our language-based user measure to explore behavioral and psychological correlates of temporal orientation. Figure 1 illustrates the user-level distributions of the message classes, broken down by gender, within the stratified sample. All experiments in this section applied our measure over the user set. Within users, the mean proportions of past, present, and future messages were 0.24, 0.61, and 0.15 respectively. Among most users, the majority of messages were classified as present, while future-oriented messages were least frequent. We compare these temporal orientations to user personality, satisfaction with life, IQ, and their number of Facebook friends. We use both Pearson correlation and linear regression (OLS) to estimate relationships between
+
+415
+
+

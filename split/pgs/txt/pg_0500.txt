@@ -1,0 +1,196 @@
+IMDB - Multinomial Naive Bayes
+0.87 0.87
+
+IMDB - Logistic Regression
+0.87
+
+IMDB - Support Vector Machines
+
+0.82
+
+0.82
+
+0.82
+
+0.77
+
+0.77
+
+0.77
+
+AUC
+
+AUC
+
+0.72
+
+0.72
+
+AUC Lw/R-tfidf
+
+0.72
+
+0.67
+
+Lw/R-tfidf
+
+0.67
+
+0.67
+
+Lw/R-tfidf
+
+Lw/R-binary
+0.62 Lw/oR-tfidf Lw/oR-binary 0.57 0 50 100 150 Number of documents 200 0.57 0 50 100 150 Number of documents 0.62
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary 0.57 200 0 50 100 150 Number of documents 0.62
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary 200
+
+(a)
+NOVA - Multinomial Naive Bayes
+0.97 0.97
+
+(b)
+NOVA - Logistic Regression
+0.97
+
+(c)
+NOVA - Support Vector Machines
+
+0.92
+
+0.92
+
+0.92
+
+AUC
+
+AUC
+
+0.87
+
+0.87
+
+AUC Lw/R-tfidf
+
+0.87
+
+Lw/R-tfidf 0.82 Lw/R-binary Lw/oR-tfidf Lw/oR-binary 0.77 0 50 100 150 Number of documents 200 0.77 0 50 100 150 Number of documents 0.82
+
+Lw/R-tfidf 0.82
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary
+
+0.77 200 0 50 100 150 Number of documents 200
+
+(d)
+SRAA - Multinomial Naive Bayes
+1.00 1.00
+
+(e)
+SRAA - Logistic Regression
+1.00
+
+(f)
+SRAA - Support Vector Machines
+
+0.95
+
+0.95
+
+0.95
+
+0.90
+
+0.90
+
+0.90
+
+0.85 AUC AUC
+
+0.85 AUC 0.80 Lw/R-tfidf Lw/R-binary Lw/oR-tfidf Lw/R-tfidf
+
+0.85
+
+0.80
+
+0.80 Lw/R-tfidf
+
+0.75
+
+0.75
+
+0.75
+
+Lw/R-binary 0.70
+Lw/oR-tfidf Lw/oR-binary 0.65 0.65 0 50 100 150 Number of documents 200 0 50 100 150 Number of documents 0.70
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary 200
+
+0.70
+
+Lw/oR-binary
+0.65 0 50 100 150 Number of documents 200
+
+(g)
+WvsH - Multinomial Naive Bayes
+0.92 0.90 0.87
+
+(h)
+WvsH - Logistic Regression
+0.92
+
+(i)
+WvsH - Support Vector Machines
+
+0.87
+
+0.85
+0.82 0.80 AUC AUC 0.82
+
+0.75
+
+0.77
+
+AUC Lw/R-tfidf
+
+0.77
+
+0.70
+
+Lw/R-tfidf
+
+0.72
+
+0.72
+
+Lw/R-tfidf
+
+Lw/R-binary 0.65
+Lw/oR-tfidf Lw/oR-binary 0.60 0 50 100 150 Number of documents 200 0.62 0 50 100 150 Number of documents 0.67
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary 0.62 200 0 50 100 150 Number of documents 0.67
+
+Lw/R-binary
+Lw/oR-tfidf Lw/oR-binary 200
+
+(j)
+
+(k)
+
+(l)
+
+Figure 1: Comparison of Lw/oR with LwR. LwR provides drastic improvements over Lw/oR for all datasets with binary and tf-idf representations and using all three classifiers.
+
+446
+
+

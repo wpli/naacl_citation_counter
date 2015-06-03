@@ -1,0 +1,30 @@
+hom com v1 pur col f1 BCF 0.68 0.64 0.66 0.59 0.52 0.55 BayesCat 0.65 0.59 0.62 0.57 0.45 0.50 Strudel 0.70 0.62 0.66 0.61 0.48 0.54 Table 1: Model performance on the category induction task.
+
+full BCF -tgt full BayesCat -tgt full Strudel -tgt
+
+pr@1 pr@10 pr@20 0.12 0.50 0.63 0.09 0.40 0.53 0.11 0.49 0.64 0.09 0.39 0.53 0.07 0.33 0.47 0.07 0.35 0.49
+
+avg 56.1 78.5 37.7 52.4 64.4 62.2
+
+we construct the categories post-hoc after a highly informed feature extraction process (relying on grammatical patterns). It is therefore not surprising that Strudel performs well, and it is encouraging to see that BCF does too. Also, note that Strudel tends to learn very clean clusters at the cost of recall, whereas the tradeoff is less extreme for BCF. Again, this is expected given Strudel's pattern-based approach. While BCF and Strudel are constrained to assign each concept to only one category, BayesCat induces a soft categorization which is turned into a hard categorization in a post-learning step. While this setting allows for more flexibility, it also induces more uncertainty and results in categorizations which resemble the gold standard less closely compared to the two other models. 4.2 Experiment 2: Evaluation of Features
+
+Table 2: Model performance on the concept prediction task. Precision at rank 1, 10, 20, and average rank assigned (avg). -tgt refers to the condition where we remove context words which are identical to the target concept as opposed to using the full context. Similarly, for BayesCat we compute the score of a concept c given a set of features as follows: Score(c|f) =  P(c|k)P(f|k).
+k
+
+(5)
+
+For Strudel, we rank concepts according to the cumulative log-likelihood ratio-based association score over all observed features for a particular concept c: Score(c|f) =  association(c, f ).
+f f
+
+(6)
+
+We next investigate the quality of the features our model learns. We do this by letting the model predict the right concept solely from a set of features. If the model has acquired informative features, they will be predictive of the unknown concept. Specifically, the model is presented with a set of previously unseen test stimuli with the target concept removed. For each stimulus, the model ranks all possible target concepts based on the features f (i.e., context words). Method In our experiments we compared the ranking performance of BCF, BayesCat, and Strudel. For the Bayesian models, we directly exploit the learnt distributions. For BCF, we compute the score of a target concept c given a set of features as: Score(c|f) =  P(g|c)P(f|g).
+g
+
+Metrics Since we can directly compare model predictions against the actual target concept of the stimulus, we report precision at rank 1, 10, and 20. We also report the average rank assigned to the correct concept. All results are based on a random test set of 2,000 previously unseen stimuli. To control for the possibility that the models are learning a strong (yet trivial) correlation between target concepts and identical words occurring as features, we also report results on a modification of our test set where we remove any mention of the target concept from the context, if present (the -tgt condition). Results Our results on the concept prediction task are shown in Table 2. The Bayesian models outperform Strudel across all metrics and conditions. Strudel's extraction algorithm, which relies on predefined patterns, might be too restrictive with respect to the set of features it extracts and as a result they are not discriminative. BayesCat and BCF
+
+(4)
+
+1581
+
+

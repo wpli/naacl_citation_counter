@@ -1,0 +1,50 @@
+B¨ orschinger et al. 2013 Surface token f-score Underlying type f-score Deleted /t/ f-score Deleted /d/ f-score 0.72 -- 0.56 --
+
+Our model
+Number of deleted /t/
+
+0.76 (0.01) 0.37 (0.02) 0.58 (0.03) 0.62 (0.19)
+
+15000 Sign constraints on weights None OT 5000 Lexical OT+Lexical 0
+
+10000
+
+Table 1: Results summary for our model compared to that of the B¨ orschinger et al. (2013) model. Surface token fscore is the standard token f-score, while underlying type or "lexicon" f-score measures the accuracy with which the underlying word types are recovered. Deleted /t/ and /d/ f-scores measure the accuracy with which the model recovers segments that don't appear in the surface. These results are averaged over 40 runs (standard deviations in parentheses) with the word length penalty d = 1.525 applied to underlying forms; standard deviations are given in parentheses.
+
+Number of deleted /d/
+
+20000
+
+40000
+
+Figure 3: The effect of constraints feature weights on the number of deleted underlying /d/ and /t/ segments posited by the model (d = 1.525). The red diamond indicates the 13,457 deleted underlying /d/ and 11,727 deleted underlying /t/ in the "gold" data.
+
+0.6 0.4 0.2 0.0 1.4
+
+Sign constraints on weights None OT Lexical OT+Lexical
+
+Regularised negative log-likelihood
+
+0.8
+
+Surface token f-score
+
+4200000 4100000 4000000 3900000 3800000 4000 6000 8000 10000 Sign constraints on weights None OT Lexical OT+Lexical
+
+Word length penalty
+
+1.5
+
+1.6
+
+1.7
+
+Number of non-zero feature weights
+
+Figure 2: The effect of constraints on feature weights on surface token f-score. "OT" indicates that the markedness and faithfulness features are required to be non-positive, while "Lexical" indicates that the underlying lexical features are required to be non-negative.
+
+Figure 4: The regularised log-likelihood as a function of the number of non-zero weights for different constraints on feature weights (d = 1.525).
+
+309
+
+

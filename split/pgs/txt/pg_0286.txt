@@ -1,0 +1,53 @@
+The contributions of this work are: 1. We demonstrate that by exploiting the discourse structure of free text, monolingual alignment models can be trained to surpass the performance of models built from expensive indomain question-answer pairs. 2. We compare two methods of discourse parsing: a simple sequential model, and a deep model based on Rhetorical Structure Theory (RST) (Mann and Thompson, 1988). We show that the RST-based method captures within and across-sentence alignments and performs better than the sequential model, but the sequential model is an acceptable approximation when a discourse parser is not available. 3. We evaluate the proposed methods on two corpora, including a low-resource domain where training data is expensive (biology). 4. We experimentally demonstrate that monolingual alignment models trained using our method considerably outperform state-of-theart neural network language models in low resource domains.
+
+Bob told Zoey he likes cider. He uses the apples grown in his orchard. He makes it each autumn. Sequential Model
+sequential sequential
+
+Bob told Zoey he likes cider
+
+. .
+
+He uses the apples grown in his orchard
+
+. .
+
+He makes it each autumn
+
+. .
+
+RST Model
+attribution elaboration
+
+Bob told Zoey
+
+he likes cider
+
+He uses the apples
+
+grown in his orchard
+
+He makes it each autumn
+
+elaboration
+
+elaboration
+
+Figure 1: An example of the alignments produced by
+
+the two discourse models. The sequential model aligns pairs of consecutive sentences, capturing intersentence associations such as cider­apples, and orchard­autumn. The RST model generates alignment pairs from participants in all (binary) discourse relations, capturing both intrasentence and intersentence alignments, including apples­orchard, cider­apples, and cider­autumn.
+
+2
+
+Related Work
+
+Lexical semantic models have shown promise in bridging Berger et al.'s (2000) "lexical chasm." In general, these models can be classified into alignment models (Echihabi and Marcu, 2003; Soricut and Brill, 2006; Riezler et al., 2007; Surdeanu et al., 2011; Yao et al., 2013) which require structured training data, and language models (Jansen et al., 2014; Sultan et al., 2014; Yih et al., 2013), which operate over free text. Here, we close this gap in resource availability by developing a method to train an alignment model over free text by making use of discourse structures. Discourse has been previously applied to QA to help identify answer candidates that contain explanatory text (e.g. Verberne et al. (2007)). Jansen et al. (2014) proposed a reranking model that used both shallow and deep discourse features to identify answer structures in large answer collections across different tasks and genres. Here we use discourse to impose structure on free text to create inexpensive knowledge resources for monolingual alignment. Our work is conceptually complementary to that of Jansen et al. ­ where they explored 232
+
+largely unlexicalized discourse structures to identify explanatory text, we use discourse to learn lexicalized models for semantic similarity. Our work is conceptually closest to that of Hickl et al. (2006), who created artificially aligned pairs for textual entailment. Taking advantage of the structure of news articles, wherein the first sentence tends to provide a broad summary of the article's contents, Hickl et al. aligned the first sentence of each article with its headline. By making use of automated discourse parsing, here we go further and impose alignment structure over an entire text.
+
+3
+
+Approach
+
+A written text is not simply a collection of sentences, but rather a flowing narrative where sentences and sentence elements depend on each other for meaning ­ a concept known as cohesion (Halliday and Hasan, 2014). Here we examine two methods for generating alignment training data from free text that make use of cohesion: a shallow method that uses only intersentence structures, and a deep method that uses both intrasentence and intersentence structures. We additionally attempt to separate the contribution of discourse from that of alignment in general by comparing these models against a baseline alignment model which aligns sentences at random. The first model, the sequential discourse model (SEQ), considers that each sentence continues the
+
+

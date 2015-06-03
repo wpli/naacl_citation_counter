@@ -1,0 +1,60 @@
+2. For each document, we generate a topic z with probability z |c . 3. Given topic z , we generate each word e in the target language document independently from a categorical distribution with probability e|z . 4. For each word e in the target language, we generate a word f in the source language independently from a categorical distribution with probability f |e .4 Under this model, for one target document (e1 , ..., ek ) and its corresponding source document (f1 , ..., fk ), the joint probability p(z, c, e1 , ..., ek , f1 , ..., fk ) is c z |c
+k  j =1
+
+translation probability for each word in the source document, i.e. p(ej |fj , z ). The actual calculation of p(ej = e|fj , F ) can be derived as follows.5 p(ej |fj , F ) = p(ej |f1 , ..., fk )  p(ej , f1 , ..., fk )  = p(ej , f1 , ..., fk |z )p(z |c)p(c) ,
+c z
+
+where the probability p(ej , f1 , ..., fk |z ) can be efficiently calculated using 
+el1 V
+
+...
+
+
+elk-1 V
+
+p(e1 , . . . , ek , f1 , . . . , fk |z )
+k 
+
+ej |z · fj |ej .
+
+=
+
+
+el1 V
+
+...
+
+
+
+elk-1 V j  =1
+
+fj  |ej  · ej  |z  fj  |ej  · ej  |z , correspond to
+
+The parameter vector z specifies the target word probabilities e|z that can be learned from the target language training data as described in Section 3.1. The parameter vector  e specifies the word translation probability f |e for a target word e into a source language word f . These word translation probabilities are determined with the help of the bilingual dictionary as described in Section 3.2. Our goal is to estimate the translation probability p(e|fj , F ), since this allows us to calculate E[countE (e)|F ] =
+k  j =1
+
+= fj |ej · ej |z
+
+
+
+j  {l1 ...lk-1 } ej  V
+
+where the indexes l1 . . . lk-1 1, . . . , j - 1, j + 1, . . . k . 3.1 Learning c , z |c , and e|z
+
+p(ej = e|fj , F ) .
+
+(2)
+
+Note, that under our proposed probabilistic model, it holds that  p(ej |fj , F ) = p(ej |fj , z ) · p(z |F ) .
+z
+
+This can be interpreted as follows. First, the model determines a probability distribution over the latent topics, conditioned on the given input source document, i.e. p(z |F ). And then, second, the model uses the conditional probability p(z |F ) to determine the
+4 It might seem that we need cross-lingually aligned documents, or documents of same length in both languages. However, both is not the case, since in our experiments the translations will always be unobserved, and therefore sum over all possible translations.
+
+Note that under our model, class c and topic z are independent from f1 , ..., fk given document e1 , ..., ek in the target language. Therefore, the parameters c , z |c , and e|z can be learned solely using the training documents in the target language. Given a collection of training documents with known classes D = {(E1 , c1 )..., (En , cn )}, we can estimate the parameters as follows. Parameter c is estimated using the maximumlikelihood (ML), which is n 1c (ci )  , (3) c = i=1 n where 1x (y ) is the indicator function which is 1, if x = y , otherwise 0. The optimal ML-estimate of e|z and z |c can be found by maximizing log p(D|,  ), for which, however, an analytic solution cannot be derived. Therefore, instead, we use the EM-algorithm
+When it is clear from the context, we write p(ej ) instead of p(ej = e).
+5
+
+1468
+
+

@@ -1,0 +1,20 @@
+function C OMPUTE C LUSTERS(P , ) Result = {} S ORT B Y F REQUENCY(P ) while |P | > 0 do p = P OP(P ) Take highest-frequency pattern Cp = {p} Initialize cluster around p N = N EIGHBORS(p, P, ) n  P, sim(n, p) >  for all n  N do Cp = Cp  {n} R EMOVE(P, n) Remember n has been used Result = Result  {Cp } return Result
+
+Figure 4: Pseudocode of the algorithm for producing a clustering from the distributed representation of the extracted patterns. P is the set of extracted patterns, and  is the similarity threshold to include two patterns in the same cluster.
+
+Figure 5: Cluster size (log-scale) and ratio of unique verb lemmas in the clusters generated from N EWS S PIKE and I DEST with the R E V ERB extractions as input.
+
+5
+
+Evaluation results
+
+This section opens with a quantitative look at the clusterings obtained with the different methods to understand their implications with respect to the distribution of event clusters and their internal diversity. In 5.2, we will complement these figures with the results of a manual quality evaluation. 5.1 Quantitative analysis 5.1.1 N EWS S PIKE vs. I DEST-ReV-NS This section compares the clustering models that were output by N EWS S PIKE and I DEST when using the same set of extractions, to evaluate the performance of the factor graph-based method and the neural-network method on exactly the same EECs. We have used as input the dataset released by Zhang & Weld (2013)1 , which contains 546,713 news articles, from which 2.6 million R E V ERB extractions were reportedly produced. 84,023 of these are grouped into the 23,078 distributed EECs, based on mentions of the same entities on the same day. We compare here the released output clusters from N EWS S PIKE and a clustering obtained from a I DEST-based distributed representation trained on the same EECs. Figure 5 shows a comparative analysis of the two sets of clusters. As can be seen, I DEST generates somewhat fewer clusters for every cluster size than N EWS S PIKE. We have also computed a lexical diversity ratio, defined as the percentage of root-verb
+1
+
+lemmas in a cluster that are unique. This metric captures whether a cluster mainly contains the same verb with different inflections or modifiers, or whether it contains different predicates. The figure shows that I DEST generates clusters with much more lexical diversity. These results make sense intuitively, as a global model should be able to produce more aggregated clusters by merging patterns originating from different EECs, resulting in fewer clusters with a higher lexical diversity. A higher lexical diversity may be a signal of richer paraphrases or noisier clusters. The manual evaluation in Section 5.2 will address this issue by comparing the quality of the clusterings. 5.1.2 N EWS S PIKE vs. I DEST-Comp-NS Figure 6 compares N EWS S PIKE's clusters against I DEST clusters obtained using sentence compression instead of R E V ERB for extracting patterns. Both systems were trained on the same set of input news. Using sentence compression, the total number of extracted patterns was 321,130, organized in 41,740 EECs. We can observe that I DEST produced larger clusters than N EWS S PIKE. For cluster sizes larger or equal to 4, this configuration of I DEST produced more clusters than N EWS S PIKE. At the same time, lexical diversity remained consistently on much higher levels, well over 60%. 5.1.3 I DEST-Comp-NS vs. I DEST-Comp-All In order to evaluate the impact of the size of training data, we produced a clustering from embedding vectors trained from a much larger dataset. We used
+
+http://www.cs.washington.edu/node/9473
+
+1145
+
+

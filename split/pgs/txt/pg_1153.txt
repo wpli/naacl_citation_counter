@@ -1,0 +1,21 @@
+ence resolver for Chinese that achieves state-of-theart results, employs a supervised approach where a classifier is trained to determine whether two event mentions are coreferent. We will compare our unsupervised model against this supervised resolver.
+
+ []  [] []  Shameri and his son were [assassinated] during morning rush hour when [leaving] home. This [attack] once again demonstrated the insurgents' ability.
+
+3
+
+ACE Event Coreference
+Figure 1: An excerpt from a Chinese document in the ACE 2005 corpus with the corresponding English translation. The event mentions are bracketed.
+
+In this section, we overview the ACE 2005 event coreference task, which is the version of the withindocument event coreference task we focus on. The ACE 2005 event coreference task requires that an event coreference resolver perform coreference on event mentions belonging to one of the ACE event types. More specifically, an event mention is composed of a trigger (i.e., the word realizing the event's occurrence) and a set of arguments (i.e., the event's participants). Each event trigger has a type and a subtype. In ACE 2005, eight event types are defined, which are further subcategorized into 33 subtypes. Each event argument has a semantic role. In ACE 2005, a set of argument roles is defined for each event type. That is, an event's type determines what roles its mentions' arguments can assume. Not surprisingly, two event mentions cannot be coreferent if their triggers have different subtypes or they have incompatible arguments (e.g., their dates or locations are different). To better understand the ACE 2005 event coreference task, consider the sentence in Figure 1, which is taken from the ACE 2005 corpus. This example contains three event mentions belonging to the ACE event types. Specifically, these three mentions are triggered by the words  (leaving),  (assassinated) and  (attack).  and  have type Life and subtype Die, whereas  has type Movement and subtype Transport. Note that  and  refer to the same real-world event and are therefore coreferent.
+
+of e, contains all the event mentions preceding e in the associated text as well as a dummy candidate antecedent d (to which e will be resolved if it is nonanaphoric). Also, we define k to be the context surrounding e as well as every candidate antecedent c in C , and kc to be the context surrounding e and candidate antecedent c. Moreover, we define l to be a binary variable indicating whether c is the correct antecedent of e. Finally, et and ct denote e and c's respective trigger words. 4.2 Training Our model estimates P (e, k, c, l), the probability of seeing (1) the active event mention e; (2) the context k surrounding e and its candidate antecedents; (3) a candidate antecedent c of e; and (4) l, a binary value indicating whether c is e's correct antecedent. Since we estimate this probability from a raw, unannotated corpus, we are effectively treating e, k , and c as observed data and l as hidden data. Owing to the presence of hidden data, we estimate the model parameters using the ExpectationMaximization (EM) algorithm (Dempster et al., 1977). Specifically, we use EM to iteratively estimate the model parameters from data in which each event mention is labeled with the probability that it corefers with each of its candidate antecedents, and apply the resulting model to relabel each event mention with the probability that it corefers with each of its candidate antecedents. Below we describe the details of the E-step and the M-step. 4.2.1 E-Step The goal of the E-step is to compute P (l=1|e, k, c), the probability that a candidate antecedent c is the correct antecedent of e given context k . Assuming that exactly one of the e's candidate antecedents is
+
+4 The Generative Model
+In this section, we present our generative model. 4.1 Notation
+
+We begin by introducing the notation that we use in the rest of this paper. We denote e to be the current event mention to be resolved (henceforth the active event mention). C , the set of candidate antecedents
+
+1099
+
+

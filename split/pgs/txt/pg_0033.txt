@@ -1,0 +1,13 @@
+Monday, June 1, 2015 (continued) 14:00­15:15 14:00­14:25 14:25­14:50 14:50­15:15 Session 2A: Generation and Summarization (Long Papers) Transition-Based Syntactic Linearization Yijia Liu, Yue Zhang, Wanxiang Che and Bing Qin Extractive Summarisation Based on Keyword Profile and Language Model Han Xu, Eric Martin and Ashesh Mahidadia HEADS: Headline Generation as Sequence Prediction Using an Abstract FeatureRich Space Carlos A. Colmenares, Marina Litvak, Amin Mantrach and Fabrizio Silvestri Session 2B: Language and Vision (Long Papers) What's Cookin'? Interpreting Cooking Videos using Text, Speech and Vision Jonathan Malmaud, Jonathan Huang, Vivek Rathod, Nicholas Johnston, Andrew Rabinovich and Kevin Murphy Combining Language and Vision with a Multimodal Skip-gram Model Angeliki Lazaridou, Nghia The Pham and Marco Baroni Discriminative Unsupervised Alignment of Natural Language Instructions with Corresponding Video Segments Iftekhar Naim, Young C. Song, Qiguang Liu, Liang Huang, Henry Kautz, Jiebo Luo and Daniel Gildea Session 2C: NLP for Web, Social Media and Social Sciences (Long Papers) TopicCheck: Interactive Alignment for Assessing Topic Model Stability Jason Chuang, Margaret E. Roberts, Brandon M. Stewart, Rebecca Weiss, Dustin Tingley, Justin Grimmer and Jeffrey Heer Inferring latent attributes of Twitter users with label regularization Ehsan Mohammady Ardehaly and Aron Culotta A Neural Network Approach to Context-Sensitive Generation of Conversational Responses Alessandro Sordoni, Michel Galley, Michael Auli, Chris Brockett, Yangfeng Ji, Margaret Mitchell, Jian-Yun Nie, Jianfeng Gao and Bill Dolan
+
+14:00­15:15 14:00­14:25
+
+14:25­14:50 14:50­15:15
+
+14:00­15:15 14:00­14:25
+
+14:25­14:50 14:50­15:15
+
+xxxiii
+
+

@@ -1,0 +1,30 @@
+Figure 2: A subset of weighted speech recognition grammar rules
+public <utterance> = /6/ <ref> again passes to <ref> | /199/ <ref> kicks to <ref> | ... <ref> = /15/ pink goalie | /132/ pink nine | /10/ pink one | ...
+
+trigram models as they performed worse than the in-domain trigram models with the exception of a very slight improvement when applied as a back off model for SLU.3 4.1 Speech recognition Speech recognition was performed using different (combinations of) LMs individually; lexicon and acoustic models were the same in all cases.4 Speech recognition results with respect to the word error rate averaged over all folds are presented in Table 2.
+Table 2: speech recognition results
+
+cases where OOG utterances are recognized by applying trigram language models, the WER is higher compared to applying trigram language models only. Notably, these results were not consistent across folds. For two folds, the WER actually decreased when combining a semantically motivated grammar including weights with a trigram language model compared to applying the trigram language model only, thus indicating that combining semantically motivated grammars learned with weak supervision with trigram models can also yield improved recognition performance over applying trigram models only in some cases. 4.2 Semantic parsing For each fold, ASR transcriptions were parsed using the semantic parser learned on the training data for that fold. For comparison, as an upper baseline we computed parsing performance on normalized gold standard data, since typically performance degrades ­ and often to a large extent ­ when a semantic parser is applied to ASR transcriptions of speech; recall that the applied algorithm achieves state-ofthe-art performance on the dataset.5 Results are presented in Table 3.
+Table 3: Semantic parsing results on written text and on speech transcribed using different language models
+Written text (reference) Normalized text Speech Applied language model(s) Semantic grammar inc. weights Semantic grammar inc. weights + trigram back off Semantic grammar w/o weights Semantic grammar w/o weights + trigram back off Trigram (baseline)
+5
+
+Applied language model(s) Semantic grammar w/o weights Semantic grammar w/o weights + trigram back off Semantic grammar inc. weights Semantic grammar inc. weights + trigram back off Trigram (baseline)
+
+WER (%) 15.55 12.63 17.15 10.88 7.1
+
+As can be seen, with a rather low error rate of 7.1%, applying trigram language models yields the best results. While in case of applying semantically motivated recognition grammars the WER increases, it must be noted that in cases in which no back off models were applied this is to some extent due to OOG utterances (as these yield several deletions compared to the reference data). Yet, the OOG-rate is rather low, i.e. averaged over all folds 8.6% and 4.1% when using grammars with and without weights, respectively. However, even in
+The results were: interpolated/adapted LM: WER: 13.43%, F1 : 71.22%, semantic grammar + interpolated/adapted LM backoff: WER: 13.85, F1 : 84.6%, syntactic recognition grammar: WER: 18.98%, F1 : 70.86%, syntactic recognition grammar + trigram back off: WER: 13.98%, F1 : 71.27%. 4 We applied Sphinx4 (Walker et al., 2004) using lexicon and acoustic models trained on the HUB4 dataset (Fiscus et al., 1998), which contains broadcast news speech matching our RoboCup data with respect to acoustics in that in both cases read speech is addressed; these resources are available online. We added phonetic transcriptions for out of vocabulary (OOV) to the vocabulary; only two were OOV along with some typos.
+3
+
+F1 87.26 F1 84.18 84.46 82.24 82.37 78.36
+
+Prec. 94.28 Prec. 88.7 87.53 84.83 84.67 90.34
+
+Recall 81.42 Recall 80.18 81.64 79.84 80.21 69.4
+
+While comparison with a manually created gold standard grammar would be interesting as well, a manually created grammar for the utilized dataset is unfortunately not available.
+
+878
+
+

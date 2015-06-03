@@ -1,0 +1,22 @@
+System
+RANDOM MT HUMAN
+
+BLEU 0.33 3.21 6.08
+
+Table 2: Multi-reference corpus-level BLEU obtained by leaving one reference out at random.
+
+target phrase, Fisher's exact probability, and a score relating the lengths of source and target phrases. IR We also use an IR feature built from an index of triples, whose implementation roughly matches the IRstatus approach described in Ritter et al. (2011): For a test triple  , we choose r ~ as the candidate response iff  ~ = arg max ~ d(m , m ~ ). CMM Neither MT nor IR traditionally take into account contextual information. Therefore, we take into consideration context and message matches (CMM), i.e., exact matches between c, m and r. We define 8 features as the [1-4]-gram matches between c and the candidate reply r and the [1-4]-gram matches between m and the candidate reply r. These exact matches help capture and promote contextual information in the replies. RLMT, DCGM-I, DCGM-II We consider the RLM trained on the concatenated triples, denoted as RLMT (Section 4.1), to be a context-sensitive RLM baseline. Each neural network model contributes an additional feature corresponding to the likelihood of the candidate response given context and message. 5.4 Model Training The proposed models are trained on a 4M subset of the triple data. The vocabulary consists of the most frequent V = 50K words. In order to speed up training, we use the Noise-Contrastive Estimation (NCE) loss, which avoids repeated summations over V by approximating the probability of the target word (Gutmann and Hyv¨ arinen, 2010). Parameter optimization is done using Adagrad (Duchi et al., 2011) with a mini-batch size of 100 and a learning rate  = 0.1, which we found to work well on held-out data. In order to stabilize learning, we clip the gradients to a fixed range [-10, 10], as suggested in Mikolov et al. (2010). All the parameters of the neural models are sampled from a normal distribution N (0, 0.01) while the recurrent weight Whh is initialized as a 201
+
+random orthogonal matrix and scaled by 0.01. To prevent over-fitting, we evaluate performance on a held-out set during training and stop when the objective increases. The size of the RLM hidden layer is set to K = 512, where the context encoder is a 512, 256, 512 multilayer network. The bottleneck in the middle compresses context information that leads to similar responses and thus achieves better generalization. The last layer embeds the context vector into the hidden space of the decoder RLM. 5.5 Rescoring Setup We evaluate the proposed models by rescoring the n-best candidate responses obtained using the MT phrase-based decoder and the IR system. In contrast to MT, the candidate responses provided by IR have been created by humans and are less affected by fluency issues. The different n-best lists will provide a comprehensive testbed for our experiments. First, we augment the n-best list of the tuning set with the scores of the model of interest. Then, we run an iteration of MERT (Och, 2003) to estimate the log-linear weights of the new features. At test time, we rescore the test n-best list with the new weights.
+
+6
+6.1
+
+Results
+Lower and Upper Bounds
+
+Table 2 shows the expected upper and lower bounds for this task as suggested by BLEU scores for human responses and a random response baseline. The RAN DOM system comprises responses randomly extracted from the triples corpus. HUMAN is computed by choosing one reference amongst the multi-reference set for each context-status pair.4 Although the scores are lower than those usually reported in SMT tasks, the ranking of the three systems is unambiguous. 6.2 BLEU and METEOR The results of automatic evaluation using BLEU and METEOR are presented in Table 3, where some broad patterns emerge. First, both metrics indicate that a phrase-based MT decoder outperforms a purely IR approach. Second, adding CMM features
+For the human score, we compute corpus-level BLEU with a sampling scheme that randomly leaves out one reference - the human sentence to score - for each reference set. This sampling scheme (repeated with 100 trials) is also applied for the MT and RANDOM system so as to make BLEU scores comparable.
+4
+
+

@@ -1,0 +1,42 @@
+System UFC BASELINE IITB SJTU CUUI PKU AMU UMC IPN POST RAC CAMB NTHU
+
+TP 19 0 11 54 290 128 219 179 25 231 147 386 196
+
+TN 13062 13078 13057 12947 12697 12800 12761 12761 12848 12588 12723 12402 12620
+
+FP 7 0 26 114 337 283 322 314 251 454 426 641 521
+
+FN 665 673 668 649 553 625 556 603 680 574 623 502 575
+
+FPN 2 0 4 8 34 66 41 26 40 46 49 78 54
+
+P 73.08 100.00 29.73 32.14 46.25 31.14 40.48 36.31 9.06 33.72 25.65 37.59 27.34
+
+R 2.78 0.00 1.62 7.68 34.40 17.00 28.26 22.89 3.55 28.70 19.09 43.47 25.42
+
+F0.5 12.06 0.00 6.65 19.64 43.27 26.70 37.26 32.50 6.91 32.58 24.00 38.63 26.93
+
+Acc 95.13 95.11 94.98 94.51 93.82 93.89 93.94 93.56 93.53 92.88 92.79 92.31 92.48
+
+WAcc 95.09 95.11 94.82 93.79 91.86 92.28 92.06 91.67 92.00 90.23 90.28 88.77 89.44
+
+WAccbase 95.03 95.11 95.06 94.89 93.91 94.53 94.39 94.35 94.88 94.17 94.45 93.59 94.44
+
+I 1.35 0.00 -0.25 -1.16 -2.18 -2.38 -2.47 -2.84 -3.04 -4.18 -4.41 -5.15 -5.29
+
+Table 11: Results of our new evaluation method (in percentages). All values of I are statistically significant (two-tailed paired T-test, p < 0.01).
+System CUUI AMU CAMB POST NTHU UMC RAC PKU SJTU UFC IPN IITB BASELINE Original annotations P R F0.5  47.66 33.87 44.07 44.68 29.44 40.48 39.22 41.65 39.69 36.39 29.13 34.67 33.56 28.10 32.31 34.86 20.86 30.73 33.67 19.08 29.21 32.17 19.60 28.51 28.00 7.08 17.60 73.08 3.26 13.83 9.16 3.87 7.20 30.30 1.74 7.07 100.00 0.00 0.00 Mixed annotations P R F0.5  47.57 39.60 45.73 44.56 33.49 41.80 39.04 48.72 40.66 36.39 33.79 35.84 33.62 31.52 33.18 34.86 23.31 31.71 33.67 21.59 30.28 32.42 21.63 29.48 28.00 7.46 18.06 73.08 3.39 14.31 9.16 4.09 7.34 30.30 1.81 7.31 100.00 0.00 0.00
+
+original text) whereas F0.5 is more relevant to system developers (since they need to analyse P and R in order to tune their systems). Lastly, we verify that mixing and matching corrections from different annotators improves R (see Table 10) and ensures systems are always assigned the maximum possible score.
+
+4
+
+Discussion
+
+Table 10: M2 Scorer results (in percentages).
+
+for the shared task. Rankings by F0.5 are almost identical for the two methods (Spearman's rank correlation is 0.9835 with p < 0.01), suggesting that there is a statistically significant difference between phrase-level edits and tokens, despite phrases being only 1.12 tokens on average in this dataset. Spearman's  between both scorers (F0.5 vs I ) is -0.5330, which suggests they generally produce inverse rankings. Pearson's correlation between token-level F0.5 and I is -0.5942, confirming the relationship between rankings and our intuition that F0.5 is not a good indicator of overall correction quality. While the I -measure reflects improvement, F0.5 indicates error manipulation. We argue that I is better suited to the needs of end-users (as it indicates whether the output of the system is better than the 585
+
+Automatic evaluation metrics that are based on comparisons with a gold standard are inherently limited by the number of available references. Although this does not pose much problem for tasks such as partof-speech tagging, it does constrain evaluation for text generation tasks (such as error correction, machine translation or summarisation), where the number of `correct answers' goes beyond a few collected references. Sentences can be corrected in many different ways and the fact that a given correction is not matched by any of the references does not necessarily mean that it is not valid. Therefore, we must accept that any metric used in such scenarios will not be perfect. However, it is worth noting that this limitation does not extend to evaluation of error detection per se using such metrics. Finding independent evidence to support one correction over another is also difficult, since the notion of sentence quality is somewhat subjective. Evaluation metrics that rely on a gold standard are es-
+
+

@@ -1,0 +1,31 @@
+For example, given a gold value of 7.3, a system value of 7.2 would have a similarity of 0.98, and a system value of 14.6 or larger would have a similarity 0. If both values are equal, similarity is 1. For the other slot types, the similarity function is discrete, with values set to 1 (proposed slot is correct) or 0 (incorrect) as follows. We consider a proposed temporal argument as correct if it is within a span of 5 minutes of the corresponding gold temporal value. Durations are judged as correct if they are within 10 seconds of the gold values. We considered proposed dates as correct if they differ by at most one day from the gold date.12 For location arguments, we use GeoNames13 to obtain the coordinates of the locations produced by the system that do not match the information in the KB. Based on the average size of countries, regions, and cities, we consider these additional locations as correct if they are at the following distance (or closer) from the gold locations: 500 kms for countries, 50 kms for regions, and 10 kms for cities. The original KBP scorer increases the value of True Positives (TP) by 1 every time a predicted argument matches its gold value. In the proposed lenient scorer, TP is increased by the similarity between the predicted and gold values. The precision and recall will be thus calculated as follows (SYS for number of predicted argument values, GOLD for number of gold argument values): prec = rec = sim(x, g ) SYS sim(x, g ) GOLD (2) (3)
+
+1 0.95 0.9 0.85 0.8 Precision 0.75 0.7 0.65 0.6 0.55 0.5 0.45 0 0.05 0.1 0.15 Recall 0.2 DS
+
+appr
+
+DS-CRF -CRF
+
+0.25
+
+0.3
+
+Figure 1: Test: Precision/Recall curves for regular DS and approximate DS on test (lenient evaluation).
+
+System Prec. Rec. F1 DS-CRF 68.4 21.3 32.5 DSappr -CRF 70.6 27.8 39.9 
+Table 4: Test: Regular (DS-CRF) and approximate DS (DSappr -CRF) results, with lenient evaluation.  indicates statistically significant improvement over DS-CRF (p < 0.05).
+
+call values remains large. We address this in the next section.
+
+5
+
+Approximate distant supervision
+
+The right block in Table 3 lists the results under this lenient evaluation for the experiment initially reported in the left block in the same table. As expected, these results are higher than the ones using the strict measure, but maintain the relative order of the systems in each of the evaluation measures. The difference in precision between DS-CRF and MACRF decreases, indicating that the new measure assigns partial credit to the larger amount of argument values extracted by MA-CRF. The difference in reThese thresholds might change in other domains, but adjusting these values is trivial. 13 http://www.geonames.org/
+12
+
+The previous section demonstrated that many tweets contain argument values which are similar but not identical to the data in the knowledge base. These values would not be annotated during alignment by traditional distant supervision, which expects an exact match between knowledge base values and tweet texts. This means that DS-CRF will be trained with less data than what is available (e.g., without the 7.1 magnitude example in the tweet in Section 2.4). Here we demonstrate that a simple extension to distant supervision that annotates values close to the values in the knowledge base, results in improved performance. The proposed alignment algorithm scans the training tweets, and labels named and numeric entities as positive argument examples (with the corresponding label from the KB), if they are deemed similar to the gold values according to the similarity formulas introduced in the previous section. This
+
+646
+
+

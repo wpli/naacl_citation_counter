@@ -1,0 +1,54 @@
+Unigrams: determine, how, you Bigrams: (determine, how), (how, you) POS Unigrams: VB, WRB, PRP POS Bigrams: (VB, WRB), (WRB, PRP)
+
+Surrounding POS: (VB, WRB)     Beginning POS: (VB, WRB)     Ending POS: (VBP, WRB)    
+
+O
+
+O
+
+B
+
+I
+
+E
+
+O
+
+O
+
+O
+TO
+
+Fluent
+
+Disfluent
+
+Fluent
+
+to determine how you address how you weigh...
+
+to determine how you address how you weigh...
+TO VB WRB PRP VBP WRB PRP VBP
+
+VB
+
+WRB PRP VBP
+
+WRB PRP VBP
+
+Distance: 3 Duplicate Word+Distance: (3, how) POS Bigram: (WRB, PRP)
+
+Word duplicate length: 2 POS duplicate length: 3
+
+Figure 3: Span features for semi-CRF model.
+
+Figure 2: Token features for CRF and semi-CRF models.
+
+to be token-level asymmetric Hamming distance (where the output is viewed as binary edited/nonedited). We optimize with the AdaGrad algorithm of Duchi et al. (2011) with L2 regularization. 3.2 Features
+
+Features in our semi-CRF factor over spans, which cover the reparandum of a proposed disfluency, and thus generally end at the beginning of the repair. This means that they can look at information throughout the reparandum as well as the repair by looking at content following the span. Many of our features are inspired by those in Qian and Liu (2013) and Honnibal and Johnson (2014). We use a combination of features that are fired for each token within a span, and features that consider properties of the span as a whole. 3.2.1 Token Features Figure 2 depicts the token-level word features we employ in both our basic CRF and our semiCRF models. Similar to standard sequence modeling tasks, we fire word and predicted part-of-speech unigrams and bigrams in a window around the current token. In addition, we fire features on repeated words and part-of-speech tags in order to capture the fact that the repair is typically a partial copy of the reparandum, with possibly a word or two switched out. Specifically, we fire features on the distance to any duplicate words or parts-of-speech in a window around the current token, conjoined with the 259
+
+word identity itself or its POS tag (see the Duplicate box in Figure 2). We also fire similar features for POS tags since substituted words in the repair frequently have the same tag (compare address and weigh). Finally, we include a duplicate bigram feature that fires if the bigram formed from the current and next words is repeated later on. When this happens, we fire an indicator for the POS tags of the bigram. In Figure 2, this feature is fired for the word how because how you is repeated later on, and contains the POS tag bigram (WRB, PRP). Table 1 shows the results for using these features in a CRF model run on the development set.3 3.2.2 Span Features In addition to features that fire for each individual token, the semi-CRF model allows for the inclusion of features that look at characteristics of the proposed span as a whole, allowing us to consider the repair directly by firing features targeting the words following the span. These are shown in Figure 3. Critically, repeated sequences of words and partsof-speech are now featurized in a coordinated way, making it less likely that spurious repeated content will cause the model to falsely posit a disfluency. We first fire an indicator of whether or not the entire proposed span is later repeated, conjoined with the length of the span. Because many disfluencies
+3 We created our development set by randomly sampling documents from the training set. Compared to the development set of Johnson and Charniak (2004), this more closely matches the disfluency distribution of the corpus: their development set has 0.53 disfluent tokens per sentence, while our set has 0.38 per sentence, and the training set has 0.37 per sentence.
+
+

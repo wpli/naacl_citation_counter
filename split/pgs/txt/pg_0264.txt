@@ -1,0 +1,29 @@
+9
+
+Results and Discussion
+
+References
+Lucian Galescu and James F Allen. 2001. Bi-directional conversion between graphemes and phonemes using a joint n-gram model. In 4th ISCA Tutorial and Research Workshop (ITRW) on Speech Synthesis. ¨ G¨ ozde Ozbal and Carlo Strapparava. 2012. A computational approach to the automation of creative naming. In Proceedings of the 50th Annual Meeting of the Association for Computational Linguistics: Long Papers - Volume 1, ACL '12, pages 703­711. Association for Computational Linguistics. Michael R Smith, Ryan S Hintze, and Dan Ventura. 2014. Nehovah: A neologism creator nomen ipsum. In Proceedings of the International Conference on Computational Creativity, pages 173­181. ICCC. Robert Weide. 1998. The CMU pronunciation dictionary, release 0.6. Wikipedia. 2013. List of portmanteaus. [Online; accessed 01-November-2013]. Wiktionary. 2013. Appendix:list of portmanteaux.
+http://en.wikipedia.org/w/index.php?title= List_of_portmanteaus&oldid=578952494.
+
+We first evaluate the model at PMpron . Table 4 shows that, despite less than 50% exact matches, over 90% of the 1000-best lists contain the correct pronunciation. This motivates our model combination and reranking, which increase exact matches to over 50%. Next, we evaluate PM (Table 5). A component word mini-LM dramatically improves PM compared to PM . Filtering out component words provides additional gain, to 45% exact matches. In comparison, a baseline that merges W1 pron and 2 Wpron at the first shared phoneme achieves 33% exact matches for PMpron and 25% for PM. Table 6 provides examples of system output. Perfect outputs include "affluenza," "joggling," "tofurkey," and "zeitghost." For others, like "chilax" and "frienemy," the discrepancy is negligible and the hypothesis PM could be considered a correct alternate output. Some hypotheses, like "architecology" and "japanglish," might even be considered superior to their gold counterparts. However, some errors, like "js" and "mman," are clearly unacceptable system outputs.
+
+http://en.wiktionary.org/w/index.php?title=
+
+10
+
+Conclusion
+
+We implement a data-driven system that generates portmanteaux from component words. To accomplish this, we use an FSM cascade, including a novel 2-input, 1-output multitape FST, and train it on existing portmanteaux. In cross-validated experiments, we achieve 45% exact matches and an average Levenshtein edit distance of 1.59. In addition to improving this model, we are interested in developing systems that can select component words for portmanteaux and reconstruct component words from portmanteaux. We also plan to research other applications for multi-input/output models.
+
+[Online; accessed 02-November-2013]. Zhengyu Zhou, Jianfeng Gao, Frank K. Soong, and Helen Meng. 2006. A comparative study of discriminative methods for reranking LVCSR n-best hypotheses in domain adaptation and generalization. In 2006 IEEE International Conference on Acoustics Speech and Signal Processing, ICASSP 2006, Toulouse, France, pages 141­144.
+
+Appendix:List_of_portmanteaux&oldid=23685729.
+
+11
+
+Acknowledgements
+
+We would like to thank the anonymous reviewers for their helpful comments, as well as our colleagues Qing Dou, Tomer Levinboim, Jonathan May, and Ashish Vaswani for their advice. This work was supported in part by DARPA contract FA-8750-132-0045. 210
+
+

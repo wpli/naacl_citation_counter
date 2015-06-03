@@ -1,0 +1,54 @@
+T WITTER
+EN ES PT NL
+
+S POKEN
+EN
+
+Q UERIES
+EN
+
+N EWSWIRE U NLABELED T EST words in D % unamb. unamb. inst. words in D unamb. inst.
+
+762k 57m 3,064 380k 93% 1.1m 458k 2.7m
+
+93k 9m 1,524 240k 97% 148k 279k 613k
+
+216k 4.5m 1,593 43k 98% 134k 332k 892k
+
+217k 0.5m 16,725 55k 94% 10k 129k 55k
+
+762k 0.6m 205k 380k 93% 98k 381k 113k
+
+762k 10.1m 7,671 380k 93% 1.5m 388k 2.3m
+
+Table 2: Characteristics of data sets used in this paper
+
+D OMAIN T WITTER S POKEN Q UERIES
+
+L ANG en es nl pt en en
+
+T OOLS 80.55 75.66 84.79 67.17 89.02 88.06
+
+L I 10 81.72 71.40 74.00 64.90 38.72 65.96
+
+L I 10+ 83.26 73.20 80.50 72.50 87.86 84.39
+
+CRF 86.72 78.48 89.15 80.04 90.53 85.52
+
+CRF+D 87.50 82.74 89.29 79.16 90.54 88.06
+
++CRF+D 87.76 82.87 89.08 80.10 * 88.28
+
+Table 3: Tagging accuracies. T OOLS are off-the-shelf taggers (Stanford and TreeTagger), L I 10/L I 10+ the weakly supervised models with and without embeddings, and CRF the model trained on newswire with in-domain word clusters. Last two columns show results when extending with unambiguous data.  : Unlabeled data too small to generate clusters with cut-off 100.
+
+considerable improvements by using our extended tag dictionaries.
+
+5
+
+Discussion
+
+The most obvious reason this approach should work is the decrease in unseen words in the indomain evaluation data. Since the unambiguous data is in-domain, the out-of-vocabulary (OOV) rate goes down when we add the unambiguous data to the newswire training data. In fact, for English Twitter, the OOV rate is reduced by half, and for Portuguese and Spanish, it is reduced by about 40%. For Dutch Twitter, the reduction in OOV rate is much smaller, which probably explains the small gain for this dataset. The difference in reduction of OOV rates are due to sample biases in our unlabeled data. This probably also explains the difference in gains between S PEECH and Q UERIES. For search queries, the OOV rate is reduced by 66%, whereas it stays roughly the same for speech transcripts. 1259
+
+We have presented a simple, yet effective approach to adapt POS taggers to a new domain. It requires a) the availability of large amounts of unlabeled data and b) a lexicon to mine unambiguous sentences. As sentence length increases, the likelihood of being completely unambiguous drops. For this reason, our approach works well for domains with shorter average sentence length, such as Twitter, spoken language, and search queries. We also experimented with allowing up to one ambiguous item per sentence, i.e., we include a sentence in our training data if it contains exactly one item that either a) has more than one licensed tag in the dictionary or b) is not in the dictionary. In the first case, we choose the tag randomly at training time from the set of licensed ones. In the second case, we assume the unknown word to be a NOUN, since unknown words mostly tend to be proper names. When added to newswire, this data
+
+

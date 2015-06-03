@@ -1,0 +1,25 @@
+paper are salient keywords, those keywords which are commonly used by its citers to refer to it and are statistically over-represented in the paper's citation summary w.r.t. the overall distribution of such words across other papers' citation summaries. Put another way, the salience of a word in characterising a paper's main contributions is qualified along over-representedness and exclusiveness dimensions. Clearly, a proper statistical model of words distribution is required in order to measure words' salience in a paper's citation summary. Consider five papers, D1 , . . . , D5 with citation summaries CS1 , . . . , CS5 . We aim at identifying salient keywords from D1 's citation summary CS1 , that map to D1 's main contributions. To decide whether a word W is a characterising keyword of D1 , we first collect all n citing sentences containing W from CS1 , . . . , CS5 ; suppose there are n = 20 of them. Then for each citing sentence S amongst those 20, we perform the binary test: success iff S belongs to CS1 . Suppose that there are k = 18 successes and 2 failures. This represents a surprising observation: one would expect a word of no characterising power to appear in roughly the same number of sentences in CS1 , . . . , CS5 , assuming all citation summaries have the same number of sentences2 . So one would heuristically conclude that W is a good candidate keyword for D1 , a keyword that is likely to represent a main contribution. The previous process can be abstracted as sampling without replacement from a finite set whose elements can be classified into mutually exclusive binary categories, which itself follows a Hypergeometric distribution. Let N be the total number of citing sentences in citation summaries for papers belonging to collection C , K be the number of sentences in paper D's citation summary, n be the total number of citing sentences containing a certain word W , and X be the number of citing sentences containing W in D's citation summary. The probability of observing exactly k citing sentences in D's citation summary containing W is:
+H (X =k|N,K,n)=
+N K (K k )( n k ) N (n)
+
+(1)
+
+We can then calculate a p-value to the observed number of x citing sentences in D's citation summary that contain word W using the Hypergeometric test, which in turn is used to measure word W 's salience in characterising D's main contributions:
+S (W ) = P (X x)=1
+2 def
+
+This assumption is only made to simplify the discussion.
+
+Px
+
+1 i=0
+
+H (X =i|N,K,n))
+
+(2)
+
+The smaller the value of S (W ), the more salient W is. Also, words not appearing in D's citation summary have a maximum p-value of 1.0, and common words appearing in many papers' citation summaries are expected to have larger p-values than words that are more exclusively used when citing paper D. It is worth pointing out that the above formulation can be equivalently expressed as applying the onetailed Fisher's exact test to measure strengths of statistical associations between words and paper's citation summaries at the sentence level. Our choice of this statistical procedure has been informed by (Moore, 2004). Prior to this work, Dunning (1993) was pointing out that some commonly used methods such as the Pearson's 2 test are inappropriate for measuring textual associations due to the fact that the underlying normality assumption is usually violated in textual data. He was subsequently introducing the log-likelihood ratio test (LLR) and showing that it can yield more reliable results. The LLR was then and has since been widely adopted in statistical NLP as a measure of strength of association (Moore, 2004). For instance, Lin and Hovy (2000) successfully applied LLR in mining "topic signatures" of pre-classified document collections. But to further verify LLR's validity applied to rare events, Moore (2004) performed an empirical study comparing results obtained using LLR and Fisher's exact test on bilingual word association and found that albeit being a good approximation to Fisher's exact test, LLR can still introduce a substantial amount of error and the author went on to advocate the use of Fisher's exact test where computationally feasible. Recall that we measured associational strengths at the sentence level. This resulted in marginal frequencies in the order of only hundreds for Qazvinian's small corpus. We therefore followed this empirical advice and used the onetailed Fisher's exact test (i.e., Hypergeometric test) as our measure of textual association to perform keyword profiling of a scientific paper. To obtain a set of keywords likely to map to a paper's main contributions, one can simply sort all words according to their statistical significance and pick the top few (e.g., 10 words with the smallest pvalues). A more statistically tenable scheme would be to identify the keywords of a paper as all words appearing in its citation summary with p-values below some significance level. A technicality here is that in the identification of keywords, multiple Hypergeometric tests have been performed. For example, all unique words that appeared in the collection
+
+125
+
+

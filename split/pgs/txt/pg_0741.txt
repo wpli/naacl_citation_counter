@@ -1,0 +1,24 @@
+rameters U and V : L = log  (ui · vij ) +
+j j =j
+
+log  (-ui · vij ) (7)
+
++
+m
+
+Eci Pn (c) [log  (-ui · vij )]
+
+Here  (·) is the sigmoid function, Pn (c) is a noise distribution computed over unigrams and m is the negative sampling parameter. This is almost exactly the same as negative sampling proposed for the original skip-gram model. The only change is that we additionally take a negative gradient step with respect to all the senses that were not selected in the hard E-step. We summarize the training procedure for the adapted skip-gram model in Algorithm 2. Algorithm 2 Outputs a sense-specific VSM, given a corpus and an ontology
+1: function S ENSE EM(D, ) 2: (0)  initialize 3: for (wi , ci )  D do 4: if period > k then 5: RETROFIT((t) , ) 6: end if 7: (Hard) E-step: 8: sij  find argmax using equation 5 9: M-step: 10: (t+1)  update using equation 6 11: U (t+1) , V (t+1)  update using equation 7 12: end for 13: return (t) 14: end function
+
+3
+
+Evaluation
+
+In this section we detail experimental results on 3 lexical semantics tasks across 8 different datasets. We begin by detailing the training and setup for our experiments. 3.1 Resources, Data and Training We use WordNet (Miller, 1995) as the sense repository and ontology in all our experiments. WordNet is a large, hand-annotated ontology of English composed of 117,000 clusters of senses, or "synsets" that are related to one another through semantic relations such as hypernymy and hyponymy. Each synset additionally comprises a list of sense specific lemmas 687
+
+which we use to form the nodes in our graph. There are 206,949 such sense specific lemmas, which we connect with synonym, hypernym and hyponym3 relations for a total of 488,432 edges. To show the applicability of our techniques to different VSMs we experiment with two different kinds of base vectors. Global Context Vectors (GC) (Huang et al., 2012): These word vectors were trained using a neural network which not only uses local context but also defines global features at the document level to further enhance the VSM. We distinguish three variants: the original single-sense vectors (SINGLE), a multi-prototype variant (MULTI), ­ both are available as pre-trained vectors for download4 ­ and a sense-based version obtained by running retrofitting on the original vectors (RETRO). Skip-gram Vectors (SG) (Mikolov et al., 2013a): We use the word vector tool Word2Vec5 to train skip-gram vectors. We define 6 variants: a single-sense version (SINGLE), two multi-sense variants that were trained by first sense disambiguating the entire corpus using WSD tools, ­ one unsupervised (Pedersen and Kolhatkar, 2009) (WSD) and the other supervised (Zhong and Ng, 2010) (IMS) ­ a retrofitted version obtained from the singlesense vectors (RETRO), an EM implementation of the skip-gram model with the structured regularizer as described in section 2.2 (EM+RETRO), and the same EM technique but ignoring the ontology (EM). All models were trained on publicly available WMT20116 English monolingual data. This corpus of 355 million words, although adequate in size, is smaller than typically used billion word corpora. We use this corpus because the WSD baseline involves preprocessing the corpus with sense disambiguation, which is slow enough that running it on corpora orders of magnitude larger was infeasible. Retrofitted variants of vectors (RETRO) are trained using the procedure described in algorithm 1. We set the convergence criteria to = 0.01 with a maximum number of iterations of 10. The weights
+We treat edges as undirected, so hypernymy and hyponymy are collapsed and unified in our representation schema. 4 http://nlp.stanford.edu/~socherr/ ACL2012_wordVectorsTextFile.zip 5 https://code.google.com/p/word2vec/ 6 http://www.statmt.org/wmt11/
+3
+
+

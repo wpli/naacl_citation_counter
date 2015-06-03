@@ -1,0 +1,7 @@
+Urbain, J., Goharian, N., and Frieder, O. (2008). Probabilistic passage models for semantic search of genomics literature. Journal of the American Society for Information Science and Technology, 59(12). Voorhoeve, P. M., Le Sage, C., Schrier, M., Gillis, A. J., Stoop, H., Nagel, R., Liu, Y.-P., Van Duijse, J., Drost, J., Griekspoor, A., et al. (2006). A genetic screen implicates mirna-372 and mirna-373 as oncogenes in tes-
+
+ticular germ cell tumors. Cell, 124(6):1169­1181. Ying, H., Kimmelman, A. C., Lyssiotis, C. A., Hua, S., Chu, G. C., Fletcher-Sananikone, E., Locasale, J. W., Son, J., Zhang, H., Coloff, J. L., et al. (2012). Oncogenic kras maintains pancreatic tumors through regulation of anabolic glucose metabolism. Cell, 149(3):656­670.
+
+1048
+
+

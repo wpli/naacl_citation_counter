@@ -1,0 +1,22 @@
+Gender Resource
+I MDB G MAP SSA G MAP S TAN G MAP S TAN G MAP+ I MDB G MAP
+
+Fail Test 1 P R F1 0.35 0.63 0.45 0.26 0.21 0.24 0.22 0.96 0.36 0.52 0.55 0.54
+
+Pass Test 1 P R F1 0.97 0.91 0.94 0.94 0.95 0.94 0.996 0.74 0.85 0.97 0.96 0.96
+
+Macro-F1
+
+0.71 0.59 0.71 0.75
+
+Table 2: Results for Test 1: "are there at least two named women in the movie".
+
+et al. (2014) used this resource for assigning gender to sender and recipients of emails in the Enron email corpus. The authors noted that a first name may appear several times with conflicting genders. For example, the first name Aidyn appears 15 times as a male and 15 times as a female. For our purposes, we removed such names from the original list. The resulting resource had 90,000 names, 33,000 with the gender male and 57,000 with the gender female. S TAN G MAP: In our experiments, we found both I MDB G MAP and SSA G MAP to be insufficient. We therefore devised a simple technique for assigning genders to named entities using the context of their appearance. This technique is general (not specific to movie screenplays) and may be used for automatically assigning genders to named characters in literary texts. The technique is as follows: (1) run a named entity coreference resolution system on the text, (2) collect all third person pronouns (she, her, herself, he, his, him, himself ) that are resolved to each entity, and (3) assign a gender based on the gender of the third person pronouns. We used Stanford's named entity coreference resolution system (Lee et al., 2013) for finding coreferences. Note that the existing coreference systems are not equipped to resolve references within a conversation. For example, in the conversation between Mickey and Gail (see Figure 1) "He" refers to Mickey's doctor, Dr. Wilkes, who is mentioned by name in an earlier scene (almost 100 lines before this conversation). To avoid incorrect coreferences, we therefore ran the coreference resolution system only on the scene descriptions of screenplays. 5.2 Results and Discussion
+
+Table 2 presents the results for using various name to gender mapping resources for the first test. Since it is important for us to perform well on both classes 834
+
+(fail and pass), we report the macro-F1 measure; macro-F1 measure weights the classes equally unlike micro-F1 measure (Yang, 1999). The results show that SSA G MAP performs significantly5 worse than all the other name-to-gender resources. One reason is that movies have a number of named characters that have gender different from the common gender associated with their names. For example, the movie Frozen (released in 2010) has two named women: Parker and Shannon. According to SSA G MAP, Parker is a male, which leads to an incorrect prediction (fail when the movie actually passes the first test). The results show that a combination of S TAN G MAP and I MDB G MAP outperforms all the individual resources by a significant margin. We combined the resources by taking their union. If a name appeared in both resources with conflicting genders, we retained the gender recorded in I MDB G MAP. Note that the precision of I MDB G MAP is significantly higher than the precision of S TAN G MAP for the class Fail (0.35 versus 0.22). This has to do with coverage: S TAN G MAP is not able to determine the gender of a number of characters and predicts fail when the movie actually passes the test. We expected this behavior as a result of being able to run the coreference resolution tool only on the scene descriptions. Not all characters are mentioned in scene descriptions. Also note that the precision of I MDB G MAP is significantly lower than the precision of S TAN G MAP for the class Pass (0.97 versus 0.996). Error analysis revealed two problems with I MDB G MAP. First, it lists non-named characters (such as Stewardess) along with the named characters in the credit list. So while the movie A
+We use McNemars test with p < 0.05 to report significance throughout the paper.
+5
+
+

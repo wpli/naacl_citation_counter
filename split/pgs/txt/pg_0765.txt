@@ -1,0 +1,37 @@
+Proportion of Calibration Data First k sentences Percentage 1 0.7% 2 1.3% 3 2.0% 4 2.7% 5 3.3% 10 6.6% 20 13.3% 30 19.9% 40 26.6% 50 33.2% 60 39.8%
+
+ 0.21 0.38 0.41 0.56 0.70 0.81 0.94 0.96 0.98 0.98 0.98
+
+Top (%) 25 50 75 100
+
+random 29.85 29.80 29.76 29.83
+
+BLEU model gold 38.53 39.08 38.40 39.00 38.37 38.98 38.37 38.99
+
+ 0.55 0.60 0.61 0.62
+
+# Trans 1.95 2.73 3.48 4.00
+
+Table 4: A comparison of the translation quality when we retain the top translators under different rankings. The rankings shown are random, the model's ranking (using all features from Table 3) and the gold ranking.  is the difference between the BLEU scores for the gold ranking and the model ranking. # Trans is the average number of translations needed for each source sentence.
+
+Table 2: Pearson Correlations for calibration data in different proportion. The percentage column shows what proportion of the whole data set is used for calibration.
+
+bad workers. Similarly, we reduce the nonprofessional translation cost to the half of the original cost. · In both cases we need some amount of professionally translated materials to use as a gold standard for calibration. Although the unit cost for each reference is much higher than the unit cost for each non-professional translation, the cost associated with non-professional translations can dominate the total cost since the large amount of data need to be collected. Thus, we focus on reducing cost associated with nonprofessional translations.
+
+Feature Set (S)entence features (W)orker features (R)anking features Calibration features S+W+R features S+W+R+Bilingual features All features Baseline (MERT)
+
+ 0.80 0.78 0.81 0.93 0.86 0.88 0.95 0.73
+
+BLEU rank score 36.66 37.84 36.92 36.92 36.94 35.69 38.27 38.27 37.39 38.69 37.59 39.23 38.37 39.80 38.99
+
+7
+
+Related Work
+
+Table 3: Correlation () and translation quality for the various features used by our model. Translation quality is computed by selecting best translations based on modelpredicted ranking for workers (rank) and model-predicted scores for translations (score). Here we do not filter out bad workers when selecting the best translation.
+
+can save almost half of the cost associated with non-professional translations to get 95% of the translation quality using the full set of redundant translations. · We show that we can quickly identify bad translators, either by having them first translate a small number of sentences to be tested against professional translations, or by estimating their performance using a feature-based linear regression model. The cost savings for non-professionals here comes from not hiring 711
+
+Sheng et al. (2008) focused on training a machine learning model from noisy labels. We cannot always get high-quality labeled data from crowdsourcing, but we can still ensure that a model trained on the data is accurate by redundantly labeling the data. Sheng et al. (2008) proposed a framework for repeated-labeling that resolves the uncertainty in labeling via majority voting. The experimental results show that a model's accuracy is improved even if labels in its training data are noisy and imperfect. As long as the integrated quality (the probability of the integrated labeling being correct) is higher than 0.5, repeated labeling benefits model training. Passonneau and Carpenter (2013) created a Bayesian model of annotation. They applied it to the problem of word sense annotation. Passonneau and Carpenter (2013) also proposed an approach to detect and avoid spam workers. They measured the
+
+

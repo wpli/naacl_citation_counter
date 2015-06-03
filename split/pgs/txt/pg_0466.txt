@@ -1,0 +1,21 @@
+class of a social media message. Because this task is new, it is not clear what classification technique is ideal (for example, it is possible that present orientation is best captured with non-linear relationships), so we explore four techniques: logR: (logistic regression). We use regularized logistic regression (equivalent to maximum entropy) (Fan et al., 2008; Bishop, 2006). From crossvalidation over the training data, we chose L1 penalization (|| ||1 ). lSVC, rSVC: (support vector classification). Compared to logR, support vector machines offer non-linear kernel functions (Cortes and Vapnik, 1995), and large-margin optimization for class split. We consider both a linear kernel (lSVC) and a radial basis function kernel (rSVC). From cross-validation over the training data, we chose L1 penalization for lSVC and L2 (|| ||2 ) for rSVC. ERTs: (forest of extremely randomized trees). This technique uses an ensemble of decision trees in which both the feature and cut-point are chosen at each node from a randomly generated set of possible options (Geurts et al., 2006). Such an approach can handle both interactions and non-linear relationships, at the expense of a larger search space. From cross-validation over our training data, we set the following algorithm parameters: we build 1,000 decision trees, using the Gini impurity measure when choosing splits (as opposed to entropy), and selecting each node's feature threshold from among square-root of the total features. All classifications algorithms were implemented using the scikit-learn toolkit (Pedregosa et al., 2011). Multi-classication over binary classifiers (logR, lSVC, rSVC) was achieved using a series of one-v-rest classifiers. We explore five language-based features: ngrams: 1 to 3 token sequences. Messages are tokenized using the happierfuntokenizing tool3 which captures common social media tokens such as emoticons, hashtags, and user handles. Features
+available here: wwbp.org/public data/happierfuntokenizing.zip
+3
+
+are encoded simply as binary indicators for whether the ngram appears in the message. time exs: The mean difference between the resolved date-time of all time expressions and the date-time in which the message was posted. Time expressions are labeled via Stanford's SUTime annotator (Chang and Manning, 2012), discussed previously. Specific features recorded include the temporal difference itself (e.g. -2.5 for "two and half days ago"), its base 2 log (log (1 + value)), its absolute value, total number of time expressions, and binary variables indicating if any past, present, or future expressions appear in the text. We also include binary features for each of the named-entity time tags for the time expression provided by SUTime (e.g. "future ref", "present ref", "next immediate"). POS tags: The relative frequency of each part-ofspeech tag. Tagging is done via Stanford's part-ofspeech tagger (Toutanova et al., 2003). Stanford's tagger does not have explicit social media tags, but we are most interested in capturing tense which it does well.4 Also, it is already being used as part of SUTime. Each part-of-speech tag is encoded as the frequency of tag usage (f req (tag, msg )) divided by the total number of tokens in the message (tokensmsg ):
+p(tag |msg ) = f req (tag, msg ) |tokensmsg |
+
+lexica: The relative frequency of categories, based on
+
+the Linguistic Inquiry and Word Count (LIWC) dictionary (Pennebaker et al., 2007). We use the 2007 version of LIWC which includes 64 categories of psychologicallyrelevant language, including past, present, and future verb categories. The features are encoded as the frequency with which a word from a category (cat) appeared in the message (msg ) divided by the total tokens in the message (tokensmsg ): f req (token, msg ) p(cat|msg ) =
+4
+
+tokencat
+
+|tokensmsg |
+
+The Stanford Tagger has well documented errors on microblog text (Derczynski et al., 2013). However, we manually evaluated 49 verbs across 20 randomly selected statuses, and all verb tenses were correctly tagged while 4 non-verbs were incorrectly tagged as base-form verbs.
+
+412
+
+

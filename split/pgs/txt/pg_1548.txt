@@ -1,0 +1,38 @@
+Translating Videos to Natural Language Using Deep Recurrent Neural Networks
+Subhashini Venugopalan UT Austin Austin, TX
+vsub@cs.utexas.edu
+
+Huijuan Xu UMass Lowell Lowell, MA
+hxu1@cs.uml.edu
+
+Jeff Donahue UC Berkeley, ICSI Berkeley, CA
+jdonahue@eecs.berkeley.edu
+
+Marcus Rohrbach UC Berkeley, ICSI Berkeley, CA
+rohrbach@eecs.berkeley.edu
+
+Raymond Mooney UT Austin Austin, TX
+mooney@cs.utexas.edu Input video:
+
+Kate Saenko UMass Lowell Lowell, MA
+saenko@cs.uml.edu
+
+Abstract
+Solving the visual symbol grounding problem has long been a goal of artificial intelligence. The field appears to be advancing closer to this goal with recent breakthroughs in deep learning for natural language grounding in static images. In this paper, we propose to translate videos directly to sentences using a unified deep neural network with both convolutional and recurrent structure. Described video datasets are scarce, and most existing methods have been applied to toy domains with a small vocabulary of possible words. By transferring knowledge from 1.2M+ images with category labels and 100,000+ images with captions, our method is able to create sentence descriptions of open-domain videos with large vocabularies. We compare our approach with recent work using language generation metrics, subject, verb, and object prediction accuracy, and a human evaluation.
+
+Our output: A cat is playing with a toy. Humans: A Ferret and cat fighting with each other. / A cat and a ferret are playing. / A kitten is playing with a ferret. / A kitten and a ferret are playfully wrestling.
+
+Figure 1: Our system takes a short video as input and outputs a natural language description of the main activity in the video.
+
+1
+
+Introduction
+
+For most people, watching a brief video and describing what happened (in words) is an easy task. For machines, extracting the meaning from video pixels and generating natural-sounding language is a very complex problem. Solutions have been proposed for narrow domains with a small set of known actions and objects, e.g., (Barbu et al., 2012; Rohrbach et al., 2013), but generating descriptions for "in-thewild" videos such as the YouTube domain (Figure 1) remains an open challenge. Progress in open-domain video description has been difficult in part due to large vocabularies and
+
+very limited training data consisting of videos with associated descriptive sentences. Another serious obstacle has been the lack of rich models that can capture the joint dependencies of a sequence of frames and a corresponding sequence of words. Previous work has simplified the problem by detecting a fixed set of semantic roles, such as subject, verb, and object (Guadarrama et al., 2013; Thomason et al., 2014), as an intermediate representation. This fixed representation is problematic for large vocabularies and also leads to oversimplified rigid sentence templates which are unable to model the complex structures of natural language. In this paper, we propose to translate from video pixels to natural language with a single deep neural network. Deep NNs can learn powerful features (Donahue et al., 2013; Zeiler and Fergus, 2014), but require a lot of supervised training data. We address the problem by transferring knowledge from auxiliary tasks. Each frame of the video is modeled by a convolutional (spatially-invariant) network pre-trained on 1.2M+ images with category labels (Krizhevsky et al., 2012). The meaning state
+
+1494
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1494­1504, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,31 @@
+1.0 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 w
+
+All correct Above baseline Baseline Below baseline All incorrect
+
+System S1 S2 S1 S2
+
+Chosen references 1.2, 2.1, 3.1 1.2, 2.1, 3.1 1.1, 2.1, 3.2 1.1, 2.1, 3.2
+
+P 0.60 0.80 0.30 0.30
+
+R 0.20 0.05 0.30 0.40
+
+F0.5 0.43 0.20 0.30 0.32
+
+WAcc
+
+Table 7: S1 outperforms S2 in terms of overall F0.5 but S2 outperforms S1 when evaluated on different references.
+
+Figure 2: Effect of w on weighted accuracy (WAcc).
+
+We can reformulate accuracy to satisfy these conditions by including a weight factor w > 1:
+WAcc = w · TP + TN w · TP + TN + w · FP - FPN + FN - FPN 2 2 w · TP + TN = FPN w · TP + TN + w · FP - w · FPN 2 + FN - 2 w · TP + TN = w · (TP + FP) + TN + FN - (w + 1) · FPN 2
+
+To illustrate this, consider two systems (S1 and S2 ) evaluated on a gold standard containing 3 sentences with 2 correction alternatives each (i.e. six possible references: 1.1, 1.2, 2.1, 2.2, 3.1 and 3.2 respectively). Table 7 shows that, while S1 achieves a higher maximum score than S2 , comparing their F0.5 scores directly is not possible as they are computed on a different set of references. In fact, S2 could outperform S1 on other reference sets. 2.3.3 Measuring improvement
+
+Higher values of w will reward and penalise systems more heavily, bringing those below the baseline closer to the lower bound and those above the baseline closer to the upper bound (see Figure 2). As w increases, differences between WAccsys and its bounds become less pronounced, which is why we adopt w = 2. Regardless of w, WAcc will always reduce to Acc for the `do-nothing' baseline. 2.3.2 Metric behaviour Before we set out to evaluate and compare systems, we must understand how metrics behave and to what extent they are comparable. Table 6 indicates that the metrics will always produce the same results for detection and correction unless source = hypothesis = reference for at least one position in the alignment. A `do-nothing' baseline will always produce the same results for both aspects, since source = hypothesis for all positions. Whenever a gold standard allows for alternative corrections, references that maximise the target metric should be chosen. Nevertheless, we note that the (maximum) score obtained by a system only applies to a given set of chosen references and is therefore only directly comparable to results on the same reference set. 583
+
+We know that whenever P > 0.5, the error rate decreases (and therefore Acc increases) so the text is improved.3 However, an increase in P , R or F alone does not necessarily imply an increase in Acc or WAcc, as illustrated in Table 8. In order to determine whether a system improves on the source text, we must compare its performance (WAccsys ) with that of the baseline (WAccbase ). Because each WAccsys is computed from a different set of references, we must compute WAccbase individually for each system using its chosen references. This is done by using the source sentence as the hypothesis in the existing alignment. Once we have WAccsys and WAccbase for each system, we can compare them to determine if the text has improved. When these two values are equal, there is no benefit to deploying the system. If we want to compare and rank systems, we need to measure how much the text has been improved or degraded. This can be done using a baselinenormalised metric that measures relative coverage of the area between the baseline and WAcc bounds (see Figure 3). This metric, henceforth Improvement or
+3 In theory, applying more correct edits than incorrect edits will yield a positive balance. However, in practice, this depends on the edits, especially if they are variable-length phrases. The P > 0.5 criterion also only holds for Acc and not WAcc, as the latter modifies the original proportions by introducing weights.
+
+

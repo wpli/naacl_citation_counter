@@ -1,0 +1,50 @@
+consisting of a title and more detailed description (this is unavailable in 2010 and 2011 data). When evaluating on one TAC data set, we use the data from the other three years as the training set. All the summaries are evaluated using ROUGE (Lin, 2004; Owczarzak et al., 2012). In all of our experiments, we use Stanford CoreNLP toolkit to tokenize the sentences, extract name entities and POS tags. Berkeley Parser (Petrov et al., 2006) is used to get the constituent parse tree for every sentence. An academic free solver 11 does all the ILP decoding. 5.2 Results and Analysis 5.2.1 Summarization Results Table 1 shows the ROUGE-2 results of our proposed joint system, the ICSI system (which uses document frequency threshold to select bigram concepts and uses df as weights), the best performing system in the NIST TAC evaluation, and the state of the art performance we could find. The result of our proposed method is statistically significantly better than that of ICSI ILP (p < 0.05 based on paired ttest). It is also statistically significantly (p < 0.05) better than that of TAC Rank1 except 2011, and previous best in 2008 and 2010. The 2011 previous best results from (Ng et al., 2012) involve some rule-based sentence compression, which improves the ROUGE value. If we apply the same or similar rule-based sentence compression on our results, and the ROUGE-2 of our proposed method improves to 14.38.
+ICSI ILP TAC Rank1 Previous Best Proposed Method 2008 10.23 10.38 10.76 11.84 2009 11.60 12.16 12.46 12.77 2010 10.03 9.57 10.8 11.78 2011 12.71 13.44 13.93 13.97
+
+the percentage of the correct bigrams (those in the human reference summaries) by our proposed selection method and the original ICSI system which just ICSI System ICSI System used document frequency based selection. We can see that our selection method yields a higher percent of the correctly chosen bigrams. Since our proposed method is slightly aggressive when filtering bigrams, the absolute number of the correct bigrams decreased. However, our filtering method successfully removes more useless bigrams, resulting in a higher percentage of the correct bigrams. Table 2 shows the summarization results when using different bigrams: the method used in the ICSI ILP system, that is, document frequency based selection/filtering and our selection method. Both of them use document frequency as the bigram weight in the ILP summarization module. The results show that just by changing the input bigrams, our method has already outperformed the ICSI system, which means the selection of bigram indeed has an impact on summarization results.
+Percentage (%)
+
+34
+
+ICSI System Proposed System
+
+32
+
+Percentage (%)
+
+30
+
+28
+
+26
+
+24
+
+22
+
+20 2008 2009 2010 2011
+
+Figure 1: Percentage of correct bigrams in the selected bigrams from ICSI and our proposed system.
+
+Table 1: ROUGE-2 summarization results. is from (Li et al., 2013b),  is from (Davis et al., 2012), and  is from (Ng et al., 2012).
+
+5.2.2 The Effect of Bigram Selection In our experiments, the document frequency threshold used to filter the bigrams is 3, the same as that in (Gillick et al., 2009), in order to make a better comparison with previous work. Figure 1 shows
+11
+
+ICSI ILP Ours
+
+2008 10.23 10.26
+
+2009 11.60 11.65
+
+2010 10.03 10.25
+
+2011 12.71 12.75
+
+Table 2: ROUGE-2 summarization results when using different bigrams, both using document frequencies as weights.
+
+http://www.gurobi.com
+
+783
+
+

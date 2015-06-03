@@ -1,0 +1,26 @@
+Incrementally Tracking Reference in Human/Human Dialogue Using Linguistic and Extra-Linguistic Information
+Ryu Iida Casey Kennington NICT UCRI CITEC, Bielefeld University Universit® atsstraﬂe 25 Seika-cho, Soraku-gun Kyoto, Japan Bielefeld Germany Takenobu Tokunaga Tokyo Institute of Technology ^ Ookayama, Meguro Tokyo, Japan David Schlangen Bielefeld University Universit® atsstraﬂe 25 Bielefeld Germany
+david.schlangen@ uni-bielefeld.de
+
+ryu.iida@nict.go.jp ckennington@citec.uni-bielefeld.de take@cs.titech.ac.jp
+
+Abstract
+A large part of human communication involves referring to entities in the world and often these entities are objects that are visually present for the interlocutors. A system that aims to resolve such references needs to tackle a complex task: objects and their visual features need to be determined, the referring expressions must be recognised, and extra-linguistic information such as eye gaze or pointing gestures need to be incorporated. Systems that can make use of such information sources exist, but have so far only been tested under very constrained settings, such as WOz interactions. In this paper, we apply to a more complex domain a reference resolution model that works incrementally (i.e., word by word), grounds words with visually present properties of objects (such as shape and size), and can incorporate extra-linguistic information. We find that the model works well compared to previous work on the same data, despite using fewer features. We conclude that the model shows potential for use in a realtime interactive dialogue system.
+
+1
+
+Introduction
+
+Referring to entities in the world via definite descriptions makes up a large part of human communication (Poesio and Vieira, 1997). In task-oriented situations, these references are often to entities that are visible in the shared environment. This kind of reference has attracted attention in recent computational research, but the kinds of interactions studied are often fairly restricted in controlled lab situations (Tanenhaus and Spivey-Knowlton, 1995) or simulated human/computer interactions, (Schlangen 272
+
+et al., 2009; Kousidis et al., 2013; Chai et al., 2014). In such task-oriented, co-located settings, interlocutors can make use of extra-linguistic cues such as gaze or pointing gestures. Furthermore, listeners resolve references as they unfold, often identifying the referred entity before the end of the reference (Tanenhaus and Spivey-Knowlton, 1995; Spivey et al., 2002), however research in reference resolution has mostly focused on full, completed referring expressions. In this paper we make a first move towards addressing somewhat more complex domains. We apply a model of reference resolution, which has been tested in a simpler setup, on more natural data coming from a corpus of human/human interactions. The model is incremental in that it does not wait until the end of an utterance to process, rather it updates its interpretation at each word increment. The model can also incorporate other modalities, such as gaze or pointing cues (deixis) incrementally. We also model the saliency of the context, and show that the model can easily take such contextual information into account. The model improves over previous work on reference resolution applied to the same data (Iida et al., 2010; Iida et al., 2011). The paper is structured as follows: in the following section we discuss related work on incremental resolution of referring expressions. We explain the model that we use in Section 3 and the data we apply it to in Section 4. We then describe the experiments and the results and provide a discussion.
+
+2
+
+Related Work
+
+Reference resolution (RR), which is the task of resolving referring expressions (REs) to what they are
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 272≠282, Denver, Colorado, May 31 ≠ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,21 @@
+mean -1 and variance 1. The target's proposed state is h = (1 - r )h + r h . r can be greater than 1, and in that case, the proposed state h is more distant from h than the current state h. This ensures that the transition is reversible because r = 1/r . The acceptance probability can be calculated in a similar manner to that described for C OMP. M OVE ­ Propose to move the target internal node, without swapping its neighbors. For initialization, missing feature values are imputed by missMDA. The initial tree is constructed by distance-based agglomerative clustering. The state of an internal node is set to the average of those of its children.
+(a)
+
+6
+
+Experiments
+
+6.1 Reconstruction of Known Family Trees 6.1.1 Data and Method We first conducted a quantitative evaluation of phylogenetic inference, using known family trees. We ran 5-fold cross-validations. For each of WALS and Ethnologue, we subdivided a set of language families into 5 subsets with roughly the same number of leaves. Because of some huge language families, the number of language families per subset was uneven. We disassembled family trees in the target subset and to let the model reconstruct a binary tree for each language family. Unlike ordinary held-out evaluation, this experiment used all data for inference at once. 6.1.2 Model Settings We used the parameter settings described in Section 4.1. For phylogenetic inference, we ran 9,000 burn-in iterations after which we collected 100 samples at an interval of 10 iterations. For comparison, we performed average-link agglomerative clustering (A LC). It has two variants, A LC -C AT and A LC -C ONT. A LC -C AT worked on categorical features and used the ratio of disagreement as a distance metric. A LC -C ONT performed clustering in the continuous space, using cosine distance. In other words, we can examine the effects of the typology evaluator and precision parameters. For these models, missing feature values are imputed by missMDA. 6.1.3 Evaluation Measures We present purity (Heller and Ghahramani, 2005), subtree (Teh et al., 2008) and outlier fraction
+
+(b)
+
+(c)
+
+Figure 4: Maximum clade credibility tree of the world. (a) The whole tree. Three-letter labels are ISO
+639-3 codes. Nodes below language families are omitted. (b­c) Portions of the tree are enlarged.
+
+scores (Krishnamurthy et al., 2012). All scores are between 0 and 1 and higher scores are better. We calculated these scores for each language family and
+
+330
+
+

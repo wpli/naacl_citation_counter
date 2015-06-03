@@ -1,0 +1,33 @@
+Development of the Multilingual Semantic Annotation System
+Scott Piao
+Lancaster University Lancaster UK
+s.piao@lancaster.ac.uk
+
+Francesca Bianchi
+University of the Salento Lecce
+Italy
+francesca.bianchi@unisalento.it
+
+Carmen Dayrell
+Lancaster University Lancaster UK
+c.dayrell@lancaster.ac.uk
+
+Angela D'Egidio
+University of the Salento Lecce
+Italy
+angela.degidio@unisalento.it
+
+Paul Rayson
+Lancaster University Lancaster UK
+p.rayson@lancaster.ac.uk
+
+Abstract
+This paper reports on our research to generate multilingual semantic lexical resources and develop multilingual semantic annotation software, which assigns each word in running text to a semantic category based on a lexical semantic classification scheme. Such tools have an important role in developing intelligent multilingual NLP, text mining and ICT systems. In this work, we aim to extend an existing English semantic annotation tool to cover a range of languages, namely Italian, Chinese and Brazilian Portuguese, by bootstrapping new semantic lexical resources via automatically translating existing English semantic lexicons into these languages. We used a set of bilingual dictionaries and word lists for this purpose. In our experiment, with minor manual improvement of the automatically generated semantic lexicons, the prototype tools based on the new lexicons achieved an average lexical coverage of 79.86% and an average annotation precision of 71.42% (if only precise annotations are considered) or 84.64% (if partially correct annotations are included) on the three languages. Our experiment demonstrates that it is feasible to rapidly develop prototype semantic annotation tools for new languages by automatically bootstrapping new semantic lexicons based on existing ones.
+
+1 Introduction
+In this paper, we report on an experiment to develop prototype semantic annotation tools for Italian, Chinese and Brazilian Portuguese based on an existing English annotation tool. Over the last twenty years, semantic lexical resources and semantic annotation tools, such as EuroWordNet (Vossen, 1998) and USAS (Rayson et al., 2004), have played an important role in developing intelligent NLP and HLT systems. Various applications of semantic annotation systems and annotated corpus resources have been reported, including empirical language studies at the semantic level (Rayson et al. 2004; Ooi et al., 2007; Beigman Klebanov et al., 2008; Potts and Baker, 2013) and studies in information technology (Volk, et al., 2002; Nakano et al, 2005; Doherty et al., 2006; Chitchyan et al., 2006; Taiani et al., 2008; Gacitua et al., 2008) among others. While various semantic annotation tools are available for monolingual analysis, particularly for English, there are few such systems that can carry out semantic analysis of multiple languages with a unified semantic annotation scheme. We aim to address this issue by extending an existing English semantic annotation tool (Rayson et al., 2004) to cover a range of languages. The USAS semantic annotation tool mentioned above adopts a lexical semantic classification scheme derived from Tom McArthur's Longman Lexicon of Contemporary English (McArthur, 1981), which consists of 21 main discourse fields and 232 sub-fields, such as "social actions, states and processes" and "emotion" etc. It also uses a set
+1268
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1268­1274, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

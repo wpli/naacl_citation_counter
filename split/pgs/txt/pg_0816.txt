@@ -1,0 +1,25 @@
+Event Type Expression Transcription Catabolism Phosphorylation Localization Binding Regulation Positive regulation Negative regulation Total Event F1
+
+Rec. 50.8 18.3 0 36.2 0 24.0 2.5 11.4 4.4 19.1
+
+Prec. 41.9 14.0 0 43.6 0 42.6 5.0 21.4 16.4 29.4
+
+F1 45.9 15.9 0 39.5 0 30.7 3.3 14.9 6.9 23.2
+
+Event Type Expression Transcription Catabolism Phosphorylation Localization Binding Regulation Positive regulation Negative regulation Total Event F1
+
+Rec. 76.4 49.4 65.6 73.9 74.6 48.0 32.5 38.7 35.9 50.2
+
+Prec. 81.5 73.6 80.0 84.5 75.8 50.9 47.1 51.7 54.9 62.6
+
+F1 78.8 59.1 74.4 78.9 75.2 49.4 38.6 44.3 43.9 55.7
+
+Table 1: GENIA event extraction results of GUSPEE
+
+evaluation methodology enables us to assess the true accuracy and compare head-to-head with supervised methods. GENIA contains 800 abstracts for training and 150 for development. It also has a test set, but its annotation is not made public. Therefore, we used the training set for grounded learning and development, and reserved the development set for testing. The majority events are Regulation (including Positive regulation, Negative regulation). See Kim et al. (2009) for details. We processed all sentences using SPLAT (Quirk et al., 2012), to conduct tokenization, part-of-speech tagging, and constituency parsing. We then postprocessed the parses to obtain Stanford dependencies (de Marneffe et al., 2006). During development on the training data, we found the following parameters (Section 3) to perform quite well and used them in all subsequent experiments:  = 20, WNULL = 4, WRAISE-P = 2, WRAISE-E = -6, L2 prior = 0.1. Interestingly, we found that encouraging protein RAISING is beneficial, which probably stems from the fact that proteins are often separated from event triggers by noun modifiers, such as "the BCL gene", "IL-10 protein". Table 1 shows GUSPEE's results on GENIA event extraction. Note that this event-based evaluation is rather stringent, as it considers an event incorrect if one of its argument events is not completely correct, thus an incorrect event will render all its upstream events incorrect. See Kim et al. (2009) for details. For comparison, Table 2 shows the results of MSR11, a state-of-the-art supervised system. MSR11 also provides a upper bound for the supervised version of GUSPEE, as the latter is much less engineered. 762
+
+Table 2: GENIA event extraction results of state-of-theart supervised system MSR11 (Quirk et al., 2011).
+
+Not surprisingly, grounded learning with GUSPEE still lags behind supervised learning. MSR11 used a rich set of features, including POS tags, linear and dependency n-grams, etc. Also, it is expected that indirect supervision do not provide as effective signals as direct supervision. However, the comparison reveals a particularly interesting contrast. Event types such as Expression, Catabolism, Phosphorylation, and Localization are relatively easy, yet GUSPEE performed rather poorly on them. Simple events do not admit multiple arguments, so they appear less often in the virtual evidence, and grounded learning has difficulty learning these event types, especially their triggers. In light of this, it's actually remarkable that GUSPEE still learned a substantial portion of them. 4.2 Prototype-Driven Learning While full-blown annotations are undoubtedly expensive and time-consuming to generate, it is rather easy for a domain expert to provide a few trigger words per event type, such as "expression", "expressed" for Expression. This motivates us to explore prototype-driven learning (Haghighi and Klein, 2006) in combination with grounded learning. Specifically, we simulated expert selection by picking the top five most frequent trigger words for each event type from training data. We then augmented grounded learning in GUSPEE by incorporating word emission features for each prototype word and the corresponding event state, e.g., I[lemma = express, zm = Expression]. The weights are fixed to a large number (five in our case). Table 3 shows the results with prototypes, which improved substantially. Not surprisingly, simple
+
+

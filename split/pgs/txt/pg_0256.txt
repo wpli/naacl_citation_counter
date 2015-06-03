@@ -1,0 +1,68 @@
+MT n-best MT 9 feat. CMM 9 feat. £ MT + CMM 17 feat. RLMT 2 feat. DCGM-I 2 feat. DCGM-II 2 feat. DCGM-I + CMM 10 feat. DCGM-II + CMM 10 feat.
+
+BLEU (%) 3.60 (-9.5%) 3.33 (-16%) 3.98 (-) 4.13 (+3.7%) 4.26 (+7.0%) 4.11 (+3.3%) 4.44 (+11%) 4.38 (+10%)
+
+METEOR (%) IR n-best 9.19 (-0.9%) 9.34 (+0.7%) 9.28 (-) 9.54 (+2.7%) 9.55 (+2.9%) 9.45 (+1.8%) 9.60 (+3.5%) 9.62 (+3.5%) IR 2 feat. CMM 9 feat. £ IR + CMM 10 feat. RLMT 2 feat. DCGM-I 2 feat. DCGM-II 2 feat. DCGM-I + CMM 10 feat. DCGM-II + CMM 10 feat.
+
+BLEU (%) 1.51 (-55%) 3.39 (-0.6%) 3.41 (-) 2.85 (-16%) 3.36 (-1.5%) 3.37 (-1.1%) 4.07 (+19%) 4.24 (+24%)
+
+METEOR (%) 6.25 (-22%) 8.20 (+0.6%) 8.04 (-) 7.38 (-8.2%) 7.84 (-2.5%) 8.22 (+2.3%) 8.67 (+7.8%) 8.61 (+7.1%)
+
+Table 3: Context-sensitive ranking results on both MT (left) and IR (right) n-best lists, n = 1000. The subscript feat. indicates the number of features of the models. The log-linear weights are estimated by running one iteration of MERT. We mark by (±%) the relative improvements with respect to the reference system (£).
+
+to the baseline systems helps. Third, the neural network models contribute measurably to improvement: RLMT and DCGM models outperform baselines, and DCGM models provide more consistent gains than RLMT. MT vs. IR BLEU and METEOR scores indicate that the phrase-based MT decoder outperforms a purely IR approach, despite the fact that IR proposes fluent human generated responses. This may be because the IR model only loosely captures important patterns between message and response: It ranks candidate responses solely by the similarity of their message with the message of the test triple (§5.3). As a result, the top ranked response is likely to drift from the purpose of the original conversation. The MT approach, by contrast, more directly models statistical patterns between message and response. CMM MT+CMM, totaling 17 features (9 from MT + 8 CMM), improves 0.38 BLEU points, a 9.5% relative improvement, over the baseline MT model. IR+CMM, with 10 features (IR + word penalty + 8 CMM), benefits even more, attaining 1.8 BLEU points and 1.5 METEOR points over the IR baseline. Figure 4 (a) and (b) plots the magnitude of the learned CMM feature weights for MT+CMM and IR+CMM. CMM features help in both these hypothesis spaces and especially on the IR n-best list. Figure 4 (b) supports the hypothesis formulated in the previous paragraph: Since IR solely captures intermessage similarities, the matches between message and response are important, while context matches help in providing additional gains. The phrase-based statistical patterns captured by the MT system do a 202
+
+0.6 0.5 0.4 0.3 0.2 0.1 0.0 0.6 0.5 0.4 0.3 0.2 0.1 0.0
+
+(a) MT+CMM
+Feat. weights
+
+1-gram
+
+2-gram
+
+3-gram
+
+4-gram Feat. weights
+
+0.6 0.5 0.4 0.3 0.2 0.1 0.0 0.6 0.5 0.4 0.3 0.2 0.1 0.0
+
+(b) IR+CMM m matches c matches
+
+Feat. weights
+
+1-gram
+
+2-gram
+
+3-gram
+
+4-gram
+
+(c) DCGMII+CMM on MT
+
+(d) DCGMII+CMM on IR
+
+Feat. weights
+
+1-gram
+
+2-gram
+
+3-gram
+
+4-gram
+
+1-gram
+
+2-gram
+
+3-gram
+
+4-gram
+
+Figure 4: Comparison of the weights of learned CMM features for MT+CMM and IR+CMM systems (a) et (b) and DCGM-II+CMM on MT and IR (c) and (d).
+
+good job in explaining away 1-gram and 2-gram message matches (Figure 4 (a)) and the performance gain mainly comes from context matches. On the other hand, we observe that 4-gram matches may be important in selecting appropriate responses. Inspection of the tuning set reveals instances where responses contain long subsequences of their corresponding messages, e.g., m = "good night best friend, I love you", r = "I love you too, good night best friend". Although infrequent, such higher-order n-gram matches, when they occur, may provide a more robust signal of the quality of the response than 1- and 2-gram matches, given the highly conversational nature of our dataset. RLMT and DCGM Both RLMT and DCGM models outperform their respective MT and IR baselines. Both models also exhibit similar performance and show improvements over the MT+CMM models, albeit using a lower dimensional feature space. We believe that their similar performance is due to the limited diversity of MT n-best list together with gains in fluency stemming from the strong language
+
+

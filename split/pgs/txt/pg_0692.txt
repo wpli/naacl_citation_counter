@@ -1,0 +1,29 @@
+Criterion Grammar Meaning
+
+Fine-grained 0.51 - 0.56 0.27 - 0.35
+
+Coarse-grained 0.64 - 0.79 0.48 - 0.53
+
+rather than genuine paraphrases, substituting them in a given context often degrades grammaticality.
+
+Table 3: Cohen's  of pairwise agreement. Lexicon SSeed SID (SLV ) SLV Total n 66 339 534 600 Grammar 0.85 0.84 0.74 0.75 Meaning 0.91 0.78 0.78 0.79 Both 0.76 0.66 0.59 0.61
+
+6 Conclusion
+We proposed a method for expanding given paraphrase lexicons by first inducing paraphrase patterns and then searching monolingual corpora with these patterns for new paraphrase pairs. To the best of our knowledge, this is the first attempt to exploit various types of lexical variants for acquiring paraphrases in a completely empirical way. Our method requires minimal language-dependent resources, i.e., stoplists and tokenizers, other than raw corpora. We demonstrated the quantitative impact of our method and confirmed the potential quality of the expanded paraphrase lexicon. Our future work is four-fold. (i) Paraphrase lexicons created by different methods and sources have different properties. Designing an overall model to harmonize such heterogeneous lexicons is an important issue. (ii) We aim to investigate an extensive collection of corpora: there are far more corpora than those we used in this experiment. We are also interested in expanding paraphrase lexicons created by a method other than bilingual pivoting; for instance, those extracted from a Web-harvested monolingual comparable corpus (Hashimoto et al., 2011; Yan et al., 2013). (iii) We will apply our method to various languages for demonstrating its applicability, extending it for a wider range of lexical variants depending on the targeted language. (iv) Paraphrases are the fundamental linguistic phenomena that affect a wide range of NLP tasks. We are therefore interested in determining to what extent our paraphrase lexicons can improve the performance of application tasks such as machine translation, text summarization, and text simplification.
+
+Table 4: Precision of paraphrase substitution.
+
+paraphrases drawn from SSeed were of substantially high quality. Compared to SSeed , paraphrases sampled from SLV have relatively low precision in both grammaticality and meaning equivalence. However, these scores are reasonably high, considering that no use is made of rich language-specific resources12 . However, more grammatical errors occurred than with SSeed and SID . A manual error analysis revealed that the majority of these errors were caused by the differences of syntactic categories between phrases, e.g., (12). (12) The safety issue was considered sufficiently (  sufficient consideration) serious for all affected parties to be informed.
+
+Differences of grammatical number and determiners were the other major error sources. (13) Federal Security Service now spread a big network of fake sites and there are tons of potential buyers (  a potential buyer) of military weapons.
+
+These types of pairs originally existed in SSeed but were amplified by LEXVAR. Ganitkevitch and Callison-Burch (2014) stated that morphological variants of the same word might be desirable depending on the downstream task. For instance, they could be useful for paraphrase recognition tasks including question answering and multi-document summarization. As they are morphological variants
+Although we cannot make a direct comparison owing to the differences of data and human evaluators, for reference, Callison-Burch (2008) achieved 0.68, 0.61, and 0.55 precision for grammaticality, meaning equivalence, and both, respectively, by introducing parser-oriented syntactic constraints in bilingual pivoting.
+12
+
+Acknowledgments
+We are deeply grateful to Eiichiro Sumita, Masao Utiyama, Taro Watanabe, Kentaro Torisawa, and anonymous reviewers for their valuable comments on the earlier version of this paper. This work was partly supported by JSPS Postdoctoral Fellowship for Research Abroad (FYs 2011­2012) and JSPS KAKENHI Grant-in-Aid for Young Scientists (B) 25730139.
+
+638
+
+

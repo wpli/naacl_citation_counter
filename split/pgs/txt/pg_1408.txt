@@ -1,0 +1,51 @@
+Language French Hindi Russian
+
+Argument 1 Il He bahut se log Many people  Crash
+
+Relation phrase fut enr^ ol´ e de force au was conscripted to aaye came to  occured
+
+Argument 2 RAD RAD cailifornia California  Montenegro
+
+Table 3: Examples of extracted relations in different languages with English translations (Hindi is transliterated). Language French Hindi Russian % valid 81.6% 64.9% 63.5% BLEU 0.47 0.38 0.62 Relation length Gold Auto 3.6 2.5 4.1 2.8 1.8 1.7 Language French Hindi Russian Chinese Arabic Size 6,743 367 7,532 2,876 707 Language Georgian Latvian Tagalog Swahili Indonesian Size 497 491 102 114 1,876
+
+Table 1: % of valid relations and BLEU score of the extracted relations across languages with the average relation phrase length (in words).
+400 350 300 Number of Relations 250 200 150 100 50 0
+
+Table 2: Number of extracted relations (in thousands) from Wikipedia in multiple languages.
+
+French Hindi Russian
+
+[0-0
+
+.1)
+
+[0.1
+
+-0.2
+
+)
+
+[0.2
+
+-0.4
+
+)
+
+) ) -0.6 0.6-0.8 [0.4 [ Binned BLEU Score
+
+[0.8
+
+-1)
+
+[1]
+
+all three languages. This is an encouraging result since it implies that the majority of the extracted relation phrases are identical to the manually annotated relations. Table 2 lists the sizes of automatically extracted relations on 10 different languages from Wikipedia that we are going to make publicly available. These were selected to include a mixture of high-resource, low-resource, and typologically different languages. Table 3 shows examples of randomly selected relations in different languages along with their English translations.
+
+Figure 2: Number of automatically extracted relations binned by their BLEU scores computed relative to the manually annotated relations.
+
+4 Related Work
+Cross-lingual projection has been used for transfer of syntactic (Yarowsky and Ngai, 2001; Hwa et al., 2005) and semantic information (Riloff et al., 2002; Pad´ o and Lapata, 2009). There has been a growing interest in RE for languages other than English. Gamallo et al. (2012) present a dependency-parser based open RE system for Spanish, Portuguese and Galician. RE systems for Korean have been developed for both open-domain (Kim et al., 2011) and closed-domain (Kim and Lee, 2012; Kim et al., 2014) using annotation projection. These approaches use a Korean-English parallel corpus to project relations extracted in English to Korean. Following projection, a Korean POS-tagger and a dependency parser are employed to learn a RE system for Korean.
+
+followed by Hindi and Russian (64.0%). Surprisingly, Russian obtains the lowest percentage of valid relations but has the highest BLEU score between the automatic and the human extracted relations. This could be attributed to the fact that the average relation length (in number of words) is the shortest for Russian. From table 1, we observe that the length of the relation phrase is inversely correlated with the BLEU score. Figure 2 shows the distribution of the number of extracted relations across bins of similar BLEU scores. Interestingly, the highest BLEU score bin (1) contains the maximum number of relations in 1354
+
+

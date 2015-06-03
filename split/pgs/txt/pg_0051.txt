@@ -1,0 +1,13 @@
+Wednesday, June 3, 2015 (continued) 10:40­11:55 10:40­11:05 Session 8C: Machine Translation (Long + TACL Papers) A Comparison of Update Strategies for Large-Scale Maximum Expected BLEU Training Joern Wuebker, Sebastian Muehr, Patrick Lehnen, Stephan Peitz and Hermann Ney [TACL] Gappy Pattern Matching on GPUs for On-Demand Extraction of Hierarchical Translation Grammars Hua He, Jimmy Lin, and Adam Lopez Learning Translation Models from Monolingual Continuous Representations Kai Zhao, Hany Hassan and Michael Auli Lunch NAACL Business Meeting Session 9A: Lexical Semantics and Sentiment Analysis (Long Papers) A Corpus and Model Integrating Multiword Expressions and Supersenses Nathan Schneider and Noah A. Smith Good News or Bad News: Using Affect Control Theory to Analyze Readers' Reaction Towards News Articles Areej Alhothali and Jesse Hoey Do We Really Need Lexical Information? Towards a Top-down Approach to Sentiment Analysis of Product Reviews Yulia Otmakhova and Hyopil Shin
+
+11:05­11:30
+
+11:30­11:55
+
+11:55­13:00 13:00­14:00 14:00­15:15 14:00­14:25 14:25­14:50
+
+14:50­15:15
+
+li
+
+

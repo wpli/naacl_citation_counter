@@ -1,0 +1,25 @@
+Language Thai Hindi Hebrew Korean
+
+Acc. 15.2 25.9 21.3 40.9
+
+Data size 911 819 475 3181
+
+Model Graphemes only Joint (suppl. phonemes)
+
+EnJa 54.5 58.6
+
+EnHi 46.1 46.4
+
+Table 5: Transliteration accuracy with transcriptions generated from multiple transliterations.
+
+Table 4: Grapheme-to-phoneme word accuracy on the Wiktionary data.
+
+cause of the small size of the training data, it can only achieve about 15% word accuracy in our G2P development experiment. Table 3 shows the transliteration results. The accuracy of the model that uses only supplemental transcriptions (row 2) is very low, but the joint model obtains an improvement even with such inaccurate third-language transcriptions. Note that the Thai pronunciation is often quite different from English. For instance, the phoneme sequence [waj] obtained from the Thai transliteration of Whyte, helps the joint model correctly transliterate the English name into Japanese    (HO-WA-I-TO), which is better than (HO-I-TO) produced by the orthographic model. 5.2 Multi-lingual transcriptions Transcriptions obtained from a third language are not only noisy because of the imperfect G2P conversion, but often also lossy, in the sense of missing some phonetic information present in the source pronunciation. In addition, supplemental transliterations are not always available in a given third language. In this section, we investigate the idea of extracting phonetic information from multiple languages, with the goal of reducing the noise of generated transcriptions. We first train G2P converters for several languages on the pronunciation data collected from Wiktionary. Table 4 shows the sizes of the G2P datasets, and the corresponding G2P word accuracy numbers, which are obtained by using 90% of the data for training, and the rest for testing.2 For the highly-regular Japanese Katakana, we instead create a rule-based converter. Then we convert supplemental transliterations from those languages into
+We use the entire datasets to train G2P converters for the transliteration experiments, but their accuracy is unlikely to improve much due to a small increase in the training data.
+2
+
+noisy phonetic transcriptions. In order to obtain representative results, we also include transliteration pairs without supplemental transliterations, which results in different datasets than in the previous experiments. The sets for English-to-Japanese and English-to-Hindi now contain 30,190/17,557/1,886 and 12,070/3,777/380 entries, where the sizes refer to (1) the entire training set, (2) the subset of training entries that have at least one supplemental transcription, and (3) the test set (in which all entries have supplemental transcriptions). An interlingual approach holds the promise of ultimately replacing n2 pairwise graphemegrapheme transliteration models involving n languages with 2n grapheme-phoneme and phonemegrapheme models based on a unified phonetic representation. In our implementation, we merge different phonetic transcriptions of a given word into a single abstract vector representation. Specifically, we replace each phoneme with a phonetic feature vector according to a phonological feature chart, which includes features such as labial, voiced, and tense. After merging the vectors by averaging their weights, we incorporate them into the joint model described in Section 3.3 by modifying (i, P, T ). Unfortunately, the results are disappointing. It appears that the vector merging process compounds the information loss, which offsets the advantage of incorporating multiple transcriptions. Another way of utilizing supplemental transcriptions is to provide them directly to our generalized joint model described in Section 3.5, which can handle multiple input strings. Table 5 presents the results on leveraging transcriptions generated from supplemental transliterations. We see that the joint generation from multiple transcriptions significantly boosts the accuracy on English-to-Japanese, but the improvement on English-to-Hindi is minimal.
+
+949
+
+

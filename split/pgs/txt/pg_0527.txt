@@ -1,0 +1,27 @@
+stitute vectors, the word representations learned by our model are second-order vectors, which we call paraphrase vectors. Table 1 illustrates the difference between BOW and substitute vector context representations, as well as our representation for a word in context. Our model outperforms state-of-the-art results on lexical substitution tasks while learning from plain text in an unsupervised setting. 1
+
+distributions over topics. Then, word meaning is represented by distributions that can be conditioned on (and hence biased towards) the given context.
+
+3
+
+Substitute Vectors
+
+2
+
+Background
+
+A key element in distributional models of word meaning is the choice of context representation. Traditional out-of-context distributional models aggregate the observed contexts of a target word type to derive its representation. More recent models of word meaning in context typically bias such a word type representation towards the context of each particular word instance using context similarity measures. The typical choice for context representation is a bag-of-words (BOW) context vector. In this vector each neighboring word type is assigned with a weight, such as its count (Erk and Pad´ o, 2010) or tfidf (Reisinger and Mooney, 2010). A more recent variant of this approach is the continuous bag-ofwords (CBOW) vector, where context is represented as an average, or tf-idf weighted average, of dense low dimensional vector representations of the neighboring words (Huang et al., 2012). Context similarity is typically computed using vector Cosine. Several types of models of word meaning in context were recently proposed in the literature, mostly based on variants of BOW context representations. Thater et al. (2011) aggregate the contexts of a target word type into a sparse syntax-based context feature vector. Then, they generate a biased vector representation by reducing the weight of each context feature the less similar it is to the context of the given word instance. Reisinger and Mooney (2010) and Huang et al. (2012) use context clustering to induce multiple word senses for a target word type, where each sense is represented by a different context feature vector. Then, they choose for each word instance the sense vector most similar to its given ´ S´ context. O eaghdha and Korhonen (2014) use LDA (Blei et al., 2003) to aggregate word collocations to
+Our source code is publicly available at: www.cs.biu. ac.il/nlp/resources/downloads/word2parvec/
+1
+
+In this work we propose to use a little-known context modeling paradigm, representing a context word window as a substitute vector (Yatbaz et al., 2012). Unlike traditional context representations, a substitute vector does not comprise the first-order neighboring words of the target word. Instead it includes the second-order potential fillers for the target word slot, weighted according to how `fit' they are to fill the target slot given the neighboring words. More formally, we denote a word window context around a target word slot as c, and the substitute vector representing c as sc . sc [v ] is the fitness weight of word v to fill the target slot in context c, for every word v in the target word vocabulary. For example, the substitute vector sc = [big 0.35, good 0.28, bold 0.05, ...] may represent the context c = "It's a move.". Yatbaz et al. (2012) used a Kneser-Ney smoothed n-gram language model (Kneser and Ney, 1995) to estimate conditional probability as the fitness weight sc [v ] = p(v |c). Using a smoothed language model is essential since context-word collocation counts are too sparse when the context considered is an entire word window. We note that given the nature of ngram language models this representation is sensitive to word order. This property makes it appealing as it is potentially more informative than the traditional unordered BOW context representations.
+
+4
+
+A Model for Word Meaning in Context
+
+The main contribution of this paper is in proposing a model for word meaning in context, which is based on substitute vector context representations instead of the traditional bag-of-words representations. To achieve this we first propose a variant of substitute vectors as our context representation. Then, we consider an out-of-context representation for a word type as the average of the substitute vector representations of its observed contexts. Finally, the in-context representation for a given word instance is a weighted average of its observed contexts. In this weighted average, contexts are weighted higher the more similar they are to the given context, using
+
+473
+
+

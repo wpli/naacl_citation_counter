@@ -1,0 +1,22 @@
+for rich semantic representation of arbitrary WordNet synsets or Wikipedia pages. Second, we provide improvements over the conventional tf-idf weighting scheme by applying lexical specificity (Lafon, 1980), a statistical measure mainly used for term extraction, to the task of computing vector weights in a vector representation. Third, we propose a semantically-aware dimensionality reduction technique that transforms a lexical item's representation from a semantic space of words to one of WordNet synsets, simultaneously providing an implicit disambiguation and a distribution smoothing. We demonstrate that our representation achieves stateof-the-art performance on two different tasks: (1) word similarity on multiple standard datasets: MC30, RG-65, and WordSim-353 similarity, and (2) Wikipedia sense clustering, in which our unsupervised system surpasses the performance of a stateof-the-art supervised technique that exploits knowledge available in Wikipedia in several languages.
+
+Figure 1: The process of obtaining contextual information for a WordNet synset or a Wikipedia article.
+
+2
+
+Semantic Representation of Concepts
+
+Then, we analyze the obtained contextual information and construct two vector representations of the concept (Section 2.2). 2.1 Collecting contextual information
+
+Lexical resources and concepts. The gist of our approach lies in its combination of knowledge from two different lexical resources: (1) the expertbased lexicographic WordNet, whose basic constituents are synsets, i.e., concepts expressed by sets of synonymous words (Miller et al., 1990), and (2) the collaboratively-constructed encyclopedic Wikipedia, whose articles can be considered as individual concepts. Throughout the paper, by a concept we mean a tuple b = (p, s) where p is a Wikipedia page and s is the corresponding WordNet synset. As a bridge between the two resources we use the synset-to-article mappings provided by BabelNet1 (Navigli and Ponzetto, 2012), a high coverage multilingual encyclopedic dictionary and semantic network that merges, among other resources, Wikipedia and WordNet. Note that the concept b can also contain a Wikipedia page or a WordNet synset only, if a mapping is not provided by BabelNet. Semantic representation: N ASARI. Our concept modeling approach consists of two phases. First, for a given concept, we collect a set of relevant Wikipedia pages by leveraging the structural information in Wikipedia and WordNet (Section 2.1).
+1
+
+Figure 1 illustrates the process of obtaining a set of relevant Wikipedia pages Tb as contextual information for a given concept b = (p, s). Let Lp be the set containing p and all the Wikipedia pages having an outgoing link to p, and Rs be the set consisting of s and all other synsets that are in its direct neighbourhood. We further enrich Rs by including the coordinate synsets of s and the related synsets from its disambiguated gloss2 . Let B be a function mapping each WordNet synset s to its corresponding Wikipedia page p, if such mapping exists in BabelNet, and to the empty set otherwise. Hence, B (Rs ) = s Rs B (s ). Then, our contextual information is the set of Wikipedia pages Tb = Lp  B (Rs ). In the case either p or s is not present in the concept b, we take the contextual information as Tb = B (Rs ) or Tb = Lp , respectively. 2.2 Vector construction By processing the collected contextual information Tb , NASARI represents the concept b as two vectors in two semantic spaces: (1) word-based and (2) synset-based. Let Wb be the bag of words of all the Wikipedia pages in Tb after lemmatization and stop2
+
+http://www.babelnet.org/
+
+http://wordnet.princeton.edu/glosstag.shtml
+
+568
+
+

@@ -1,0 +1,36 @@
+of anchor words--words which unambiguously identify a particular topic. For instance, "wicket" might be an anchor word for the cricket topic. Thus, for any ¯ a,· will look like a topic distribuanchor word a, Q ¯ tion. Qwicket,· will have high probability for "bowl", "century", "pitch", and "bat"; these words are related to cricket, but they cannot be anchor words because they are also related to other topics. Because these other non-anchor words could be topically ambiguous, their co-occurrence must be explained through some combination of anchor words; thus for non-anchor word i, ¯ i,· = Q
+gk G
+
+fleece
+
+author iPad
+
+heel
+
+Toyota
+
+cozy fleece
+
+wonderful author iPad antilock Toyota
+
+¯ g ,· , Ci,k Q k
+
+(1)
+heel awful lemon
+
+where G = {g1 , g2 , . . . , gK } is the set of K anchor words. The coefficients Ci,k of this linear combination correspond to the probability of seeing a topic given a word, from which we can recover the probability of a word given a topic (represented in a matrix A) using Bayes' rule. In our experiments, we follow ¯ based on the Arora et al. (2013) to first estimate Q training data and then recover the C matrix
+ ¯ Ci, · = argminCi,· DKL (Qi,· || gk G
+
+¯ g ,· ) , Ci,k Q k
+
+Figure 1: Graphical intuition behind supervised anchor words. Anchor words (in gold) form the convex hull of word co-occurrence probabilities in unsupervised topic modeling (top). Adding an additional dimension to capture metadata, such as sentiment, changes the convex hull: positive words appear above the original 2 D plane (underlined) and negative words appear below (in outline).
+
+where DKL (x, y ) denotes the Kullback-Leibler divergence between x and y . In addition to discovering topics from a given set of anchor words as described above, Arora et al. (2013) also provide a geometric interpretation of a process for finding the needed anchor words. If we view ¯ as points in a high-dimensional space, the rows of Q the convex hull of those points provides the anchor words.1 Equation 1 linearly combines anchor words' co¯ g ,· to create the representation occurrence vectors Q k of other words. The convex hull corresponds to the perimeter of the space of all possible co-occurrence vectors that can be formed from the set of basis anchor vectors. However, the convex hull only encodes
+As discussed by Arora et al. (2013), this is a slight simplification, since the most extreme points will be words that only appear infrequently. Thus, there is some nuance to choosing the anchor words. For instance, a key step for effective topic modeling is choosing a minimum number of documents a word must appear in before it can be considered an anchor word. (c.f. Figure 3).
+1
+
+an unsupervised view of the data. To capture topics informed by metadata such as sentiment, we need to explicitly represent the combination of words and metadata. One problem inherited by the anchor method from parametric topic models is the determination of the number of anchor words (and thus topics) to use. Because word co-occurrence statistics live in an extremely high-dimensional space, the number of anchor words needed to cover all of the data will be quite high. Thus, Arora et al. (2013) require a user to specify the number of anchor words a priori (just as for parametric topic models). They use a form of the Gram-Schmidt process to find the best words that enclose the maximum volume of points.
+
+747
+
+

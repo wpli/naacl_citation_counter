@@ -1,0 +1,27 @@
+Set DE-V DE-N ES-V FI-V FI-N DU-V FR-V
+
+% of Total DDN 69.2 92.7 36.1 15.6 15.2 50.5 27.6 90.2 88.3 97.1 73.8 71.6 89.8 94.6
+
+Ours Basic Reranked 96.2 97.9 88.4 89.8 95.9 99.6 78.7 85.6 78.2 80.4 94.9 96.0 96.6 98.9
+
+Set CZ-N CZ-V
+
+% of Total DDN 13.0 6.8
+
+Ours Basic Reranked 91.1 97.7 93.5 82.5 83.6 85.8
+
+Table 7: Prediction accuracy of models trained on observed Czech forms.
+
+Table 6: Prediction accuracy of models trained on observed forms.
+
+with the models trained on 50 and 100, respectively. For reranking, we use the same German corpus as in our previous experiments, but limited to the first 10M words. The results are shown in Table 8. When trained on 50 seed tables, the accuracy of our models is comparable to both the basic model of Dreyer and Eisner (DE) and the Factored model of DDN, and matches the best system when we add reranking. When trained on 100 seed tables, our full reranking model outperforms the other models.
+
+5
+
+Error analysis
+
+In this section, we analyze several types of errors made by the various systems. Non-word predictions are marked with an asterisk. German and Dutch are closely-related languages that exhibit similar errors. Many errors involve the past participle, which is often created by circumfixation. For the German verb verfilmen "to film," we predict the correct verfilmt, while the other systems have verfilmen*, and geverfilmt*, respectively. DDN simply select an incorrect rule for the past participle. AFH choose paradigms through suffix analysis, which fails to account for the fact that verbs that begin with a small set of prefixes, such as ver-, do not take a ge- prefix. This type of error particularly affects the accuracy of AFH on Dutch because of a number of verbs in our test set that involve infixation for the past participle. Our system uses its source and target-side n-gram features to match these prefixes with their correct representation. The second type of error is an over-correction by the corpus. The past participle of the verb dimmen is 929
+
+gedimmt, but AFH predict dimmt*, and then change it to dummen with the corpus. Dummen is indeed a valid word in German, but unrelated to the verb dimmen. It is also far more common, with 181 occurrences in the corpus, compared with only 28 for gedimmt. Since AFH use corpus frequencies, mistakes like this can occur. Our system is trained to balance transducer confidence against a form's existence in a corpus (as opposed to log frequency), which helps it ignore the bias of common, but incorrect, forms. The German verb brennen "to burn" has an irregular past participle: gebrannt. It involves both a stem vowel change and a circumfix, two processes that only rarely co-occur. AFH predict the form brannt*, using the paradigm of the similar bekennen. The flexibility of DDN allows them to predict the correct form. Our basic model predicts gebrennt*, which follows the regular pattern of applying a circumfix, while maintaining the stem vowel. The reranker is able to correct this mistake by relating it to the form gebrannt in the corpus, whose stem is identical to the stem of the preterite forms, which is a common paradigmatic pattern. Our system can also over-correct, such as with the second person plural indicative preterite form for the verb reisen, which should be reistet, and which our basic model correctly predicts. The reranker, however, changes the prediction to rist. This is a nominal form that is observed in the corpus, while the verbal form is not. An interesting example of a mistake made by the Factored model of DDN involves the Dutch verb aandragen. Their model learns that stem vowel a should be doubled, and that an a should be included as part of the suffix -agt, which results in an incorrect form aandraaagt*. Thanks to the modelling of phonotactics, our model is able to correctly rule out the tripling of a vowel.
+
+

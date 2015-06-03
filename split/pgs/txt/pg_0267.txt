@@ -1,0 +1,23 @@
+4
+
+Sentence Alignment Method
+young  
+
+We use a sentence-level similarity score that builds on a new word-level semantic similarity, described below, together with a greedy search over the article. 4.1 Word-Level Similarity Word-level similarity functions return a similarity score  (w1 , w2 ) between words w1 and w2 . We introduce two novel similarity metrics: Wiktionarybased similarity and structural semantic similarity. WikNet Similarity: The Wiktionary-based semantic similarity measure leverages synonym information in Wiktionary as well as word-definition cooccurrence, which is represented in a graph and referred to as WikNet. In our work, each lexical content word (noun, verb, adjective and adverb) in the English Wiktionary is represented by one node in WikNet. If word w2 appears in any of the sense definitions of word w1 , one edge between w1 and w2 is added, as illustrated in Figure 1. We prune the WikNet using the following steps: i) morphological variations are mapped to their baseforms; ii) atypical word senses (e.g. "obsolete," "Jamaican English") are removed; and iii) stopwords (determined based on high definition frequency) are removed. After pruning, there are roughly 177k nodes and 1.15M undirected edges. As expected, our Wiktionary based similarity metric has a higher coverage of 71.8% than WordNet, which has a word coverage of 58.7% in our annotated dataset. Motivated by the fact that the WikNet graph structure is similar to that of many social networks (Watts and Strogatz, 1998; Wu, 2012), we characterize semantic similarity with a variation on a link-based node similarity algorithm that is commonly applied for person relatedness evaluations in social network studies, the Jaccard coefficient (Salton and McGill, 1983), by quantifying the number of shared neighbors for two words. More specifically, we use the extended Jaccard coefficient, which looks at neighbors within an n-step reach (Fogaras and Racz, 2005) with an added term to indicate whether the words are direct neighbors. In addition, if the words or their neighbors have synonym sets in Wiktionary, then the shared synonyms are used in the extended Jaccard measure. If the two words are in each other's synonym lists, then the similarity is set to 213
+
+lad         sense2:  ...   boy  
+
+lad:           sense1:  a  boy  or  a  young  man  
+
+boy:           sense1:  a  young  male  man               man         sense2:  ...  
+
+male  
+
+Figure 1: Part of WikNet
+with words "boy" and "lad".
+
+s 1 otherwise, wk (w1 , w2 ) = n l=0 Jl (w1 , w2 ), for  (w )syn l (w2 ) Jls (w1 , w2 ) = ll (1 w1 )l (w2 ) where l (wi ) is the l-step neighbor set of wi , and syn accounts for synonyms if any. We precomputed similarities between pairs of words in WikNet to make the alignment algorithm more efficient. The WikNet is available at http://ssli.ee.washington.edu/ tial/projects/simplification/.
+
+Structural Semantic Similarity: We extend the word-level similarity metric to account for both semantic similarity between words, as well as the dependency structure between the words in a sentence. We create a triplet for each word using Stanford's dependency parser (de Marneffe et al., 2006). Each triplet tw = (w, h, r) consists of the given word w, its head word h (governor), and the dependency relationship (e.g., modifier, subject, etc) between w and h. The similarity between words w1 and w2 combines the similarity between these three features in order to boost the similarity score of words whose head words are similar and appear in the same dependency structure: sswk (w1 , w2 ) = wk (w1 , w2 ) + wk (h1 , h2 )r (r1 , r2 ) where wk is the WikNet similarity and r (r1 , r2 ) represents dependency similarity between relations r1 and r2 such that r = 0.5 if both relations fall into the same category, otherwise r = 0. 4.2 Greedy Sequence-level Alignment To avoid aligning multiple sentences to the same content, we require one-to-one matches between sentences in standard and simple Wikipedia articles using a greedy algorithm. We first compute similarities between all sentences Sj in the simple article and Ai in standard article using a sentencelevel similarity score. Then, our method iteratively selects the most similar sentence pair S  , A = arg max s(Sj , Ai ) and removes all other pairs associated with the respective sentences, repeating until all sentences in the shorter document are aligned. The cost of aligning sentences in two articles S, A is O(mn) where m, n are the number of sentences in
+
+

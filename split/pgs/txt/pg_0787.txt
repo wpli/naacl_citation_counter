@@ -1,0 +1,40 @@
+Method LDA DF-LDA Quad-LDA MRF-LDA
+
+Annotator1 30 35 32 60
+
+Annotator2 33 41 36 60
+
+Annotator3 22 35 33 63
+
+Annotator4 29 27 26 60
+
+Mean 28.5 36.8 31.8 60.8
+
+Standard Deviation 4.7 2.9 4.2 1.5
+
+Table 4: CM (%) on 20-Newsgroups Dataset
+
+Method LDA DF-LDA Quad-LDA MRF-LDA
+
+Annotator1 75 65 40 86
+
+Annotator2 74 74 40 85
+
+Annotator3 74 72 38 87
+
+Annotator4 69 47 25 84
+
+Mean 73 66 35.8 85.8
+
+Standard Deviation 2.7 9.5 7.2 1.0
+
+Table 5: CM (%) on NIPS Dataset
+
+References
+David Andrzejewski, Xiaojin Zhu, and Mark Craven. 2009. Incorporating domain knowledge into topic modeling via dirichlet forest priors. In Proceedings of the 26th Annual International Conference on Machine Learning, pages 25­32. ACM. David Andrzejewski, Xiaojin Zhu, Mark Craven, and Benjamin Recht. 2011. A framework for incorporating general domain knowledge into latent dirichlet allocation using first-order logic. In Proceedings of the Twenty-Second international joint conference on Artificial Intelligence-Volume Volume Two, pages 1171­ 1177. AAAI Press. David M Blei, Andrew Y Ng, and Michael I Jordan. 2003. Latent dirichlet allocation. the Journal of machine Learning research, 3:993­1022. Jordan L Boyd-Graber, David M Blei, and Xiaojin Zhu. 2007. A topic model for word sense disambiguation. In EMNLP-CoNLL, pages 1024­1033. Zhiyuan Chen, Arjun Mukherjee, Bing Liu, Meichun Hsu, Malu Castellanos, and Riddhiman Ghosh. 2013. Leveraging multi-domain prior knowledge in topic models. In Proceedings of the Twenty-Third International Joint Conference on Artificial Intelligence, IJCAI'13, pages 2071­2077. Gregor Heinrich. 2009. A generic approach to topic models. In Machine Learning and Knowledge Discovery in Databases, pages 517­532. Springer. Thomas Hofmann. 1999. Probabilistic latent semantic indexing. In Proceedings of the 22nd annual international ACM SIGIR conference on Research and development in information retrieval, pages 50­57. ACM. Yuening Hu, Jordan L Boyd-Graber, and Brianna Satinoff. 2011. Interactive topic modeling. In ACL, pages 248­257.
+
+Jagadeesh Jagarlamudi, Hal Daum´ e, III, and Raghavendra Udupa. 2012. Incorporating lexical priors into topic models. In Proceedings of the 13th Conference of the European Chapter of the Association for Computational Linguistics, EACL '12, pages 204­213. Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. 2013. Distributed representations of words and phrases and their compositionality. In Advances in Neural Information Processing Systems, pages 3111­3119. George A Miller. 1995a. Wordnet: a lexical database for english. Communications of the ACM, 38(11):39­41. George A. Miller. 1995b. Wordnet: A lexical database for english. Commun. ACM, 38(11):39­41, November. David Newman, Edwin V Bonilla, and Wray Buntine. 2011. Improving topic coherence with regularized topic models. In Advances in Neural Information Processing Systems, pages 496­504. Jeffrey Pennington, Richard Socher, and Christopher D Manning. 2014. Glove: Global vectors for word representation. Proceedings of the Empiricial Methods in Natural Language Processing (EMNLP 2014), 12. James Petterson, Wray Buntine, Shravan M Narayanamurthy, Tib´ erio S Caetano, and Alex J Smola. 2010. Word features for latent dirichlet allocation. In Advances in Neural Information Processing Systems, pages 1921­1929. Jakob Verbeek and Bill Triggs. 2007. Region classification with markov field aspect models. In Computer Vision and Pattern Recognition, 2007. CVPR'07. IEEE Conference on, pages 1­8. IEEE. Martin J Wainwright and Michael I Jordan. 2008. Graphical models, exponential families, and variational inference. Foundations and Trends R in Machine Learning, 1(1-2):1­305.
+
+733
+
+

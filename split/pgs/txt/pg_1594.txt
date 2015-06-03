@@ -1,0 +1,19 @@
+Figure 1: Annotation interface, with dropdown menu for verb supersenses. The large text box at the bottom can be used to edit the MWE annotation by typing underscores and tildes to connect tokens.
+
+ity of the service would be labeled N : GROUP.9 Some subjectivity is involved, suggesting that the scheme is not ideal for such multifaceted concepts. 3.2 Verbs Targets. The set of lexical expressions that should receive a verb supersense consists of (a) all verb singletons that are not auxiliaries, and (b) all verb-like MWEs. Again, simple but overly liberal heuristics were used to detect annotation targets, so wherever the heuristics overpredicted, annotators entered: · `a for auxiliary verbs · `j for adjectives (some -ing and -ed adjectives are POS-tagged as VBG and VBD, respectively) · ` for all other cases Tagset conventions. We wrote new guidelines to characterize the verb supersenses for annotation. They briefly define and exemplify each category, and also relate them via precedence rules: e.g., the rule
+V: BODY > V: CHANGE
+
+the two types of annotation to be worked on in tandem, especially when a supersense annotator wishes to change a multiword grouping. The tool offers an autocomplete dropdown menu when typing a tag name, and validates that the submitted annotation is complete and internally consistent. Additionally, the tool provides a complete version history of the sentence and a "reconciliation" mode that merges two users' annotations of a sentence, flagging any differences for manual resolution; these features are extremely useful when breaking the annotation down into multiple rounds among several annotators. 3.4 Quality Control There were 2 primary annotators and 3 others who participated in annotation to a lesser degree, including the first author of this paper, whose role was mainly supervisory. All 5 hold bachelor's degrees in linguistics. The annotators were trained in the noun supersense annotation scheme of Schneider et al. (2012) and cooperatively developed and documented interpretations for the verb supersenses. Our main quality control mechanism for the annotation process was to obtain two independent annotations for every sentence--differences between them were reconciled by negotiation (between the two annotators in most cases, and between the two primary annotators in a small number of cases). To get a sense of the difficulty of the task, we examine the annotation history for a sample of sentences to measure inter-annotator agreement. Estimated between the 2 primary annotators on the batch of sentences annotated last during each phase (350, 302, and 379 sentences, respectively), inter-annotator F1 scores (excluding auxiliaries and other miscellaneous categories) are: 76% for noun expression supersenses after the noun phase, 93% for verb expression supersenses after the verb phase, and 88% for all supersenses after the combined annotation phase.10 These
+10
+
+{V: PERCEPTION, V: CONSUMPTION} >
+
+stipulates that verbs of perception or consumption (hear, eat, etc.) be labeled as such rather than the less specific class V: BODY. The precedence rules help to resolve many of the cases of meaning overlap between the categories. The guidelines were developed over several weeks and informed by annotation difficulties and disagreements. We release them along with the STREUSLE corpus. 3.3 Interface We extended the online MWE annotation tool of Schneider et al. (2014b) to also support supersense labeling, as well as grouping tokens into multiword lexical expressions. This is visualized in figure 1. Specifically, singletons and strong MWEs may receive labels (subject to a POS filter). This allows
+This rule is sometimes at odds with WordNet, which only lists N : ARTIFACT for hotel and restaurant.
+9
+
+Cohen's  , limited to tokens for which both annotators
+
+1540
+
+

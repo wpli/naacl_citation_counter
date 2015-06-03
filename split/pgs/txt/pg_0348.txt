@@ -1,0 +1,42 @@
+likely could not decide which is correct. However, if they were additionally given English T2 translations corresponding to each of the Chinese translations, they could easily choose the third as the most natural, even without knowing a word of Chinese. Translating this into MT terminology, this is equivalent to generating two corresponding target sentences E1 and E2 , and using the naturalness of E2 to help decide which E1 to generate. Language models (LMs) are the traditional tool for assessing the naturalness of sentences, and it is widely known that larger and stronger LMs greatly help translation (Brants et al., 2007). It is easy to think of a situation where we can only create a weak LM for T1, but much more easily create a strong LM for T2. For example, T1 could be an under-resourced language, or a new entrant to the EU or UN. As a concrete method to realize multi-target translation, we build upon Chiang (2007)'s framework of synchronous context free grammars (SCFGs), which we first overview in Section 2.2 SCFGs are an extension of context-free grammars that define rules that synchronously generate source and target strings F and E . We expand this to a new formalism of multi-synchronous CFGs (MSCFGs, Section 3) that simultaneously generate not just two, but an arbitrary number of strings F, E1 , E2 , . . . , EN . We describe how to acquire these from data (Section 4), and how to perform search, including calculation of LM probabilities over multiple target language strings (Section 5). To evaluate the effectiveness of multi-target translation in the context of having a strong T2 LM to help with T1 translation, we perform experiments on translation of United Nations documents (Section 6). These experiments, and our subsequent analysis, show that the framework of multi-target translation can, indeed, provide significant gains in accuracy (of up to 1.5 BLEU points), particularly when the two target languages in question are similar.
+
+(a) SCFG
+
+Grammar
+
+r1: X  <X1 of the X2, X1 des X2> r2: X  <activity, activités> r3: X  <chambers, chambres> r1 r2 r3 <X1, X1>
+
+Derivation
+
+<X2 of the X3, X2 des X3> <activity of the X3, activités des X3> <activity of the chambers, activités des chambres>
+
+(b) MSCFG
+
+Grammar
+
+r1: X  <X1 of the X2, X1 des X2, X2  X1> r2: X  <activity, activités,  > r3: X  <chambers, chambres,  > r1 r2 r3 <X1, X1, X1>
+
+Derivation
+
+<X2 of the X3, X2 des X3, X3  X2> <activity of the X3, activités des X3, X3   > <activity of the chambers, activités des chambres,    >
+
+Figure 2: Synchronous grammars and derivations using (a) standard SCFGs and (b) the proposed MSCFGs.
+
+cal phrase-based translation (Hiero; Chiang (2007)). SCFGs are based on synchronous rules defined as tuples of X ,  , and  X  ,  , (1)
+
+where X is the head of the rule, and  and  are strings of terminals and indexed non-terminals on the source and target side of the grammar. Each non-terminal on the right side is indexed, with nonterminals with identical indices corresponding to each-other. For example, a synchronous rule could take the form of3 X  X0 of the X1 , X0 des X1 . (2)
+
+2
+
+Synchronous Context-Free Grammars
+
+We first briefly cover SCFGs, which are widely used in MT, most notably in the framework of hierarchiOne could also consider a multi-target formulation of phrase-based translation (Koehn et al., 2003), but generating multiple targets while considering reordering in phrase-based search is not trivial. We leave this to future work.
+2
+
+By simply generating from this grammar, it is possible to generate a string in two languages synchronously, as shown in Figure 2 (a). When we are already given a source side sentence and would like to using an SCFG to generate the translation, we find all rules that match the source side and perform search using the CKY+ algorithm (Chappelier et al., 1998). When we would additionally like to consider
+It is possible to use symbols other than X (e.g.: N P , V P ) to restrict rule application to follow grammatical structure, but we focus on the case with a single non-terminal.
+3
+
+294
+
+

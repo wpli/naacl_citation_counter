@@ -1,0 +1,24 @@
+Learning to parse with IAA-weighted loss
+H´ ector Mart´ inez Alonso Barbara Plank Arne Skjærholt Anders Søgaard  Njalsgade 140, Copenhagen (Denmark), University of Copenhagen  Gaustadall´ een 23B, Oslo (Norway), University of Oslo
+alonso@hum.ku.dk,bplank@cst.dk,arnskj@ifi.uio.no,soegaard@hum.ku.dk
+
+Abstract
+Natural language processing (NLP) annotation projects employ guidelines to maximize inter-annotator agreement (IAA), and models are estimated assuming that there is one single ground truth. However, not all disagreement is noise, and in fact some of it may contain valuable linguistic information. We integrate such information in the training of a cost-sensitive dependency parser. We introduce five different factorizations of IAA and the corresponding loss functions, and evaluate these across six different languages. We obtain robust improvements across the board using a factorization that considers dependency labels and directionality. The best method-dataset combination reaches an average overall error reduction of 6.4% in labeled attachment score.
+
+For a dependency tree, annotators can disagree in attachment, labeling, or both. We implement different strategies, i.e., factorizations (§2), to capture disagreement on specific syntactic phenomena. Our hypothesis is that a dependency parser can be informed of disagreements to regularize over annotators' biases. Testing our hypothesis requires the availability of doubly-annotated data, and involves two steps: i) how to factorize attachment or labeling disagreements; and ii) how to inform the parser of them during learning (§3).
+
+2
+
+Factorizations
+
+1
+
+Introduction
+
+Typically, NLP annotation projects employ guidelines to maximize inter-annotator agreement. Possible inconsistencies are resolved by adjudication, and models are induced assuming there is one single ground truth. However, there exist linguistically hard cases where there is no clear answer (Zeman, 2010; Manning, 2011), and incorporating such disagreements into the training of a model has proven helpful for POS tagging (Plank et al., 2014a; Plank et al., 2014b). Inter-annotator agreement (IAA) is straightforward to calculate for POS, but not for dependency trees. There is no well-established standard for computing agreement on trees (Skjærholt, 2014). 1357
+
+Assume a sample of sentences annotated by annotators A1 and A2 . With such a sample we can estimate probabilities of the two annotators' disagreeing on the annotation of a word or span, relative to some dependency tree factorization. We factorize disagreement on dependency tree annotations relative to four properties of the annotated dependency edges: the POS of the dependent, the POS of the head, the label of the edge and the direction (left or right) of the head with regards to the dependent. This section describes the different factorizations. We present five factorizations, depicted in Figure 1. With artificial root notes, all words in a dependency tree have one incoming edge. This means that in our sample, any word wi has two headId, label annotations, i.e., h1 , l1 and h2 , l2 given by A1 and A2 , respectively, with POS(·) being a function from word indices to POS. The five factorizations are as follows:
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1357­1361, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

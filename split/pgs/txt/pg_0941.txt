@@ -1,0 +1,42 @@
+MomResp Inference
+WEBKB
+
+LogResp Inference
+R52 algorithm
+
+Accuracy
+
+Accuracy
+
+1.0 0.8 0.6 0.4 0 1 2 3
+
+0.6 0.4 0.2 0.0 0 2 4 6 8 LOW
+
+algorithm LogResp+MF LogResp+EM
+
+Number of annotated instances x 1,000 Number of annotated Number of annotated instances ×1000. instances x 1,000
+Figure 2: Mean field (MF) variational inference outperforms previous inference methods for both models. Left: M OM R ESP with MF (M OM R ESP+MF) versus with Gibbs sampling (M OM R ESP+Gibbs) on the WebKB dataset using annotators from the MED pool. Right: L OG R ESP with MF (L OG R ESP+MF) versus with EM (L OG R ESP+EM) on the Reuters52 dataset using annotators from the LOW pool. produced at simulation time by constructing a perannotator confusion matrix (similar to  j ) whose diagonal is set to the desired accuracy setting, and whose off-diagonal row entries are sampled from a symmetric Dirichlet distribution with parameter 0.1 to encourage sparsity and then scaled so that each row properly sums to 1. These draws from a sparse Dirichlet yield consistent error patterns. The CONFLICT pool approximates an annotation project where annotators understand the annotation guidelines differently from one another. For the sake of example, annotator A5 in the CONFLICT setting will annotate documents with the true class B as B exactly 10% of the time but might annotate B as C 85% of the time. On the other hand, annotator A4 might annotate B as D most of the time. We choose low agreement rates for CONFLICT to highlight a case that violates majority vote's assumption that annotators are basically in agreement. 5.2 Datasets and Features
+
+MED
+
+MomResp+MF MomResp+Gibbs
+
+HIGH MED LOW CONFLICT
+
+A1 90 70 50 50
+
+A2 85 65 40 40
+
+A3 80 60 30 30
+
+A4 75 55 20 20
+
+A5 70 50 10 10
+
+We simulate the annotator pools from Table 1 on each of six text classification datasets. The datasets 20 Newsgroups, WebKB, Cade12, Reuters8, and Reuters52 are described by CardosoCachopo (2007). The LDC-labeled Enron emails dataset is described by Berry et al. (2001). Each dataset is preprocessed via Porter stemming and by removal of the stopwords from MALLET's stopword list. Features occurring fewer than 5 times in the corpus are discarded. Features are fractionally scaled so that |xi |1 is equal to the average document length since document scaling has been shown to be beneficial for multinomial document models (Nigam et al., 2006). Each dataset is annotated according to the following process: an instance is selected at random (without replacement) and annotated by three annotators selected at random (without replacement). Because annotation simulation is a stochastic process, each simulation is repeated five times. 5.3 Validating Mean-field Variational Inference Figure 2 compares mean-field variational inference (MF) with alternative inference algorithms from previous work. For variety, the left and right plots are calculated over arbitrarily chosen datasets and annotator pools, but these trends are representative of other settings. M OM R ESP using MF is compared with M OM R ESP using Gibbs sampling estimating p(y|x, a) from several hundred samples (an improvement to the method used by Felt et al. (2014)).
+
+Table 1: For each simulated annotator quality pool (HIGH, MED, LOW, CONFLICT), annotators A1A5 are assigned an accuracy.  indicates that errors are systematically in conflict as described in the text.
+
+887
+
+

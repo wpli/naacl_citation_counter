@@ -1,0 +1,45 @@
+100
+
+Dataset SPMRL Classical CTB5
+
+Score (%)
+
+95 Seg Pos Dep TedEval
+
+Seg Seen OOV 48.4 27.8 13.8 34.8 20.3 25.7
+
+POS Seen OOV 44.7 15.0 4.2 17.2 14.2 19.9
+
+Dep Seen OOV 15.9 17.5 ­ ­ 13.0 15.6
+
+90
+
+85 0
+
+Table 5: F-score error reductions (%) of the joint model over the pipeline counterpart on seen and OOV words.
+20
+
+5
+
+10 # MADA Analysis
+
+15
+
+Figure 7: Performance with different sizes of the candidate sets on the SPMRL dataset. The graph shows the TedEval and F-scores when considering the best k analyses by MADA, and the variation is achieved by changing k .
+1
+
+Score
+
+0.98 0.96 0.94 0.92 0 200 400 600 800 1000
+
+# Restarts
+
+Figure 8: The normalized score of the output tree as the function of the number of restarts. We normalize scores of each sentence by the highest score among 3,000 restarts for this sentence. We show the curve up to 1,000 restarts because it reaches convergence after 500 restarts. tasks: segmentation (0.3%), tagging (0.1%), and dependency parsing (0.3%).12 Impact of the Joint Prediction As Table 4 shows, our joint prediction model consistently outperforms the corresponding pipeline model in all three tasks. This observation is consistent with findings in previous work (Hatori et al., 2012; Tratz, 2013). We also observe that gains are higher (2%) on the classical Arabic dataset, which demonstrates that joint prediction is particularly helpful in bridging the gap between MSA and classical Arabic.
+Zhang et al. (2014a) improve the dependency F-score to 82.14% by adding manually annotated intra-word dependency information. Even without such gold word structure annotations, our model still achieves a comparable result.
+12
+
+Figure 6 shows the break of the improvement based on seen and out-of-vocabulary (OOV) words. As expected, across all languages OOV words benefit more from the joint prediction, as they constitute a common source of error propagation in a pipeline model. The extent of improvement depends on the underlying accuracy of the preprocessing for segmentation and POS tagging on OOV words. For instance, we observe a higher gain (7%) on Chinese OOV words which have a 61.5% accuracy when processed by the original stand-along POS tagger. On the SPMRL dataset, the gain on OOV words is lower (3%), while preprocessing accuracy is higher (82%). Their error reductions on OOV words are nevertheless close to each other. Table 5 summarizes the results on F-score error reduction. We also observe that the error reductions of OOV words/morphemes on the Chinese and the Classical Arabic dataset are larger than that of the invocabulary counterparts (e.g. 26% vs. 20% on Chinese word segmentation). However, we have the opposite observation on the segmentation and POS tagging on the SPMRL dataset (28% vs. 48%). This can be explained by analyzing the oracle performance in which we select the best solution from possible candidates. The oracle error reduction of OOV morphemes in the SPMRL dataset is relatively low (44%), compared to the 61% oracle error reduction of OOV morphemes in the Classical Arabic dataset. Impact of the Number of Alternative Analyses In Figure 7, we plot the performance on the SPMRL dataset as a function of the number k of MADA analyses that we use to construct the candidate sets. For low k , increasing the number of analyses improves performance across all evaluation metrics. However, the performance converges at around k = 15.
+
+49
+
+

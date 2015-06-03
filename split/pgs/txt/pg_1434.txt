@@ -1,0 +1,22 @@
+CASSA: A Context-Aware Synonym Simplification Algorithm
+Ricardo Baeza-Yates Luz Rello Julia Dembowski Yahoo Labs & Human-Computer Interaction Institute Department of Web Research Group Carnegie Mellon University Computational Linguistics Universitat Pompeu Fabra, Pittsburgh, PA, USA Saarland University, Germany Barcelona, Spain luzrello@acm.org juliad@coli.uni-saarland.de
+rbaeza@acm.org
+
+Abstract
+We present a new context-aware method for lexical simplification that uses two free language resources and real web frequencies. We compare it with the state-of-the-art method for lexical simplification in Spanish and the established simplification baseline, that is, the most frequent synonym. Our method improves upon the other methods in the detection of complex words, in meaning preservation, and in simplicity. Although we use Spanish, the method can be extended to other languages since it does not require alignment of parallel corpora.
+
+Lexical simplification methods require language resources, such as simplified corpora or synonyms dictionaries. For languages with less resources than English, e.g. no Simple Wikipedia (Biran et al., 2011; Yatskar et al., 2010) or less representation in WordNet, such as Spanish,1 the creation of lexical simplification methods is more challenging. Our approach makes use of two free resources, Google Books Ngram Corpus and the Spanish OpenThesaurus, as well as real web frequencies to create a lexical simplification system. Our system improves upon the state of the art for lexical simplification in Spanish and the established simplification baseline, i.e., the most frequent synonym, in several aspects: complex word detection, meaning preservation, and simplicity. We also show the coverage of our technique in a collection of books in Spanish, as this is another relevant measure of a simplification algorithm. The method is language independent and given that these resources are available in other languages, it could be easily extended to other languages with similar language resources. The rest of the paper is organized as follows. The next section presents related work. Then in Section 3 we present the simplification algorithm while in Sections 4 and 5 we present our experimental evaluation. Finally, in Section 6 we discuss our results, extensions to other languages, and outline future work.
+
+1
+
+Introduction
+
+Simplified text is crucial for some populations to read effectively, especially for cognitively impaired people such as people with autism spectrum disorder (Evans et al., 2014; Orasan et al., 2013), aphasia (Carroll et al., 1999), dyslexia (Rello et al., 2013a), Down syndrome (Saggion et al., 2015; Saggion et al., 2011), or other intellectual disabilities (Huenerfauth et al., 2009). In fact, the United Nations (1994) proposed a set of standard rules to leverage document accessibility for persons with disabilities. Text simplification attempts to solve this problem automatically by reducing the complexity of the lexicon, syntax, or semantics while attempting to preserve its meaning and information content (Siddharthan, 2006). Among all the types of text simplification this paper focuses on lexical simplification. 1380
+
+The Spanish part of EuroWordNet contains only 50,526 word meanings and 23,370 synsets, in comparison to 187,602 meanings and 94,515 synsets in the English WordNet 1.5. (Vossen, 2004).
+
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1380­1385, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

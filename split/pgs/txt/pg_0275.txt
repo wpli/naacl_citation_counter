@@ -1,0 +1,32 @@
+the less confident our method is that there is a true style difference. Table 5 shows pairwise accuracy as a function of confidence: it is well above the 50% random baseline, reaching 90% for the highconfidence predictions in the complexity dimension.
+Pairwise accuracy Top 10% Top 25% Overall 0.90 0.88 0.74 0.72 0.73 0.68
+
+annotations, we see some sentences for which the judgement seems unanimous among annotators and some sentences for which there is very little consensus (Table 7). We discuss this variation further in Section 5.
+Formal/Simple Formal/Simple Casual/Complex Casual/Complex has dr. miller left the courtroom? i want to thank you for listening tonight. right. cuz if we have a fixed number of neurons-? i was actually thinking we could use the warping factors that we compute for the mfcc's
+
+Complexity Formality
+
+Table 5: Pairwise accuracy for paraphrase pairs at varying levels confidence. Top 10% refers to the 10% of pairs with largest difference in log-ratio style score. Random guessing achieves an accuracy of 0.5.
+
+Table 6: Some examples of sentences for which the generally high correlation between formality and complexity does not hold.
+
+4.2
+
+Genre characterization
+
+Now we explore if the dimensions we learned at the sub-sentential level can be used to capture stylistic variation at the sentence and genre level. Sentence-level human judgements We gather human ratings of formality and complexity for 900 sentences from the MASC corpus (Ide et al., 2010): 20 sentences from each of 18 genres.2 Recently data from this corpus has been used to study genre difference in terms of pronoun, named entity, punctuation and part of speech usage (Passonneau et al., 2014). We use the data to test a specific hypothesis that automatically induced scores for lexical style are predictive of perceptions of sentence- and genre-level style. We average 7 independent human scores to get sentence-level style scores. To get genre-level style scores, we use the the average of the 20 sentencelevel scores for the sentences belonging to that genre. In human perception, the formality and complexity dimensions are highly correlated (Spearman  = 0.7). However, we see many interesting examples of sentences which break this trend (Table 6). Overall, inter-annotator correlations are reasonably strong (  0.5), but as in the phrase-level
+2 Court transcripts, debate transcripts, face-to-face conversations, blogs, essays, fiction, jokes, letters, technical writing, newspaper, twitter, email, ficlets (short fan fiction), government documents, journal entries, movie scripts, non-fiction, and travel guides. We omit the "telephone" genre, since it is too similar to the Switchboard corpus and may inflate results.
+
+Automatically characterizing genre The extent to which genre is defined by topic versus style is an open question. We therefore look at two methods for genre-level style characterization, which we apply at the sentence-level as well as at the genre-level. First, we take the average formality (complexity) score of all words in the text, which we refer to as the "all words" method. Using the style score alone in this way will likely to conflate aspects of topic with aspects of style. For example, the word birthday receives a very low formality score whereas the phrase united nations receives a very high formality score, reflecting the tendency of certain topics to be discussed more formally than others.
+my annual big gigantic remarkable immense colossal birthday post . quite totally very intends to enjoy her birthday thoroughly
+! ! ! ! ! style !
+
+wholly
+
+Figure 2: Authors reveal by choosing casual terms or formal terms for the same concept. Shown is a casual sentence (left) and a formal sentence (right) on the same topic. Alternative paraphrases are ordered casual (top) to formal (bottom).
+
+We therefore use a second method, which we refer to as "PP only", in which we look only at the words in the text which belong to one of our paraphrase sets (as in Figure 3), allowing us to control for topic and focus only on stylistic word choice. In "PP only", we consider a word to be formal if it appears on the formal side of the set (i.e. there are
+
+221
+
+

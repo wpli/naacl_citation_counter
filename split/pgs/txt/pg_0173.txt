@@ -1,0 +1,23 @@
+no pos 50% pos all pos no pos 50% pos all pos no pos 50% pos all pos no dep no dep no dep 50% dep 50% dep 50% dep all dep all dep all dep BL SP BL SP BL SP BL SP BL SP BL SP BL SP BL SP BL SP Z13 42.9 4872 43.4 4856 44.7 4826 50.5 4790 51.4 4737 52.2 4720 73.3 4600 74.7 4431 76.3 4218 Ours 47.5 155 47.9 119 48.8 74 54.8 132 55.2 91 56.2 41 77.8 40 79.1 28 81.1 22
+
+Table 3: Partial-tree linearizion results on the development test set. BL ­ the BLEU score, SP ­ number of milliseconds to order one sentence. Z13 refers to the best-first system of Zhang (2013). 4.3 Comparison with Best-First The beam-search linearizer takes a very different search strategy compared with best-first search, which affects the error distribution. As mentioned earlier, one problem of best-first is the lack of theoretical guarantee on time complexity. As a result, a time constraint is used and default output can be constructed when no full output is found (White, 2004b; Zhang and Clark, 2011b). This may result in incomplete output sentences and intuitively, this problem is more severe for larger bag of words. In contrast, the transition-based linearization algorithm takes |2n| steps to generate a sentence and thus guarantees to order all the input words. Figure 8 shows the results by comparing the brevity scores (i.e. the number of words in the output divided by the number of words in reference sentence) on different sizes of inputs. Best-search can fail to order all the input words even on bags of 9 ­ 11 words, and the case is more severe for larger bag of words. On the other hand, the transition-based method uses all the input words to generate output and the brevity score is constant 1. Since the BLEU score consists two parts: the n-gram precision and brevity, this comparison partly explains why the transition-based linearization algorithm achieves higher BLEU scores. To further compare the difference between the two systems, we evaluate the qualities of projective spans, which are dependency treelets. Both systems build outputs bottom-up by constructing projective spans, and a break-down of span accuracies against span sizes shows the effects of the different search algorithms. The results are shown in Table 4. According to this table, the best-first system tends to construct smaller spans more precisely, but the recall is relatively lower. Overall, higher F-scores are achieved by the transition-based system. During the decoding process, the best-first system compares spans of different sizes and expands
+
+1.000 0.975 0.950 0.925 0.900 1-8 system bestfirst ours 33-164 12-14 15-17 18-20 21-24 25-32 9-11
+
+Figure 8: Comparison between transition-based and best-first systems on surface string brevity.
+
+Precision Recall len Z13 ours Z13 ours < 5 24.63 20.45 14.56 21.82 < 10 15.20 16.33 10.59 15.88 < 15 10.82 14.73 9.38 14.08 < 30 8.18 12.54 8.26 12.43
+
+Z13 18.3 12.48 10.05 8.22
+
+F
+
+ours 21.11 16.1 14.4 12.49
+
+Table 4: Precision, recall and F-score comparison on different spans lengths.
+
+BLEU scores along with the average time to order one sentence are shown in Table 3. With more syntactic information in the input, our linearization system achieves better performance, showing that G ET P OSSIBLE ACTIONS can take advantage of the input constraints and yield more specified output. In addition, because input constraints reduce the search space, the systems with more syntactic information achieve faster decoding speeds. In comparison with Zhang (2013), the transition-based system achieves improved accuracies under the settings, and the decoding speed can be over two orders of magnitude faster (22ms vs. 4218ms). We give more detailed analysis next.
+
+119
+
+

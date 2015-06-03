@@ -1,0 +1,18 @@
+ROOT  Position-1  Position-2 
+Figure 2: Possible EC Positions in a Dependency Tree
+
+with a multi-layer hierarchical dependency tree as in Fig. 3. If we have m kinds of such paths with different path types or dependency types, we need md elements to represent this kind of features. The distributed representations of the words would be placed at the corresponding positions in the feature vector and the remaining are set to 0.
+
+Besides, we keep punctuations in the parse tree so that we can describe all the possible positions using the "head node, following word" pairs, as no elements will appear after a full stop in a sentence. 2.2.2 Feature Extraction
+
+The feature vector is constructed by concatenating the word embeddings of context words that are expected to contribute to the detection of ECs. 1. The head word (except the dummy root node). Suppose words are represented using d dimension vectors, we need d elements to represent this feature. The distributed representations of the head word would be placed at the corresponding positions. 2. The following word in the text. This feature is extracted using the same method with head words. 3. "Nephews", the sons of the following word. We choose the leftmost two. 4. Words in dependency paths. ECs usually have long distance dependencies with words which cannot be fully captured by the above categories. We need a new feature to describe such long distance semantic relations: Dependency Paths. From the training data, we collect all the paths from root nodes to ECs (ECs excluded) together with dependency types. Below we give an example to illustrate the extraction of this kind of features using a complex sentence
+following word (). But such phenomenas are rare, so here we still adopt the tree based method.
+
+Previous work usually involves lots of syntactic and semantic features. In the work of (Xue and Yang, 2013), 6 kinds of features are used, including those derived from constituency parse trees, dependency parse trees, semantic roles and others. Here we use only the dependency parse trees for the feature extraction. The words in dependency paths we use have proven their potential in representing the meanings of text in frame identification (Hermann et al., 2014). Take the OP in the sentence shown in Fig. 3 for example. For the OP, its head word is "", its following word is "" and its nephews are "NULL" and "NULL" (ECs are invisible). The dependency path from root to OP is: ROOT COM P Root - - - -  /hold - - - - -  /ceremony - - - -  /DE - - - - -  OP For such a path, we have the following subpaths:
+ROOT ROOT ROOT COM P COM P RELC RELC COM P
+
+Root - - - - .- - - - - .- - - - X Root - - - - .- - - - - X Root - - - - X For the position of the OP in the given example, the words with corresponding dependency paths are "", "" and "". Similarly, we collects all the paths from other ECs in the training examples to build the feature template. In the testing phase, for each possible EC position, we place the distributed representations of the right words at the corresponding positions of its feature vector.
+
+266
+
+

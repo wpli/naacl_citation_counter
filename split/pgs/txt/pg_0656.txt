@@ -1,0 +1,31 @@
+Faithfulness constraints
+MAX - IO - MORPH MAX - IO - C MAX - IO - V DEP - IO - MORPH DEP - IO - V IDENT- IO - C IDENT- IO - C - M IDENT- IO - C - A IDENT- IO - C - S IDENT- IO - C - P IDENT- IO - C - G IDENT- IO - C - E IDENT- IO - V IDENT- IO - V- O IDENT- IO - V- R IDENT- IO - V- F IDENT- IO - V- FIN
+
+Markedness constraints
+NO - CODA ONSET PEAK SSP
+
+no (donor) affix deletion no consonant deletion no vowel deletion no (recipient) affix epenthesis no vowel epenthesis no consonant substitution no subst. in manner of pronunciation no subst. in place of articulation no subst. in sonority no pharyngeal consonant substitution no glottal consonant substitution no emphatic consonant substitution no vowel substitution no subst. in vowel openness no subst. in vowel roundness no subst. in vowel frontness no final vowel substitution
+
+* COMPLEX - S * COMPLEX - C * COMPLEX - V
+
+syllables must not have a coda syllables must have onsets there is only one syllabic peak complex onsets rise in sonority, complex codas fall in sonority no consonant clusters on syllable margins no consonant clusters within a syllable no vowel clusters
+
+Table 2: Markedness constraints impose languagespecific structural well-formedness of surface realizations.
+
+Table 1: Faithfulness constraints prefer pronounced realizations completely congruent with their underlying forms.
+
+Johnson, 2003). OT distinguishes "markedness" constraints (McCarthy and Prince, 1995), which detect dispreferred phonetic patterns in the language, and "faithfulness" constraints (Prince and Smolensky, 2008), which ensure correspondences between the underlying form and the surface candidates.6 The implemented constraints are listed in tables 1 and 2. Faithfulness constraints are integrated in phonological transformation components as transitions following each insertion, deletion, or substitution. Markedness constraints are implemented as standalone identity transducers: inputs are equal outputs, but path weights representing candidate evaluation with respect to violated constraints are different. The final "loanword transducer" is the composition of all transducers described in §3 and OT constraint transducers. A path in the transducer represents a syllabified phonemic sequence along with (weighted)
+6 To clarify the distinction between faithfulness and markedness constraint groups to the NLP readership, we can draw the following analogy to the components of machine translation or speech recognition: faithfulness constraints are analogical to the translation model or acoustic model (reflecting input), while markedness constraints are analogical to the language model (requiring well-formedness of the output). Without faithfulness constraints, the optimal surface form could differ arbitrarily from the underlying form.
+
+OT constraints it violates, and shortest path outputs are those, whose cumulative weight of violated constraints is minimal. OT constraints are realized as features in our linear model, and feature weights are learned in a discriminative training to maximize the accuracy obtained by the loanword transducer on a small development set of donor­recipient pairs. For parameter estimation, we employ the Nelder­Mead algorithm (Nelder and Mead, 1965), a heuristic derivative-free method that iteratively optimizes, based on an objective function evaluation, the convex hull of n +1 simplex vertices.7 The objective function is the "soft accuracy" of the development set, defined as the proportion of correctly identified donor words in the total set of 1-best outputs.
+
+5
+
+Adapting the model to a new language
+
+Although we conduct a thorough case study on the Arabic­Swahili language pair, our methodology can easily be generalized to other language pairs. String transformation operations, as well as OT constraints are language-universal. The only adaptation required is a linguistic analysis to identify plausible morphophonological repair strategies for the new language pair (i.e., a subset of allowed insertions, deletions and substitutions of phonemes and morphemes). Since we need only to overgenerate candidates (the OT constraints will filter bad outputs), the effort is minimal relative to many other grammar engineering exercises. The second language-specific component is the grapheme-to-IPA converter. While this can be a nonThe decision to use Nelder­Mead rather than more conventional gradient-based optimization algorithms was motivated by practical limitations of the finite-state toolkit we used that made computing derivatives with latent structure impractical.
+7
+
+602
+
+

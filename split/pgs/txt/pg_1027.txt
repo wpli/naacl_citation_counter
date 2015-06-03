@@ -1,0 +1,19 @@
+Dataset Kotlerman 2010 Bless 2011 Baroni 2012 Turney 2014 Levy 2014
+
+Top Positional Contexts of y grave-1 , substances+2 , lend-lease-1 , poor-2 , bureaucratic-1 , physical-1 , dry-1 , air-1 , civil-1 other-1 , resembling+1 , such+1 , assemblages+1 , magical-1 , species+1 , any-2 , invertebrate-1 any-1 , any-2 , social-1 , every-1 , this-1 , kinds-2 , exotic-1 , magical-1 , institute-2 , important-1 of+1 , inner-1 , including+1 , such+1 , considerable-1 , their-1 , extra-1 , types-2 , different-1 , other-1 psychosomatic-1 , unidentified-1 , auto-immune+2 , specific-1 , unspecified-1 , treatable-2 , any-1
+
+Table 4: Top positional features learned with logistic regression over concat. Displaying positive features of y .
+
+category pairs, e.g. (banana, animal). For each dataset, we generate a set of such synthetic examples S , by taking the positive examples from the test portion T + , and extracting all of its instance words + and category words T + . Tx y
++ Tx = {x|(x, y )  T + } + Ty = {y |(x, y )  T + }
+
+We then define S as all the in-place combinations of instance-category word pairs that did not appear in T + , and are therefore likely to be false.
++ + S = Tx × Ty \ T+
+
+Finally, we test the classifier on a sample of S (due to its size). Since all examples are assumed to be false, we measure the false positive rate as match error ­ the error of classifying a mismatching instancecategory pair as positive. According to our hypothesis, the classifier cannot differentiate between matched and mismatched examples (T + and S , respectively). We therefore expect it to classify a similar proportion of T + and S as positive. We validate this by comparing recall (proportion of T + classified as positive) to match error (proportion of S classified as positive). Figure 1 plots these two measures across all configurations and datasets, and finds them to be extremely close (regression curve: match error = 0.935 · recall), thus confirming our hypothesis. 4.2 Prototypical Hypernym Features A qualitative way of analyzing our hypothesis is to look at which features the classifiers tend to consider. Since SVD and SGNS features are not easily interpretable, we used PPMI with positional contexts as our representation, and trained a logistic regression model with L1 regularization using concat over the entire dataset (no splits). We then observed the features with the highest weights (Table 4). 973
+
+Figure 1: The correlation of recall (positive rate on T + ) with match error (positive rate on S ) compared to perfect correlation (green line).
+
+Many of these features describe dataset-specific category words. For example, in Levy's medicaldomain dataset, many words entail "symptom", which is captured by the discriminative feature psychosomatic-1 . Other features are domainindependent indicators of category, e.g. any-1 , every-1 , and kinds-2 . The most striking features, though, are those that occur in Hearst (1992) patterns: other-1 , such+1 , including+1 , etc. These features appear in all datasets, and their analogues are often observed for x (e.g. such-2 ). Even qualitatively, many of the dominant features capture prototypical or dataset-specific hypernyms. As mentioned, the datasets examined in this work also contain inference relations other than hypernymy. In Turney's dataset, for example, 77 % of positive pairs are non-hypernyms, and y is often a quality (coat  warmth) or a component (chair  legs) of x. Qualities and components can often be detected via possessives, e.g. of+1 and their-1 . Other prominent features, such as extra-1
+
+

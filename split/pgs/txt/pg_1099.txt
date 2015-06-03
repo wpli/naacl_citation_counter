@@ -1,0 +1,37 @@
+Type of agreement Full agreement Partial agreement between all annotators Partial agreement between a majority of annotators Partial agreement between a minority of annotators No agreement at all
+
+Count 2 66 121 113 11
+
+Average overlap 100% 21.7 ± 15.4% 19.2 ± 11.4% 27.0 ± 15.9% 0%
+
+tion metric, as it rewards a method for retrieving spans that are similar to the gold spans. Specifically, ROUGE -L, takes into account the sentence similarity by considering the longest in sequence n-grams between the retrieved spans and gold spans.
+
+4
+
+Results and discussion
+
+Table 1: Levels of agreement between annotators. The 4 annotators fully agree on just 2 of the 313 annotations. In most cases, a majority (3 annotators) or a minority (2 annotators) agrees on a portion of reference spans, indicating that the task is not trivial even for domain experts.
+
+3
+
+Evaluation and Dataset
+
+The system was evaluated on TAC 2014 Biomedical Summarization track training dataset. It consists of 20 topics, each of which contains between 10 to 20 citing articles and 1 reference article. For each topic, four domain experts were asked to identify the appropriate reference spans for each citance in the reference text. To better understand the dataset, we analyzed the agreement between annotators (table 1). This table shows that the overall agreement is relatively low. We used two sets of metrics for evaluation of the task. The first one is based on the weighted overlaps between the retrieved spans and the correct spans designated by annotators and is meant to reward spans overlapping with the ground truth. Weighted recall and precision for a system returning span S with respect to a set of M annotators, consisting of gold spans G1 , ..., GM are defined as follows:
+Recall =
+def
+
+M i=1 |S  Gi | M i=1 |Gi |
+
+Prec =
+
+def
+
+M i=1
+
+|S  Gi | (1) M × |S |
+
+The overall score of the system is the mean F-1 (harmonic mean of the weighted precision and recall) over all the topics. Based on the weighted F-1 score, a method could be penalized for retrieving any spans that are not indicated as gold spans by the annotators. Even if those spans are semantically similar to the gold spans, they will not receive any score. This is not ideal because, as the high disagreement shown in table 1 implies, gold spans by offset locations are highly controversial. For this reason, we also considered ROUGE -L (Lin, 2004) as another evalua1045
+
+The problem of matching citations with cited spans in scientific articles is a new task and to the best of our knowledge, there is no prior work on this task. Thus to evaluate the effectiveness of our different methods, we compared the performance of our proposed approaches against the unmodified query baseline. The results are shown in Table 2. Interestingly, we observe that UMLS-reduce performs worse than the baseline in terms of F-1. This can be attributed to the fact that multiple expressions in the biomedical literature can be used to refer to the same concept. Such diversity is not captured by UMLS -reduce, as it only performs query reduction. Moreover, a citance often contains expressions that, while not mapping to any biomedical concepts, provide useful context and therefore are fundamental in conveying the meaning of the citance (we will refer to such expressions as supporting expressions in the reminder of the paper). These supporting expressions are not captured by UMLS-reduce. NP outperforms the baseline (+18.8% F-1). This outcome is expected, as most important biomedical concepts in the citance are noun phrases. Moreover, supporting expressions are also captured, as most of them are noun phrases. KW also shows promising results (+11.5% F-1 and +15.2% ROUGE -L F-1 improvement), proving that the idf of the terms in citance over a large biomedical corpus is a valid measure of their informativeness for this task. When comparing KW and NP, we notice that the former obtains higher precision values than the latter; this outcome is reversed with respect to recall (i.e., NP's recall is higher than KW 's). Such behavior can be motivated by the fact that NP, as it extracts noun phrases that are likely to appear in the gold reference span, has a higher chance of retrieving relevant sections of the reference text. However, NP is more likely to retrieve non-relevant spans, as the extracted noun phrases, which are often describing the main findings of the cited paper, are preva-
+
+

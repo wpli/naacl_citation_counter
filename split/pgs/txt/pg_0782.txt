@@ -1,0 +1,68 @@
+tion yields a larger value if the two topic labels are the same and a smaller value if the two topic labels are different. Hence, it encourages similar words to be assigned to the same topic. Under the MRF model, the joint probability of all topic assignments z = { zi } N i=1 can be written as p(z| , ) = exp{
+1 A( ,) N i=1
+
+
+
+
+
+p(zi | )
+
+(m,n)P
+
+I(zm = zn )}
+
+(1)
+
+z1
+w1
+
+z2
+
+z3
+w3
+
+K
+
+z4
+w4
+
+z5
+w5
+
+where P denotes the edges in G and A( , ) is the partition function
+N
+
+w2
+
+A( ) =
+z i=1
+
+p(zi | ) exp{
+(m,n)P
+
+I(zm = zn )}
+
+(2) We introduce   0 as a trade-off parameter between unary potential and binary potential. In standard LDA, topic label zi only depends on topic proportion vector  . In MRF-LDA, zi not only depends on  , but also depends on the topic labels of similar words. If  is set to zero, the correlation between words is ignored and MRF-LDA is reduced to LDA. Given the topic labels, the generation of words is the same as LDA. wi is generated from the topic-words multinomial distribution  zi corresponding to zi . In MRF-LDA, the generative process of a document is summarized as follows: · Draw a topic proportion vector   Dir() · Draw topic labels z for all words from the joint distribution defined in Eq.(1) · For each word wi , drawn wi  multi( zi ) Accordingly, the joint distribution of  , z and w can be written as p( , z, w|,  , ) = p( |)p(z| , ) N i=1 p(wi |zi ,  ) 3.2 Variational Inference and Parameter Learning (3)
+
+Figure 1: Markov Random Field Regularized Latent Dirichlet Allocation Model
+
+MRF-LDA is that, an undirected MRF is coupled with a directed LDA and the hard-to-compute partition function of MRF makes the posterior inference and parameter learning very difficult. To solve this problem, we resort to variational inference (Wainwright and Jordan, 2008), which uses a easy-tohandle variational distribution to approximate the true posterior of latent variables. To deal with the partition function in MRF, we seek lower bound of the variational lower bound to achieve tractability. We introduce a variational distribution
+N
+
+q ( , z) = q ( | )
+i=1
+
+q (zi |i )
+
+(4)
+
+where Dirichlet parameter  and multinomial parameters {i }N i=1 are free variational parameters. Using Jensen's inequality (Wainwright and Jordan, 2008), we can obtain a variational lower bound L = Eq [log p( |)] + Eq [log p(z| , )] +Eq [log -Eq [log
+N i=1 N i=1
+
+The key inference problem we need to solve in MRF-LDA is to compute the posterior p( , z|w) of latent variables  , z given observed data w. As in LDA (Blei et al., 2003), exact computation is intractable. What makes things even challenging in 728
+
+p(wi |zi ,  )] - Eq [log q ( | )] q (zi |i )]
+
+(5)
+
+

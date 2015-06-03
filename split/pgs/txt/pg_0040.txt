@@ -1,0 +1,9 @@
+Monday, June 1, 2015 (continued) [TACL] Reasoning about Quantities in Natural Language Subhro Roy, Tim Vieira, and Dan Roth [TACL] A sense-topic model for WSI with unsupervised data enrichment Jing Wang, Mohit Bansal, Kevin Gimpel, Brian D. Ziebart, and Clement T. Yu Tuesday, June 2, 2015 07:30­09:00 09:00­10:40 09:00­09:25 09:25­09:50 Registration and Breakfast Session 4A: Dialogue and Spoken Language Processing (Long Papers) Semantic Grounding in Dialogue for Complex Problem Solving Xiaolong Li and Kristy Boyer Learning Knowledge Graphs for Question Answering through Conversational Dialog Ben Hixon, Peter Clark and Hannaneh Hajishirzi Sentence segmentation of aphasic speech Kathleen C. Fraser, Naama Ben-David, Graeme Hirst, Naida Graham and Elizabeth Rochon Semantic parsing of speech using grammars learned with weak supervision Judith Gaspers, Philipp Cimiano and Britta Wrede
+
+09:50­10:15
+
+10:15­10:40
+
+xl
+
+

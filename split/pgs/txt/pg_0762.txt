@@ -1,0 +1,28 @@
+ (%) 90 91 92 93 94 95 96 97 98 99 100
+
+BLEU Score 36.26 36.66 36.93 37.23 37.48 38.05 38.16 38.48 38.67 38.95 39.54
+
+# Trans. 1.63 1.69 1.78 1.85 1.93 2.21 2.30 2.47 2.59 2.78 3.18
+
+Time (days)
+0 1 2 3 4 5 6 7
+
+Table 1: The relationship between  (the allowable deviation from the expected upper bound on BLEU score), the BLEU score for translations selected by models from partial sets and the average number of translation candidates set for each source sentence (# Trans).
+
+a143bvgouf83je a3dd3acpmvdvca a2yc779twnpohq a1wyssw33m2fz2 a3b84pq645okwb a132zmwemnnusa a3sw1e5d0b9v9a a1es9zcdrlgxls a2xknsbfsj3hso a4x4g5ttibjer a28z6a8uc4er3x a1hb5veh552cys a39gcdog0zj64o a2llfcd7di80k3 a28e6z78qj2yz6 a3u16uhguaktzs a8v7wa74iohz9 a31n8vegvccz9a a2aktvoca80377 a2qlm59qc9g1uf a2jtc8u7z5z9tf a21xirv18up71h a1is07hajk7bzr a1fij2sbw160xt a1u0z1mafqeh9y a7o9tyb0xcikg a2yfc3l62fkzfr a3fq8i38xt2b4z a33mu4sfa9v8ei a3bz8b0jpubzqq a1aczgd5azz3r7 a1vbzioywe4osh a2de039cxxjuga a237ydzvlsvdzw a1sanjgoj47idf a2u20xxn0ob88e alzgu09bjzsiw a353ocl6lm6m4o a2i57ww1b3evwx alrghxunh1uv7 amwxjmcv94h5s a2pwmdzucikw4c a3hs2e871iw2fi ayowrg5s0py3f a3kwcqj39dxkt4 az9utcfpk0ude a2dsltew8ffmbv a172x4w90uost1 a34ce07kjic192 a1kpcqmdzmxxzw a2iouac3vzbks6
+
+licit translations. Algorithm 1 details the process of model training and searching for . 4.1 Experiments
+
+Figure 2: A time-series plot of all of the translations produced by Turkers (identified by their WorkerID serial number). Turkers are sorted with the best translator at the top of the y-axis. Each tick represent a single translation and black means better than average quality.
+
+We divide data into a training set (10%), a validation set (10%) and a test set (80%). Each source sentence has four translations in total. We use the validation set to search for . The Oracle upper bound on BLEU is set to be 40.13 empirically. We then vary the value of  from 90% to 100%, and sweep values of  by incrementing it in step sizes of 0.01. We report results based on a five-fold cross validation, rotating the training, validation and test sets. 4.1.1 Baseline and upper bound The baseline selection method of randomly picking one translation for each source sentence achieves a BLEU score of 29.56. To establish an upper bound on translation quality, we perform an oracle experiment to select best translation for each source segment from full sets of candidates. It reaches a BLEU score of 40.13. 4.1.2 Translation reducing method Table 1 shows the results for translation reducing method. The  variable correctly predicts the deviation in BLEU score when compared to using the full set of translations. If we set  < 0.95 then we lose 2 BLEU points, but we cut the cost of translations in 708
+
+half, since we pay for only two translations of each source segment on average.
+
+5
+
+Choosing Better Translators
+
+The second mechanism that we use to optimize cost is to reduce the number of non-professional translators that we hire. Our goal is to quickly identify whether Turkers are good or bad translators, so that we can continue to hire only the good translators and stop hiring the bad translators after they are identified as such. Before presenting our method, we first demonstrate that Turkers produce consistent quality translations over time. 5.1 Turkers' behavior in translating sentences Do Turkers produce good (or bad) translations consistently or not? Are some Turkers consistent and others not? We used the professional translations as a gold-standard to analyze the individual Turkers, and we found that most Turkers' performance stayed surprisingly consistent over time. Figure 2 illustrates the consistency of workers' quality by plotting quality of their individual translations on a timeline. The translation quality is com-
+
+

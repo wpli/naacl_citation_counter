@@ -1,0 +1,27 @@
+supporting reflection on that framing.
+
+3.2
+
+Results
+
+3
+
+Exploratory Pilot Study
+
+While the framing literature provides some guidance (Entman, 1993; Chong and Druckman, 2007), little work has explored how exactly non-elites go about identifying framing (Chong and Druckman, 2007). Thus, we conducted a pilot investigating to explore laypersons' understandings and identification of framing. 3.1 Methods
+
+We recruited undergraduate students at two major US universities. Participants were asked to read an article that framed the issue of health care in terms of equality (as opposed to cost). Previous work showed that reading this article was associated with stronger support for a national healthcare system (Druckman et al., 2012). Participants were then asked to re-read the article and highlight any words or phrases they believed were related to framing. Specifically, participants were given the following prompt and instructions:
+
+Political issues can often be complex, contentious, and difficult to understand. One way of making sense of these issues, and the different positions that one can take on an issue, is to think about the frames that structure debate about the issue. Frames help organize facts and information. They help define what counts as a problem, diagnose the problem's causes, and suggest remedies for solving the problem. These ways of thinking have lots of different parts, including stereotypes, metaphors, images, catchphrases, and other elements. These different frames are often associated with a particular way of talking about or communicating about an issue. Certain words or phrases might suggest that one or another frame. Please use the tool at the link below to highlight the words or phrases that help you identify the framings used in the article you just read.
+
+After a student finished highlighting the article, s/he also participated in a debriefing interview where a researcher asked her or him about what s/he highlighted and why. We recruited total of 47 students; 20 completed the task in person, who completed the debriefing interview immediately, and 27 used an online annotation tool, who completed the debriefing over the phone within 24 hours. 1474
+
+First, we sought to determine the extent to which study participants' annotations agreed with one another. Do different people see the same words and phrases as being related to framing? An intraclass correlation (ICC) among participants' annotations of 0.757 indicated that the annotators demonstrated a moderately high degree of agreement as to which words and phrases were most related to framing. As an example, one article about health care contained the sentence: "A good doctor might recognize the regenerative powers of the body politic and come up with a comprehensive treatment plan that also attacks root causesincluding the twin cancers of racism and poverty." Three students highlighted the entire sentence, another three highlighted only the phrase "twin cancers of racism and poverty," and one more highlighted "twinpoverty," "regenerative powers," and "body politic." Several important insights were also derived from the debriefing interviews. Participants drew a distinction between facts and opinions, the later being more relevant to framing. For example, statistics were rarely seen as related to framing. Also, framing often dealt not only with a word itself but also with aspects of its context and its relationships with other terms in the article. For example, a participant might highlight just the word "but" because it indicates an important rhetorical shift and, implicitly, the article's take on the issue. Similarly, latent relationships between an individual word and the article's main argument also played an important role. For example, the article participants read emphasized "disparities" between healthcare available to the wealthy and to the working class. Many participants indicated that they would highlight any words or phrases that drew attention to such disparities. These insights, in conjunction with the theoretical literature on conceptual framing, were used to guide feature selection.
+
+4
+
+Data
+
+We sought to develop a classifier that could automatically identify the language in a text that most related to framing. We chose to focus on news coverage rather than, say, opinion and editorial columns. Framing likely occurs in a more apparent, poten-
+
+

@@ -1,0 +1,58 @@
+0.395 0.390 0.385
+
+0.100 0.095
+
+0.140 0.135
+
+ROUGE-1
+
+0.375 0.370 0.365 0.360 0.355 0.10 0.15 0.20 0.25 0.30 0.35
+
+ROUGE-2
+
+0.090 0.085 0.080 0.075 0.10
+
+ROUGE-SU
+0.15 0.20 0.25 0.30 0.35 0.40
+
+0.380
+
+0.130 0.125 0.120 0.115 0.10
+
+Density threshold
+
+0.40
+
+Density threshold
+
+0.15
+
+Density threshold
+
+0.20
+
+0.25
+
+0.30
+
+0.35
+
+0.40
+
+Figure 1: ROUGE curves of DPSC method varying the density threshold.
+
+when the density threshold is set around 0.22 while starts to drop significantly after 0.30. This indicates that 0.22 is a good setting for the density threshold on DUC04.
+
+References
+Xiaoyan Cai and Wenjie Li. 2013. Ranking through clustering: An integrated approach to multi-document summarization. Audio, Speech, and Language Processing, IEEE Transactions on, 21(7):1424­1433. Xiaoyan Cai, Wenjie Li, You Ouyang, and Hong Yan. 2010. Simultaneous ranking and clustering of sentences: a reinforcement approach to multidocument summarization. In Proceedings of the 23rd International Conference on Computational Linguistics, pages 134­142. Association for Computational Linguistics. Ercan Canhasi and Igor Kononenko. 2013. Multidocument summarization via archetypal analysis of the content-graph joint model. Knowledge and Information Systems, pages 1­22. Jaime Carbonell and Jade Goldstein. 1998. The use of mmr, diversity-based reranking for reordering documents and producing summaries. In Proceedings of the 21st annual international ACM SIGIR conference on Research and development in information retrieval, pages 335­336. ACM. John M Conroy, Judith D Schlesinger, Jade Goldstein, and Dianne P Oleary. 2004. Left-brain/right-brain multi-document summarization. In Proceedings of the Document Understanding Conference (DUC 2004). G¨ unes Erkan and Dragomir R Radev. 2004. Lexrank: Graph-based lexical centrality as salience in text summarization. J. Artif. Intell. Res.(JAIR), 22(1):457­ 479. Yihong Gong and Xin Liu. 2001. Generic text summarization using relevance measure and latent semantic analysis. In Proceedings of the 24th annual international ACM SIGIR conference on Research and development in information retrieval, pages 19­25. ACM. Ju-Hong Lee, Sun Park, Chan-Min Ahn, and Daeho Kim. 2009. Automatic generic document summarization
+
+5
+
+Conclusion and Future Work
+
+In this paper we report the density peaks sentence clustering (DPSC) method for multi-document summarization. Different from the prior work which deals with representativeness and redundancy independently, a unified sentence scoring model is designed in DPSC to combine the representativeness score, the diversity score and the length score of each sentence. Experimental results on DUC04 dataset show that DPSC outperforms the DUC04 best method and the existing clusteringbased methods. Meanwhile, it yields close results when compared with the state-of-the-art generic MDS methods. It is thus verified that density peaks clustering algorithm is able to handle MDS effectively. However, this work is still preliminary. We will study semantic text similarity to improve the sentence similarity matrix. We will then apply the proposed method in query-based multi-document summarization.
+
+Acknowledgement
+This work is partially supported by Natural Science Foundation of China (61272233, 61373056, 61433018) and Shenzhen Peacock Scheme(183003656). We thank the reviewers for the insightful comments. 1266
+
+

@@ -1,0 +1,25 @@
+p is large. Since the dimensionality of region vectors determines the dimensionality of weight vectors, having high-dimensional region vectors means more parameters to learn. If p|V | is too large, the model becomes too complex (w.r.t. the amount of training data available) and/or training becomes unaffordably expensive even with efficient handling of sparse data; therefore, one has to lower the dimensionality by lowering the vocabulary size |V | and/or the region size p, which may or may not be desirable, depending on the nature of the task. An alternative we provide is to perform bagof-word conversion to make region vectors |V |dimensional instead of p|V |-dimensional; e.g., the example region vectors above would be converted     to: 0 don t 0 don t  0  hate   r0 (x) =  1  I  0  it
+1
+
+I love it
+(a)
+
+This isn't what I expected !
+(b)
+
+Figure 3: Convolution layer for variable-sized text. pooling unit associated with the whole text). The dynamic k -max pooling of (Kalchbrenner et al., 2014) for sentence modeling extends it to take the k largest values where k is a function of the sentence length, but it is again over the entire data, and the operation is limited to max-pooling. Our pooling differs in that it is a natural extension of standard pooling for image, in which not only max-pooling but other types can be applied. With multiple pooling units associated with different regions, the top layer can receive locational information (e.g., if there are two pooling units, the features from the first half and last half of a document are distinguished). This turned out to be useful (along with average-pooling) on topic classification, as shown later. 2.3 CNN vs. bag-of-n-grams Traditional methods represent each document entirely with one bag-of-n-gram vector and then apply a classifier model such as SVM. However, since high-order n-grams are susceptible to data sparsity, use of a large n such as 20 is not only infeasible but also ineffective. Also note that a bag-of-n-gram represents each n-gram by a one-hot vector and ignores the fact that some n-grams share constituent words. By contrast, CNN internally learns embedding of text regions (given the consituent words as input) useful for the intended task. Consequently, a large n such as 20 can be used especially with the bow-convolution layer, which turned out to be useful on topic classification. A neuron trained to assign a large value to, e.g., "I love" (and a small value to "I hate") is likely to assign a large value to "we love" (and a small value to "we hate") as well, even though "we love" was never seen during training. We will confirm these points empirically later. 2.4 Extension: parallel CNN We have described CNN with the simplest network architecture that has one pair of convolution and pooling layers. While this can be extended in several ways (e.g., with deeper layers), in our experiments, we explored parallel CNN, which has two or
+
+love
+
+ 0  hate   r 1 ( x) =  0  I  1  it
+1
+
+love
+
+With this representation, we have fewer parameters to learn. Essentially, the expressiveness of bow-convolution (which loses word order only within small regions) is somewhere between seqconvolution and bow vectors. 2.2.3 Pooling for text Whereas the size of images is fixed in image applications, documents are naturally variable-sized, and therefore, with a fixed stride, the output of a convolution layer is also variable-sized as shown in Figure 3. Given the variable-sized output of the convolution layer, standard pooling for image (which uses a fixed pooling region size and a fixed stride) would produce variable-sized output, which can be passed to another convolution layer. To produce fixed-sized output, which is required by the fully-connected top layer5 , we fix the number of pooling units and dynamically determine the pooling region size on each data point so that the entire data is covered without overlapping. In the previous CNN work on text, pooling is typically max-pooling over the entire data (i.e., one
+In this work, the top layer is fully-connected (i.e., each neuron responds to the entire data) as in CNN for image. Alternatively, the top layer could be convolutional so that it can receive variable-sized input, but such CNN would be more complex.
+5
+
+106
+
+

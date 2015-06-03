@@ -1,0 +1,42 @@
+Corpus WMT-11
+
+Wikipedia
+
+Vector Training CBOW Yu and Dredze (2014) CBOW + Retrofitting SG Xu et al. (2014) SG + Retrofitting
+
+MEN-3k 55.2 50.1 60.5 76.1 ­ 65.7
+
+RG-65 44.8 47.1 57.7 66.7 ­ 73.9
+
+WS-353 54.7 53.7 58.4 68.6 68.3 67.5
+
+TOEFL 73.3 61.3 81.3 72.0 ­ 86.0
+
+SYN-REL 40.8 29.9 52.5 40.3 44.4 49.9
+
+SA 74.1 71.5 75.7 73.1 ­ 74.6
+
+Table 4: Comparison of retrofitting for semantic enrichment against Yu and Dredze (2014), Xu et al. (2014). Spearman's correlation (3 left columns) and accuracy (3 right columns) on different tasks.
+
+6.3
+
+Comparisons to Prior Work
+
+inferior score on the WS-353 task. 6.4 Multilingual Evaluation
+
+Two previous models (Yu and Dredze, 2014; Xu et al., 2014) have shown that the quality of word vectors obtained using word2vec tool can be improved by using semantic knowledge from lexicons. Both these models use constraints among words as a regularization term on the training objective during training, and their methods can only be applied for improving the quality of SG and CBOW vectors produced by the word2vec tool. We compared the quality of our vectors against each of these. Yu and Dredze (2014). We train word vectors using their joint model training code8 while using exactly the same training settings as specified in their best model: CBOW, vector length 100 and PPDB for enrichment. The results are shown in the top half of Table 4 where our model consistently outperforms the baseline and their model. Xu et al. (2014). This model extracts categorical and relational knowledge among words from Freebase9 and uses it as a constraint while training. Unfortunately, neither their word embeddings nor model training code is publicly available, so we train the SG model by using exactly the same settings as described in their system (vector length 300) and on the same corpus: monolingual English Wikipedia text.10 We compare the performance of our retrofitting vectors on the SYN-REL and WS353 task against the best model11 reported in their paper. As shown in the lower half of Table 4, our model outperforms their model by an absolute 5.5 points absolute on the SYN-REL task, but a slightly
+https://github.com/Gorov/JointRCM https://www.freebase.com 10 http://mattmahoney.net/dc/enwik9.zip 11 Their best model is named "RC-NET" in their paper.
+9 8
+
+We tested our method on three additional languages: German, French, and Spanish. We used the Universal WordNet (de Melo and Weikum, 2009), an automatically constructed multilingual lexical knowledge base based on WordNet.12 It contains words connected via different lexical relations to other words both within and across languages. We construct separate graphs for different languages (i.e., only linking words to other words in the same language) and apply retrofitting to each. Since not many word similarity evaluation benchmarks are available for languages other than English, we tested our baseline and improved vectors on one benchmark per language. We used RG-65 (Gurevych, 2005), RG-65 (Joubarne and Inkpen, 2011) and MC-30 (Hassan and Mihalcea, 2009) for German, French and Spanish, respectively.13 We trained SG vectors for each language of length 300 on a corpus of 1 billion tokens, each extracted from Wikipedia, and evaluate them on word similarity on the benchmarks before and after retrofitting. Table 5 shows that we obtain high improvements which strongly indicates that our method generalizes across these languages.
+
+7
+
+Further Analysis
+
+Retrofitting vs. vector length. With more dimensions, word vectors might be able to capture higher orders of semantic information and retrofitting might be less helpful. We train SG vechttp://www.mpi-inf.mpg.de/yago-naga/ uwn 13 These benchmarks were created by translating the corresponding English benchmarks word by word manually.
+12
+
+1612
+
+

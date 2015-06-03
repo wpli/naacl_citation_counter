@@ -1,0 +1,22 @@
+4
+
+Learning
+
+We now describe the learning method for our SRL (i) ^ (i) )}N model. Let D = {(^ x(i) , y^ syn , zsem i=1 be the collection of N training samples. The values of the set of parameters  = {w, P, Q, R, S } are estimated on the basis of this training set. Following standard practice, we optimize the parameter values in a maximum soft-margin framework. That is, for the given ^ and the corresponding syntactic tree y^ sentence x syn , we adjust parameter values to separate gold semantic parse and other incorrect alternatives: zsem  Z (^ x, y^ syn ) : ^ )  Ssem (^ Ssem (^ x, y^ x, y^ syn , zsem syn , zsem ) ^ , zsem ) + cost(zsem (4)
+
+and we revise the parameter values to minimize this loss function. Since this loss function is neither linear nor convex with respect to the parameters  (more precisely the low-rank component matrices P , Q, R and S ), we can use the same alternating passive-aggressive (PA) update strategy in our previous work (Lei et al., 2014) to update one parameter matrix at one time while fixing the other matrices. However, as we demonstrated later, modifying the passiveaggressive algorithm slightly can give us a joint update over all components in  . Our preliminary experiment shows this modified version achieves better results compared to the alternating PA. 4.2 Joint PA Update for Tensor The original passive-aggressive parameter update  is derived for a linear, convex loss function by solving a quadatic optimization problem. Although our scoring function Ssem (·) is not linear, we can simply approximate it with its first-order Taylor expansion: S (x, y, z;  +  )  S (x, y, z;  ) + dS ·  d
+
+where Z (^ x, y^ syn ) represent the set of all possible se^ , zsem ) is a non-negative mantic parses, and cost(zsem function representing the structural difference be^ and zsem . The cost is zero when zsem = tween zsem ^ , otherwise it becomes positive and therefore is zsem the "margin" to separate the two parses. Following previous work (Johansson, 2009; Martins and Almeida, 2014), this cost function is defined as the sum of arc errors ­ we add 1.0 for each false-positive arc, 2.0 for each false-negative arc (a missing arc) and 0.5 if the predicate-argument pair (p, a) is in both parses but the semantic role label r is incorrect. 4.1 Online Update
+
+In fact, by plugging this into the hinge loss function and the quadratic optimization problem, we get a joint closed-form update which can be simply described as,  = max C, where g = dS dS ^ )- ~ ), (^ x, y^ (^ x, y^ syn , zsem syn , zsem d d loss( ) g 2 g
+
+The parameters are updated successively after each training sentence. Each update first checks whether the constraint (4) is violated. This requires "costaugmented decoding" to find the maximum violation with respect to the gold semantic parse: ~ = arg max Ssem (^ zsem x, y^ syn , zsem )
+zsem
+
+^ , zsem ) + cost(zsem ~ = When the constraint (4) is violated (i.e. zsem ^ ), we seek a parameter update  to fix this vizsem olation. In other words, we define the hinge loss for this example as follows, loss( ) = ~ ) max{ 0, Ssem (^ x, y^ syn , zsem
+
+and C is a regularization hyper-parameter controlling the maximum step size of each update. Note that  is the set of all parameters, the update jointly adjusts all low-rank matrices and the traditional weight vector. The PA update is "adaptive" in the sense that its step size is propotional to the loss( ) of the current training sample. Therefore the step size is adaptively decreased as the model fits the training data. 4.3 Tensor Initialization Since the scoring and loss function with high-order tensor components is highly non-convex, our model
+
+^ )} ^ , zsem ~ ) - Ssem (^ + cost(zsem x, y^ syn , zsem 1154
+
+

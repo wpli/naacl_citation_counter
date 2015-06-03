@@ -1,0 +1,29 @@
+No. 0 1­4 5­8 9,10 11,12 13 14,15 16­19 20­23 24­27 28 29 30­33 34 35 36­39 40­59 60­99 100 101
+
+Name temporal anchor first word, POS tag last word, POS tag num tokens subcategory direction syntactic node head word, POS tag left and right sibling parent node and index common subsumer syntactic path word, POS tag isRole same predicate firstRole, lastRole hasRole role index and node x containedIn y role y containedIn x role
+
+Description are we predicting LOCATION(x, y ) before, during or after ypred ? first word and POS tag in x and y last word and POS tag in x and y number of tokens in x and y concatenation of (1) x's children and (2) y's children whether x occurs before or after y syntactic node of x and y head word and POS tag of x and y syntactic nodes of the left and right siblings of x and y syntactic nodes and child indices of parents of x and y syntactic node subsuming x and y syntactic path between x and y predicate and POS tag of xpred and ypred semantic role label between xpred and x whether xpred and ypred are the same token the first and last semantic roles of xpred and ypred flags indicating whether xpred and ypred have each semantic role for each semantic role, the order of appearance and syntactic node semantic role of ypred that fully contains x semantic role of xpred that fully contains y
+
+Table 5: Feature set to infer temporally-anchored spatial knowledge from semantic role representations. We believe the high Kappa scores are due to the fact that we start from PropBank-style roles instead of plain text, and questions asked are intuitive. Note that not all disagreements are equal, e.g., the difference between certYES and certNO is much larger than the difference between certYES and probYES.
+Sentence: [In this laboratory]ARGM- LOC, v1 [I]ARG0 , v1 'm [surrounded]v1 [by the remains of [20 service members who]ARG1 , v2 are in the process of being [identified]v2 ]ARG1 , v1 Potential additional spatial knowledge: x: 20 service members who, y: In this laboratory; x containedIn y role = ARG1 Sentence: [Children]ARG0 , v1 can get to [know]v1 [different animals and plants, and [even some crops that]ARG1 , v2 are [rarely]ARGM- ADV, v2 [seen]v2 [in our daily life]ARGM- LOC, v2 ]ARG1 , v1 . Potential additional spatial knowledge: x: Children, y: in our daily life; y containedIn x role = ARG1
+
+4 Inferring Spatial Knowledge
+We follow a standard supervised machine learning approach. The 200 sentences were divided into train (80%) and test (20%), and the corresponding instances assigned to the train and test sets.8 We trained an SVM with RBF kernel using scikit-learn (Pedregosa et al., 2011). Parameters C and  were tuned using 10-fold cross-validation with the training set, and results are calculated with test instances. 4.1 Feature selection
+
+semantic
+
+syntactic
+
+lexical
+
+Figure 5: Pairs (x, y) for which x containedIn y role and y containedIn x role features have a value.
+
+we describe semantic features, which include any feature derived from semantic role representations. Features 30­33 correspond to the surface form and POS tag of the verbs to which x and y attach to. Feature 34 indicates the semantic role between xpred and x; note that the semantic role between ypred and y is always ARGM - LOC (Algorithm 1). Feature 35 distinguishes inferences of type (1a) from (1b) (Section 2.2): it indicates whether both x and y attach to the same verb, as in Figure 1, or not, as in Figure 2. Features 36­39 encode the first and last semantic role of xpred and ypred by order of appearance. Features 40­59 are binary flags signalling which se-
+
+Selected features (Table 5) are a mix of lexical, syntactic and semantic features, and are extracted from tokens (words and POS tags), full parse trees and semantic roles. Lexical and syntactic features are standard in semantic role labeling (Gildea and Jurafsky, 2002) and we do not elaborate on them. Hereafter
+Splitting instances randomly would be unfair, as instances from the same sentence would be assigned to the train and test sets. Thank you to an anonymous reviewer for pointing this out.
+8
+
+457
+
+

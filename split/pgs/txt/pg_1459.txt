@@ -1,0 +1,61 @@
+60 50 40 30 20 10 0
+
+Confusion Matrix
+ARA CHI FRE GER True label ITA JPN KOR SPA TUR RUS POR 640 560 480 400 320 240 160 80
+
+Accuracy (%)
+
+POS-1 POS-2 POS-3 FW EFCamDat TOEFL11
+
+PR CLC
+
+Figure 1: Comparing E F C AM DAT feature performance with the T OEFL11 and Chinese Learner Corpus (CLC). POS-1/2/3: POS uni/bi/trigrams, FW: Function Words, PR: CFG Productions
+
+ITA JPN
+
+CHI FRE GER
+
+KOR
+
+SPA TUR RUS
+
+ARA
+
+Part-of-Speech (POS) n-grams of size 1­3 are extracted as features. They capture preferences for word classes and their localized ordering patterns.
+
+Figure 2: E F C AM DAT 11-class confusion matrix.
+
+Predicted label
+
+5
+
+Within-Corpus Evaluation
+
+Our first experiment applies 10-fold cross-validation within the corpus to assess feature efficacy. The results are shown in the first column of Table 2. All features perform substantially higher than the 9% baseline. POS trigrams are the best single feature (53%), suggesting there exist significant interclass syntactic differences. Next, we also combined all features using a classifier ensemble, which has been shown to be helpful for NLI (Tetreault et al., 2012). This yields the best accuracy of 65% against an upper-bound of 87% set by the oracle. We also compare these results to those from the T OEFL11 and Chinese Learner Corpus (CLC). As shown in Figure 1, we find that feature performance is nearly identical across corpora. Consistent with the results in Malmasi and Dras (2014b), this seems to suggest an invariant degree of transfer across different learners and L1-L2 pairs. Figure 2 shows the confusion matrix. German is the most correctly classified L1, while the highest confusion is between Japanese­Korean, followed by Spanish­Portuguese and French­Italian. This is not surprising given their syntactic similarity as well as being typologically related in case of the latter two.
+
+Arabic Saudi Arabia Arabic Mohammed Ali
+
+German Germany Berlin Hamburg Frankfurt Munich
+
+Japanese Japan Tokyo Osaka Nagoya Yen
+
+Table 3: Selected items from the top 15 most discriminative words for Arabic/German/Japanese.
+
+6
+
+Large-scale Cross-Corpus Evaluation
+
+Our second experiment tests the cross-corpus efficacy of the features by training on E F C AM DAT and testing on T OEFL11,4 and vice versa. As the corpus texts are from different genres, this approach enables
+4
+
+The 9 common classes discussed in §3 are used.
+
+us to test the cross-corpus and cross-genre generalizability of our features. Results are shown in the second and third column of Table 2. While lower than the cross-validation results which were on 11 classes vs 9 here, the results are far greater than the baseline. The accuracy for training on E F C AM DAT and testing on T OEFL11 is higher (33.45%) than the other way around (28.42%), even though T OEFL11 is the larger corpus. This is possibly because E F C AM DAT has numerous genres while T OEFL11 does not. The cross-corpus oracle is also over 20% lower, despite an increase in the random baseline, showing some features are not portable across corpora. Training on T OEFL11 yields a lower oracle. Although a performance drop was expected due to the big genre differences, results suggest the presence of some corpus-independent features that capture cross-linguistic influence. However, they also suggest that a large portion of the features helpful for NLI are genre-dependent. Previously, word n-grams have been applied in small-scale cross-corpus studies and found to be the best feature (Brooke and Hirst, 2012b). Word ngrams have been previously used in NLI and are believed to capture lexical transfer effects which have been previously noted by researchers and linguists
+
+1405
+
+POR
+
+0
+
+

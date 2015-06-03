@@ -1,0 +1,53 @@
+Algorithm 1 Outputs a sense-specific VSM, given a sense-agnostic VSM and ontology
+^ , ) 1: function R ETROFIT(U (0) (0) 2: V  {vij = u ^i | sij  Ws }
+3: 4: 5: 6: 7: 8: 9:
+
+Figure 1: A factor graph depicting the retrofitting model in the neighborhood of the word "bank". Observed variables corresponding to word types are shaded in grey, while latent variables for word senses are in white.
+
+while vij - vij  i, j do for tij  T do (t+1) vij  update using equation 2 end for end while return V (t) end function
+
+(t)
+
+(t-1)
+
+as follows: C (V ) = arg min
+V i-ij
+
+ u ^i - vij r vij - vi j
+
+2
+
++
+ij -i j
+
+2
+
+(1)
+
+is summarized in Algorithm 1. The generality of this algorithm allows it to be applicable to any VSM as a computationally attractive post-processing step. An implementation of this technique is available at https://github.com/sjauhar/ SenseRetrofit. 2.2 Adapting Predictive Models with Latent Variables and Structured Regularizers
+
+Here  is the sense-agnostic weight and r are relation-specific weights for different semantic relations. This objective encourages vectors of neighboring nodes in the MN to pull closer together, leveraging the tension between sense-agnostic neighbors (the first summation term) and ontological neighbors (the second summation term). This allows the different neighborhoods of each sense-specific vector to tease it apart from its sense-agnostic vector. Taking the partial derivative of the objective in equation 1 with respect to vector vij and setting to zero gives the following solution: u ^i + vij =
+i j Nij
+
+ r vi j r
+i j Nij
+
++
+
+(2)
+
+where Nij denotes the set of neighbors of ij . Thus, the MAP sense-specific vector is an -weighted combination of its sense-agnostic vector and the r weighted sense-specific vectors in its ontological neighborhood. We use coordinate descent to iteratively update the variables V using equation 2. The optimization problem in equation 1 is convex, and we normally converge to a numerically satisfactory stationary point within 10 to 15 iterations. This procedure 685
+
+Many successful techniques for semantic representation learning are formulated as models where the desired embeddings are parameters that are learnt to maximize the likelihood of a corpus (Collobert and Weston, 2008; Mnih and Teh, 2012; Mikolov et al., 2013a). In our second approach we extend an existing probability model by adding latent variables representing the senses, and we use a structured prior based on the topology of the ontology to ground the sense embeddings. Formally, we assume a corpus D = {(w1 , c1 ), . . . , (wN , cN )} of pairs of target and context words, and the ontology , and we wish to infer sense-specific vectors V = {vij |  sij  Ws }. Consider a model with parameters  (V  ) that factorizes the probability over the corpus as (wi ,ci )D p(wi , ci ;  ). We propose to extend such a model to learn ontologically grounded sense vectors by presenting a general class of objectives of the following form: C () = arg max
+ (wi ,ci )D
+
+log(
+sij
+
+p(wi , ci , sij ; )) + log p ()
+
+(3)
+
+This objective introduces latent variables sij for senses and adds a structured regularizer p ()
+
+

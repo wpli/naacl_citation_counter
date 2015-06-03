@@ -1,0 +1,25 @@
+Start (s) 40.58 42.58 42.90 48.48 58.95 65.93 83.80 84.80 88.95 96.68 108.15
+
+End (s) 42.58 42.90 48.48 58.95 65.93 80.90 84.80 88.95 96.68 104.67 118.12
+
+Blobs in Hands boat boat base base, spatula base boat, bottle water water water, bottle water bottle
+
+Detected Nouns boat, scale scale spatula, base, boat spatula, base, boat spatula, base, boat base, bottle water water, sink water, sink mix cap, bottle, water
+
+Detected Verbs place measure measure measure pour add use use put, shake, mix
+
+Protocol Sentence place the plastic boat on the scale . zero the scale . using the spatula , measure 20 g of lb broth base into the plastic boat . using the spatula , measure 20 g of lb broth base into the plastic boat . using the spatula , measure 20 g of lb broth base into the plastic boat . pour the lb broth base into the 1000 ml bottle . add 800 ml of di water . use the di water near the sink . use the di water near the sink . mix . put a cap on the bottle and shake to mix the dry ingredients with the water .
+
+Table 2: An example of an alignment, obtained for a part of a manually tracked video. We notice several incorrect parses, e.g., the verbs "mix" and "zero" were not detected correctly.
+
+ment path features. LCRF sums over all possible output and latent variables, which includes the correct solution, and hence constrained decoding is not necessary. While the latent variables for blob-tonoun mappings improved the alignment accuracy for LCRF, it did not improve alignment accuracy for LSP and LSSVM and their variants, presumably because of their hard-decision decoding approach. Among the different variants of LSP and LSSVM, we obtained the best accuracy with the hybrid variants (LSP-H and LSSVM-H), where we started with constrained decoding, and then switched to standard updates. While these hybird approaches provided better accuracy, they still suffer from the issue of not converging. The feature weights learned by LSSVM and its variants were smaller than that for LSP (due to regularization). However, they always resulted in the same forced decoding alignments in our experiments, and obtained same alignment accuracy. Unlike the previous models, we considered the co-occurrences of verbs with blobs in the video. The highest weighted features include: (write, pen), (aspirate, pipette), which agree with our intuition. Our immediate next step will be to automatically learn a dictionary of hand motion patterns, and consider the co-occurrence of these patterns with verbs in the sentences. Some of the objects in our video are small and thin (e.g., pen, pipette, spatula, plastic boat), and were not reliably detected by the computer vision segmentation and tracking system. This may be the reason why we achieved relatively smaller improve172
+
+ments on the auto-tracking dataset. Our alignment models are different from the traditional discriminative approaches in that our cost function is not same as our evaluation criteria. Although our goal is to improve alignment accuracy, the objective function that we minimize is either the negative conditional log-likelihood (LCRF) or the number of mis-predicted video segments (LSSVM). Since the ground truth alignments are unknown, we could not integrate alignment error in our objective function. The proposed discriminative models outperform LHMM despite the fact that the discriminative models are simpler ­ lacking latent variables for the observation states of nouns. The alignment accuracy of the discriminative models is expected to improve even further once these latent variables are incorporated.
+
+8
+
+Conclusion
+
+We proposed three discriminative unsupervised alignment algorithms and their novel variants using constrained decoding. The proposed algorithms incorporate overlapping features to capture the cooccurrences of nouns and verbs with video blobs, and outperform the state-of-the-art latent HMM model via discriminative training. Acknowledgments Funded by NSF IIS-1446996, ONR N00014-11-10417, Intel ISTCPC, DoD SBIR N00014-12-C-0263, DARPA FA8750-13-2-0041 (DEFT), NSF IIS-1449278, and a Google Faculty Research Award.
+
+

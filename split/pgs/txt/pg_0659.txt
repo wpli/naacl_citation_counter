@@ -1,0 +1,35 @@
+EN
+
+book palace wage
+
+AR gloss ktAb AlqSr
+
+AR pronunciation kitAb AlqaSr
+
+SW syllabification ki.ta.bu. ka.sri
+
+Ajrh
+
+Aujrah
+
+u.ji.ra.
+
+Violated OT constraints IDENT- IO - C - G A, a , DEP - IO - V , u MAX - IO - MORPH Al, , IDENT- IO - C - S q, k , IDENT- IO - C - E S, s , * COMPLEX - C sr , DEP - IO - V , i MAX - IO - V A, , ONSET u , DEP - IO - V , i , MAX - IO - C h,
+
+Table 5: Examples of syllabification and OT constraint violations produced by our borrowing model.
+
+highly in the French­Romanian model, where vowel insertion is rare. A second interesting by-product of our model is an inferred syllabification. While we did not conduct a systematic quantitative evaluation, higher-ranked Swahili outputs tend to contain linguistically plausible syllabifications, although the syllabification transducer inserts optional syllable boundaries between every pair of phones. This result further attests to the plausible constraint ranking learned by the model. Example Swahili syllabifications14 along with the OT constraint violations produced by the borrowing model are depicted in table 5.
+
+Borrowing vs. inheritance Cognates are words in related languages inherited from one word in a common ancestral language (the proto-language). Loanwords, on the other hand, can occur between any languages, either related or not, that historically came into contact. Theoretical analysis of cognates has tended to be concerned with a diachronic point of view, i.e., modeling word changes across time. While of immense scientific interest, language processing applications are arguably better served by models of synchronic processes, peculiar to loanword analysis. Why borrowing? Borrowing is a distinctive and pervasive phenomenon: all languages borrowed from other languages at some point in their lifetime, and borrowed words constitute a large fraction of most language lexicons. Another important property of borrowing is that in adaptation of borrowed items, changes in words are systematic, knowledge of morphological and phonological patterns in a language can be used to predict how borrowings will be realized in that language, without having to list them all. Therefore, modeling of borrowing is a task wellsuited for computational approaches. Our suggestion in this work is that we can identify borrowing relations between resource-limited languages and resource-rich donor languages, such as English, French, Spanish, Arabic, Chinese, and Russian. For example, 30­70% of the vocabulary in Vietnamese, Cantonese, and Thai--relatively resourcelimited languages spoken by hundreds of millions of people--are borrowed from Chinese and English. Similarly, African languages have been greatly influenced by Arabic, Spanish, English, and French-- widely spoken languages such as Swahili, Zulu, Malagasy, Hausa, Tarifit, Yoruba contain up to 40% of loanwords. Indo-Iranian languages--Hindustani, Hindi, Urdu, Bengali, Persian, Pashto--spoken by 860 million, also extensively borrowed from Arabic and English (Haspelmath and Tadmor, 2009). In
+
+7
+
+Discussion
+
+The task of modeling borrowing is unexplored in computational linguistics. In this section we first situate the task with respect to two most closely related research directions: modeling transliteration and cognate forms. We then motivate the new line of research proposed in this work: modeling borrowing. Borrowing vs. transliteration Borrowing is not transliteration. Transliteration refers to writing in a different orthography, whereas borrowing refers to expanding a language to include words adapted from another language. Unlike borrowing, transliteration is more amenable to orthographic--rather than morpho-phonological--features, although see (Knight and Graehl, 1998). Borrowed words might have begun as transliterations, but a characteristic of borrowed words is that they become assimilated in the linguistic system of the recipient language, and became regular content words, e.g., `orange' and `sugar' are English words borrowed from Arabic (nArnj) and (Alskr), respectively.
+We chose examples from the Arabic­Swahili system because this is a more challenging case due to linguistic discrepancies.
+14
+
+605
+
+

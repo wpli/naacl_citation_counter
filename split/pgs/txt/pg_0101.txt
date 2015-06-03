@@ -1,0 +1,25 @@
+MADA analysis Word Emlyp Emly/NOUN+p/NSUFF, gen:f/num:s/per:na Emly/ADJ+p/NSUFF, gen:f/num:s/per:na Eml/NOUN+y/NSUFF+p/PRON, gen:m/num:d/per:na Lattice structure Emly/NOUN Emly/ADJ Eml/NOUN p/PRON gen:m/num:d/per:na p/NSUFF gen:f/num:s/per:na
+
+Dataset SPMRL Classical CTB5
+
+F1 99.4 92.4 95.3
+
+Seg POS Oracle Avg. |Si | F1 Avg. |Ti,j | 99.8 1.23 96.9 1.71 97.0 1.16 82.4 3.01 99.0 1.22 91.4 2.02
+
+Table 3: Quality of the lattice structures on each dataset. For SPMRL and CTB5, we show the statistics on the development sets. For classical Arabic, we directly show the statistics on the testing set because the development set is not available. and construct the lattice as described in Section 3.4. Our model then focuses on disambiguating the rest of the word boundaries in the candidates. To generate POS candidates, we apply a CRF-based tagger with Chinese-specific features used in previous work (Hatori et al., 2011). 5.3 Evaluation Measures
+
+y/NSUFF
+
+Figure 5: Example MADA analysis for the word Emlyp and the corresponding lattice structure. POS tagging. Table 3 provides statistics on the generated candidate sets. SPMRL 2013 Following Marton et al. (2013), we use the MADA system to generate candidate morphological analyses and POS tags. For each token in the sentence, MADA provides a list of possible morphological analyses and POS tags, each associated with a score. The score of each segmentation or POS tag equals the highest score of the MADA analysis in which it appears. In addition, we associate each segmentation with MADA analyses on gender, number and person. Figure 5 shows an example of MADA output for the token Emlyp and the corresponding lattice structure. Classical Arabic We construct the lattice for this corpus in a similar fashion to the SPMRL dataset with two main departures. First, we use the Arabic morphological analyzer developed by Darwish et al. (2014) because MADA is primarily trained for MSA and performs poorly on classical Arabic. Second, we implement a CRF-based morpheme-level POS tagger and generate the POS tag candidates for each morpheme based on their marginal probabilities, truncated by a probability threshold. CTB5 We first re-train the Stanford Chinese word segmenter on CTB5 and generate a top-10 list for each sentence.7 We treat the word boundaries shared across all the 10 candidates as the confident ones,
+We use 10-fold cross validation to avoid overfitting on the training set.
+7
+
+Following standard practice in previous work (Hatori et al., 2012; Zhang et al., 2014a), we use Fscore as the evaluation metric for segmentation, POS tagging and dependency parsing. We report the morpheme-level F-score for Arabic and the wordlevel F-score for Chinese. In addition, we use TedEval (Tsarfaty et al., 2012) to evaluate the joint prediction on the SPMRL dataset, because TedEval score is the only evaluation metric used in the official report. We directly use the evaluation tools provided on the SPMRL official website.8 5.4 Baselines
+
+State-of-the-Art Systems For the SPMRL dataset, we directly compare with Bj¨ orkelund et al. (2013). This system achieves the best TedEval score in the track of dependency parsing with predicted information and we directly republish the official result. We also compute the F-score of this system on each task using our own evaluation script.9 For the CTB5 dataset, we directly compare to the arc-eager system by Zhang et al. (2014a), which slightly outperforms the arc-standard system by Hatori et al. (2012).
+http://www.spmrl.org/spmrl2013-sharedtask.html F-score evaluation for Arabic is not straightforward due to the stem changes in the morphological analysis. Therefore, the comparison of F-scores is only approximate.
+9 8
+
+47
+
+

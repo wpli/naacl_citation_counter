@@ -1,0 +1,23 @@
+Morphological Modeling for Machine Translation of English-Iraqi Arabic Spoken Dialogs
+Wilson Tam Colleen Richey, Wen Wang Katrin Kirchhoff Microsoft Corporation SRI International Department of wilson.yctam@gmail.com Menlo Park, CA, USA Electrical Engineering colleen@speech.sri.com University of Washington wwang@speech.sri.com Seattle, WA, USA kk2@u.washington.edu
+
+Abstract
+This paper addresses the problem of morphological modeling in statistical speech-tospeech translation for English to Iraqi Arabic. An analysis of user data from a real-time MT-based dialog system showed that generating correct verbal inflections is a key problem for this language pair. We approach this problem by enriching the training data with morphological information derived from sourceside dependency parses. We analyze the performance of several parsers as well as the effect on different types of translation models. Our method achieves an improvement of more than a full BLEU point and a significant increase in verbal inflection accuracy; at the same time, it is computationally inexpensive and does not rely on target-language linguistic tools.
+
+1
+
+Introduction
+
+to-speech translation system. Our focus is on resolving those morphological translation errors that are most likely to cause confusions and misunderstandings in machine-translation mediated human-human dialogs. Due to the constraints imposed by a realtime system, previous approaches that rely on elaborate feature sets and multi-pass processing strategies are unsuitable for this problem. The language pair of interest in this study is English and Iraqi Arabic (IA). The latter is a spoken dialect of Arabic with few existing linguistic resources. We therefore develop a low-resource approach that relies on sourceside dependency parses only. We analyze its performance in combination with different types of parsers and different translation models. Results show a significant improvement in translation performance in both automatic and manual evaluations. Moreover, the proposed method is sufficiently fast for a realtime system.
+
+SMT from a morphologically poor language like English into a language with richer morphology continues to be a problem, in particular when training data is sparse and/or the SMT system has insufficient modeling capabilities for morphological variation in the target language. Most previous approaches to this problem have utilized a translate-and-inflect method, where a first-pass SMT system is trained on lemmatized forms, and the correct inflection for every word is predicted in a second pass by statistical classifiers trained on a combination of source and target language features. This paper looks at morphological modeling from a different perspective, namely to improve SMT in a real-time speech995
+
+2
+
+Prior Work
+
+Much work in SMT has addressed the issue of translating from morphologically-rich languages by preprocessing the source and/or target data by e.g., stemming and morphological decomposition (Popovic and Ney, 2004; Goldwater and McClosky, 2005), compound splitting (Koehn and Knight, 2003), or various forms of tokenization (Lee, 2004; Habash and Sadat, 2006). In (Minkov et al., 2007; Toutanova et al., 2008) morphological generation was applied as a postprocessing step for translation into morphologically-rich languages. A maximumentropy Markov model was trained to predict the correct inflection for every stemmed word in the
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 995­1000, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

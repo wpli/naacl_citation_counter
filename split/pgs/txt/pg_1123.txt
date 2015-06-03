@@ -1,0 +1,67 @@
+scene 1
+0.3
+
+scene 2
+0.2 0.1
+
+scene 3
+0.07 0.11 0.04
+
+scene 4
+0.07
+
+specifically in a particular scene. For wc,s , we consider the probability of a character being important, i.e., of them belonging to the set of main characters: wc,s = P(c  main(M )), (c, s, wc,s )  E (4)
+
+0.1
+
+0.04
+
+0.05
+
+0.01
+
+0.2
+
+0.3
+
+0.2
+
+char 1
+
+char 2
+
+char 3
+
+char 4
+
+Figure 4: Example of a bipartite graph, connecting a movie's scenes with participating characters.
+
+Scene-to-scene Progression The first term in the objective is responsible for selecting chains representing a logically coherent story. Intuitively, this means that if our chain includes a scene where a character commits an action, then scenes involving affected parties or follow-up actions should also be included. We operationalize this idea of progression in a story in terms of how strongly the characters in a selected scene si influence the transition to the next scene si+1 : P(S ) =
+|S |-1
+
+where P(c  main(M )) is some probability score associated with c being a main character in script M . For ws,c , we take the number of interactions a character is involved in relative to the total number of interactions in a specific scene as indicative of the character's importance in that scene. Interactions refer to conversational interactions as well as relations between characters (e.g., who does what to whom): ws,c =
+c Cs
+
+ inter(c, c ) inter(c1 , c2 ) , (s, c, ws,c )  E (5)
+
+c1 ,c2 Cs
+
+
+
+We defer discussion of how we model probability P(c  Main(M )) and obtain interaction counts to Section 5. Weights ws,c and wc,s are normalized: ws,c = , (s, c, ws,c )  E (s,c ,ws,c ) ws,c wc,s , (c, s, wc,s )  E wc,s = (c,s ,wc,s ) wc,s ws,c (6) (7)
+
+i=0 cCi
+
+  INF (si , si+1 |c)
+
+(3)
+
+We represent screenplays as weighted, bipartite graphs connecting scenes and characters: B = (V, E ) : V = C  S E = {(s, c, ws,c )|s  S, c  C, ws,c  [0, 1]}  {(c, s, wc,s )|c  C, s  S, wc,s  [0, 1]} The set of vertices V corresponds to the union of characters C and scenes S. We therefore add to the bipartite graph one node per scene and one node per character, and two directed edges for each scene-character and character-scene pair. An example of a bipartite graph is shown in Figure 4. We further assume that two scenes si and si+1 are tightly connected in such a graph if a random walk with restart (RWR; Tong et al. 2006; Kim et al. 2014) which starts in si has a high probability of ending in si+1 . In order to calculate the random walk stationary distributions, we must estimate the weights between a character and a scene. We are interested in how important a character is generally in the movie, and 1069
+
+We calculate the stationary distributions of a random walk on a transition matrix T , enumerating over all vertices v (i.e., characters and scenes) in the bipartite graph B: T (i, j) = wi, j if (vi , v j , wi, j  E B ) 0 otherwise (8)
+
+We measure the influence individual characters have on scene-to-scene transitions as follows. The stationary distribution rk for a RWR walker starting at node k is a vector that satisfies: rk = (1 - )Trk + ek (9)
+
+where T is the transition matrix of the graph, ek is a seed vector, with all elements 0, except for element k which is set to 1, and  is a restart probability parameter. In practice, our vectors rk and ek are indexed by the scenes and characters in a movie, i.e., they have length |S| + |C|, and their nth element corresponds either to a known scene or character. In cases where
+
+

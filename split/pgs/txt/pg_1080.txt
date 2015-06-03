@@ -1,0 +1,23 @@
+For example, during training, the German verb lesen would have the following binary features activated: {#l, #le, #les, #lese, #lesen, #lesen#, lesen#, esen#, sen#, en#, n#}. Before applying the classifier to an unseen base form and reconstructing the corresponding inflection table, many competing paradigms can be ruled out as being ill-matched simply by inspecting the base form. For example, the infinitive for the paradigm containing the English verb sing is generalized as x1 +i+x2 . At classification time of a verb like run, this paradigm can be ruled out due to incompatibility, as there is no i in run, and so the infinitive cannot be generated. Likewise, the Icelandic paradigm seen in Figure 1 can be ruled out for the base form hest ¨ . The `horse', as the base form does not contain o SVM-classifier may indeed suggest such paradigm assignments, but such classifications are ignored and the highest scoring compatible paradigm is selected instead. These additional constraints on possible base form-paradigm pairings are a general feature of the LCS-strategy and are not at all tied to the classification method here. 2.1 Feature selection
+
+In order to eliminate noise features, we performed feature selection using the development set. We simultaneously tuned the SVM soft-margin penalty parameter C , as well as the length and type (prefix/suffix) of substrings to include as features. More concretely, we explored the values using a grid search over C = 0.01 . . . 5.0, with a growing sequence gap (Hsu et al., 2003), as well as tuning the maximum length of anchored substring features to use (3 . . . 9), and whether to include prefix-anchored substrings at all (0/1). In the second experiment, where cross-validation was used, we performed the same tuning procedure on each fold's development set.
+
+The number of inflection tables in this set ranges from 2,027 (DE - VERBS) to 7,249 (FI VERBS). From these tables, 200 were held out for development and 200 for testing, following the splits that previous authors have used (Durrett and DeNero, 2013; Ahlberg et al., 2014) to ensure a fair baseline.3 For the second experiment, we collected additional inflection tables from Catalan (CA), English (EN), French (FR), Galician (GL), Italian (IT), Portuguese (PT), Russian (RU) (all from the FreeLing project (Padr´ o and Stanilovsky, 2012)) and Maltese (MT) (Camilleri, 2013).4 These inflection tables are often incomplete or defective and some contain very rarely occurring grammatical forms. Many alternate forms are also given. To avoid having to account for rare or historical forms, we filtered out grammatical forms (slots) that occur in less than 1% of all inflection tables. We also performed an independent cross-check with Wiktionary and removed some inflection table slots that did not appear in that resource. We further limited the number of inflection tables to 5,000. In the second experiment, we also split each dataset into 5 folds for cross-validation (maximally 4,000 tables for training, 500 for development and 500 for testing for each fold).
+
+VERBS).
+
+4
+
+Results and discussion
+
+In the main results tables 1, 2, and 3 we report the per table accuracy and per form accuracy in reconstructing complete inflection tables from unseen base forms. The per table accuracy is the percentage of inflection tables that are perfectly reconstructed from the base form. The per form accuracy is the percentage of correct forms in the reconstructed table. The associated oracle scores, which independently provide a measure of generalization power of the LCS-method, represent the maximal percentage achievable by an oracle classifier that always picks
+The development and test data for the first experiment had been filtered to not contain any of the 200 most frequently occurring forms in the language (Durrett and DeNero, 2013); this may result in an easier classification task because the maneuver in effect ensures that words belonging to irregular paradigms--i.e. those which would otherwise be difficult to classify correctly--are never evaluated against. 4 The FreeLing data also included Russian verbs. However, this data set was deemed too incomplete to be useful and was left out.
+3
+
+3
+
+Data
+
+For the first experiment, we use the datasets provided by Durrett and DeNero (2013). This dataset contains complete inflection tables for German nouns and verbs (DE - NOUNS, DE - VERBS), Finnish verbs and nouns combined with adjectives (FI VERBS, FI - NOUNADJ ), and Spanish verbs ( ES 1026
+
+

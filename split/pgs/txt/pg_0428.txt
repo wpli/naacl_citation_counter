@@ -1,0 +1,22 @@
+rect action tg to take for a given state s. A comparison between tg and the best action t actually taken by our parser will give us a sense about how accurately each type of action is applied. When we compare the actions, we focus on the structural aspect of AMR parsing and only take into account the eight action types, ignoring the concept and edge labels attached to them. For example, NEXT-EDGE-ARG0 and NEXT-EDGE-ARG1 would be considered to be the same action and counted as a match when we compute the errors even though the labels attached to them are different. Figure 9 shows the confusion matrix that presents a comparison between the parser-predicted actions and the correct actions given by oracle() function. It shows that the NEXT-EDGE (ned), NEXTNODE (nnd), and DELETENODE (dnd) actions account for a large proportion of the actions. These actions are also more accurately applied. As expected, the parser makes more mistakes involving the REATTACH (reat), REENTRANCE (reen) and SWAP (sw) actions. The REATTACH action is often used to correct PP-attachment errors made by the dependency parser or readjust the structure resulting from the SWAP action, and it is hard to learn given the relatively small AMR training set. The SWAP action is often tied to coordination structures in which the head in the dependency structure and the AMR graph diverges. In the Stanford dependency representation which is the input to our parser, the head of a coordination structure is one of the conjuncts. For AMR, the head is an abstract concept signaled by one of the coordinating conjunctions. This also turns out to be one of the more difficult actions to learn. We expect, however, as the AMR Annotation Corpus grows bigger, the parsing model trained on a larger training set will learn these actions better.
+
+tion identification, they adopt the graph-based techniques for non-projective dependency parsing. Instead of finding maximum-scoring trees over words, they propose an algorithm to find the maximum spanning connected subgraph (MSCG) over concept fragments obtained from the first stage. In contrast, we adopt a transition-based approach that finds its root in transition-based dependency parsing (Yamada and Matsumoto, 2003; Nivre, 2003; Sagae and Tsujii, 2008), where a series of actions are performed to transform a sentence to a dependency tree. As should be clear from our description, however, the actions in our parser are very different in nature from the actions used in transition-based dependency parsing. There is also another line of research that attempts to design graph grammars such as hyperedge replacement grammar (HRG) (Chiang et al., 2013) and efficient graph-based algorithms for AMR parsing. Existing work along this line is still theoretical in nature and no empirical results have been reported yet.
+
+7
+
+Conclusion and Future Work
+
+We presented a novel transition-based parsing algorithm that takes the dependency tree of a sentence as input and transforms it into an Abstract Meaning Representation graph through a sequence of actions. We show that our approach is linguistically intuitive and our experimental results also show that our parser outperformed the previous best reported results by a significant margin. In future work we plan to continue to perfect our parser via improved learning and decoding techniques.
+
+Acknowledgments
+We want to thank the anonymous reviewers for their suggestions. We also want to thank Jeffrey Flanigan, Xiaochang Peng, Adam Lopez and Giorgio Satta for discussion about ideas related to this work during the Fred Jelinek Memorial Workshop in Prague in 2014. This work was partially supported by the National Science Foundation via Grant No.0910532 entitled Richer Representations for Machine Translation. All views expressed in this paper are those of the authors and do not necessarily represent the view of the National Science Foundation.
+
+6
+
+Related Work
+
+Our work is directly comparable to JAMR (Flanigan et al., 2014), the first published AMR parser. JAMR performs AMR parsing in two stages: concept identification and relation identification. They treat concept identification as a sequence labeling task and utilize a semi-Markov model to map spans of words in a sentence to concept graph fragments. For rela-
+
+374
+
+

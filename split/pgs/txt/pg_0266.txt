@@ -1,0 +1,25 @@
+Good Good Partial Partial
+
+Apple sauce or applesauce is a puree made of apples. Commercial versions of applesauce are really available in supermarkets Applesauce is a sauce that is made from stewed and mashed apples.
+
+Applesauce (or applesauce) is a sauce that is made from stewed or mashed apples. It is easy to make at home, and it is also sold already made in supermarkets as a common food. Applesauce is made by cooking down apples with water or apple cider to the desired level.
+
+Table 1: Annotated examples: the matching regions for partial and good partial are italicized.
+
+set of standard and simple Wikipedia article pairs. The datasets are publicly available to facilitate further research on text simplification.
+
+in the other article. This method relies on consistent ordering between two articles, which does not always hold for Wikipedia articles.
+
+2
+
+Background
+
+3
+
+Simplification Datasets
+
+Given comparable articles, sentence alignment is achieved by leveraging the sentence-level similarity score and the sequence-level search strategy. Sentence-Level Scoring: There are two main approaches for sentence-level scoring. One approach, used in Wikipedia alignment (Kauchak, 2013), computes sentence similarities as the cosine distance between vector representations of tf.idf scores of the words in each sentence. Other approaches rely on word-level  (w, w ) semantic similarity scores 1 s(W, W ) = Z wW maxw W  (w, w )idf (w ). Previous work use WordNet-based similarity (Wu and Palmer, 1994; Mohler and Mihalcea, 2009; Hosseini et al., 2014), distributional similarity (Guo and Diab., 2012), or discriminative similarity (Hajishirzi et al., 2010; Rastegari et al., 2015). In this paper, we leverage pairwise word similarities, and introduce two novel word-level semantic similarity metrics and show that they outperform the previous metrics. Sequence-Level Search: There are several sequence-level alignment strategies (Shieber and Nelken, 2006). In (Zhu et al., 2010), sentence alignment between simple and standard articles is computed without constraints, so every sentence can be matched to multiple sentences in the other document. Two sentences are aligned if their similarity score is greater than a threshold. An alternative approach is to compute sentence alignment with a sequential constraint, i.e. using dynamic programming (Coster and Kauchak, 2011; Barzilay and Elhadad, 2003). Specifically, the alignment is computed by a recursive function that optimizes alignment of one or two consecutive sentences in one article to sentences 212
+
+We develop datasets of aligned sentences in standard and simple Wikipedia. Here, we describe the manually annotated dataset and leave the details of the automatically generated dataset to Section 5.2. Manually Annotated: For every sentence in a standard Wikipedia article, we create an HTML survey that lists sentences in the corresponding simple article and allow the annotator to judge each sentence pair as a good, good partial, partial, or bad match (examples in Table 1): Good: The semantics of the simple and standard sentence completely match, possibly with small omissions (e.g., pronouns, dates, or numbers). Good Partial: A sentence completely covers the other sentence, but contains an additional clause or phrase that has information which is not contained within the other sentence. Partial: The sentences discuss unrelated concepts, but share a short related phrase that does not match considerably. Bad: The sentences discuss unrelated concepts. The annotators were native speaker, hourly paid, undergraduate students. We randomly selected 46 article pairs from Wikipedia (downloaded in June 2012) that started with the character `a'. In total, 67,853 sentence pairs were annotated (277 good, 281 good partial, 117 partial, and 67,178 bad). The kappa value for interannotator agreement is 0.68 (13% of articles were dual annotated). Most disagreements between annotators are confusions between `partial' and `good partial' matches. The manually annotated dataset is used as a test set for evaluating alignment methods as well as tuning parameters for generating automatically aligned pairs across standard and simple Wikipedia.
+
+

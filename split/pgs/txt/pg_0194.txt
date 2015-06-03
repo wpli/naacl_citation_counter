@@ -1,0 +1,35 @@
+Perceptron MIRA f-MIRA 1st sent. HMM Word graphs Keywords Reference
+
+H. Len. 10.096 13.045 11.737 8.932 9.000 10.973 9.000 11.898
+
+LSI 0.446 0.463 0.491 0.224 0.172 0.480 0.701 0.555
+
+Gram. ­ ­ 3.45 ­ ­ 3.69 ­ 4.49
+
+Inf. ­ ­ 2.94 ­ ­ 2.32 ­ 4.14
+
+Gram. Inf.
+
+R-1 -0.130 0.561
+
+R-2 -0.084 0.535
+
+R-SU -0.131 0.557
+
+R-WSU -0.132 0.542
+
+LSI-DS -0.015 0.370
+
+Table 3: Spearman correlation between human-assessed metrics and automatic ones.
+
+8
+
+Conclusions and Discussion
+
+Table 2: Result of the evaluation of our models and baselines with LSI document similarity, grammaticality and informativeness as assessed by human raters, and average headline length.
+
+respect to the LSI document similarity metric, and the human evaluations for grammaticality and informativeness. For exploratory purposes the table also contains the average length for the generated headlines of each of the models (which also counts the imposed final period). The results in this table are satisfying: with respect to LSI document similarity, our model outperforms all of the baselines and its value is close to the one achieved by human-generated headlines. On the other hand, the human evaluations are middling: the word-graphs method produces more readable headlines, but our model proves to be more informative because it does better work at detecting abstract word relationships in the text. All differences in this table are statistically significant when computed as paired t-tests (p < 0.001). It is worth noting that the informativeness of human-generated headlines did not get a high score. The reason for this is the fact that editors tend to produce rather sensationalist or partially informative titles so as to attract the attention of readers and engage them to read the whole article; human raters penalized the relevance of such headlines, which was reflected on this final score. Finally, table 3 contains the mutual correlation between automated and manual metrics. The first thing to note is that none of the used metrics proved to be good for assessing grammaticality of headlines. It is also worth noting that our proposed metric ROUGEWSU performs as well as the other ROUGE metrics, and that the proposed LSI document similarity does not prove to be as strong a metric as the others. 140
+
+In this study we proposed a CRF model with state transitions. The model tries to learn how humans title their articles. The learning is performed by means of a mapping function that, given a document, translates headlines to an abstract featurerich space, where the characteristics that distinguish human-generated titles can be discriminated. This abstraction allows our model to be trained with any monolingual corpus of news articles because it does not impose conditions on the provenance of stories' headlines ­i.e, our model maps reference headlines to a feature space and only learns what abstract properties characterize them. Furthermore, our model allows defining the task of finding the best possible producible headline as a discrete optimization problem. By doing this each candidate headline is modelled as a path in a graph of state sequences, thus allowing the best-scoring path to be found in polynomial time by means of dynamic programming. Our results, obtained through reliable automatic and human-assessed evaluations, provide a proof of concept for the soundness of our model and its capabilities. Additionally, we propose a new evaluation metric, ROUGE-WSU, which, as shown in table 3, correlates as good as traditional ROUGE metrics with human evaluations for informativeness of headlines. The further work we envisage for augmenting our research can be grouped in the following areas: · Exploring more advanced features that manage to detect abstract semantic relationships or discourse flows in the compressed article. · Complementing our system with a separate translation model capable of transforming to "Headlinese" the titles generated with the language used in the bodies of articles. · Attempting to achieve a more objective evaluation of our generated headlines, through the use of semantic-level measures.
+
+

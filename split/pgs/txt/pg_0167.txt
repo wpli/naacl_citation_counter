@@ -1,0 +1,24 @@
+Transition-Based Syntactic Linearization
+Yijia Liu , Yue Zhang , Wanxiang Che , Bing Qin  Singapore University of Technology and Design Research Center for Social Computing and Information Retrieval Harbin Institute of Technology, China {yjliu,car,bqin}@ir.hit.edu.cn yue zhang@sutd.edu.sg
+
+Abstract
+Syntactic linearization algorithms take a bag of input words and a set of optional constraints, and construct an output sentence and its syntactic derivation simultaneously. The search problem is NP-hard, and the current best results are achieved by bottom-up bestfirst search. One drawback of the method is low efficiency; and there is no theoretical guarantee that a full sentence can be found within bounded time. We propose an alternative algorithm that constructs output structures from left to right using beam-search. The algorithm is based on incremental parsing algorithms. We extend the transition system so that word ordering is performed in addition to syntactic parsing, resulting in a linearization system that runs in guaranteed quadratic time. In standard evaluations, our system runs an order of magnitude faster than a state-of-the-art baseline using best-first search, with improved accuracies.
+
+Initial State Final State
+
+([ ], [1...n], ) ([ ], [ ], A)
+
+Induction Rules: S HIFT L EFTA RC R IGHTA RC (, [i| ], A) ([ | i], , A) ([ |j i], , A) ([ |i], , A  {j  i}) ([ |j i], , A) ([ |j ], , A  {j  i})
+
+Figure 1: The arc-standard parsing algorithm. given a full-spanning syntactic tree, and partial tree linearization (Zhang, 2013), which orders a bag of words given some syntactic relations between them as partial constraints. The search space for syntactic linearization is huge. Even with a full syntax tree being available as constraints, permutation of nodes on each level is an NP-hard problem. As a result, heuristic search has been adopted by most previous work, and the best results have been achieved by a time-constrained best-first search framework (White, 2004a; White and Rajkumar, 2009; Zhang and Clark, 2011b; Song et al., 2014). Though empirically highly accurate, one drawback of this approach is that there is no asymptotic upper bound on the time complexity of finding the first full sentence. As a result, it can take 5­10 seconds to process a sentence, and sometimes fail to yield a full sentence at timeout. This issue is more severe for larger bags of words, and makes the algorithms practically less useful. We study the effect of an alternative learning and search framework for the linearization prob-
+
+1
+
+Introduction
+
+Linearization is the task of ordering a bag of words into a grammatical and fluent sentence. Syntaxbased linearization algorithms generate a sentence along with its syntactic structure. Depending on how much syntactic information is available as inputs, recent work on syntactic linearization can be classified into free word ordering (Wan et al., 2009; Zhang et al., 2012; de Gispert et al., 2014), which orders a bag of words without syntactic constraints, full tree linearization (He et al., 2009; Bohnet et al., 2010; Song et al., 2014), which orders a bag of words
+
+113
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 113­122, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

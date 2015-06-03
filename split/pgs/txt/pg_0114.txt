@@ -1,0 +1,24 @@
+Algorithm NonInc (beam=1) RevInc (beam=1) NonInc (beam=16) Z&C (beam=16)*
+
+UP 92.57 91.62 92.71 -
+
+UR 82.60 85.94 89.66 -
+
+UF 87.30 88.69 91.16 -
+
+LP 85.12 83.42 85.78 87.15
+
+LR 75.96 78.25 82.96 82.95
+
+LF 80.28 80.75 84.35 85.00
+
+Cat Acc. 91.10 90.87 92.51 92.77
+
+Table 2: Performance on the development data. *: These results are from the Z&C paper. NonInc algorithm and hence more incremental. This property is likely to be crucial for future applications in ASR and SMT language modeling. 4.3 Results and Analysis We trained the perceptron for both NonInc and RevInc algorithms using the CCGbank training data for 30 iterations, and the models which gave best results on development data are directly used for test data. Table 2 gives the unlabeled precision (UP), recall (UR), F-score (UF) and labeled precision (LP), recall (LR), F-score (LF) results of both NonInc and RevInc approaches on the development data. Last column in the table gives the category accuracy. We used the modified CCGbank for all experiments, including NonInc, for consistent comparisons. For NonInc, the modification decreased unlabeled F-score by 0.45%, without a major difference in labeled F-score. Our incremental algorithm gives 1.39% and 0.47% improvements over the NonInc algorithm in unlabeled and labeled F-scores respectively. For both unlabeled and labeled scores, precision of RevInc is slightly lower than NonInc but the recall of RevInc is much higher than NonInc resulting in a better F-score for RevInc. As NonInc is not incremental and as it uses more context to the right while making a decision, it makes more precise actions. But, on the other hand, if a node is reduced, it is not available for future actions. This is not a problem for our RevInc algorithm which is the reason for higher recall. For example, in the example sentence, `John likes mangoes from India madly', if the object `mangoes' is reduced after it got shifted to the stack, then in case of NonInc, the preposition phrase `from India' can never be attached to `mangoes'. But, RevInc makes the correct attachment using RRev action. Category accuracy of NonInc is better than RevInc, since NonInc can use more context before taking a complex action and is less prone to error propagation compared to RevInc. To compare these results in the perspective of Z&C's parser we also trained our NonInc parser with a beam size of 16 similar to Z&C. The second last row in Table 2 (NonInc (beam=16)) shows these results and the last row presents the results from their paper. Results with our implementation of Z&C are 0.65% lower than the published results, possibly due to the modification made in the head rule, and other minor differences like the supertagger beta value. Unlabeled and labeled F-scores of our RevInc parser are lower than these numbers. But, given that our RevInc parser doesn't use any beam, these margins are reasonable. We also analyzed the label-wise scores of both NonInc and RevInc. In general, NonInc is better in precision and RevInc is better in recall. In the case of verbal arguments ((S\NP)/NP) and verbal modifiers ((S\NP)\(S\NP)), the F-score of RevInc is better than that of NonInc. But NonInc performed better than RevInc in the case of preposition phrase (PP) attachments ((NP\NP)/NP, ((S\NP)\(S\NP))/NP). More context is required for better PP attachment which is provided by the fact that NonInc has a context of several unreduced types for the model to work with, whereas RevInc has fewer. Whereas actions like LRev are required to correctly attach the verbal modifiers (`madly') if the subject argument (`John') of the verb (`likes') is reduced early. Table 3 gives the results of these CCG lexical categories.
+Category (NP\NP)/NP (NP\NP)/NP ((S\NP)\(S\NP))/NP ((S\NP)\(S\NP))/NP ((S[dcl]\NP)/NP ((S[dcl]\NP)/NP (S\NP)\(S\NP) RevInc 81.36 78.66 65.09 62.69 78.96 76.71 80.49 NonInc 83.21 82.94 66.98 65.89 78.29 75.22 76.90
+
+Table 3: Label-wise F-score of RevInc and NonInc parsers (both with beam=1). Argument slots in the relation are in bold.
+
+60
+
+

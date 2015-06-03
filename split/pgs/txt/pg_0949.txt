@@ -1,0 +1,90 @@
+Algorithm 1 The Training Algorithm (Optimizing Eq 10)
+1: procedure OPT- LATENT SVM(X, Y ) 2: Initialize w(0) and set t = 0 3: repeat 4: for i := 1 to N do (t) 5: h · (xi , h, yi ) i := arg maxh w 6: 7: 8: 9:
+
+To apply DD to the loss-augmented inference (13), let us rewrite it as a constrained optimization problem:
+y1 ,...,yN ,y1 ,...,yN N
+
+max
+
+ (y1 , . . . , yN ), (y1 , . . . , yN )
+
+w(t+1) := optSVM(X, H , Y) t := t + 1 until some stopping condition is met return w(t)
+
+// Optimizing Eq 12
+
++ subject to
+i=1
+
+max w · (xi , h, yi )
+h
+
+i  {1, . . . , N },   {1, . . . , L},
+
+yi, = yi,
+
+lowerbound of g2 (w) involves populating the hidden variables by:
+(t) · (xi , h, yi ) . h i := arg max w h
+
+Introduction of the new variables (y1 , .., yN ) decouples the two terms in the objective function, and as we will see, leads to an effective optimization algorithm. After forming the Lagrangian, the dual objective function is derived as:
+L() := max (Y, Y ) +
+Y i N
+
+Therefore, in each iteration of our CCCP-based algorithm we need to optimize Eq (12), which is reminiscent of the standard structural SVM without latent variables:
+1 min ||w||2 max 2 +C w 2 y 1 ,..,y N  (y1 , .., yN ), (y 1 , .., y
+N)
+
+i ( )yi, + i ( )yi,
+i
+
+max
+Y i=1
+
+max w · (xi , h, yi ) -
+h
+
+where  := ( 1 , ..,  N ), and  i is a vector of Lagrange multipliers for L binary variables each of N N which represent a relation label. The two optimizamax w · (xi , h, yi ) - w · (xi , h , y ) (12) + i i h i=1 i=1 tion problems involved in the dual L() are indeThe above objective function can be optimized us- pendent and can be solved separately. The dual is an ing the standard cutting-plane algorithms for struc- upperbound on the loss-augmented objective functural SVM (Tsochantaridis et al., 2004; Joachims, tion for any value of ; therefore, we can find the 2005). The cutting-plane algorithm in turn needs tightest upperbound as an approximate solution: to solve the loss-augmented inference, which is the min L()  subject of the next sub-section. The CCCP-based training algorithm is summarized in Algorithm 1. The dual is non-differentiable at those points  where either of the two optimisation problems has 3.2 Loss-Augmented Inference multiple optima. Therefore, it is optimized using the To be able to optimize the training objective Eq (12) subgradient descent method: encountered in each iteration of Algorithm 1, we (t) := (t-1) -  (t) (Y - Y ) need to solve (the so-called) loss-augmented inference: 1 is the step size1 , and where  (t) =  t
+y1 ,..,yN
+
+max
+
+ (y1 , .., yN ), (y1 , .., yN )
+N
+
+Y := arg max (Y, Y ) +
+Y i N
+
+i
+
+(t-1)
+
+( )yi, (14)
+
++
+i=1
+
+max w · (xi , h, yi )
+h
+
+(13)
+
+Y := arg max
+Y i=1
+
+max w · (xi , h, yi )
+h
+
+We make use of the dual decomposition (DD) technique to decouple the two terms of the above objective function, and efficiently find an approximate solution. DD is shown to be an effective technique for loss-augmented inference in structured prediction models without hidden variables (Ranjbar et al., 2012). 895
+
+-
+i
+1
+
+i
+
+(t-1)
+
+( )yi, (15)
+
+Other (non-increasing) functions of the iteration number t are also plausible, as far as they satisfy the following conditions (Komodakis et al., 2011) needed to guarantee the convergence to the optimal solution in the subgradient descent method: (t)  (t)  0, limt  (t) = 0,  = t=1 
+
+

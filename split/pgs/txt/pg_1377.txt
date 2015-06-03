@@ -1,0 +1,19 @@
+MPQA 3.0: An Entity/Event-Level Sentiment Corpus
+Lingjia Deng Intelligent Systems Program University of Pittsburgh lid29@pitt.edu Janyce Wiebe Intelligent Systems Program Department of Computer Science University of Pittsburgh wiebe@cs.pitt.edu
+
+Abstract
+This paper presents an annotation scheme for adding entity and event target annotations to the MPQA corpus, a rich span-annotated opinion corpus. The new corpus promises to be a valuable new resource for developing systems for entity/event-level sentiment analysis. Such systems, in turn, would be valuable in NLP applications such as Automatic Question Answering. We introduce the idea of entity and event targets (eTargets), describe the annotation scheme, and present the results of an agreement study.
+
+1
+
+Introduction
+
+Much work in sentiment analysis and opinion mining is at the document level (Pang et al., 2002; Turney, 2002). There is increasing interest in more fine-grained levels - sentence-level (Yu and Hatzivassiloglou, 2003; McDonald et al., 2007), phrase-level (Choi and Cardie, 2008), aspect-level (Hu and Liu, 2004; Titov and McDonald, 2008), etc. We specifically address sentiments toward entities and events (i.e., eTargets) expressed in data such as blogs, newswire, and editorials. A system that could recognize sentiments toward entities and events would be valuable in an application such as Automatic Question Answering, to support answering questions such as "Toward whom/what is X negative/positive?" "Who is negative/positive toward X ?" (Stoyanov et al., 2005). Or, to augment an automatic wikification system (Ratinov et al., 2011) ­ in addition to relationships such as spouse and parents, the system could include information about 1323
+
+whom or what the subject supports or opposes. A recent NIST evaluation ­ The Knowledge Base Population (KBP) Sentiment track1 -- aims at using corpora to collect information regarding sentiments expressed toward or by named entities. Annotated corpora of reviews (e.g., (Hu and Liu, 2004; Titov and McDonald, 2008)), widely used in NLP, often include target annotations. Such targets are often aspects or features of products or services, and as such are somewhat limited.2 Recently, to create the Sentiment Treebank (Socher et al., 2013), researchers crowdsourced annotations of movie review data and then overlaid the annotations onto syntax trees. Thus, the targets are not limited to aspects of products/services. However, annotators were asked to annotate small and then increasingly larger segments of the sentence. Thus, the annotations are mixed in the degree to which context was considered when making the judgements. Previously, we (Deng et al., 2013) annotated a corpus of non-review data with sentiments toward entities, but only for those that participate in certain types of events. In all of the above corpora, the only sentiments considered are those of the writer, excluding sentiments attributed to other entities. The MPQA opinion annotated corpus (Wiebe et al., 2005; Wilson, 2007) is entirely span-based, and contains no eTarget annotations. However, it provides an infrastructure for sentiment annotation that is not provided by other sentiment NLP corpora, and
+http://www.nist.gov/tac/2014/KBP/Sentiment/index.html For example, as stated in SemEval-2014: "We annotate only aspect terms naming particular aspects."
+2 1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1323­1328, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

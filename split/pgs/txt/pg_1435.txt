@@ -1,0 +1,21 @@
+2
+
+Related Work
+
+Lexical simplification is a kind of text simplification that aims at the word level. It can be performed through the substitution of words by simpler synonyms, by adding a definition, or by showing simpler synonyms. Most of the approaches aim at the substitution of complex words. To find appropriate synonyms, many approaches use WordNet (Burstein et al., 2007; Carroll et al., 1999; Lal and Ruger, 2002). De Belder et al. (2010) apply explicit word sense disambiguation with a latent words language model. Devlin and Unthank (2006) use dictionaries. Aluisio and Gasperin (2010) use a thesaurus and lexical ontologies. More recently, Biran et al. (2011) and Yatskar et al. (2010) used Simple English Wikipedia, in combination with the standard English Wikipedia for their lexical simplification algorithms using machine learning. There are also machine translation based approaches (Coster and Kauchak, 2011; Specia, 2010) as well as hybrid approaches (Narayan and Gardent, 2014; Siddharthan and Angrosh, 2014) that are also able to handle lexical simplification, since the translation model maps words from the non-simplified language to words of the simplified language. The closest algorithm to ours is LexSiS (Bott et al., 2012; Saggion et al., 2013), that uses the Spanish OpenThesaurus and a corpus that contains 6,595 words of original and 3,912 words of manually simplified news articles. To the best of our knowledge this is the first and only lexical simplification algorithm for Spanish. Hence, we use it here as the stateof-the-art in our evaluation. To the best of our knowledge, our approach is novel in using the Google Books Ngram corpus for the word context, Open Thesaurus for the synonyms, and real web frequencies for disambiguating synonym candidates. However, Google Ngram have been previously used to find synonyms, for instance to expand user queries by including synonyms (Baker and Lamping, 2011).
+
+text and the web frequency of the complex word for disambiguation. 3.1 Resources Our method uses the following two resources: ­ Spanish OpenThesaurus (version 2): The thesaurus is freely available2 to be used with OpenOffice.org. This thesaurus provides 21,378 target words (lemmas) with a total of 44,348 different word senses for them. The following is a part of the thesaurus entry for farol, which is ambiguous, as it could mean `lie', `lamp', or the adjective `flashy', among others.
+farol - embuste|mentira (`lie') - luz|l´ ampara|fuego|bombilla (`lamp') - ostentoso|jactancioso|farolero (`flashy')
+
+­ Google Books Ngram Corpus for Spanish (2012 edition): The corpus consists of n-grams and their usage frequency over time,3 and is derived from 8,116,746 books, over 6% of all books ever published. The corpus has 854,649 volumes and 83,967,471,303 tokens (Lin et al., 2012). 3.2 Algorithm Description First, we modified and enriched the Spanish OpenThesaurus and created our List of Senses. Instead of having a target word with different senses, we included the target word in each sense, and we kept a list of unique senses, including for each word its frequency in the Web using a large search engine index. The Spanish OpenThesaurus contains singleword and multi-word expressions. We only treated single-word units, which represent 98% of the cases, leaving out only 399 multi-word expressions, such as de esta forma (`in this manner'). We lemmatized the words because the frequencies were all for inflected word forms as they appear in the Web while we were interested in the lemma frequencies for the synonyms, adding all the
+2 3
+
+3
+
+Method
+
+CASSA (Context-Aware Synonym Simplification Algorithm) is a method that generates simpler synonyms of a word. It takes into consideration the con1381
+
+http://openthes-es.berlios.de http://books.google.com/ngrams
+
+

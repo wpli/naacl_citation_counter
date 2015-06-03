@@ -1,0 +1,31 @@
+ponent model corresponding to language is called P CHAR . Second, our LM also incorporates a model that governs code-switching between languages. We call this model P LANG . The generative process for our LM works as follows. For the ith character position, we first generate the current language i conditioned on the previous character ei-1 and the previous language i-1 using P LANG . Then, conditioned on the current language li and the previous n - 1 characters, we generate the current character ei using P CHAR . This means that the probability of pair i (ei , i ) given its context is computed as: P LANG (
+i
+
+original
+
+| ei-1 ,
+
+i- 1 )
+
+· P CHAR (ei | ei-1 ... ei-n+1 ) i
+
+` a ´ a que per ce x j an space h be u v oracion
+
+ replacement a a ~ q ~ p ze j x ~ a space ve v u o~ ron
+
+We parameterize P LANG in a way that enforces two constraints. First, to ensure that each word is assigned a single language, we only allow language transitions for characters directly following whitespace (a space character or a page margin, unless the character follows a line-end hyphen). Second, to resist overly frequent code-switching (and encourage longer spans), we let a Bernoulli parameter  specify the probability of choosing to draw a new language at a word boundary (instead of deterministically staying in the same language). By setting  low, we indicate a strong belief that language switches should be infrequent, while still allowing a switch if sufficient evidence is found in the image.2 Finally, we parameterize the frequency of each language in the text. Specifically, for each language , a multinomial parameter  specifies the probability of transitioning to when you draw a new language. We learn this group of multinomial parameters,  for each language, in an unsupervised fashion, and in doing so, adapt to the proportions of languages found in the particular input document. Thus, using our parameterization, the probability of transitioning from language to , given previous character e, is: P LANG ( | e, ) =   (1 - ) +  ·      ·   1    0
+2
+
+Table 1: An example subset of the orthographic replacement rules for Spanish. Finally, because our code-switching LM uses multiple separate language-specific n-gram models P CHAR , we are able to maintain a distinct set of valid characters for each language. By restricting each language's model to the set of characters in the corpus for that language, we can push the model away from incompatible languages during transcription if it is confident about certain rare characters, and limit the search space by reducing the number of character combinations considered for any given position. We also include, for all languages, a set of punctuation symbols such as ¶ and § that appear in printed books but not in the LM training data. 4.2 Orthographic Variability
+
+if e = space and if e = space and if e = space and if e = space and
+
+= = = =
+
+We use  = 10-6 across all experiments.
+
+The component monolingual n-gram LMs must be trained on monolingual corpora in their respective languages. However, due to the lack of codified orthographic conventions concerning spelling, diacritic usage, and spacing, compounded by the liberal use of now-obsolete shorthand notations by printers, statistics gleaned from available modern corpora provide a poor representation of the language used in the printed documents. Even 16th century texts on Project Gutenberg tend to be written, for the benefit of the reader, using modern spellings. The disconnect between the orthography of the original documents and modern texts can be seen in Figure 1. To address these issues, we introduced an interface for
+
+1038
+
+

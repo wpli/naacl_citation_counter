@@ -1,0 +1,38 @@
+set
+MAIN PARAPHRASE FIGURATIVE
+
+# captions # images 176,780 3,967,524 7,570 human-annotated triples 353,560 auto-generated triples 6,088 quotations 180,185 18,179 quotations + 413,698 predicted figurative captions
+
+Automatic Visual Paraphrases
+- Good morning sun (*) - Sun through the trees - Here comes the sun - Life on the ocean waves (*) - Swimming in the ocean - Playing in the ocean - Hanging out with dad (*) - Snuggling with dad - Cuddles with dad
+
+Crowd-sourced Visual Paraphrases
+- A bee collecting pollen (*) - Bumble bee on purple flower - Working bee - Fly high in the sky (*) - Stretching to the sky - Reaching out to the sky - Children see magic because they look for it (*) - The soul is healed by being with children
+
+Table 1: Corpus Statistics
+#imgs. #tokens mean 22.4 4.9 std 47.6 3.3 25% 4 3 50% 10 4 75% 25 5 max 4617 178
+
+Figure 2: Example visual paraphrases: automatic (left)
+
+Table 2: Percentiles of the image count associated with
+each caption and the number of tokens in each caption.
+
+want captions that are more than simple keywords, thus we discard trivial captions that do not include at least one verb, preposition, or adjective. The next step is to find captions in repetition. For this purpose, we transform captions into canonical forms. We lemmatize all words, convert prepositions to a special token "IN"2 , and discard function words, numbers, and punctuations. For instance, "The bird flies in blue sky" and "A bird flying into the blue sky" have the same canonical form, "bird fly IN blue sky". We then retain only those captions that are repeated with respect to their canonical forms by more than one user, and for distinctly different images to ensure the generality of the captions. Retaining only captions that are repeated verbatim may seem overly restrictive. Nonetheless, because we start with as many as 760 million pairs, this procedure yields nearly 180K unique captions associated with nearly 4M images.3 What is more surprising, as will be shown later, is that many of these captions are highly expressive. Table 2 shows the distribution of the number of images associated with each caption.4 The median and mean are 10 and 22.4 respectively, showing a high degree of connectivities between captions and images. Our dataset collection procedure finds one-to-many relations between captions
+PARAPHRASE SET
+
+and crowd-sourced (right). The first caption marked with * indicates the original caption of the corresponding imThere(is(a(storm(rolling(in( age. Some paraphrases are not strictly equivalent to the Storm(clouds(coming(over( Big(storm(is(coming( original caption if considered out of context, while they are pragmatically adequate paraphrases given the image.
+figure of speech #caps. !smiling(children( quotation&idiom 70 !The(soul(is(healed(by( personification 43 being(with(children(( metaphor 24 question 18 dialog 11 anaphora 6 simile 5 hyperbole 1 example (#imgs.) !Bumble(bee(( !Storm(clouds(( on(purple(flower( coming(over( The early bird gets the worm (77) !Working(bee( Meditating cat (38) !Big(storm(is(coming( Wine is the answer (7) Do you see the moon (82) Hello little flower (37) Beads, beads and more beads (62) The lake is like glass (23) In the land of a billion lights (3)
+
+Table 3: Distribution of figurative language out of 1000
+random captions (171 figurative captions in total)
+
+We do this transformation so as not to over-count unique captions with trivial variations, but merging prepositions can sometimes combine prepositions that are not semantically compatible. We therefore also keep original captions with original prepositions. 3 We also keep user annotated image tags if available. 4 Without counting additional edges created by visual paraphrasing (§5).
+
+2
+
+and images. To extend these relations to many-tomany, we introduce visually-situated paraphrases (or visual paraphrases for shorthand) (§5). A visual paraphrase relation is a triple (i, c, p), where image i has an original caption c, caption p is the visual paraphrase for c situated in image i. We collect visual paraphrases for sample images in our dataset, using both crowd sourcing (7,570 triples) and an automatic algorithm (353,560 triples) (see §5 for details). Figure 2 shows example visual paraphrases. Formally, our corpus represents a bipartite graph G = (T, V, E ), in which the set of captions T and the set of images V are connected by typed edges e(c, i, t), where caption c  T , image i  V , and edge type t  {original, paraphrase}, which denotes whether the image-caption association is given by the original caption or by a visual paraphrase.
+FIGURATIVE SET We find that many repeating captions are surprisingly lengthy and expressive, most of which turn out to be idiomatic expressions and quotations, e.g., "faith is the bird that feels the light when the dawn is still dark" from Tagore's poem. We look up goodreads.com
+
+506
+
+

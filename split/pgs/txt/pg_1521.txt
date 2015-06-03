@@ -1,0 +1,27 @@
+sification of the source text. Therefore, we propose a probabilistic model that uses latent document topics to help improve the translation probabilities for a source document. Our experiments, on three different pairs of corpora, confirm that our probabilistic model for estimating word translation probabilities is helpful for cross-lingual text classification.
+
+2
+
+Related Work
+
+The work in (Wu et al., 2008) and (Shi et al., 2010) uses a bilingual dictionary for cross-lingual text classification. The method described in (Wu et al., 2008) is motivated by transfer learning to adjust the class probability p(c) to account for the differences in distributions between source and target language. Similar to our work, in the first step, they generate a probabilistic bilingual lexicon that contain word translation probabilities p(e|f ). However, one main difference to our work is that they translate each source word f in source text F independently, without considering any topic or context information of F . Instead of translating the source text into the target language, the method in (Shi et al., 2010) suggests to translate the target classification model into the source language. They directly estimate the translation probabilities p(f |e, c) using the source and target language data. One limitation of their method is that it assumes that the class of the document, that we want to translate, is given. Our idea of learning word translation probabilities in context is related to the work in (Koehn and Knight, 2000). They describe an efficient method for learning word translation probabilities p(f |e) using a bilingual dictionary and a pair of comparable corpora2 . Like our approach, their method has the advantage that no parallel corpora are needed for translation. However, to solve the ambiguity of wordtranslation they considered only (local) bi-gram context. Moreover, their method assumes that the word order in the languages are the same. This is obviously not the case for language pairs like English and Japanese. We note that the bilingual paired topic model,
+Two corpora written in different languages which do not need to be translations of each other
+2
+
+suggested in (Jagarlamudi and Gao, 2013), can also be used to disambiguate and select the appropriate word translations by using the topic associated with the given document. However, their model does not consider the use of a document class, and uses fixed word translation probabilities. In Section 3.2, we show that our model can also be used to learn the translation probabilities. Alternatively, the multi-lingual topic model described in (Ni et al., 2011), and the use of a common low-dimensional projection described in (Platt et al., 2010) have also been applied to the cross-lingual text classification problem. However, both models require for training that cross-lingually aligned documents are available.
+
+3 Proposed Method
+Our proposed method does not use one translation of F , but implicitly generates all translations and weights them by the probability of each translation. More formally, let E be one translation of source text F . Moreover, let countE (e) denote the frequency of word e in E. Instead of using countE (e), we use the expected number of word occurrences denoted by E[countE (e)|F ] as features. When we use a simple uni-gram language model in the source language we get: E[countE (e)|F ] =
+k  j =1
+
+p(ej = e|fj )
+
+(1)
+
+where we might write F as (f1 , f2 , f3 , ...fk ), where fj is the j-th word in F , and k is the number of words in source text F .3 The random variable ej denotes the translation of the j-th word in F . However, such a simple model translates each source word independently and ignores the context of the word. In the following, we describe a probabilistic model that allows us to consider the whole document context F into account for translating one word fj . The generative story is as follows: 1. For each document, we generate a class label c with probability c . Here we consider only the binary classification task with class label "positive", or "negative".
+Here "word" refers to a word occurrence (and not unique word). Therefore, k is the length of the source text F .
+3
+
+1467
+
+

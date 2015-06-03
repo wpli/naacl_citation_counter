@@ -1,0 +1,29 @@
+the intended referent, given the observed word. We assume the presence of an unobserved, latent variable R, which models properties of the candidate objects such as colour or shape; explained further below), and so the computation formally is: P (I |U ) =
+r R
+
+P (I, U, R) P (U )
+
+(1)
+
+Which, after making some independence assumptions, can be factored into: P (I |U ) = 1 P (I ) P (U ) P (U |R)P (R|I )
+r R
+
+(2)
+
+This is an update model in the usual sense that the posterior P (I |U ) at one step becomes the prior P (I ) at the next. P (R|I ) provides the link between the intentions (that is, objects) and the properties (e.g., the colour and shape of each object), and P (U |R) the link between properties and (observed) words. Being incremental, this model is computed at each word. As properties play an important role in this model, they will now be explained. Properties The variable R models visual or abstract properties of entities (such as real-world objects or linguistic entities) and their selection for verbalisation in the referring expression. The simple assumption made by the model is that only such properties can be selected for verbalisation which the candidate object actually has. Hence, the starting point for the model is a representation of the world and the current dialogue context in terms of the properties of the objects. For this paper, this means properties belonging to objects in the shared work space. We will explain the properties we used in our implementation of this model (henceforth SIUM, i.e., simple incremental update model), the motivation for using them, and give an example of applying the model in Section 5.
+
+collaboratively solved Tangram puzzles. In this setting, anaphoric references (i.e., pronoun references to entities in an earlier utterance, e.g., "move it to the left") and exophoric references via definite descriptions (i.e., references to real-world objects, e.g., "that one" or "the big triangle") are common (note that both refer in different ways to objects that are physically present). The corpus also records an added modality: the gaze of the puzzle solver (SV) who gives the instructions and that of the operator (OP), who moves the tangram pieces. The mouse pointer controlled by the OP could also be considered a modality, used as a kind of pointing gesture that both participants can observe. The goal of the task was to arrange puzzle pieces on a board into a specified shape (example in Figure 1), which was only known to SV and hidden from OP. The language of the dialogues was Japanese.
+
+Figure 1: Example Tangram Board; the goal shape is the swan in the top left, the shared work area is the large board on the right, the mouse cursor and OP gaze (blue dot) are on object 5, the SV gaze is the red dot (gaze points were not seen by the participants).
+
+This environment provided frequent use of REs that aimed to distinguish puzzle pieces (and piece groups) from each other. The following are some example REs from the REX corpus: (1) (2) a. b. a. b. chicchai sankakkei small triangle sono ichiban migi ni shippo ni natte iru sankakkei that most right tail becoming triangle 'that right-most triangle that is the tail'
+
+4
+
+The REX Data
+
+The corpora presented in Iida et al. (2011) and Spanger et al. (2012) are a collection of human/human interaction data where the participants 274
+
+Example (1) is a typical example of an RE as found in the corpus. Note that this at the same time constitutes the whole utterance, which hence can be classi-
+
+

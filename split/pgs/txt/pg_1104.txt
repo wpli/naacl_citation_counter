@@ -1,0 +1,23 @@
+Therefore, we apply stacked generalization (i.e. stacking) (Wolpert, 1992; Sakkis et al., 2001; Torres Martins et al., 2008) to build an ensemble of the response- and reference-based approaches. To our knowledge, there is little if any research investigating the value of stacking for NLP applications such as automated scoring.1 The contributions of this paper are as follows: (1) we investigate various reference-based features for short answer scoring, (2) we apply stacking (Wolpert, 1992) in order to combine the referenceand response-based methods, and (3) we demonstrate that the stacked combination outperforms other models, especially for small training sets.
+
+· scored responses: short responses written by students, scored on a 0 to 4 scale for the first question, and 0 to 3 for the other 3. · exemplars: one or two exemplar responses for each score level, and · key concepts: several ( 10) sentences briefly expressing key concepts in a correct answer. The data for each question is split into a training and testing sets. For each question, we have about 2,000 scored student responses. Following previous work on automatic scoring (Shermis and Burstein, 2013), we evaluate performance using the quadratically weighted  (Cohen, 1968) between human and machine scores (rounded and trimmed to the range of the training scores).
+
+2
+
+Task and Dataset
+
+We conduct our experiments on short-answer questions that are developed under the Reading for Understanding (RfU) assessment framework. This framework is designed to measure the reading comprehension skills of students from grades 6 through 9 by attempting to assess whether the reader has formed a coherent mental model consistent with the text discourse. A more detailed description is provided by Sabatini and O'Reilly (2013). We use 4 short-answer questions based on two different reading passages. The first passage is a 1300-word short story. A single question ("Q1" hereafter) asks the reader to read the story and write a 5­7 sentence synopsis in her own words that includes all the main characters and action from the story but does not include any opinions or information from outside the story. The second passage is a 700-word article that describes the experiences of European immigrants in the late 19th and early 20th centuries. There are 3 questions associated with this passage: two that ask the reader to summarize one section each in the article ("Q2" and "Q4") and a third that asks to summarize the entire article ("Q3"). These 3 questions ask the reader to restrict his or her responses to 1­2 sentences each. Each question includes the following:
+Some applications have used stacking but not analyzed its value. For example, many participants used stacking in the ASAP2 competition http://http://www.kaggle. com/c/asap-sas. Also, Heilman and Madnani (2013) used stacking for Task 7 of SemEval 2013.
+1
+
+3
+
+Models for Short Answer Scoring
+
+Next, we describe our implementations of the response- and reference-based scoring methods. All models use support vector regression (SVR) (Smola and Sch¨ olkopf, 2004), with the complexity parameter tuned by cross-validation on the training data.2 3.1 Response-based Our implementation of the response-based scoring approach ("resp" in §4) uses SVR to estimate a model to predicts human scores for text responses. Various sparse binary indicators of linguistic features are used: · binned response length (e.g. the length-7 feature fires when the character contains 128255 characters.) · word n-grams from n = 1 to 2 · character n-grams from n = 2 to 5, which is more robust than word n-gram regarding spelling errors in student responses · syntactic dependencies in the form of ParentLabel-Child (e.g. boy-det-the for "the boy") · semantic roles in the form of PropBank3 style (e.g. say.01-A0-boy for "(the) boy said")
+We used the implementation of SVR in scikit-learn (Pedregosa et al., 2011) via SKLL (https://github.com/ EducationalTestingService/skll) version 0.27.0. Other than the complexity parameter, we used the defaults. 3 http://verbs.colorado.edu/~mpalmer/ projects/ace.html
+2
+
+1050
+
+

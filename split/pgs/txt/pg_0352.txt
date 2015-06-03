@@ -1,0 +1,37 @@
+number is to simulate a T1 language that has relatively few resources. For the T2 language, we assume we have a large language model trained on all of the UN data, amounting to 3.5M sentences total. As a decoder, we use the Travatar (Neubig, 2013) toolkit, and implement all necessary extensions to the decoder and rule extraction code to allow for multiple targets. Unless otherwise specified, we use joint search with a pop limit of 2,000, and T1 rule pruning with a limit of 10 rules per source rule. BLEU is used for both tuning and evaluating all models. In particular, we tune and evaluate all models based on T1 BLEU, simulating a situation similar to that in the introduction, where we want to use a large LM in T2 to help translation in T1. In order to control for optimizer instability, we follow Clark et al. (2011)'s recommendation of performing tuning 3 times, and reporting the average of the runs along with statistical significance obtained by pairwise bootstrap resampling (Koehn, 2004). 6.2 Main Experimental Results
+
+T1 ar
+
+es
+
+fr
+
+ru
+
+zh
+
+In this section we first perform experiments to investigate the effectiveness of the overall framework of multi-target translation. We assess four models, starting with standard single-target SCFGs and moving gradually towards our full MSCFG model: SCFG: A standard SCFG grammar with only the source and T1. SCFG+T2Al: SCFG constrained during rule extraction to only extract rules that also match the T2 alignments. This will help measure the effect, if any, of being limited by T2 alignments in rule extraction. MSCFG-T2LM: The MSCFG, without using the T2 LM. Compared to SCFG+T2Al, this will examine the effect caused by adding T2 rules in scoring (Section 4.3) and pruning (Section 4.4) the rule table. MSCFG: The full MSCFG model with the T2 LM. The result of experiments using all five languages as T1, and the remaining four languages as T2 for all of these methods is shown in Table 1. 298
+
+T2 es fr ru zh ar fr ru zh ar es ru zh ar es fr zh ar es fr ru
+
+SCFG 24.97
+
+42.15
+
+37.21
+
+26.20
+
+21.16
+
+SCFG +T2Al 25.11 24.70 24.54 24.21 41.73 42.20 41.62 41.80 37.26 37.25 37.11 37.14 25.91 26.17 26.07 25.53 21.06 21.39  21.60 20.50
+
+MSCFG -T2LM 24.79 24.73 24.62 24.16 41.21 41.84 41.90 41.61 37.03 37.22 37.31 37.29 25.67 26.01 25.77 25.57 20.85 21.31 21.28 21.15
+
+MSCFG  25.19 24.89 24.48 23.95 41.22  42.91 41.98 41.65 37.41  38.67  37.79 36.99 25.86  26.45 26.29 25.52 20.84 21.33 21.16 21.14
+
+Table 1: Results for standard Hiero (SCFG), SCFG with T2 extraction constraints (SCFG+T2Al), a multi-SCFG minus the T2 LM (MSCFG-T2LM), and full multi-target translation (MSCFG). Bold indicates the highest BLEU score, and daggers indicate statistically significant gains over SCFG (: p < 0.05, : p < 0.01)
+
+First, looking at the overall results, we can see that MSCFGs with one of the choices of T2 tends to outperform SCFG for all instances of T1. In particular, the gain for the full MSCFG model is large for the cases where the two target languages are French and Spanish, with en-fr/es achieving a gain of 1.46 BLEU points, and en-es/fr achieving a gain of 0.76 BLEU points over the baseline SCFG. This is followed by Arabic, Russian and Chinese, which all saw small gains of less than 0.3 when using Spanish as T2, with no significant difference for Chinese. This result indicates that multi-target MT has the potential to provide gains in T1 accuracy, particularly in cases where the languages involved are similar to each other. It should be noted however, that positive results are sensitive to the languages chosen for T1 and T2,
+
+

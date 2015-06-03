@@ -1,0 +1,44 @@
+additive over sentences:
+S
+
+^ = argmin w
+w s=1
+
+E (^ e(fs ; w), rs )
+
+(2)
+
+Hopkins and May (2011) note that for the sth source sentence, the parameter w that correctly ranks its K -best list must satisfy the following set of constraints for 1  i, j  K : w(hs,j - hs,i )  0 if (es,i , es,j )  0 (6)
+
+Optimisation can be made tractable by restricting the search to rescoring of K-best lists of translation hypotheses, {es,i , 1  i  K }S s=1 . For fs , let hs,i = h(es,i , fs ) be the feature vector associated with hypothesis es,i . Restricted to these lists, the general decoder of Eqn. 1 becomes ^(fs ; w) = argmax{wh(es,i , fs )} e
+es,i
+
+(3)
+
+Although the objective function in Eqn. (2) cannot be solved analytically, MERT as described by Och (2003) can be performed over the K-best lists. The line optimisation procedure considers a subset of parameters defined by the line w(0) +  d, where w(0) corresponds to an initial point in parameter space and d is the direction along which to optimise. Eqn. (3) can be rewritten as: ^(fs ;  ) = argmax{w(0) hs,i +  dhs,i )} e
+es,i
+
+(4)
+
+where  computes the difference in error between two hypotheses. The difference vectors (hs,j - hs,i ) associated with each constraint can be used as input vectors for a binary classification problem in which the aim is to predict whether the the difference in error (es,i , es,j ) is positive or negative. Hopkins and May (2011) call this algorithm Pairwise Ranking Optimisation (PRO). Because there are SK 2 difference vectors across all source sentences, a subset of constraints is sampled in the original formulation; with effcient calculation of rankings, sampling can be avoided (Dreyer and Dong, 2015). The online error based training algorithm MIRA (Crammer et al., 2006) is also used for SMT (Watanabe et al., 2007; Chiang et al., 2008; Chiang, 2012). Using a sentence-level error function, a set of S oracle hypotheses are indexed with the vector ^ i: ^ is = argmin E (es,i , rs ) for 1  s  S
+i
+
+Line optimisation reduces the D-dimensional procedure in Eqn. (2) to a 1-Dimensional problem that can be easily solved using a geometric algorithm for many source sentences (Macherey et al., 2008). More recently, Galley and Quirk (2011) have introduced linear programming MERT (LP-MERT) as an exact search algorithm that reaches the global optimum of the training criterion. A hypothesis es,i from the sth K-best list can be selected by the decoder only if w(hs,j - hs,i )  0 for 1  j  K (5)
+
+For a given s the objective at iteration n + 1 is : 1 (n+1) minimise w - w(n) ( n +1) 2 w
+2 K
+
++C
+j =1
+
+j
+
+(7)
+
+subject to j  0 and for 1  j  K, ^ is = j : w(n+1) (hs,j - hs,is ) + (es,is , es,j ) - j  0 where { } are slack variables added to allow infeasible solutions, and C controls the trade-off between error minimisation and margin maximisation. The online nature of the optimiser results in complex implementations, therefore batch versions of MIRA have been proposed (Cherry and Foster, 2012; Gimpel and Smith, 2012). Although MERT, LP-MERT, PRO, and MIRA carry out their search in very different ways, we can compare them in terms of the constraints they are attempting to satisfy. A feasible solution for LPMERT is also an optimal solution for MERT, and vice versa. The constraints (Eqn. (5)) that define LP-MERT are a subset of the constraints (Eqn. (6))
+
+for some parameter vector w = 0. If such a solution exists then the system of inequalities is feasible, and defines a convex region in parameter space within which any parameter w will yield es,i . Testing the system of inequalities in (5) and finding a parameter vector can be cast as a linear programming feasibility problem (Galley and Quirk, 2011), and this can be extended to find a parameter vector that optimizes Eqn. 2 over a collection of K-best lists. We discuss the complexity of this operation in Section 4.1.
+
+377
+
+

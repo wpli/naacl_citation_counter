@@ -1,0 +1,24 @@
+Language Basque Czech Dutch English German Greek Hungarian Portuguese Slovene Turkish Average
+
+2-Crossing Interval 93.5 97.4 91.4 99.2 94.7 99.1 95.3 99.0 98.2 99.1 96.7
+
+1-EndpointCrossing 94.7 98.9 95.8 99.3 96.4 99.7 96.3 99.6 99.5 99.3 98.0
+
+Projective 74.8 77.9 63.6 93.4 72.3 84.4 74.7 83.3 79.6 89.9 79.4
+
+root b a1 b1 a2 b2 . . . an-1 bn-1 an bn a
+Figure 2: A 2-Crossing Interval tree that is not wellnested and has unbounded block degree.
+
+Table 1: Proportion of trees (excluding punctuation) in each tree class for the CoNLL shared tasks training sets: Dutch, German, Portuguese, and Slovene are from Buchholz and Marsi (2006); Basque, Czech, English, Greek, Hungarian, and Turkish data are from Nivre et al. (2007).
+
+tices such that a) all crossed arcs within the interval are incident to at least one of these vertices and b) any vertex in the interval that has a child on the far side of its parent is one of these k vertices. Figure 1a shows a 2-Crossing Interval tree. For the first crossing interval, think and came satisfy the conditions; for the second, parade and held do. The coverage of 2-Crossing Interval trees is shown in Table 1. Across datasets from ten languages with a non-negligible proportion of crossing dependencies, on average 96.7% of dependency trees are 2-Crossing Interval, within 1.3% of the larger 1-Endpoint-Crossing class (Pitler et al., 2013) and substantially larger than the 79.4% coverage of projective trees. Coverage increases as k increases; for 3-Crossing Interval trees, the average coverage reaches 98.6%. Punctuation tokens are excluded when computing coverage to better reflect language specific properties rather than treebank artifacts; for example, the Turkish CoNLL data attaches punctuation tokens to the artificial root, causing a 15% absolute drop in coverage for projective trees when punctuation tokens are included (89.9% vs. 74.7%). 3.1 Connections to Other Tree Classes k = 0 or k = 1 gives exactly the class of projective trees (even a single crossing implies two vertexdisjoint crossed edges). 2-Crossing Interval trees are a subset of the linguistically motivated 1-EndpointCrossing trees (Pitler et al., 2013) (each crossed edge is incident to one of the two vertices for the 664
+
+interval, so all edges that cross it are incident to the other vertex for the interval); all of the examples from the linguistics literature provided in Pitler (2013, p.132-136) for 1-Endpoint-Crossing trees are 2-Crossing Interval trees as well. 2-Crossing Interval trees are not necessarily well-nested and can have unbounded block degree (Kuhlmann, 2013). Figure 2 shows an example of a 2-Crossing Interval tree (all crossed edges are incident to either a or b; no children are on the far side of their parent) in which the subtrees rooted at a and b are ill-nested and each has a block degree of n + 1.
+
+4
+
+Two-Registers Transition System
+
+A transition system for dependency parsing comprises: 1) an initial configuration for an input sentence; 2) a set of final configurations after which the parsing derivation terminates; and 3) a set of deterministic transitions for transitioning from one configuration to another (Nivre, 2008). Our transition system builds on one of the most commonly used transition systems for parsing projective trees, the arc-eager system (Nivre, 2003). An arc-eager configuration, c, is a tuple, (, , A), where 1)  is a stack consisting of a subset of processed tokens; 2)  is a buffer consisting of unprocessed tokens; and 3) A is the set of dependency arcs already added to the tree. We define a new transition system called tworegisters. Configurations are updated to include two registers R1 and R2, i.e., c = (, , R1, R2, A). A register contains one vertex or is empty: R1, R2  V  {null}. Table 2 defines both the arc-eager and two-registers transition systems. The two-registers system includes the arc-eager transitions (top half of Table 2) and three new transitions that make use of the registers (bottom half of Table 2): · Store: Moves the token at the front of the buffer into the first available register, optionally
+
+

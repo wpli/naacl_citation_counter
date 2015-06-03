@@ -1,0 +1,18 @@
+(19) Would have been nice if the stilts could accommodate multiple/varying heights. (negative) 4.2.4 Primary Polarity Features
+
+Lastly, we use reviews' scores to predict their global semantic orientation (primary polarity). The intuition behind this is that the reviews with a higher score will contain more positive sentences than reviews with a lower score, and thus global polarity information might help us to amend incorrect predictions of a lexical classifier (a similar approach was taken, among others, by (Yang, 2014)). This is supported by the statistics of our corpus: the polarity of sentences in a review in general correlates with its score. Highly positive (5-star) and highly negative (1-star) reviews contain few segments of the opposite polarity, and even reviews with a less extreme score demonstrate a clear preference of one of the polarities (see Table 1). Thus it can be predicted that the classifier using this feature will tend to assign the primary polarity (positive for 4- and 5star reviews, negative for 1-, 2-, and 3-star reviews) unless there is some strong evidence preventing it. Review score 1 2 3 4 5 Positive 0.01 0.10 0.22 0.62 0.68 Negative Objective 0.85 0.13 0.77 0.12 0.65 0.13 0.23 0.15 0.04 0.27
+
+features (called primary polarity features in this paper). The bottom-up approach has become a standard in sentiment analysis, so we believe there is no need to explain it in detail. The main focus of this study is on the top-down approach, which we describe below. 4.3.2. Top-down Approach In this set of experiments, we do not use any lexical information about the presence of sentiments in segments and their types. Instead, we rely on rating scores assigned to the reviews to determine their primary polarity, and then correct the misclassified instances using discourse features. In general, the feature set used for this classifier is the same as for the bottom-up approach. The only important exception is that lexical features are completely omitted. We adopt the following process for sentiment classification: 1. All sentences in a review are assigned a polarity label determined by the corresponding review rating. 2. We look for discourse patterns that are associated with a change of the primary polarity (POSITIVE -> NEGATIVE, NEGATIVE -> POSITIVE). These are usually manifested through contrast relation and enable us to correct some of misclassified polarity labels. 3. We look for discourse patterns where a polar statement is accompanied by an objective statement. A common example of such discourse relations in product reviews is background. At this stage, unnecessary POSITIVE and NEGATIVE labels are changed into OBJECTIVE. Schematically this can be shown as follows using an arbitrary example of a 4-star review, where light-gray blocks stand for positive segments, darkgray for negative segments and white for objective ones (here we assume that all segments will be initialized as positive, as it is the primary class for 4-star reviews):
+
+Table 1. Percentage of positive, negative and objective sentences in reviews with different product ratings
+
+4.3 Bottom-up vs Experiment Design
+
+Top-down
+
+Approach:
+
+4.3.1 Bottom-up Approach This is a widely-used approach which relies on a lexical polarity classifier to determine the semantic orientation of each segment and then corrects the misclassified segments by employing more general features: discourse features (in our study ­ contrast and background) and global semantic orientation
+1565
+
+

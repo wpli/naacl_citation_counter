@@ -1,0 +1,55 @@
+Model Pipeline Joint Best Published
+
+Seg 99.18 99.52 96.42
+
+SPMRL POS Dep 95.76 84.79 97.43 87.23 91.66 82.41
+
+TedEval 92.86 93.87 91.74
+
+Classical Arabic Seg POS 92.37 82.40 94.35 84.44 ­ ­
+
+CTB5 Seg POS Dep 97.45 93.42 79.46 98.04 94.47 82.01 97.76 94.36 81.70
+
+Table 4: Segmentation, POS tagging and unlabeled attachment dependency F-scores (%) and TedEval score (%) on different datasets. The first line denotes the performance by the pipeline variation of our model. The second row shows the results by our joint model. "Best Published" includes the best reported results: Bj¨ orkelund et al. (2013) for the SPMRL 2013 shared task and Zhang et al. (2014a) for the CTB5 dataset. Note that the POS F-scores are not directly comparable because Bj¨ orkelund et al. (2013) use a different POS tagset from us.
+4 3.5 3 2.5 2 1.5 1 0.5 0 Seg POS Dep
+2 0 Seg POS 6 4
+
+Seen OOV
+
+10 8
+
+Seen OOV
+
+8 7 6 5 4 3 2 1 0
+
+Seen OOV
+
+Seg
+
+POS
+
+Dep
+
+(a) SPMRL
+
+(b) Classical Arabic
+
+(c) CTB5
+
+Figure 6: Absolute F-score (%) improvement of the joint model over the pipeline counterpart on seen and out-of-vocabulary (OOV) words. System Variants We also compare against a pipeline variation of our model. In our pipeline model, we predict segmentations and POS tags by the same system that we use to generate candidates. The subsequent standard parsing model then operates on the predicted segmentations and POS tags. 5.5 Experimental Details parameters based on the current violation. The reasoning behind this early-stop strategy is that weaker violations for some training sentences are already sufficient for separable training sets (Huang et al., 2012).
+
+6
+
+Results
+
+Following our earlier work (Zhang et al., 2014b), we train a first-order classifier to prune the dependency tree space.10 Following common practice, we average parameters over all iterations after training with passive-aggressive online learning algorithm (Crammer et al., 2006; Collins, 2002). We use the same adaptive random restart strategy as in our earlier work (Zhang et al., 2014b) and set K = 300. In addition, we also apply an aggressive early-stop strategy during training for efficiency. If we have found a violation against the ground truth during the first 50 iterations, we immediately stop and update the
+We set the probability threshold to 0.05 and limit the number of candidate heads up to 20, which gives a 99.5% pruning recall on both the SPMRL and the CTB5 development sets.
+10
+
+Comparison to State-of-the-art Systems Table 4 summarizes the performance of our model and the best published results for the SPMRL and the CTB5 datasets.11 On both datasets, our system outperforms the baselines. On the SPMRL 2013 shared task, our approach yields a 2.1% TedEval score gain over the top performing system (Bj¨ orkelund et al., 2013). We also improve the segmentation and dependency F-scores by 3.1% and 4.8% respectively. Note that the POS F-scores are not directly comparable because Bj¨ orkelund et al. (2013) use a different POS tagset from us. On the CTB5 dataset, we outperform the state-of-the-art with respect to all
+We are not aware of any published results on the Classical Arabic Dataset.
+11
+
+48
+
+

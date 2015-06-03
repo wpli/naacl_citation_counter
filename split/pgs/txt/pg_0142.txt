@@ -1,0 +1,15 @@
+Figure 3: An example illustrating annotation projection via click-log and wrapper induction.
+
+tem is typically much lower than the annotation cost of queries. Figure 4 shows the statistics of parsed web documents on 24 domains with approximately 500 template rules. One of the chosen domains in our experiment, Music, has over 130 million documents parsed by our approach. 3.3 Annotation Projection via Structural Alignment
+
+quality partially-labeled data: 314K, 1.2M, and 1.1M queries for the Game, Movie and Music domain, respectively.
+
+4 Experiments
+To test the effectiveness of our approach, we perform experiments on a suite of three entertainment domains for slot tagging: queries about movies, music, and games. For each domain, we have two types of data: engineered data and log data. Engineered data is a set of synthetic queries to mimic the behavior of users. This data is created during development at which time no log data is available. Log data is a set of queries created by actual users using deployed spoken dialogue systems: thus it is directly transcribed from users' voice commands with automatic speech recognition (ASR). In general we found log data to be fairly noisy, containing many ASR and grammatical errors, whereas engineered data consisted of clean, well-formed text. Not surprisingly, synthetic queries in engineered data are not necessarily representative of real queries in log data since it is difficult to accurately simulate what users' queries will be before a fully functioning system is available and real user data can be gathered. Hence this setting can greatly benefit from weakly-supervised learning methods such as ours since it is critical to learn from new incoming log data. We use search engine log data to project lattice constraints for weakly supervised learning. In this setup, a user issues a natural language query to retrieve movies, music titles, games and/or information there of. For instance, a user could say
+
+We now turn to the annotation projection step where structural alignment is used to transfer type annotation from structured data to queries. Note that this is different from the word-based or phrase-based alignment scenario in machine translation since we need to align a word sequence to a type-value pair. Let us assume that we are given the user query as a word sequence, w = w1 , w2 , . . . , wn and a set of structured data, s = {s1 , s2 , . . . , sm }, where si is a pair of slot-type and value. We define a measurement of dissimilarity between word tokens and slots, dist(wi , sj ) = 1 - sim(wi , sj ) where sim(·, ·) is cosine similarity over character trigrams of wi and sj . Next we construct a n-by-n score matrix S of which element is maxj dist(wt ...t , sj ) meaning that a score of the most similar type-value sj and a segment {t . . . t} where 1  t < t  n. Finally, given this approximate score matrix S , we use a dynamic programming algorithm to find the optimal segments to minimize the objective function: T (t) = min T (t )S (t , t).
+t <t
+
+Our approach results in a large amount of high88
+
+

@@ -1,0 +1,28 @@
+Figure 1: Graphical model instantiated for entity pair x := Barack Obama, United States
+
+2
+2.1
+
+Preliminaries
+Distant Supervision for Relation Extraction
+
+Our framework is motivated by distant supervision for learning relation extraction models (Mintz et al., 2009). The goal is to learn relation extraction models by aligning facts in a database to sentences in a large unlabeled corpus. Since the individual sentences are not hand labeled, the facts in the database act as "weak" or "distant" labels, hence the learning scenario is termed as distantly supervised. Prior work casts this problem as a multi-instance multi-label learning problem (Hoffmann et al., 2011; Surdeanu et al., 2012). It is multi-instance since for a given entity-pair, only the label of the bag of sentences containing both entities (aka mentions) is given. It is multi-label since a bag of mentions can have multiple labels. The inter-dependencies between relation labels and (hidden) mention labels are modeled by a Markov Random Field (Figure 1) (Hoffmann et al., 2011). The learning algorithms used in the literature for this problem optimize the (conditional) likelihood, but the evaluation measure is commonly the F -score. Formally, the training data is D := {(xi , yi )}N i=1 where xi  X is the entity-pair, yi  Y denotes the relation labels, and hi  H denotes the hidden mention labels. The possible relation labels for the entity pair are observed from a given knowledgebase. If there are L candidate relation labels in the knowledge-base, then yi  {0, 1}L , (e.g. yi, is 1 if the relation is licensed by the knowledge-base for the entity-pair) and hi  {1, .., L, nil}|xi | (i.e. each mention realizes one of the relation labels or nil). 893
+
+Notation. In the rest of the paper, we denote the collection of all entity-pairs {xi }N i=1 by X  X := X × .. × X , the collection of mention relations {hi }N i=1 by H  H := H× .. ×H, and the collection of relation labels {yi }N i=1 by Y  Y := Y × .. × Y . The aim is to learn a parameter vector w  Rd by which the relation labels for a new entity-pair x can be predicted
+fw (x) := arg max max w · (x, h, y)
+y h
+
+(1)
+
+where   Rd is a feature vector defined according to the Markov Random Field, modeling the interdependencies between x and y through h (Figure 1). In training, we would like to minimize the loss function  by which the model will be assessed at test time. For the relation extraction task, the loss can be considered to be the negative of the F score: F = 1
+ Precision
+
++
+
+1- Recall
+
+(2)
+
+where  = 0.5 results in optimizing against F1 score. Our proposed learning method optimizes those loss functions  which cannot be decomposed over individual training instances. For example, F depends non-linearly on Precision and Recall which in turn require the predictions for all the entity pairs in the training set, hence it cannot be decomposed over individual training instances. 2.2 Structured Prediction Learning The goal of our learning problem is to find w  Rd which minimizes the expected loss, aka risk, over a
+
+

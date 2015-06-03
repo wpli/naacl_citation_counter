@@ -1,0 +1,19 @@
+Model Baseline Base+PTB Base+GCG Base+Both
+
+First Pass Log-Likelihood AIC -1212242 2424592 -1212239 2424587 -1212239 2424589  -1212235 2424583
+
+Go-Past Log-Likelihood -1261474 -1261468 -1261470 -1261465
+
+AIC 2523055 2523047 2523050 2523043
+
+Baseline random slopes: sentpos, wlen, rlen, prevfix, 5-gram, cumu-5-gram, surp-GCG, surp-PTB Baseline fixed effects: sentpos, wlen, rlen, prevfix, 5-gram, cumu-5-gram Table 6: Goodness of fit of models with differing syntactic calculations to reading times. Significance testing was done between each model and the models in the section above it. Base+Both first pass significance applies to improvement over PTB (p < .05) and to improvement over GCG (p < .01), Base+Both go-past significance applies to improvement over each independent model.  p < .05  p < .01 bread is easy to cut), which introduce clauses with gap dependencies, for c, d, e  C ,  {-g}×C : d-ie c-gd  c-ie d-re c-gd  c-re c-b(d ) d  c (Fa) (Fb) (Fc) Significance testing is done as in the preceding evaluations: a baseline model is fit to reading times, each PCFG surprisal factor is added independently to the baseline, and both PCFG surprisal factors are added concurrently to the baseline. Each model is compared to the next simpler models using likelihood ratio tests. The results (Table 6) show that GCG PCFG surprisal is a significant predictor of reading times even in the presence of the stronger n-gram baseline. Moreover, both PTB and GCG PCFG surprisal significantly improve reading time predictions even when the other PCFG surprisal measure is also included. This suggests that each is contributing something the other is not. Since the GCG grammar is derived from an automatically reannotated version of the Penn Treebank, there may be errors in the GCG annotation which cause errors in the estimates of underlying GCG structure. Since the PTB grammar is manually annotated by experts, the PTB grammar may be receiving credit for correct structural prediction in cases where GCG's estimates are incorrect. However, it seems likely that GCG may be providing a better fit in cases of long-distance dependencies because such relations are omitted from the PTB grammar. A follow-up evaluation (not shown here) using the experimental design from Section 4 but using GCG PCFG surprisal rather than PTB PCFG surprisal revealed that cumulative PCFG surprisal is still not a significant predictor when calculated using GCG. The failure of cumulative PCFG surprisal to improve over basic GCG PCFG surprisal could be expected
+
+Also, inference rules for relative pronoun attachment apply pronominal relative clauses of category c-rd to modificands of category e: e c-rd  e (R)
+
+Because of its richer set of language-specific inference rules, the GCG grammar annotated by Nguyen et al. (2012) does not require different categories for words like which in different pied-piping contexts: cafes N which we ate in N-rN V-gN Fb V-rN R N we ate which in V R-aN-bN N-rN Gc Ab R-aN-rN V-g(R-aN) Fb V-rN R N
+
+cafes N
+
+5.2 Evaluation Following van Schijndel et al. (2013b), the GCG calculation of PCFG surprisal comes from a GCGreannotated version of the Penn Treebank whose grammar rules have undergone 3 iterations of the split-merge algorithm (Petrov et al., 2006). A k -best beam with a width of 5000 is used in order to be comparable to the PTB calculation. 1602
+
+

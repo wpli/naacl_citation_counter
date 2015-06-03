@@ -1,0 +1,54 @@
+with each element as 1. Thus, the objective function to minimize is:
+Jc (wc ) = 2 ~ c wc - Y ~ c ||2 ~ ~ 2 ||X 2 + c · ||Xc wc - Yc ||2 + c · ||wc ||2
+
+~ c is a vector of same size as X ~c (xcdi ,j - xcdi ,k ). Y
+
+we can show a closed form solution to Equation 4 as follows:
+^ = w ~ )-1 (X ~X ~Y ~ TL ~X ~ +X ~ TX ~ +X ~ T ~ + ~ TY ~ +X ~ T ~ ) (X (5)
+Basic Features - num of words - absolute/relative position - overlaps with headline - avg/sum TF-IDF scores - num of NEs Social Features - avg/sum frequency of words appearing in comment - avg/sum frequency of dependency relations appearing in comment
+
+(2)
+
+Graph-Based Regularization. The regularizing constraint is based on two mutually reinforcing hypotheses: (1) the importance of a sentence depends partially on the availability of sufficient insightful comments that touch on topics in the sentence; (2) the importance of a comment depends partially on whether it addresses notable events reported in the sentences. For example, we want our model to bias ws to predict a high score for a sentence with high similarity to numerous insightful comments. We first create a bipartite graph from sentences and comments on the same articles, where edge weights are based on the content similarity between a sentence and a comment (TF-IDF similarity is ~ be an N × M adjacency matrix, where used). Let R N and M are the numbers of sentences and comments. Rsc is the similarity between sentence xs and 1 ~ by Q ~ =D ~-1 ~D ~ -2 , 2R comment xc . We normalize R ~ and D ~ are diagonal matrices: D ~  RN × N , where D
+Di,i =
+
+Table 2: Features used for sentence importance scoring.
+Basic Features Readability Features - num of words - Flesch-Kincaid Readability - num of sentences - Gunning-Fog Readability - avg num of words Discourse Features per sentence - num/proportion of connectives - num of NEs - num/proportion of hedge words - num/proportion of Article Features capitalized words - TF/TF-IDF simi with article - avg/sum TF-IDF - TF/TF-IDF simi with comments - contains URL - JS/KL divergence (div) with article - user rating (pos/neg) - JS/KL div with comments Sentiment Features - num /proportion of positive/negative/neutral words (MPQA (Wilson et al., 2005), General Inquirer (Stone et al., 1966)) - num /proportion of sentiment words
+
+Table 3: Features used for comment importance scoring.
+
+The interplay between the two types of data is encoded in the following regularizing constraint:
+Js,c (ws , wc ) = sc ·
+di xs xsd ,xc xcd
+i i
+
+M j =1
+
+~  RM ×M , D = Ri,j ; D j,j
+
+N i=1
+
+Ri,j .
+
+4
+
+Timeline Generation
+
+Qxs ,xc · (xs · ws - xc · wc )2 (3)
+
+Full Objective Function. Thus, the full objective function consists of the three parts discussed above:
+J (ws , wc ) = Js (ws ) + Jc (wc ) + Js,c (ws , wc ) (4)
+
+Now we present an optimization framework for timeline generation. Formally, for each day, our system takes as input a set of sentences Vs and a set of comments Vc to be summarized, and the (automatically generated) timeline T (represented as threads) for days prior to the current day. It then identifies a subset S  Vs as the article summary and a subset C  Vc as the comment summary by maximizing the following function:
+Z (S, C ; T ) = Squal (S ; T ) + Cqual (C ) +  X (S, C ) (6)
+
+Furthermore, using the following notation,
+~ ~ ~ ~ ~ = Xs 0 Y ~ = Ys X ~ = Xs 0 Y ~ = Ys X ~ ~ ~ ~ Yc 0 Xc Yc 0 Xc ~ = s Ik 0  0 c I l 0 ~ = s I|Xs |  0 c I|Xc | w= ws wc
+
+~ ~ = sc I|Xs | -sc Q L T ~ -sc Q sc I|Xc |
+
+where Squal (S ; T ) measures the quality of the article summary S in the context of the historical timeline represented as event threads T ; Cqual (C ) computes the quality of the comment summary C ; and X (S, C ) estimates the connectivity between S and C . We solve this maximization problem using an alternating optimization algorithm which is outlined
+
+1058
+
+

@@ -1,0 +1,24 @@
+Dep. (h, m) + ­ + ­ + ­
+
+Class Span i, j + + + + ­ ­
+
+Split k + + ­ ­ ­ ­
+
+Results Count Acc. A 32853 381 802 496 1717 1794 97.9 69.3 83.3 85.9 0.0 0.0
+
+Figure 5: Empirical runtime of the parser on sentences of varying length, with and without pruning. Despite a worst-case quadratic complexity, observed runtime is linear.
+
+Table 5: Error analysis of binary CFG rules. Rules used are split into classes based on correct (+) identification of dependency (h, m), span i, j , and split k. "Count" is the size of each class. "Acc." is the accuracy of span nonterminal identification.
+
+shows that there is a direct correlation between the UAS of the inputs and labeled F1 . Runtime In Section 3 we considered the theoretical complexity of the parsing model and presented the main speed results in Table 1. Despite having a quadratic theoretical complexity, the practical runtime was quite fast. Here we consider the empirical complexity of the model by measuring the time spent on individual sentences. Figure 5 shows parser speed for sentences of varying length for both the full algorithm and with pruning. In both cases the observed runtime is linear. Recovering Phrase-Structure Treebanks Annotating phrase-structure trees is often more expensive and slower than annotating unlabeled dependency trees (Schneider et al., 2013). For low-resource languages, an alternative approach to developing fully annotated phrase-structure treebanks might be to label a small amount of c-parses and a large amount of cheaper d-parses. Assuming this setup, we ask how many c-parses would be necessary to obtain reasonable performance? For this experiment, we train PAD on only 5% of the PTB training set and apply it to predicted dparses from a fully-trained model. Even with this small amount of data, we obtain a parser with development score of F1 = 89.1%, which is comparable to Charniak (2000) and Stanford PCFG (Klein and Manning, 2003) trained on the complete c-parse training set. Additionally, if the gold dependencies are available, PAD with 5% training achieves F1 = 95.8% on development, demonstrating a strong abil-
+
+ity to recover the phrase-structure trees from dependency annotations. Analysis Finally we consider an internal error analysis of the parser. For this analysis, we group each binary rule production selected by the parser by three properties: Is its dependency (h, m) correct? Is its span i, j correct? Is its split k correct? The first property is fully determined by the input d-parse, the others are partially determined by PAD itself. Table 5 shows the breakdown. The conversion is almost always accurate (98%) when the parser has correct span and dependency information. As expected, the difficult cases come when the dependency was fully incorrect, or there is a propagated span mistake. As dependency parsers improve, the performance of PAD should improve as well.
+
+8 Conclusion
+With recent advances in statistical dependency parsing, we find that fast, high-quality phrase-structure parsing is achievable using dependency parsing first, followed by a statistical conversion algorithm to fill in phrase-structure trees. Our implementation is available as open-source software at https:// github.com/ikekonglp/PAD. Acknowledgments The authors thank the anonymous reviewers and Andr´ e Martins, Chris Dyer, and Slav Petrov for helpful feedback. This research was supported in part by NSF grant IIS-1352440 and computing resources provided by Google and the Pittsburgh Supercomputing Center.
+
+9
+
+796
+
+

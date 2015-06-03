@@ -1,0 +1,41 @@
+Formula x, y x, y x, y x, y x, y : #2-unit-of-#1(x, y )  org/parent/child(x, y ) : #2-city-of-#1(x, y )  location/containedby(x, y ) : #2-minister-#1(x, y )  person/nationality(x, y ) : #2-executive-#1(x, y )  person/company(x, y ) : #2-co-founder-of-#1(x, y )  company/founders(y, x)
+
+Score 0.97 0.97 0.97 0.96 0.96
+
+Relation person/company location/containedby author/works written person/nationality parent/child person/place of birth person/place of death neighborhood/neighborhood of person/parents company/founders film/directed by film/produced by MAP Weighted MAP
+
+# 102 72 27 25 19 18 18 11 6 4 2 1
+
+MF 0.07 0.03 0.02 0.01 0.01 0.01 0.01 0.00 0.00 0.00 0.00 0.00 0.01 0.03
+
+Inf 0.03 0.06 0.05 0.19 0.01 0.43 0.24 0.00 0.17 0.25 0.50 1.00 0.23 0.10
+
+Post 0.15 0.14 0.18 0.09 0.48 0.40 0.23 0.60 0.19 0.13 0.50 1.00 0.34 0.21
+
+Pre 0.31 0.22 0.31 0.15 0.66 0.56 0.27 0.63 0.37 0.37 0.36 1.00 0.43 0.33
+
+Joint 0.35 0.31 0.27 0.19 0.75 0.59 0.23 0.65 0.65 0.77 0.51 1.00 0.52 0.38
+
+Table 1: Sample Extracted Formulae: Top implica-
+
+tions of textual patterns to five different Freebase relations. These implications were extracted from the matrix factorization model and manually annotated. The premises of these implications are dependency paths, but we present a simplified version to make them more readable.
+
+dings (i.e. it has no access to any formulae). Furthermore, we consider pure logical inference (Inf). Our final approach, post-factorization inference (Post), first runs matrix factorization and then performs logical inference on the known and predicted facts. Postinference is computationally expensive, since for all premises of formulae we have to iterate over all rows (entity-pairs) in the matrix to assess whether the premise is true or not. Parameters For every matrix factorization based method we use k = 100 as the dimension for the embeddings,  = 0.01 as parameter of 2 -regularization and  = 0.1 as initial learning rate for AdaGrad, which we run for 200 epochs. Complexity Each AdaGrad update is defined over a single cell of the matrix, and thus training data can be streamed one ground atom at a time. For matrix factorization, each AdaGrad epoch touches all the observed atoms once, and as many sampled negative atoms. With given formulae, it additionally revisits all the observed atoms that appear as an atom in the formula (and as many sampled negative atoms), and thus more general formulae will be more expensive. However the updates over atoms are performed independently and thus not all the data needs to be stored in memory. All presented models take less than 15 minutes to train on a 2.8 GHz Intel Core i7 machine.
+
+Table 2: Zero-shot Relation Learning: Average and
+
+(weighted) mean average precisions with relations that do not appear in any of the annotated formulae omitted from the evaluation. The difference between "Pre" and "Joint" is significant according to the sign-test (p < 0.05).
+
+logic formulae and textual patterns. In §5.2 we then describe an experiment where the amount of Freebase alignments is varied in order to assess the effect of combining distant supervision and background knowledge on the accuracy of predictions. Although the methods presented in this paper target relations with insufficient alignments, we also provide a comparison on the complete distant supervision dataset in §5.3. We conclude in §5.4 with a brief analysis of the reasoning capacity of the learned embeddings. 5.1 Zero-shot Relation Learning
+
+5
+
+Results and Discussion
+
+To evaluate the utility of injecting logic formulae into embeddings, we present a comparison on a variety of benchmarks. First, in §5.1 we study the scenario of learning extractors for relations for which we do not have any Freebase alignments, evaluating how the approaches are able to generalize only from
+
+We start with the scenario of learning extractors for relations that do not appear in the knowledge base schema, i.e., those that do not have any textual alignments. Such a scenario occurs in practice when a new relation needs to be added to a knowledge base for which there are no facts that connect the new relation to existing relations or surface patterns. For accurate extractions of such relations, the model needs to rely primarily on background domain knowledge to identify relevant textual alignments, but at the same time it also needs to utilize correlations between textual patterns for generalization. To simulate this setup, we remove all alignments between all entity-pairs and Freebase relations from the distant supervision data, use the extracted logic formulae (§4) as background knowledge, and evaluate on the ability of the different methods to recover the lost alignments. Table 2 provides detailed results. Unsurprisingly,
+
+1124
+
+

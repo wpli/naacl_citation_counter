@@ -1,0 +1,5 @@
+Pengtao Xie and Eric P Xing. 2013. Integrating document clustering and topic modeling. Proceedings of the 30th Conference on Uncertainty in Artificial Intelligence. Bin Zhao, Li Fei-Fei, and Eric Xing. 2010. Image segmentation with topic random field. Computer Vision­ ECCV 2010, pages 785­798. Jun Zhu and Eric P Xing. 2010. Conditional topic random fields. In Proceedings of the 27th International Conference on Machine Learning (ICML-10), pages 1239­1246.
+
+734
+
+

@@ -1,0 +1,80 @@
+Features Description Description Wikipedia +
+
+Algorithm Linear.Adagrad Linear.DCD Linear.Adagrad Linear.DCD
+
+MAP 29.17 28.40 33.28 31.92
+
+GAP 28.17 27.76 31.97 31.36
+
+(a) Adagrad vs. Dual coordinate descent (DCD). Results are obtained using linear models trained with global training objective (m=1, n=1) on 70 types.
+
+Features Type (T) Description (D) Wikipedia (W) D+W T+D+W
+
+MAP 12.33 29.17 30.81 33.28 36.13
+
+GAP 13.58 28.17 30.56 31.97 31.13
+
+(b) Feature Comparison. Results are obtained from using Linear.Adagrad with global training objective (m=1, n=1) on 70 types.
+
+Features D+W T+D+W
+
+Objective NE (m = 2) NT (n = 2) Global (m = 1, n = 1) NE (m = 2) NT (n = 2) Global (m = 1, n = 1)
+
+MAP 33.01 31.61 33.28 34.56 34.45 36.13
+
+GAP 23.97 29.09 31.97 21.79 31.42 31.13
+
+Features D+W T+D+W
+
+Objective NE (m = 2) NT (n = 2) Global (m = 1, n = 1) NE (m = 2) NT (n = 2) Global (m = 1, n = 1)
+
+MAP 30.92 25.77 31.60 28.70 28.06 30.35
+
+GAP 22.38 23.40 30.13 19.34 25.42 28.71
+
+(c) Global Objective vs NE and NT. Results are obtained using Linear.Adagrad on 70 types.
+
+(d) Global Objective vs NE and NT. Results are obtained using the embedding model on 70 types.
+
+Features D+W T+D+W
+
+Model Linear.Adagrad Embedding Linear.Adagrad Embedding
+
+MAP 33.28 31.60 36.13 30.35
+
+GAP 31.97 30.13 31.13 28.71
+
+G@1000 79.63 73.40 70.02 62.61
+
+G@10000 68.08 64.69 65.09 64.30
+
+(e) Model Comparison. The models were trained with the global training objective (m=1, n=1) on 70 types.
+
+Model Linear.Adagrad Embedding
+
+MAP 13.28 9.82
+
+GAP 20.49 17.67
+
+G@1000 69.23 55.31
+
+G@10000 60.14 51.29
+
+(f) Results on 500 types using Freebase description features. We train the models with the global training objective (m=1, n=1).
+
+Table 2: Automatic Evaluation Results. Note that m = |NE (e, t)| and n = |NT (e, t)|.
+
+One might expect that with the increased number of types, the embedding model would perform better than the classifier since they share parameters across types. However, despite the recent popularity of embedding models in NLP, linear model still performs better in our task. 5.3 Human Evaluation
+
+To verify the effectiveness of our KBC algorithms, and the correctness of our automatic evaluation method, we perform manual evaluation on the top 100 predictions of the output obtained from two dif522
+
+ferent experimental setting and the results are shown in Table 3. Even though the automatic evaluation gives pessimistic results since the test KB is also incomplete6 , the results indicate that the automatic evaluation is correlated with manual evaluation. More excitingly, among the 179 unique instances we manually evaluated, 17 of them are still7 missing in Freebase which emphasizes the effectiveness of our approach.
+6
+
+ods.
+
+This is true even with existing automatic evaluation methat submission time.
+
+7
+
+

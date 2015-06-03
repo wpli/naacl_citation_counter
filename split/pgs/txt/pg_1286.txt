@@ -1,0 +1,21 @@
+Short Text Understanding by Leveraging Knowledge into Topic Model
+Shansong Yang, Weiming Lu , Dezhi Yang, Liang Yao, Baogang Wei Zhejiang University Hangzhou, Zhejiang 310000, China {yangshansong,luwm,deathyyoung,yaoliang,wbg}@zju.edu.cn
+
+Abstract
+In this paper, we investigate the challenging task of understanding short text (STU task) by jointly considering topic modeling and knowledge incorporation. Knowledge incorporation can solve the content sparsity problem effectively for topic modeling. Specifically, the phrase topic model is proposed to leverage the auto-mined knowledge, i.e., the phrases, to guide the generative process of short text. Experimental results illustrate the effectiveness of the mechanism that utilizes knowledge to improve topic modeling's performance.
+
+We consider, in the STU task, the available knowledge can be divided into two classes: selfcontained knowledge and external knowledge. Self-contained knowledge, which is focused in this paper, is extracted from the short text itself, such as key-phrase. External knowledge is constructed without special purpose, such as WordNet (Miller, 1995), KnowItAll (Etzioni et al., 2005), Wikipedia (Gabrilovich and Markovitch, 2007), Yago (Suchanek et al., 2007), NELL (Carlson et al., 2010) and Probase (Wu et al., 2012). PLSA and LDA are the typical unsupervised topic models, that is non-knowledgeable model. In contrast, Biterm topic model (BTM) (Yan et al., 2013) leverages self-contained knowledge into semantic analysis. BTM learns topics over short texts by modeling the generation of biterms in the whole corpus. A biterm is an unordered word-pair co-occurring in short contexts. BTM posits that the two words in a biterm share the same topic drawn from a mixture of topics over the whole corpus. The major advantage of BTM is that BTM explicitly model the word cooccurrences in the local context, which well captures the short-range dependencies between words. External knowledge-based models incorporate expert domain knowledge to help guide the models. DF-LDA (Andrzejewski et al., 2009) model incorporates domain knowledge in the form of mustlink and cannot-link. Must-link states that two words should belong to the same topic, while cannotlink states that two words should not be in the same topic. GK-LDA (Chen et al., 2013) leverages lexical semantic relations of words such as synonyms, antonyms and adjective attributes in topic models. A
+
+1
+
+Introduction
+
+The explosion of online text content, such as twitter messages, text advertisements, QA community messages and product reviews has given rise to the necessity of understanding these prevalent short texts. Conventional topic modeling, like PLSA (Hofmann, 1999) and LDA (Blei et al., 2003) are widely used for uncovering the hidden topics from text corpus. However, the sparsity of content in short texts brings new challenges to topic modeling. In fact, short texts usually do not contain sufficient statistical signals to support many state-ofthe-art approaches for text processing such as topic modeling (Hua et al., 2015). Knowledge is indispensable to STU task, where knowledge-based topic model (Andrzejewski et al., 2009; Hu et al., 2011; Jagarlamudi et al., 2012; Mukherjee and Liu, 2012; Chen et al., 2013; Yan et al., 2013) has attracted more attention recently.
+
+
+Corresponding author
+
+1232
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1232­1237, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

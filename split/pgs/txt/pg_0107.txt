@@ -1,0 +1,19 @@
+An Incremental Algorithm for Transition-based CCG Parsing
+Bharat Ram Ambati1 , Tejaswini Deoskar1 , Mark Johnson2 , Mark Steedman1 1 ILCC, School of Informatics, University of Edinburgh 2 Department of Computing, Macquarie University
+bharat.ambati@ed.ac.uk, mark.johnson@mq.edu.au, {tdeoskar,steedman}@inf.ed.ac.uk
+
+Abstract
+Incremental parsers have potential advantages for applications like language modeling for machine translation and speech recognition. We describe a new algorithm for incremental transition-based Combinatory Categorial Grammar parsing. As English CCGbank derivations are mostly right branching and non-incremental, we design our algorithm based on the dependencies resolved rather than the derivation. We introduce two new actions in the shift-reduce paradigm based on the idea of `revealing' (Pareschi and Steedman, 1987) the required information during parsing. On the standard CCGbank test data, our algorithm achieved improvements of 0.88% in labeled and 2.0% in unlabeled F-score over a greedy non-incremental shift-reduce parser.
+
+parsers for CCG (Zhang and Clark, 2011; Xu et al., 2014). Most of these parsers model normal-form CCG derivations (Eisner, 1996), which are mostly right-branching trees : hence are not incremental in nature. The dependency models of Clark and Curran (2007) and Xu et al. (2014) model dependencies rather than derivations, but do not guarantee incremental analyses. Besides being cognitively plausible (MarslenWilson, 1973), incremental parsing is more useful than non-incremental parsing for some applications. For example, an incremental analysis is required for integrating syntactic and semantic information into language modeling for statistical machine translation (SMT) and automatic speech recognition (ASR) (Roark, 2001; Wang and Harper, 2003). This paper develops a new incremental shiftreduce algorithm for parsing CCG by building a dependency graph in addition to the CCG derivation as a representation. The dependencies in the graph are extracted from the CCG derivation. A node can have multiple parents, and hence we construct a dependency graph rather than a tree. Two new actions are introduced in the shift-reduce paradigm for "revealing" (Pareschi and Steedman, 1987) unbuilt structure during parsing. We build the dependency graph in parallel to the incremental CCG derivation and use this graph for revealing, via these two new actions. On the standard CCGbank test data, our algorithm achieves improvements of 0.88% in labeled F-score and 2.0% in unlabeled F-score over a greedy non-incremental shift-reduce algorithm. As our algorithm does not model derivations, but rather models transitions, we do not need a treebank
+
+1
+
+Introduction
+
+Combinatory Categorial Grammar (CCG) (Steedman, 2000) is an efficiently parseable, yet linguistically expressive grammar formalism. In addition to predicate-argument structure, CCG elegantly captures the unbounded dependencies found in grammatical constructions like relativization, coordination etc. Availability of the English CCGbank (Hockenmaier and Steedman, 2007) has enabled the creation of several robust and accurate wide-coverage CCG parsers (Hockenmaier and Steedman, 2002; Clark and Curran, 2007; Zhang and Clark, 2011). While the majority of CCG parsers use chart-based approaches (Hockenmaier and Steedman, 2002; Clark and Curran, 2007), there has been some work on developing shift-reduce
+
+53
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 53­63, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

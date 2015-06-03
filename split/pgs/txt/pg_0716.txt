@@ -1,0 +1,20 @@
+A Linear-Time Transition System for Crossing Interval Trees
+
+Emily Pitler Ryan McDonald Google, Inc. {epitler,ryanmcd}@google.com
+
+Abstract
+We define a restricted class of non-projective trees that 1) covers many natural language sentences; and 2) can be parsed exactly with a generalization of the popular arc-eager system for projective trees (Nivre, 2003). Crucially, this generalization only adds constant overhead in run-time and space keeping the parser's total run-time linear in the worst case. In empirical experiments, our proposed transition-based parser is more accurate on average than both the arc-eager system or the swap-based system, an unconstrained nonprojective transition system with a worst-case quadratic runtime (Nivre, 2009).
+
+1
+
+Introduction
+
+Linear-time transition-based parsers that use either greedy inference or beam search are widely used today due to their speed and accuracy (Nivre, 2008; Zhang and Clark, 2008; Zhang and Nivre, 2011). Of the many proposed transition systems (Nivre, 2008), the arc-eager transition system of Nivre (2003) is one of the most popular for a variety of reasons. The arc-eager system has a well-defined output space: it can produce all projective trees and only projective trees. For an input sentence with n words, the arc-eager system always performs 2n operations and each operation takes constant time. Another attractive property of the arc-eager system is the close connection between the parameterization of the parsing problem and the final predicted output structure. In the arc-eager model, each operation has a clear interpretation in terms of constraints on the 662
+
+final output tree (Goldberg and Nivre, 2012), which allows for more robust learning procedures (Goldberg and Nivre, 2012). The arc-eager system, however, cannot produce trees with crossing arcs. Alternative systems can produce crossing dependencies, but at the cost of taking O(n2 ) transitions in the worst case (Nivre, 2008; Nivre, 2009; Choi and McCallum, 2013), requiring more transitions than arc-eager to produce projective trees (Nivre, 2008; G´ omez-Rodr´ iguez and Nivre, 2010), or producing trees in an unknown output class1 (Attardi, 2006). Graph-based non-projective parsing algorithms, on the other hand, have been able to preserve many of the attractive properties of their corresponding projective parsing algorithms by restricting search to classes of mildly non-projective trees (Kuhlmann and Nivre, 2006). Mildly non-projective classes of trees are characterizable subsets of directed trees. Classes of particular interest are those that both have high empirical coverage and that can be parsed efficiently. With appropriate definitions of feature functions and output spaces, exact higher-order graph-based non-projective parsers can match the asymptotic time and space of higher-order projective parsers (Pitler, 2014). In this paper, we propose a class of mildly nonprojective trees (§3) and a transition system (§4) that is sound and complete with respect to this class (§5) while preserving desirable properties of arc-eager: it runs in O(n) time in the worst case (§6), and each operation can be interpreted as a prediction about
+A characterization independent of the transition system is unknown.
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 662­671, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

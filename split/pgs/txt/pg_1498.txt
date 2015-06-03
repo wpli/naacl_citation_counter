@@ -1,0 +1,31 @@
+Article-biased add drink sing refer read think imagine remember shout sit Summary-biased spur hail allege avert slay exile claim intensify extradite oust
+
+country,year,get,States,time,people,do,make drink,do,take,glass,much,make,eat song,woman,man,chorus,dance,sing,feel use,official,attack,part,term,program,day,people time,report,people,write,statement,book,man time,part,get,do,year,take,issue take,people,get,come,time,make,ask day,year,time,see,decade,many man,people,hear,soldier,get,come,crowd day,man,road,talk,wall,people,watch,table do,action,help,tell,States,effort,concern,man leader,man,call,effort,Clinton,step,election,visit part,case,fraud,arrest,help,people,responsible attack,Iraq,action,month,confrontation,crisis,official week,month,member,attack,many,soldier,day,Americans country,accuse,many,kill,Hussein,family,friend,Arafat member,bombing,describe,part,group,life,leader country,States,war,week,demand,day,year,effort Britain,States,try,citizen,Pinochet,trial,member,receive year,Party,Minister,force,coalition,invasion,month,leader
+
+p-value 0.05 0.01
+
+GI 0.134 0.130
+
+GI+blog 0.098 0.087
+
+Table 6: 10-fold cross-validation mean squared error of a linear regression for increasingly biased vocabularies.
+
+Table 4: Most frequent co-occurring words for the most extremely weighted verbs.
+
+Personal-biased
+threaten wake rain wander kneel yell grin convulse smile chat hug climb gorge nod crouch laugh sleep perch head park
+
+Nonpersonal-biased
+acquit deploy misstate founder besiege decriminalize censure peacekeep headquarter streamline dissociate excommunicate unveil deadlock modify extradite ratify imperil chose Table 5: Top weighted words derived from personal and non-personal blog entries
+
+The Pearson correlation between the NYT log odds ratio and the blog log odds ratio is negative and rather high, -0.54, indicating a strong relationship between personal and article-biased words. Restricting the significance to p-value cutoff of 0.01 reduces the vocabulary from 937 to 675 verbs, but strengthens the correlation to -0.61. Of the top 100 summary-biased words, only 18 were personal. Of the top 100 article-biased words, 90 were personal. Not only do the personal/non-personal classes map on to the summary/article classes well, but they supply explanatory information about words that the GI did not cover. In order to measure this effect, we trained a linear regression to predict the NYT logodds ratio of a word using a binary feature for each GI tag, as well as a binary feature indicating no tags. We were interested in the reduction of error when the personal-biased information was added. Adding the blog log-odds ratio for each word as a feature improved our results in 10-fold cross-validation, reducing the prediction error by almost 30%. The detailed results are shown in Table 6, for experiments performed for two different p-value cut-offs.
+
+For this purpose, we used a subset of the ICWSM 2009 Spinn3r Blog Dataset that has been annotated with a semi-supervised classifier trained to identify personal stories (Gordon and Swanson, 2009). We took 56,048 blog entries that had been tagged as being a personal story and 2,196,162 blog entries that were not identified as personal. We then applied the same procedure that we used for the NYT articles to produce two classes of words: those biased towards blogs describing personal stories and those biased towards non-personal blogs. After restricting the vocabulary to only verbs with a binomial test p-value of at most 0.05, we obtained log odds ratio weights for 3,143 verbs. Of the 1,210 verbs in the NYT classes, 937 were also present in the restricted blog vocabulary. The 20 most and least personal verbs are shown in Table 5. 1444
+
+4
+
+Conclusion
+
+We presented a method for data-driven acquisition of domain-level importance of verbs in reports of world news events. Analysis of the acquired verbs reveals that summary-biased words tend to be more negative, active, and hostile, while the article-biased words mostly describe personal actions. This lexicon provides a useful notion of global importance in a domain and can serve as resource for semantic characterization of words in a variety of tasks, including sentence selection in summarization, flagging articles as newsworthy or filtering uninteresting documents. Additionally, we provide a lexicon for personal and non-personal verbs that also captures some of the newsworthiness of the article and summary classes.
+
+

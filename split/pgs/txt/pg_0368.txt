@@ -1,0 +1,23 @@
+Semi-Supervised Word Sense Disambiguation Using Word Embeddings in General and Specific Domains
+Kaveh Taghipour Department of Computer Science National University of Singapore 13 Computing Drive Singapore 117417 kaveh@comp.nus.edu.sg Hwee Tou Ng Department of Computer Science National University of Singapore 13 Computing Drive Singapore 117417 nght@comp.nus.edu.sg
+
+Abstract
+One of the weaknesses of current supervised word sense disambiguation (WSD) systems is that they only treat a word as a discrete entity. However, a continuous-space representation of words (word embeddings) can provide valuable information and thus improve generalization accuracy. Since word embeddings are typically obtained from unlabeled data using unsupervised methods, this method can be seen as a semi-supervised word sense disambiguation approach. This paper investigates two ways of incorporating word embeddings in a word sense disambiguation setting and evaluates these two methods on some SensEval/SemEval lexical sample and all-words tasks and also a domain-specific lexical sample task. The obtained results show that such representations consistently improve the accuracy of the selected supervised WSD system. Moreover, our experiments on a domainspecific dataset show that our supervised baseline system beats the best knowledge-based systems by a large margin.
+
+1
+
+Introduction
+
+to achieve its goal. Part of this ambiguity may be resolved by considering part-of-speech (POS) tags but the word senses are still highly ambiguous even for the same part-of-speech. Machine translation is probably the most important application of word sense disambiguation. In machine translation, different senses of a word cause a great amount of ambiguity for automated translation and it negatively affects the results. Hence, an accurate WSD system can benefit machine translation significantly and improve the results (Chan et al., 2007; Carpuat and Wu, 2007; Vickrey et al., 2005). Moreover, Zhong and Ng (2012) have shown that word sense disambiguation improves information retrieval by proposing a method to use word senses in a language modeling approach to information retrieval. The rest of this paper is organized as follows. Section 2 gives a literature review of related work, including a review of semi-supervised word sense disambiguation and distributed word representation called word embeddings. The method and framework used in this paper are explained in Section 3. Finally, we evaluate the system in Section 4 and conclude the paper in Section 5.
+
+Because of the ambiguity of natural language, many words can have different meanings in different contexts. For example, the word "bank" has two different meanings in "the bank of a river" and "a bank loan". While it seems simple for humans to identify the meaning of a word according to the context, word sense disambiguation (WSD) (Ng and Lee, 1996; Lee and Ng, 2002) is a difficult task for computers and thus requires sophisticated means 314
+
+2
+
+Related Work
+
+The method that we use in this paper is a semisupervised learning method which incorporates knowledge from unlabeled datasets by using word embeddings. This section is a literature review of previous work on semi-supervised word sense disambiguation and various methods of obtaining word embeddings.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 314­323, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

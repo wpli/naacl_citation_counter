@@ -1,0 +1,21 @@
+Based on this definition, child wrapped, into cradle, wrapped into cradle, child wrapped into cradle all qualify as a chain while child was does not. To illustrate the motivation to use dependency parsing, consider the sentence: The hidden "camera," found by a security guard, was hidden in a business card-sized "box" placed at an unmanned ATM. The shortest path between entities is: camera  found  hidden  in  box Using dependency parsing, we only need four compositions for this chain, which results in 86% decrease against constituency-based parsing. Now with all words represented as vectors, we need to find a reduced dimensional representation of the chain in fixed size. To this end, we transform this chain to a data structure, the root of which represents the extracted features. 3.1 Fixed Structure We cannot use an off-the-shelf syntax parser to create a tree for the chain because the chain may not necessarily be a coherent English statement. Thus, we build two Directed Acyclic Graph (DAG) structures by heuristics. The idea is to start from argument(s) and recursively combine dependent-head pairs to the (common) ancestor i.e., each head is combined with the subtree below itself. In the simplest case: a  b results in p = f (a, b). The subtlety of this approach lies in the treatment of the word with two dependents. We use two methods to handle such a node: 1) including it in only one composition as in Figure 2 or 2) including it in two compositions and sum their results as in Figure 3. Both structures produce a DAG where each internal node has two children and there is only one node with two non-leaf children. We now prove that this greedy algorithm results in a full binary tree for the first case. We skip the proof of the algorithm for the second case which produces a full binary DAG. Lemma: There is at most one node with exactly two none-leaf children in the tree. Proof. If one of the arguments is an ancestor of the other argument e.g., arg1  ...  arg2, then
+
+x7 = f (x5 , x6 )
+
+x5 = f (x1 , x2 )
+
+x6 = f (x3 , x4 )
+
+x1 = child x2 = wrapped x3 = into
+
+x4 = cradle
+
+Figure 2: a fixed tree example
+
+obviously every head on the chain has exactly one dependent. Combination of each head and its subtree's output vector results in a full binary node in the tree. If the arguments have a common ancestor p e.g., arg1  ... p ...  arg2, then that particular node has two dependents. In this case, the parent is combined with either its left or right subtrees, and its result is combined with the output of the other child. No other head has this property; otherwise, p is not the common ancestor. Theorem: The algorithm converts a chain to a full binary tree. Proof. The leaves of the tree are words of the chain. By applying the lemma, there exists one root and all internal nodes have exactly two children. Note that we only consider dependency trees as the input; so each pair of arguments has a unique common ancestor. Concretely, having a connected graph leads to at least one such ancestor and having only one head for each node (being a tree) leads to exactly one such ancestor. 3.2 Predicted Tree Structure
+
+Instead of using a deterministic approach to create the tree, we can use Recursive Autoencoders (RAE) to find the best representation of the chain. This model is similar to (Socher et al., 2011) with some modification in implementation. Socher et al. (2011) use a semi supervised method where the objective function is a weighted sum of the supervised and unsupervised error. We achieved better results with a pipeline where first, during pre-training, the unsupervised autoencoder predicts the structure of RNN and then during training, the supervised cross entropy error is minimized.
+
+1246
+
+

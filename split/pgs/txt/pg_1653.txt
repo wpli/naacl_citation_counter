@@ -1,0 +1,22 @@
+Model Baseline Base+N -gram Base+Cumu-N -gram Base+Both
+
+First Pass Log-Likelihood AIC -1212399 2424868 -1212396 2424864 -1212392 2424856  -1212387 2424848
+
+Go-Past Log-Likelihood -1261582 -1261577 -1261576 -1261570
+
+AIC 2523234 2523226 2523224 2523214
+
+Baseline random slopes: sentpos, wlen, rlen, prevfix, 5-gram, cumu-5-gram Baseline fixed effects: sentpos, wlen, rlen, prevfix Table 3: Goodness of fit of N -gram models to reading times.3 Significance testing was done between each model and the models in the section above it. Significance for Base+Both applies to improvement over each of the n-gram models.  p < .05  p < .01 not probabilities of complete word sequences and may miss words that are parafovially previewed or simply inferred. For example, in Table 1, the standard bigram factor (top line) predicts that the reading time of the region that ends with word 6 depends on word 5, but the probability of word 5 given its context is never included in the model, so an improbable transition between words 4 and 5 would not be caught. This might allow another factor to inappropriately receive credit for an extra long fixation on word 6. Instead, a better model would include the probabilities of every word in the sequence since that is the information that will need to be processed by the reader. Using log-probabilities, a cumulative n-gram factor can be created simply by summing the log probabilities over each region (comparable to the last line of Table 1). The cumulative n-gram predictor is able to account for the frequency of the entire lexical sequence and so should provide a better reading time predictor than the standard fixation-only n-gram predictor (see Table 2 for an example). For this initial evaluation (Table 3), the baseline omits the fixed n-gram factor. Instead, a model is constructed without any fixed effects for n-gram. Then, the same model is fit to reading times after adding just a fixed effect for n-gram and after adding just a fixed effect for cumulative n-gram. Finally, a model is fit with both the cumulative and noncumulative n-gram factors as fixed effects.4 SignifiLog-likelihood values are rounded to the nearest whole number, which is why the difference between Base and Base+Both can be larger than the cumulative difference between Base and the other two models. 4 To ensure effects are not driven by individual subject differ3
+
+cance between the models is determined using likelihood ratio testing.5 Table 3 shows that both n-gram factors significantly improve the fit of the model and the final line shows that each factor provides a significant orthogonal improvement. Both n-gram factors will therefore be included as fixed effects and as by-subject random slopes in the baselines of the remaining evaluations in this study.
+
+4
+
+Hierarchic Syntax Predictors
+
+This section tests the main hypothesis of this study: that hierarchic syntactic processing is a significant contributor to reading times. For the purposes of this evaluation, total PCFG surprisal (Hale, 2001; Levy, 2008; Roark et al., 2009) will be used as a measure of hierarchic syntactic processing. Specifically, PCFG surprisal will be calculated using the van Schijndel et al. (2013a) incremental parser trained on sections 02-21 of the Wall Street Journal section of the Penn Treebank (Marcus et al., 1993) using 5 iterations of split-merge (Petrov et al., 2006) and a beam width of 5000.
+ences, by-subject random slopes for both predictors of interest are included in the baseline. This practice is repeated throughout this study. 5 Twice the log-likelihood difference of two nested models can be approximated by a 2 distribution with degrees of freedom equal to the difference in degrees of freedom of the models in question. The probability of obtaining a given log-likelihood difference D between the two models is therefore analogous to P(2 · D) under the corresponding 2 distribution.
+
+1599
+
+

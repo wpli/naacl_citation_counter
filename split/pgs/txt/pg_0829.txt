@@ -1,0 +1,25 @@
+1. Bad auto. translation: mistranslation of ambiguous words Post Auto.Trans. Manl.Trans. the minimum taught me that more relatives clock Life has taught me that most of the relatives are scorpions
+
+negative neutral negative positive negative positive negative positive negative
+
+2. Bad auto. translation: mistranslation of ambiguous words Post Auto.Trans. Manl.Trans. i wish i live in a place not cut off by snow I wish I live in a place where snow never stops falling
+
+3. Bad auto. translation: sarcasm is hard to translate Post Auto.Trans. Manl.Trans. you're still good in front of the leakage of water existed from time Expect more good to come, water has been leaking since a long time
+
+Table 6: Examples where the automatic translation was annotated a sentiment different from the sentiment of the original Arabic tweet, but whose original sentiment was correctly predicted by the English sentiment system. The manual translations are also listed for reference.
+
+One reason why the automatic sentiment analysis system correctly annotates several automatically translated instances (where manual annotations of the translation may fail), is that the system can learn an appropriate model even from mistranslated text -- especially when automatic translation makes consistent errors. For example, (Oh God grant victory to) has been consistently translated to God forsake. All tweets having this phrase are correctly annotated as positive by our system, but were marked negative by the human annotators. Caveats: The automatic systems employed in these experiments, i.e., Arabic sentiment analysis, English sentiment analysis, and SMT systems, exhibit state-of-the-art performance; nevertheless, further improvements are possible. The Arabic sentiment system will benefit from extended sentiment lexicons and features derived specifically for the Arabic language. The English sentiment analysis system can be further adapted to the peculiarities of machine-translated texts, which are notably different from regular English. The current translation system has been trained on non-tweet data that results in a high percentage of out-of-vocabulary words on our datasets. In our experiments, we assumed that all texts are written in Levantine dialect of the Arabic language. However, tweets can have a mixture of dialects or even a mixture of languages (e.g., Arabic and English). Addressing these factors will give even more insight on how sentiment is altered on translation, in specific contexts. 775
+
+9
+
+Conclusions
+
+We presented a set of experiments to systematically study the impact of English translation (manual and automatic) on sentiment analysis of Arabic social media posts. Our experiments show that automatic sentiment analysis of English translations (even of automatic translations) can lead to competitive results--results that are similar to that obtained by current state-of-the-art Arabic sentiment analysis systems. Our results also show that automatic sentiment analysis of automatic translations outperforms the manual sentiment annotations of the automatically translated text. This suggests that SMT errors impact human perception of sentiment markedly more than automatic sentiment systems. This is an interesting avenue for future exploration. We also show that translated texts tend to lose some of the sentiment information and there is a relatively higher percentage of neutral instances in the translated text than in the original dataset. The resources created as part of this project (Arabic sentiment lexicons, Arabic sentiment annotations of social media posts, and English sentiment annotations of their translations) are made freely available.5
+
+Acknowledgments
+Thanks to Kareem Darwish and Eshrag Refaee for sharing their data. We thank Colin Cherry, Samuel Larkin, and Marine Carpuat for helpful discussions.
+5
+
+http://www.purl.com/net/ArabicSentiment
+
+

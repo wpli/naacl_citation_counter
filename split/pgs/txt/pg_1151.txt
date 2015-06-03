@@ -1,0 +1,18 @@
+Chinese Event Coreference Resolution: An Unsupervised Probabilistic Model Rivaling Supervised Resolvers
+Chen Chen and Vincent Ng Human Language Technology Research Institute University of Texas at Dallas Richardson, TX 75083-0688 {yzcchen,vince}@hlt.utdallas.edu
+
+Abstract
+Recent work has successfully leveraged the semantic information extracted from lexical knowledge bases such as WordNet and FrameNet to improve English event coreference resolvers. The lack of comparable resources in other languages, however, has made the design of high-performance non-English event coreference resolvers, particularly those employing unsupervised models, very difficult. We propose a generative model for the under-studied task of Chinese event coreference resolution that rivals its supervised counterparts in performance when evaluated on the ACE 2005 corpus.
+
+resolution is complicated in part by the fact that an event coreference resolver has to rely on the noisy outputs produced by its upstream components in the standard information extraction (IE) pipeline. In this paper, we examine Chinese event coreference resolution. While English event coreference is under-investigated, Chinese event coreference is much less studied than English event coreference. In terms of task definition, there is no difference between English and Chinese event coreference. However, the design of high-performance Chinese event coreference resolvers is complicated in part by the lack of large-scale lexical knowledge bases. Recent work by Bejan and Harabagiu (2010; 2014) has shown that the semantic information extracted from WordNet (Fellbaum, 1998) and FrameNet (Baker et al., 1998) significantly contributed to the performance of their English event coreference resolver. While the lack of comparable lexical knowledge bases in Chinese can be mitigated in part by the use of event coreference annotated data, we focus on a challenging version of the task --- unsupervised Chinese event coreference resolution. Specifically, our goal is to learn an event coreference model without using data annotated with event coreference links. When evaluated on the Chinese portion of the ACE 2005 corpus, our unsupervised probabilistic model for event coreference resolution rivals its state-ofthe-art supervised counterpart in performance. This, together with the fact that its underlying generative process is not language-dependent and does not rely on features extracted from lexical knowledge bases, potentially enables it to be applied to languages where neither annotated data nor large-scale
+
+1
+
+Introduction
+
+Event coreference resolution is the task of determining which event mentions in a text refer to the same real-world event. Compared to entity coreference, event coreference is not only much less studied, but it is arguably more challenging. Recall that for two event mentions to be coreferent, both their triggers (i.e., the words realizing the occurrence of the events) and their corresponding arguments (e.g., the times, places, and people involved in them) have to be compatible. However, identifying potential arguments (which is typically performed by an entity extraction system), linking arguments to their event mentions (which is typically performed by an event extraction system), and determining the compatibility between two event arguments (which is the job of an entity coreference resolver), are all non-trivial tasks. In other words, end-to-end event coreference
+
+1097
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1097­1107, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

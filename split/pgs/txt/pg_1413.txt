@@ -1,0 +1,25 @@
+4
+
+Data
+
+We use six treebanks (Buch-Kromann et al., 2003; Buch-Kromann et al., 2007; Arias et al., 2014; Solberg et al., 2014; Agi´ c and Merkler, 2013; Haverinen et al., 2010) for which we could get a sample of doubly-annotated data. All these treebanks are directly developed as dependency treebanks, instead of being converted from constituent treebanks. Table 1 gives overview statistics of the treebanks, Table 2 lists the sizes of the doubly-annotated samples, as well as F1 scores between annotators and  values (Skjærholt, 2014). The doubly-annotated samples are solely used to estimate confusion probabilities, and not for training or testing. When a treebank had no canonical train/test split, we took the final 30% for testing.
+lang NO EN DA CA HR FI sents 400 264 162 63 100 400 tokens 5.3k 5.5k 2.4k 1.3k 2.4k 5.1k between annotator: LAS UAS LA  plain 94.70 96.47 96.62 0.984 88.44 93.83 91.95 0.925 90.43 96.12 92.40 0.957 94.48 98.26 95.64 0.978 78.89 89.16 84.07 0.939 83.45 88.77 89.83 0.950
+
+We use bootstrap sampling in all our experiments in order to get more reliable results. This method allows abstracting away from biases--in sampling and annotation--of training and test splits. We use two complementary evaluation methods: crossvalidation within the training data, and learning curves against the test set. We calculate significance using the approximate randomization test (Noreen, 1989) with 10k iterations. Cross-validation In this setup, we perform 50 runs of 5-fold cross validation on bootstrap-based samples of the training data. This allows us to gauge the effect of our factorization without committing to a certain test set. We report on the average of the total of 250 runs. Learning curve To calculate the learning curves, we train the parser on increasing amounts of training data, bootstrap-sampled in steps of 10%, and evaluate against the test set. Each 10% increment is repeated k = 50 times. We finally report average overall error reduction over the baseline.
+
+6 Results
+Cross-validation The results for cross-validation are shown in Table 3. For 5 out of the 6 languages we get significant improvements over the baseline with some factorization. We obtain improvements on all treebanks using L ABEL D, and on five out of six using C HILD P OS D. For CA, with the smallest doubly-annotated sample, results are not as consistent across the two evaluation methods. Learning curve Table 4 summarizes the overall average error reduction over the 10-step bootstrapbased learning curve (with 50 runs at each step). We get consistent improvements for languages for which we have a sample of 100+ sentences (Table 2). Again, the most robust factorization is L A BEL D. Figure 2 shows the learning curves for the system with the highest error reduction (NO with C HILD P OS D). Additional studies In order to evaluate whether our results are meaningful and not just artifacts of random regularization, we performed a sanity check for the best performing system and factorization (i.e., NO with C HILD P OS D factorization). We
+
+Table 2: Statistics of the doubly-annotated data.
+
+5
+
+Experiments
+
+In our experiments, we use redshift,1 a transition-based arc-eager dependency parser that implements the dynamic oracle (Goldberg and Nivre, 2012) with averaged perceptron training. We modified the parser2 to read confusion matrices and weigh the updates with the respective  . We compare the five (§2) factorized systems to a baseline system that does not take confusion probabilities into account, i.e., standard redshift. Throughout the experiments, we fix the number of iterations to 5, and we use pseudo-projectivization (Nivre and Nilsson, 2005).3 The parser does not include morphological features, which lowers performance for morphological rich languages like FI. We report labeled attachment scores (LAS) incl. punctuation.
+https://github.com/syllog1sm/redshift 2 The modified code, as well as the confusion matrices for all factorizations, is available at https://bitbucket.org/ lowlands/iaa-parsing 3 15­33% of the sentences contain non-projectivities.
+1
+
+1359
+
+

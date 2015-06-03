@@ -1,0 +1,21 @@
+Task Training Test
+
+Query Classification Restaurant Hotel Flight Nightlife 1,585K 2,131K 1,880K 1,214K 3,074 6,307 6,199 298
+
+Web Search 4,084K queries & click-through documents 12,071 queries / 897,770 documents
+
+Table 1: Statistics of the data sets used in the experiments. good, excellent and perfect. The evaluation metric for query classification is the Area under of Receiver Operating Characteristic (ROC) curve (AUC) score (Bradley, 1997). For web search, we employ the Normalized Discounted Cumulative Gain (NDCG) (J¨ arvelin and Kek¨ al¨ ainen, 2000). 3.2 Results on Accuracy First, we evaluate whether our model can robustly improve performance, measured as accuracy across multiple tasks. Table 2 summarizes the AUC scores for query classification, comparing the following classifiers: · SVM-Word: a SVM model2 with unigram, bigram and trigram surface-form word features. · SVM-Letter: a SVM model with letter trigram features (i.e. l1 in Figure 1 as input to SVM). · DNN: single-task deep neural net (Figure 2). · MT-DNN: our multi-task proposal (Figure 1). The results show that the proposed MT-DNN performs best in all four domains. Further, we observe: 1. MT-DNN outperforms DNN, indicating the usefulness of the multi-task objective (that includes web search) over the single-task objective of query classification. 2. Both DNN and MT-DNN outperform SVMLetter, which initially uses the same input features (l1 ). This indicates the importance of learning a semantic representation l2 on top of these letter trigrams. 3. Both DNN and MT-DNN outperform a strong SVM-Word baseline, which has a large feature set that consists of 3 billion features. Table 3 summarizes the NDCG results on web search, comparing the following models:
+2
+
+Query Classification Restaurant Hotel Flight Nightlife SVM-Word 90.91 75.82 91.17 91.27 SVM-Letter 88.75 69.65 85.51 87.71 DNN 97.38 76.81 95.58 93.24 MT-DNN 97.57 78.56 96.21 94.20 System Table 2: Query Classification AUC results. · Popular baselines in the web search literature, e.g. BM25, Language Model, PLSA · DSSM: single-task ranking model (Figure 2) · MT-DNN: our multi-task proposal (Figure 1) Again, we observe that MT-DNN performs best. For example, MT-DNN achieves NDCG@1=0.334, outperforming the current state-of-the-art single-task DSSM (0.327) and the classic methods like PLSA (0.308) and BM25 (0.305). This is a statistically significant improvement (p < 0.05) over DSSM and other baselines. To recap, our MT-DNN robustly outperforms strong baselines across all web search and query classification tasks. Further, due to the use of larger training data (from different domains) and the regularization effort as we discussed in Section 1, we confirm the advantage of multi-task models over than single-task ones.3 3.3 Results on Model Compactness and Domain Adaptation
+
+Important criteria for building practical systems are agility of deployment and small memory footprint and fast run-time. Our model satisfies both with
+3
+
+In this paper, we use the liblinear to build SVM classifiers and optimize the corresponding parameter C by using 5-fold cross-validation in training data. http://www.csie.ntu.edu.tw/ cjlin/liblinear/
+
+We have also trained SVM using Word2Vec (Mikolov et al., 2013b; Mikolov et al., 2013a) features. Unfortunately, the results are poor at 60-70 AUC, indicating the sub-optimality of unsupervised representation learning objectives for actual prediction tasks. We optimized the Word2Vec features in the SVM baseline by scaling and normalizing as well, but did not observe much improvement.
+
+916
+
+

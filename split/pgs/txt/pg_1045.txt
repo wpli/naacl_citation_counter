@@ -1,0 +1,25 @@
+reasonable to expect that the small vocabulary size of Simple English Wikipedia may be disadvantageous when trying to create word embeddings using co-occurrence information, but it may also be true that despite the much smaller vocabulary size and overall size, because of the explanatory nature of its text, Simple English Wikipedia would still preserve enough information to allow the performance of models trained with Simple English Wikipedia to be comparable to models trained on full Wikipedia, and perform equally well or better than non-explanatory texts like the Google News corpus.
+
+2.3
+
+Word2Vec
+
+The distributed representation of words, or word embeddings, has gained significant attention in the research community, and one of the more discussed works is Mikolov's (2013) word representation estimation research. Mikolov proposed two neusral network based models for word representation: Continuous Bag-of-Words (CBOW) and Skip-gram. CBOW takes advantage of context words surrounding a given word to predict the word by summing all the context word vectors together to represent the word; whereas Skip-gram uses the word to predict the context word vectors for skip-gram positions, therefore making the model sensitive to positions of context words. Both of the models scale well to large quantities of training data, however it is noted by Mikolov that Skipgram works well with small amounts of training data and provides good representations for rare words, and CBOW would perform better and have higher accuracy for frequent words if trained on larger corpora. The purpose of this paper is not to compare the models, but to use the models to compare training corpora to see how different arrangement of information may impact the quality of the word embeddings.
+
+similarity and be better predicted by a contextwindow model. However, when the models are constant, the semantic information of the test words in the training corpora is crucial to allowing the model to build semantic representations for the words. It may be argued that when the corpus is explanatory, more semantic information about the target words is present; whereas when the corpus is non-explanatory, information around the words is merely related to the words. The WordSim353 (Agirre, 2009) dataset is used as the test dataset. This dataset contains pairs of words that are decided by human annotators to be either similar or related, and a similarity or relatedness gold standard score is also given to every pair of words. There are 100 similar word pairs, 149 related pairs and 104 pairs of words with very weak or no relation. In the evaluation task, the unrelated word pairs are discarded from the dataset. The objective of the task is to rank the similar word pairs higher than related ones. The retrieval/ranking procedure is as follows. First, the cosine similarity scores are calculated using word embeddings from a certain model; then the scores are sorted from the highest to the lowest. The retrieval step is then carried out by locating the last pair of the first n% of the pairs of similar words in the sorted list of scores and determining the percentage of similar word pairs in the sub-list delimited by the last pair of similar words. In other words, the procedure treats similar word pairs as successful retrievals and determines the accuracy rate when the recall rate is n%. Because the accuracy rate would always fall to the percentage of similar word pairs in all word pairs, it is expected that the later and more suddenly it falls, the better the model is performing in this task.
+
+4
+
+Models
+
+3
+
+Task Description
+
+To evaluate the effectiveness of full English Wikipedia and Simple English Wikipedia as training corpora for word embeddings, the word similarityrelatedness task described by Levy & Goldberg (2014) is used. As pointed out by Agirre et al (2009) and Levy & Goldberg (2014), relatedness may actually be measuring topical similarity and be better predicted by a bag-of-words model, and similarity may be measuring functional or syntactic
+
+The word2vec python implementation provided by gensim (Rehurek et al, 2010) package is used to train all the word2vec models. For Skip-gram and CBOW, a 5-word window size is used to allow them to get the same amount of raw information, also words appearing 5 times or fewer are filtered out. The dimensions of the word embeddings from Skip-gram and CBOW are all 300. Both full English Wikipedia and Simple English Wikipedia are used as training corpora with minimal preprocessing procedures: XML tags are removed and
+
+991
+
+

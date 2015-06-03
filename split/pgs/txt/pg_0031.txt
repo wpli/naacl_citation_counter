@@ -1,0 +1,12 @@
+Conference Program
+Monday, June 1, 2015 07:30­08:45 08:45­09:00 09:00­10:10 Registration and Breakfast Welcome to NAACL HLT 2015 Rada Mihalcea Invited Talk: "Big data pragmatics!", or, "Putting the ACL in computational social science", or, if you think these title alternatives could turn people on, turn people off, or otherwise have an effect, this talk might be for you Lillian Lee Break Session 1A: Semantics (Long Papers) Unsupervised Induction of Semantic Roles within a Reconstruction-Error Minimization Framework Ivan Titov and Ehsan Khoddam Predicate Argument Alignment using a Global Coherence Model Travis Wolfe, Mark Dredze and Benjamin Van Durme Improving unsupervised vector-space thematic fit evaluation via role-filler prototype clustering Clayton Greenberg, Asad Sayeed and Vera Demberg A Compositional and Interpretable Semantic Space Alona Fyshe, Leila Wehbe, Partha P. Talukdar, Brian Murphy and Tom M. Mitchell
+
+10:10­10:40 10:40­12:20 10:40­11:05
+
+11:05­11:30 11:30­11:55
+
+11:55­12:20
+
+xxxi
+
+

@@ -1,0 +1,26 @@
+("C-S KIP"), whereby a given word in context is projected onto a projection layer, and used to predict its immediate context (preceding and following words). WORD 2 VEC generates a vector of fixed dimensionality d for each pre-tokenised word/MWE type with frequency above a certain threshold in the training corpus. We again use comp 1 and comp 2 to estimate compositionality from these vectors. 3.3 Multi-Sense Skip-gram Model One potential shortcoming of WORD 2 VEC is that it generates a single word embedding for each word, irrespective of the relative polysemy of the word. Neelakantan et al. (2014) proposed a method motivated by WORD 2 VEC, which efficiently learns multiple embeddings per word/MWE. We refer to this approach as the multi-sense skip-gram (MSSG) model. We once again compose the resultant vectors with comp 1 and comp 2 , but modify the formulation slightly to handle the variable number of vectors for each word/MWE, by searching over the cross-product of vectors in each sim calculation and taking the maximum in each case. We initially set the number of embeddings to 2 in our MSSG experiments -- in keeping with the findings in Neelakantan et al. (2014) -- but come back to examine the impact of the number of embeddings on compositionality prediction in Section 5.
+
+model, trained over the distributional method from Section 3.1 as applied to both English and 51 target languages (under word and MWE translation). The EVPC dataset consists of 160 English verb particle constructions, and is manually annotated for compositionality on a binary scale for each of the head verb and particle (Bannard, 2006). In order to translate the dataset into a regression task, we calculate the overall compositionality as the number of annotations of entailment for the verb, divided by the total number of verb annotations for that VPC. The state-of-the-art method for this dataset (Salehi et al., 2014b) is a linear combination of: (1) the distributional method from Section 3.1; (2) the same method applied to 10 target languages (under word and MWE translation, selecting the languages using supervised learning); and (3) the string similarity method of Salehi and Cook (2013). The GNC dataset consists of 246 German noun compounds, and is annotated on a continuous [1, 7] scale (von der Heide and Borgwaldt, 2009; Schulte im Walde et al., 2013). The state-of-the-art method for this dataset is a distributional similarity method applied to part-of-speech tagged and lemmatised data (Schulte im Walde et al., 2013).
+
+5
+
+Experiments
+
+4
+
+Datasets
+
+We evaluate our methods over three datasets:3 (1) English noun compounds ("ENCs", e.g. spelling bee and swimming pool); (2) English verb particle constructions ("EVPCs", e.g. stand up and give away); and (3) German noun compounds ("GNCs", e.g. ahornblatt "maple leaf" and eidechse "lizard"). The ENC dataset consists of 90 binary English noun compounds, and is annotated on a continuous [0, 5] scale for both overall compositionality and the component-wise compositionality of each of the modifier and head noun (Reddy et al., 2011). The state-of-the-art method for this dataset (Salehi et al., 2014b) is a supervised support vector regression
+We also considered using the dataset from the DisCo shared task (Biemann and Giesbrecht, 2011), but ultimately excluded it because it includes different types of MWEs without indication of the syntactic type of a given MWE, preventing us from carrying out construction-specific parameter tuning.
+3
+
+For all experiments, we train our models over raw text Wikipedia corpora for either English or German, depending on the language of the dataset. The raw English and German corpora were preprocessed using the WP2TXT toolbox4 to eliminate XML and HTML tags and hyperlinks, and punctuation was removed. Finally, word-tokenisation was performed based on simple whitespace delimitation, after which we greedily identified all string occurrences of the MWEs in each of our datasets and combined them into a single token.5 The word embedding approaches are unable to generate vector representations for tokens which occur with frequency below a fixed cutoff.6 In order to
+4 5
+
+For English, a single model was trained over a corpus containing both ENC and EVPC tokens. 6 For a frequency threshold of 15, the total numbers of ENCs, EVPCs and GNCs for which we were unable to generate word embeddings were 3, 0 and 25, respectively, in the latter case, largely as a result of our simple tokenisation strategy and
+
+http://wp2txt.rubyforge.org/
+
+979
+
+

@@ -1,0 +1,76 @@
+^k = argmax q(k ) which can be calculated using  k existing numerical optimization methods for loglinear models. Such maximization can be understood as embedding the variational algorithm inside of an outer EM loop such as might be used to tune hyperparameters in an empirical Bayesian approach (where  are treated as hyperparameters). 4.2 M OM R ESP Inference M OM R ESP's posterior p (y,  ,  ,  |x, a) is approximated with the fully factorized distribution q(y,  ,  ,  ) = q( )  j k q( jk ) k q(k ) i q(yi ). Algorithm. Initialize each q(yi ) to the empirical distribution observed in the annotations ai . The Kullback-Leibler divergence KL(q|| p ) is minimized by iteratively updating each variational distribution in the model as follows: q( )  q( jk )  q(k ) 
+kK
+
+matrix  = 1 for L OG R ESP. We set bk f = 0.1 for M OM R ESP to encourage sparsity in per-class word distributions. Liu et al. (2012) argue that a uniform prior over the entries of each confusion matrix  j can lead to degenerate performance. Accordingly, we ( ) set the diagonal entries of each b j to a higher value b jkk =
+1+ K + and off-diagonal ( ) 1 b jkk = K +  with  = 2. ( )
+
+( )
+
+entries to a lower value
+
+ k k
+b
+
+b
+
+( )
+
++iN q(yi =k)-1
+
+= Dirichlet ( ( ) )
+( )
+
+k K
+
+jkk   jkk ( )
+
+( )
+
+Both M OM R ESP and L OG R ESP are given full access to all instances in the dataset, annotated and unannotated. However, as explained in Section 3.1, L OG R ESP is conditioned on the data and thus is structurally unable to make use of unannotated data. We experimented briefly with self-training for L OG R ESP but it had little effect. With additional effort one could likely settle on a heuristic scheme that allowed L OG R ESP to benefit from unannotated data. However, since such an extension is external to the model itself, it is beyond the scope of this work.
+
++iN ai jk q(yi =k)-1
+
+= Dirichlet ( jk ) 5
+( )
+
+Experiments with Simulated Annotators
+
+f F
+
+ k f
+
+bk f +iN xi f q(yi =k)-1
+
+= Dirichlet (k )
+
+q(yi ) 
+
+kK
+
+ exp   ai jk Eq(
+jJ k K f F
+k
+
+jk )
+
+[log  jkk ]+
+1(yi =k)
+
+Models which learn from error-prone annotations can be challenging to evaluate in a systematic way. Simulated annotations allow us to systematically control annotator behavior and measure the performance of our models in each configuration. 5.1 Simulating Annotators We simulate an annotator by corrupting ground truth labels according to that annotator's accuracy parameters. Simulated annotators are drawn from the annotator quality pools listed in Table 1. Each row is a named pool and contains five annotators A1­ A5, each with a corresponding accuracy parameter (the number five is chosen arbitrarily). In the pools HIGH, MED, and LOW, annotator errors are distributed uniformly across the incorrect classes. Because there are no patterns among errors, these settings approximate situations in which annotators are ultimately in agreement about the task they are doing, although some are better at it than others. The HIGH pool represents a corpus annotation project with high quality annotators. In the MED and LOW pools annotators are progressively less reliable. The CONFLICT annotator pool in Table 1 is special in that annotator errors are made systematically rather than uniformly. Systematic errors are
+
+Eq(k ) [log k ] + 
+
+ xi f Eq( ) [log k f ]
+(y)
+
+kK
+
+ ik
+
+(y)1(yi =k)
+
+= Categorical (i )
+
+Approximate distributions are updated by calculating the values of variational parameters  (·) , disambiguated by a superscript. The expectations of log terms in the q(yi ) update are all with respect to Dirichlet distributions and so can be computed analytically as explained previously. 4.3 Model priors and implementation details Computing a lower bound on the log likelihood shows that in practice the variational algorithms presented above converge after only a dozen or so updates. We compute argmaxk q(k ) for L OG R ESP using the L-BFGS algorithm as implemented in MALLET (McCallum, 2002). We choose unin( ) formed priors bk = 1 for M OM R ESP and identity 886
+
+

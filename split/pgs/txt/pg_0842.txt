@@ -1,0 +1,25 @@
+Transforming Dependencies into Phrase Structures
+Alexander M. Rush Noah A. Smith Lingpeng Kong Facebook AI Research School of Computer Science School of Computer Science New York, NY, USA Carnegie Mellon University Carnegie Mellon University srush@seas.harvard.edu Pittsburgh, PA, USA Pittsburgh, PA, USA nasmith@cs.cmu.edu lingpenk@cs.cmu.edu
+
+Abstract
+We present a new algorithm for transforming dependency parse trees into phrase-structure parse trees. We cast the problem as structured prediction and learn a statistical model. Our algorithm is faster than traditional phrasestructure parsing and achieves 90.4% English parsing accuracy and 82.4% Chinese parsing accuracy, near to the state of the art on both benchmarks.
+
+1
+
+Introduction
+
+Natural language parsers typically produce phrasestructure (constituent) trees or dependency trees. These representations capture some of the same syntactic phenomena, and the two can be produced jointly (Klein and Manning, 2002; Hall and Nivre, 2008; Carreras et al., 2008; Rush et al., 2010). Yet it appears to be completely unpredictable which will be preferred by a particular subcommunity or used in a particular application. Both continue to receive the attention of parsing researchers. Further, it appears to be a historical accident that phrase-structure syntax was used in annotating the Penn Treebank, and that English dependency annotations are largely derived through mechanical, rule-based transformations (reviewed in Section 2). Indeed, despite extensive work on directto-dependency parsing algorithms (which we call dparsing), the most accurate dependency parsers for English still involve phrase-structure parsing (which we call c-parsing) followed by rule-based extraction of dependencies (Kong and Smith, 2014). What if dependency annotations had come first? Because d-parsers are generally much faster than 788
+
+c-parsers, we consider an alternate pipeline (Section 3): d-parse first, then transform the dependency representation into a phrase-structure tree constrained to be consistent with the dependency parse. This idea was explored by Xia and Palmer (2001) and Xia et al. (2009) using hand-written rules. Instead, we present a data-driven algorithm using the structured prediction framework (Section 4). The approach can be understood as a specially-trained coarse-to-fine decoding algorithm where a d-parser provides "coarse" structure and the second stage refines it (Charniak and Johnson, 2005; Petrov and Klein, 2007). Our lexicalized phrase-structure parser, PAD, is asymptotically faster than parsing with a lexicalized context-free grammar: O(n2 ) plus d-parsing, vs. O(n5 ) worst case runtime in sentence length n, with the same grammar constant. Experiments show that our approach achieves linear observable runtime, and accuracy similar to state-of-the-art phrase-structure parsers without reranking or semisupervised training (Section 7).
+
+2
+
+Background
+
+We begin with the conventional development by first introducing c-parsing and then defining d-parses through a mechanical conversion using head rules. In the next section, we consider the reverse transformation. 2.1 CFG Parsing The phrase-structure trees annotated in the Penn Treebank are derivation trees from a context-free grammar. Define a binary1 context-free grammar
+For notational simplicity, we defer discussion of nonbinary rules to Section 3.3.
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 788­798, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

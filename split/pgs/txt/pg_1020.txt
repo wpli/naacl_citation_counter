@@ -1,0 +1,21 @@
+asking participants to rate pairs on a 7-point scale by answering the following question: "How much do you agree with the statement that <word1> and <word2> can refer to the same thing, animal or person?" We asked the judges to consider real-life scenarios and fairly ordinary circumstances; in case of ambiguity, they were asked to choose the sense that would make the pair compatible, as long as it was sufficiently common. 20 control items with obvious choices (e.g. drummer/ant - writer/father) were inserted to exclude raters that did not perform the task seriously. We paid close attention to contributors' feedback, correcting dubious controls. For example, we removed bucket/chair, since one contributor pointed out that you could turn a bucket upside down and use it as a chair.3 In this way, we obtained usable annotation for 17973 pairs, each rated by 10 participants4 . The average standard deviation was as as low as 0.70, compared to the standard deviation of a uniformly distributed multinomial distribution, which amounts to 1.8. As expected, ratings were highly skewed as most random pairs are incompatible: the median is 1.10 (with a standard deviation of 1.81). Yet, the overall distribution is bimodal, peaking at the two ends of the scale. In order to be able to phrase (in)compatibility detection not only in continuous terms, but also as dichotomous tasks, we further produced a list of unambiguously (in)compatible pairs from the ends of the rating scale. Specifically, we manually inspected a subset of the list (before any computational simulation was run), and picked a mean 3.7 rating (exclusive) as minimum value for compatible pairs, and 1.6 (inclusive) as maximum score for incompatible ones. The number of problematic cases above/below these thresholds was absolutely negligible. We thus coded the data set by classifying the 2,933 pairs above the first threshold as compatible (e.g., expert/criminal, hill/obstacle, snake/vermin), the 12,669 pairs below the second as incompatible (e.g., bottle/plate, cheetah/queen), and the remain3 We also were surprised to learn that drummer ants actually exist. Yet, in that case we decided to keep the control item since, under the most common sense of drummer, and in ordinary circumstances, ants cannot be drummers. 4 The guidlienes provided to the participants and the collected data set are available at: http://clic.cimec. unitn.it/composes/
+
+(a) 2L direct
+
+(b) 2L interaction (c) 2L interaction direct
+
+(d) 1L direct
+
+(e) 1L interaction (f) 1L interaction direct
+
+Figure 1: Schematic representation of the models der as neither.
+
+3
+
+Models
+
+We take DSM vectors as input, since they provide us with semantically rich word representations, and seek to induce a compatibility measure by learning the parameters of a model in a supervised manner. In particular, we used the word vectors publicly available at http://clic.cimec.unitn. it/composes/semantic-vectors.html. These vectors, extracted with the word2vec toolkit (Mikolov et al., 2013) from a 3B token corpus, were shown by Baroni et al. (2014) to produce near-state-of-the-art performance on a variety of semantic tasks. We hypothesized that the interaction between a simple set of features (induced from the distributional ones) should account for a large portion of compatibility patterns. For example, human roles would typically be compatible (classmate/friend), whereas two animals would probably be incompatible (iguana/zebra). The model should thus be able to learn features associated to such classes, and compatibility rules associated to their interaction (e.g., if both w1 and w2 have large values for a human feature, compatibility is more likely). We incorporated this insight into the 2L interaction neural network illustrated in Figure 1b. This network takes the distributional representations of the words in a pair, transforms them into new feature vectors by means of a mapping that is shared by both inputs, constructs the vector of pairwise interactions between the induced features, and finally uses the weighted combination of the latter to produce a real-number
+
+966
+
+

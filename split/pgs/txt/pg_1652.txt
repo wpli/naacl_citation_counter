@@ -1,0 +1,32 @@
+Factors Bigram Cumu-Bigram
+
+Durations w6 Rw 5 P(w4|w3 ) P(w6|w5 ) P(w4|w3 ) P(w6|w5 )·P(w5|w4 )
+w4 Rw 4
+
+Bigram: The red apple that the girl ate . . . Cumu-Bigram: The red apple that the girl ate X : bigram targets X: bigram conditions
+1 2
+
+1
+
+2
+
+Table 1: Bigram factors and their predictions of reading times in example eye-tracking regions. wi wj represents word i. Rwi represents the region from wi to wj (inclusive).
+
+Table 2: Influences on bigram factor predictions of reading times on girl following fixation on red. pos), word length (wlen), region length in words (rlen), whether the previous word was fixated (prevfix), and basic 5-gram log probability of the current word given the preceding context (5-gram). All independent predictors are centered and scaled before being added to each model. The 5-gram probabilities are interpolated 5-grams computed over the Gigaword 4.0 corpus (Graff and Cieri, 2003) using KenLM (Heafield et al., 2013). Gigaword 4.0 consists of around 2.96 billion words from around 4 million English newswire documents, which provides appropriate n-gram statistics since the Dundee corpus is also English news text. Each mixed effects model contains random intercepts for subject and word, and random by-subject slopes for all fixed effects. Since the following evaluations use ablative testing to determine whether a fixed effect significantly improves the fit of a model compared to a model without that fixed effect, all models in a given evaluation include random slopes for all fixed effects used in that evaluation, even if the fixed effect is absent from that particular model.
+
+2
+
+Modeling
+
+This study fits models to reading times from the Dundee corpus (Kennedy et al., 2003), which consists of eye-tracking data from 10 subjects who read 2388 sentences of news text from the newspaper, The Independent. Prior to using this corpus for evaluations, the first and last fixation of each sentence and of each line are filtered out to avoid potentially confounding wrap-up effects. Additionally, all fixations after saccades (eye movements) over more than 4 words are removed to avoid confounds with eyetracker track-loss. All evaluations are done with linear mixed effects models using lme4 (version 1.1-7; Bates et al., 2014).2 There are two dependent reading time variables of interest in this study: first pass durations and go-past durations. During reading, a person's eye can jump over multiple words each time it moves, this study refers to that span of words as a region. First pass durations measure elapsed time until a person's eye leaves a given region. Go-past durations measure elapsed time until a person's eye moves further in the text. For example, in the fixation sequence: word 4, word 6, word 3, word 7, the first region would be from word 4 to word 6 and the second region would be from word 6 to word 7. The first pass duration for the first region would consist of the time fixated on word 6 before leaving the region for word 3, while the go-past duration would consist of the duration from the fixation of word 6 until the fixation of word 7. Separate models are fit to each centered dependent variable. There are a number of independent variables in all evaluations in this study: sentence position (sentThe models are fit using both the default bobyqa and the gradient nlminb algorithms to work around convergence issues.
+2
+
+3
+
+A Cumulative N-gram Predictor
+
+Since n-gram frequencies can have such a dramatic impact on the contribution of hierarchic syntax, this study tests whether n-gram factors can be improved. Models include a measure of n-gram frequencies to capture the rarity of observed sequences. Readers fixate longer on less predictable lexemes than on more predictable lexemes, but the predictability of a lexeme depends on the preceding context. Therefore, it is common for psycholinguistic models to include a measure of n-gram predictability for each fixated word conditioned on its context, but unless probabilities for words between fixations are also included, the probabilities used in this calculation are
+
+1598
+
+

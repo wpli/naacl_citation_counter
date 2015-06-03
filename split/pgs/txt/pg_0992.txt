@@ -1,0 +1,26 @@
+6.1
+
+Optimizing  with a penalty
+a 1.2 ab 0
+
+Now consider the penalized objective (3). Ideally, ( ) would count the number of nonzero weights in  --or better, the number of arcs in E NCODE( ). But it is not known how to efficiently minimize the resulting discontinuous function. We give two approximate methods, based on the two methods above. Proximal gradient. Leaning on recent advances in sparse estimation, we replace this ( ) with a convex surrogate whose partial derivative with respect to each w is undefined at w = 0 (Bach et al., 2011). Such a penalty tends to create sparse optima. def A popular surrogate is an 1 penalty, ( ) = w | w |. However, 1 would not recognize that  is simpler with the features {ab, abc, abd} than with the features {ab, pqr, xyz}. The former leads to a smaller WFSA encoding. In other words, it is cheaper to add abd once abc is already present, as a state already exists that represents the context ab. We would thus like the penalty to be the number of distinct prefixes in the set of nonzero features, |{u   : (x   ) ux = 0}|, (8)
+
+ -0.6 b 0 aa 0 ba 0 bb 0
+
+Figure 2: Active set method, showing the infinite tree of all features for the alphabet  = {a, b}. The green nodes currently have non-zero weights. The yellow nodes are on the frontier and are allowed to become non-zero, but the penalty function is still keeping them at 0. The red nodes are not yet considered, forcing them to remain at 0.
+
+as this is the number of ordinary arcs in E NCODE( ) (see Appendix B.4). Its convex surrogate is ( ) =
+u x
+def
+
+2 ux
+
+(9)
+
+This tree-structured group lasso (Nelakanti et al., 2013) is an instance of group lasso (Yuan and Lin, 2006) where the string w = abd belongs to four groups, corresponding to its prefixes u = , u = a, u = ab, u = abd. Under group lasso, moving w away from 0 increases ( ) by |w | (just as in 1 ) for each group in which w is the only nonzero feature. This penalizes for the new WFSA arcs needed for these groups. There are also increases due to w's other groups, but these are smaller, especially for groups with many strongly weighted features. Our objective (3) is now the sum of a differentiable convex function (2) and a particular nondifferentiable convex function (9). We minimize it by proximal gradient (Parikh and Boyd, 2013). At each step, this algorithm first takes a gradient step as in section 6 to improve the differentiable term, and then applies a "proximal operator" to jump to 938
+
+a nearby point that improves the non-differentiable term. The proximal operator for tree-structured group lasso (9) can be implemented with an efficient recursive procedure (Jenatton et al., 2011). What if  is -dimensional because we allow all n-grams as features? Paul and Eisner (2012) used just this feature set in a dual decomposition algorithm. Like them, we rely on an active set method (Schmidt and Murphy, 2010). We fix abcd's weight at 0 until abc's weight becomes nonzero (if ever);7 only then does feature abc become "active." Thus, at a given step, we only have to compute the gradient with respect to the currently nonzero features (green nodes in Figure 2) and their immediate children (yellow nodes). This hierarchical inclusion technique ensures that we only consider a small, finite subset of all n-grams at any given iteration of optimization. Closed-form with greedy growing. There are existing methods for estimating variable-order ngram language models from data, based on either "shrinking" a high-order model (Stolcke, 1998) or "growing" a low-order one (Siivola et al., 2007). We have designed a simple "growing" algorithm to estimate such a model from a WFSA p. It approximately minimizes the objective (3) where ( ) is given by (8). We enumerate all n-grams w   in decreasing order of expected count (this can be done efficiently using a priority queue). We add w to W if we estimate that it will decrease the objective. Every so often, we measure the actual objective (just as in the gradient-based methods), and we stop if it is no longer improving. Algorithmic details are given in Appendices B.8­B.9.
+Paul and Eisner (2012) also required bcd to have nonzero weight, observing that abcd is a conjunction abc  bcd (McCallum, 2003). This added test would be wise for us too.
+7
+
+

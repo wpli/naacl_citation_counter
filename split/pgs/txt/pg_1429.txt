@@ -1,0 +1,101 @@
+A A
+
+A0 B
+
+of
+-.5
+
+.3
+
+.8
+
+B0
+.7
+
+B B
+.8 0 .8 0 0 .8 .8
+
+(9)
+n X
+
+y=ART(M1,M2)
+M1=man
+
+A
+
+0
+fi
+1 0 1 0 0 1
+
+of f
+i
+
+0
+
+ewi
+.3 0 .3 0 0 .3 .3
+
+M2=taxicab
+
+fi3 : (wi is on path, M1
+-.5 0 -.5 0 0 -.5 -.5 .7 0 .7 0 0 .7 .7
+
+is PER and M2 is VEH )
+
+A
+
+T
+w1="A"
+
+f1
+
+f e
+FCT
+
+[A man]M1 driving what appeared to be [a taxicab]M2
+
+[f : e]
+CNN
+
+...
+
+fi
+
+f
+
+...
+
+e ) Relations
+ewi (wi="driving")
+
+wi="driving"
+
+Figure 1: Example of input structure. Left: a sentence
+
+@` @ R of Yu et al. (2014), is provided by the recent work
+
+with target entities (M1 , M2 ) and annotations A (e.g. dependency tree). Right: outer product representation of a ~0 ~( 2  0) single word wi with an example of useful features .7 fi3 . -.5 .3 .8 .7 1 0 -.51 .3 0 .8 0 1
+
+(10) while keeping s(l, e e2 , Sof ;T )= s(l, ew expressiveness, the number param1, eters small. This is especially beneficial when con- i=1 sidering tasks with many labels, such as fine-grained n relation extraction. We demonstrate these advan- X (11) = Tl f tages on two relation extraction tasks: the well studied ACE 2005 dataset and the new ERE relation i=1 extraction task. We consider both coarse and finegrained relations, the latter of which has been largely unexplored in previous work.
+2
+i=1
+
+n X @` @` Factor-based Compositional Embedding =  f wi  Models (FCM) @T @R
+
+which reduces this complexity by using a tensor to transform the input feature vectors to a matrix transformation. The model is equivalent to treating the outer product between word embeddings and fea1 tures as input to a parameter tensor, thus 0 model pa1 rameters increase linearly with the number of fea0 0 tures. Yet this model also uses too many parameters 1 when a large number of features (e.g. over 1000) are used. This limits the applicability of their method to settings where there are a large number of training examples. For smaller training sets, the variance of their estimator will be high resulting in increased ~  0 We seek ~ ( to0)use  generalization error on test data. -.5 .3 .8 .7 1 0 1 0 0 1 many more features (based on rich annotations such as syntactic parsing and NER) and larger label sets, which further exacerbates the problem of overfitting. We propose a new method of learning interactions between engineered features and word embeddings by combining the idea of the outer product in FCM (Yu et al., 2014) with learning feature embeddings (Collobert et al., 2011; Chen and Manning, 2014).2 Our model jointly learns feature embeddings and a tensor-based classifier which relies on the outer product between features embeddings and word embeddings. Therefore, the number of parameters are dramatically reduced since features are only represented as low-dimensional embeddings, which alleviates problems with overfitting. The resulting model benefits from both approaches: conjunctions between feature and word embeddings allow model
+2
+
+We begin by briefly summarizing the FCM model proposed by Yu et al. (2014) in the context of relation extraction. In relation extraction, for a pair of mentions in a given sentence, the task is to determine the type of relation that holds between the two entities, if any. For each pair of mentions in a sentence, we have a training instance (x, y ); x is an annotated sentence, including target entity mentions M1 and M2 , and a dependency parse. We consider directed relations: for relation type Rel, y = Rel(M1 , M2 ) and y = Rel(M2 , M1 ) are different. FCM has a log-linear form, which defines a particular utilization of the features and embeddings. FCM decomposes the structure of x into single words. For each word wi , a binary feature vector fi is defined, which considers the ith word and any other substructure of the annotated sentence x. We denote the dense word embedding by ewi and the labelspecific model parameters by matrix Ty , e.g. in Figure 1, the gold label corresponds to matrix Ty where y =ART (M1 , M2 ). FCM is then given by: P (y |x; T )  exp(
+i Ty
+
+(fi  ewi ))
+
+(1)
+
+2 Collobert et al. (2011) and Chen and Manning (2014) also capture interactions between word embeddings and features by using deep convolutional networks with max-pooling or cube activate function, but they cannot directly express conjunctions of word embeddings and features.
+
+where  is the outer-product of the two vectors and is the `matrix dot product' or Frobenious inner product of the two matrices. Here the model parameters form a tensor T = [T1 : ... : T|L| ], which transforms the input matrix to the labels. The key idea in FCM is that it gives similar words (i.e. those with similar embeddings) with similar functions in the sentence (i.e. those with similar features) similar matrix representations. Thus, this model generalizes its model parameters across words with similar embeddings only when they share similar functions in the sentence. For the
+
+1375
+
+

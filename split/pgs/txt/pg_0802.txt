@@ -1,0 +1,22 @@
+p( w 1 | w 1 ) . . . . ¯ . Q . p( w j | w i ) p( w 1 | w 1 ) . . . . S . . p( y ( l ) | w 1 ) . . .
+
+3 Supervised Anchor Words
+Because the anchor algorithm scales so well compared to traditional probabilistic inference, we now unify the supervised topic models of Section 2 with the anchor algorithm discussed in Section 1. We do ¯ with an additional so by augmenting the matrix Q dimension for each metadata attribute, such as sentiment. We provide the geometric intuition in Figure 1. Picture the anchor words projected down to two dimensions (Lee and Mimno, 2014): each word is a point, and the anchor words are the vertices of a polygon encompassing every point. Every non-anchor word can be approximated by a convex combination of the anchor words (Figure 1, top). Now add an additional dimension as a column to ¯ Q (Figure 2). This column encodes the metadata specific to a word. For example, we have encoded sentiment metadata in a new dimension (Figure 1, bottom). Neutral sentiment words will stay in the plane inhabited by the other words, positive sentiment words will move up, and negative sentiment words will move down. For simplicity, we only show a single additional dimension, but in general we can add as many dimensions as needed to encode the metadata. In this new space some of the original anchor words may still be anchor words ("author"). Other words that were near the convex hull boundary in the unaugmented representation may become anchor words in the augmented representation because they capture both topic and sentiment ("anti-lock" vs. "lemon"). Finally, extreme sentiment words might become anchor words in the new higher-dimensional space because they are so important for explaining extreme sentiment values ("wonderful" vs. "awful"). 3.1 Words to Sentiment
+
+p( w j | w i ) p ( y ( l ) | w i )
+New column(s) encoding word-sentiment relationship
+
+Figure 2: We form a new column to capture the relationship between words and each sentiment level: per entry is the conditional probability of observing a sentiment level y (l) given an observation of the word wi . Adding all of ¯ to form an augmented matrix S . these columns to Q
+
+2
+
+Supervised Topics: Effective but Slow
+
+Topic models discover a set of topics A . Each topic is a distribution over the V word types in the corpus. Ai,t is the probability of seeing word i in topic t. Supervised topic models relate those topics with predictions of document metadata such as sentiment by discovering a vector of regression parameters µ that connects topics to per-document observations yd (Blei and McAuliffe, 2007). Blei and McAuliffe (2007) treat this as a regression: seeing one word with topic k in document d means that prediction of yd should be adjusted by µk . Given a document's distribution over topics z ¯d , the response yd is normally distributed with mean µ z ¯d .2 Typically, the topics are discovered through a process of probabilistic inference, either variational EM (Wang et al., 2009) or Gibbs sampling (BoydGraber and Resnik, 2010). However, these methods scale poorly to large datasets. Variational inference requires dozens of expensive passes over the entire dataset, and Gibbs sampling requires multiple Markov chains (Nguyen et al., 2014b).
+2 We are eliding some details in the interest of a more compact presentation. The topics used by a document, z ¯d , are based on per-token inference of topic assignments; this detail is not relevant to our contribution, and in Section 4.2 we use existing techniques to discover documents' topics.
+
+Having explained how a word is connected to sentiment, we now elaborates on how to model that connection using the conditional probability of sentiment given a particular word. Assume that sentiment is discretized into a finite set of L sentiment levels {y (1) , y (2) , . . . , y (L) } and that each document is assigned to one of these levels. We define a matrix S of size V × (V + L). The first V columns are ¯ and the L additional columns capture the same as Q the relationship of a word to each discrete sentiment
+
+748
+
+

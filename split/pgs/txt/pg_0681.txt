@@ -1,0 +1,43 @@
+Comparing Single- and Double-Graph Approaches Considering that the embedding-based measurement performs better, we only compare the results of single- and double-graph random walk using this measurement (rows (c) and (e)). It can be seen that the difference between them is not consistent in terms of slot induction and SLU model. For evaluating slot induction (AP and PR-AUC), the double-graph random walk (row (e)) performs better on both ASR and manual results, which implies that additionally integrating the lexical knowledge graph helps decide a more coherent and complete slot set since we can model the score propagation more precisely (not only slot-level but wordlevel information). However, for SLU evaluation (WAP and AF), the single-graph random walk (row (c)) performs better, which may imply that the slots carrying the coherent relations from the row (e) may not have good semantic decoder performance so that the performance is decreased a little. For example, double-graph random walk scores the slots local by use and expensiveness higher than the slot contacting, while the single-graph method ranks the latter higher. local by use and expensiveness are more important on this domain but contacting has very good performance of its semantic decoder, so the double-graph approach does not show the improvement when evaluating SLU models. This allows us to try an improved method of jointly optimizing the slot coherence and SLU performance in the future. 5.4.3 Relation Discovery Analysis To interpret the inter-slot relations, we output the slot-to-slot relations with highest scores from the best results (row (e) in Table 5.1) in Table 3, and the automatically constructed ontology is shown in Figure 6. It can be shown that the outputted interslot relations are reasonable and usually connect two important semantic slots in this restaurant domain. This proves that inter-slot relations help decide a coherent and complete slot set and enhance the interpretability of semantic slots. Therefore, from a practical perspective, developers are able to design the framework of dialogue systems more easily, and the development of SDS can be speeded up with less human effort. 627
+
+5.4.2
+
+Rank 1 2 3 4 5 6 7 8
+
+Relation locale by use, NN, food food, AMOD, expensiveness locale by use, AMOD, expensiveness seeking, PREP FOR, food food, AMOD, relational quantity desiring, DOBJ, food seeking, PREP FOR, locale by use food, DET, quantity
+
+Table 3: The top inter-slot relations learned from the training set of ASR outputs.
+
+PREP_FOR
+
+locale_by_use
+NN AMOD
+
+seeking
+PREP_FOR
+DOBJ
+
+food
+
+AMOD
+
+expensiveness
+
+AMOD
+
+desiring
+
+relational_quantity
+
+Figure 6: The automatically constructed domain-specific ontology based on Table 3.
+
+6
+
+Conclusion
+
+The paper proposes an approach of jointly considering inter-slot relations for slot induction to output a more coherent slot set, where two knowledge graphs, a slot-based semantic knowledge graph and a word-based lexical knowledge graph, are built and combined by a random walk algorithm. The automatically induced slots carry coherent and interpretable relations and can be used for training better SLU models of SDSs in an unsupervised fashion.
+
+Acknowledgments
+We thank Anatole Gershman for helpful discussions and anonymous reviewers for their useful comments. We are also grateful to MetLife's support. Any opinions, findings, and conclusions expressed in this publication are those of the authors and do not necessarily reflect the views of funding agencies.
+
+

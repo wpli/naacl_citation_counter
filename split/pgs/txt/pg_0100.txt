@@ -1,0 +1,63 @@
+1-gram 2-gram 3-gram 4-gram 5-gram Character
+
+t0 , w-2 , t0 , w-1 , t0 , w0 , t0 , w1 , t0 , w2 , t0 , w-1 , w0 , t0 , w0 , w1 , s(t0 ) , t0 , s(t0 ) t-1 , t0 , t-2 , t0 , t-1 , t0 , w-1 , t-1 , t0 , w0 t-1 , t0 , t1 , t-2 , t0 , t1 , , t-1 , t0 , t2 , t-2 , t0 , t2 t-2 , t-1 , t0 , t+1 , t-2 , t-1 , t0 , t2 , t-2 , t0 , t1 , t2 t-2 , t-1 , t0 , t1 , t2 t0 , pre1 (w0 ) , t0 , pre2 (w0 ) , t0 , suf1 (w0 ) , t0 , suf2 (w0 ) , t0 , cn (w0 ) , t0 , len(w0 )
+
+Dataset Language #sent Train #token #sent Dev. #token #sent Test. #token
+
+SPMRL Classical CTB5 Arabic Arabic Chinese 14.4k 15.4k 17.5k 451k 573k 442k 1.8k ­ 348 56.9k ­ 6.6k 1.8k 163 348 55.6k 7.9k 8.0k
+
+Table 2: Statistics of datasets. Morphologically Rich Languages (SPMRL) Shared Task 2013 (Seddah et al., 2013).5 We follow the official split for training, development and testing set. We use the core set of 12 POS categories provided by Marton et al. (2013). In the second Arabic dataset, the training set is a dependency conversion of the Arabic Treebank, which primarily includes Modern Standard Arabic (MSA) text. However, we test on a new corpus, which consists of classical Arabic text obtained from the Comprehensive Islamic Library (CIS).6 A native Arabic speaker with background in computational linguistics annotated the morphological segmentation and POS tags. This corpus is an excellent testbed for a joint model because classical Arabic may use rather different vocabulary from MSA, while their syntactic grammars are very similar to each other. Therefore incorporating syntactic information should be particularly beneficial to morphological segmentation and POS tagging. For Chinese, we use the Chinese Penn Treebank 5.0 (CTB5) and follow the split in previous work (Zhang and Clark, 2010). Table 2 summarizes the statistics of the datasets. For the SPMRL test set, we follow the common practice which limits the sentence lengths up to 70 (Seddah et al., 2013). For classical Arabic and Chinese, we evaluate on all the test sentences. 5.2 Generating Lattice Structures
+
+Table 1: POS tag feature templates. t0 and w0 denotes the POS tag and the word at the current position. t-x and tx denote left and right context tags, and similarly for words. s(·) denotes the score of the POS tag produced by the preprocessing tagger. The last row shows the "Character"-based features for Chinese. pre 1 (·) and pre 2 (·) denote the word prefixes with one and two characters respectively. suf 1 (·) and suf 2 (·) denote the word suffixes similarly. cn (·) denotes the n-th character in the word. len (·) denotes the length of the word, capped at 5 if longer.
+arc! consecutive sibling! grandparent!
+
+h
+
+m
+tri-siblings!
+
+h
+
+m
+
+s
+
+g
+
+h
+
+m
+
+grand-sibling!
+
+h
+
+m
+
+s
+
+t
+
+g
+
+h
+
+m
+
+s
+
+Figure 4: First- to third-order dependency parsing features. ure 4 shows the first- to third-order feature templates that we use in our model. We also use global features to capture the adjacent conjuncts agreement in a coordination structure, and the valency patterns for each POS category. Note that most dependency features are implicitly cross-task in that they include POS tag and segmentation information. For example, the standard feature involves the POS tags of the words on both ends of the arc.
+
+In this section we introduce the methodology for constructing candidate sets for segmentation and
+This dataset is originally provided by the LDC (Maamouri et al., 2004), specifically its SPMRL 2013 dependency instance, derived from the Columbia Catib Treebank (Habash and Roth, 2009; Habash et al., 2009) and extended according to the SPMRL 2013 extension scheme (Seddah et al., 2013). 6 This classical Arabic dataset is publicly available at http: //farasa.qcri.org/
+5
+
+5
+5.1
+
+Experimental Setup
+Datasets
+
+We evaluate our model on two Arabic datasets and one Chinese dataset. For the first Arabic dataset, we use the dataset used in the Statistical Parsing of 46
+
+

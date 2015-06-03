@@ -1,0 +1,22 @@
+categories. We supplemented this data with gay marriage posts from 4forums, but excluded the discussion threads in our dialog corpus. From this data, we extracted the LIWC categories most frequent nouns, verbs and adjectives. For the verbs category, we excluded the verbs present in the NLTK stop word list. We retained only semantically rich categories such as Biological Processes, Causation, Cognitive Processes, Humans, Negative Emotion, Positive Emotion, Religion, Sexual, and Social Processes. The score for this set was the LIWC category overlap count across pairs for each category. ROUGE Scores. ROUGE is a family of metrics to determine the quality of a summary by comparing it to other ideal summaries (Lin, 2004). It is based on a number of overlapping units such as n-gram, word sequences, and word pairs. This feature includes all of the rouge f-scores available via the package at https://pypi.python.org/pypi/pyrouge/0.1.0. 3.2 Results Our aim is to predict the similarity among repeated arguments across many discussions in online social and political debate forums, a task we have dubbed ARGUMENT FACET SIMILARITY (AFS). Given the CENTRAL PROPOSITIONS from the CP detector (see Fig. 2a), we need to train an argument FACET inducer. We define AFS as a regression problem and evaluate support vector regression and linear regression for 10-fold cross validation using the Weka machine learning toolkit (Hall et al., 2005).
+Classifier SMO Linear Regression RMS 1.0208 0.9996 MAE 0.8019 0.8003 R 0.532 0.540
+
+Row 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+
+Feature Set NGRAM (N) UMBC (U) LIWC (L) DISCO (D) ROUGE (R) N-U N-L N-R N-D U-R U-L U-D N-L-R U-L-R N-L-R-D N-L-R-U N-L-R-D-U
+
+R 0.39 0.46 0.32 0.33 0.34 0.47 0.45 0.42 0.41 0.48 0.51 0.45 0.48 0.53 0.50 0.54 0.54
+
+MAE 0.90 0.86 0.92 0.93 0.91 0.85 0.86 0.88 0.89 0.84 0.83 0.86 0.84 0.81 0.83 0.80 0.80
+
+RMS 1.09 1.06 1.13 1.12 1.12 1.05 1.06 1.08 1.08 1.04 1.02 1.06 1.04 1.00 1.03 1.00 1.00
+
+Table 3: Results for Different Individual Features and Feature Combinations. line (Row 2). It is interesting that Ngram alone outperforms distributional measures (which Conrad & Wiebe found most helpful) as well as Rouge (which contains metrics insensitive to linear adjacency). Table 3, Row 15, shows that the best correlation that is achievable without UMBC is the combination of Ngram, LIWC, ROUGE and DISCO (NLRD). This combination significantly improves over the UMBC baseline of 0.46 to 0.50 (paired t-test, p < .05). We then tested combinations of of features to determine which feature sets are complementary. LIWC + NGRAM is significantly different than NGRAM alone ( p < 0.01), and ROUGE + NGRAM is significantly different than NGRAM alone ( p = 0.03), but DISCO does not add anything ( p = 0.2). This shows that LIWC and ROUGE features complement Ngram features. Other combinations of interest are NGRAM + LIWC (Row 7) which amazingly performs as well as UMBC while UMBC includes sentence alignment, a model of negation, and distributional measures (Han et al., 2013). This suggests that AFS is clearly a different task that STS. Additionally we also combined our proposed set of features with UMBC. A comparison of Row 15 (our feature set) with Rows 16 and 17 of Table 3 where we combine our features with UMBC shows that this improves the correlation further, from the UMBC baseline of 0.46 to 0.54 (p < 0.01.)
+
+RMS: Root Mean Squared Error, MAE: Mean Absolute Error, R: Correlation Coefficient.
+
+Table 2: Support Vector and Linear Regression.
+
+Table 2 shows that the results for support vector regression are worse than the linear regression model using our proposed features combined with UMBC, hence we focus hereon on linear regression. Table 3 provides the correlations, MAE, and RMS values for models produced using various sets of features. We considered two baselines, simple Ngram overlap and the off-the-shelf UMBC STS metric (Han et al., 2013). In general, we found that Ngram overlap (Row 1) performed best alone of our features, but falls short of the UMBC base435
+
+

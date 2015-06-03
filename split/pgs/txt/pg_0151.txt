@@ -1,0 +1,59 @@
+affix word Dataset prefix suffix space-prefix space-suffix multi-word whole-word mid-word CCAT 10 74.6 71.0 71.2 66.0 65.8 48.0 70.0 CCAT 50 61.9 59.6 57.0 51.0 51.2 35.4 61.0 (a) Single Domain affix word Dataset prefix suffix space-prefix space-suffix multi-word whole-word mid-word Guardian1 41.6 36.7 41.9 38.1 32.2 38.1 37.8 Guardian2 31.0 26.9 29.7 27.0 23.2 26.8 27.2 (b) Cross-Domain
+
+punct beg-punct mid-punct end-punct 60.2 35.4 56.2 39.7 12.4 36.5
+
+punct beg-punct mid-punct end-punct 43.5 46.1 37.3 33.6 33.5 24.5
+
+Table 5: Accuracy of AA classifiers trained on each of the character n-gram categories. The top four accuracies for each dataset are in bold. Single Domain (CCAT) 10 8 6 4
+3 4 2 1
+
+CCAT 10 CCAT 50
+6 5 6 5
+
+10 9 8 7
+
+4 2
+
+2 prefix suffix
+
+spaceprefix
+
+spacesuffix
+
+multiword
+
+wholeword
+
+midword
+
+begpunct
+
+midpunct
+
+endpunct
+
+Cross Domain (Guardian) 10 8 6 4 2 prefix suffix spaceprefix spacesuffix multiword wholeword midword
+4.5 3.2
+
+Guardian1 Guardian2
+6.7 8 6.4 5.5 4.4 3.9
+
+9.3 8.5 6.6 6.2
+
+8.3 6.6
+
+5.6 8 3.8 2 2.9 2.2
+
+begpunct
+
+midpunct
+
+endpunct
+
+Figure 1: Average rank of the performance of each n-gram category on the single-domain CCAT tasks (top) and the cross-domain Guardian tasks (bottom).
+
+most discriminative. Table 5 shows the accuracy of each type of n-gram for each of the different corpora. Table 5(a) shows that the top four categories for single-domain AA are: prefix, suffix, space-prefix, and mid-word. These four categories have the best performance on both CCAT 10 and CCAT 50. In contrast, Table 5(b) shows that the top four categories for cross-domain AA are: prefix, space-prefix, beg97
+
+punct, and mid-punct. For both single-domain and cross-domain AA, prefix and space-prefix are strong features, and are generally better than the suffix features, perhaps because authors have more control over prefixes in English, while suffixes are often obligatory for grammatical reasons. For cross-domain AA, beg-punct and midpunct are the top features, likely because an author's
+
+

@@ -1,0 +1,46 @@
+method I NSTANCE
+ASSOC gi ASSOC ti ASSOC gi para ASSOC ti para
+
+BLEU
+
+METEOR
+
+AMT
+
+0.125 0.172 0.187 0.184 0.197
+
+0.029 0.033 0.036 0.034 0.036
+
+45% 55% 45% 55%
+
+N/A
+
+are identified as figurative. Table 3 shows the distribution over different types of figurative captions. Creative Language Classifier: Using the small set of labels described above, we train a simple binary classifier to identify captions with creative language.8 Using this classifier, we can control the degree of literalness or creativity in generated captions. Based on 5-fold cross-validation, the classifier performs with 77% precision and 43% recall. Importantly, a high-precision and low-recall classifier suffices our purpose. It is because in the context of creative captioning and creative paraphrasing presented below, we only need to detect some figurative captions, not all. 7.1 Creative Image Captioning Given a query image q , we describe it with the most appropriate figurative caption. We propose the AS SOC creative approach that alters the ASSOC approach (§3) to return a figurative caption from the candidate pool, excluding literal captions. 7.2 Creative Visual Paraphrasing Given a query image q and its original caption c, we rephrase c to a more creative and inspirational caption that still describes q . We use the PARAcreative approach that changes our automatic visual paraphrasing algorithm (§5), by retrieving only figurative captions.
+
+ing visual paraphrases for image captioning. The superscripts represent the image feature used in the reranking step; gi: GIST; ti: Tinyimage. The AMT column shows the percentages of captions preferred by human as of better visual relevance, in pairwise comparisons. The improvement of ASSOCpara over ASSOC is significant at p < 0.002 for BLEU, and p < 0.03 for METEOR with two tailed t-test.
+
+Table 8: Automatic and human evaluation of exploit-
+
+paraphrase, A(q, Ci ) = (q, Nci  Npi ) (3)
+
+6
+
+Experiments: Visual Paraphrasing Improves Image Captioning
+
+The experimental configuration basically follows §4. We compare ASSOCpara , the visual-paraphrase augmented approach, to the vanilla ASSOC approach. The image feature setting is the one with which the ASSOC approach performs best. Both approaches use the GIST+Tinyimage feature to prepare candidate captions, then use either the GIST or Tinyimage feature for reranking. Table 8 shows that the ASSOCpara approach significantly improves the vanilla ASSOC method under both automatic and human evaluation. As a reference, the first row shows the performance of the I NSTANCE method (§4). The ASSOC method significantly improves over the I NSTANCE method. On a similar vein, the ASSOCpara method further improves over the ASSOC method, as automatic paraphrases provide a better visual neighborhood. This improvement is remarkable since the paraphrasing association is added automatically without any supervised training. This demonstrates the usefulness of the bipartite association structure of our corpus.
+
+8
+
+Experiments: Creative Image Captioning and Paraphrasing
+
+7
+
+Image Captioning with Creativity
+
+Naturally existing captions reflect everyday narratives, which in turn reflect figurative language use such as metaphor, simile, and personification. To gain better insights, one of the authors manually categorized a set of 1000 random captions. About 17% 510
+
+8.1 Creative Captioning We compare the ASSOCcreative approach to the vanilla ASSOC approach. With the ASSOC approach, the top-rank caption is usually literal. Both approaches use the GIST+Tinyimage feature for preparing candidate captions, and the Tinyimage feature for reranking, which is the best setting for the ASSOC approach (§4). Similarly to §4, we sample 200 test images from our corpus, and use AMT to compare two algorithms in terms of visual relevance and creativity separately. For creativity, we ask turkers to choose one
+We use a random forest classifier with features including words indicating reasoning (but, could, that), generality (never, always), caption length, abstract nouns (life, and hope), and whether the caption is a known idiom or quotation.
+8
+
+

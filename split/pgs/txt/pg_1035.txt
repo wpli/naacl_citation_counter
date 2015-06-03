@@ -1,0 +1,19 @@
+0. 7 0. 6 0. 5 0. 4 0. 3 0. 2 0. 1 1 2 3 4 5 Number of prototypes 6
+
+ENC comp 1 ENC comp 2 EVPC comp 1 GNC comp 1 GNC comp 2
+
+Figure 1: The effect of the number of prototypes on the results with MSSG
+
+tions, they surpass the state-of-the-art methods for ENC and EVPC; in the case of GNC, the bestperforming method (WORD 2 VEC with d = 500 and C-S KIP) roughly matches the state-of-the-art. Note that in each case, the state-of-the-art is achieved using varying levels of supervision over labelled data (ENC and EVPC) or language-specific preprocessing (GNC), whereas the word embedding methods use no labelled data. As such, the answer to RQ1 would appear to be a resounding yes. Looking to RQ2, the models are remarkably insensitive to hyper-parameter optimisation for EVPC, but there are slight deviations in the results for ENC and GNC. Having said that, they are largely between the different word embedding approaches, and the results for a given approach under different parameter settings is relatively stable. A large part of the cause of the drop in results and greater parameter sensitivity over GNC is the lower token frequencies, through a combination of the Wikipedia corpus being markedly smaller and our naive tokenisation strategy having low recall over German due to the richer morphology. As such, the answer would appear to be a tentative "relatively insensitive, assuming high token frequencies". Finally, looking to RQ3, there was little separating WORD 2 VEC and MSSG over ENC, but over the other two datasets, WORD 2 VEC had a clear advantage. Given the high levels of polysemy observed in high frequency English verb particle construc981
+
+tions (Salehi et al., 2014a), this result for EVPC was particularly surprising, and suggests that, at least under our two basic forms of composition, multiprototype word embeddings are at best equal to, and in many cases, inferior to, single-prototype word embeddings. According to the results, the string similarity approach complements all word-embedding approaches. We hypothesise that this is because it is not based on any corpus, and is thus not biased by the frequency of token instances in the corpus. In Table 1, the number of embeddings for MSSG was set to 2 prototypes, based on the default recommendations of Neelakantan et al. (2014). To investigate the impact of this parameter on our results, we retrained MSSG over the range [1, 6] and reran our experiments for each set of embeddings over the three datasets (without string similarity, to isolate the effect of the number of embeddings), as shown in Figure 1. For both English datasets (ENC and EVPC), setting the number of prototypes to a value higher than 2 boosts the results slightly, with 5 prototypes appearing to be the optimal value. For the German dataset (GNC), on the other hand, the best results are actually achieved for a single prototype. Further research is required to better understand this effect.
+
+Correlation (r)
+
+6
+
+Conclusions
+
+We presented the first approach to using word embeddings to predict the compositionality of MWEs. We showed that this approach, in combination with information from string similarity, surpassed, or was competitive with, the current state-of-the-art on three compositionality datasets. In future work we intend to explore the contribution of information from word embeddings of a target expression and its component words under translation into many languages, along the lines of Salehi et al. (2014b). Acknowledgements We thank the anonymous reviewers for their insightful comments and valuable suggestions. NICTA is funded by the Australian government as represented by Department of Broadband, Communication and Digital Economy, and the Australian Research Council through the ICT Centre of Excel-
+
+

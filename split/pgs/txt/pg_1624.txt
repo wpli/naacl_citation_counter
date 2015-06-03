@@ -1,0 +1,51 @@
+Method Name Average Number of Words XKCD First Letter Mnemonic 4
+
+Average Number of Characters 31.2
+
+AVG LM Capacity Score -62.42 1
+
+Sample Passwords fees wesley inmate decentralization photo bros nan plain embarrass debating gaskell jennie It makes me think of union pacific resource said it looks like most commercial networks . Some companies keep their windows rolled down so you don't feel connected to any community . Contains extreme violence and it was a matter of not only its second straight loss . Parking and utilities have been searching for a third straight road win . It was the same girl and now a law professor in the former east german town . I know a man who said he was chief of staffs in a real and deep conversation . Fox news networks are seeking views from downtown streets . The review found a silver tree through documents and artifacts . These big questions are bothering me a bit stronger . Joanna kissing verified soprano finally reside Diversity inside replied retreats or colors justified Surprise celebrity without the dragging allison throughout
+
+15
+
+87.7
+
+-61.20
+
+2 · 1051
+
+All Letter Method
+
+11.8
+
+70.8
+
+-58.83
+
+3 · 1056
+
+Frequency Method
+
+9.7
+
+55.5
+
+-52.88
+
+6 · 1014
+
+Poetry
+
+7.2
+
+52.7
+
+-73.15
+
+106
+
+Table 1: Comparison of methods that convert system-assigned 60-bit strings into English word sequences. Average word lengths range from 4 (XKCD) to 15 (First Letter Mnemonic). Average character lengths include spaces. LM score refers to the log probability assigned by a 5-gram English language model trained on the Gigaword corpus. Capacity tells how many English word sequences are available for an individual 60-bit input string.
+
+1570
+
+

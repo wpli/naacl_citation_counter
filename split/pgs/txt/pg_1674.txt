@@ -1,0 +1,35 @@
+Text: POS: Address:
+
+I PRP O
+
+'m VBP O
+
+not RB O
+
+Mr. NNP B-ADDR
+
+Lebowski NNP L-ADDR
+
+; : O
+
+you PRP O
+
+'re VBP O
+
+Mr. NNP B-ADDR
+
+Lebowski NNP L-ADDR
+
+. . O
+
+Figure 1: Automatic re-annotation of dialogue data for address term sequences Feature Lexical POS Case Constituency parse Dependency parse Location Punctuation Second person pronoun Description The word to be tagged, and its two predecessors and successors, wi-2:i+2 . The part-of-speech of the token to be tagged, and the POS tags of its two predecessors and successors. The case (lower, upper, or title) of the word to be tagged, and its two predessors and successors. First non-NNP ancestor node of the word wi in the constituent parse tree, and all leaf node siblings in the tree. All dependency relations involving wi . Distance of wi from the start and the end of the sentence or turn. All punctuation symbols occurring before and after wi . All forms of the second person pronoun within the sentence.
+
+each NNP tag sequence that contains the name of the addressee, we label it as an address, using BILOU notation (Ratinov and Roth, 2009): Beginning, Inside, and Last term of address segments; Outside and Unit-length sequences. An example of this tagging scheme is shown in Figure 1. Next, we train a classifier (Support Vector Machine with a linear kernel) on this automatically labeled data, using the features shown in Table 2. For simplicity, we do not perform structured prediction, which might offer further improvements in accuracy. This classifier provides an initial, partial solution to the first problem, distinguishing second-person addresses from references to other individuals (for name references only). On heldout data, the classifier's macro-averaged F-measure is 83%, and its micro-averaged F-measure is 98.7%. Class-by-class breakdowns are shown in Table 3. 4.1 Address term lexicons
+
+Table 2: Features used to identify address spans
+
+a lexicon of placeholder names, which can only be used in isolation. We now present a tagging-based approach for performing each of these subtasks. We build an automatically-labeled dataset from the corpus of movie dialogues provided by DanescuNiculescu-Mizil and Lee (2011); see Section 6 for more details. This dataset gives the identity of the speaker and addressee of each line of dialogue. These identities constitute a minimal form of manual annotation, but in many settings, such as social media dialogues, they could be obtained automatically. We augment this data by obtaining the first (given) and last (family) names of each character, which we mine from the website rottentomatoes.com. Next, we apply the CoreNLP part-of-speech tagger (Manning et al., 2014) to identify sequences of the NNP tag, which indicates a proper noun in the Penn Treebank Tagset (Marcus et al., 1993). For 1620
+
+To our surprise, we were unable to find manuallylabeled lexicons for either titles or placeholder names. We therefore employ a semi-automated approach to construct address term lexicons, bootstrapping from the address term tagger to build candidate lists, which we then manually filter. Titles To induce a lexicon of titles, we consider terms that are frequently labeled with the tag BADDR across a variety of dialogues, performing a binomial test to obtain a list of terms whose frequency of being labeled as B-ADDR is significantly higher than chance. Of these 34 candidate terms, we manually filter out 17, which are mainly common first names, such as John; such names are frequently labeled as B-ADDR across movies. After this manual filtering, we obtain the following titles: agent, aunt, captain, colonel, commander, cousin, deputy, detective, dr, herr, inspector, judge, lord, master, mayor, miss, mister, miz, monsieur, mr, mrs, ms, professor, queen, reverend, sergeant, uncle.
+
+

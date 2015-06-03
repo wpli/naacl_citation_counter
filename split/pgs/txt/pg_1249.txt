@@ -1,0 +1,29 @@
+(e|f ) =
+pi
+
+(e|pi )  (pi |f )
+
+(2)
+
+Pw (f |e, a) =
+pi
+
+Pw (f |pi , a1 )  Pw (pi |e, a2 ) (3) Pw (e|pi , a2 )  Pw (pi |f, a1 ) (4)
+pi
+
+Pw (e|f, a) =
+
+Here a1 is the alignment between phrases f (source) and pi (pivot), a2 , the alignment between pi and e (target) and a the alignment between e and f. Note that the lexical translation probabilities are calculated in the same way as the phrase probabilities. Our results might improve even more if we used more sophisticated approaches like crosslanguage similarity method or the method which uses pivot induced alignments (Wu and Wang, 2007). 3.4 Phrase Table Combination There are 3 ways to combine phrase tables: linear interpolation, fillup interpolation and multiple decoding paths. Linear interpolation is performed by merging the tables and computing a weighted sum of phrase pair probabilities from each phrase table giving a final single table. Typically, the direct phrase table is given a significantly higher weight than the pivot based table. (f |e) = 0  direct (f |e) +
+li
+
+Multiple Decoding Paths (MDP) method of Moses which uses all the tables simultaneously while decoding ensures that each pivot table is kept separate and translation options are collected from all the tables. Increasing the number of pivot languages slows the decoding process drastically but the existence of powerful machines negates this limitation. For the sake of completeness we also experimented with a combination of both, linear and MDP, methods by: Firstly, combining the pivot based phrase tables into a single table using equation 5 (using the ratio of BLEU scores as interpolation weights) followed by using this table to support the direct phrase table by MDP. Note that the right way would be to use the BLEU scores on the tuning set but our objective was to show that even in the best case scenario (also called Oracle7 scenario) this method is still inferior compared to only using the MDP method. 3.5 Descriptions of Experiments Our experiments were centered around Phrase Based SMT (PBSMT). We used the open source Moses decoder (Hoang et al., 2007) package (including Giza++) for word alignment, phrase table extraction and decoding for sentence translation. We also used the Moses scripts for linear and fillup interpolation along with the multiple decoding paths (MDP) setting (by modifying the moses.ini files). We performed MERT (Och, 2003) based tuning using the MIRA algorithm. We used BLEU (Papineni et al., 2002) as our evaluation criteria and the bootstrapping method (Koehn, 2004) for significance testing. For the sake of comparison with previous methods, we experimented with sentence translation strategy (Utiyama and Isahara, 2007) using 10 as the n-best list size for intermediate and target language translations. The experiments we performed are given below. Each experiment involves either the creation of a phrase tables or combination of phrase tables. We tune, test and evaluate these tables or combinations. 1. A src (source) to tgt (target) direct phrase table. 2. For piv in Pivot Languages Set; the set of pivot languages to be used (Tables 1 and 2):
+7 By Oracle scenario we mean that we already know the performance on the test sets and exploit this information to "unfairly" boost the translation scores.
+
+li  li (f |e) li = 1 (5)
+li
+
+subject to 0 +
+
+Typically 0 is 0.9 (Wu and Wang, 2009) and the pivot languages are collectively given a weight of 0.1. li (f |e) is the inverse translation probability for language li . In our experiments we set the 's according to the ratio of the BLEU scores, on the test set, of the translations using the individual phrase tables. It is possible to learn optimal weights but this requires a collection of reference phrase pairs which would not be readily available in a resource constrained scenario. Fillup interpolation does not modify phrase probabilities but selects phrase pair entries from the next table if they are not present in the current table. The priority of the phrase tables should be specified which we do by ranking them according to the BLEU scores on a test set. 1195
+
+

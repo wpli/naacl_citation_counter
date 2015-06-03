@@ -1,0 +1,24 @@
+3.3
+
+Constraints
+
+Finally, we describe the soft constraints used by label regularization. Each constraint will apply to a (possibly overlapping) subset of users from the unlabeled Twitter data. For all constraints below, we only include the constraint for consideration if at least 1,000 unlabeled Twitter users are matched. For example, if we only have 500 users from a county, we will not use that county's demographics as a constraint. This is to ensure that there is sufficient unlabeled data for learning. We consider three classes of constraints: County constraints (cnt): The U.S. Census produces annual estimates of the ethnicity and age demographics for each county. We use the most recent decennial census (2010) to compute the proportion of each county that is below and above 25 years old (to match the labels of the annotated data). We additionally use the 2012 updated estimates of ethnicity by county, restricting to Asian, Black, Latino, and White. Each constraint, then, is applied to the users assigned to that county in the unlabeled data. For example, there are 46K unlabeled users from Cook County, which the Census estimates as 45% White. We consider 3,000 total counties as constraints, of which roughly 500 are retained for consideration after filtering those that match fewer than 1,000 users. Name constraints (nam): Silver and McCanc (2014) recently demonstrated how a person's first name can often indicate their age. The Social Security Administration reports the frequencies of names given to children born in a given year,3 and its actuarial tables4 estimate how many people born in a given year are still alive. From these data, one can estimate the age distribution of people with a given name. For example, the median age of someone named "Brittany" is 23. With this approach, we can assign constraints indicating the fraction of people with a given name that are above and below 25 years old. For each user in the unlabeled Twitter data, we parse the "name" field of the profile, assuming that the first token represents the first name. Constraints are assigned to users with matching names. We
+http://www.ssa.gov/oact/babynames/ 4 http://www.ssa.gov/oact/NOTES/as120/ LifeTables_Tbl_7.html
+3
+
+consider more than 50K total name constraints, of which we retain 175 that match a sufficient number of users. For example, there are roughly 1,600 unlabeled users with the first name Katherine; the constraint specifies that 86% of them are under 25. Follower constraints (fol): Our final type of constraint uses Twitter accounts and hashtags strongly associated with a class label. The constraint applies to users that follow such exemplar accounts or use such hashtags. We consider two sources of such constraints. For age and race, we download demographic data for 1K websites from Quantcast.com, an audience measurement company that tracks the demographics of visitors to millions of websites (Kamerer, 2013). We then identify the Twitter accounts for each website. For example, one constraint indicates that 12% of Twitter users who follow "oprah" are Latino. For political constraints, we manually identify 18 Twitter accounts or hashtags that are strongly associated with either Democrats or Republicans.5 The constraint specifies that 90% of users that follow one of these accounts (or use one of these hashtags) are affiliated with the corresponding party. (We omit constraints use to construct the labeled data for the politicianfollower data.)
+
+4
+
+Label Regularization
+
+Our goal is to learn a classification model using the unlabeled Twitter data and the constraints described above. The idea of label regularization is to define an objective function that enforces that the predicted label distribution for a set of unlabeled data closely matches the expected distribution according to a constraint. We select multinomial logistic regression as our classification model. Given a feature vector x, a class label y , and set of parameter vectors  = {y1 . . . yk } (one vector per class), the conditional distribution of y given x is defined as follows: p (y |x) =
+5
+
+exp(y · x) y exp(y · x)
+
+For Democrats: thedemocrats, wegoted, dccc, collegedems, dennis kucinich, sensanders, repjohnlewis, keithellison, #p2. For Republicans: gop, nrsc, the rga, repronpaul, senrandpaul, senmikelee, repjustinamash, gopleader, #tcot
+
+188
+
+

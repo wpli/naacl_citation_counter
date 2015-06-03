@@ -1,0 +1,20 @@
+Expanding Paraphrase Lexicons by Exploiting Lexical Variants
+
+
+Atsushi Fujita Pierre Isabelle National Institute of Information and Communications Technology 3-5 Hikaridai, Seika-cho, Souraku-gun, Kyoto, 619-0289, Japan atsushi.fujita@nict.go.jp  National Research Council Canada 1200 Montreal Road, Ottawa, Ontario, K1A 0R6, Canada Pierre.Isabelle@nrc.ca Abstract
+sure substantial coverage along with high accuracy despite the natural tension between these factors. Among the different types of language resources, monolingual corpora1 offer the largest coverage, but the quality of the extracted candidates is generally rather low. The difficulty lies in the manner of distinguishing paraphrases from expressions that stand in different semantic relations, e.g., antonyms and sibling words, using only the statistics estimated from such corpora. In contrast, highly accurate paraphrases can be extracted from parallel or comparable corpora, but their coverage is limited owing to the limited availability of such corpora for most languages. This study aims to improve coverage while maintaining accuracy. To that end, we propose a method that exploits the generality exhibited by pairs of lexical variants. Given a seed set of paraphrase pairs, our method first induces paraphrase patterns by generalizing not only identical word forms (Fujita et al., 2012) but also pairs of lexical variants. For instance, from a seed pair (1a), a pattern (1b) is acquired, where the pair of lexical variants ("amendment", "amending") and the shared word form "regulation" are generalized. (1) a. amendment of regulation  amending regulation b. X :ment of Y :  X :ing Y : With such patterns, new paraphrase pairs that would have been missed using only the surface forms are extracted from a monolingual corpus. Obtainable pairs can include those comprising words that are
+The term "monolingual corpora" in this study refers to monolingual non-parallel corpora, unless otherwise explicitly noted. As reviewed in Section 2.1.2, monolingual parallel corpora have also been used as a source of paraphrases.
+1
+
+This study tackles the problem of paraphrase acquisition: achieving high coverage as well as accuracy. Our method first induces paraphrase patterns from given seed paraphrases, exploiting the generality of paraphrases exhibited by pairs of lexical variants, e.g., "amendment" and "amending," in a fully empirical way. It then searches monolingual corpora for new paraphrases that match the patterns. This can extract paraphrases comprising words that are completely different from those of the given seeds. In experiments, our method expanded seed sets by factors of 42 to 206, gaining 84% to 208% more coverage than a previous method that generalizes only identical word forms. Human evaluation through a paraphrase substitution test demonstrated that the newly acquired paraphrases retained reasonable quality, given substantially high-quality seeds.
+
+1
+
+Introduction
+
+One of the characteristics of human languages is that the same semantic content can be expressed using several different linguistic expressions, i.e., paraphrases. Dealing with paraphrases is an important issue in a broad range of natural language processing (NLP) tasks (Madnani and Dorr, 2010; Androutsopoulos and Malakasiotis, 2010). To adequately and robustly deal with paraphrases, a large-scale knowledge base containing words and phrases having approximately the same meaning is indispensable. Thus, the task of automatically creating such large-scale paraphrase lexicons has been drawing the attention of many researchers (see Section 2 for details). The challenge is to en-
+
+630
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 630­640, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

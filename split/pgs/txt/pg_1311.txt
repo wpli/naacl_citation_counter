@@ -1,0 +1,26 @@
+N EWSWIRE T WITTER S POKEN Q UERIES
+
+Spielberg took the helm of this big budget live action project with Robin Williams playing an adult Peter and Dustin Hoffman as the dastardly Captain Hook. Rooofiii Oooooo, didn't think ppl<3the movie as much as me, this movie will always b the peter pan story2me #robin #williams #hook I loved that movie... Uhm... You know, Hook. With Robin Williams, uh. peter pan williams movie
+Table 1: Examples from source (top row) and target domains (bottom rows)
+
+spelling variations with the standard form (youuuuuuuu  you), which reduces the vocabulary size. For languages where no such normalization dictionary is available, we use word clusterings based on Brown clusters (Brown et al., 1992) to generalize tags from unambiguous words to previously unseen words in the same class.
+C LUSTER 01011110 01011110 01011110 01011110 01011110 01011110 01011110 T OKEN offish alreadyyy finali aleady previously already recently TAG  D ADJ ??? ??? ??? ADV ADV ADV P ROJ . TAG -- ADV ADV ADV -- -- --
+
+2.2
+
+Unlabeled data
+
+Figure 1: Example of a Brown cluster with unambiguous tokens, as well as projected tags for new tokens (tokens marked "--" are unchanged in D ).
+
+For each domain and language, given dictionary D, we extract unambiguous sentences/tweets. User names and URLs are assumed to be nouns. If all words are unambiguous according to the dictionary, we include the sentence/tweet in our training data. For hashtags on Twitter, we remove the "#" sign and check the remainder against the dictionary. We exclude tweets that only contain users and URLs. The unambiguous subsets of the unlabeled data represent very biased samples of the various domains. The ratio of unambiguous English tweets, for example, is only about 0.012 (or 1 in 84), and the distribution of tags in the Twitter data set is heavily skewed towards nouns, while several other labels are under-represented. Twitter We collect the unlabeled data from the Twitter streaming API.3 We collected 57m tweets for English, 8.2m for Spanish, 4.1m for Portuguese, and 0.5m for Dutch. We do not perform sentence splitting on tweets, but take them as unit sequences. Spoken language We use the Switchboard corpus of transcribed telephone conversations (Godfrey et al., 1992), sections 2 and 3, as well as the English section of EuroParl (Koehn, 2005) and CHILDES (MacWhinney, 1997). We removed all meta-data and inline annotations (gestures, sounds, etc.), as well as dialogue markers. The final joint corpus contains transcriptions of 570k spoken sentences. Search queries For search queries, we use a combination of queries from Yahoo4 and AOL. We only use the search terms and ignore any additional information, such as user ID, time, and linked URLs. The resulting data set contains 10m queries.
+3 4
+
+In particular, to extend the dictionary D to D using clusters, we first run clustering on the unlabeled data T , using Brown clustering.2 We then assign to each unambiguous word in the cluster its tag from dictionary D. For all remaining tokens in the same cluster, we assign them the most frequently observed tag in the cluster, provided that label occurred at least twice as often as the second most frequent one, and the token itself was not already in Wiktionary. As an example, consider the cluster in Figure 1. Since three tokens were unambiguously tagged as ADV in the original dictionary (previously, already, recently), we project ADV to all tokens in the cluster that were not already in D (here: alreadyyy, finali, aleady), and finally add all words to D . The token offish remains an ADJ.
+https://github.com/percyliang/ brown-cluster
+2
+
+https://github.com/saffsd/langid.py http://webscope.sandbox.yahoo.com/
+
+1257
+
+

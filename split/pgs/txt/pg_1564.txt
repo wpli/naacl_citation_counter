@@ -1,0 +1,64 @@
+that the selected objects are varied with the aim of generating logically consistent descriptions. Constraint (4) avoids empty descriptions, by enforcing that at least one clip art object pair is selected. Constraint (5) ensures that an object cannot appear in the same pair twice, whereas constraint (6) requires that at most one pair can be selected for a given rank k. We also enforce the selection of different pairs of objects (constraint (7)) at contiguous ranks (constraint (8)).
+sS,t S
+
+Surface realization The ILP selects all description-worthy pairs of clip art objects for a scene. Using the rules presented in Table 1 we create visual encodings for them (see Table 2, source side), and finally translate them into natural language using a Phrase-based SMT engine (Koehn et al., 2003). Specifically, given a source visual expression f, our aim is to find an equivalent target ^ that maximizes the natural language description e posterior probability: ^ = argmax P(e|f) e
+e
+
+
+
+yst 1 = 1
+
+(4) (5) (6) (7) ystk (8)
+
+(12)
+
+stk,s==t , ystk = 0 k , st , k=1,..,S-1 ,
+sS,t S
+
+
+
+ystk  1;
+
+Most recent SMT work models the posterior P(e|f) directly (Och and Ney, 2002) using a log-linear combination of several models where: P(e|f) = exp K k=1 k hk (f, e) e exp K k=1 k hk (f, e ) (13)
+
+kS
+
+ (ystk + ytsk )  1
+sS,t S
+
+
+
+ystk+1 
+
+sS,t S
+
+
+
+and the decision decision rule is given by: ^ = argmax  k hk (f, e) e
+e k=1 K
+
+Finally, to instill some coherence in the descriptions, while avoiding overly repetitive discourse, we disallow objects to be selected more than four times: s , sums = t , sumt =
+t S,kS
+
+(14)
+
+
+
+ystk ystk
+
+(9) (10) (11)
+
+sS,kS
+
+
+
+st ,s==t , sums + sumt  4
+
+Auxiliary variables sums and sumt represent the number of times objects s and t are selected to be the first and second object of a pair. Given a new unseen scene, we obtain the Fst values for all pair-wise combinations of the objects in it and compute their distance Dst . We solve the ILP problem defined above and read the value of the variable ystk which contains the selected clip art object pairs ranked by relevance. So, our model can in principle produce multiple descriptions for a given scene, highlighting potentially different aspects of the visually encoded information. We used GLPK3 to maximize the objective function subject to the constraints introduced above.
+3 https://www.gnu.org/software/glpk/
+
+where hk (f, e) is a scoring function representing important features for the translation of f into e. Examples include the language model of the target language, a reordering model, or several translation models. K is the number of models (or features) and k are the weights of the log-linear combination. Typically, the weights  = [1 , . . . , K ]T are optimized on a development set, by means of Minimum Error Rate Training (MERT; Och (2003)). One of the most popular instantiations of loglinear models in SMT are phrase-based (PB) models (Zens et al., 2002; Koehn et al., 2003). PB models allow to learn translations for entire phrases instead of individual words. The basic idea behind PB translation is to segment the source sentence into phrases, then to translate each source phrase into a target phrase, and finally reorder the translated target phrases in order to compose the target sentence. For this purpose, phrase-tables are produced, in which a source phrase is listed together with several target phrases and the probability of translating the former into the latter. Throughout our experiments, we obtained translation models using the PB SMT framework implemented in MOSES (Koehn et al., 2007).
+
+1510
+
+

@@ -1,0 +1,31 @@
+The embeddings of the neighbors nijk of the sense are kept fixed at each such step. We iterate through the whole set of lemmas for a fixed number of epochs or until the objective is unchanged. Furthermore, instead of directly optimizing with respect to the sense embeddings (which involves mi · D scalars), the sense embeddings (and therefore also the loss Li ) can be computed analytically if the mix variables pi1 , . . . , pimi are given, so we have reduced the optimization problem to one involving mi - 1 scalars, i.e. it is univariate in most cases. Given a sense sij of a lemma li , we define the weighted centroid of the set of neighbors of sij as cij =
+k
+
+3
+
+Application to Swedish Data
+
+The algorithm described in Section 2 was applied to Swedish data: we started with lemma embeddings computed from a corpus, and then created sense embeddings by using the SALDO semantic network (Borin et al., 2013). The algorithm was run for a few epochs, which seemed to be enough for reaching a plateau in performance; the total runtime of the algorithm was a few minutes. 3.1 Creating Lemma Embeddings We created a corpus of 1 billion words downloaded from Spr° akbanken, the Swedish language bank.1 The corpora are distributed in a format where the text has been tokenized, part-of-speech-tagged and lemmatized. Compounds have been segmented automatically and when a lemma was not listed in SALDO, we used the parts of the compounds instead. The input to the software computing the lemma embedding consisted of lemma forms with concatenated part-of-speech tags, e.g. dricka..vb for the verb `to drink' and dricka..nn for the noun `drink'. We used the word2vec tool2 to build the lemma embeddings. All the default settings were used, except the vector space dimensionality which was set to 512. 3.2 SALDO, a Swedish Semantic Network SALDO (Borin et al., 2013) is the largest freely available lexical resource for Swedish. We used a version from May 2014, which contains 125,781 entries organized into a single semantic network. Compared to WordNet (Fellbaum, 1998), there are similarities but also significant differences. Most significantly, SALDO is organized according to the lexical-semantic relation of association, not is-a as in WordNet. In SALDO, when we go up in the hierarchy we move from specialized vocabulary to the most central vocabulary of the language (e.g. `move', `want', `who'); in WordNet we move from specific to abstract (e.g. `entity'). Another difference is that sense distinctions in SALDO tend to be more coarse-grained than in WordNet. Each entry except a special root is connected to other entries, its semantic descriptors. One of the
+1 2
+
+wijk E (nijk ) . k wijk
+
+(3)
+
+If the mix constraints were removed, cij would be the solution to the optimization problem: they minimize the weighted sum of squared Euclidean distances to the neighbors. Then, given the mix, the residual is defined  1  p2 ij k wijk  pij cij - F (li ) .
+j
+
+ri =
+j
+
+(4)
+
+The vector ri represents the difference between the linear combination of the weighted centroids and the lemma embedding. Finally, we the sense embeddings for the lemma li become E (sij ) = cij - pij ri . k wijk (5)
+
+Equations (4) and (5) show the role of the mix variables: if pij = 0, then the sense embedding E (sij ) is completely determined by the neighbors of the sense (that is, it is equal to the weighted centroid). On the other hand, if pij = 1, then the sense embedding becomes equal to the embedding of the lemma, F (li ). To optimize the mix variables pi1 , . . . , pimi with respect to the loss Li , basically any search procedure could be used; we found it easiest to use a variant of a simple randomized gradient-free search method (Matyas, 1965).
+
+http://spraakbanken.gu.se https://code.google.com/p/word2vec
+
+1430
+
+

@@ -1,0 +1,5 @@
+Tuesday, June 2, 2015 (continued) Unediting: Detecting Disfluencies Without Careful Transcripts Victoria Zayats, Mari Ostendorf and Hannaneh Hajishirzi Type-Driven Incremental Semantic Parsing with Polymorphism Kai Zhao and Liang Huang Template Kernels for Dependency Parsing Hillel Taub-Tabib, Yoav Goldberg and Amir Globerson Embedding a Semantic Network in a Word Space Richard Johansson and Luis Nieto Piña Random Walks and Neural Network Language Models on Knowledge Bases Josu Goikoetxea, Aitor Soroa and Eneko Agirre Identification and Characterization of Newsworthy Verbs in World News Benjamin Nye and Ani Nenkova Enhancing Sumerian Lemmatization by Unsupervised Named-Entity Recognition Yudong Liu, Clinton Burkhart, James Hearne and Liang Luo Extracting Information about Medication Use from Veterinary Discussions Haibo Ding and Ellen Riloff Reserating the awesometastic: An automatic extension of the WordNet taxonomy for novel terms David Jurgens and Mohammad Taher Pilehvar Cross-lingual Text Classification Using Topic-Dependent Word Probabilities Daniel Andrade, Kunihiko Sadamasa, Akihiro Tamura and Masaaki Tsuchida
+
+xlix
+
+

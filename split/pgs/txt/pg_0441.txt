@@ -1,0 +1,21 @@
+Data-driven sentence generation with non-isomorphic trees
+Miguel Ballesteros1 Bernd Bohnet2 Simon Mille1 Leo Wanner1,3 Natural Language Processing Group, Pompeu Fabra University, Barcelona, Spain 2 Google Inc. 3 Catalan Institute for Research and Advanced Studies (ICREA) 1,3 {name.lastname}@upf.edu 2 bohnetbd@google.com
+
+1
+
+Abstract
+Abstract structures from which the generation naturally starts often do not contain any functional nodes, while surface-syntactic structures or a chain of tokens in a linearized tree contain all of them. Therefore, data-driven linguistic generation needs to be able to cope with the projection between non-isomorphic structures that differ in their topology and number of nodes. So far, such a projection has been a challenge in data-driven generation and was largely avoided. We present a fully stochastic generator that is able to cope with projection between non-isomorphic structures. The generator, which starts from PropBank-like structures, consists of a cascade of SVM-classifier based submodules that map in a series of transitions the input structures onto sentences. The generator has been evaluated for English on the Penn-Treebank and for Spanish on the multi-layered AncoraUPF corpus.
+
+1
+
+Introduction
+
+Applications such as machine translation that inherently draw upon sentence generation increasingly deal with deep meaning representations; see, e.g., (Aue et al., 2004; Jones et al., 2012; Andreas et al., 2013). Deep representations tend to differ in their topology and number of nodes from the corresponding surface structures since they do not contain, e.g., any functional nodes, while syntactic structures or chains of tokens in linearized trees do. This means that sentence generation needs to be able to cope 387
+
+with the projection between non-isomorphic structures. However, most of the recent work in datadriven sentence generation still avoids this challenge. Some systems focus on syntactic generation (Bangalore and Rambow, 2000; Langkilde-Geary, 2002; Filippova and Strube, 2008) or linearization and inflection (Filippova and Strube, 2007; He et al., 2009; Wan et al., 2009; Guo et al., 2011a), and avoid thus the need to cope with this projection all together; some use a rule-based module to handle the projection between non-isomorphic structures (Knight and Hatzivassiloglou, 1995; Langkilde and Knight, 1998; Bohnet et al., 2011); and some adapt the meaning structures to be isomorphic with syntactic structures (Bohnet et al., 2010). However, it is obvious that a "syntacticization" of meaning structures can be only a temporary workaround and that a rule-based module raises the usual questions of coverage, maintenance and portability. In this paper, we present a fully stochastic generator that is able to cope with the projection between non-isomorphic structures.1 Such a generator can be used as a stand-alone application and also, e.g., in text simplification (Klebanov et al., 2004) or deep machine translation (Jones et al., 2012) (where the transfer is done at a deep level). In abstractive summarization, it facilitates the generation of the summaries, and in extractive summarization a better sentence fusion.2
+The data-driven sentence generator is available for public downloading at https://github.com/ talnsoftware/deepgenerator/wiki. 2 For all of these applications, the deep representation can be obtained by a deep parser, such as, e.g., (Ballesteros et al., 2014a).
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 387­397, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,39 @@
+We learn latent topics corresponding to terms occurring in the titles using Latent Dirichlet Allocation (David Blei and Jordan, 2003). We capture the meaning of a title using the learned topic distribution. For our experimental setting, we use the MALLET (McCallum, 2002) implementation of LDA and build it in the following manner. Method: Given a set of titles and descriptions D of products from different categories, find K latent topics. The generative story is modeled as follows:
+for each product category sk where k  {1, ..., K } do Generate sk according to Dir( ) end for for each title i in the corpus D do Choose i  Dir() for each word wi,j where j  {1, ..., Ni } do Choose a topic zi,j  M ultinomial(i ) Choose a word wi,j  M ultinomial(zi,j ) end for end for
+
+vised algorithms have demonstrated that deep neural network architectures can be effective in learning semantic representation of words and phrases from large unlabeled corpora. To model the semantic representations of product titles, we learn embeddings over the corpus P using the technique of (Mikolov et al., 2013a; Mikolov et al., 2013b). We use a feedforward neural network architecture in which the training objective is to find word (vector) representations that are useful for predicting the current word in a product title based on the context. Formally, given a sequence of training words w1 , w2 , ..., wT the objective is to maximize the average log probability T 1 log p(wt |wt+j ) T where n is the size of the training context and p(wt |wt+j ) predicts the current position wt using the surrounding context words wt+j and learned with hierarchical softmax algorithm. Since word2vec provides embeddings only for words or at most two word phrases, to represent a product title p containing a sequence of M word tokens (w1 , ..., wM ), we retrieve the embeddings of all words and take the average score. p = [e1 , ..., ed ] where, e
+i t=1 -nj n,j =0
+
+Inference: We perform inference on this model using collapsed Gibbs sampling, where each of the hidden sense variables zi,j are sampled conditioned on an assignment for all other variables, while integrating over all possible parameter settings (Griffiths and Steyvers, 2002). We set the hyperparameter  to the default value of 0.01 and =50. During feature generation, we take all words in the title and estimate the percentage of words associated with each topic sk . The topic-word mapping is constructed from the word distribution learnt for a given topic. The number of features is equal to the number of topics. Figure 2 shows an example of the different topics associated with the word bag for different product titles.
+t22'
+
+=
+
+1 M
+
+M j =1
+
+ei wj
+
+T"Sac&Disposable&Paper&Filter&Tea&Bags,&Size&2,&100"Count& SKB&Mixer&Bag&for&Powered&Mackie&mixers&&
+t59' t13'
+
+Here, d is the embedding vector size, ei and ei wj are the vector values at position i for the product p and word wj in p, respectively. To build the embeddings, we use a vector size of 200 and context of 5 consecutive words in our experiments. We then use the new vector representation [e1 , ..., ed ] (d features per title) to train and test the machine learning model.
+
+5
+
+Data Description
+
+NauEca&Baby"Girls&Infant&Printed&Paper&Bag&Waist&Dress&&
+
+Figure 2: Learnt Topic Assignments for bag.
+
+4.4
+
+Neural Network Embeddings
+
+While LDA allows us to capture the latent topics of the product titles, recent advances in unsuper1331
+
+To conduct our experimental studies, we have used and manually annotated product titles from Yahoo's shopping platform. For each title, we asked two annotators to provide the whole product category from the root to the leaf and used these annotations as a gold standard. We split the data into a training set of 353, 809 examples and a test set of 91, 599 examples. Our
+
+

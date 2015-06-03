@@ -1,0 +1,41 @@
+60000
+
+Sign constraints on weights None OT Lexical OT+Lexical
+
+40000
+
+20000
+
+Number of non-zero feature weights
+
+4000
+
+6000
+
+8000
+
+10000
+
+Figure 5: The number of underlying types proposed by the model as a function of the number of non-zero weights, for different constraints on feature weights (d = 1.525). There are 9,353 underlying types in the "gold" data.
+
+0.6 0.4 0.2 0.0 1.4 1.5 1.6 1.7 All pairs in all contexts FALSE TRUE
+
+Word length penalty
+
+Figure 6: F-score for deleted /d/ and /t/ recovery as a function of word length penalty d and whether all surface/underlying pairs X are included in all contexts C (d = 1.525).
+
+features) relate to the number of underlying types posited by the model. Figure 5 shows that the weight constraints on markedness and faithfulness constraints have great impact on the number of nonzero feature weights and on the number of underlying forms the model posits. In all cases, the model recovers far more underlying forms than it finds nonzero weights. The lexicon weight constraints have much less impact than the OT weight constraints. As Figure 3 shows, without the OT weight constraints the models posit too many deleted /d/ and essentially no deleted /t/. Figure 4 shows that OT weight constraints enable the model to find higher likelihood solutions, i.e., the OT weight constraints help search. Inspired by a reviewer's comments, we studied typetoken ratios and the number of boundaries our models posit. We found that the models without OT weight constraints posit far too few word boundaries compared to the gold data, so the number of surface tokens is too low, so the words are too long, and the number of underlying types is too high. This is consistent with Figures 4­5. We also examined whether it is necessary to consider all surface/underlying pairs X in each context C , or whether it is possible to restrict attention to the much smaller sets Xc that occur in each c  C (this dramatically reduces the amount of memory required and speeds the computation). Figure 6 shows that working with the smaller, context-specific sets dramatically decreases the model's ability to recover deleted segments.
+
+not any /t/ or /d/ deletions (i.e., the case that BergKirkpatrick et al. (2010) studied). Investigating this further, we found that the weight constraints on the markedness and faithfulness features has a dramatic effect on the recovery of underlying segments, particularly underlying /d/s. Figure 3 shows that with these constraints the model recovers approximately the correct number of deleted underlying segments, while without this constraint the model posits far too many underlying /d/s. Figure 4 shows that these constraints help the model find higher regularised likelihood sets of feature weights with fewer non-zero feature weights. We examined how the number of non-zero feature weights (most of which are for underlying type 310
+
+Deleted segment f-score
+
+Number of underlying types
+
+5
+
+Conclusions and future work
+
+The MaxEnt unigram model of word segmentation developed by Berg-Kirkpatrick et al. (2010) integrates straight-forwardly with the MaxEnt phonology models of Goldwater and Johnson (2003) to produce a MaxEnt model that jointly models word segmentation and the mapping from underlying to surface forms. We tested our model on data derived from the manually-annotated Buckeye corpus of conversational speech (Pitt et al., 2007) in which the only phonological alternations are deletions of word-final /d/ and /t/ segments. We demonstrated that our model improves on the state-of-the-art for word seg-
+
+

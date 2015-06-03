@@ -1,0 +1,31 @@
+Sarkar, 2014), in which source-pivot and pivot-target phrase tables are triangulated according to Eq. 1 (with words replaced by phrases). The resulting triangulated phrase table can then be combined with an existing source-target phrase table, and is especially useful in increasing the source language vocabulary coverage, reducing OOVs. In our case, since word alignment is a closed vocabulary task, OOVs are never an issue. In word alignment, Kumar et al. (2007) uses multilingual parallel data to compute better sourcetarget alignment posteriors. Filali and Bilmes (2005) tag each source token and target token with their most likely translation in a pivot language, and then proceed to align (source word, source tag) tuple sequences to (target word, target tag) tuple sequences. In contrast, our word alignment method can be applied without multilingual parallel data, and does not commit to hard decisions.
+
+Acknowledgements
+The authors would like to thank Kevin Knight, Daniel Marcu and Ashish Vaswani for their comments and insights as well as the anonymous reviewers for their valuable feedback. This work was partially supported by DARPA grants DOI/NBC D12AP00225 and HR0011-12-C-0014 and a Google Faculty Research Award to Chiang.
+
+Appendix: Joint Training Generative Story
+We argue that our joint training procedure can be seen as optimizing the posterior likelihood of the three models. Specifically, suppose we place Dirichlet priors on each of the t-tables tst , tsp , tpt as before, but define the prior parameterization using a single hyperparameter  = { spt } and its marginals such that: tst (· | s)  D(. . . ,  s·t , . . .) tsp (· | s)  D(. . . ,  sp· , . . .) tpt (· | p)  D(. . . , · pt , . . .)  s·t =  sp· = · pt =
+p  spt t  spt s  spt
+
+6
+
+Conclusion and Future Work
+
+We presented a simple multi-task learning algorithm that jointly trains three word alignment models over disjoint bitexts. Our approach is a natural extension of a mathematically sound MAP-EM algorithm we originally developed to better utilize the model triangulation idea. Both algorithms are easy to implement (with closed-form solutions for each step) and require minimal effort to integrate into an EM-based word alignment system. We evaluated our methods on a low-resource Czech-English word alignment task using additional Czech-French and French-English corpora. Our multi-task learning approach significantly improves F- and Bleu scores compared to both baseline and the interpolation method of Wang et al. (2006). Further experiments showed our approach is insensitive to the choice of pivot language, producing roughly the same alignments over six different pivot language choices. For future work, we plan to improve word alignment and translation quality in a more data restricted case where there are very weak source-pivot resources: for example, word alignment of MalagasyEnglish via French, using only a Malagasy-French dictionary, or Pashto-English via Persian. 1225
+
+Intuitively,  spt represents the number of times a source-pivot-target triplet ( s, p, t) was observed. With this prior, we can maximize the posterior likelihood of the three models given the three bitexts (denoted data = {bitextst , bitextsp , bitextpt }) with respect to all parameters and hyperparameters: arg max P( | , data) =
+,
+
+arg max
+,
+
+d{st,sp,pt}
+
+P(bitextd | d )P(d | )
+
+Under the generative story, we need only observe the marginals  s·t ,  sp· , · pt of . Therefore, instead of explicitly optimizing over , we can optimize over the marginals while keeping them consistent (via constraints such as t  s·t = p  sp· for all s). In our joint training algorithm (Algorithm 1) we abandon these consistency constraints in favor of closed form estimates of the marginals  s·t ,  sp· , · pt .
+
+References
+Peter F. Brown, Vincent J.Della Pietra, Stephen A. Della Pietra, and Robert. L. Mercer. 1993. The mathematics of statistical machine translation: Parameter estimation. Computational Linguistics, 19:263­311.
+
+

@@ -1,0 +1,13 @@
+Wednesday, June 3, 2015 07:30­09:00 09:00­10:10 Registration and Breakfast Invited Talk: A Quest for Visual Intelligence in Computers Fei-fei Li Break Session 8A: NLP for Web, Social Media and Social Sciences (Long + TACL Papers) Testing and Comparing Computational Approaches for Identifying the Language of Framing in Political News Eric Baumer, Elisha Elovic, Ying Qin, Francesca Polletta and Geri Gay [TACL] Extracting Lexically Divergent Paraphrases from Twitter Wei Xu, Alan Ritter, Chris Callison-Burch, William B. Dolan, and Yangfeng Ji Echoes of Persuasion: The Effect of Euphony in Persuasive Communication Marco Guerini, Gözde Özbal and Carlo Strapparava Session 8B: Language and Vision (Long + TACL Papers) Translating Videos to Natural Language Using Deep Recurrent Neural Networks Subhashini Venugopalan, Huijuan Xu, Jeff Donahue, Marcus Rohrbach, Raymond Mooney and Kate Saenko [TACL] A Bayesian Model of Grounded Color Semantics Brian McMahan and Matthew Stone Learning to Interpret and Describe Abstract Scenes Luis Gilberto Mateos Ortiz, Clemens Wolff and Mirella Lapata
+
+10:10­10:40 10:40­11:55 10:40­11:05
+
+11:05­11:30 11:30­11:55
+
+10:40­11:55 10:40­11:05
+
+11:05­11:30 11:30­11:55
+
+l
+
+

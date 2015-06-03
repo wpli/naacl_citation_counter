@@ -1,0 +1,23 @@
+patibles, whereas 54% of them are actually incompatible. By contrast the L2 interaction model gets 78% of these incompatible pairs right.
+
+5 Conclusion
+We have introduced the challenge of modeling compatibility to the computational linguistics community. To this end, we collected a data set, and produced a model that satisfactorily captures a large portion of the data, that cannot be accounted for by simple semantic relatedness. Finally, we have explored the features learned by the model, confirming that high-order category information is relevant for producing compatibility judgements. Computational models of compatibility could help in many semantic tasks, such as coreference resolution, question answering, modeling plausibility and negation. Future lines of research will explore the contributions that accounting for compatibility can make to these tasks.
+
+(a) Input
+
+vectors
+
+(b) Mapped
+vectors
+
+(c) Categories
+
+Figure 2: Heatmap visualization of original DSM features and features learned by the mapping function of the 2L interaction model. of the vocabulary across the labels is shown in Figure 2c. If we plot the input distributional vectors so that words tagged with the same category are adjacent to each other, and categories arranged as in Figure 2c, we obtain the heatmap in Figure 2a, where no obvious pattern emerges. If instead we plot the output vectors of 2L interaction mapping in the same way, we obtain the heatmap in Figure 2b. It is evident that the mapping produces vectors that are similar within most categories, and very different across them. Thus, the 2L interaction model clearly learned the relevance of general categories in capturing compatibility judgments. The fact that this model produced the best results hints at the importance of exploiting this source of information, confirming the intuition we used in designing it, that compatibility can be characterized by a combination of general relatedness and category-specific cues. Finally, we explored to what extent the data can be accounted by co-hyponymy, an idea briefly introduced in the introductory discussion of Section 1. For simplicity purposes, we take the same category tags we just introduced as a word's hypernym. Classifying co-hyponyms as incompatibles and noncohyponyms as compatibles performs very poorly (7 and 18 F1-scores for compatibility and incompatibility, respectively). On the other hand, the opposite strategy ­ co-hyponyms as compatibles and noncohyponyms as incompatibles ­ works much better (62 and 84 F1), even outperforming many supervised models. Yet, this strategy does not suffice. For example, all animal pairs would be treated as com968
+
+Acknowledgments
+We thank Denis Paperno for the interesting discussions that motivated this paper and the three anonymous reviewers for useful comments. We acknowledge ERC 2011 Starting Independent Research Grant n. 283554 (COMPOSES).
+
+References
+Heike Adel and Hinrich Sch¨ utze. 2014. Using mined coreference chains as a resource for a semantic task. In Proceedings of EMNLP, pages 1447­1452, Doha, Qatar. Marco Baroni, Georgiana Dinu, and Germ´ an Kruszewski. 2014. Don't count, predict! a systematic comparison of context-counting vs. context-predicting semantic vectors. In Proceedings of ACL, pages 238­247, Baltimore, MD. Stephen Clark. 2015. Vector space models of lexical meaning. In Shalom Lappin and Chris Fox, editors, Handbook of Contemporary Semantics, 2nd ed. Blackwell, Malden, MA. In press; http://www.cl.cam.ac.uk/~sc609/ pubs/sem_handbook.pdf. Ronan Collobert, Koray Kavukcuoglu, and Cl´ ement Farabet. 2011. Torch7: A matlab-like environment for machine learning. In BigLearn, NIPS Workshop. D. Alan Cruse. 1986. Lexical Semantics. Cambridge University Press, Cambridge, UK.
+
+

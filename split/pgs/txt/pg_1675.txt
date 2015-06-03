@@ -1,0 +1,26 @@
+Placeholder names To induce a lexicon of placeholder names, we remove the CURRENT- WORD feature from the model, and re-run the tagger on all dialogue data. We then focus on terms which are frequently labeled U-ADDR, indicating that they are the sole token in the address (e.g., I'm/O perfectly/O calm/O, dude/U-ADDR.) We again perform a binomial test to obtain a list of terms whose frequency of being labeled U-ADDR is significantly higher than chance. We manually filter out 41 terms from a list of 96 possible placeholder terms obtained in the previous step. Most terms eliminated were plural forms of placeholder names, such as fellas and dudes; these are indeed address terms, but because they are plural, they cannot refer to a single individual, as required by our model. Other false positives were fillers, such as uh and um, which were ocassionally labeled as I-ADDR by our tagger. After manual filtering, we obtain the following placeholder names: asshole, babe, baby, boss, boy, bro, bud, buddy, cocksucker, convict, cousin, cowboy, cunt, dad, darling, dear, detective, doll, dude, dummy, father, fella, gal, ho, hon, honey, kid, lad, lady, lover, ma, madam, madame, man, mate, mister, mon, moron, motherfucker, pal, papa, partner, peanut, pet, pilgrim, pop, president, punk, shithead, sir, sire, son, sonny, sport, sucker, sugar, sweetheart, sweetie, tiger. 4.2 Address term tokens When constructing the content vectors xij and xij , we run the address span tagger described above, and include counts for the following types of address spans: · the bare first name, last name, and complete name of individual j ; · any element in the title lexicon if labeled as BADDR by the tagger; · any element in the title or placeholder lexicon, if labeled as U-ADDR by the tagger.
+
+Class I-ADDR B-ADDR U-ADDR L-ADDR O-ADDR
+
+F-measure 0.58 0.800 0.987 0.813 0.993
+
+Total Instances 53 483 1864 535 35975
+
+Table 3: Breakdown of f-measure and number of instances by class in the test set.
+
+terms whose meaning is more difficult to ascertain from data, such as admiral, dude, and player. Moreover, the precise social meaning of address terms can be context-dependent: for example, the term comrade may be formal in some contexts, but jokingly informal in others. Both problems can be ameliorated by adding social network structure. We treat Y = V as indicating formality and Y = T as indicating informality. (The notation invokes the concept of T/V systems from politeness theory (Brown, 1987), where T refers to the informal Latin second-person pronoun tu, and V refers to the formal second-person pronoun vos.) While formality relations are clearly asymmetric in many settings, for simplicity we assume symmetric relations: each pair of individuals is either on formal or informal terms with each other. We therefore    add the constraints that   V =  V and  T =  T . In this model, we have a soft expectation that triads will obey transitivity: for example, if i and j have an informal relationship, and j and k have an informal relationship, then i and k are more likely to have an informal relationship. After rotation, there are four possible triads, TTT, TTV, TVV, and VVV. The weights estimated for these triads will indicate whether our prior expectations are validated. We also consider a single pairwise feature template, a metric from Adamic and Adar (2003) that sums over the mutual friends of i and j , assigning more weight to mutual friends who themselves have a small number of friends: AA(i, j ) =
+k(i)k(j )
+
+5
+
+Address terms in a model of formality
+
+Address terms play a key role in setting the formality of a social interaction. However, understanding this role is challenging. While some address terms, like Ms and Sir, are frequent, there is a long tail of rare 1621
+
+1 , log #|(k )|
+
+(10)
+
+where (i) is the set of friends of node i. (We also tried simply counting the number of mutual friends, but the Adamic-Adar metric performs
+
+

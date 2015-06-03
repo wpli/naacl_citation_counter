@@ -1,0 +1,21 @@
+the remaining synsets, we performed a search for absolute and relative clues and obtained 1,329 absolute clues and 7,335 relative clues. This set of relative clues stems from 848 WordNet-based clues and 6,496 corpus-based clues with a small overlap. We note that fewer than 1% of these 6,496 corpus-based clues are explicit. The synsets for which no clues are found are removed from the following process, leaving 3,598 synsets. Thoroughly using the web data might provide a larger overall amount, but the current result suggests that there are fewer absolute clues than relative ones and fewer explicit clues than implicit ones. We evaluate the methods in two different ways. One is the difference: the sizes of the 262 randomly sampled synsets without absolute clues are manually determined, and we calculated the difference between the estimated size and the manually determined size for each of those synsets. The other is the order relation classification: the size relations of 1,152 randomly sampled pairs of synsets are manually annotated, and we employ as an evaluation metric the accuracy indicating how many of those relations are correctly predicted. We implemented our combined regression and ranking method by modifying a package.4 We used the logarithms of sizes as the target value. We tuned  in Equation (1) to the value that optimizes the accuracy out of 11 values5 : 10-7 , 10-6 , · · · , 103 . We tested different numbers of absolute clues in training (namely, 300, 500, 800, 1,000) in order to examine its effect. 5.2 Results Figure 1 shows how the average difference for each number of absolute clues changes as  in Equation (1) is varied. All types of clues and features are used for Figure 1 (a), while the clues and features extracted from WordNet except for glosses are excluded for Figure 1 (b). The latter emulates the situation where the dictionary is available, but the large-scale thesaurus such as WordNet is not. The left-most point ( = 0) for each figure corresponds to simple regression. The curves show that the difference can be reduced by using the combined rehttp://code.google.com/p/sofia-ml/ In the actual application, we would be able to use development data for tuning.
+5 4
+
+Size (cm) 1.35×10-1 2.68×100 3.26×100 7.16×100 9.09×100 1.14×101 3.01×101 3.35×101 4.57×101 1.56×102 1.65×102 4.31×104
+
+Synset 11678768-n 02312744-n 02206856-n 04453037-n 03209910-n 03378442-n 04586225-n 03485794-n 04590553-n 09189157-n 04152829-n 02687992-n
+
+Example word ovum silkworm bee tooth of gear floppy disk foot wind chime hand towel windshield nest of hawk or eagle screen airport
+
+Table 1: Sample of the estimated sizes
+
+gression and ranking. The improvement is more remarkable when fewer absolute clues are used. Similarly, Figure 2 shows how the accuracy of the order relation classification for each number of absolute clues changes as  is varied. The accuracy of the order relation classification was around 70 to 80 %. The benefit of using combined regression and ranking is more remarkable in Figure 2 (b), i.e., when the thesaurus is not available. Table 1 shows a sample of physical objects and their estimated sizes. We can see that the overall trend of the size has been successfully captured. We also examine some features with small or large weights in Table 2. Very small weights are given to, for example, elementary particles in the field of particle physics, hydrons, and bacteria.6
+Feature Synset for baryon, as ancestor Hydron as synonym Synset for fermion, as ancestor Electron, as synonym Bacteria, as synonym Bell tower, hprt feature Railroad as synonym, Means of transportation as ancestor Weight -7.75 -7.75 -7.13 -6.06 -6.06 +7.15 +8.16 +8.38
+
+Table 2: Features with large absolute weights. Note that baryon is a heavy particle in the field of particle physics.
+More comprehensive results are available from http://www.lr.pi.titech.ac.jp/~takamura/ core9.html .
+6
+
+1308
+
+

@@ -1,0 +1,48 @@
+and v  RDy such that projections of the two views onto these vectors are maximally (linearly) correlated:
+uRDx ,vRDy
+
+View 2 View 1
+
+max
+
+E =
+
+(u x)(v y) E [(v y)2 ] v yy v (1)
+English word vector 1
+foul magnificent awful horrid cute beastly grotesque gorgeous ugly marvelous hidous
+
+u
+
+v
+German word vector 2
+h¨ assliche bezaubernder foul abscheulichen ziemlich aufzukl¨ aren grotesk schrecklichen gebot elegante großartige clever hervorragende blonden wunderbaren
+
+f
+
+g
+
+E [(u x)2 ] u xx u
+
+u xy v
+
+elegant
+
+charming splendid pretty
+
+where xy and xx are the cross-view and withinview covariance matrices. (1) is extended to learn multi-dimensional projections by optimizing the sum of correlations in all dimensions, subject to different projected dimensions being uncorrelated. Given sample pairs {(xi , yi )}N i=1 , the empirical es^ xx = timates of the covariance matrices are  N N 1 1   ^ i=1 xi xi + rx I, yy = N i=1 yi yi + ry I N N 1  ^ and xy = N i=1 xi yi where (rx , ry ) > 0 are regularization parameters (Hardoon et al., 2004; De Bie and De Moor, 2003). Then the optimal kdimensional projection mappings are given in closed form via the rank-k singular value decomposition ^ -1/2  ^ xy  ^ -1/2 . (SVD) of the Dx × Dy matrix 
+xx yy
+
+2.1 Deep Canonical Correlation Analysis A linear feature mapping is often not sufficiently powerful to faithfully capture the hidden, non-linear relationships within the data. Recently, Andrew et al. (2013) proposed a nonlinear extension of CCA using deep neural networks, dubbed deep canonical correlation analysis (DCCA) and illustrated in Figure 1. In this model, two (possibly deep) neural networks f and g are used to extract features from each view, and trained to maximize the correlations between outputs in the two views, measured by a linear CCA step with projection mappings (u, v). The neural network weights and the linear projections are optimized together using the objective max u  f g v u f f u v gg v , (2)
+
+Figure 1: Illustration of deep CCA. does not have a closed-form solution, but the parameters can be learned via gradient-based optimization, with either batch algorithms like L-BFGS as in (Andrew et al., 2013) or a mini-batch stochastic gradient descent-like approach as in (Wang et al., 2015). We choose the latter in this paper. An alternative nonlinear extension of CCA is kernel CCA (KCCA) (Lai and Fyfe, 2000; Vinokourov et al., 2003), which introduces nonlinearity through kernels. DCCA scales better with data size, as KCCA involves the SVD of an N × N matrix. Andrew et al. (2013) showed that DCCA achieves better correlation on held-out data than CCA/KCCA, and Wang et al. (2015) found that DCCA outperforms CCA and KCCA on a speech recognition task.
+
+3 Experiments
+We use English and German as our two languages. Our original monolingual word vectors are the same as those used by Faruqui and Dyer (2014). They are 640-dimensional and are estimated via latent semantic analysis on the WMT 2011 monolingual news corpora.1 We use German-English translation pairs as the input to CCA and DCCA, using the same set of 36K pairs as used by Faruqui and Dyer. These pairs contain, for each of 36K English word types, the single most frequently aligned German word. They were obtained using the word aligner in cdec (Dyer et al., 2010) run on the WMT0610 news commentary corpora and Europarl. After training, we apply the learned CCA/DCCA projection mappings to the original English word embeddings (180K words) and use these transformed embeddings for our evaluation tasks. 3.1 Evaluation Tasks We compare our DCCA-based embeddings to the original word vectors and to CCA-based em1
+
+Wf ,Wg ,u,v
+
+where Wf and Wg are the weights of the two networks and f g , f f and gg are covariance matrices computed for {f (xi ), g(yi )}N i=1 in the same way as CCA. The final transformation is the composition of the neural network and CCA projection, e.g., u f (x) for the first view. Unlike CCA, DCCA 251
+
+www.statmt.org/wmt11/
+
+

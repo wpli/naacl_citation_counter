@@ -1,0 +1,29 @@
+2
+
+Related Work
+
+3.1
+
+Count-Based Distributional Similarity
+
+Recent work on distributed approaches to distributional semantics has demonstrated their utility in a wide range of NLP tasks, including identifying various morphosyntactic and semantic relations (Mikolov et al., 2013a), dependency parsing (Bansal et al., 2014), sentiment analysis (Socher et al., 2013), named-entity recognition (Collobert and Weston, 2008; Passos et al., 2014), and machine translation (Zou et al., 2013; Devlin et al., 2014). Despite the wealth of research applying word embeddings within NLP, they have not yet been considered for predicting the compositionality of MWEs. Much prior work on MWEs has been tailored to specific kinds of MWEs in particular languages (e.g. English verb­noun combinations (Fazly et al., 2009)). There has however been recent interest in approaches to MWEs that are more broadly applicable to a wider range of languages and MWE types (Brooke et al., 2014; Salehi et al., 2014b; Schneider et al., 2014). Word embeddings could form the basis for such an approach to predicting MWE compositionality.
+
+Our first method for building vectors is that of Salehi et al. (2014b): the top 50 most-frequent words in the training corpus are considered to be stopwords and discarded, and words with frequency rank 51­ 1051 are considered to be the content-bearing words, which form the dimensions for our vectors, in the manner of Sch¨ utze (1997). To measure the similarity of the MWE vector and the component word vectors, we considered two different approaches. The first approach is based on Reddy et al. (2011) and Schulte im Walde et al. (2013). The similarity between the MWE and each of its components is measured, and the overall compositionality of the MWE is computed by combining the similarity scores for the two components as follows:
+comp 1 (MWE) = sim (MWE, C1 )
+
++(1 - )sim (MWE, C2 ) where MWE is the vector associated with the MWE, Ci is the vector associated with the ith component word of the MWE, sim is a vector similarity function, and   [0, 1] is a weight parameter. We also experimented with the approach from Mitchell and Lapata (2010), where MWE is compared directly with a composed vector of the component words, based on vector addition:1 comp 2 (MWE) = sim (MWE, C1 + C2 ) For both comp 1 and comp 2 , we used cosine similarity as our similarity measure sim . 3.2
+WORD 2 VEC
+
+3
+
+Methodology
+
+In this work, we estimate the compositionality of an MWE based on the similarity between the expression and its component words in vector space. We use three different vector-space models: (1) a simple count-based model of distributional similarity; (2) word embeddings based on WORD 2 VEC; and (3) a multi-sense skip-gram model that, unlike the previous two models, is able to learn multiple embeddings per target word (or MWE). For all three models, we first greedily pre-tokenise the corpus to represent each MWE as a single token, similarly to Baldwin et al. (2003). In this, we apply the constraint that no language-specific pre-processing can be applied to the training corpus, in order to make the method maximally language independent. As such, we cannot perform any form of lemmatisation, and MWE identification takes the form of simple string match for concatenated instances of the component words, naively assuming that all occurrences of that word combination are MWEs. We detail each of the distributional similarity methods below. 978
+
+Our second method is based on the recurrent neural network language model (RNNLM) approach to learning word embeddings of Mikolov et al. (2013a) and Mikolov et al. (2013b), using the WORD 2 VEC package.2 WORD 2 VEC uses a log-linear model inspired by the original RNNLM approach of Mikolov et al. (2010), in two forms: (1) a continuous bagof-words ("CBOW") model, whereby all words in a context window are averaged in a single projection layer; and (2) a continuous skip-gram model
+We also experimented with vector multiplication, but found it to perform poorly compared to the other approaches.
+2 1
+
+https://code.google.com/p/word2vec/
+
+

@@ -1,0 +1,71 @@
+Class Name Alternating I Alternating II Freely Omissible Omissible Non-omissible
+
+OR High Low High Low zero
+
+JSD High High Low Low NA
+
+Connectives further, in sum, in the end, overall, similarly, whereas earlier, in turn, nevertheless, on the other hand, ultimately accordingly, as a result, because, by comparison, by contrast, consequently, for example, for instance, furthermore, in fact, in other words, in particular, in short, indeed, previously, rather, so, specifically, therefore, also, although, and, as, but, however, in addition, instead, meanwhile, moreover, rather, since, then, thus, while as long as, if, nor, now that, once, otherwise, unless, until
+
+Table 1: Classification of discourse connectives based on omission rate (OR) and Jensen-Shannon Divergence context differential (JSD).
+q q q q q q q q q
+
+Context Differential (JSD)
+
+q
+
+q
+
+0.35
+
+0.30
+q q q q q q q q q
+
+q
+
+0.25
+q q q
+
+q q
+
+q q q q q q q q q q q q q q q
+
+0.20
+
+q
+
+q q
+
+0.25
+
+0.50
+
+0.75
+
+1.00
+
+Omission Rate (OR)
+
+Figure 3: The scattergram of the discourse connectives suggest three distinct classes. Each dot represents a discourse connective.
+
+3.2
+
+Evaluation results
+
+We formulate the implicit relation classification task as a 4-way classification task in a departure from previous practice where the task is usually set up as four one vs other binary classification tasks so that the effect of adding the distant supervision from the weakly labeled data can be more easily studied. We also believe this setup is more natural in realistic settings. Each classification instance consists of the two arguments of an implicit discourse relation, typically adjacent pairs of sentences in a text. The distribution of the sense labels is shown in Table 2. We follow the data split used in previous work for a consistent comparison (Rutherford and Xue, 2014). The PDTB corpus is split into a training set, development set, and test set. Sections 2 to 20 are used to train classifiers. Sections 0 and 1 are used for developing feature sets and tuning models. Section 21 and 22 are used for testing the systems. To evaluate our method for selecting explicit discourse relation instances, we extract weakly labeled discourse relations from the Gigaword corpus for each class of discourse connective such that the discourse connectives are equally represented within the class. We train and test Maximum Entropy classifiers by adding varying num-
+
+ber (1000, 2000, . . . , 20000) of randomly selected explicit discourse discourse relation instances to the manually annotated implicit discourse relations in the PDTB as training data. We do this for each class of discourse connectives as presented in Table 1. We perform 30 trials of this experiment and compute average accuracy rates to smooth out the variation from random shuffling of the weakly labeled data. The statistical models used in this study are from the MALLET implementation with its default setting (McCallum, 2002). Features used in all experiments are taken from the state-of-the-art implicit discourse relation classification system (Rutherford and Xue, 2014). The feature set consists of combinations of various lexical features, production rules, and Brown cluster pairs. These features are described in greater detail by Pitler et al. (2009) and Rutherford and Xue (2014). Instance reweighting is required when using weakly labeled data because the training set no longer represents the natural distribution of the labels. We reweight each instance such that the sums of the weights of all the instances of the same label are equal. More precisely, if an instance i is from class j , then the weight for the instance wij is equal to the inverse proportion of class j : wij = = Number of total instances Size of class j · Number of classes
+k j
+
+cj
+
+cj · k
+
+=
+
+n cj · k
+
+where cj is the total number of instances from class j and k is the number of classes in the dataset of size n. It is trivial to show that the sum of the weights for all instances from class j is exactly n k for all classes. The impact of different classes of weakly labeled explicit discourse connective relations is illustrated in Figure 4. The results show that expicit discourse relations with freely omissible discourse connectives (high OR and low JSD) improve the performance on the standard test set and outperform the other classes of discourse connectives and the naive approach where all of the discourse
+
+804
+
+

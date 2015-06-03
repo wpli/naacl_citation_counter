@@ -1,0 +1,20 @@
+Figure 1: Example bilingual features for two crowdsourced translations of an Urdu sentence. The numbers are alignment probabilities for each aligned word. The bilingual feature is the average of these probabilities, thus 0.240 for the good translation and 0.043 for the bad translation. Some words are not aligned if potential word pairs don't exist in bilingual training corpus.
+
+language model, sentence length and edit distance to other translations. · Worker-level features: 15 features based on worker's language ability, location and average sentence-level scores. · Ranking features: 3 features based on the judgments of monolingual English speakers' ranking the translations from best to worst. · Calibration features: 1 feature based on the average BLEU score of a worker's translations provided is computed against professional references. We additionally introduce a new bilingual feature based on IBM Model 1. We align words between each candidate translation and its corresponding source sentence. The bilingual feature is the average of its alignment probabilities between words in the source sentence and words in the Turker's translation. In Figure 1, we show how the bilingual feature allows us to distinguish between a valid translation (top) and an invalid/spammy translation (bottom).
+
+Algorithm 1 How good is good enough Input:  , the allowable deviation from the expected upper bound on BLEU score (using all redundant translations); , the upper bound BLEU score; a s , y s )j =1..m } and a validation training set S = {fi,j i,j i=1..n v , y v )j =1..m } where f set V = {(fi,j i,j is the feai,j i=1..n ture vector for ti,j which is the jth translation of the source sentence si and yi,j is the label for fi,j . Output: , the threshold between acceptable and unacceptable translations; w, a linear regression model parameter. 1: initialize   0,w   2: w  train a linear regression model on S 3: maxbleu  select best translations for each si  S based on the model parameter w and record the highest model predicted BLEU score 4: while  = maxbleu do 5: for i  1 to n do 6: for j  1 to m do v >   j < m then select 7: if w · fi,j tv i,j for si and break
+8: 9: 10:
+
+if j == m then select tv i,m for si
+
+q  calculate translation quality for V if q >  ·  then break 11: else  =  + stepsize 12: w  train a linear regression model on S  V 13: Return:  and model parameter w
+
+enough,' in which case we do not gain any benefit from paying for another redundant translation. Our translation reduction method allows us to set an empirical definition of `good enough'. We define an Oracle upper bound  to be the estimated BLEU score using the full set of non-professional translations. We introduce a parameter  to set the allowable degradation in translation quality. We train a model to search for a threshold  between acceptable and unacceptable translations for a specific value of  . For instance, we may fix  at 95%, meaning that the resulting BLEU score should not drop below 95% of the  after reducing the number of translations. For a new translation, our model scores it, and if its score is higher than , then we do not solicit another translation. Otherwise, we continue to so-
+
+4
+
+Reducing the Number of Translations
+
+The first way that we optimize cost is to solicit fewer redundant translations. The strategy is to recognize when we have got a good translation of a source sentence and to immediately stop purchasing additional translations of that sentence. The crux of this method is to decide whether a translation is `good 707
+
+

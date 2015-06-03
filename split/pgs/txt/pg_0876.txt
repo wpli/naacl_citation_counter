@@ -1,0 +1,29 @@
+We define the conditional probabilities as: P (wi |hi ) = P (ci |hi )P (wi |ci , hi ), where ci is the class the word wi belongs to, i.e. wi  Cci . We adjust the model definition to also account for the class probabilities P (ci |hi ). We associate a distributed representation sc and a bias term tc to every class c. The class conditional probabilities are computed reusing the projection vector p with a new scoring function  (c, hi ) = sT c p + tc . The probabilities are normalised separately: P (ci |hi ) = P (wi |ci , hi ) = exp( (ci , hi )) K j =1 exp( (cj , hi )) exp((wi , hi )) wCc exp((w, hi ))
+i
+
+The optimal time complexity is obtained by using balanced binary trees. The overall complexity of the normalisation step becomes O(log |V |× D) because the length of any path is bounded by O(log |V |) and because exactly two terms are present in the denominator of every normalisation operation. Inducing high quality binary trees is a difficult problem which has received some attention in the research literature (Mnih and Hinton, 2009; Morin and Bengio, 2005). Results have been somewhat unsatisfactory, with the exception of Mnih and Hinton (2009), who did not release the code they used to construct their trees. In our experiments, we use Huffman trees (Huffman, 1952) which do not have any linguistic motivation, but guarantee that a minimum number of nodes are accessed during training. Huffman trees have depths that are close to log |V |. 2.3 Noise Contrastive Estimation Training neural language models to maximise data likelihood involves several iterations over the entire training corpus and applying the backpropagation algorithm for every training sample. Even with the previous factorisation tricks, training neural models is slow. We investigate an alternative approach for training language models based on noise contrastive estimation, a technique which does not require normalised probabilities when computing gradients (Mnih and Teh, 2012). This method has already been used for training neural language models for machine translation by Vaswani et al. (2013). The idea behind noise contrastive training is to transform a density estimation problem into a classification problem, by learning a classifier to discriminate between samples drawn from the data distribution and samples drawn for a known noise distribution. Following Mnih and Teh (2012), we set the unigram distribution Pn (w) as the noise distribution and use k times more noise samples than data samples to train our models. The new objective is:
+m
+
+When K  |V | and the word classes have roughly equal sizes, the softmax step has a more manageable time complexity of O( |V | × D) for both training and testing. 2.2 Tree Factored Models One can take the idea presented in the previous section one step further and construct a tree over the vocabulary V . The words in the vocabulary are used to label the leaves of the tree. Let n1 , . . . , nk be the nodes on the path descending from the root (n1 ) to the leaf labelled with wi (nk ). The probability of the word wi to follow the context hi is defined as:
+k
+
+P (wi |hi ) =
+j =2
+
+P (nj |n1 , . . . , nj -1 , hi ).
+
+We associate a distributed representation sn and bias term tn to each node in the tree. The conditional probabilities are obtained reusing the scoring function  (nj , hi ): P (nj |n1 , . . . , nj -1 , hi ) = exp( (nj , hi )) , nS (nj ) exp( (n, hi ))
+
+J ( ) = +
+
+log P (C = 1|, wi , hi )
+i=1 m k
+
+where S (nj ) is the set containing the siblings of nj and the node itself. Note that the class decomposition trick described earlier can be understood as a tree factored model with two layers, where the first layer contains the word classes and the second layer contains the words in the vocabulary. 822
+
+log P (C = 0|, nij , hi ),
+i=1 j =1
+
+where nij are the noise samples drawn from Pn (w). The posterior probability that a word is generated
+
+

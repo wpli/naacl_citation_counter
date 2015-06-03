@@ -1,0 +1,30 @@
+Type AVG MWE INT ID INV
+
+Total 6341 1638 612 392 259
+
+SVM Corr Prec 3408 0.546 369 0.225 370 0.605 283 0.722 76 0.293
+
+CLSA Corr Prec 3158 0.506 538 0.328 362 0.592 269 0.686 65 0.251
+
+RNTN Corr Prec 3604 0.577 538 0.359 413 0.675 286 0.730 93 0.359
+
++replace-gold Corr Prec 4309 0.690 546 0.333 470 0.768 323 0.824 79 0.305
+
+Table 7: Precision of rules with non-neutral parent label (ID: daughters and parent have identical labels)
+
+enough of it ­ because of the way the Stanford Sentiment Treebank is constructed, phrases always have the same (context-independent) label, while we may get a more accurate (and possibly different) picture from introducing additional means of quality control (which in turn increases the necessary investment for such a sentiment treebank). 7.2 Contrasting SVM and RNTN behaviour
+
+In table 7, we tabulated the classification accuracy for the parent node in different types of productions in HeiST. In this evaluation, we counted a production as correct whenever the parent node has the right sentiment label (in parallel with the labeled recall in syntactic evaluation), ignoring for the moment the question whether the production produced by a system falls into the same category. It is easy to see that AVG-type productions are the least errorprone for all classifiers, whereas MWE and INV productions pose a significant challenge for the models. We also see that on these challenging production, the RNTN performs better than the other methods.
+
+results for parsing on the very small TUT treebank (slightly more than 2000 sentences) can be achieved using a PCFG-LA model. We showed that a wide variety of models ­ from lexicon-based sentiment prediction over SVM with unigram features to crosslingual classification ­ performs better than the RNTN, and that methods to improve RNTN performance that work in other settings (syntax) do not offer any easy fix. In a second step, we took a closer look at the crowdsourced data in order to explain certain counterintuitive results (such as the fact that most sentiment lexicons do not benefit from negation handling, or that the upper baseline achievable with the RNTN by getting gold-standard information on positive and negative words is at about the same level as our SVM classifier), and found that SSTb-type resources show marked differences from e.g., the MLSA dataset as they incorporate multiword items, but seem to be challenging for the study of compositionality due to noise that is not present in expert-annotated resources.
+
+8
+
+Summary
+
+References
+Banea, C., Mihalcea, R., and Wiebe, J. (2013). Porting multilingual subjectivity resources across languages. IEEE Transactions on Affective Computing, 2(4):211­225. Candito, M.-H. and Seddah, D. (2010). Parsing word clusters. In Proceedings of the First Workshop on Statistical Parsing of MorphologicallyRich Languages (SPMRL 2010). Choi, Y. and Cardie, C. (2008). Learning with compositional semantics as structural inference for subsentential sentiment analysis. In Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing (EMNLP 2008).
+
+We presented a novel dataset for subsentential sentiment classification, which uses the same conventions as the Stanford Sentiment Treebank (SSTb), which is the only German resource of this type besides the smaller (270 sentences) MLSA corpus (Clematide et al., 2012). We performed a systematic exploration into supervised, cross-lingual, and lexicon-based approaches on this dataset and found that, paradoxically, the performance of the stateof-the-art recursive neural tensor network (RNTN) models are severely impeded in this data-sparse situation, unlike latent-variable models for syntax which can deal with such conditions quite well: Lavelli and Corazza (2009), for example, reports that the best 702
+
+

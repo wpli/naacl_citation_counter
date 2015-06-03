@@ -1,0 +1,32 @@
+BBN data a. Ar(Manl.Sent) b. En(Manl.Trans., Manl.Sent) c. En(Auto.Trans., Manl.Sent) Syria data d. Ar(Manl.Sent) e. En(Auto.Trans., Manl.Sent)
+
+positive 41.50 35.00 36.17 22.40 14.25
+
+negative 47.92 43.25 36.50 67.50 66.15
+
+neutral 10.58 21.75 27.34 10.10 19.60
+
+agreement 73.80 68.00 65.70 79.00 76.10
+
+Table 1: Class distribution (in percentage) of the sentiment annotated datasets.
+
+has a negative hashtag. For each term in the tweet set, a sentiment score is computed by measuring the PMI (pointwise mutual information) between the term and the positive and negative categories:
+SenScore (w) = P M I (w, pos) - P M I (w, neg ) (1)
+
+sum of negative scores for tweet tokens in affirmative contexts and in negated contexts, separately.
+
+7
+7.1
+
+Arabic Sentiment Analysis
+Building an Arabic Sentiment System
+
+where w is a term in the lexicon. P M I (w, pos) is the PMI score between w and the positive class, and P M I (w, neg ) is the PMI score between w and the negative class. A positive SenScore (w) suggests that the word is associated with positive sentiment and a negative score suggests that the word is associated with negative sentiment. The magnitude indicates the strength of the association. 6.2 Pre-processing and Feature Generation
+
+The following pre-processing steps are performed. URLs and user mentions are normalized to http://someurl and @someuser, respectively. Tweets are tokenized and part-of-speech tagged with the CMU Twitter NLP tool (Gimpel et al., 2011). Then, each tweet is represented as a feature vector. The features: - Word and character ngrams; - POS: # occurrences of each part-of-speech tag; - Negation: # negated contexts. Negation also affects the ngram features: a word w becomes w NEG in a negated context; - Automatic sentiment lexicons: For each token w occurring in a tweet, its sentiment score score (w) is used to compute: # tokens with score (w) = 0; the total score = wtweet score (w); the maximal score = max wtweet score (w); the score of the last token in the tweet. - Manually created sentiment lexicons: For each of the three manual sentiment lexicons, the following features are computed: the sum of positive and the 772
+
+We built an Arabic sentiment analysis system by reconstructing the NRC-Canada English system to deal with Arabic text. It extracts the same feature set as described in Section 6.2. We also generated a word-sentiment association lexicon as described in Section 6.1, but for Arabic words from Arabic tweets (more details in sub-section below). We preprocess Arabic text by tokenizing with CMU Twitter NLP tool to deal with specific tokens such as URLs, usernames, and emoticons. Then we use MADA to generate lemmas. Finally, we normalize different forms of Alif and Ya to bare Alif and dotless Ya to decrease token sparcity in Arabic datasets. 7.1.1 Generating Arabic Sentiment Lexicon
+
+We translated 77 positive and negative seed words used to generate the English NRC Hashtag Sentiment Lexicon into Arabic using Google Translate. Among the several translations provided by it, we chose words that were less ambiguous and tended to have strong sentiment in Arabic texts. To increase the coverage of our seed list, we manually added different inflections for these translations. We polled the Twitter API for the period of June to August 2014 and collected tweets with #(keyword). After filtering out duplicate tweets and retweets, we ended up with 163,944 positive unique tweets and 37,848 negative unique tweets. Then for each word w, SenScore (w) was calculated just as described in Section 6.1.
+
+

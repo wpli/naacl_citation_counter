@@ -1,0 +1,31 @@
+Token count Word vector count Word vector train time
+
+English 5b 2.9m 100hrs
+
+Arabic 5b 2.7m 100hrs
+
+Urdu 75m 0.2m 3hrs
+
+Linear Search LSH RBV
+
+False Negative (%) 0 14.29 9.08
+
+Time (s) 342 69 19
+
+Table 1: Monolingual corpora statistics, number of word vectors, and time to learn the word vectors (on single CPU core) for each source language.
+
+Table 2: Performance of linear search, locality sensitive hashing, and redundant bit vectors, for k = 200.
+
+form a bitwise and over the corresponding bit vectors to find the set of points that actually fall into p's hypercube, i.e., the approximated candidate neighbor set of p. Finally, a linear search over this much smaller set finds the approximate k -nearest neighbors, similar to LSH.
+
+5
+
+Experiments
+
+We first evaluate the speed and accuracy of the presented approximate k -NN query algorithms (§5.2). Next we experiment with the translation rule generation approaches (§5.3), and then we analyze the global and local projection methods (§5.4). Following Saluja et al. (2014), we present most results on Arabic-English translation and then validate our findings on Urdu-English (§5.5), a low-resource setting. Lastly, we discuss some qualitative results (§5.6). 5.1 Datasets & Preprocessing We test our approach on both Arabic-English and Urdu-English translation. For Arabic-English our bilingual training data comprises of 685k sentence pairs. The NIST MT08 and MT09 data sets serve as tuning and testing sets, respectively. Both are combinations of newswire and weblog articles, and each Arabic sentence has four reference translations. For Urdu-English our bilingual training corpus contains 165k sentence pairs, and the tuning and testing sets are NIST MT08 and NIST MT09, respectively. Table 1 shows some statistics for the monolingual data we use. The majority of the data for Arabic and English is drawn from the AFP Gigaword corpus. For Urdu most of the data is mined by a web crawler, mainly because there are not many official resources for this language. We run standard tokenization and segmentation on the monolingual corpora. After that we use the Word2Vec tool (Mikolov et al., 2013b) to generate 1532
+
+word embeddings for each language with the bagof-words model, where the number of dimensions is set to d = 300. See Table 1 for the number of word vectors learned for each language. To obtain phrases in each language, we use a similar strategy as in Saluja et al. (2014). For Arabic and Urdu, we collect all unigrams and bigrams from the tuning and testing sets. This gives 0.66m phrases for Arabic and 0.2m phrases for Urdu. For English, we collect unigrams and bigrams from the monolingual data instead. However, the English monolingual corpus is much larger than the tuning and testing sets for Arabic and Urdu. We therefore train a language model over the monolingual data, and collect the unigrams and bigrams from the ARPA file, filtering out all candidates that have a probability smaller than 10-7 . Similar to Saluja et al. (2014), we use a baseline MT system to translate the Arabic or Urdu phrases and add their translations to the English phrase set. After this procedure we end up with 1.5m English phrases. We use simple component-wise addition to generate phrase vectors from word vectors. Some rare words do not receive a vector representation after running Word2Vec, and we simply remove phrases containing those words, resulting in a total of 0.65m phrases for Arabic, 0.18m phrases for Urdu, and 1.2m phrases for English. 5.2 Evaluation of Approximated k -NN Query
+
+We first evaluate the performances of different k -NN query approaches on English word vectors. There are 2.9m word vectors in d = 300 dimensional space. We randomly select 1,000 words, and query for each word the 200 nearest neighbors, k = 200, with either linear search, LSH, and RBV. We measure the false negative ratio, i.e., the percentage of true neighbors missed by each query method, as well as time. For LSH and RBV, we tune the parameters for best performance (LSH: number of projected dimensions, number of layers, and width of
+
+

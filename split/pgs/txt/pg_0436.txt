@@ -1,0 +1,40 @@
+BLEU 0.2
+
+0.331
+
+0.334
+
+0.337
+
+0.1 WIP Parameter 2
+
+0
+
+w(0)
+
+-0.1
+
+-0.2
+
+-0.2
+
+-0.1
+
+0 0.1 UtoV Parameter 1
+
+0.2
+
+Figure 4: The BLEU score over a 1502 sentence tune set for the CUED Russian-to-English (Pino et al., 2013) system over two parameters. Enumerated vertices of the Minkowski sum are shown in the shaded regions. tially reverse search transforms the graph into a tree. The vertex associated with w(0) is denoted as the root of the tree, and from this root vertices are enumerated in reverse order of model score under w(0) . Each branch of the tree can be enumerated independently, which means that the enumeration can be parallelised. The complexity of the full algorithm is O( (D3.5  )| vert(H )|) (Fukuda, 2004). In comparison with the O(K S ) for LP-MERT the worst case complexity of the reverse search algorithm is linear with respect to the size of vert(H ). 4.2 Two Dimensional Projected MERT
+
+For our demonstration, we plot the error count over a plane in (RD ) . Using the CUED Russian-toEnglish (Pino et al., 2013) entry to WMT'13 (Bojar et al., 2013) we build a tune set of 1502 sentences. The system uses 12 features which we initially tune with lattice MERT (Macherey et al., 2008) to get a parameter w(0) . Using this parameter we generate 1000-best lists. We then project the feature functions in the 1000-best lists to a 3-dimensional representation that includes the source-to-target phrase probability (UtoV), the word insertion penalty (WIP), and the model score due to w(0) . We use the Minkowski sum algorithm to compute BLEU as   (R2 ) is applied to the parameters from w(0) . Figure 4 displays some of the characteristics of the algorithm1 . This plot can be interpreted as a 3-dimensional version of Figure 3 in Macherey et al. (2008) where we represent the BLEU score as a heatmap instead of a third axis. Execution was on 12 CPU cores, leading to the distinct search regions, demonstrating the parallel nature of the algorithm. Weibel (2010) uses a depth-first enumeration order of G(H ), hence the narrow and deep exploration of (RD ) . A breadth-first ordering would focus on cones closer to w(0) . To our knowledge, this is the first description of a generalised line optimisation algorithm that can search all the parameters in a plane in polynomial time. Extensions to higher dimensional search are straightforward.
+
+5 Robustness of Linear Models
+In the previous section we described the Minkowski sum polytope. Let us consider the following upper bound theorem Theorem 1. Let H1 , . . . ., HS be polytopes in RD with at most N vertices each. Then for D > 2 the upper bound on number of vertices of H1 + . . . + HS is O(S D-1 K 2(D-1) ). Proof. See Gritzmann and Sturmfels (1992) Each vertex hi corresponds to a single index vector i, which itself corresponds to a single set of selected hypotheses. Therefore the number of distinct sets of hypotheses that can be drawn
+A replication of this experiment forms part of the UCAMSMT tutorial at http://ucam-smt.github.io
+1
+
+We now explore whether the reverse search algorithm is a practical method for performing MERT using an open source implementation of the algorithm (Weibel, 2010). For reasons discussed in the next section, we wish to reduce the feature dimension. For M < D, we can define a projection matrix AM +1,D that maps hi  RD into RM +1 as ~ i, h ~ i  RM +1 . There are techAM +1,D hi = h nical constraints to be observed, discussed in Waite (2014). We note that when M = 1 we obtain Eqn. (4).
+
+382
+
+

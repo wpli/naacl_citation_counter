@@ -1,0 +1,35 @@
+updated state ht using a non-linear function f : ht = f (xt , ht-1 ) (2) where (h0 = 0). In our work we use the highly successful Long Short-Term Memory (LSTM) net as the sequence model, since it has shown superior performance on tasks such as speech recognition (Graves and Jaitly, 2014), machine translation (Sutskever et al., 2014; Cho et al., 2014) and the more related task of generating sentence descriptions of images (Donahue et al., 2014; Vinyals et al., 2014). To be specific, we use two layers of LSTMs (one LSTM stacked atop another) as shown in Figure 2. We present details of the network in Section 3.1. To convert videos to a fixed length representation (input xt ), we use a Convolutional Neural Network (CNN). We present details of how we apply the CNN model to videos in Section 3.2. 3.1 LSTMs for sequence generation A Recurrent Neural Network (RNN) is a generalization of feed forward neural networks to sequences. Standard RNNs learn to map a sequence of inputs (x1 , . . . , xt ) to a sequence of hidden states (h1 , . . . , ht ), and from the hidden states to a sequence of outputs (z1 , . . . , zt ) based on the following recurrences: ht = f (Wxh xt + Whh ht-1 ) zt = g (Wzh ht ) (3) (4)
+
+xt
+
+ht-1
+
+xt
+
+ht-1
+
+Input Gate xt ht-1 Input Modulation Gate
+
+Output Gate Cell ht(=zt)
+
+Forget Gate
+
+LSTM Unit
+
+xt
+
+ht-1
+
+Figure 3: The LSTM unit replicated from (Donahue et al., 2014). The memory cell is at the core of the LSTM unit and it is modulated by the input, output and forget gates controlling how much knowledge is transferred at each time step.
+
+where f and g are element-wise non-linear functions such as a sigmoid or hyperbolic tangent, xt is a fixed length vector representation of the input, ht  RN is the hidden state with N units, Wij are the weights connecting the layers of neurons, and zt the output vector. RNNs can learn to map sequences for which the alignment between the inputs and outputs is known ahead of time (Sutskever et al., 2014) however it's unclear if they can be applied to problems where the inputs (xi ) and outputs (zi ) are of varying lengths. This problem is solved by learning to map sequences of inputs to a fixed length vector using one RNN, and then map the vector to an output sequence using another RNN. Another known problem with RNNs is that, it can be difficult to train them to learn longrange dependencies (Hochreiter et al., 2001). However, LSTMs (Hochreiter and Schmidhuber, 1997),
+
+which incorporate explicitly controllable memory units, are known to be able to learn long-range temporal dependencies. In our work we use the LSTM unit in Figure 3, described in Zaremba and Sutskever (2014), and Donahue et al. (2014). At the core of the LSTM model is a memory cell c which encodes, at every time step, the knowledge of the inputs that have been observed up to that step. The cell is modulated by gates which are all sigmoidal, having range [0, 1], and are applied multiplicatively. The gates determine whether the LSTM keeps the value from the gate (if the layer evaluates to 1) or discards it (if it evaluates to 0). The three gates ­ input gate (i) controlling whether the LSTM considers its current input (xt ), the forget gate (f ) allowing the LSTM to forget its previous memory (ct-1 ), and the output gate (o) deciding how much of the memory to transfer to the hidden state (ht ), all enable the LSTM to learn complex long-term dependencies. The recurrences for the LSTM are then defined as: it =  (Wxi xt + Whi ht-1 ) (5) ft =  (Wxf xt + Whf ht-1 ) ot =  (Wxo xt + Who ht-1 ) ct = ft ht = ot ct-1 + it (ct ) (6) (7) (9)
+
+(Wxc xt + Whc ht-1 ) (8)
+
+where  is the sigmoidal non-linearity,  is the hyperbolic tangent non-linearity, represents the
+
+1497
+
+

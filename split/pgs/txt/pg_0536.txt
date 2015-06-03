@@ -1,0 +1,5 @@
+Mehmet Ali Yatbaz, Enis Rifat Sert, and Deniz Yuret. 2014. Unsupervised instance-based part of speech induction using probable substitutes. In Proceedings of COLING. Deniz Yuret. 2012. FASTSUBS: An efficient and exact procedure for finding the most likely lexical substitutes based on an n-gram language model. Signal Processing Letters, IEEE, 19(11):725­728.
+
+482
+
+

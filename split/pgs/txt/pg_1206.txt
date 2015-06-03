@@ -1,0 +1,49 @@
+AM-LOC A0 A1
+
+UNESCO
+SBJ
+
+is
+VC
+
+holding
+
+its
+OBJ
+
+meetings
+NMOD
+
+in
+
+Paris
+PMOD
+
+LOC
+
+Figure 1: Example sentence from the CoNLL­2009 dataset annotated with syntactic and semantic dependencies. The lower graph is the syntactic dependency tree for the sentence. The upper part contains the semantic dependencies for the predicate "holding". word lemma. Some tokens are also marked as predicates, i.e., argument-bearing tokens. The goal is to determine the semantic dependencies for each predicate pi (cf. upper part of Figure 1). These dependencies identify the arguments of each predicate and their role labels. In this work, we focus only on the semantic side ­ that is, identification and classification of predicate arguments. To this end, our system takes as input a syntactic dependency tree ysyn derived from a state-of-the-art parser (bottom part of Figure 1). More formally, let {pi }  x be the set of verbal and nominal predicates in the sentence. For each predicate pi (e.g., "holding"), our goal is to predict tuples (pi , aij , rij ) specifying the semantic dependency arcs, where aij  x is one argument (e.g., "meetings"), and rij is the corresponding semantic role label (e.g., A1). The semantic parse is then the collection of predicted arcs zsem = {(pi , aij , rij )}. We decouple syntactic and semantic inference problems into two separate steps. We first run our syntactic dependency parser RBGParser2 to obtain the syntactic dependency tree ysyn . The semantic parse zsem is then found conditionally on the syntactic part: z sem = arg max Ssem (x, ysyn , zsem ),
+zsem
+
+Predicate word Predicate POS Argument word Argument POS Pred. + arg. words Pred. + arg. POS Voice + pred. word
+
+Path Path + arg. POS Path + pred. POS Path + arg. word Path + pred. word Voice + pred. + arg. POS Voice + pred. POS
+
+Table 1: Templates for first-order semantic features. These features are also (optionally) combined with role labels. 3.1 Traditional Scoring Using Manually-designed Features
+
+In a typical feature-based approach (Johansson, 2009; Che et al., 2009), feature templates give rise to rich feature descriptions of the semantic structure. The score Ssem (x, ysyn , zsem ) is then defined as the inner product between the parameter vector and the feature vector. In the first-order arc-factored case, Ssem (x, ysyn , zsem ) = w · (x, ysyn , zsem ) =
+(p,a,r)zsem
+
+w · (p, a, r),
+
+where w are the model parameters and (p, a, r) is the feature vector representing a single semantic arc (p, a, r) (we suppress its dependence on x and ysyn ). We also experiment with second order features, i.e., considering two arguments associated with the same predicate, or two predicates sharing the same token as argument. For the arc-factored model, there are mainly four types of atomic information that define the arc features in (p, a, r): (a) the predicate token p (and its local context); (b) the argument token a (and its local context); (c) the dependency label path that connects p and a in the syntactic tree; (d) the semantic role label r of the arc. These pieces of atomic information are either used directly or combined as unigram up to 4-gram features into traditional models. To avoid heavy feature engineering and overfitting, we use a light and compact feature set derived from the information in (a)­(d). Table 1 shows the complete list of feature
+
+(1)
+
+Here Ssem (·) is the parametrized scoring function to be learned. We build our scoring function by combining a traditional feature scoring function with a tensor-based scoring function.
+2
+
+https://github.com/taolei87/RBGParser
+
+1152
+
+

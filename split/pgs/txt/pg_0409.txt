@@ -1,0 +1,17 @@
+I Can Has Cheezburger? A Nonparanormal Approach to Combining Textual and Visual Information for Predicting and Generating Popular Meme Descriptions
+William Yang Wang and Miaomiao Wen School of Computer Science Carnegie Mellon University Pittsburgh, PA 15213 Abstract
+The advent of social media has brought Internet memes, a unique social phenomenon, to the front stage of the Web. Embodied in the form of images with text descriptions, little do we know about the "language of memes". In this paper, we statistically study the correlations among popular memes and their wordings, and generate meme descriptions from raw images. To do this, we take a multimodal approach--we propose a robust nonparanormal model to learn the stochastic dependencies among the image, the candidate descriptions, and the popular votes. In experiments, we show that combining text and vision helps identifying popular meme descriptions; that our nonparanormal model is able to learn dense and continuous vision features jointly with sparse and discrete text features in a principled manner, outperforming various competitive baselines; that our system can generate meme descriptions using a simple pipeline.
+
+Figure 1: An example of the LOL cat memes.
+
+1
+
+Introduction
+
+In the past few years, Internet memes become a new, contagious social phenomenon: it all starts with an image with a witty, catchy, or sarcastic sentence, and people circulate it from friends to friends, colleagues to colleagues, and families to families. Eventually, some of them go viral on the Internet. Meme is not only about the funny picture, the Internet culture, or the emotion that passes along, but also about the richness and uniqueness of its language: it is often highly structured with special written style, and forms interesting and subtle connotations that resonate among the readers. For example, the LOL cat memes (e.g., Figure 1) often 355
+
+include superimposed text with broken grammars and/or spellings. Even though the memes are popular over the Internet, the "language of memes" is still not wellunderstood: there are no systematic studies on predicting and generating popular Internet memes from the Natural Language Processing (NLP) and Computer Vision (CV) perspectives. In this paper, we take a multimodal approach to predict and generate popular meme descriptions. To do this, we collect a set of original meme images, a list of candidate descriptions, and the corresponding votes. We propose a robust nonparanormal approach (Liu et al., 2009) to model the multimodal stochastic dependencies among images, text, and votes. We then introduce a simple pipeline for generating meme descriptions combining reverse image search and traditional information retrieval approaches. In empirical experiments, we show that our model outperforms strong discriminative baselines by very large margins in the regression/ranking experiments, and that in the generation experiment, the nonparanormal outperforms the second-best supervised baseline by 4.35 BLEU points, and obtains a BLEU score improvement of 4.48 over an unsupervised recurrent neural network language model
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 355­365, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

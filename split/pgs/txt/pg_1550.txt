@@ -1,0 +1,41 @@
+Predicting natural language desriptions of still images has received considerable attention, with some of the earliest works by Aker and Gaizauskas (2010), Farhadi et al. (2010), Yao et al. (2010), and Kulkarni et al. (2011) amongst others. Propelled by successes of deep learning, several groups released record breaking results in just the past year (Donahue et al., 2014; Mao et al., 2014; Karpathy et al., 2014; Fang et al., 2014; Kiros et al., 2014; Vinyals et al., 2014; Kuznetsova et al., 2014). In this work, we use deep recurrent nets (RNNs), which have recently demonstrated strong results for machine translation tasks using Long Short Term Memory (LSTM) RNNs (Sutskever et al., 2014; Cho et al., 2014). In contrast to traditional statistical MT (Koehn, 2010), RNNs naturally combine with vector-based representations, such as those for images and video. Donahue et al. (2014) and Vinyals et al. (2014) simultaneously proposed a multimodal analog of this model, with an architecture which uses a visual convnet to encode a deep state vector, and an LSTM to decode the vector into a sentence. Our approach to video to text generation is inspired by the work of Donahue et al. (2014), who also applied a variant of their model to video-to-text generation, but stopped short of training an end-toend model. Instead they converted the video to an intermediate role representation using a CRF, then decoded that representation into a sentence. In contrast, we bypass detection of high-level roles and use the output of a deep convolutional network directly as the state vector that is decoded into a sentence. This avoids the need for labeling semantic roles, which can be difficult to detect in the case of very large vocabularies. It also allows us to first pre-train the model on a large image and caption database, and transfer the knowledge to the video domain where the corpus size is smaller. While Donahue et al. (2014) only showed results on a narrow domain of cooking videos with a small set of pre-defined objects and actors, we generate sentences for opendomain YouTube videos with a vocabulary of thousands of words.
+
+Input Video
+
+Convolutional Net CNN CNN
+
+Recurrent Net LSTM LSTM LSTM LSTM LSTM LSTM LSTM LSTM
+
+Output A boy is playing golf <EOS>
+
+mean pooling
+
+...
+
+Figure 2: The structure of our video description network. We extract fc7 features for each frame, mean pool the features across the entire video and input this at every time step to the LSTM network. The LSTM outputs one word at each time step, based on the video features (and the previous word) until it picks the end-of-sentence tag.
+
+et al. (2014) and extends them to generate sentences describing events in videos. These models work by first applying a feature transformation on an image to generate a fixed dimensional vector representation. They then use a sequence model, specifically a Recurrent Neural Network (RNN), to "decode" the vector into a sentence (i.e. a sequence of words). In this work, we apply the same principle of "translating" a visual vector into an English sentence and show that it works well for describing dynamic videos as well as static images. We identify the most likely description for a given video by training a model to maximize the log likelihood of the sentence S , given the corresponding video V and the model parameters ,  = argmax log p(S |V ; ) (1)
+
+
+Assuming a generative model of S that produces each word in the sequence in order, the log probability of the sentence is given by the sum of the log probabilities over the words and can be expressed as: N log p(S |V ) = log p(Swt |V, Sw1 , . . . , Swt-1 )
+t=0
+
+3
+
+Approach
+
+Figure 2 depicts our model for sentence generation from videos. Our framework is based on deep image description models in Donahue et al. (2014);Vinyals
+
+where Swi represents the ith word in the sentence and N is the total number of words. Note that we have dropped  for convenience. A sequence model would be apt to model p(Swt |V, Sw1 , . . . , Swt-1 ), and we choose an RNN. An RNN, parameterized by , maps an input xt , and the previously seen words expressed as a hidden state or memory, ht-1 to an output zt and an
+
+...
+
+LSTM LSTM LSTM LSTM
+
+CNN CNN CNN
+
+(V,S )
+
+1496
+
+

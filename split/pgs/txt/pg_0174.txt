@@ -1,0 +1,29 @@
+system 0.2 bestfirst ours gold 0.1
+
+ref. Z13 ours ref. Z13 ours
+
+0.0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+
+ref. Z13 ours
+
+Figure 9: Distributions of spans outputted by the best-first, transition-based systems and the gold trees.
+no pos no dep 44.7 49.4 all pos no dep 33.7 40.1 43.8 46.8 50.8 all pos all dep 76.2 82.3
+
+output There is no asbestos in our products now . There is no asbestos now in our products . There is now our products in no asbestos . Previously , watch imports were denied such duty-free treatment . such duty-free treatment Previously , watch imports were denied . Previously , watch imports were denied such duty-free treatment . Despite recent declines in yields , investors continue to pour cash into money funds . continue yields investors pour to recent declines in cash , into money funds Despite recent declines in yields into money funds , investors continue to pour cash .
+
+BL 43.5 17.8 67.6 100
+
+20.1 67.0
+
+Wan et al. (2009) Zhang and Clark (2011b) Zhang et al. (2012) Zhang (2013) This paper
+
+Table 6: Example outputs.
+
+5 Related Work
+The input to practical natural language generation (NLG) system (Reiter and Dale, 1997) can range from a bag of words and phrases to a bag of lemmas without punctuation (Belz et al., 2011). The linearization module of this paper can serve as the final stage in a pipeline when the bag of words and their optional syntactic information are given. There has also been work to jointly perform linearization and morphological generation (Song et al., 2014). There has been work on linearization with unlabeled and labeled dependency trees (He et al., 2009; Zhang, 2013). These methods mostly use greedy or best-first algorithms to order each tree node. Our work is different by performing word ordering using a transition process. Besides dependency grammar, linearization with other syntactic grammars, such as CFG and CCG (White and Rajkumar, 2009; Zhang and Clark, 2011b), has also been studied. In this paper, we adopt the dependency grammar for transition-based linearization. However, since transition-based parsing algorithms has been successfully applied to different grammars, including CFG (Sagae et al., 2005) and CCG (Xu et al., 2014), our linearization method can be applied to these grammars.
+
+Table 5: Final results. those that have higher scores. As a result, the number of expanded spans do not have a fixed correlation with the size, and there can be fewer but better small spans expanded. In contrast, the transition-based system models transition sequences rather than individual spans, and therefore the distribution of spans of different sizes in each hypothesis resembles that of the training data. Figure 9 verifies the analysis by counting the distributions of spans with respect to the length, in the search algorithms of the two systems and the gold dependency trees. The distribution of the transition-based system is closer to that of gold dependency trees, while the best-first system outputs less smaller spans and more longer ones. This explains the higher precision for the best-first system on smaller spans. 4.4 Final Results The final results on the test set of Penn Treebank are shown in Table 5. Compared with previous studies, our transition-based linearization system achieves the best results on all the tests. Table 6 shows some example output sentences, when there are no input constraints. For longer sentences, the transitionbased method gives noticeably better results.
+
+120
+
+

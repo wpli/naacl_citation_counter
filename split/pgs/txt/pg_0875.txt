@@ -1,0 +1,36 @@
+Model Standard Class Factored Tree Factored NCE
+
+Training
+O(|V | × D) O ( |V | × D ) O(log |V | × D) O(k × D)
+
+Exact Decoding
+O(|V | × D) O( |V | × D) O(log |V | × D) O(|V | × D)
+
+Table 1: Training and decoding complexities for the optimization tricks discussed in section 2.
+
+Figure 1: A 3-gram neural language model is used to predict the word following the context the cat.
+
+and factoring the softmax layer using Brown clusters (Brown et al., 1992) provides the most pragmatic solution for fast training and decoding. Further, we confirm that when evaluated purely on BLEU score, neural models are unable to match the benchmark Kneser-Ney models, even if trained with large hidden layers. However, when the evaluation is restricted to models that match a certain memory footprint, neural models clearly outperform the n-gram benchmarks, confirming that they represent a practical solution for memory constrained environments.
+
+linear activation. The model computes a set of similarity scores measuring how well each word w  V matches the context projection of hi . The similarity score is defined as (w, hi ) = rT w p + bw , where bw is a bias term incorporating the prior probability of the word w. The similarity scores are transformed into probabilities using the softmax function: P (wi |hi ) = exp((wi , hi )) , wV exp((w, hi ))
+
+2
+
+Model Description
+
+As a basis for our investigation, we implement a probabilistic neural language model as defined in Bengio et al. (2003).1 For every word w in the vocabulary V , we learn two distributed representations qw and rw in RD . The vector qw captures the syntactic and semantic role of the word w when w is part of a conditioning context, while rw captures its role as a prediction. For some word wi in a given corpus, let hi denote the conditioning context wi-1 , . . . , wi-n+1 . To find the conditional probability P (wi |hi ), our model first computes a context projection vector:   p=f
+n-1 j =1
+
+The model architecture is illustrated in Figure 1. The parameters are learned with gradient descent to maximize log-likelihood with L2 regularization. Scaling neural language models is hard because any forward pass through the underlying neural network computes an expensive softmax activation in the output layer. This operation is performed during training and testing for all contexts presented as input to the network. Several methods have been proposed to alleviate this problem: some applicable only during training (Mnih and Teh, 2012; Bengio and Senecal, 2008), while others may also speed up arbitrary queries to the language model (Morin and Bengio, 2005; Mnih and Hinton, 2009). In the following subsections, we present several extensions to this model, all sharing the goal of reducing the computational cost of the softmax step. Table 1 summarizes the complexities of these methods during training and decoding. 2.1 Class Based Factorisation
+
+Cj qhij  ,
+
+where Cj  RD×D are context specific transformation matrices and f is a component-wise rectified
+Our goal is to release a scalable neural language modelling toolkit at the following URL: http://www.example.com.
+1
+
+The time complexity of the softmax step is O(|V | × D). One option for reducing this excessive amount of computation is to rely on a class based factorisation trick (Goodman, 2001). We partition the vocabulary into K classes {C1 , . . . , CK } such that V = K i=1 Ci and Ci  Cj = , 1  i < j  K .
+
+821
+
+

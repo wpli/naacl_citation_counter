@@ -1,0 +1,35 @@
+( i, k , m, 1 ) ( k + 1, j , h, 2 ) For a production ( i, j , h, A) Nonterm Features (A, 1 ) (A, 1 , tag(m)) (A, 2 ) (A, 2 , tag(h)) Span Features (rule, xi ) (rule, xi-1 ) (rule, xj ) (rule, xj +1 ) (rule, xk ) (rule, xk+1 ) (rule, bin(j - i)) Rule Features (rule) (rule, xh , tag(m)) (rule, tag(h), xm ) (rule, tag(h), tag(m)) (rule, xh ) (rule, tag(h)) (rule, xm ) (rule, tag(m))
+
+Model Xia et al. (2009) PAD (§19) PAD (§2­21)
+
+Prec. 88.1 95.9 97.5
+
+PTB §22 Rec. F1 90.7 95.9 97.8 89.4 95.9 97.7
+
+Table 2: Comparison with the rule-based system of Xia et al. (2009). Results are shown using gold-standard tags and dependencies. Xia et al. report results consulting only §19 in development and note that additional data had little effect. We show our system's results using §19 and the full training set.
+
+Figure 4: The feature templates used in the function f (x, d, y ). For the span features, the symbol rule is expanded into both A  B C and backoff symbol A. The function bin(i) partitions a span length into one of 10 bins.
+
+modifier word and part-of-speech, and head word and part-of-speech. The second set of features is modeled after the span features described in the X-bar-style parser of Hall et al. (2014). These include conjunctions of the rule with: first and last word of current span, preceding and following word of current span, adjacent words at split of current span, and binned length of the span. The full feature set is shown in Figure 4. After training, there are a total of around 2 million nonzero features. For efficiency, we use lossy feature hashing. We found this had no impact on parsing accuracy but made the parsing significantly faster. 4.2 Training The parameters  are estimated using a structural support vector machine (Taskar et al., 2004). Given a set of gold-annotated c-parse examples, (x1 , y 1 ), . . . , (xD , y D ), and d-parses d1 . . . dD induced from the head rules, we estimate the parameters to minimize the regularized empirical risk
+D
+
+The objective is optimized using AdaGrad (Duchi et al., 2011). The gradient calculation requires computing a loss-augmented max-scoring c-parse for each training example which is done using the algorithm of Figure 3 (right).
+
+5
+
+Related Work
+
+min
+ i=1
+
+(xi , di , y i , ) + ||||1
+
+where we define as (x, d, y, ) = -s(y ) + maxy Y (x,d) (s(y ) + (y, y )) and where  is a problem specific cost-function. In experiments, we use a Hamming loss (y, y ) = |y - y | where y is an indicator for production rules firing over pairs of adjacent spans (i.e., i, j, k ).
+
+6
+
+The problem of converting dependency to phrasestructured trees has been studied previously from the perspective of building multi-representational treebanks. Xia and Palmer (2001) and Xia et al. (2009) develop a rule-based system for the conversion of human-annotated dependency parses. This work focuses on modeling the conversion decisions made and capturing how researchers annotate specific phenomena. Our work focuses on a different problem of learning a data-driven structured prediction model that is also able to handle automatically predicted dependency parses as input. While the aim is different, Table 2 does give a direct comparison of our system to that of Xia et al. (2009) on gold d-parse data. An important line of previous work also uses dependency parsers to produce phrase-structure trees. In particular Hall et al. (2007) and Hall and Nivre (2008) develop a specialized dependency label set to encode phrase-structure information in the d-parse. After predicting a d-parse this label information can be used to assemble a predicted c-parse. Our work differs in that it does not make any assumptions on the labeling of the dependency tree used and it uses structured prediction to produce the final c-parse. Very recently, Fern´ andez-Gonz´ alez and Martins (2015) also show that an off-the-shelf, trainable, dependency parser is enough to build a highlycompetitive constituent parser. They proposed
+
+793
+
+

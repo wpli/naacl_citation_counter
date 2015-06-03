@@ -1,0 +1,37 @@
+Table 1: Average sizes of the intersection between the ESA concept representations of documents and labels. Both documents and label are represented with 500 Wikipedia concepts. Documents are split into different lengths.
+# of split 1 2 4 8 16 Avg. # of words per doc. 209.6 104.8 52.4 26.2 13.1 Avg. # of concepts 23.1 18.1 13.8 10.6 8.4
+
+x and y together to increase the similarity value. We can rewrite the vectors x and y as x = {xa1 , . . . , xanx } and y = {yb1 , . . . , ybny }, where ai and bj are indices of the non-zero terms in x and y (1  ai , bj  V ). xai and ybi are the weights associated to the terms in the vocabulary. Suppose there are non-zero terms nx and ny in x and y respectively. Then cosine similarity can be rewritten as: cos(x, y) =
+nx i=1 ny j =1  (ai
+
+- bj )xai ybj
+
+||x|| · ||y||
+
+,
+
+(1)
+
+as the drop in the document size. For example, there are on average 8 concepts in the intersection of two vectors with 500 non-zero concepts when we split each document into 16 parts. When there are fewer overlapping terms between two pieces of texts, it can cause mismatch or biased match and result in less accurate comparison. In this paper, we propose to use unsupervised approaches to improve the representation, along with a corresponding similarity approach between these representations. Our contribution is twofold. First, we incorporate the popular word2vec (Mikolov et al., 2013a; Mikolov et al., 2013b) representations into ESA representation, and show that incorporating semantic relatedness between Wikipedia titles can indeed help the similarity measure between short texts. Second, we propose and evaluate three mechanisms for comparing the resulting representations. We verify the superiority of the proposed methods using three different NLP tasks.
+
+where  (·) is the Dirac function  (0) = 1 and  (other) = 0. Suppose we can compute the similarity between terms ai and bj , which is denoted as (ai , bj ), then the problem is how to aggregate the similarities between all ai 's and bj 's to augment the original cosine similarity. 2.1 Similarity Augmentation The most intuitive way to integrate the similarities between terms is averaging them: 1 SA (x, y) = nx ||x|| · ny ||y||
+nx ny
+
+xai ybj (ai , bj ).
+i=1 j =1
+
+2
+
+Sparse Vector Densification
+
+In this section, we introduce a way to compute the similarity between two sparse vectors by augmenting the original similarity measure, i.e., cosine similarity. Suppose we have two vectors x = (x1 , . . . , xV )T and y = (y1 , . . . , yV )T where V is the vocabulary size. Traditional cosine similarity computes the dot product between these two vectors and normalizes it by their norms: cos(x, y) = xT y ||x||·||y|| . This requires each dimension of x to be aligned with the same dimension of y. Note that for sparse vectors x and y, most of the the elements can be zero. Aligning the indices can result in zero similarity even though the two pieces of texts are related. Thus, we propose to align different indices of 1276
+
+(2) This similarity averages all the pairwise similarities between terms ai 's and bj 's. However, we can expect a lot of the similarities (ai , bj ) to be close to zero. In this case, instead of introducing the relatedness between nonidentical terms, it will also introduce noise. Therefore, we also consider an alignment mechanism that we implement greedily via a maximum matching mechanism: SM (x, y) = 1 ||x|| · ||y||
+nx
+
+xai ybj max (ai , bj ).
+i=1 j
+
+(3) We choose j as argmaxj (ai , bj ) and substitute the similarity (ai , bj ) between terms ai and bj into the final similarity between x and y. Note that this similarity is not symmetric. Thus, if one needs a symmetric similarity, the similarity can be computed by averaging two similarities SM (x, y) and SM (y, x). The above two similarity measurements are simple and intuitive. We can think about SA (x, y) as leveraging term many-to-many mapping, while
+
+

@@ -1,0 +1,43 @@
+Query classification posterior probability computed by sigmoid
+
+Query Classification P ( C 1 | Q) P ( C 2 | Q)
+
+Web Search P ( D 1 | Q) P ( D 2 | Q)
+
+Web search posterior probability computed by softmax Relevance measured by cosine similarity
+
+l3 : Task-Specific Q C1 Q C2 Representation t=C1 t=C2 (128) W2 W2 Shared layers
+
+t=C1 W3
+
+t=C2 W3
+
+Q Sq W2
+t=Sq
+
+Sd D1 t=Sd W2
+
+Sd D2 t=Sd W2
+
+l2 : Semantic Representation (300) W1 l1 : Letter 3gram (50k) H X : Bag-of-Words Input (500k)
+
+Figure 1: Architecture of the Multi-task Deep Neural Network (DNN) for Representation Learning: The lower layers are shared across all tasks, while top layers are task-specific. The input X (either a query or document, with vocabulary size 500k) is first represented as a bag of words, then hashed into letter 3-grams l1 . Non-linear projection W1 generates the shared semantic representation, a vector l2 (dimension 300) that is trained to capture the essential characteristics of queries and documents. Finally, for each task, additional t generate task-specific representations l (dimension 128), followed by operations non-linear projections W2 3 necessary for classification or ranking. dimensional vector by l2 = f (W1 · l1 ) (1) Algorithm 1: Training a Multi-task DNN t , Wt } randomly Initialize model  : {W1 , W2 3 for iteration in 0... do 1. Pick a task t randomly 2. Pick sample(s) from task t (Q, yt = {0, 1}) for query classification (Q, L) for web search 3. Compute loss: L() L()=Eq. 5 for query classification L()=Eq. 6 for web search 4. Compute gradient: () 5. Update model:  =  - () end
+The task t is one of the query classification tasks or web search task, as shown in Figure 1. For query classification, each training sample includes one query and its category label. For web search, each training sample includes query and document list.
+
+where f (·) is the tanh nonlinear activation f (z ) = 1-e-2z . This 50k-by-300 matrix W1 is responsible 1+e-2z for generating the cross-task semantic representation for arbitrary text inputs (e.g., Q or D). Task-Specific Representation (l3 ): For each 1 task, a nonlinear transformation maps the 300dimension semantic representation l2 into the 128dimension task-specific representation by
+t l3 = f (W2 · l2 )
+
+(2)
+
+where, t denotes different tasks (query classification or web search). Query Classification Output: Suppose QC1  t=C1 l3 = f (W2 · l2 ) is the 128-dimension taskspecific representation for a query Q. The probability that Q belongs to class C1 is predicted by a logistic regression, with sigmoid g (z ) = 1+1 : e-z
+t=C1 P (C1 |Q) = g (W3 · QC1 )
+
+computed by cosine similarity as: R(Q, D) = cos(QSq , DSd ) = 2.3 The Training Procedure QSq · DSd (4) ||QSq ||||DSd ||
+
+(3)
+
+Web Search Output: For the web search task, both the query Q and the document D are mapped into 128-dimension task-specific representations QSq and DSd . Then, the relevance score is 914
+
+In order to learn the parameters of our model, we use mini-batch-based stochastic gradient descent (SGD) as shown in Algorithm 1. In each iteration, a task t is selected randomly, and the model is updated ac-
+
+

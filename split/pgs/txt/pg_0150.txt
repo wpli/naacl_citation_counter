@@ -1,0 +1,39 @@
+Corpus CCAT 10 CCAT 50 Guardian1 Guardian2
+
+#authors 10 50 13 13
+
+#docs #sentences #words /author/topic /doc /doc 100 19 425 100 19 415 13 53 1034 65 10 207
+
+Table 3: Some statistics about the datasets.
+
+sidering these parts of text for measuring the frequencies of character n-grams is not a good idea because signatures provide direct clues about the authorship of document and quotations do not reflect the author's writing style. Therefore, to clean up the CCAT collection, we preprocessed it to remove signatures and quotations from each document. Since the CCAT collection contains documents belonging to only corporate/industrial topic category, this will be our single-domain collection. The other collection consists of texts published in The Guardian daily newspaper written by 13 authors in four different topics (Stamatatos, 2013). This dataset contains opinion articles on the topics: World, U.K., Society, and Politics. Following prior work, to make the collection balanced across authors, we choose at most ten documents per author for each of the four topics. We refer to this corpus as Guardian1. We also consider a variation of this corpus that makes it more challenging but that more closely matches realistic scenarios of forensic investigation that deal with short texts such as tweets, SMS, and emails. We chunk each of the documents by sentence boundaries into five new short documents. We refer to this corpus as Guardian2. Table 3 shows some of the statistics of the CCAT and Guardian corpora and Table 4 presents some of the top character n-grams for each category (taken from an author in the Guardian data, but the top ngrams look qualitatively similar for other authors).
+
+SC Category prefix suffix space-prefix space-suffix whole-word mid-word multi-word beg-punct mid-punct end-punct word affix
+
+tha ing th he the tio et .T s, es,
+
+N -grams the wit con hat ion ent of to an of to ed and for was ati iti men sa tt st 's ,t ,a e, s. e's on. on, es.
+
+hav ers in ng not ent nt .I y's er,
+
+Table 4: Top character 3-grams in each category for author 'Catherine Bennet' in the cross-domain training data.
+
+tion models was measured in terms of accuracy. In the single-domain CCAT experiments, accuracy was measured using the train/test partition of prior work. In the cross-domain Guardian experiments, accuracy was measured by considering all 12 possible pairings of the 4 topics, treating one topic as training data and the other as testing data, and averaging accuracy over these 12 scenarios. This ensured that in the crossdomain experiments, the topics of the training data were always different from that of the test data. We trained support vector machine (SVM) classifiers using the Weka implementation (Witten and Frank, 2005) with default parameters. We also ran some comparative experiments with the Weka implementation of naive Bayes classifiers and the LibSVM implementation of SVMs. In the results below, when performance of a single classifier is presented, it is the result of Weka's SVM, which generally gave the best performance. When performance of other classifiers are presented, the classifiers are explicitly indicated.
+
+5
+
+4
+
+Experimental Settings
+
+We performed various experiments using different categories of character n-grams. We chose n=3 since our preliminary experiments found character 3-grams to be more effective than other higher level character n-grams. For each category, we considered only those 3-grams that occur at least five times in the training documents. The performance of different authorship attribu96
+
+In this section, we present various results on authorship attribution tasks using both single as well as cross-domain datasets. We will explore character ngrams in depth and try to understand why they are so effective in discriminating authors. 5.1 Which n-gram Categories are Most Author-Discriminative?
+
+After breaking character n-grams into ten disjoint categories, we empirically illustrate what categories are
+
+punct
+
+Experimental Results and Evaluation
+
+

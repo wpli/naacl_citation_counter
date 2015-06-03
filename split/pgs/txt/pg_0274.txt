@@ -1,0 +1,32 @@
+agreed assumes currently most beautiful following a the man who
+
+     
+
+great implies today very nice in the aftermath one who
+
+     
+
+sure imagine now really nice in the wake the one that
+
+     
+
+yeah guess nowadays really pretty right after the guy that
+
+Table 3: Groups of paraphrases ordered from most formal (left) to least formal (right), as described in Section 4.1.
+Spearman  Formality Complexity 0.654 0.657 0.655 0.443
+
+Inter-annotator Log-ratio score
+
+Table 4: First row: mean correlation of each rater's scores with the average of the others. Second row: correlation of our automatic style score with the average human score.
+
+4.1
+
+Differentiating style in paraphrases
+
+Paraphrases are usually defined as "meaning equivalent" words or phrases. However, many paraphrases, even while capturing the same meaning overall, display subtle differences which effect their substitutability (Gardiner and Dras, 2007). For example, paraphrasing "I believe that we have..." as "I think we got..." preserves the meaning but causes a clear change in style, from a more formal register to a casual one. It has been proposed that paraphrases are rarely if ever perfectly equivalent, but instead represent near synonyms (Edmonds and Hirst, 2002), which contain subtle differences in meaning and connotation. We test whether our method can tease apart stylistic variation given a set of "equivalent" phrases. We use phrase pairs from the Paraphrase Database (PPDB) (Ganitkevitch et al., 2013). Using the scoring method described in Section 2, we identify paraphrase pairs which display stylistic variation along a particular dimension. We can find pairs w1, w2 in PPDB for which FORMALITY(w1) - FORMALITY (w 2) is large; Table 1 gives some examples of pairs identified using this method. We can also view paraphrases along a continuum; Table 3 shows groups of paraphrases ordered from most formal to most casual and Figure 1 shows how paraphrases of the phrase money rank along the formality and complexity dimensions. For example, we capture the fact that money is more formal but simpler than the idiomatic expression a fortune. 220
+
+Figure 1: Several paraphrases for money ranked according to automatically learned style dimensions.
+
+Pairwise human judgements To evaluate the goodness of our style-adapted paraphrases, we take a random sample of 3,000 paraphrase pairs from PPDB and solicit MTurk judgements. We show workers each paraphrase pair and ask them to choose which of the words is more casual, or to indicate "no difference." We also carry out the analogous task for the complexity distinction. We take the majority of 7 judgements as the true label for each pair. In only 9% of the 3,000 paraphrase pairs, turkers decided there was no stylistic difference in the pair, indicating that indeed formality and complexity differences are truly characteristic of paraphrases. In further analysis we ignore the pairs for which the consensus was no difference but note that in further work we need to automate the identification of stylistically equivalent paraphrases. Automatically differentiating paraphrases Using the human judgements, we compute the accuracy of our method for choosing which word in a pair is more formal (complex). We use the magnitude of the difference in formality (complexity) score as a measure of our method's confidence in its prediction. E.g. the smaller the gap in FORMALITY,
+
+

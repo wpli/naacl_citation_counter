@@ -1,0 +1,39 @@
+S1
+
+S2
+
+S2
+
+S1
+
+S2
+
+S2
+
+S1 S1 S1 S1
+
+S2 S2 S2 S2
+
+S2 S2 S2 S2
+
+S1 S1 S1 S1
+
+S2 S2 S2 S2
+
+S2 S2 S2 S2
+
+5 Experiments
+To evaluate the impact of incorporating semantic relatedness, we conduct experiments on two datasets, each of which resembles a real sub-task in modeling text coherence: sentence ordering and summary coherence rating. Since text coherence is a relative concept rather than a binary distinction, in both tasks, we formulate the problem as pairwise preference ranking. Specifically, given a set of texts with different degrees of coherence, we train a ranker to prefer the more coherent (b) Sentence graph text over the less coherent one. Performance is therefore measured as the fraction of correct pairwise rankings as recognized by the ranker. We use SVMlight (Joachims, 2002) with the ranking configuration to train and evaluate our models, with all parameters set to default values. On both tasks, across two frameworks, supervised and unsupervised, we directly compare our modified model against the original one, i.e., B&L in the supervised framework and G&S in the unsupervised framework. In our experiments, we use the Stanford parser (Marneffe et al., 2006) to automatically extract the grammatical role for each entity mention. 5.1 Sentence ordering The task of sentence ordering attempts to simulate the situation where, given a predefined set of information-bearing items, we need to determine the best order to arrange those items. In this paper, we follow G&S and introduce CoNLL 20122 (Pradhan et al., 2012) as our dataset, which is composed of documents from multiple news sources. For each text, we randomly shuffle its sentences to generate 20 permutations with incorrect sentence order. For a fair comparison, we also evaluate our model on a filtered subset of documents with an average length of 31.8 sentences. Therefore, our dataset contains 72 documents and 72 × 20 = 1440 permutations, among which the shortest one contains 25 sentences. For our enhanced graph-based model (introduced in Section 4.1), which is purely unsupervised, we evaluate our model over the entire dataset. For our enhanced entity-based model (introduced in Section 4.2), which is purely supervised, we use half of the complete CoNLL dataset for training (237 documents plus permutations) and use half
+2
+
+Figure 3: Eight patterns of how world knowledge is distributed among three adjacent sentences.
+
+4.2
+
+(a) Entity graph Supervised entity-based framework
+
+As mentioned previously, numerous extensions have been proposed to the original entity-based model of B&L. However, those extensions mostly rely on entity matching and thus fail to incorporate the information from semantically related yet distinct entities. We propose a novel extension by introducing world knowledge to capture entity-wise relatedness. Inspired by the original entity-based model, in which local coherence is reflected by the patterns of how entities act grammatically from one sentence to the next, we believe that local coherence can also be characterized by the patterns of how world knowledge relates a pair of sentences. Specifically, given a set of sentences, there are different patterns of how knowledge instances are distributed among them. We consider modeling those patterns within a window of 3 sentences, in which there are 23 = 8 different distribution patterns, as shown in Figure 3. We then use the frequencies of these distribution patterns over the entire document as additional features into the entity-based model. In particular, for each particular distribution pattern bk , its corresponding |b k | frequency p(bk ) = , where |bk | is the number |V | - 2 of occurrences of bk in the sentence graph. In addition to p(bk ), we also compute another feature, p(E ), which is the frequency that two nodes are connected by certain world knowledge over the sentence graph, reflecting the overall semantic relatedness within the graph. p(E ) is computed as |L | p(E ) = k . With these world knowledge features |V | incorporated into the original entity-based model, we obtain an enhanced model with an emphasis on semantic relatedness between different entities. 1092
+
+http://conll.cemantix.org/2012/data.html
+
+

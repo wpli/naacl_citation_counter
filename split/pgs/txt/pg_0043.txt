@@ -1,0 +1,11 @@
+Tuesday, June 2, 2015 (continued) 11:15­12:30 11:15­11:30 11:30­11:45 Session 5C: Morphology, Syntax, Multilinguality, and Applications (Short Papers) Paradigm classification in supervised learning of morphology Malin Ahlberg, Markus Forsberg and Mans Hulden Shift-Reduce Constituency Parsing with Dynamic Programming and POS Tag Lattice Haitao Mi and Liang Huang Unsupervised Code-Switching for Multilingual Historical Document Transcription Dan Garrette, Hannah Alpert-Abrams, Taylor Berg-Kirkpatrick and Dan Klein Matching Citation Text and Cited Spans in Biomedical Literature: a SearchOriented Approach Arman Cohan, Luca Soldaini and Nazli Goharian Effective Feature Integration for Automated Short Answer Scoring Keisuke Sakaguchi, Michael Heilman and Nitin Madnani Lunch Session 6A: Generation and Summarization (Long Papers) Socially-Informed Timeline Generation for Complex Events Lu Wang, Claire Cardie and Galen Marchetti Movie Script Summarization as Graph-based Scene Extraction Philip John Gorinski and Mirella Lapata Toward Abstractive Summarization Using Semantic Representations Fei Liu, Jeffrey Flanigan, Sam Thomson, Norman Sadeh and Noah A. Smith
+
+11:45­12:00 12:00­12:15
+
+12:15­12:30
+
+12:30­14:00 14:00­15:15 14:00­14:25 14:25­14:50 14:50­15:15
+
+xliii
+
+

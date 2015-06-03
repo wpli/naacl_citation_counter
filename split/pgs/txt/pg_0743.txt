@@ -1,0 +1,28 @@
+GC
+
+SG
+
+SINGLE MULTI RETRO SINGLE EM WSD IMS RETRO EM+RETRO
+
+WS-353 0.623 0.535 0.543 0.639 0.194 0.481 0.549 0.552 0.321
+
+Word Similarity () RG-65 MC-30 MEN-3k 0.629 0.657 0.314 0.510 0.309 0.359 0.661 0.714 0.528 0.546 0.627 0.646 0.278 0.167 0.228 0.298 0.396 0.175 0.579 0.606 0.591 0.673 0.705 0.560 0.734 0.758 0.428
+
+Synonym Selection (%) ESL-50 RD-300 TOEFL-80 47.73 45.07 60.87 27.27 47.89 52.17 63.64 66.20 71.01 52.08 55.66 66.67 27.08 33.96 40.00 16.67 49.06 42.67 41.67 53.77 66.67 56.25 65.09 73.33 62.22 66.67 68.63
+
+Table 1: Similarity scoring and synonym selection in English across several datasets involving different VSMs. Higher scores are better; best scores within each category are in bold. In most cases our models consistently and significantly outperform the other VSMs.
+
+one word to the context vector of the other word, averaged over both words. With this scoring function the correlation  jumped from 0.321 to 0.493. While still not as good as some of the other VSMs, it should be noted that this scoring function negatively influences the similar word pairs in the dataset. The MEN-3k dataset is crowd-sourced and contains much diversity, with word pairs evidencing similarity as well as relatedness. However, we aren't sure why the performance for GC-RETRO improves greatly over GC-SINGLE for this dataset, while that of SG-RETRO and SG-RETRO+EM drops in relation to SG-SINGLE. Similarity Scoring in Context: As outlined by Reisinger and Mooney (2010), multi-sense VSMs can be used to consider context when computing similarity between words. We use the SCWS dataset (Huang et al., 2012) in these experiments. This dataset is similar to the similarity scoring datasets, except that they additionally are presented in context. For example an item involving the words "bank" and "money", gives the words in their respective contexts, "along the east bank of the Des Moines River" and "the basis of all money laundering" with a low averaged similarity score of 2.5 (on a scale of 1.0 to 10.0). Following Reisinger and Mooney (2010) we use the following function to assign a score to word pairs in their respective contexts, given a multi-sense VSM: avgSimC (wi , ci , wi , ci ) = p(sij |ci , wi )p(si j |ci , wi )cos(vij , vi j ) (10)
+j,j
+
+Vectors SG-WSD SG-IMS SG-RETRO GC-RETRO SG-EM SG-EM+RETRO GC-MULTI
+
+SCWS () 0.343 0.528 0.417 0.420 0.613 0.587 0.657
+
+Table 2: Contextual word similarity in English. Higher scores are better.
+
+As with similarity scoring, the output of systems is evaluated against gold standard using Spearman's rank correlation coefficient. The results are presented in table 2. Preprocessing a corpus with WSD information in an unsupervised fashion (SG-WSD) yields poor results. In comparison, the retrofitted vectors (SG-RETRO & GC-RETRO) already perform better, even though they do not have access to context vectors, and thus do not take contextual information into account. Supervised sense vectors (SG-IMS) are also competent, scoring better than both retrofitting techniques. Our EM vectors (SG-EM & SG-EM+RETRO) yield even better results and are able to capitalize on contextual information, however they still fall short of the pretrained GC-MULTI vectors. We were surprised that SG-EM+RETRO actually performed worse than SG-EM, given how poorly SG-EM performed in the other evaluations. However, an analysis again revealed that this was due to the kind of similarity encouraged by WordNet rather than an inability of the model to learn useful vectors. The SCWS dataset, in addition to containing related
+
+689
+
+

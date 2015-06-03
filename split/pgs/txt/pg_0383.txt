@@ -1,0 +1,41 @@
+P
+
+P
+
+P
+
+P
+
+P
+
+S C1 C2
+
+S C1 C2
+
+S C1 C2
+
+S C1 C2
+
+S C1 C2
+
+(a)
+
+(b)
+
+(c)
+
+(d)
+
+(e)
+
+Figure 3: S WAP operator. The gray circle is the target node. Its parent P, sibling S and two children C1 and C2 are shown. (a) The current state. (b­e) The proposed states. (b­c) The topology remains the same but the target is moved toward C1 and C2, respectively. (d) C1 is swapped for S. (e) C2 is swapped for S. are tied to observed categorical vectors, our inference procedures also work on them. We map categorical vectors into the latent space every time we attempt to change a feature value. By contrast, we adopt latent vectors as the primary representations of internal nodes. Take the Indo-European language family for example. Its tree topology is given but the states of its internal nodes such as Indo-European, Germanic and Indic need to be inferred. Dutch has some missing feature values. Although they have been imputed with multiple correspondence analysis, its close relatives such as Danish and German might be helpful for better estimation. We need to infer portions of tree topologies even though a set of trees (language families) is given. To evaluate the performance of phylogenetic inference, we hide some trees to see how well they are reconstructed. To reconstruct a common ancestor of the world's languages, we build a binary tree on top of the set of trees. Note that while we only infer binary trees, a node may have more than two children in the fixed portions of tree topologies. We use Gibbs sampling for inference. We define four operators, C AT, C OMP, S WAP and M OVE. The first tree operators correspond to missing feature values, latent components and tree topologies, respectively. C AT ­ For the target categorical feature of a leaf node, we sample from K possible values. Let x be a binary feature representation with the target feature value altered, let hP be the state of the node's parent, and let h = s(We x +be ). The probability of choosing x is proportional to p(x ) pM OVE (h |hP , Mhist ), where h is removed from the history. The second
+329
+
+term is omitted if the target node has no parent.4 C OMP ­ For the target k -th component of an internal node, we choose its new value using the Metropolis algorithm. It stochastically proposes a new state and accepts it with some probability. If the proposal is rejected, the current state is reused as the next state. The proposal distribution Q(h k |hk ) is a Gaussian distribution centered at hk . The acceptance probability is a(hk , h k) =  ) is defined as min(1, P (h ) /P ( h )) , where P ( h k k k
+  P P (h k ) = p(x ) pM OVE (h |h , Mhist )  pM OVE (hC |h , Mhist ) hC children(h )
+
+where children(h ) is the set of the target node's children. S WAP ­ For the target internal node (which cannot be the root), we use the Metropolis-Hastings algorithm to locally rearrange its neighborhood in a way similar to Li et al. (2000). We first propose a new state as illustrated in Figure 3. The target node has a parent P, a sibling S and two children C1 and C2. From among S, C1 and C2, we choose two nodes. If C1 and C2 are chosen, the topology remains the same; otherwise S is swapped for one of the node's children. It is shown that one topology can be transformed into any other topology in a finite number of steps (Li et al., 2000). To improve mobility, we also move the target node toward C1, C2 or S, depending on the proposed topology. Here the selected node is denoted by . We first draw r from a log-normal distribution whose underlying Gaussian distribution has
+It is easy to extend the operator to handle internal nodes supplied with some categorical features.
+4
+
+

@@ -1,0 +1,101 @@
+method
+0.70
+
+q ANCHOR
+
+LDA
+
+SLDA
+
+SUP. ANCHOR
+
+classifier Accuracy
+0.75 0.70 0.65 0.60 0 25
+q q q
+
+q HINGE q q q
+
+LOGISTIC
+q q q
+
+TREE
+q
+
+AMAZON
+
+AMAZON
+
+q
+
+q
+
+q
+
+0.65
+q
+
+q
+
+0.79 0.78 0.77 0.76 0.75 0.74 0.78 0.77 0.76 0.75 0.74
+
+TRIPADVISOR
+
+Accuracy
+
+50
+
+75
+
+100
+
+q q
+
+q
+
+q
+
+Interpolation Percentage
+
+q q
+
+q
+
+q
+
+Figure 5: Accuracy on AMAZON with twenty topics. SUP ANCHOR produces good representations for sentiment classification that can be improved by interpolating with lexical TF - IDF features. The interpolation (x-axis) ranges from zero (all TF - IDF features) to one hundred (all SUP ANCHOR topic features).
+
+YELP
+
+20
+
+40
+
+60
+
+80
+
+Number Of Topics
+
+Figure 4: Results on TEST fold, SUP ANCHOR outperforms ANCHOR, LDA, and SLDA on all three datasets. We report the results based on LOGISTIC as it produces the best accuracy consistently for ANCHOR, SUP ANCHOR, and LDA.
+
+the proxy of topics. 4.5 Lexical Features
+
+ANCHOR .
+
+accuracy of 0.71 in comparison to only 0.62 from Similarly, with twenty topics on the YELP dataset, SUP ANCHOR has 0.77 accuracy while AN CHOR has 0.74. Our SUP ANCHOR model is able to incorporate metadata to learn better representations for predicting sentiment. Moreover, in Section 5 we show that SUP ANCHOR does not need to sacrifice topic quality to gain predictive power. 4.4
+SUP ANCHOR
+
+Outperforms SLDA
+
+More surprising is that SUP ANCHOR also outperforms SLDA. Like SUP ANCHOR, SLDA jointly learns topics and their relation to metadata such as sentiment. Figure 4 shows that this trend is consistent on all sentiment datasets. On average, SUP ANCHOR is 2.2 percent better than SLDA on AMAZON, and 2.0 percent better on both YELP and TRIPADVISOR. Furthermore, SUP ANCHOR is much faster than SLDA. SLDA performs worse than SUP ANCHOR in part because SUP ANCHOR is able to jointly find specific lexical terms that improve prediction. Nguyen et al. (2013) show that this improves supervised topic models; forming anchor words around the same strong lexical cues could discover better topics. In contrast, SLDA must discover the relationship through 751
+
+Ramage et al. (2010) show that interpolating topic and lexical features often provides better classification than either alone. Here, we take the same approach and show how different interpolations of topic and lexical features create better classifiers. We first select an interpolation value  in {0, 0.1, 0.2, . . . , 1}, and we then form a new feature vector by concatenating -weighted topic features with (1 - )-weighted lexical features. Figure 5 shows the interplay between topic features and TF - IDF features10 as the weight of topic features increases from zero (all TF IDF ) to one hundred (all SUP ANCHOR topic features) percent on the A MAZON dataset (other datasets are similar). Combining both feature sets is better than either alone, although the interpolation depends on the classifier. 4.6 Runtime Analysis
+
+Having shown that SUP ANCHOR outperforms both and SLDA, in this section we show that SUP ANCHOR also inherits the runtime efficiency from ANCHOR. Table 2 summarizes the runtimes on both A MAZON and T RIPADVISOR; these results were obtained using a six-core 2.8GHz Intel Xeon X5660. On the small dataset AMAZON, SUP AN CHOR finishes the training within one minute, and for the larger TRIPADVISOR dataset it completes the
+ANCHOR
+
+As before, we do parameter selection on DEV data and report final TEST results.
+
+10
+
+

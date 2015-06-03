@@ -1,0 +1,49 @@
+adding more context. We considered the following pieces of information in particular.
+Spine NP D N V P D The 1
+det
+
+S VP
+
+Head Path (w = 4)
+
+PP NP N
+
+cat 2
+nsubj
+
+sat 3
+prep
+
+on 4
+
+the mat 5 6  = -1
+det pobj
+
+Constituent Head Paths. Inspired by Björkelund et al. (2013), we used MATE dependencies to extract the shortest path between a token and its lexical head and included the path length w (in terms of traversed nodes) as a feature (blue part in Figure 2). The global idea is to use the phrase-based features to provide different kinds of syntactic context and the dependency-based features to provide generalisations over the functional label governing a token. The spines are seen as deterministic supertags, bringing a vertical context. We report, in Table 4, the counts for each syntactic feature on each set.
+T REE FRAG . T RAIN D EV T EST 648 272 273
+MATE LABELS + 
+
+S PINES TREES 637 265 268
+
+H EAD PATHS 27,670 3,320 2,389
+
+ = -1  = -1  = 1
+
+=2
+
+1305 742 731
+
+Figure 2: Schema of Syntactic Features
+
+Table 4: Syntactic features statistics (Counts).
+
+Constituent Tree Fragments These consist of fragments of syntactic trees predicted by the Petrov et al. (2006) parser in a 10-way jackknife setting. They can be used as enhanced POS or as features. Spinal Elementary Trees A full set of parses was reconstructed from the tree fragments using a slightly tweaked version of the C O NLL 2009 shared task processing tools (Haji c et al., 2009). We then extracted a spine grammar (Seddah, 2010) using the head percolation table of the Bikel (2002) parser, slightly modified to avoid certain determiners being marked as heads in certain configurations. The resulting spines were assigned in a deterministic way (red part in Figure 2). Predicted MATE Dependency Labels These consist of the dependency labels predicted by the MATE parser (Bohnet, 2010), trained on a Stanford surface dependency version of the Penn Treebank. We combined the labels with a distance  = t - h where t is the token position and h the head position (brown labels and  in Figure 2). In addition, we expanded these features with the part-of-speech of the head of a given token (HPOS). The idea is to evaluate the informativeness of more abstract syntactic features since a <L ABEL , HPOS> pair can be seen as generalizing many constituent subtrees. 67
+
+5
+
+Experiments
+
+Experimental Setup Both DM and PAS treebanks consist of texts from the P TB and which were either automatically derived from the original annotations or annotated with a hand-crafted grammar (see above). We use them in their bi-lexical dependency format, aligned at the token level as provided by Oepen et al. (2014)1 . The following split is used: sections 00-19 for training, 20 for the dev. set and 21 for test2 . All predicted parses are evaluated against the gold standard with labeled precision, recall and f-measure metrics. Results Our experiments are based on the evaluation of the combinations of the 4 main types of syntactic features described in section 4: tree fragments (BKY), predicted mate dependencies (BN) and their extension with POS heads (BN ( HPOS )), spinal elementary trees (SPINES) and head paths (PATHS). The results are shown in Tables 5 and 6. All improvements from the baseline are significant with a p-value p < 0.05. There was no significant difference of the same p value between our two best modThis alignment entailed the removal of all unparsed sentences. 2 We used the same unusual split as in (Oepen et al., 2014) to be able to conduct meaningful comparisons with others.
+1
+
+

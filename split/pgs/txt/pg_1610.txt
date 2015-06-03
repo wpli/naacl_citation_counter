@@ -1,0 +1,32 @@
+Headline Press sees hope in Mecca talks ..... Brazil deploys troops to secure borders for World . Cup .... Gunfire injures three Napoli fans Three political candidates slain before Iraqi vote .... Lily Allen wins web music award Finland Air crash kills skydivers Bomb kills 18 on military bus . . . in Iran Russia says 4 militants killed in Dagestan siege Baby dies after being left in car for over 8 .hours ..... Female astronaut sets record
+
+d 2.57 2.32 6.80 11.24 2.74 12.54 3.40 11.37 17.42 0.79
+
+ET S happy proud furious furious proud furious impatient furious furious contented
+
+ET O reverent apathetic melancholy sorry reverent cheerless overwhelmed sorry overwhelmed reverent
+
+Te 1.33 1.7 -1.13 -1.33 1.67 -1.33 -1.6 -0.2 -1.67 3.50
+
+ 2.50 1.61 -0.86 -1.46 2.45 -3.20 -1.23 -1.46 -2.10 0.91
+
+es 1.53 0.66 -1.25 -1.80 1.46 -3.0 -2.3 -2.34 -1.57 1.37
+
+eo 1.59 1.22 0.54 0.05 1.36 -0.10 -0.11 -0.58 0.06 0.46
+
+Table 5: ACT model's results on news headlines, d=deflection, ETS, ETO= emotion towards subject and object, Te = emotions towards the event (ground truth), =emotions towards the event (ACT), and es , eo = the evaluation value of the emotion towards subject and object. Parse elements are coded as: subject, verb, object, and setting. .......
+
+[2.40, -2.28, 2.58], which is considered to be quite good, quite weak, and quite active identity and a car is considered to be a quite positive place, with EPA value equal to [1.62, 1.65, 2.01]. While if an event took place in a war zone or if the subject has negative evaluation, the deflection will not be very high (e.g., "Bomb kills 18 on military bus in Iran") the deflection is equal to 3.40 because "Bomb" has a negative evaluation. In Table 5, we can see the emotions () and the ground truth evaluation toward the events (Te ) are often quite close. The aforementioned results are obtained by extracting single subject, verb, object, modifier, and setting. These results could further improved by taking adverbs (e.g, "lived happily"), phrasal verbs (e.g,"get along" and "get back"), numbers (e.g,"45 killed"), and negations (e.g.,"no more funding") into consideration. Finally, accumulating the emotions of multiple consequent behaviors could also be very useful. For example, in the sentence "Man arrested after beating cops in a restaurant" the behavior will be "arrested", and "beating" is not taken into account. We could address this using more complex parse trees and accumulating the emotions of multiple behaviors by considering the previously generated sentiment as the fundamental sentiment. Finally, using ACT predictions to bootstrap supervised learning could also yield improvements.
+
+based/objective statements and their entities (subject, object). Unlike the majority of sentiment analysis models that are trained on highly subjective words to obtain descriptive labels, our model incorporates ACT, that models emotions as points in three-dimensional space, and analyzes how objective texts trigger different emotions. We use a semisupervised method based on Wordnet similarities to compute emotional ratings for words not in the ACT lexicons. Evaluated on a news headline dataset, our model yielded higher accuracy than a widely used classifier, with a highest precision of 82%. We also analyzed the sentiment evaluation of ACT on (actor/subject and the object) in the news headlines, yielding a precision of 79% and 68% when analyzing the emotions towards the subject and the object, respectively. These results have been obtained without performing any supervised learning and without taking consequent behaviors, phrasal verbs, or sentence negations into account. Thus, they demonstrate the potential of ACT for sentiment analysis. Affect control theory can also handle consequent behaviors and modifiers. In future, we plan to augment our method with more complex levels of detail, gather more extensive datasets, and evaluate ACT for more precise and detailed sentiments.
+
+Acknowledgments
+The authors thank Tobias Schr¨ oder and Dan Lizotte for their thoughtful discussion and suggestions. Areej Alhothali acknowledges the sponsorship of King Abdul Aziz University, Jeddah, Saudi Arabia. Jesse Hoey is supported in part by the Natural Sciences and Engineering Council of Canada (NSERC).
+
+7
+
+Conclusions
+
+We have proposed a new direction for sentiment analysis, employing Affect Control Theory (ACT) to assign different emotions towards events1556
+
+

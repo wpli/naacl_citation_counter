@@ -1,0 +1,20 @@
+whole-name error-rate (WNER)7 of 40% with parallel data (trained over 3.3k word pairs), compared to 73% WNER without parallel data (trained over 9.5k Japanese words only), demonstrating the weakness of methods that do not use parallel data. 6.2 Forward Pipeline
+
+6.4
+
+Training Data
+
+We reproduced the English-to-Japanese transliteration pipeline of Ravi and Knight (2009) by constructing each of the cascade wFSTs as follows: 1. A unigram language model (LM) of English terms, estimated over the top 40K most frequent capitalized words found in the Gigaword corpus (without smoothing). 2. An English pronunciation wFST from the CMU pronunciation dictionary.8 3. An English-to-Japanese phoneme mapping wFST that encodes a phoneme t-table t1 which was designed according to the best setting reported by Ravi and Knight (2009). Specifically, t1 is restricted to either 1-to-1 or 1-to-2 phoneme mappings and maintains consonant parity. See further details in their paper. 4. A hand-built Japanese pronunciation Katakana wFST (Ravi and Knight, 2009). 6.3 Backward Pipeline to
+
+For training data, we used the top 50% most frequent terms from the monolingual data over which we constructed the LM wFSTs. This resulted in a set of 20K English terms (denoted ENG) and a set of 13K Japanese terms in Katakana (denoted KTKN). Taking the entire set of monolingual terms led to poor baseline results, probably since uncommon English terms are not transliterated, and uncommon Katakana terms may be borrowed from languages other than English. In any case, it is important to note that ENG and KTKN are unrelated, since both were collected over non-parallel corpora. 6.5 Training and Tuning We train and tune 4 models: baseline: the model proposed by Ravi and Knight (2009), which maximizes the likelihood (Eq. 2) of the observed Japanese terms KTKN. MIR: Our bidirectional, regularized model, which maximizes the regularized likelihoods (Eq. 4) of both monolingual corpora ENG, KTKN. bi-EM: The joint model proposed by Mylonakis et al. (2007), which maximizes the likelihoods (Eq. 7) of both monolingual corpora ENG, KTKN. Oracle: As an upper bound, we train the model of Ravi and Knight (2009) as if it was given the correct English origin for each Japanese term. (over 4.2K parallel English-Japanese phoneme sequences). We train each method for 15 EM iterations, while keeping the LM and pronunciation wFSTs fixed. Training was done using the Carmel finite-state toolkit.10 Specifically, baseline and oracle rely on Carmel exclusively, while for MIR and bi-EM, we manipulated Carmel to output the E-step posteriors, which we then used to construct and solve the Mstep objective using our own implementation. The different models were tuned over a development set consisting of 50 frequent Japanese terms and their English origin. For each method, we chose the so-called stretch-factor   {1, 2, 3} used to exponentiate the model parameters before decoding
+10
+
+MIR requires a pipeline in the reverse direction, transliteration of Japanese to English. We constructed a unigram LM of Katakana terms over the top 25K most frequent Katakana words found in the Japanese 2005-2008-news dictionary from the Leipzig corpora.9 The remaining required wFSTs were obtained by inverting the forward model wFSTs (that is, wFSTs 2,3,4 above), and the cascade was composed in the reverse direction. In particular, by inverting t1 , we obtained the Japanese-to-English t-table t2 that allows only 2-to-1 or 1-to-1 phoneme mappings.
+The percentage of names where any error occurs anywhere in either the first or last name. 8 http://www.speech.cs.cmu.edu/cgi-bin/cmudict 9 http://corpora.uni-leipzig.de/
+7
+
+http://www.isi.edu/licensed-sw/carmel/
+
+615
+
+

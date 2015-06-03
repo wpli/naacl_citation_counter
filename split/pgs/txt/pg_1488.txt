@@ -1,0 +1,17 @@
+Random Walks and Neural Network Language Models on Knowledge Bases
+Josu Goikoetxea, Aitor Soroa and Eneko Agirre IXA NLP Group University of the Basque Country Donostia, Basque Country {josu.goikoetxea,a.soroa,e.agirre}@ehu.eus
+
+Abstract
+Random walks over large knowledge bases like WordNet have been successfully used in word similarity, relatedness and disambiguation tasks. Unfortunately, those algorithms are relatively slow for large repositories, with significant memory footprints. In this paper we present a novel algorithm which encodes the structure of a knowledge base in a continuous vector space, combining random walks and neural net language models in order to produce novel word representations. Evaluation in word relatedness and similarity datasets yields equal or better results than those of a random walk algorithm, using a dense representation (300 dimensions instead of 117K). Furthermore, the word representations are complementary to those of the random walk algorithm and to corpus-based continuous representations, improving the stateof-the-art in the similarity dataset. Our technique opens up exciting opportunities to combine distributional and knowledge-based word representations.
+
+Figure 1: Main architecture for generating KB word embeddings. A random walk algorithm over the KB produces a synthetic corpus, which is fed into a NNLM to produce continuous word representations. senting the best results to date among WordNetbased methods for the well-known WS353 wordsimilarity dataset (Finkelstein et al., 2001). For each target word, the method performs a personalized random walk on the WordNet graph. At convergence, the target word is represented as a vector in a multi-dimensional conceptual space, with one dimension for each concept in the KB. The good results of the algorithm contrast with the large dimensionality of the vectors that it needs to produce, 117K dimensions (one per synset) for WordNet. In recent years a wide variety of Neural Network Language Models (NNLM) have been successfully employed in several tasks, including word similarity (Collobert and Weston, 2008; Socher et al., 2011;
+
+1
+
+Introduction
+
+Graph-based techniques over Knowledge Bases (KB) like WordNet (Fellbaum, 1998) have been widely used in NLP tasks, including word sense disambiguation (Agirre et al., 2014; Moro et al., 2014), semantic similarity and semantic relatedness between terms (Agirre et al., 2009; Agirre et al., 2010; Pilehvar et al., 2013). For instance, Agirre et al. (2009; 2010) apply a random walk algorithm based on Personalized PageRank to WordNet, pre1434
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1434­1439, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

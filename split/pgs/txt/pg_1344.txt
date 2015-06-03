@@ -1,0 +1,33 @@
+measure is then defined below, M ORPHO D IST(w) = -
+w Kw
+def
+
+mw ,mw
+
+min dh (mw , mw ),
+
+All Types No Tags
+
+Morph-LBL 81.5% 44.8%
+
+LBL 22.1% 15.3%
+
+WORD 2 VEC
+
+10.2% 14.8%
+
+where mw  Mw , mw  Mw , dh is the Hamming distance and Kw is a set of words close to w in the embedding space. We are given some freedom in choosing the set Kw --in our experiments we take Kw to be the k -nearest neighbors (k -NN) in the embedded space using cosine distance. We report performance under this evaluation metric for various k . Note that M ORPHO D IST can be viewed as a soft version of k -NN--we measure not just whether a word has the same morphological tag as its neighbors, but rather has a similar morphological tag. Metrics similar to M ORPHO D IST have been applied in the speech recognition community. For example, Levin et al. (2013) had a similar motivation for their evaluation of fixed-length acoustic embeddings that preserve linguistic similarity.
+
+Table 2: We examined to what extent the individual embeddings store morphological information. To quantify this, we treated the problem as supervised multi-way classification with the embedding as the input and the morphological tag as the output to predict. Note that "All Types" refers to all types in the training corpus and "No Tags" refers to the subset of types, whose morphological tag was not seen by Morph-LBL at training time.
+
+and Morph-LBL randomly and trained them using stochastic gradient descent (Robbins and Monro, 1951). We used a history size of n = 4. 6.1 Experiment 1: Morphological Content
+
+6
+
+Experiments and Results
+
+To show the potential of our approach, we chose to perform a case study on German, a morphologicallyrich language. We conducted experiments on the TIGER corpus of newspaper German (Brants et al., 2004). To the best of our knowledge, no previous word-embedding techniques have attempted to incorporate morphological tags into embeddings in a supervised fashion. We note again that there has been recent work on incorporating morphological segmentations into embeddings--generally in a pipelined approach using a segmenter, e.g., M OR FESSOR , as a preprocessing step, but we distinguish our model through its use of a different view on morphology. We opted to compare Morph-LBL with two fully unsupervised models: the original LBL and WORD 2 VEC (code.google.com/p/word2vec/, Mikolov et al. (2013)). All models were trained on the first 200k words of the train split of the TIGER corpus; Morph-LBL was given the correct morphological annotation for the first 100k words. The LBL and Morph-LBL models were implemented in Python using THEANO (Bastien et al., 2012). All vectors had dimensionality 200. We used the SkipGram model of the WORD 2 VEC toolkit with context n = 5. We initialized parameters of LBL 1290
+
+We first investigated whether the embeddings learned by Morph-LBL do indeed encode morphological information. For each word, we selected the most frequently occurring morphological tag for that word (ties were broken randomly). We then treated the problem of labeling a word-embedding with its most frequent morphological tag as a multiway classification problem. We trained a k nearest neighbors classifier where k was optimized on development data. We used the scikit-learn library (Pedregosa et al., 2011) on all types in the vocabulary with 10-fold cross-validation, holding out 10% of the data for testing at each fold and an additional 10% of training as a development set. The results displayed in table 2 are broken down by whether MorphLBL observed the morphological tag at training time or not. We see that embeddings from Morph-LBL do store the proper morphological analysis at a much higher rate than both the vanilla LBL and WORD 2 VEC. Word-embeddings, however, are often trained on massive amounts of unlabeled data. To this end, we also explored on how WORD 2 VEC itself encodes morphology, when trained on an order of magnitude more data. Using the same experimental setup as above, we trained WORD 2 VEC on the union of the TIGER German corpus and German section of Europarl (Koehn, 2005) for a total of  45 million tokens. Looking only at those types found in TIGER, we found that the k -NN classifier predicted the cor-
+
+

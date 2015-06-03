@@ -1,0 +1,23 @@
+Extracting Information about Medication Use from Veterinary Discussions
+Haibo Ding School of Computing University of Utah Salt Lake City, UT 84112 hbding@cs.utah.edu Ellen Riloff School of Computing University of Utah Salt Lake City, UT 84112 riloff@cs.utah.edu
+
+Abstract
+Our research aims to extract information about medication use from veterinary discussion forums. We introduce the task of categorizing information about medication use to determine whether a doctor has prescribed medication, changed protocols, observed effects, or stopped use of a medication. First, we create a medication detector for informal veterinary texts and show that features derived from the Web can be very powerful. Second, we create classifiers to categorize each medication mention with respect to six categories. We demonstrate that this task benefits from a rich linguistic feature set, domain-specific semantic features produced by a weakly supervised semantic tagger, and balanced self-training.
+
+1
+
+Introduction
+
+Natural language processing holds great promise for automatically extracting empirical data about medications, from the perspective of both doctors and patients. A wealth of information about the administration and effectiveness of medications lies within unstructured text, including medical records created by health care professionals (e.g., discharge summaries) as well as informal texts written by medical practitioners and patients (e.g., Web forums). Previous work has been done on detecting medication terms and recognizing relations between medications and other medical concepts, such as diseases and symptoms. Our research explores a new problem: identifying and categorizing contexts involving the administration of medications, which we call medication use categorization. For each mentioned medication, we want to know whether it was used in a patient's care, and if so, what actions or ob1452
+
+servations are being reported. Our task aims to distinguish between contexts where a doctor prescribed a medication, changed the protocol of a medication (e.g., dosage or frequency), stopped use of a medication, observed effects produced by the medication, or is asking a question about a medication. Distinguishing these contexts is an important step toward being able to extract empirical data about medication use, such as effectiveness, success under different protocols, and adverse events. Our research studies veterinary discussion forums, which often contain informal vocabulary such as shortened and abbreviated medication terms (e.g. "pred" instead of "prednisone", or "abx" for "antibiotics"). The first part of our research addresses the problem of medication detection from informal text. We create an effective medication detector using supervised learning with linguistic features as well as contextual features acquired from the Web. We show that the Web context features substantially improve recall, and yield an effective medication detector even with small amounts of training data. Second, we design supervised classifiers for medication use categorization. We incorporate a rich set of contextual, syntactic, and sentential features as well as a semantic tagger trained for the veterinary domain with bootstrapped learning over a large set of unannotated veterinary texts. We demonstrate additional performance gains by using balanced selftraining with the unannotated texts.
+
+2
+
+Related Work
+
+Previous work on extracting medication information from text has primarily focused on clinical medical text, such as discharge summaries (e.g., (Doan and Xu, 2010; Halgrim et al., 2010; Doan et al., 2012; Tang et al., 2013; Segura-Bedmar et al.,
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1452­1458, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

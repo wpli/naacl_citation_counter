@@ -1,0 +1,23 @@
+The Unreasonable Effectiveness of Word Representations for Twitter Named Entity Recognition
+Colin Cherry and Hongyu Guo National Research Council Canada first.last@nrc-cnrc.gc.ca
+
+Abstract
+Named entity recognition (NER) systems trained on newswire perform very badly when tested on Twitter. Signals that were reliable in copy-edited text disappear almost entirely in Twitter's informal chatter, requiring the construction of specialized models. Using wellunderstood techniques, we set out to improve Twitter NER performance when given a small set of annotated training tweets. To leverage unlabeled tweets, we build Brown clusters and word vectors, enabling generalizations across distributionally similar words. To leverage annotated newswire data, we employ an importance weighting scheme. Taken all together, we establish a new state-of-the-art on two common test sets. Though it is wellknown that word representations are useful for NER, supporting experiments have thus far focused on newswire data. We emphasize the effectiveness of representations on Twitter NER, and demonstrate that their inclusion can improve performance by up to 20 F1.
+
+1
+
+Introduction
+
+Named entity recognition (NER) is the task of finding rigid designators as they appear in free text and classifying them into coarse categories such as person or location (Nadeau and Sekine, 2007). NER enables many other information extraction tasks such as relation extraction (Bunescu and Mooney, 2005) and entity linking (Ratinov et al., 2011). There is considerable excitement at the prospect of porting information extraction technology to social media platforms such as Twitter. Social media reacts to world events faster than traditional news sources, and its sub-communities pay close attention to topics that other sources might ignore. An early 735
+
+example of the potential inherent in social information extraction is the Twitter Calendar (Ritter et al., 2012), which detects upcoming events (concerts, elections, video game releases, etc.) based on the anticipatory chatter of Twitter users. Unfortunately, processing social media text presents a unique set of challenges, especially for technologies designed for newswire: Twitter posts are short, the language is informal, capitalization is inconsistent at best, and spelling variations and abbreviations run rampant. Armed with an affordable training set of 1,000 annotated tweets, we establish a strong baseline for Twitter NER using well-understood techniques. We build two unsupervised word representations in order to leverage a large collection of unannotated tweets, while a data-weighting technique allows us to benefit from annotated newswire data. Taken together, these two simple ideas establish a new state-of-the-art for both our test sets. We rigorously test the impact of both continuous and cluster-based word representations on Twitter NER, emphasizing the dramatic improvement that they bring. We also bring the experimental methodology of the domain adaptation community to Twitter NER, testing indomain, out-of-domain and combined training scenarios, and revealing that it is not trivial to benefit from out-of-domain training data. Finally, an error analysis helps us begin to understand which social media challenges are being addressed by our adaptations, and which problems persist.
+
+2
+
+Background
+
+Our work builds on a long line of research in discriminative tagging (Collins, 2002), and its application to named entity recognition (McCallum and Li, 2003). Our baseline tagger draws inspiration from Sarawagi and Cohen (2004), who introduce the no-
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 735­745, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

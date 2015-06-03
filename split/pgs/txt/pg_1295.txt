@@ -1,0 +1,30 @@
+WordNet Features S S+G S+G+E S+G+E+HS S+G+E+HG S+G+E+HE S+G+E+HS+HG S+G+E+HS+HE S+G+E+HG+HE S+G+E+HS+HG+HE
+
+P 51.73 53.31 56.61 59.53 60.57 60.12 57.59 58.93 62.43 58.56
+
+R 38.13 52.39 55.84 58.72 59.75 59.3 56.81 58.13 61.58 57.76
+
+F-1 43.89 52.85 56.22 59.12 60.16 59.71 57.19 58.52 62.00 58.16
+
+Table 4: UMFS-WE accuracy on Hindi WSD with various WordNet features
+
+defining the sense. The other reason is to bring down the impact of topic drift which may have occurred because of polysemous synset members. Similarly, it is observed that adding hypernym/hyponym gloss members gives better performance compared to hypernym/hyponym synset members. Example sentence members also provide additional information in determining the MFS of a word, which further improves the results. On the whole, we achieve the best performance when S, G, E, HG and HE features are used together. This is shown in Table 4.
+WordNet Features S S+G S+G+E S+G+E+HS S+G+E+HG S+G+E+HE S+G+E+HS+HG S+G+E+HS+HE S+G+E+HG+HE S+G+E+HS+HG+HE S+G+HS+HG P 22.89 32.72 30.87 33.46 39.36 29.77 46.00 39.11 41.82 52.39 51.17 R 22.82 32.64 30.79 33.37 39.26 29.69 45.89 39.02 41.72 52.27 51.04 F-1 22.85 32.68 30.84 33.42 39.31 29.73 45.95 39.06 41.77 52.34 51.11
+
+Table 5: UMFS-WE accuracy on English WSD with various WordNet features
+
+proves results. The same is observed for hypernym/hyponym gloss members. Using example sentence members of either synsets or their hypernymy/hyponymy synsets bring down the performance of the system. This is also justified when we consider only synset members, gloss members, hypernym/hyponym synset members, hypernym/hyponym gloss members which give a score close to the best obtained score. All the features (S, G, E, HS, HG & HE), when used together, give the best performance as shown in Table 5. Also, we have calculated the F-1 score for Hindi and English WSD for increasing thresholds on the frequency of nouns appearing in the corpus. This is depicted in Figure 2 and Figure 3 for Hindi and English WSD respectively. Here, in both plots, it is clearly shown that, as the frequency of nouns in the corpus increases our approach outperforms baselines for both Hindi and English WSD. On the other hand, SemCor baseline accuracy decreases for those words which occur more than 8 times in the test corpus. This is depicted in Figure 3. There are 15 such frequent word types. The main reason for low SemCor accuracy is that these words occur very few times with their MFS as listed by the SemCor baseline. For example, the word cell never appears with its MFS (as listed by SemCor baseline) in the SENSEVAL-2 dataset. As opposed to baselines, our approach gives a feasible way to extract predominant senses in an unsupervised setup. Our approach is domain independent sothat it can be very easily adapted to a domain specific corpus. To get the domain specific word embeddings, we simply have to run the word2vec program on the domain specific corpus. The domain specific word embeddings can be used to get the MFS for the domain of interest. Our approach is language independent. However, due to time and space constraints we have performed our experiments on only Hindi and English languages.
+
+4.2
+
+English
+
+5
+
+Related Work
+
+We achieve good performance for English WSD on the SENSEVAL-2 dataset, whereas the performance on the SENSEVAL-3 dataset is comparatively poor. Here also, synset members alone perform badly. However, adding gloss members im1241
+
+McCarthy et al. (2007) proposed an unsupervised approach for finding the predominant sense using an automatic thesaurus. They used WordNet similarity for identifying the predominant sense. Their approach outperforms the SemCor baseline for words
+
+

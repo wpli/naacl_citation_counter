@@ -1,0 +1,38 @@
+level. For each additional column l, Si,(V +l)  p(y = ( l y ) | w = i) is the conditional probability of observing a sentiment level y (l) given an observation of word i. We compute the conditional probability of a sentiment level y (l) given word i Si,(V +l) 
+d (1 [i
+
+4.1
+
+Sentiment Datasets
+
+ d] · 1 yd = y (l) ) , d 1 [i  d]
+
+(2)
+
+where the numerator is the number of documents that contain word type i and have sentiment level y (l) and the denominator is the number of documents containing word i. Given this augmented matrix, we again want to find the set of anchor words G and coefficients Ci,k that best capture the relationship between words and sentiment (c.f. Equation 1) Si,· =
+gk G
+
+We use three common sentiment datasets for evaluation: AMAZON product reviews (Jindal and Liu, 2008), YELP restaurant reviews (Jo and Oh, 2011), and TRIPADVISOR hotel reviews (Wang et al., 2010). For each dataset, we preprocess by tokenizing and removing all non-alphanumeric words and stopwords. As very short reviews are often inscrutable and lack cues to connect to the sentiment, we only consider documents with at least thirty words. We also reduce the vocabulary size by keeping only words that appear in a sufficient number of documents: 50 for AMAZON and YELP datasets, and 150 for TRIPADVI SOR (Table 1). 4.2 Documents to Labels
+
+Ci,k Sgk ,· .
+
+(3)
+
+Because we retain the property that non-anchor words are explained through a linear combination of the anchor words, our method retains the same theoretical guarantees of sampling complexity and robustness as the original anchor algorithm. To facilitate direct comparisons, we keep the number of anchor words fixed in our experiments. Even so, the introduction of metadata forces the anchor method to select the words that best capture this metadata-augmented view of the data. Consequently, some of the original anchor words will remain, and some will be replaced by sentiment-specific anchor words.
+
+4
+
+Quantitative Comparison of Supervised Topic Models
+
+In this section, we evaluate the effectiveness of our new method on a binary sentiment classification problem. Because the supervised anchor algorithm (SUP ANCHOR) finds anchor words (and thus different topics) which capture the sentiment metadata, we evaluate the degree to which its latent representation improves upon the original unsupervised anchor algorithm (Arora et al., 2013, ANCHOR) for classification in terms of both accuracy and speed. 749
+
+Our goal is to perform binary classification of sentiment. Due to a positive skew of the datasets, the median for all datasets is four out of five. All 5-star reviews are assigned to y + and the rest of the reviews are assigned to y - . Table 1 summarizes the composition of each dataset and the percentage of documents with high positive sentiment.3 We compare the effectiveness of different representations in predicting high-sentiment documents: unsupervised topic models (LDA), traditional supervised topic models (SLDA), the unmodified anchor algorithm (ANCHOR), our supervised anchor algorithm (SUP ANCHOR), and a traditional TF IDF (Salton, 1968, TF - IDF ) representation of the words. The anchor algorithm only provides the topic distribution over words; it does not provide the perdocument assignment of topics needed to represent the document in a low-dimensional space necessary for producing a prediction yd . Fortunately, this requires a very quick--because the topics are fixed-- pass over the documents using a traditional topic model inference algorithm. We use the variational inference implementation for LDA of Blei et al. (2003)4 to obtain z ¯d , the topic distribution for document d.5
+3 Multiclass labeling for each sentiment label also works well, but binary classification simplifies the analysis and presentation. 4
+
+For other inference schemes, we use native inference to apply pre-trained topics to extract DEV and TEST topic proportions.
+
+5
+
+http://www.cs.princeton.edu/~blei/lda-c/
+
+

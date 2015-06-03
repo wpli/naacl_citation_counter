@@ -1,0 +1,70 @@
+Error rate (%)
+
+Error rate (%)
+
+9 8 0
+
+8
+
+Error rate (%)
+
+models LYRL04's best SVM bow-CNN
+
+micro-F 81.6 84.0
+
+macro-F 60.7 64.8
+
+9.5 8.5 7.5
+
+IMDB (25K) seq-CNN seq2-bown
+
+8.5
+
+Elec (25K) seq2-CNN CNN seq2-bown bown
+
+11 10 9.5 9
+
+RCV1 (16K) bow-CNN
+
+10.5
+
+7.5 7 0 20 40 60 80 minutes
+
+Table 4: RCV1 micro-averaged and macro-averaged Fmeasure results on multi-label task with LYRL04 split.
+
+50 100 minutes
+
+0 10 20 30 40 minutes
+
+Error rate (%)
+
+10 9 8 7 6 5
+
+Previous CNN We focus on the sentence classification studies due to its relation to text categorization. Kim (2014) studied fine-tuning of pre-trained word vectors to produce input to parallel CNN. He reported that performance was poor when word vectors were trained as part of CNN training (i.e., no additional method/corpus). On our tasks, we were also unable to outperform the baselines with this type of model. Also, with our approach, a system is simpler with one fewer layer ­ no need to tune the dimensionality of word vectors or meta-parameters for word vector learning. Kalchbrenner et al. (2014) proposed complex modifications of CNN for sentence modeling. Notably, given word vectors  Rd , their convolution with m feature maps produces for each region a matrix  Rd×m (instead of a vector  Rm as in standard CNN). Using the provided code, we found that their model is too resource-demanding for our tasks. On IMDB and Elec14 the best error rates we obtained by training with various configurations that fit in memory for 24 hours each on GPU (cf. Fig 5) were 10.13 and 9.37, respectively, which is no better than SVM bow2. Since excellent performances were reported on short sentence classification, we presume that their model is optimized for short sentences, but not for text categorization in general. Performance dependency CNN training is known to be expensive, compared with, e.g., linear models ­ linear SVM with bow3 on IMDB only takes 9 minutes using SVMlight (single-core) on a high-end Intel CPU. Nevertheless, with our code on GPU, CNN training only takes minutes (to a few hours) on these datasets shown in Figure 5.
+14 We could not train adequate models on RCV1 on either Tesla K20 or M2070 due to memory shortage.
+
+Error rate (%)
+
+LYRL04. We used the same thresholding strategy as LYRL04. As shown in Table 4, bow-CNN outperforms LYRL04's best results even though our data preprocessing is much simpler (no stemming and no tf-idf weighting).
+
+Figure 5: Training time (minutes) on Tesla K20. The
+horizontal lines are the best-performing baselines.
+12 11 Elec SVM bow2 (all) SVM bow3 (all) NB-LM bow3 (all) seq2-CNN 17 16 15 14 13 12 11 10 9 8 7 6 RCV1 SVM bow1 (all) SVM bow2 (all) SVM bow3 (all) bow-CNN
+
+5000 50000 Training data size (log-scale)
+
+2000 20000 Training data size (log-scale)
+
+Figure 6: Error rate in relation to training data size. For
+readability, only representative methods are shown.
+
+Finally, the results with training sets of various sizes on Elec and RCV1 are shown in Figure 6. 3.6 Why is CNN effective?
+
+In this section we explain the effectiveness of CNN through looking into what it learns from training. First, for comparison, we show the n-grams that SVM with bow3 found to be the most predictive; i.e., the following n-grams were assigned the 10 largest weights by SVM with binary features on Elec for the negative and positive class, respectively: · poor, useless, returned, not worth, return, worse,
+disappointed, terrible, worst, horrible · great, excellent, perfect, love, easy, amazing, awesome, no problems, perfectly, beat
+
+Note that, even though SVM was also given bi- and tri-grams, the top 10 features chosen by SVM with binary features are mostly uni-grams; furthermore, the top 100 features (50 for each class) include 28 bi-grams but only four tri-grams. This means that, with the given size of training data, SVM still heavily counts on uni-grams, which could be ambiguous, and cannot fully take advantage of higher-order ngrams. By contrast, NB-weights tend to promote ngrams with a larger n; the 100 features that were assigned the largest NB-weights are 7 uni-, 33 bi-, and 60 tri-grams. However, as seen above, NB-weights do not always lead to the best performance.
+
+110
+
+

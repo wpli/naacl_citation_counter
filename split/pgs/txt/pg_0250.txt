@@ -1,0 +1,30 @@
+A Neural Network Approach to Context-Sensitive Generation of Conversational Responses
+Alessandro Sordoni 1 Michel Galley 2 Michael Auli 3 Chris Brockett 2 4 2 1 Yangfeng Ji Margaret Mitchell Jian-Yun Nie Jianfeng Gao 2 Bill Dolan 2
+1
+
+DIRO, Universit´ e de Montr´ eal, Montr´ eal, QC, Canada 2 Microsoft Research, Redmond, WA, USA 3 Facebook AI Research, Menlo Park, CA, USA 4 Georgia Institute of Technology, Atlanta, GA, USA
+
+Abstract
+We present a novel response generation system that can be trained end to end on large quantities of unstructured Twitter conversations. A neural network architecture is used to address sparsity issues that arise when integrating contextual information into classic statistical models, allowing the system to take into account previous dialog utterances. Our dynamic-context generative models show consistent gains over both context-sensitive and non-context-sensitive Machine Translation and Information Retrieval baselines.
+
+context
+because of your game ?
+
+message response
+ok good luck ! yeah i'm on my way now
+
+Figure 1: Example of three consecutive utterances occurring between two Twitter users A and B .
+
+1
+
+Introduction
+
+Until recently, the goal of training open-domain conversational systems that emulate human conversation has seemed elusive. However, the vast quantities of conversational exchanges now available on social media websites such as Twitter and Reddit raise the prospect of building data-driven models that can begin to communicate conversationally. The work of Ritter et al. (2011), for example, demonstrates that a response generation system can be constructed from Twitter conversations using statistical machine translation techniques, where a status post by a Twitter user is "translated" into a plausible looking response. However, an approach such as that presented in Ritter et al. (2011) does not address the challenge of
+*The entirety of this work was conducted while at Microsoft Research.  Corresponding authors: Alessandro Sordoni (sordonia@iro.umontreal.ca) and Michel Galley (mgalley@microsoft.com).
+
+generating responses that are sensitive to the context of the conversation. Broadly speaking, context may be linguistic or involve grounding in the physical or virtual world, but we here focus on linguistic context. The ability to take into account previous utterances is key to building dialog systems that can keep conversations active and engaging. Figure 1 illustrates a typical Twitter dialog where the contextual information is crucial: the phrase "good luck" is plainly motivated by the reference to "your game" in the first utterance. In the MT model, such contextual sensitivity is difficult to capture; moreover, naive injection of context information would entail unmanageable growth of the phrase table at the cost of increased sparsity, and skew towards rarely-seen context pairs. In most statistical approaches to machine translation, phrase pairs do not share statistical weights regardless of their intrinsic semantic commonality. We propose to address the challenge of contextsensitive response generation by using continuous representations or embeddings of words and phrases to compactly encode semantic and syntactic similarity. We argue that embedding-based models af-
+
+196
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 196­205, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

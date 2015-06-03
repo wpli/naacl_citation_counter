@@ -1,0 +1,17 @@
+Jointly Modeling Inter-Slot Relations by Random Walk on Knowledge Graphs for Unsupervised Spoken Language Understanding
+Yun-Nung Chen, William Yang Wang, and Alexander I. Rudnicky School of Computer Science, Carnegie Mellon University 5000 Forbes Avenue, Pittsburgh, PA 15213-3891, USA {yvchen, yww, air}@cs.cmu.edu
+
+Abstract
+A key challenge of designing coherent semantic ontology for spoken language understanding is to consider inter-slot relations. In practice, however, it is difficult for domain experts and professional annotators to define a coherent slot set, while considering various lexical, syntactic, and semantic dependencies. In this paper, we exploit the typed syntactic dependency theory for unsupervised induction and filling of semantics slots in spoken dialogue systems. More specifically, we build two knowledge graphs: a slot-based semantic graph, and a word-based lexical graph. To jointly consider word-to-word, word-toslot, and slot-to-slot relations, we use a random walk inference algorithm to combine the two knowledge graphs, guided by dependency grammars. The experiments show that considering inter-slot relations is crucial for generating a more coherent and compete slot set, resulting in a better spoken language understanding model, while enhancing the interpretability of semantic slots.
+
+1
+
+Introduction
+
+An important requirement for building a successful spoken dialogue system (SDS) is to define a coherent slot set and the corresponding slot-fillers for the spoken language understanding (SLU) component. Unfortunately, since the semantic slots are often mutually-related, it is non-trivial for domain experts and professional annotators to design a such slot set for semantic representation of SLU. Considering a restaurant domain (Henderson et 619
+
+al., 2012), "restaurant" is the target slot, and important adjective modifiers such as "Asian" (the restaurant type) and "cheap" (the price of the restaurant) should be included in the slot set, so that the semantic representation of SLU can be more coherent and complete. In this case, it is challenging to design such a coherent and complete slot set manually, while considering various lexical, syntactic, and semantic dependencies. Instead of considering slots independently, this paper takes a data-driven approach to model wordto-word relations via syntactic dependencies and further infer slot-to-slot relations. To do this, we incorporate the typed dependency grammar theory (De Marneffe and Manning, 2008) in a stateof-the-art frame-semantic driven unsupervised slot induction framework (Chen et al., 2013b). In particular, we build two knowledge graphs: a slotbased semantic knowledge graph, and a word-based lexical knowledge graph. Using typed dependency triples, we then study the stochastic relations between slots and words, using a mutually-reinforced random walk inference procedure to combine the two knowledge graphs. In evaluations, we use the jointly learned inter-slot relations to induce a coherent slot set in an unsupervised fashion. Our contributions are three-fold: · We are among the first to consider unsupervised spoken language understanding combining semantic and lexical knowledge graphs; · We propose a novel typed syntactic dependency grammar driven random walk model for relation discovery;
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 619­629, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

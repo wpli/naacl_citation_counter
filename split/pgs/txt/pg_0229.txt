@@ -1,0 +1,36 @@
+TopicCheck: Interactive Alignment for Assessing Topic Model Stability
+Jason Chuang
+jason@chuang.ca
+
+Margaret E. Roberts Brandon M. Stewart Political Science Government U. California, San Diego Harvard University
+meroberts@ucsd.edu
+
+Rebecca Weiss Communication Stanford University
+
+bstewart@fas.harvard.edu rjweiss@stanford.edu
+
+Dustin Tingley Government Harvard University
+dtingley@gov.harvard.edu
+
+Justin Grimmer Political Science Stanford University
+jgrimmer@stanford.edu
+
+Jeffrey Heer Computer Science & Eng. University of Washington
+jheer@uw.edu
+
+Abstract
+Content analysis, a widely-applied social science research method, is increasingly being supplemented by topic modeling. However, while the discourse on content analysis centers heavily on reproducibility, computer scientists often focus more on scalability and less on coding reliability, leading to growing skepticism on the usefulness of topic models for automated content analysis. In response, we introduce TopicCheck, an interactive tool for assessing topic model stability. Our contributions are threefold. First, from established guidelines on reproducible content analysis, we distill a set of design requirements on how to computationally assess the stability of an automated coding process. Second, we devise an interactive alignment algorithm for matching latent topics from multiple models, and enable sensitivity evaluation across a large number of models. Finally, we demonstrate that our tool enables social scientists to gain novel insights into three active research questions.
+
+intensive steps in the analysis process, are increasingly replaced by computational approaches such as statistical topic modeling (Grimmer, 2013; McFarland et al., 2013; Roberts et al., 2014a). However, while the discourse on content analysis overwhelmingly centers around the reproducibility and generalizability of a coding scheme (Krippendorff, 2004b; Lombard et al., 2002), computer scientists tend to focus more on increasing the scale of analysis and less on establishing coding reliability. Machine-generated latent topics are often taken on faith to be a truthful and consistent representation of the underlying corpus, but in practice exhibit significant variations among models or modeling runs. These unquantified uncertainties fuel growing skepticism (Schmidt, 2012) and hamper the continued adoption (Grimmer and Stewart, 2011) of topic models for automated content analysis. In response, we introduce TopicCheck, an interactive tool for assessing the stability of topic models. Our threefold contributions are as follows. First, from established guidelines on reproducible content analysis, we distill a set of design requirements on how to computationally assess the stability of an automated coding process. We advocate for the use of multiple models for analysis, a user-driven approach to identify acceptable levels of coding uncertainty, and providing users with the capability to inspect model output at all levels of detail. Second, we devise an interactive up-to-one alignment algorithm for assessing topic model stability. Through repeated applications of a topic model to generate multiple outputs, our tool allows users to inspect whether the model consistently uncover the
+
+1
+
+Introduction
+
+Content analysis -- the examination and systematic categorization of written texts (Berelson, 1952) -- is a fundamental and widely-applied research method in the social sciences and humanities (Krippendorff, 2004a), found in one third of all articles published in major communication journals (Wimmer and Dominick, 2010). Initial reading and coding, two laborWork completed while at Stanford University and the University of Washington, and submitted while at the Allen Institute for Artificial Intelligence.  These authors contributed equally to this paper.
+
+
+175
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 175­184, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

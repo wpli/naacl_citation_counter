@@ -1,0 +1,36 @@
+Accuracy past (p, r, f1) present (p, r, f1) future (p, r, f1)
+
+mfc .528 (.00, .00, .00) (.53, 1.0, .69) (.00, .00, .00)
+
+logR .686
+
+lSVC .708
+
+rSVC .684
+
+ERTs .718
+
+msgs 500
+131 264 105
+
+(.56, .68, .62) (.63, .67, .65) (.63, .56, .59) (.73, .67, .71) (.80, .74, .77) (.78, .78, .78) (.70, .85, .77) (.74, .84, .79) (.60, .56, .58) (.61, .56, .58) (.69, .43, .53) (.60, .47, .53)
+
+Table 2: Accuracy (percentage classified correct) message classifiers based on different learning algorithms (identified in section 3). Temporal class results are broken down by precision (p), recall (r), and f1 score for each of past (pa), present (pr), and future (fu). Number of messages (msgs) are listed on the far right. The most frequent class baseline (mfc) indicates accuracy if only predicting the present class. reposts of others' statuses and comments on other people's posts, and we found only 2 of the 500 random messages were made by apps (users still choose whether or not to post these to their walls). Three annotators independently classified each status message as predominantly talking about the past, present, or future. The overall rating for each message was determined by a majority vote (when there was a tie: i.e., one of each class, present was used). Agreement among these raters, calculated as the intraclass correlation coefficient, was 0.83. One might suggest some messages do not have a temporal class (e.g. does "I like Selena Gomez" have a predominant temporal class?).6 Such messages would be marked as `present' in our annotation scheme. Thus, one might consider our present class to encompass both a present and "non-temporal" class. ating stratified samples, these three subsets include users for whom gender and age information is also available: 1,565 in the case of satisfaction with life, 268 for the CES-D depression scale, 898 for IQ and, 1,000 in the case of number of friends. The gender and age data is then included as covariates in regression analyses to find the relationship between these variables and temporal orientation, controlled for demographics. In all five subsets of the user set, we randomly sample 100 messages from each user in order to determine their temporal orientation. Table 1 shows example status updates along with ratings. As evidenced from the rater agreement, most status updates were fairly easy to determine. Some messages have explicit temporal phrases (e.g. "in the future") while others are more subtle (e.g. relying on verb tense: "is listening ..."). Others, such as the bottom three examples, might reference multiple temporal classes or not include clear verb tense and thus rely on the raters' judgements for what is most dominant.
+
+User set. Human-level data is used to evaluate our
+model toward understanding the relationship between human temporal orientation and individual characteristics (e.g. demographics, personality). Thus, this data spans both message and user levels, from consenting participants, in the MyPersonality Facebook study (Kosinski and Stillwell, 2012). We used five subsets of the MyPersonality data in order to capture various psychological and behavioral variables: user subset 1: gender, age, and personality; user subset 2: satisfaction with life, user subset 3: depression, user subset 4: IQ, and user subset 5: number of friends. For our first subset, gender, age, and personality variables are well represented in the dataset, so we created a stratified sample over 1,520 users. We sampled equal proportions of males and females across 4-year age bins from 13 to 60 (i.e., ages [13,16], [17,20], . . . ,[57, 60]), which provides gender- and age-controlled correlations for each personality factor (openness, conscientiousness, extraversion, agreeableness, and neuroticism). Other variables are more limited. Thus, instead of cre-
+
+5
+
+Evaluation
+
+6 We attempted to include a non-temporal class and found disagreement. Some argue that every message has a temporal class (e.g. "I like Selena Gomez" is truly signalling present).
+
+We evaluate our past, present, and future message classifier as well as its features. All models were trained over our training set and evaluated over the test set. Table 2 compares accuracy of various types of classifiers: logistic regression (logR), linear support vector classifier (lSVC), support vector classifier with rbf kernel (rSVC), and a forest of extremely randomized trees (ERTs). We saw best results from the ERTs classifier, suggesting some of its benefits (capturing non-linear relationships or interactions among features) may help this problem. We also see, from the F1 scores, that all classifiers found the future class most difficult to predict; this was the smallest class and likely subject to the most bias against. All classifiers performed significantly better than the most frequent class baseline with an error reduction of 41% in the case of ERTs (p < 0.001 from paired t-test on absolute errors). We selected the ERTs classifier for the remaining experiments.7
+7
+
+This trained classifier is available at: wwbp.org/data.html.
+
+414
+
+

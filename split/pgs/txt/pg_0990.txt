@@ -1,0 +1,26 @@
+4.2
+
+Passing messages through factors
+
+Our factors are weighted finite-state machines, so their messages still require finite-state computations, as shown by the purple material in Figure 1. These computations are just as in BP. Concretely, let F be a factor of degree d, given as a d-tape machine. We can compute a belief at this factor by joining F with d WFSAs that represent its d incoming messages, namely E NCODE( V F ) for V  N (F ). This gives a new d-tape machine, bF . We then obtain each outgoing message µF V by projecting bF onto its V tape, but removing (dividing out) the weights that were contributed (multiplied in) by  V F .5 4.3 Getting from factors back to variables Finally, we reach the only tricky step. Each resulting µF V is a possibly large WFSA, so we must force it back into our log-linear family to get an updated approximation  F V . One cannot directly employ the methods of section 3, because KL divergence is only defined between probability distributions. (µF V might not be normalizable into a distribution, nor is its best approximation necessarily normalizable.) The EP trick is to use section 3 to instead approximate the belief at V , which is a distribution, and then reconstruct the approximate message to V that would have produced this approximated belief. The "unapproximated belief" p ^V resembles (4): it multiplies the unapproximated message µF V by the current values of all other messages  F V . We know the product of those other messages,  V F , so p ^V := µF V µV F (5) where the pointwise product is carried out by def WFSA intersection and µV F = E NCODE( V F ). We now apply section 3 to choose  V such that qV is a good approximation of the WFSA p ^V . Finally, to preserve (4) as an invariant, we reconstruct  F V :=  V -  V F (6)
+5 This is equivalent to computing each µF V by "generalized composition" of F with the d - 1 messages to F from its other neighbors V . The operations of join and generalized composition were defined by Kempe et al. (2004). In the simple case d = 2, F is just a weighted finite-state transducer mapping V to V , and computing µF V reduces to composing E NCODE( V F ) with F and projecting the result onto the output tape. In fact, one can assume WLOG that d  2, enabling the use of popular finite-state toolkits that handle at most 2-tape machines. See Appendix B.10 for the construction.
+
+In short, EP combines µF V with  V F , then approximates the result p ^V by  V before removing  V F again. Thus EP is approximating µF V by  F V := argmin D(µF V
+ =p ^V
+
+µV F || q
+
+µV F )
+= V
+
+(7) in a way that updates not only  F V but also  V . Wisely, this objective focuses on approximating the message's scores for the plausible values v . Some values v may have p ^V (v )  0, perhaps because another incoming message  F V rules them out. It does not much harm the objective (7) if these µF V (v ) are poorly approximated by qF V (v ), since the overall belief is still roughly correct. Our penalized EP simply adds  · ( ) into (7). 4.4 The EP algorithm: Putting it all together To run EP (or PEP), initialize all  V and  F V to 0, and then loop repeatedly over the nodes of the factor graph. When visiting a factor F , E NCODE its incoming messages  V F (computed on demand) as WFSAs, construct a belief bF , and update the outgoing WFSA messages µF V . When visiting a variable V , iterate K  1 times over its incoming WFSA messages: for each incoming µF V , compute the unapproximated belief p ^V via (5), then update  V to approximate p ^V , then update  F V via (6). For possibly faster convergence, one can alternate "forward" and "backward" sweeps. Visit the factor graph's nodes in a fixed order (given by an approximate topological sort). At a factor, update the outgoing WFSA messages to later variables only. At a variable, approximate only those incoming WFSA messages from earlier factors (all the outgoing messages  V F will be recomputed on demand). Note that both cases examine all incoming messages. After each sweep, reverse the node ordering and repeat. If gradient ascent is used to find the  V that approximates p ^V , it is wasteful to optimize to convergence. After all, the optimization problem will keep changing as the messages change. Our implementation improves  V by only a single gradient step on each visit to V , since V will be visited repeatedly. See Appendix A for an alternative view of EP.
+
+5
+
+Related Approximation Methods
+
+We have presented EP as a method for simplifying a variable's incoming messages during BP. The vari-
+
+936
+
+

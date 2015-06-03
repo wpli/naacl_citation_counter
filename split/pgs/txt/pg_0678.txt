@@ -1,0 +1,22 @@
+Rd and each context c is represented as a context vector vc  Rd , where d is the embedding dimensionality. We learn vector representations for both words and contexts such that the dot product vw · vc associated with "good" word-context pairs belonging to the training data D is maximized, leading to the objective function: 1 arg max log , (5) v w ,v c 1 + exp(-vc · vw )
+(w,c)D
+
+4.3.1 Single-Graph Random Walk Here we run random walk only on the semantic knowledge graph to propagate the scores based on inter-slot relations through the edges Ess .
+(t+1) (0) (t) Rs = (1 - )Rs + Lss Rs , (t)
+
+(8)
+
+which can be trained using stochastic-gradient updates (Levy and Goldberg, 2014). Then we can obtain the dependency-based slot and word embeddings using Ts and Tw respectively. With trained dependency-based embeddings, we estimate the probability that xi is the headword and xj is its dependent via the typed dependency t as Sim(xi , xj /t) + Sim(xj , xi /t-1 ) P (xi  - xj ) = , t 2 (6) where Sim(xi , xj /t) is the cosine similarity between the slot/word embeddings vxi and the context embeddings vxj /t after normalizing to [0, 1]. Then we can measure the scoring function r2 (·) as r2 (xi  xj ) = C (xi - - - -  xj )·P (xi - - - -  xj ),   (7) which is similar to (4) but additionally weighted by the estimated probability. The estimated probability smooths the observed frequency to avoid overfitting due to a smaller dataset. 4.3 Random Walk Algorithm We first compute Lww = [^ r(wi , wj )]|Vw |×|Vw | and Lss = [^ r(si , sj )]|Vs |×|Vs | , where r ^(wi , wj ) and r ^(si , sj ) are either from frequency-based (r1 (·)) or embedding-based measurements (r2 (·)). Similarly, Lws = [^ r(wi , sj )]|Vw |×|Vs | and Lsw = [^ r(wi , sj )]T , ^(wi , sj ) is the frequency |Vw |×|Vs | where r that sj and wi are a slot-filler pair computed in Section 4.2. Then we only keep the top N highest weights for each row in Lww and Lss (N = 10), which means that we filter out the edges with smaller weights within the single knowledge graph. Column-normalization are performed for Lww , Lss , Lws , Lsw (Shi and Malik, 2000). They can be viewed as word-to-word, slot-to-slot, and word-toslot relation matrices. 624
+txi xj txi xj
+
+where Rs denotes the importance scores of the slot candidates Vs in t-th iteration. In the algorithm, the score is the interpolation of two scores, the normalized baseline importance of slot candidates (0) (Rs ), and the scores propagated from the neighboring nodes in the semantic knowledge graph based on slot-to-slot relations via Lss . The algorithm will (t+1) (t)  and (9) can be converge when Rs = Rs = Rs satisfied.
+ (0) T   Rs = (1 - )Rs e + Lss Rs = M1 R s , (9) T where e = [1, 1, ..., 1] . It has been shown that  of (9) is the dominant the closed-form solution Rs eigenvector of M1 (Langville and Meyer, 2005), the eigenvector corresponding to the largest abso delute eigenvalue of M1 . The solution of Rs notes the updated importance scores for all utterances. Similar to the PageRank algorithm (Brin and Page, 1998), the solution can also be obtained by it(t) eratively updating Rs .
+
+4.3.2 Double-Graph Random Walk Here we borrow the idea from two-layer mutually reinforced random walk to propagate the scores based on not only internal importance propagation within the same graph but external mutual reinforcement between different knowledge graphs (Chen and Metze, 2012; Chen and Metze, 2013). Rs = (1 - )Rs + Lss Lsw Rw (t+1) (0) (t) Rw = (1 - )Rw + Lww Lws Rs
+(t+1) (0) (t)
+
+(10)
+
+In the algorithm, they are the interpolations of two (0) scores, the normalized baseline importance (Rs (0) and Rw ) and the scores propagated from another (t) graph. For the semantic knowledge graph, Lsw Rw is the score from the word set weighted by slot-toword relations, and then the scores are propagated based on slot-to-slot relations via Lss . Similarly, nodes of the lexical knowledge graph also include
+
+

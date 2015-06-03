@@ -1,0 +1,29 @@
+Embeddings Original CCA-1 CCA-Ens DCCA-1 (BestAvg) DCCA-Ens (BestAvg) DCCA-1 (MostBeat) DCCA-Ens (MostBeat)
+
+WS-353 46.7 67.2 67.5 69.6 70.8 68.6 69.9
+
+WS-SIM 56.3 73.0 73.1 73.9 75.2 73.5 74.4
+
+WS-REL 36.6 63.4 63.7 65.6 67.3 65.7 66.7
+
+SL-999 26.5 40.7 40.4 38.9 41.7 42.3 42.3
+
+AN 26.5 42.4 42.0 35.0 42.4 44.4 43.7
+
+NN 38.1 48.1 48.2 40.9 45.7 44.7 47.4
+
+VN 34.1 37.4 37.8 41.3 40.1 36.7 38.8
+
+Avg 32.9 42.6 42.7 39.1 42.7 41.9 43.3
+
+Dim 640 384 384 128 128 384 384
+
+Table 1: Main results on word and bigram similarity tasks, tuned on 7 development tasks (see text for details). Shading indicates a result that matches or improves the best linear CCA result; boldface indicates the best result in a given column. See Section 3.4 for discussion on NN results. Embeddings AN NN VN Avg CCA 42.4 48.1 37.4 42.6 Deep CCA 45.5 47.1 45.1 45.9 Table 2: Bigram results, tuned on bigram dev sets. gram tasks themselves (as provided by Mitchell and Lapata), since the 7 tuning tasks are not particularly related to the bigram test sets. We see that DCCA can achieve even stronger improvements over CCA and overall using these related dev sets. We note that the performance on the NN task does not improve. The typical variance of annotator scores for each bigram pair was larger for the NN dataset than for the other bigram datasets, suggesting noisier annotations. Also, we found that the NN annotations often reflected topical relatedness rather than functional similarity, e.g., television set and television programme are among the most similar noun-noun bigrams. We expect that multilingual information would help embeddings to more closely reflect functional similarity. For DCCA, we found that the best-performing networks were typically asymmetric, with 1 to 2 layers on the English side and 2 to 4 on the German side. The best network structure on the bigram VN development set is 640-128-128 for the English view and 640-128-512-128 for the German view, with a final CCA projection layer with dimensionality 128 for each language.
+better with DCCA arrive come locate find way manner recent new take obtain boundary border win accomplish contemplate think worse with DCCA author creator leader manager buddy companion crowd bunch achieve succeed attention interest join add mood emotion
+
+Table 3: Highly-similar pairs in SimLex-999 that improved/degraded the most under DCCA. Pairs are sorted in decreasing order according to the amount of improvement/degradation. of the 36K training set for the 180K English vocabulary during testing. We have accidentally found that this normalization step alone greatly improves the performance of the original vectors. For example, the WS-353 correlation improves from 46.7 to 67.1, essentially matching the linear CCA correlations, though DCCA still outperforms them both. This indicates that the cosine similarity is not stable, and it is likely better to learn a distance/similarity function (using labeled tuning data) atop the learned features such that similarities between selected pairs will match the human similarities, or such that the rankings will match. Error Analysis We analyze high-similarity word pairs that change the most with DCCA, as compared to both linear CCA and the original vectors. For a word pair w, we use r (w) to refer to its similarity rank, subscripting it whether it is computed according to human ratings (rh ) or if based on cosine similarity via the original vectors (ro ), CCA-1 (rc ), or DCCA-1 MostBeat (rd ). We define a (w) = |ra (w) - rh (w)| and compute (w) =
+
+4 Discussion
+Normalization and Evaluation We note that the cosine similarity (and thus Spearman's ) between a pair of words is not invariant to the series of simple (affine) transformations done by the normalizations in our procedure. For their baseline, Faruqui and Dyer (2014) did not remove the standard deviation 253
+
+

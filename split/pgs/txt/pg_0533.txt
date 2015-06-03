@@ -1,0 +1,20 @@
+compatibility between the candidates and the given context versus their semantic similarity to the target word. To this end, we explore strategies with different points of balance between these two factors. On one hand we evaluate the scores assigned to the candidates by our out-of-context paraphrase vector representation, which is based only on semantic similarity. Similarly, we also evaluate rankings based on word2vec similarity scores, with a range of learning parameters (same range as used in Section 6.2) and report the best results that we were able to obtain. On the other hand, we ignore the target word identity and consider only context compatibility by ranking candidates based on their conditional probabilities to fill the target word slot, as reflected in the respective context substitute vector representation, denoted Scond,1000 . Finally, we rank the candidates using the scores in our in-context paraphrase vectors from Section 6.2. However, this time we check the effect of injecting a stronger bias towards the given context c, by averaging only the top-m percent contexts most similar to c, for m  {1%, 5%, 10%, 100%}, as described in,m in Section 4.2. We denote this as Pn . We do not report results based on conditional probability weights, as they perform substantially worse than our SPPMI weights. We also report the most recent state-of-the-art results on both LS07 and LS14. On LS07, we report our results both on the test-set and on the entire dataset (trial+test). 6.3.3 Results The results are shown in Table 6. Looking first at the results on the LS07 dataset, we see that not surprisingly both our out-of-context method, P out , out and the word2vec baseline, w2vskip, 2w , which ignore the given context, achieve relatively low results. Scond,1000 that considers only the context compatibility performs a little better. Next, we see that our in,100% in-context method, P1000 outperforms all of the in,5% above, but P1000 , which is more strongly biased to context compatibility performs even better. For brevity, we report only the results for m = 5%, which performed best on the trial portion of LS07, but the results are almost as good for m = 1% and m = 10%. This supports our hypothesis that in the ranking task more focus is to be given to context compatibility. As in the prediction task in Section 479
+
+Method
+in,5% P1000 in,100% P1000 Scond,1000 P out out w2vskip, 2w Random Kremer, 2014 Thater, 2011 S´ eaghdha, 2014 Moon, 2013 Szarvas, 2013b Szarvas, 2013a
+
+Resources UW UW
+
+GW GW WP,BN UW,BN,WN GW,WN LLC,WN LLC,WN
+
+LS07 test 55.2 52.0 48.6 46.6 45.2 29.7 n/a n/a n/a n/a n/a n/a n/a
+
+LS07 all 55.1 51.7 48.4 45.9 45.2 30.0 52.5 51.7 49.5 47.1 46.7 55.0* 52.4*
+
+LS14 all 50.2 50.0 46.4 47.9 46.5 33.8 47.8 n/a n/a n/a n/a n/a n/a
+
+Table 6: GAP scores for compared methods. UW = ukWaC; GW = Gigaword; WP = Wikipedia; WN = WordNet; BN = British National Corpus (Aston and Burnard, 1998).  A re-implementation of the model in Thater, 2011. * Obtained by a supervised method.
+
+6.2, the pruning factor of 100 performed slightly (up to half a point) worse than 1000. In comparison to previous results, our method achieves the best reported GAP score to date, on par with Szarvas et al. (2013b). However, we note that both Szarvas et al. (2013b) and Szarvas et al. (2013a) follow a supervised approach, training on the LS07 gold standard with 10-fold cross validation, as well as incorporate features from WordNet. Therefore, they cannot be directly compared with unsupervised models, such as our own. Our model and previous works used different learning corpora that are similar in size. Moon and Erk (2013) reported results for both Gigaword and ukWaC, showing minor differences in performance. The results on LS14 exhibit a similar behavior with our method outperforming the state-of-the-art. However, as also reported in Kremer et al. (2014), the performance gain achieved by taking the given context into consideration is smaller than in LS07. Again, this seems to be due to the nature of LS14, which is not biased to ambiguous target words.
+
+

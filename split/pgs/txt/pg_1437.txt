@@ -1,0 +1,25 @@
+shows a set of substitutions along with the original sentence. Similar studies had smaller or slightly larger evaluation data sets. In Yatskar et al. (2010), 200 simplification examples were rated by six annotators (three native, three non-native speakers of English), although only the native speakers annotations were used for the results because they yielded higher inter-annotator agreement. Biran et al. (2011) used 130 examples that were judged by three annotators (native English speakers). In Bott et al. (2012), three annotators (native speakers of Spanish) rated 69 sentences each of the Spanish lexical simplification performed by LexSiS. Complexity dataset: This dataset was created to evaluate the degree of complexity of the words selected by the algorithms. Using the same texts as before we extracted 40 random complex words according to LexSiS and 40 according to our method (recall that those also are complex for the baseline). 4.4 Judgment Guidelines
+
+Type Baseline LexSiS CASSA
+
+Mean. (%) 49.17 42.50 74.17
+
+Simp. (%) 60.00 35.83 70.83
+
+SimpSyn. (%) 65.08 45.83 77.08
+
+Table 1: Average percentage scores in meaning preservation (Mean.), simplification (Simp.), and simplification among the synonyms (SimpSyn.).
+
+We presented the 200 examples in two different online tests, one for each evaluation dataset. The examples were presented in random order to three native Spanish speakers, frequent readers and non-authors of this paper. For the Main Dataset each annotator rated the simplification examples on two scales: Meaning Preservation ­does the transformation preserve the original meaning of the sentence (yes/no); and Simplification ­does the transformation result in a simpler sentence (more complex, same complexity or simpler). For the Complexity Dataset the annotators rated the examples on a three point scale (complex, neither complex or simple and simple). We used Fleiss Kappa (Fleiss, 1971) to measure the inter-annotator agreement for multiple raters. We obtained a reasonable agreement: 0.46 for meaning preservation, 0.54 for simplicity ratings, and 0.41 for complexity. Hence, we have a moderate agreement (Landis and Koch, 1977), comparable with agreements in related literature (Biran et al., 2011; Bott et al., 2012; Yatskar et al., 2010). 4.5 Results
+
+pler synonym substitutions (21 for Baseline, 16 for LexSiS, and 32 for ours) that preserved their meaning (agreement of 2 annotators). In this case, the simplicity performance improves for all the methods. In Table 2 we give the results for the two band frequencies for meaning preservation and simplicity. In the dataset our method overlaps in 15.79% with LexSiS candidates and in 65.79% with the baseline. The results of LexSiS are consistent with the ones presented in Bott et al. (2012) for the news genre. In that study only for one dataset among three improved upon the frequency baseline in some measures (meaning preservation and global simplicity). As it can be observed from the frequency band results and the complexity measure, LexSiS offers better synonyms for high frequency and not for low frequency words. On the other hand, our method improves with low frequency complex words. In the complexity evaluation, the prediction accuracy for complex words was only 13.33% for LexSis while was more than double, 34.17%, for ours (idem for the baseline as it used the same complexity criteria). The percentages for the complexity are low as the annotators were regular readers and non-impaired native speakers. For people with language difficulties or cognitive disabilities the accuracy should be higher because people which cognitive disabilities are more sensitive to text simplifications, such as people with Down Syndrome (Saggion et al., 2015), dyslexia (Rello and Baeza-Yates, 2014), or mild intellectual disabilities (Huenerfauth et al., 2009).
+
+5
+
+Coverage Evaluation
+
+In Table 1 we show the results for the Main Dataset, where in the last column we consider only the sim1383
+
+As not all possible contexts appear in Google Books Ngrams, we created a corpus made of 195 classic literature books from the 15th century to the 20th century of over 100Mb, to check the coverage of our
+
+

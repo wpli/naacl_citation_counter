@@ -1,0 +1,20 @@
+Specifically, P (et |ct , l=1) is estimated as follows: P (et |ct , l=1) = Count(et , ct , l=1) +  Count(ct , l=1) +   |t| (9)
+
+candidate antecedents, and select the one that yields the largest probability. If c is a non-dummy candidate antecedent, we posit c as the antecedent of e; otherwise, we posit e as non-anaphoric.
+
+where Count(ct , l=1) is the expected number of times c has trigger word ct when it is the antecedent of an event mention; and |t| is the number of possible trigger words in the training data (we treat the "trigger word" of a dummy candidate antecedent as an unseen word). Also,  is the Laplace smoothing parameter, which we set to 1, and Count(et , ct , l=1) is the expected number of times e has et as its trigger when its antecedent c has trigger ct . Given trigger    words e t and ct , we compute Count(et , ct , l=1) as follows:   Count(e P (l=1|e, k, c) t , ct , l=1) =
+ e,c:et =e t ,ct =ct
+
+5 Context Features
+As mentioned at the end of Section 4.2.2, to fully specify our model, we need to describe the features i used to represent k , which is needed to comfc c i |l). Recall that k encodes the context pute P (fc c surrounding candidate antecedent c and active event mention e. We represent kc using six features that encode the relationship between c and e, some of which are motivated by previous work on supervised event coreference resolution (e.g., Chen and Ji (2009)). Below we describe these six features, which can be broadly divided into three categories. 5.1 Trigger-Based Features We employ two trigger-based features (Features 1 and 2), both of which are binary-valued and are computed based on e's and c's triggers. Feature 1 encodes whether ct and et , the trigger words of c and e, satisfy any of the following three conditions: 1. ct and et are lexically identical; 2. ct and et contain the same basic verb (BV) and their verb structures are compatible; 3. the similarity between ct and et is greater than a certain threshold (which we set to 0.8 in our experiments). Intuitively, Feature 1 is a recall-enhancing feature: it encodes a condition whose satisfaction can help discover many event coreference links. However, it is not designed to be precision-oriented, as it is computed based solely on the triggers and not their surrounding contexts. Below we explain conditions 2 and 3 in more detail. Recall that condition 2 encodes our observation that an event coreference relation may exist between two non-identical trigger words having the same BV if their verb structures are compatible. To understand this condition, let us explain the notion of BVs and how we determine the compatibility of two verb structures. A BV is a single-character Chinese verb, which is the building block of all Chinese verbs.
+
+(10) i |l), can The remaining group of parameters, P (fc be estimated in a similar fashion. To start the induction process, we initialize all parameters with uniform values. Specifically, 1 P (et |ct , l=1) is set to |t| , and P (l=1|kc ) is set to 0.5. As noted before, P (l) is also initialized here and used throughout the EM iterations. Recall that P (l=1) is the fraction of event pairs that are coreferent. Since we assumed earlier that each event mention has exactly one (dummy or non-dummy) antecedent, P (l=1) can be computed as the number of event mentions divided by the total number of event pairs. After initialization, we iteratively run the Estep and the M-step until convergence. There is an important question we have not adi should we use to represent dressed: what features fc i |l)? We context kc , which we need to estimate P (fc defer the discussion of this question to Section 5. 4.3 Inference After training, we can apply the resulting model to resolve event mentions. Given an event mention e, we determine its antecedent as follows: c ^ = arg max P (l=1|e, k, c)
+cC
+
+(11)
+
+where C is the set of candidate antecedents of e. In other words, we apply Equation (11) to each of e's
+
+1101
+
+

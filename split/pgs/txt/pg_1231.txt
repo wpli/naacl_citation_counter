@@ -1,0 +1,39 @@
+MAP DT PSQ BOW-FD BOW-FD+LTR BOW-FD+LEX+LTR .3678 .3642  .3880  .3913  .3919
+
+Wikipedia NDCG PRES .5691 .5671  .5911  .5962  .5963 .7219 .7165  .7417  .7543  .7528
+
+MAP .2554 .2659  .2825  .2870  .2883
+
+patents NDCG .5397 .5508  .5721  .5807  .5819
+
+PRES .5680 .5851  .6072  .6260  .6251
+
+Table 1: Retrieval results of baseline systems and BOW-FD with default weight v = 1.6 for Wikipedia and v = 0.8 for patents, respectively. Baseline and BOW-FD models use the same SMT system. Significant differences at p = 10-4 with respect to baselines are indicated with  . Significant differences at p = 10-6 of learning-to-rank-based models (LTR) with respect to BOW-FD are indicated with  .
+
+MAP DT PSQ BOW-FD .3347(-.03) .3464(-.02) .3218(-.07)
+
+Wikipedia NDCG .5368(-.03) .5483(-.02) .5315(-.06)
+
+PRES .6970(-.03) .7006(-.02) .7220(-.02)
+
+MAP .2315(-.02) .2460(-.02) .1651(-.12)
+
+patents NDCG .5105(-.03) .5290(-.02) .4185(-.15)
+
+PRES .5420(-.03) .5672(-.02) .4959(-.11)
+
+Table 2: SMT-based CLIR models without a language model. Numbers in superscripts denote the absolute loss with respect to equivalent systems in Table 1.
+
+5
+
+Evaluation
+
+Data and Systems. We conducted experiments on two large-scale CLIR tasks, namely German-English Wikipedia cross-lingual article retrieval4 (Bai et al., 2010; Schamoni et al., 2014), and patent prior art search with Japanese-English patent abstracts5 (Fujii et al., 2009; Guo and Gomes, 2009; Sokolov et al., 2013; Schamoni et al., 2014), comparing retrieval performance of BOW-FD against the state-of-the-art SMT-based CLIR baselines of Direct Translation (DT) and cross-lingual Probabilistic Structured Queries (PSQ) (Ture et al., 2012a; Ture et al., 2012b). The SMT models, as well as baseline evaluation scores were taken from (Schamoni et al., 2014). We present results for BOW-FD using a default weight v optimized on the development sets, and for models with parameters trained using pairwise learning-to-rank. We compute MAP, NDCG (Manning et al., 2008) and PRES (Magdy and Jones, 2010) scores on the top 1,000 returned documents
+http://www.cl.uni-heidelberg.de/ statnlpgroup/wikiclir/ 5 http://www.cl.uni-heidelberg.de/ statnlpgroup/boostclir/
+4
+
+to provide an extensive evaluation across precision-, and recall-oriented measures. Differences in evaluation scores between two systems were tested for statistical significance using paired randomization tests (Smucker et al., 2007). Significance levels are either indicated as superscripts, or provided in the captions of the respective tables. Baseline SMT systems and BOW-FD share the hierarchical phrase-based SMT systems built with cdec (Dyer et al., 2010). For German-English cross-lingual article retrieval on Wikipedia, we built a system analogously to Schamoni et al. (2014) from parallel training data (over 104M words) consisting of the Europarl corpus (Koehn, 2005) in version 7, the News Commentary corpus, and the Common Crawl corpus (Smith et al., 2013). Word alignments were created with fast align (Dyer et al., 2013). The 4-gram language model was trained with the KenLM toolkit (Heafield, 2011) on the English side of the training data and the English Wikipedia articles. Language model scores are added to the search spaces using the cube pruning algorithm (Huang and Chiang, 2007) with poplimit = 200. SMT Model parameters were optimized using MIRA (Chiang et al., 2008) on the WMT2011 news test set (3003
+
+1177
+
+

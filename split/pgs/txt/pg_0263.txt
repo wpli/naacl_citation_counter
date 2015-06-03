@@ -1,0 +1,57 @@
+model cond joint mixed rerank
+
+% exact dev test 28.9 29.9 44.6 44.6 31.9 33.4 51.4 50.6
+
+avg. dev 1.6 1.5 1.6 1.2
+
+dist. test 1.6 1.5 1.5 1.3
+
+% 1k-best dev test 92.0 91.2 91.0 89.7 92.8 91.0 93.1 91.5
+
+Table 4: PMpron results pre- and post-reranking.
+
+PM PM PM PM
+
+% exact 12.03 42.14 45.39
+
+avg. dist. 5.31 1.80 1.59
+
+% 1k-best 42.35 58.10 61.35
+
+W1 affluence architecture chill friend japan jeans jogging man tofu zeitgeist
+
+W2 influenza ecology relax enemy english shorts juggling purse turkey ghost
+
+gold PM affluenza arcology chillax frenemy japlish jorts joggling murse tofurkey zeitghost
+
+hyp. PM affluenza architecology chilax frienemy japanglish js joggling mman tofurkey zeitghost
+
+Table 6: Component words and gold and hypothesis PMs.
+
+Table 5: PM results on cross-validated test data.
+
+6.3
+
+Mixed Alignment
+
+We use expectation maximization (EM) to learn these weights from our unaligned input and output, 2 {W1 pron , Wpron } and PMpron . We use three different methods of normalizing fractional counts. The learned phoneme alignment probabilities P (x, y  z ) (Table 2) vary across these methods, but the learned step probabilities P (k ) (Table 3) do not. 6.1 Conditional Alignment
+
+Our third learning method initializes alignment probabilities with the joint method, then normalizes them so that P (x|x, y ) and P (y |x, y ) sum to 1. This "mixed" method, like the joint method, is more conservative in learning phoneme alignments. However, like the conditional method, it has high alignment probabilities and prefers longer alignments.
+
+7
+
+Model Combination and Reranking
+
+Our first learning method models phoneme alignment P (x, y  z ) conditionally, as P (z |x, y ). Since P (z |x, y ) tends to be larger than step probabilities P (k ), the model prefers to align phonemes when possible, rather than keep or delete them separately. This creates longer alignment regions. Additionally, during training a potential alignment P (x|x, y ) can compete only with its pair P (y |x, y ), making it more difficult to zero out an alignment's probability. The conditional method therefore also learns more potential alignments between phonemes. 6.2 Joint Alignment
+
+Using the methods from sections 6.1, 6.2, and 6.3, we train three models and produce three different 1000-best lists of PMpron candidates for dev data. We combine these three lists into a single one, and compute the following features for each candidate: model scores, PMpron length, percentage of W1 pron or W2 in PM , and percentage of PM pron pron in pron 1 2 Wpron or Wpron . We also include a binary feature 2 for whether PMpron matches W1 pron or Wpron . We then compute feature weights using the averaged perceptron algorithm (Zhou et al., 2006), and use them to rerank the candidate list, for both dev and test data. We combine the reranked PMpron lists to generate wFST C's input.
+
+8
+
+Evaluation
+
+Our second learning method models P (x, y  z ) jointly, as P (z, x, y ). Since P (z, x, y ) is relatively low compared to the step probabilities, this method prefers very short alignments­the reverse of the effect seen in the conditional method. However, the model can also zero out the probabilities of unlikely aligments, so overall it learns fewer possible alignments between phonemes. 209
+
+We evaluate our model's generation of PMpron preand post-reranking against our manually annotated PMpron . We also compare PM , PM , and PM . For both PMpron and PM, we use three metrics: · percent of 1-best results that are exact matches, · average Levenshtein edit distance of 1-bests, and · percent of 1000-best lists with an exact match.
+
+

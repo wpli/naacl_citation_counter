@@ -1,0 +1,5 @@
+Figure 1: The paraphrase identification architecture Bi-CNN-MI
+
+904
+
+

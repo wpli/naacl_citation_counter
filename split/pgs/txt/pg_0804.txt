@@ -1,0 +1,96 @@
+Corpus
+AMAZON TRIPADVISOR YELP
+
+Train Documents 13,300 115,384 13,955
+
+Test Documents 3,314 28,828 3,482
+
+Tokens 1,031,659 12,752,444 1,142,555
+
+Types 2,662 4,867 2,585
+
+Percentage with Positive Sentiment 52.2% 41.5% 27.7%
+
+Table 1: Statistics for the datasets employed in the experiments.
+
+Classifiers Given a low-dimensional representation of a test document, we predict the document's sentiment yd . We have already inferred the topic distribution z ¯d for each document, and we use log (¯ zd ) as the features for a classifier. Feature vectors from training data are used to train the classifiers, and feature vectors from the development or test set are used to evaluate the classifiers. We run three standard machine learning classifiers: decision trees (Quinlan, 1986), logistic regression (Friedman et al., 1998), and a discriminative classifier. For decision trees (hence TREE) and logistic regression (hence LOGISTIC), we use SKL EARN.6 For the discriminative classifier, we use a linear classifier with hinge loss (hence HINGE) in Vowpal Wabbit.7 Because HINGE outputs a regression value in [0, 1], we use a threshold 0.5 to make predictions. Parameter Tuning Parameter tuning is important in topic models, so we cross-validate: each sentiment dataset is split randomly into five folds. We used four folds to form the TRAIN set and reserved the last fold for the TEST set. All cross-validation results are averaged over the four held out DEV sets; the best cross-validation result provides the parameter settings we use on the TEST set. For ANCHOR and SUP ANCHOR, the parameter for the document-level Dirichlet prior  is required for inferring document-topic distributions given learned topics. Despite selecting this parameter using grid search,  does not affect our final results. The same is also true for SLDA: its predictive performance does not significantly vary as  varies, given a fixed number of topics K .8 Anchor algorithms are sensitive to the value of anchor threshold M (the minimum document frequency for a word to be considered an anchor word). For
+6 7 8
+
+AMAZON 0.75 0.70 0.65 0.78 0.76 0.74 0.72 0.70 0.78 0.76 0.74 0.72
+q q q q q q q q q q q q
+
+TRIPADVISOR
+q q q qq qq qq q q
+
+YELP
+q q q q q
+
+20
+
+Accuracy
+
+q q q qq
+
+q q qq q q q
+
+q
+
+q
+
+q q
+
+40
+
+q
+
+q q q q q qq q q qq q q q q q q q
+
+60
+
+q
+
+q
+
+q
+
+q q q q q q q qq q qq q q q q q q q
+
+0.77 0.75 0.73 0.71 q 100
+
+80
+
+q
+
+q
+
+q q q
+
+400 100 400
+
+2400 100
+
+400
+
+M
+
+Figure 3: Grid search for selecting the word-document threshold M for SUP ANCHOR based on development set accuracy.
+
+each number of topics K , we perform a grid search to find the best value of M . Figure 3 shows the performance trends. For LDA, we use the Gibbs sampling implementation in Mallet.9 For training the model, we run LDA with 5,000 iterations; and for inference (on DEV and TEST) of document topic distribution we iterate 100 times, with lag 5 and 50 burn-in iterations. As Mallet accepts i as a parameter, we always initialize i = 1 and only perform a grid search over different values of  , the hyper-parameter for Dirichlet prior over the per-topic topic-word distribution, starting from 0.01 and doubling until reaching 0.5. 4.3
+SUP ANCHOR
+
+Outperforms ANCHOR
+
+http://scikit-learn.org/stable/ http://hunch.net/~vw/
+
+//www.cs.cmu.edu/~chongw/slda/ to estimate .
+
+We use the SLDA implementation by Chong Wang: http:
+
+Learning topics that jointly reflect words and metadata improves subsequent prediction. The results for both SUP ANCHOR and ANCHOR on the TEST set are shown in Figure 4. SUP ANCHOR outperforms ANCHOR on all datasets. This trend holds consistently for LOGISTIC, TREE, and HINGE methods for sentiment prediction. For example, with twenty topics on the AMAZON dataset, SUP ANCHOR gives an
+9
+
+http://mallet.cs.umass.edu/topics.php
+
+750
+
+

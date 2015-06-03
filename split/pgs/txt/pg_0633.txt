@@ -1,0 +1,25 @@
+Source This machines is designed for help people . System hypothesis These machines are designed to help people .
+
+Annotator 1 (This  These), (is  are), (help  helping) System edits (This  These), (is  are), (for  to)
+
+Annotator 2 (machines  machine), (for  to) P 0.67 R 0.67 F0.5 0.67
+
+Table 1: The M2 Scorer is unable to mix and match corrections from different annotators.
+
+Source Machine is design to help people . System hypothesis Machine is designed to help people .
+
+Gold edits (Machine  Machines), (is design  are designed) System edits (design  designed) P 0.00 R 0.00 F0.5 0.00
+
+Table 2: Partial matches are ignored by the M2 Scorer.
+
+(a) There is a limit to the number of unchanged words allowed in an edit (2 by default), whose value affects final results. (b) Given that the computed metrics rely on true positive counts, a baseline system that does not propose any correct edits will not produce informative results (P = 1 by definition, R = 0 and F = 0). The actual error rate and consequent potential for text improvement are not taken into account. (c) It is not possible to discriminate between a `donothing' baseline system and other systems that only propose wrong corrections, as they will all yield F = 0. (d) System performance is underestimated when using multiple annotations for a sentence, since the scorer will choose the one that maximises F -score instead of mixing and matching all the available annotations (see Table 1). (e) Partial matches are ignored (see Table 2). (f) Phrase-level edits can produce misleading results, as they may not always reflect effective improvements (see Table 3). (g) The lack of a true negative count (i.e. the number of non-errors) precludes the computation of accuracy, which is useful for discriminating between systems with F = 0. 579
+
+(h) There is no clear indicator of improvement on the original text after applying the suggested corrections, since an increase in P, R or F does not imply a reduction in the error rate (see Section 2.3.3). (i) It is not clear how values of F should be interpreted (especially for F0.5 ), as there is no known threshold that would signal improvement. Ranking by F -score does not guarantee that the top systems make the source text better. (j) Detection scores are not computed. In addition, Leacock et al. (2014) discuss key issues concerning system evaluation, such as the estimation of true negatives and good practices for reporting results, which are currently not addressed by the M2 scorer.
+
+2
+
+Designing a new evaluation method
+
+A better evaluation method should address the issues described above and use a metric that is meaningful and easy to interpret. We examine these and other related problems, showing how they can be resolved. The proposed method uses tokens as the unit of evaluation (instead of phrase-level edits), which provides a stable unit of comparison and facilitates the computation of true negatives. In turn, this provides a solution for problems 1.(a), 1.(e), 1.(f) and 1.(g).
+
+

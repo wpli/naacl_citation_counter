@@ -1,0 +1,22 @@
+classifying e as non-anaphoric) depend on e's position in the associated text. This makes sense because in general, the probability of e being non-anaphoric tends to be larger (smaller) when it appears earlier (later) in the document.
+
+Documents Sentences Event mentions Event coreference chains
+
+633 9,967 3,333 2,521
+
+Table 1: Statistics on the ACE 2005 Chinese corpus.
+
+6
+6.1
+
+Evaluation
+Experimental Setup first extracted and typed by its entity extraction subsystem, and then linked to their triggers by its event extraction subsystem. Finally, the entity coreference links and the semantic roles needed to compute Feature 4 are provided by its entity coreference subsystem and its event extraction subsystem, respectively.4 Details of each of these subsystems can be found in Chen and Ng (2014). 6.2 Results We employ two supervised resolvers as baseline systems. The first baseline employs rote learning, simply positing two event mentions as coreferent if their corresponding triggers are annotated as coreferent in the training data. The second baseline is SinoCoreferencer, which has produced the best Chinese event coreference results to date on the ACE corpus. Row 1 of Table 2 shows the results of the baseline that employs rote learning. As we can see, this baseline achieves a CoNLL score of 37.9. Row 2 shows the results of SinoCoreferencer. It performs significantly better than the rote-learning baseline w.r.t. all five scoring measures5 , achieving a CoNLL score of 39.2. Finally, row 3 shows the results of our model. Despite being unsupervised, it significantly outperforms the better baseline, SinoCoreferencer, w.r.t. all five scoring measures, achieving a CoNLL score of 41.5, which is 2.3 points higher than that of SinoCoreferencer. These results suggest that a generative approach to unsupervised event coreference holds promise. 6.3 Ablation Experiments Recall that in our model eight probability terms play i |l) for each a major role: P (et |ct ), P (c|k ), and P (fc
+4
+
+Dataset. For evaluation, we conduct five-fold cross-validation experiments on the 633 Chinese documents of the ACE 2005 training corpus. Statistics on the corpus are shown in Table 1. Evaluation measures. We report results in terms of recall (R), precision (P), and F-score (F) using the commonly-used coreference evaluation measures given by the CoNLL scorer, namely the link-based MUC scorer (Vilain et al., 1995), the mention-based B3 scorer (Bagga and Baldwin, 1998), the entitybased version of the CEAF scorer (Luo, 2005), and the Rand index-based BLANC scorer (Recasens and Hovy, 2011), after singleton event mentions are removed from the coreference partitions produced by our resolver. We use the latest version (version 8) of the CoNLL scorer2 , which fixes a bug in previous versions (Pradhan et al., 2014). In addition, we report the CoNLL score (Pradhan et al., 2011), which is the unweighted average of the MUC, B3 , and CEAF F-scores. Evaluation setting. We perform an end-to-end evaluation, as it can more accurately reflect the performance of an event coreference resolver when it is used in practice. More specifically, to extract the event mentions used in our evaluation, we employ SinoCoreferencer3 , which, as mentioned before, is an end-to-end ACE-style Chinese IE system that achieves state-ofthe-art event coreference results. Specifically, the event triggers needed to compute the trigger-based context features are extracted using SinoCoreferencer's event extraction subsystem. The event subtypes needed to identify and filter out implausible candidate antecedents are also provided by its event extraction subsystem. The event arguments needed to compute the argument-based context features are
+
+We employ only those semantic roles that can be reliably determined by SinoCoreferencer's event extraction subsystem, namely, Agent, Adjudicator, Defendant, Giver, Per2 conll.github.io/reference-coreference-scorers/ son, Place, Position, Organization, Origin, and Re3 cipient. Downloadable from http://www.hlt.utdallas.edu/ 5 ~yzcchen/coreference/ All significance tests are paired t-tests, with p < 0.05.
+
+1103
+
+

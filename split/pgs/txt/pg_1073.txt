@@ -1,0 +1,56 @@
+s ), or for short, f s , and ture representation1 f (xs , yi i T f s , where w a linear classification score hs = w i i is a feature weight vector. Given a source sentence xs , a translation decoder can search (often a subset s , . . . , y s with of) Y s and return the k translations y1 k the highest classification scores. A k -best list is the s , . . . , y s , s. For each translation y s we can list of y1 i k s , y s ), or for short, obtain an evaluation score b(yi + bs i , which can be the B LEU +1 score (Lin and Och, 2004).2 For a given source sentence xs , let (i, j ) des , y s ). note a pair of translations (yi j
+
+ (interpolation factor)
+
+PRO
+faster convergence 1.0
+
+APRO
+
+0.5 slower convergence
+
+0.1
+
+20.5
+
+21.0
+
+BLEU score on test data
+
+21.5
+
+22.0
+
+22.5
+
+23.0
+
+3
+
+P RO
+
+Figure 1: P RO versus A PRO (eng-swe) for 3 settings of . P RO: 8 sampling settings per  setting.4 A PRO: no sampling. Vertical line indicates settings from H&M (2011). Not shown: P RO outlier with B LEU =7.9 at  = 0.5.
+
+We now describe P RO, before constrasting it with our new approach, A PRO. For each iteration t from t = 1 . . . T , P RO performs the following steps: 1. Given current feature weights wt , obtain a k best list, as defined above, from the translation decoder. For each xs , add to its k -best entries the k best entries from previous iterations, so that xs now has ks translations; the overall list is called an accumulated k -best list. 2. For each source sentence xs , first sample up to  candidate pairs from its translations in the k best list. Less similar pairs are more likely to become candidate pairs. Similarity in a pair (i, j ) here s means a small absolute difference ds ij between bi s and bs j . The most similar pairs (dij <  ) are discarded. Then select the  least similar pairs among the remaining candidate pairs. 3. For each pair (i, j ) from the  selected pairs, s add the difference vector (f s i - f j ) with class label s 1 if bs i > bj , otherwise add it with class label -1. s Also add (f s j - f i ) with the opposite label. 4. Train any classifier on the labeled data, resulting in a new weights vector w . Set wt+1 =  · w +(1 - ) · wt . Dependencies between tuning iterations are introduced by the use of accumulated k -best lists and the interpolation of weight vectors in step 4, using an interpolation factor . Translation quality varies with different choices for , ,  , , see Figure 1. The quality varies even when P RO is run multiple times with the same parameters, due to the sampling
+For simplicity, we leave out nuisance variables like alignments, segmentations, or parse trees, from this description, which may be part of the feature space. 2 But see Nakov et al. (2013) for variants.
+1
+
+step. Practitioners would have to perform an expensive grid search multiple times to be sure to obtain good results. A PRO seeks to remedy this problem. One could try to improve P RO by experimenting with other pair selection heuristics; A PRO circumvents the problem by efficiently selecting all pairs.
+
+4
+
+A PRO
+
+Our method A PRO is, like P RO, a ranking method. We believe that learning to rank is a suitable method for MT tuning because it matches the test-time requirements of correctly predicting the best translations or correctly ranked k -best lists of translations. Compared to P RO, we simplify the procedure by removing sampling and labeling steps 2 and 3, thereby removing some of P RO's implementation complexity and manually set parameters. We run only two steps, corresponding to P RO's steps 1 and 4: In each tuning iteration, we obtain an accumulated k -best list, then directly find a new w that minimizes the loss on that k -best list, which corresponds to P RO's running of a classifier. A PRO's classification model is an efficient ranking SVM (Airola et al. (2011), Lee and Lin (2014)), described as follows. 4.1 Model
+
+For each sentence xs , we define the set of preference pairs as the set of ordered translation pairs for which the evaluation score prefers the first element:
+s P s = {(i, j ) : bs i > bj }
+4
+
+(1)
+
+P RO settings:  = {5k, 8k} = {small, large},  = {50, 100} = {light, dark},  = {.03, .05} = {no dot, dot}.
+
+1019
+
+

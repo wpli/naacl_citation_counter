@@ -1,0 +1,32 @@
+convince 0.96 believe 0.81
+
+Most discriminative abuser onto victim verbs isolate kick kill love manipulate 0.93 1 0.91 0.95 1 Most discriminative victim as subject verbs choose decide felt know learn realize 1 1 0.79 0.82 1 0.99 find 1
+
+promise 0.83 think 0.93
+
+want 0.93 want 0.83
+
+Legend #WhyIStayed #WhyILeft
+
+Table 2: Discriminative verbs for abuser onto victim and victim as subject structures.
+
+3.3 Analysis of Subject-Verb-Object Structures Data inspection suggested that many users explained their reasons using a Subject-Verb-Object (SVO) structure, in which the abuser is doing something to the victim, or the victim is explaining something about the abuser or oneself.9 We used the open-source tools Tweeboparser (Kong et al., 2014) and TurboParser (Martins et al., 2013) to heuristically extract syntactic dependencies, constrained by pronomial usage. Both parsers performed similarly, most likely due to the well-formed English in the corpus. While tweets are known for non-standard forms, the seriousness of the discourse domain may have encouraged more standard writing conventions. Using TurboParser, we conducted an analysis for both male and female genders acting as the abuser in the subject position. Starting at the lemmatized predicate verb in each dependency parse, if the predicate verb followed an abuser subject word10 per the dependency links, and preceded a victim object word,11 it was added to a conditional frequency distribution, with the two classes as conditions. These structures are here denoted abuser onto victim. We used similar methods to extract structures in which the victim is the subject. Instances with female abusers were rare, and statistical gender differences could not be pursued. Accordingly, both genders' frequency counts were combined. Discriminative predicates from these conditional frequency distributions were determined by equation (1). In Table 2 we report on those where the ratio is greater than 0.75 and the total count exceeds a threshold to avoid bias towards lower frequency verbs. ratio =
+9
+
+3.4
+
+Classification Experiments
+
+countlargerOf Counts countlef t + countstayed
+
+(1)
+
+We examined the usefulness of the SVO structures, using subsets of the devset and testset having SVO structures (10% of the instances in total). While 10% is not a large proportion overall, given the massive number of possible dependency structures, it is a pattern worth examining ­ not only for corpus analytics but also classification, particularly as these SVO structures provide insight into the abuser-victim relationship. A linear SVM using boolean SVO features performed best (C=1), obtaining 70% ± 2% accuracy on the devset and 73% accuracy on the testset. The weights assigned to features by a Linear SVM are indicative of their importance (Guyon et al., 2002). Here, the top features presented as (S,V,O) for #WhyIStayed were: (he, introduce, me), (i, think, my), (he, convince, me), (i, believe, his), and (he, beat, my). For #WhyILeft they were (he, choke, me), (i, beg, me), (he, want, my), (i, realize, my), and (i, listen, my). The SVO structures capture meaning related to staying and leaving, but are limited in their data coverage. Another experiment explored an extended feature set including uni-, bi-, and trigrams in sublinear tf × idf vectors, tweet instance character length, its retweet count, and SVO structures. We compared Na¨ ive Bayes, Linear SVM, and RBF SVM classifiers from the Scikit-learn package (Pedregosa et al., 2011). The RBF SVM performed slightly better than the others, achieving a maximum accuracy of 81% ± .3% on the devset and 82% on the testset.12,13 Feature ablation, following the procedure in Fraser et al. (2014), was utilized to determine the most important features for the classifier, the results
+Tuned parameters: max df = 11%, C=10, gamma=1. Dimensionality reduction with Supervised Locality Preserving Projections (SLPP) (Ptucha and Savakis, 2014) was attempted, but this did not improve results.
+13 12
+
+Example: He hurt my child S: He, V: hurt, O: my child. 10 Male abuser: he, his, my bf, etc. Female: she, her, etc. 11 Male victim: me, my, him, etc. Female: me, my, her, etc.
+
+1284
+
+

@@ -1,0 +1,29 @@
+tation prediction (PHITS), along with Erosheva et. al.'s (2004) work (LinkLDA), content-based modelling approaches have extensively used generative models ­ while largely ignoring meta-data features which collaborative filtering approaches often use ­ thus creating somewhat of a dichotomy between two approaches towards the same problem. We demonstrate that combining (1) a simple, yet effective, generative approach to modelling content with (2) author-based features into a discriminative classifier can improve performance. We show state-of-theart performance on the largest corpus for this task. Finally, our classifier learns the importance of each topic within our corpus, which can be useful beyond this task. In the next section, we describe related research. In Section 3 we describe our models and motivations for them. In Section 4 we detail our experiments, including data and results, and compare our work to the current state-of-the-art system. We finally conclude in Section 5.
+
+M N r s d w K z V ,  (p) L kd sl
+
+total # documents in the corpus (both reports and sources) # of words in the particular document a report document a source document a document (report and/or source) a word in a document total # of topics a particular topic corpus' vocabulary size concentration parameters to corpus-wide Dirichlet priors a simplex of dimension (p-1) number of citations in a particular document probability of a link to document d w.r.t. topic k a token representing a link to source s
+
+Table 1: Notation Guide
+
+2
+
+Related Work
+Figure 1: Plate notation of LinkLDA
+
+Hofmann and Cohn's (2001) PHITS seminal work on citation prediction included a system that was based on probabilistic latent semantic analysis (PLSA) (Hofmann, 1999). Specifically, they extended PLSA by representing each distinct link to a document as a separate word token ­ as shown in Equation 1 and represented by sl . (Note: Table 1 displays common notation that is used consistently throughout this paper.) PHITS assumes both the links and words are generated from the same global topic distributions, and like PLSA, a topic distribution is inferred for each document in the corpus.
+K
+
+P (wi |dj ) =
+k=1 K
+
+P (wi |zk )P (zk |dj ), (1) P (sl |zk )P (zk |dj )
+k=1
+
+P (sl |dj ) =
+
+Later, Erosheva et. al.'s (2004) system replaced PLSA with LDA as the fundamental generative process; thus, the topic distributions were assumed to be sampled from a Dirichlet prior, as depicted in the plate notation of Figure 1. We will refer to this model as it is commonly referred, LinkLDA, and it 76
+
+is the closest model to our baseline approach (later introduced as LDA-Bayes). Others have researched several variants of this LDA-inspired approach, paving the field with promising, generative models. For example, LinkPLSA-LDA is the same as LinkLDA but it treats the generation of the source documents as a separate process inferred by PLSA (Nallapati et al., 2008). Related, Cite-LDA and Cite-PLSA-LDA (Kataria et al., 2010) extend LinkLDA and Link-PLSA-LDA, respectively, by asserting that the existence of a link between a report and source is influenced by the context of where the citation link occurs within the report document. Note, the authors supplemented corpora to include context that surrounds each citation; however, there is currently no freely-available, widely-used corpus which allows one to discern where citations appear within each report. Therefore, few systems rely on citation context. TopicBlock (Ho et al., 2012) models citation prediction with a hierarchical topic model but only uses the first 200 words of each document's abstract. To
+
+

@@ -1,0 +1,25 @@
+Corpus BU
+
+CSJ
+
+Model oracle maxPrecision maxFscore maxRecall oracle maxPrec maxFscore maxRecall
+
+% found 100 7.0 20.3 40.4 100 9.9 21.0 32.8
+
+% incorr 0 0.1 5.7 34.2 0 0.04 23.5 51.3
+
+symbol, forcing us to make a binary decision. A more integrated model would enable to associate prosodic break with a probability distribution, over acoustic features, thereby achieving the joint learning of segmentation and prosody.
+
+Acknowledgments
+The authors would like to thank the three anonymous reviewers for their insightful comments. The research leading to these results was funded by the European Research Council (ERC-2011-AdG295810 BOOTPHON). It was also supported by the Agence Nationale pour la Recherche (ANR-10LABX-0087 IEC, ANR-10-IDEX-0001-02 PSL*), ´ the Fondation de France, the Ecole des Neurosciences de Paris, and the R´ egion ^ Ile-de-France (DIM cerveau et pens´ ee).
+
+Table 3: Word boundary-based evaluation of the three systems used for prosodic boundary detection. We report the percentage of correct word boundaries found and the number of incorrect boundaries found, as a percentage of all boundaries found.
+
+boundaries used. Before closing, we note that prosody seem to helps differentially the segmentation of the two languages we tested. In Japanese we found improvements reaching 10 percentage points in F-score, whereas the improvements in English were more modest (5 points for the BU, 1 point for the LUCID), when automatic boundaries are used. This could be due to differences in the segmentation problem across these two languages. Indeed, words in Japanese are in their majority composed of several syllables, and many words contain embedded words, making the segmentation problem intrinsically more difficult than in English, for which the large majority of words are monosyllabic (Fourtassi et al., 2013). It is possible that prosody particularly helps those languages with a polysyllabic lexicon, by helping prevent over-segmentation. While the current work examined the use of prosodic boundaries for word segmentation in two languages, we would like to extend the study to more languages. We would expect a similar behaviour also for other languages, but it would be interesting to investigate the interaction between boundary information and collocation level for other typologically distinct languages. Also, we have employed here oracle segmental information for the automatic detection of prosodic boundaries. In the future we plan to completely automatize the process, by employing segmental durations obtained with signalbased methods for speech segmentation. Finally, prosody was introduced here by way of a discrete
+
+References
+Sankaranarayanan Ananthakrishnan and Shrikanth Narayanan. 2008. Automatic prosodic event detection using acoustic, lexical, and syntactic evidence. Audio, Speech, and Language Processing, IEEE Transactions on, 16(1):216­228. Rachel Baker and Valerie Hazan. 2010. LUCID: a corpus of spontaneous and read clear speech in British English. In Proceedings of DiSS-LPSS Joint Workshop, pages 3­6. Benjamin B¨ orschinger and Mark Johnson. 2014. Exploring the role of stress in Bayesian word segmentation using Adaptor Grammars. Transactions of the Association for Computational Linguistics, 2:93­104. Luc Boruta. 2011. Indicators of allophony and phonemehood. Ph.D. thesis, Paris-Diderot University. Michael Brent and Timothy Cartwright. 1996. Distributional regularity and phonotactics are useful for segmentation. Cognition, 61:3­125. Anne Christophe and Emmanuel Dupoux. 1996. Bootstrapping lexical acquisition: The role of prosodic structure. The Linguistic Review, 13(3-4):383­412. Anne Christophe, Emmanuel Dupoux, Josiane Bertoncini, and Jacques Mehler. 1994. Do infants perceive word boundaries? An empirical study of the bootstrapping of lexical acquisition. Journal of the Acoustical Society of America, 95:1570­1580. Anne Christophe, Teresa Guasti, Marina Nespor, Emmanuel Dupoux, and Brit van Ooyen. 1997. Reflections on prosodic bootstrapping: its role for lexical and syntactic acquisition. Language and Cognitive Processes, 12:585­612.
+
+961
+
+

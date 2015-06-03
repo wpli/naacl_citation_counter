@@ -1,0 +1,21 @@
+Premise: ( i, i , i, A) i  {1 . . . n}, A  N Rules:  For i  h  k < m  j , and rule A  1 2 , ( i, k , h, 1 ) ( k + 1, j , m, 2 ) ( i, j , h, A)
+ For i  m  k < h  j , rule A  1 2 ,
+
+Premise: ( i, i , i, A) i  {1 . . . n}, A  N Rules:  For all h, m  R(h), rule A  1 2 , and i  {m : m  L(h)}  {h}, ( i, m - 1 , h, 1 ) ( m , m , m, 2 ) ( i, m , h, A)
+ For all h, m  L(h), rule A  1 2 , and j  {m : m  R(h)}  {h},
+
+( i, k , m, 1 ) ( k + 1, j , h, 2 ) ( i, j , h, A) Goal: ( 1, n , m, r) for any m
+
+( m , m , m, 1 ) ( m + 1, j , h, 2 ) ( m , j , h, A) Goal: ( 1, n , m, r) for any m  R(0)
+
+Figure 3: The two algorithms written as deductive parsers. Starting from the premise, any valid application of rules that leads to a goal is a valid parse. Left: lexicalized CKY algorithm for CFG parsing with head rules. For this algorithm there are O(n5 |G|) rules where n is the length of the sentence. Right: the constrained CKY parsing algorithm for Y (x, d). The algorithm is nearly identical except that many of the free indices are now fixed given the dependency parse. Finding the optimal c-parse with the new algorithm now requires O ( h |L(h)||R(h)|)|G| time where L(h) and R(h) are the left and right dependents of word h.
+
+a valid dependency span. For example, if for a word h there are |L(h)| = 3 left dependents, then when taking the next right-dependent there can only be 4 valid left boundary indices. The runtime of the final algorithm reduces to O( h |L(h)||R(h)||G|). While the terms |L(h)| and |R(h)| could in theory make the runtime quadratic, in practice the number of dependents is almost always constant in the length of the sentence. This leads to linear observed runtime in practice as we will show in Section 7. 3.2 Pruning In addition to constraining the number of c-parses, the d-parse also provides valuable information about the labeling and structure of the c-parse. We can use this information to further prune the search space. We employ two pruning methods: Method 1 uses the part-of-speech tag of xh , tag(h), to limit the possible rule productions at a given span. We build tables Gtag(h) and restrict the search to rules seen in training for a particular partof-speech tag. Method 2 prunes based on the order in which dependent words are added. By the constraints of the
+
+algorithm, a head word xh must combine with each of its left and right dependents. However, the order of combination can lead to different tree structures (as illustrated in Figure 2). In total there are |L(h)| × |R(h)| possible orderings of dependents. In practice, though, it is often easy to predict which side, left or right, will come next. We do this by estimating the distribution, p(side | tag(h), tag(m), tag(m )), where m  L(h) is the next left dependent and m  R(h) is the next right dependent. If the conditional probability of left or right is greater than a threshold parameter  , we make a hard decision to combine with that side next. This pruning further reduces the impact of outliers with multiple dependents on both sides. We empirically measure how these pruning methods affect observed runtime and oracle parsing performance (i.e., how well a perfect scoring function could do with a pruned Y (x, d)). Table 1 shows a comparison of these pruning methods on development data. The constrained parsing algorithm is much faster than standard lexicalized parsing, and
+
+4
+
+791
+
+

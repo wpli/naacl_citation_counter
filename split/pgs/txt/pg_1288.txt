@@ -1,0 +1,42 @@
+2.2 Inference By Gibbs Sampling Similarly with LDA, collapsed Gibbs sampling (Griffiths and Steyvers, 2004) can be utilized to perform approximate inference. In our model, the hidden variables are key-phrase's topic assignment z and non-phrase word's topic assignment  . To perform Gibbs sampling, we first randomly initialize the hidden variables. Then we sample the topic assignment based on the conditional distribution p(zm,n = k |z¬(m,n) , w, o,  ) and p(m,s = k |z, w, o, ¬(m,s) ). We can derive the conditional probability for zm,n following Equation 1, where nk m,¬(m,n) denotes the number of key-phrases whose topic assignment are k in document m without consideration of  key-phrase {m, n}, which is similar to nk m,¬(m,n) .
+w
+
+represents the whole distinct words for those identified key-phrases. In our paper, we assumed each domain has a single topic model. For different domain, we think the semantic space is quite different. So we performed the proposed topic model with respect to different domain. The number of topics is usually determined by experience, in our experiment, each domain collection contains 500 reviews, we think the number of topics ranging from 2 to 20 is appropriate, and these reviews are sufficient to train a topic model. Dataset Computer Cellphone Camera Food
+Table 1: Statistic information of the dataset.
+
+nk,m,n,l ¬(m,n) denotes the number of times key-phrase term wm,n,l assigned to topic k without consideration of key-phrase {m, n}, which is similar to om,s nw k,¬(m,n) . nk,¬m denotes the number of times nonphrase term om,s assigned to topic k without consideration of document m, which is similar to nw k,¬m . Similarly, we can derive the conditional probabilom,s ity for m,s following Equation 2, where nk, ¬(m,s) denotes the number of times non-phrase term om,s assigned to topic k without consideration of nonphrase term {m, s}, which is similar to nw k,¬(m,s) . Lm denotes the number of topics assigned to keyphrases in document m. Finally, we can easily estimate the topic distribution m,k and topic-word distribution k,w following Equation 3 and 4. m,k = K
+k
+
+
+Phrase 1439 1110 2962 1235
+
+Word 1423 1109 2620 1350
+
+Vocabulary 5109 4184 8366 4488
+
+nk m+ nk + K =1 m nw k +
+ 
+
+(3)
+
+k,w = V
+
+w =1
+
+
+
+nw k +V
+
+(4)
+
+3
+
+Experiments and Results
+
+Online reviews dataset (Chen et al., 2013), which consists of four domains, is utilized to evaluate our model, where each domain collection contains 500 reviews. Each review's average length is 20.42. The statistics of each domain are presented in Table 1. It's worth noting that the Phrase is auto-identified by the key-phrase extraction method. And the Word
+
+Recent research (Chang et al., 2009; Newman et al., 2010) shows that the models which achieve better predictive perplexity often have less interpretable latent spaces. So the Topic Coherence Metric (Mimno et al., 2011) is utilized to assess topic quality, which is consistent with human labeling. We compare our model with four baseline models: non-knowledgeable model LDA, self-contained knowledgeable model BTM, external knowledgebased model GK-LDA (Chen et al., 2013) and DFLDA (Andrzejewski et al., 2009). Those identified key-phrases are used as must-links in DF-LDA and LR-sets in GK-LDA. This can ensure the incorporated knowledge upon different models are equal. Table 2 illustrates the auto-identified phrases from cellphone dataset. From this result, we can see key-phrase extraction method can efficiently identify mostly phrases. More than one phrase, for example warranty service and android phone, may appear in a single sentence, and their topic assignments are probably different. Our proposed phrase topic model(PTM) can well handle this case, which is more well-defined than the assumption of all words within a sentence share one topic. Our phrase topic model assumes non-phrase term's topic assignment should depend on that of key-phrases in the same text. This assumption can be clearly confirmed by Table 2, for example, Nokia N97 mini is semantic dependent US-
+
+1234
+
+

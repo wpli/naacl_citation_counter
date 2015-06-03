@@ -1,0 +1,38 @@
+step 0 1­3 4 7 8 9 11 12 13
+
+action skip shcapital shlargest shstate re sh area re re
+
+stack after action (simple type)   capital:ee capital:ee argmax:(et)(ei)e capital:ee argmax:(et)(ei)e capital:ee (argmax state):(ei)e capital:ee (argmax state):(ei)e capital:ee (argmax state size):e (capital (argmax state size)):e
+
+state:et size:ei
+
+stack after action (subtyping+polymorphism)   capital:stct capital:stct argmax : ('at)('ai)'a capital:stct argmax : ('at)('ai)'a state : stt capital:stct (argmax state) : (sti)st  capital:stct (argmax state) : (sti)st size : loi capital:stct (argmax state size) : st  (capital (argmax state size)) : ct
+
+Figure 1: Type-driven Incremental Semantic Parsing (T ISP) with (a) simple types and (b) subtyping+polymorphism on the example question: "what is the capital of the largest state by area?". Steps 5­6 and 10 are skip actions and thus omitted. The stack and queue in each row are the results after each action. : Type variable 'a is binded to st. : From Eq. 4, st <: lo  (loi) <: (sti).
+
+while the stack becomes (step 9) capital : ee (argmax state) : (ei)e Now if we want to continue reduction, it does not type check for either left or right reduction, so we have to shift again. So we move on to shift the final word "area" with predicate: size : ei and the stack becomes (step 11): capital : ee (argmax state) : (ei)e size : ei. Now we can do two consecutive right reduces supported by type checking (step 12, 13) and get the final result: (capital (argmax state size)) : e. Here we can see the novelty of our shift-reduce parser: its decisions are largely driven by the type system. When we attempt a reduce, at most one of the two reduce actions (left, right) is possible thanks to type checking, and when neither is allowed, we have to shift (or skip). This observation suggests that our incremental parser is more deterministic than those syntactic incremental parsers where each step always faces a three-way decision (shift, left-reduce, right-reduce). We also note that this type-checking mechanism, inspired by the classical type-driven theory in linguistics (Heim and Kratzer, 1998), eliminates the need for an explicit encoding of direction as in CCG, which makes our formalism much simpler than the synchronous syntactic-semantic ones in most other semantic parsing efforts (Zettlemoyer and Collins, 2005; Zettlemoyer and Collins, 2007; Wong and Mooney, 2007).3
+
+top (root) lo (location) au (admin. unit) nu (nature unit)
+
+t (boolean) i (integer)
+
+st (state) ct (city) rv (river) lk (lake)
+
+Figure 2: Type hierarchy for G EO Q UERY (slightly simplified).
+
+3.1
+
+Semantics with Subtype Polymorphism
+
+3
+
+Subtype and Parametric Polymorphisms
+
+Currently in simply typed lambda calculus representation function capital can apply to any entity type, for example capital(boston), which should have been disallowed by the type checker. So we need a more sophisticated system that helps ground with refined types, which will in turn help type-driven parsing.
+3 We need to distinguish between two concepts: a) "direction of reduction": f (g ) or g (f ). Obviously at any given time, between the top two (unarized) functions f and g on the stack, at most one reduction is possible. b) "order of arguments": f (x, y ) or f (y, x). For predicates such as loc : lolot the order does matter. Our parser can not distinguish this purely via types, nor can CCG via its syntactic categories. In practice, it is decided by features such as the voice of the verb.
+
+We first augment the meaning representation with a domain specific type hierarchy. For example Figure 2 shows a (slightly simplified) version of the type hierarchy for G EO Q UERY domain. We use <: to denote the (transitive, reflexive, and antisymmetric) subtyping relation between types; for example in G EO Q UERY, st <: lo. Each constant in the G EO Q UERY domain is well typed. For example, there are states (michigan:st), cities (nyc:ct), rivers (mississippi:rv), and lakes (tahoe:lk). Similarly each predicate is also typed. For example, we can query the length of a river, len:rvi, or the population of some administrative unit, population:aui. Notice that population(·) can be applied to both states and cities, since they are subtypes of administrative unit, i.e., st <: au and ct <: au. This is because, as in Java and C++, a function that expects a certain type can always take an argument of a subtype. For example, we can query whether two locations are adjacent, using next_to:lo(lot), as the next_to(·, ·) function can be applied to two states, or to a river and a city, etc. Before we move on, there is an important consequence of polymorphism worth mentioning here. For the types of unary predicates such as city(·) and state(·) that characterize its argument, we define theirs argument types to be the required type, i.e., city : ctt, and state : stt. This might look a little weird since everything in the domain of those functions are always mapped to true; i.e., f (x) is either undefined or true, and never false for such f 's. This is different from classical simply-typed Montague semantics (Heim and Kratzer, 1998) which defines such predicates as type topt so that city(mississippi : st) returns false. The reason for our design is, again, due to
+
+1418
+
+

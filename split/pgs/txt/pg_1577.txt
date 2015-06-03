@@ -1,0 +1,33 @@
+42.1 42 expected BLEU [%] 41.9 41.8 41.7 41.6 41.5
+
+BOLT zh-en
+RPROP SGD AdaGrad GT
+
+# feat.
+
+df
+
+web
+
+MT06
+
+baseline SGD AdaGrad RPROP
+Setiawan&Zhou (GT)
+
+19 12.4M 12.4M 12.4M 150M
+
+18.0 18.0 18.3 18.7 -
+
+34.1 34.3 34.7 34.8 32.7
+
+39.7 39.8 40.1 40.5 40.3
+
+Table 3: Results for the BOLT ChineseEnglish task in B LEU [%] on the discussion forum test set (df), the mixed web test set and NIST MT06. The baseline is our 5 10 15 20 25 30 35 40 BOLT evaluation system and contains a recurrent neural Iteration LM. We compare with (Setiawan and Zhou, 2013) who applied maximum expected B LEU training with growth Figure 2: Expected B LEU value on IWSLT transformation (GT). Note that the number of features reGermanEnglish for the different update strate- ported by Setiawan and Zhou (2013) is artificially blown gies. Note that growth transformation (GT) applies a up due to renormalization. different regularization term and is therefore not directly comparable with the other techniques.
+
+expected, we found that in all cases regularization is not strictly necessary - results are barely affected as long as  is sufficiently small - and that SGD is much more sensitive to  than AdaGrad. Further, SGD and RPROP need around 25 iterations to reach good results, where 5-10 iterations are sufficient for GT and AdaGrad. For a fair comparison, however, we run all algorithms for 40 iterations and select the best one on a seletion set, namely iterations 19 (AdaGrad), 23 (GT), 29 (RPROP) and 35 (SGD). Figure 2 shows how the expected B LEU function evolves in training with different update strategies. Although the value for GT is not directly comparable to the others due to a different regularization term, the respective characteristics are clearly visible. SGD exhibits a linear growth pattern, GT resembles a logarithmic and RPROP an exponential function. After initially overshooting and then retracting as the regularization kicks in, AdaGrad also displays logarithmic characteristics. In terms of B LEU RPROP performs best, followed by AdaGrad, GT and SGD, where the RPROPAdaGrad and AdaGrad-GT differences are small (0.2% B LEU absolute) but statistically significant on the 95% level. Altogether, RPROP improves over the baseline by 0.9 B LEU points, which is statistically significant at the 99% level. In an additional experiment we verified that leave-one-out has a clear 1523
+
+impact on the results. The B LEU difference between RPROP with and without leave-one-out is 0.6% absolute. By adding lexical, triplet and reordering features, we get an additional gain and observe a total improvement of 1.2 B LEU points over the baseline system. Efficiency comparison. 921K discriminative phrase table features are active in our training data. Due to the renormalization component, this results in a total of 6.08M features that are updated with GT using the same data. Consequently, it is less time and space efficient than the other algorithms. With our implementation, GT needed around 16 hours and 6.7G memory for 40 iterations, where RPROP, AdaGrad and SGD finished after less than 2.5 hours and required 2.1G memory. For the BOLT task, we directly compare with the GT-trained system in (Setiawan and Zhou, 2013) using the same tune set for MERT and reporting results on the same test sets, see Table 3. With RPROP we achieve nearly twice the improvement reported by Setiawan on both web and MT06 using feature sets (a)-(c)5 . Our baseline on web is already much stronger and RPROP training yields +0.7 B LEU points, as opposed to +0.44 reported by Setiawan. On MT06 our baseline system is slightly worse, but with the larger gain received by RPROP our final system outperforms the one reported by Se5
+
+Reordering features are not applicable to our hiero system.
+
+

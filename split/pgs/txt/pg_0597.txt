@@ -1,0 +1,37 @@
+Rule e-deletion y-replacement k-insertion e-insertion consonant doubling f-voicing
+
+Input voice·ing industry·al panic·ing church·s get·ing knife·s
+
+Output voicing industrial panicking churches getting knives
+
+Rule e-deletion y-replacement k-insertion e-insertion consonant doubling f-voicing
+
+Writing 98.8 93.5 100.0 100.0 96.3 33.3
+
+Reading 67.1 95.8 1.0 98.7 36.3 14.7
+
+Table 6: Common English spelling rules with examples.
+
+Table 7: Applicability of common spelling rules.
+
+consistency is striking. Traditional orthography is not only far from optimality, but overall seems no more optimal than any other of the evaluated systems. Searching for the explanation of this surprising result, we find that much of the morphemic score deduction can be attributed to small changes like dropping of the silent e, as in `make' + `ing' = `making'. These types of inconsistencies counter-weigh the high marks that traditional orthography gets for maintaining consistent spelling in spite of unstressed vowel reductions. The prevalence of silent e's in traditional orthography undeniably diminishes its morphemic consistency. Nor is the device necessary to represent the pronunciation of the preceding vowel; for example, SoundSpel has those words as `maek' and `maeking'. However, one can argue that such minor alterations should not be penalized because English speakers subconsciously take them into account while reading. In the next section, we describe an experiment in which we pre-process words with such orthographic rules, in order to determine how much they influence the optimality picture.
+
+7
+
+Spelling rules
+
+Table 6 lists six common English spelling rules that affect letters at morpheme boundaries, of which the first five are included in the textbook account of Jurafsky and Martin (2009, page 63). We conducted an experiment to determine the applicability of these rules by computing how often they fired when triggered by the correct environment.2 We tested the rules in both directions, with respect to both writing
+The conditioning environments of the rules were implemented according to the guidelines provided at http://www.phonicslessons.co.uk/englishspellingrules.html.
+2
+
+and reading applicability. Writing rules are applied to morphemes when they are in the correct environment. For example, the k-insertion rule fires if the morpheme ends in a c and the next morpheme begins with e or i, as in panic·ing. On the other hand, reading may involve recovering the morphemes from the surface forms. For example, if the stem ends in a tt and the affix begins with an i, the consonant doubling rule implies that the free form of the morpheme ends in a single t, as in getting. The results in Table 7 show that the rules, with the exception of the f-voicing rule, have high applicability in writing. Most rules, however, cannot be trusted to recover the morpheme spellings from the surface form. For example, following the consonant doubling rule would cause the reader to incorrectly infer from the word butted that the spelling of the verb is but. This is significant considering that Chomsky and Halle define orthography as a system for readers (page 49). Notwithstanding the unreliability of the spelling rules, we incorporate them into the computation of the morphemic consistency of the traditional orthography. We apply the rules from a reading perspective, but assume some morphemic knowledge of a reader. Whereas we consider a rule to misfire if it does not apply in the correct environment when calculating applicability, as in Table 7, when calculating morphemic consistency, we allow the rules to be more flexible. We consider a morpheme to match the prototype if either the observed form or the form modified by the spelling rule matches the prototype.
+
+8
+
+Discussion
+
+Figure 2 shows a two-dimensional plot of orthographic perplexity vs. morphemic consistency. The (unattainable) optimality is represented by the lower
+
+543
+
+

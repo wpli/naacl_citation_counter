@@ -1,0 +1,31 @@
+^ ), where ^ = argmaxa P (f, a| e, D tive function: a ^ D = argmaxD P (D| e). Table 3 presents the results. It reveals that a soft domain assignment on the domain of sentence pairs results in a better alignment accuracy than a hard domain assignment.10
+
+Data 1M 2M 4M
+
+System Model 4 (ref.) Baseline Our System Baseline Our System Baseline Our System Model 4 (ref.) Baseline Our System Baseline Our System Baseline Our System Model 4 (ref.) Baseline Our System Baseline Our System Baseline Our System Model 4 (ref.) Baseline Our System Baseline Our System Baseline Our System
+
+8
+
+Translation Experiment
+
+In this section, we investigate the contribution of our model in terms of the translation accuracy. Here, we run experiments on the heterogeneous corpora of 1M, 2M, and 4M sentence pairs, testing the translation accuracy over four different domain-specific test sets related to News, Pharmacy, Legal, and Hardware. We use a standard state-of-the-art phrase-based system as the baseline. Our dense features include MOSES (Koehn et al., 2007) baseline features, plus hierarchical lexicalized reordering model features (Galley and Manning, 2008), and the word-level feature derived from IBM model 1 score, c.f., (Och et al., 2004).11 The interpolated 5-grams LMs with Kneser-Ney are trained on a very large monolingual corpus of 2B words. We tune the systems using kbest batch MIRA (Cherry and Foster, 2012). Finally, we use MOSES (Koehn et al., 2007) as decoder. Our system has exactly the same setting with the baseline, except: (1) To learn the translation, we use the alignment result derived from our latent domain HMM alignment model, rather than the HMM alignment model; and (2) We replace the word-level feature with our four domain-conditioned word-level features derived from the latent domain IBM model 1. Here, note that our latent model is learned with the supervision from the combining domain knowledge of all three domain-specific seed samples.
+Note that similar results are also observed for training, in which a soft domain assignment using soft EM produces better alignment accuracy than a hard domain assignment using hard EM. (See (Gao et al., 2011) for reference to hard domain assignment to training data.) This is perhaps due to the characteristics of the data we use. For instance, News sentence pairs are useful for translating Legal, Financial or EuroParl to varying degrees. 11 ~, e For every phrase pair f ~ with their length of mf ~ and le ~ respectively, the lexical feature estimates a probability in ~| e Model 1 style between their word pairs fj , ei (i.e. P (f ~) = mf ~ le ~ P ( f | e ) ). Note that adding word-level features j i j =1 i=1 le ~ from both translation sides does not help much, as observed by (Och et al., 2004). We thus add only an one from a translation side.
+10
+
+1M 2M 4M
+
+1M 2M 4M
+
+1M 2M 4M
+
+BLEU METEOR News test 23.6 30.8 23.2 30.6 23.5/+0.3 30.8/+0.2 25.9 32.4 26.3/+0.4 32.6/+0.2 26.8 33.0 27.0/+0.2 33.1/+0.1 Pharmacy 54.7 43.8 53.9 43.4 54.4/+0.5 43.8/+0.4 54.5 43.7 55.3/+0.8 44.3/+0.6 54.8 43.9 55.0/+0.2 44.0/+0.1 Legal 56.6 44.7 56.0 44.2 57.2/+1.2 44.4/+0.2 55.8 43.9 58.3/+2.5 44.7/+0.8 55.9 43.9 57.3/+1.4 44.4/+0.5 Hardware 75.4 53.6 74.9 53.1 76.8/+1.9 53.9/+0.8 75.7 53.5 77.4/+1.7 54.3/+0.8 77.1 54.2 77.9/+0.8 54.5/+0.3
+
+TER 58.3 58.9 58.7/-0.2 56.1 55.6/-0.5 55.0 54.7/-0.3 33.4 34.6 34.0/-0.6 34.4 33.5/-0.9 33.8 33.7/-0.1 34.1 35.0 34.0/-1.0 35.4 33.4/-2.0 34.3 33.4/-0.9 17.7 19.0 17.3/-1.7 18.6 17.0/-1.6 17.3 16.7/-0.6
+
+Table 4: Metric scores for the systems, which are averages over multiple runs. Bold results indicate that the comparison is significant over the baseline.
+
+For the News translation task, we tune systems on the News-test 2008 of 2, 051 sentence pairs and test them on the News-test 2013 of 3, 000 sentence pairs from the WMT 2013 shared task (Bojar et al., 2013). For the Pharmacy, Legal, and Hardware translation tasks, we tune systems on three domain-specific dev sets of 1, 000 sentence pairs and test them on three domain-specific test sets of 1, 016, 1, 326 and 1, 721 sentence pairs. We report three metrics - BLEU (Papineni et al., 2002), METEOR (Denkowski and Lavie, 2011) and TER (Snover et al., 2006), with statistical significance at 95% confidence interval
+
+405
+
+

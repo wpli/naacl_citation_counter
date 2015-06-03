@@ -1,0 +1,150 @@
+Stacked Denoising Auto-Encoder
+
+Labeled and Unlabeled Data
+
+Semi-supervised Sentiment-aware LDA
+
+General Feature Extraction
+
+Co-training
+
+Domain-specific Lexicon Construction
+
+SVM Classifier Combined Classifier Corpus-based Method
+
+Lexicon-Based Classifier Lexicon-based Method
+
+Figure 1: Algorithm Overview
+
+the whole corpus. Let mi (or mj , or mk ) indicate the number of occurrence of positive sentiment topic i(p) (or negative sentiment topic j (n) , or neutral sentiment topic k (u) ) in the current document. Then, the posterior probability that the current word w belongs to a specific topic is presented as follow
+Pr z = i(p) |D  ((p) + ·  + mi K (p)  +
+(p) K (p) i=1
+
+(p)
+
+(n)
+
+(u)
+
+mi ) i,w + ni,w
+V w =1 K (p) (p) (p)
+
+(p)
+
+where c  {p, n, u}. The goal is to use these values to construct a sentiment lexicon, which assigns sentiment scores to each word. In particular, we need the probability that each word w appears in a certain sentiment class, i.e. we want to calculate Pr (c  {p, n, u}|w) for the sentiment indicator c. (p) (n) (u) We use w , w , w to represent these probabilities. By the ssLDA's model specification, we define
+K (p)
+
+K (p) i =1
+
+mi
+
+(p)
+
+·
+
+i,w + ni,w
+
+(p)
+
+(p)
+
+(2)
+(p) w
+
+:=
+
+Pr (c = p|w)  p
+
+(p)
+
+·
+i=1 K (n) j =1
+
+i,w w,i (5) i,w w,j (6) i,w w,k (7)
+(u) (u) (n) (n)
+
+(p) (p)
+
+Pr z = j ·
+
+(n)
+
+|D  ( 
+(n) mj K (n) j =1
+
+(p)
+
++
+i=1
+
+mi )
+(n) j,w V w =1
+(p)
+
+(p)
+
++ K (n)  +
+
+(n) mj
+
+·
+
++
+
+(n) ni,w
+
+(n) w := Pr (c = n|w)  p(n) ·
+(n)
+
+(n) j,w
+
++ nj,w
+
+(3)
+(u) w
+
+:= Pr (c = u|w)  p
+
+(u)
+
+K (u)
+
+·
+k=1
+
+Pr z = k(u) |D  ((p) + · + K (u)  +
+(u) mk K (u) k =1
+
+K
+
+mi )
+i=1
+
+(p)
+
+mu
+
+(n)
+
+·
+
+k,w + nk,w
+V w =1
+
+(u)
+
+(u)
+
+k,w + nk,w
+
+(u)
+
+(u)
+
+(4)
+
+By equations (2), (3), and (4), we can sample the topic z for each word. In the Gibbs sampling procedure, we only need to maintain the counters n(p) , n(n) , n(u) , m(p) , m(n) and m(u) , which takes O(1) time to update for each iteration. 3.1.2 Lexicon Construction and Sentiment Classification Once we obtain the topic of each word, we obtain the value of hidden variables p(c) , (c) , (c) , 549
+
+We construct the sentiment lexicon for each word (p) (n) (u) (p) w by comparing w , w and w . If w is the greatest value, then the word w is considered to convey positive sentiment, and is added to the positive (p) (s) sentiment lexicon with weight w . If 1,w is the greatest, then the word w is added to the negative (n) sentiment lexicon with weight -w . Otherwise, the word w is considered neutral and not included in the sentiment lexicon. It remains to classify the sentiment for each document. We aggregate the weights for each word, so that the document is classified as "positive" if the accumulated weight is larger than zero; Otherwise,
+
+

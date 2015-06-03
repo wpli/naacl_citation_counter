@@ -1,0 +1,22 @@
+cluster members using frequency counts of instances where these members are found in strong-weak and weak-strong patterns. To evaluate their approach, de Melo and Bansal construct a manually curated gold standard of 88 clusters, each with a cardinality of three or more adjectives. These 88 clusters are randomly drawn from all possible clusters that are either half of a WordNet dumbbell. Two annotators manually examined these clusters to remove words that did not belong to the same scale. Further, all pairs within these clusters were annotated for scalar relationship: is the adjective in a pair weaker than the other, stronger than the other, or of equivalent intensity. The output of the MILP was tested on these 88 clusters (569 word pairs). They achieve a pairwise accuracy of 78.2%.
+
+Introducing tree patterns requires parsing a corpus: while this additional step in the pipeline might lead to error propagation, the advantages of the structural patterns are that (i) they are more robust than the lexical ones and (ii) restricting results to a desired part-of-speech comes for free. In the experiments reported here, we use the Stanford parser v3.3.1 (Klein and Manning, 2003). 3.2 Automatic clustering
+
+3
+3.1
+
+Our approach
+Extraction using structural patterns
+
+As observed by Ruppenhofer et al. (2014), lexical pattern-based approaches suffer from a coverage issue. This is because these patterns consist of longer n-grams, which are sparsely found in a small dataset. Therefore, Sheinman et al. (2013) use the Web as their corpus, and de Melo & Bansal use Google N-grams (Brants and Franz, 2006). However, this results in a large number of instances where satisfied lexical patterns do not correspond to adjectives (e.g., sometimes but not always). Moreover, since the Google N-grams corpus is limited to 5-grams, adjective pairs of interest beyond a five-word window are lost. To deal with these shortcomings, we use Tregex (Levy and Andrew, 2006), which enables pattern matching on parse trees based on syntactic relationships and regular expression matches on nodes. Using Tregex, we transform de Melo and Bansal's weak-strong and strong-weak lexical patterns into structural patterns. For example, one way of expanding the lexical pattern ` but not ' into a structural Tregex pattern for adjectives is `ADJP< ((ADJP<JJ) $ (CC<but)$(RB<not)$ (ADJP<JJ)).' Similarly, a structural pattern for adverbs can be written as `ADVP< ((ADVP<RB) $ (CC<but)$(RB<not)$ (ADVP<RB)).' These patterns are available for download1 .
+1
+
+In order to determine a ranking of words based on their semantic intensity, the first step is to determine words that belong to the same scale of meaning. As pointed out earlier, previous work (de Melo and Bansal, 2013; Sheinman et al., 2013) use WordNet dumbbells, and this restricts the utility of these approaches to the scope of a manually created lexical resource. We overcome this limitation by automatically clustering words that belong to the same scale. As the clustering algorithm, we use the Matlab (2014) implementation of K-means++ (Arthur and Vassilvitskii, 2007), a hard clustering algorithm2 with cosine similarity as a distance metric. Following Hatzivassiloglou and McKeown (1993), we use context vectors to represent the words to cluster. They make use of standard context vectors for clustering adjectives, where context for every adjective comprises of nouns it modifies across all sentences in a corpus. However, recent work shows promise for context vectors embedded in a compressed semantic space that are derived using neural networks: Baroni et al. (2014) compare standard context vectors with embedded vectors for a wide range of lexical semantic tasks and found embedded vectors to yield better results. We therefore generate context vectors and compare the utility of both skip-gram and continuous bag of words (CBOW) representations using the word2vec tool (Mikolov et al., 2013) for our task. These two representations have demonstrated varying degrees of success in different NLP tasks (Baroni et al., 2014; Bansal et al., 2014). Given a
+The choice of a hard-clustering algorithm was mostly for implementational convenience, but carries with it the issue that polysemous words can only appear in one semantic cluster. We leave the issue of deriving a soft clustering approach that works with context vectors, a separate research problem in its own right, to future work.
+2
+
+http://web.cse.ohio-state.edu/~shivade/naacl2015
+
+485
+
+

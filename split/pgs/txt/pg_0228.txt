@@ -1,0 +1,5 @@
+word meanings from unaligned parallel data. Machine Learning, pages 1­17. SVN Vishwanathan, Nicol N Schraudolph, Mark W Schmidt, and Kevin P Murphy. 2006. Accelerated training of conditional random fields with stochastic gradient methods. In Proceedings of the 23rd international conference on Machine learning, pages 969­ 976. ACM. Stephan Vogel, Hermann Ney, and Christoph Tillmann. 1996. HMM-based word alignment in statistical translation. In COLING-96, pages 836­841, Copenhagen, Denmark. Chen Yu and Dana H Ballard. 2004. On the integration of grounding language and learning objects. In AAAI, volume 4, pages 488­493. Haonan Yu and Jeffrey Mark Siskind. 2013. Grounded language learning from video described with sentences. In Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (ACL13), volume 1, pages 53­63. Heng Yu, Liang Huang, Haitao Mi, and Kai Zhao. 2013. Max-violation perceptron and forced decoding for scalable MT training. In Conference on Empirical Methods in Natural Language Processing (EMNLP13).
+
+174
+
+

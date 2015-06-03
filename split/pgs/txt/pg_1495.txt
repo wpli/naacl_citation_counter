@@ -1,0 +1,21 @@
+in either summaries or in articles. We noticed that verbs that tended to be dis-preferred in the summaries related to personal narratives, in which people are described as private entities rather than public personas. We applied the same measures that we used to analyze domain-level importance in world news to a collection of labeled personal and nonpersonal blog entries. Characterizing verbs on the personal vs. nonpersonal dimension indeed turned out to beneficial for explaining domain-level importance of verbs in world news: personal narratives are not considered important in this domain and verbs that tended to get excluded from summaries also tended to appear more frequently in personal blog entries. This characterization offered broad coverage of the article vocabulary and additional explanatory power compared to a characterization derived from General Inquirer categories.1 The derived lexical resources may serve as shallow semantics for a range of language processing tasks such as summarization, news filtering and search.2
+
+Then we compare the rate of occurrence of each verb in the two types of writing. Verbs used proportionally more in summaries are likely to correspond to events that are important, while verbs that occur more frequently in the articles are less likely to be related to the key topics of an article. To generate two classes of verbs representing important and non-important verbs, we consider two measurements: the difference of a verb's usage frequency between summaries and articles, and the statistical significance of this bias.
+
+2
+
+Determining domain-level importance
+
+To determine domain-level importance, we use summaries and articles from the New York Times Annotated Corpus3 , a collection of NYT articles that includes genre tags and summaries written by library scientists. We use articles published in the world news section between 1996 and 2005 for a total of 36,69 article-summary pairs. All of the documents were parsed with the Stanford Parser to obtain lemmatized forms of the words and part of speech tags. There are 2,634,850 tokens in the summaries and 32,587,740 tokens in the respective articles. The overall verb frequency is very similar in the summaries (14.5%) and the articles (14.6%). In our analysis we reduce the corpus of summaries and original articles to only the verbs that occur in them.
+The two lists characterizing the domain-level importance and the personal­public dimension are available for download at http://www.cis.upenn.edu/~nlp/ software/importance.html. 2 Personal perspective verbs may not be important in reporting world news but may be excellent indicators of celebrity/gossip search for example. 3 https://catalog.ldc.upenn.edu/LDC2008T19
+1
+
+Figure 1: Word frequency in summaries vs. articles. The black line is where the frequencies are equal, and words plotted in grey have statistically significant differences in frequencies for the two classes.
+
+Figure 1 shows the plot of each verb's probability in the summaries, Ps (wi ) vs. in the articles, Pa (wi ). Points above the line are verbs that occur more frequently in articles, while points below the line are more frequent in summaries. Dividing the points along this line produces two classes of verbs. We can further quantify how strongly a word is associated with its class using a variety of metrics (Monroe et al., 2008). For this application, we chose to use the log odds ratio. To measure how much more likely a word w is to occur in a class c, we compute the odds of a word occurring in corpora type c, i.e summary (s) or original article (a): Odds(w, c) = P (w | class = c) 1 - P (w | class = c)
+
+The ratio of the odds with respect to the two different corpora is a measure of how much more frequently
+
+1441
+
+

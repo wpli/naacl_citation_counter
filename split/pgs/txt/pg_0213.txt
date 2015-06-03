@@ -1,0 +1,30 @@
+Setup We take out as test set 25% of the 5.1K words we have visual vectors for. The multimodal models are re-trained without visual vectors for these words, using the same hyperparameters as above. For both tasks, the search for the correct word label/image is conducted on the whole set of 5.1K word/visual vectors. In the image labeling task, given a visual vector representing an image, we map it onto word space, and label the image with the word corresponding to the nearest vector. To perform the vision-tolanguage mapping, we train a Ridge regression by 5fold cross-validation on the test set (for S KIP - GRAM only, we also add the remaining 75% of word-image vector pairs used in estimating the multimodal models to the Ridge training data).4 In the image retrieval task, given a linguistic/multimodal vector, we map it onto visual space, and retrieve the nearest image. For S KIP - GRAM, we use Ridge regression with the same training regime as for the labeling task. For the multimodal models, since maximizing similarity to visual representations is already part of their training objective, we do not fit an extra mapping function. For MMS KIP GRAM -A, we directly look for nearest neighbours of the learned embeddings in visual space. For MMS KIP - GRAM -B, we use the M uv mapping function induced while learning word embeddings. Results In image labeling (Table 3) S KIP - GRAM is outperformed by both multimodal models, confirming that these models produce vectors that are directly applicable to vision tasks thanks to visual propagation. The most interesting results however are achieved in image retrieval (Table 4), which is essentially the task the multimodal models have been implicitly optimized for, so that they could be applied to it without any specific training. The strategy of directly querying for the nearest visual vectors of the MMS KIP - GRAM -A word embeddings works remarkably well, outperforming on the higher ranks S KIP - GRAM, which requires an ad-hoc mapping function. This suggests that the multimodal
+We use one fold to tune Ridge , three to estimate the mapping matrix and test in the last fold. To enforce strict zero-shot conditions, we exclude from the test fold labels occurring in the LSVRC2012 set that was employed to train the CNN of Krizhevsky et al. (2012), that we use to extract visual features.
+4
+
+S KIP - GRAM MMS KIP - GRAM -A MMS KIP - GRAM -B
+
+P@1 1.5 2.1 2.2
+
+P@2 2.6 3.7 5.1
+
+P@10 14.2 16.7 20.2
+
+P@20 23.5 24.6 28.5
+
+P@50 36.1 37.6 43.5
+
+Table 3: Percentage precision@k results in the zeroshot image labeling task.
+P@1 1.9 1.9 1.9 P@2 3.3 3.2 3.8 P@10 11.5 13.9 13.2 P@20 18.5 20.2 22.5 P@50 30.4 33.6 38.3
+
+S KIP - GRAM MMS KIP - GRAM -A MMS KIP - GRAM -B
+
+Table 4: Percentage precision@k results in the zeroshot image retrieval task.
+
+embeddings we are inducing, while general enough to achieve good performance in the semantic tasks discussed above, encode sufficient visual information for direct application to image analysis tasks. This is especially remarkable because the word vectors we are testing were not matched with visual representations at model training time, and are thus multimodal only by propagation. The best performance is achieved by MMS KIP - GRAM -B, confirming our claim that its M uv matrix acts as a multimodal mapping function. 5.3 Abstract words
+
+We have already seen, through the depth and chaos examples of Table 2, that the indirect influence of visual information has interesting effects on the representation of abstract terms. The latter have received little attention in multimodal semantics, with Hill and Korhonen (2014) concluding that abstract nouns, in particular, do not benefit from propagated perceptual information, and their representation is even harmed when such information is forced on them (see Figure 4 of their paper). Still, embodied theories of cognition have provided considerable evidence that abstract concepts are also grounded in the senses (Barsalou, 2008; Lakoff and Johnson, 1999). Since the word representations produced by MMS KIP - GRAM -A, including those pertaining to abstract concepts, can be directly used to search for near images in visual space, we decided to verify, experimentally, if these near images (of concrete things) are relevant not only for concrete words, as
+
+159
+
+

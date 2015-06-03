@@ -1,0 +1,25 @@
+Dataset Manual-Tracking Auto-Tracking
+
+LHMM 75.58 64.04
+
+LCRF 85.09 65.59
+
+LSP 79.64 61.99
+
+Average Alignment Accuracy (%) LSP-C LSP-H LSSVM LSSVM-C 80.68 80.41 79.64 80.68 63.95 65.27 61.99 63.95
+
+LSSVM-H 80.41 65.27
+
+Table 1: Alignment accuracy (% of video chunks aligned to the correct protocol step) for both manual and automatic tracking data. LHMM is the existing state-of-the-art generative model. For the variants of latent perceptron (LSP) and latent structured SVM (LSSVM), "C" indicates constrained decoding, and "H" indicates hybrid update.
+
+color model and their boundary maps (Luo and Guo, 2003), and track each blob using a 3D Kalman filter. In order to isolate alignment error from computer vision tracking and segmentation error, we manually tracked and annotated each of the video segments with the set of blobs touched by hands using the video annotation tool Anvil (Kipp, 2012). The alignment accuracies are reported both for the manual and automated tracking datasets. Parsing error is relatively small. The Charniak-Johnson parser correctly identified the nouns and verbs for most sentences, except for several single-word imperative sentences (e.g., Mix.), for which the verbs were mistakenly parsed as nouns. We experimented with the latent CRF (LCRF), latent perceptron (LSP) and its constrained variant (LSP-C), and latent SVM (LSSVM) and its constrained variant (LSSVM-C). Furthermore, we tried two hybrid variants LSP-H and LSSVM-H, where we started with constrained decoding, and later switched to full decoding. We experimented by incorporating additional latent variables for Blobto-Noun mapping (Section 4.5), which significantly improved alignment accuracy for LCRF, but decreased accuracy for LSP and LSSVM and their variants. We report the best result for each model. The discriminative algorithms are compared with the state-of-the-art LHMM model (Naim et al., 2014), which is a generative HMM with latent variables for blob-to-noun mapping and the observation states of each noun. We initialized the weights for co-occurrence and jump size features to the log-probabilities learned by the generative HMM model. All the other features are initialized to zero. For both LHMM and the discriminative models, we used monotonic jumps as they performed better than the non-monotonic 001 jumps. We used the same learning rate  = 0. t (where t is the iteration number) for all the discrim171
+
+inative models, and the LSSVM regularization constant  = 0.001. All the Perceprton and SVM variants performed "weight averaging" (Collins, 2002). The number of iterations are set to 100 for all the algorithms. Table 1 shows that the discriminative models, especially LCRF and LSP-H/LSSVM-H, outperform the generative model LHMM both on the manualtracking and auto-tracking datasets. For the manualtracking dataset, the difference between LHMM and each of the discriminative models is statistically significant (p-value < 0.0001). On the auto-tracking dataset, however, the differences are not significant (p-value > 0.1). Table 2 shows an example of an alignment obtained by LCRF for a short segment of a manually tracked video. The average running time for each iteration per video is 0.8 seconds for LHMM, 1.1 seconds for LSP and LSSVM, and 2.5 seconds for LCRF on a 2.9 GHz Intel Core-i7 processor and 8GB RAM.
+
+7
+
+Discussions and Future Work
+
+The results show that discriminative methods outperform the generative LHMM model on both the manual and auto-tracking datasets. We achieved the best overall accuracy using the LCRF model. LCRF takes expectations over all possible alignment states and video sequences. On the other hand, LSP and LSSVM consider the highest scoring prediction only, which is similar to the hard-decision decoding. With no information regarding how many video segments to align to each sentence, LSP and LSSVM could not correctly predict the output video sequences during full decoding, and the weight vectors did not converge. By constraining the alignment to the forced alignment, we avoid aggressive updates, which may have helped LSP-C and LSSVMC to learn better alignments. However, constrained decoding has a limitation that it can not update align-
+
+

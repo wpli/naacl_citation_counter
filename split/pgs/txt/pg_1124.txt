@@ -1,0 +1,47 @@
+graphs are relatively small, we can compute r directly4 by solving: rk = (I - (1 - )T )-1 ek (10)
+
+we define dsen , the sentiment overlap between two scenes as: dsen (si , si+1 ) =1 - k · di f (si , si+1 ) k - k · di f (si , si+1 ) + 1 1 di f (si , si+1 ) = 1 + |sen(si ) - sen(si+1 )| (15) (16)
+
+The l th element of r then equals the probability of the random walker being in state l in the stationary c be the same as r , but with the distribution. Let rk k character node c of the bipartite graph being turned into a sink, i.e., all entries for c in the transition matrix T are 0. We can then define how a single character influences the transition between scenes si and si+1 as:
+c INF (si , si+1 |c) = rsi [si+1 ] - rs [s ] i i+1
+
+where the sentiment sen(s) of scene s is the aggregate sentiment score of all interactions in s: sen(s) =
+c,c Cs
+
+
+
+sen(inter(c, c ))
+
+(17)
+
+(11)
+
+where rsi [si+1 ] is shorthand for that element in the vector rsi that corresponds to scene si+1 . We use the INF score directly in Equation (3) to determine the progress score of a candidate chain. Diversity The diversity term D(S ) in our objective should encourage chains which consist of more dissimilar scenes, thereby avoiding redundancy. The diversity of chain S is the sum of the diversities of its successive scenes: D(S ) =
+|S |-1 i=1
+
+We explain how interactions and their sentiment are computed in Section 5. Again, dsen is larger if two scenes have a less similar sentiment. di f (si , si+1 ) becomes 1 if the sentiments are identical, and increasingly smaller for more dissimilar sentiments. The sigmoid-like function in Equation (15) scales dsen within range [0, 1] to take smaller values for larger sentiment differences (factor k adjusts the curve's smoothness). Importance The score I (S ) captures whether a chain contains important scenes. We define I (S ) as the sum of all scene-specific importance scores imp(si ) of scenes contained in the chain: I (S ) =  imp(si )
+i=1 |S |
+
+
+
+d (si , si+1 )
+
+(12)
+
+The diversity d (si , si+1 ) of two scenes si and si+1 is estimated taking into account two factors: (a) do they have any characters in common, and (b) does the sentiment change from one scene to the next: dchar (si , si+1 ) + dsen (si , si+1 ) d (si , si+1 ) = 2 (13)
+
+(18)
+
+The importance imp(si ) of a scene si is the ratio of lead to support characters within that scene: imp(si ) = c: cCsi cmain(M) 1 c: cCsi 1 (19)
+
+where dchar (si , si+1 ) and dsen (si , si+1 ) respectively denote character and sentiment similarity between scenes. Specifically, dchar (si , si+1 ) is the relative character overlap between scenes si and si+1 : dchar (si , si+1 ) = 1 - |Csi  Csi+1 | |Csi  Csi+1 | (14)
+
+where Csi is the set of characters present in scene si , and main(M ) is the set of main characters in the movie.5 I (si ) is 0 if a scene does not contain any main characters, and 1 if it contains only main characters (see Section 5 for how main(M ) is inferred). Optimal Chain Selection We use Linear Programming to efficiently find a good chain. The objective is to maximize Equation (2), i.e., the sum of the terms for progress, diversity and importance,
+5 Whether scenes are important if they contain many main characters is an empirical question in its own right. For our purposes, we assume that this relation holds.
+
+dchar will be 0 if two scenes share the same characters and 1 if no characters are shared. Analogously,
+4 We could also solve for r recursively which would be preferable for large graphs, since the performed matrix inversion is computationally expensive.
+
+1070
+
+

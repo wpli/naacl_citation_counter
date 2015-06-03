@@ -1,0 +1,57 @@
+Context word
+(observed)
+
+Chase
+
+loaned bank2 bank
+
+money
+
+Sense
+(latent)
+
+p( c | s ) p( s | w )
+
+cept with  = 0. This leads to the following realization of the objective in equation 3: C () = arg max
+ (wi ,ci )D
+
+Word
+(observed)
+
+log
+sij
+
+p(ci | sij ; )× r vij - vi j
+2
+
+Figure 2: The generative process associated with the skip-gram model, modified to account for latent senses. Here, the context of the ambiguous word "bank" is generated from the selection of a specific latent sense.
+
+p(sij | wi ; ) - 
+ij -i j
+
+(4)
+
+that grounds the vectors V in an ontology. This form permits flexibility in the definition of both p(wi , ci , sij ; ) and p () allowing for a general yet powerful framework for adapting MLE models. In what follows we show that the popular skipgram model (Mikolov et al., 2013a) can be adapted to generate ontologically grounded sense vectors. The classic skip-gram model uses a set of parameters  = (U, V ), with U = {ui | ci  W } and V = {vi | wi  W } being sets of vectors for context and target words respectively. The generative story of the skip-gram model involves generating the context word ci conditioned on an observed word wi . The conditional probability is defined to exp(ui · vi ) be p(ci | wi ; ) = . ci W exp(ui · vi ) We modify the generative story of the skip-gram model to account for latent sense variables by first selecting a latent word sense sij conditional on the observed word wi , then generating the context word ci from the sense distinguished word sij . This process is illustrated in Figure 2. The factorization p(ci | wi ; ) = sij p(ci | sij ; ) × p(sij | wi ; ) follows from the chain rule since senses are wordspecific. To parameterize this distribution, we define a new set of model parameters  = (U, V, ), where U remains identical to the original skip-gram, V = {vij | sij  Ws } are a set of vectors for word senses, and  are the context-independent sense proportions ij = p(sij | wi ). We use a Dirichlet prior over the multinomial distributions i for every wi , with a shared concentration parameter . We define the ontological prior on vectors as p ()  exp(- r vij - vi j 2 ), where  controls the strength of the prior. We note the similarity to the retrofitting objective in equation 1, ex686
+ij -i j
+
+This objective can be optimized using EM, for the latent variables, and with lazy updates (Carpenter, 2008) every k words to account for the prior regularizer. However, since we are primarily interested in learning good vector representations, and we want to learn efficiently from large datasets, we make the following simplifications. First, we perform "hard" EM, selecting the most likely sense at each position rather than using the full posterior over senses. Also, given that the structured regularizer p () is essentially the retrofitting objective in equation 1, we run retrofitting periodically every k words (with  = 0 in equation 2) instead of lazy updates.2 The following decision rule is used in the "hard" E-step: sij = arg max p(ci | sij ; (t) )ij
+sij (t)
+
+(5)
+
+In the M-step we use Variational Bayes to update  with:
+(t+1) ij
+
+
+
+exp  c ~(wi , sij ) + ij exp ( (~ c(wi ) + ))
+
+(0)
+
+(6)
+
+where c ~(·) is the online expected count and  (·) is the digamma function. This approach is motivated by Johnson (2007) who found that naive EM leads to poor results, while Variational Bayes is consistently better and promotes faster convergence of the likelihood function. To update the parameters U and V , we use negative sampling (Mikolov et al., 2013a) which is an efficient approximation to the original skip-gram objective. Negative sampling attempts to distinguish between true word pairs in the data, relative to noise. Stochastic gradient descent on the following equation is used to update the model pa2
+
+We find this gives slightly better performance.
+
+

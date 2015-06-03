@@ -1,0 +1,40 @@
+unigrams
+
+feature templates f (S, Q) s0 .t  s0 .c s 0 .w  s 0 .c s1 .t  s1 .c s 1 .w  s 1 .c s2 .t  s2 .c s2 .w  s2 .c s3 .t  s3 .c q0 .w  q0 .t q1 .w  q1 .t q2 .w  q2 .t q3 .w  q3 .t s0 .lc.w  s0 .lc.c s0 .rc.w  s0 .rc.c s0 .u.w  s0 .u.c s1 .lc.w  s1 .lc.c s1 .rc.w  s1 .rc.c s1 .u.w  s1 .u.c bigrams s0 .w  s1 .w s 0 .w  s 1 .c s0 .c  s1 .w s 0 .c  s 1 .c s0 .w  q0 .w s0 .w  q0 .t s0 .c  q0 .w s0 .c  q0 .t q0 .w  q1 .w q0 .w  q1 .t q0 .t  q1 .w q0 .t  q1 .t s1 .w  q0 .w s1 .w  q0 .t s1 .c  q0 .w s1 .c  q0 .t s0 .c  s0 .lc.c  s0 .rc.c  s1 .c s0 .c  s0 .lc.c  s0 .rc.c  s1 .c trigrams s0 .c  s1 .c  s2 .c s0 .w  s1 .c  s2 .c s0 .c  s1 .w  q0 .t s0 .c  s1 .c  s2 .w s0 .c  s1 .c  q0 .t s0 .w  s1 .c  q0 .t s0 .c  s1 .w  q0 .t s 0 .c  s 1 .c  q 0 .w
+
+Table 1: All feature templates (43 templates based on 32 atomic features), taken from Zhu et al. (2013). si .c, si .w and si .t denote the syntactic label, the head word, and the head tag of si . si .lc.w means the head word of the left child of si . si .u.w means the head word of the unary root si . qi .w and qi .t denote the word and the tag of qi .
+
+input (T1 , w1 )...(Tn , wn )
+90 F1 on the dev set 11th 15th
+
+axioms 0 : sh
+
+, (t, w1 )...(Tn , wn )({</s>}, </s>) : 0,  t  T1
+
+89.5 89 88.5 88 DP non-DP 2 4 6
+
+l : S, (t, w)|(T , w )|Q : (c, v ) t  T , l+1 : S |t(w), (t , w )|Q : (c+csh , 0) l is even
+
+Figure 3: Extended shift-reduce deductive system with tagging sausage lattice, only showing sh.
+
+87.5 8 10 12 14 16 18 iteration
+
+In order to compute all the scores in GSS, for each state p, we calculate the prefix score, c, which is the total cost of the best action sequence from the initial state to the end of state p, and the inside score v , which is the score since the last shift (Figure 2). The new mechanism beyond Huang and Sagae (2010) is the non-trivial dynamic programming treatment of unary actions (unx and st), which is not found in dependency parsing. Note that the score calculation is quite different from shift in the sense that unary actions are more like reduces.
+
+Figure 4: The learning curves of non-DP and DP parsers on the development set. DP achieves the best performance at 11th iteration with 89.8%, while non-DP gets its optimal iteration at 15th with a lower F1 89.5%.
+
+ahead (we just need to know the tag of the first word on the queue), but in practice, we use a look ahead of 4 words (q0 ..q3 , see Table 1), so each shift actually splits the tagset of the 5th word on the queue (q4 ).
+
+5
+
+Experiments
+
+4
+
+Incorporating Tag Lattices
+
+It is easy to extend our deductive system to take tagging sausage lattices as input. The key difference is that the tag t associated with each word in the input sequence becomes a set of tags T . Thus, in the sh action, we split the state with all the possible tags t in the tagset T for the second word on the queue. Figure 3 shows the deductive system, where we only change the sh action, input and axiom. For simplicity reasons we only present one word look 1032
+
+We evaluate our parsers on both Penn English Treebank (PTB) and Chinese Treebank (CTB). For PTB, we use sections 02-21 as the training, section 24 as the dev set, and section 23 as the test. For CTB, we use the version of 5.1, articles 001-270 and 4401151 as the training data, articles 301-325 as the dev set, and articles 271-300 as the test set. Besides training with gold POS tags, we add k -best automatic tagging results to the training set using a MaxEnt model with ten-way jackknifing (Collins, 2000). And we automatically tag the dev and test sets with k -best tagging sequences us-
+
+

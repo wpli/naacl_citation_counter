@@ -1,0 +1,34 @@
+ing the derived probabilities as the initialization for their corresponding domain-conditioned alignment parameters. In our implementation, one EM iteration is usually dedicated for this. It should be noted that we ignore the domain prior parameters in the model during the period. Parameter Constraints During training, it would be also necessary to keep the domain prior parameters fixed for all sentence pairs that belong to seed samples. This can be thought of as the constraints derived from the partial knowledge, guiding the learning to a desirable parameter space. Domain-conditioned LMs training We now discuss how to train the domain-conditioned LMs with partial supervision. It would be reasonable to use the domain-specific seed samples to train their exemplifying domain-conditioned LMs, and the pool of the rest sentence pairs to train the out-domain LMs. Nevertheless, the out-domain LMs trained on such a big corpus could dominate the other domain-conditioned LMs. Following Cuong and Sima'an (2014b), we rather create a "pseudo" outdomain sample to train the out-domain LMs, i.e., the creation is via an inspired burn-in period. In brief, an EM iteration is dedicated just to compute P (DOU T | f, e) for all sentences, ranking them and select a small subset with highest score as the (on the fly) pseudo out-domain sample. Note that our partial learning framework is very simple. There are various advanced learning framework that are also applicable with the partial supervision, e.g., Posterior Regularization (Ganchev et al., 2010). This leaves much space for future work.
+
+follows: ^ = argmaxa a = argmaxa = argmaxa
+D D D
+
+P (f, a, D|e) P (f, a|e, D)P (D|e) P (f, a|e, D)P (e|D)P (D).
+
+Here, we derive the last equation by applying Bayes' rule to P (D| e), i.e., P (D| e)  P (e| D)P (D). Interestingly, our Viterbi decoding now relies on a mix of domain-conditioned statistics for each sentence pair. The computing of term D (a) for all possible alignments, a, however, is intractable, making the search problem difficult. Inspired by Liang et al. (2006), we opt instead for a heuristic objective function as follows8 : ^ = argmax a
+a D
+
+P (f, a| e, D)P (e| D)P (D) . (5)
+
+Here, note that p is a lower bound for p, when 0  p  1, according to Jensen's inequality. With Eq. 5, it is straightforward to design a dynamic programming algorithm to decoding, e.g., the Viterbi algorithm. In practice, we observe that the approximation yields good results. Later experiments on word alignment will present this in detail.
+
+6
+
+Experimental Setup
+
+5
+
+Domain-conditioned Decoding
+
+At test time, assigning each sentence pair to a single most likely domain (hard decision) is likely to result in sub-optimal performance.7 Instead we average over domains (soft decision) while predicting the translation. Formally for each sentence pair, ^ as e, f , we can find their best Viterbi alignment, a
+7
+
+In the following experiments, we use three heterogeneous English-Spanish corpora consisting of 1M , 2M and 4M sentence pairs respectively. These corpora combine two parts. The first part respectively 0.7M , 1.7M and 3.7M is collected from multiple domains and resources including EuroParl (Koehn, 2005), Common Crawl, United Nation, News Commentary. The second part consists of three domainexemplifying samples consisting of roughly 100K sentence pairs for each one (total 300K ). Each of these three samples (manually collected by a commercial partner) exemplifies a specific domain related to Legal, Hardware and Pharmacy. Outlook In Section 7 we examine the word alignment yielded by the HMM alignment model and our latent domain HMM alignment model. In Section 8 we proceed further to examine the translation produced by derived SMT systems.
+Alternative solutions could be Lagrangian relaxation-based decoder (DeNero and Macherey, 2011; Chang et al., 2014).
+8
+
+Later experiments on word alignment will confirm this.
+
+402
+
+

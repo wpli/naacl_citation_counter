@@ -1,0 +1,35 @@
+ [P]OS Tags [G]azetteers [P]+[G]
+
+Base +X 42.9 47.1 52.8 55.6
+
+Reps +X 62.4 63.0 63.2 63.5
+
+System PHMS14 Baseline PHMS14 Dict  Web All Data+Reps+Weights All Data+Ling+Reps+Weights
+
+Rit11 77.4 78.5 82.3 82.6
+
+Fro14 82.1 83.9 86.4 86.9
+
+Table 8: Adding linguistic resources to our baseline and representation-enabled systems, as measured by F1 averaged over 3 test sets. All systems are trained on CoNLL+Fin10, and all but Base+ use data weighting.
+
+Table 9: Comparison with the state-of-the-art, reporting test F1. Both the gold-standard and the system outputs have @user names deterministically tagged as PER.
+
+5.3 languages, such as English, rich resources exist and can be very useful. We now examine how word representations compare and interact with gazetteers and POS taggers. For gazetteers, we use those included with the Illinois NER system (Ratinov and Roth, 2009), generating features that indicate when a word appears as part of a phrase found in a gazetteer. For POS tags, we use the CMU Twitter Tagger (Owoputi et al., 2013), and generate POS tag indicators for the current word and for tags within a 2-word window. For some of our corpora, notably CoNLL and Rit11, the corpus tokenization did not match the POS tagger's tokenization. We resolve mismatches by allowing the POS tagger to further tokenize the input sentence to better match its assumptions. After POS tagging, we merge any split tokens back to the original tokenization, picking a representative tag from among merged tags according to a priority list (verb > noun > adjective, etc.). The POS tags may have performed better if we had used the tagger's native tokenization throughout.4 Results of our comparison are shown in Table 8. Comparing Base+ and Base+[P]+[G], we see that linguistic resources boost the baseline's performance considerably. Turning to Reps+[P]+[G], we see that adding word representations to linguistic resources provides another substantial boost of 7.9 F1. Conversely, adding linguistic resources to a system that already has representations increases F1 by only 1.1 points, indicating that not much new information is being added. The per-feature analysis indicates that much of this boost comes from the gazetteers.
+Inconsistent tokenization also hinders the word representations, which were constructed from a corpus tokenized by the CMU Twokenizer.
+4
+
+Comparison with the State-of-the-Art
+
+In Table 9, we compare our best system, including linguistic resources, to the state-of-the-art results reported by Plank et al. (2014).5 In order to create a fair comparison, we post-process both our system output and the gold-standard to tag all @user names as PER, just as they do. Like our system, their baseline includes CoNLL and Twitter data, and uses Brown clusters trained on a comparable number of unlabeled tweets. Their strongest system uses distant supervision over linked web-pages to create artificial training data. But we are able to outperform it with our vector representations and importance weights. Note that this comparison is not perfect, as they train on a much larger pool of crowd-sourced, NER-annotated tweets, consisting of 170k tokens compared to our 17k. The size of their training data is balanced by the fact that its annotations were automatically correctly using MACE (Hovy et al., 2013), where ours were corrected manually, making it unclear which group has the advantage. Nonetheless, our results establish a new state-of-the-art for both test sets, and they do so using only 1k annotated tweets.
+
+6
+
+Analysis
+
+We inspected 100 tweets from the Rit11 test set, focusing on the output from our primary system, Base+Reps+Weights, and our baseline, Base, both trained on the CoNLL+Fin10 data. We noted cases where the primary system improved upon the baseline, and cases where it failed to achieve the goldstandard, and placed the phenomena we observed into bins. In general, the baseline was observed
+We omit the Fin10 test set from this comparison, as Plank et al. (2014) test on the entirety of Fin10, while we have divided it into training and development sets.
+5
+
+742
+
+

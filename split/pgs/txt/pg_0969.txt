@@ -1,0 +1,51 @@
+cording to the task-specific objective. This approximately optimizes the sum of all multi-task objectives. For query classification of class Ct , we use the cross-entropy loss as the objective: -{yt ln P (Ct |Q) + (1 - yt ) ln(1 - P (Ct |Q))} (5) where yt = {0, 1} is the label and the loss is summed over all samples in the mini-batch (1024 samples in experiments). The objective for web search used in this paper follows the pair-wise learning-to-rank paradigm outlined in (Burges et al., 2005). Given a query Q, we obtain a list of documents L that includes a clicked document D+ (positive sample), and J randomly- sampled non-clicked documents {Dj }j =1,.,J . We then minimize the negative log likelihood of the clicked document (defined in Eq. 7) given queries across the training data - log P (D+ |Q) (6)
+(Q,D+ )
+
+DNN model P ( C | Q)
+
+DSSM model P ( D 1 | Q) R(Q, D1 ) P ( D 2 | Q) R(Q, D2 )
+
+128 W2 300 W1 50k H 500k Q
+
+128
+q W2 300 q W1 50k
+
+128
+d W2 300 d W1 50k
+
+128
+d W2 300 d W1 50k
+
+H 500k Q
+
+H 500k D1
+
+H 500k D2
+
+Figure 2: A DNN model for classification and a DSSM model (Huang et al., 2013) for ranking. retains independent parameters for computing the document representations. This is more similar to the original DSSM. We have attempted training this model using Algorithm 1, but it achieves good results on query classification at the expense of web search. This is likely due to unbalanced updates (i.e. parameters for queries are updated more often than that of documents), and implying that the amount of sharing is an important design choice in multi-task models.
+4
+
+where the probability of a given document D+ is computed exp(R(Q, D+ )) P (D+ |Q) = (7) D L exp(R(Q, D )) here,  is a tuning factor determined on held-out data. Additional training details: (1) Model parameters are initialized with uniform distribution in the range (- 6/(f anin + f anout ), 6/(f anin + f anout )) (Montavon et al., 2012). Empirically, we have not observed better performance by initialization with layer-wise pre-training. (2) Moment methods and AdaGrad training (Duchi et al., 2011) speed up the convergence speed but gave similar results as plain SGD. The SGD learning rate is fixed at = 0.1/1024. (3) We run Algorithm 1 for 800K iterations, taking 13 hours on an NVidia K20 GPU. 2.4 An Alternative View of the Multi-Task Model
+
+Q C1
+
+Q C2 300 50k 500k Q
+
+QSq
+
+D Sd 300 50k 500k D
+
+Figure 3: An alternative multi-task architecture. Compared with Figure 1, only the query part is shared across tasks here.
+
+3
+3.1
+
+Experimental Evaluation
+Data Sets and Evaluation Metrics
+
+Our proposed multi-task DNN (Figure 1) can be viewed as a combination of a standard DNN for classification and a Deep Structured Semantic Model (DSSM) for ranking, shown in Figure 2. Other ways to merge the models are possible. Figure 3 shows an alternative multi-task architecture, where only the query part is shared among all tasks and the DSSM 915
+
+We employ large-scale, real data sets in our evaluation. See Table 1 for statistics. The test data for query classification were sampled from one-year log files of a commercial search engine with labels (yes or no) judged by humans. The test data for web search contains 12,071 English queries, where each query-document pair has a relevance label manually annotated on a 5-level relevance scale: bad, fair,
+3
+
+

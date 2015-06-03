@@ -1,0 +1,24 @@
+How to Memorize a Random 60-Bit String
+Marjan Ghazvininejad Information Sciences Institute Department of Computer Science University of Southern California ghazvini@isi.edu Kevin Knight Information Sciences Institute Department of Computer Science University of Southern California knight@isi.edu
+
+Abstract
+User-generated passwords tend to be memorable, but not secure. A random, computergenerated 60-bit string is much more secure. However, users cannot memorize random 60bit strings. In this paper, we investigate methods for converting arbitrary bit strings into English word sequences (both prose and poetry), and we study their memorability and other properties.
+
+1
+
+Introduction
+
+44-bit password English phrase ---------------------------10101101010 -> correct 10010110101 -> horse 01010101010 -> battery 10110101101 -> staple The four-word sequence is nonsense, but it is easier to memorize than the 44-bit string, and XKCD hypothesizes that users can improve memorability by building an image or story around the four words. In this paper, we investigate other methods for converting a system-generated bit string into a memorable sequence of English words. Our methods produce whole sentences, e.g. Fox news networks are seeking views from downtown streets. as well as short poems, e.g. Diversity inside replied, Soprano finally reside. We also move to 60-bit passwords, for better security. One source claims: As of 2011, available commercial products claim the ability to test up to 2,800,000,000 passwords a second on a standard desktop computer using a highend graphics processor.2 If this is correct, a 44-bit password would take one hour to crack, while a 60-bit password would take 11.3 years. Our concrete task is as follows:
+2
+
+Passwords chosen by users (e.g., "Scarlet%2") are easy to remember, but not secure (Florencio and Herley, 2007). A more secure method is to use a system-assigned 60-bit random password, such as 0010100010100...00101001. However, this string is hard to memorize. In this paper, we convert such strings into English phrases, in order to improve their memorability, using natural language processing to select fluent passphrases. Our methods are inspired by an XKCD cartoon1 that proposes to convert a randomly-chosen 44-bit password into a short, nonsensical sequence of English words. The proposed system divides the 44-bit password into four 11-bit chunks, and each chunk provides an index into a 2048-word English dictionary. XKCD's example passphrase is correct horse battery staple:
+1
+
+http://xkcd.com/936
+
+http://en.wikipedia.org/wiki/Password cracking
+
+1569
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1569­1575, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

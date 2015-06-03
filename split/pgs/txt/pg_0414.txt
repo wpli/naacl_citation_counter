@@ -1,0 +1,44 @@
+query image with all possible images with their captions in Google's database, a "Best Guess" of the keywords in the image is then revealed. Using the extracted image keywords, we further query a TF-IDF based Lucene5 meme search engine, which we indexed with a large number of Webcrawled meme descriptions. After we obtain the candidate generations, we then extract all the text and vision features that we described in Section 3.1. Finally, our nonparanormal model ranks all possible candidates, and selects the final generation with the highest posterior.
+Figure 4: Our pipeline for generating memes from raw images.
+
+4
+
+Datasets
+
+intractable in the multivariate case, and approximate inference, such as Markov Chain Monte Carlo sampling (Gelfand and Smith, 1990; Pitt et al., 2006) is often used for posterior inference. In this work, we propose an efficient sampling method to derive y given the text features -- we sample Fy^ (y ) s.t. it maximizes the joint high-dimensional Gaussian copula density:
+Fy^ (y )(0,1)
+
+arg max 
+
+1 1 exp - T · -1 - I ·  2 det 
+
+(9)
+
+We collected meme images and text descriptions6 from two popular meme websites7 . In the prediction experiment, we use 3,008 image-description pairs for training, and 526 image-description pairs for testing. In the generation experiment, we use 269,473 meme descriptions to index the meme search engine, and 50 randomly selected images for testing. During training, we convert the raw counts of popular votes into reciprocal ranks (e.g., the most popular text descriptions will all have a reciprocal rank of 1, and n-th popular one will have a score of 1/n).
+
+where
+
+x1 (x1 ))   . .   . =  -1 (Fxn (xn )) -1 (Fy (y ))
+
+
+
+-1 (F
+
+
+
+5
+
+Prediction Experiments
+
+This approximate inference scheme using maximum density sampling from the Gaussian copula significantly relaxes the complexity of inference. Finally, to derive y ^, the last step is to compute the inverse CDF of Fy^ (y ). A detailed description of the inference algorithm can be found in our prior work (Wang and Hua, 2014). 3.4 A Simple Meme Generation Pipeline Now after we train a nonparanormal model for ranking meme descriptions, we show the simple meme generation pipeline in Figure 4. Given a test image, we disguise as the Internet Explorer, and query Google's "Search By Image" inverse image search service4 . By comparing the
+4
+
+In the first experiment, we compare the proposed NPN with various baselines in a prediction task, since prior literature (Hodosh et al., 2013) also suggests using ranking based evaluation for associating images with text descriptions. Throughout the experiment sections, we set = 10, and  = 80 as the dropout hyperparameters. Baselines: The baselines are standard squared-loss linear regression, linear kernel SVM, and non-linear (Gaussian) kernel SVM. In a recent empirical study (Fern´ andez-Delgado et al., 2014) that evaluates 179 classifiers from 17 families on 121 UCI datasets, the authors find that Gaussian SVM is one of the top performing classifiers. We use the Statistical Toolbox's linear regression implementation in Matlab, and LibSVM (Chang and Lin, 2011) for
+http://lucene.apache.org/ http://www.cs.cmu.edu/~yww/data/meme dataset.zip. 7 memegenerator.net and cheezburger.com
+6 5
+
+http://www.google.com/imghp/
+
+360
+
+

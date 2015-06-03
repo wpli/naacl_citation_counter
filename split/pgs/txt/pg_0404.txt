@@ -1,0 +1,20 @@
+Method HMM-GMM HMM-DNN HMM-SHF CTC no LM CTC+5-gram CTC+7-gram CTC+NN-1 CTC+NN-3 CTC+RNN CTC+RNN-3
+
+CER 23.0 17.6 NR 27.7 25.7 24.7 24.5 24.0 24.9 24.7
+
+EV 29.0 21.2 NR 47.1 39.0 35.9 32.3 30.9 33.0 30.8
+
+CH 36.1 27.1 NR 56.1 47.0 43.8 41.1 39.9 41.7 40.2
+
+SWBD 21.7 15.1 12.4 38.0 30.8 27.8 23.4 21.8 24.2 21.4
+
+model built from the 3M words in the Switchboard transcripts interpolated with a second bigram language model built from 11M words on the Fisher English Part 1 transcripts (LDC2004T19). Both LMs are trained using interpolated KneserNey smoothing. For context we also include WER results from a state-of-the-art HMM-DNN system built with quinphone phonetic context and Hessianfree sequence-discriminative training (Sainath et al., 2014). 4.2 DBRNN Training We train a DBRNN using the CTC loss function on the entire 300hr training corpus. The input features to the DBRNN at each timestep are MFCCs with context window of ±10 frames. The DBRNN has 5 hidden layers with the third containing recurrent connections. All layers have 1824 hidden units, giving about 20M trainable parameters. In preliminary experiments we found that choosing the middle hidden layer to have recurrent connections led to the best results. The output symbol set  consists of 33 characters including the special blank character. Note that because speech recognition transcriptions do not contain proper casing or punctuation, we exclude capital letters and punctuation marks with the exception of "-", which denotes a partial word fragment, and "'", as used in contractions such as "can't." We train the DBRNN from random initial parameters using the gradient-based Nesterov's accelerated gradient (NAG) algorithm as this technique is sometimes beneficial as compared with standard stochastic gradient descent for deep recurrent neural network training (Sutskever et al., 2013). The NAG algorithm uses a step size of 10-5 and a momentum of 0.95. After each epoch we divide the learning rate by 1.3. Training for 10 epochs on a single GTX 570 GPU takes approximately one week. 4.3 Character Language Model Training The Switchboard corpus transcripts alone are too small to build CLMs which accurately model general orthography in English. To learn how to spell words more generally we train our CLMs using a corpus of 31 billion words gathered from the web (Heafield et al., 2013). Our language models use sentence start and end tokens, <s> and </s>, as
+
+Table 1: Character error rate (CER) and word error rate results on the Eval2000 test set. We report word error rates on the full test set (EV) which consists of the Switchboard (SWBD) and CallHome (CH) subsets. As baseline systems we use an HMMGMM system and HMM-DNN system. We evaluate our DBRNN trained using CTC by decoding with several character-level language models: 5-gram, 7gram, densely connected neural networks with 1 and 3 hidden layers (NN-1, and NN-3), as well as recurrent neural networks s with 1 and 3 hidden layers. We additionally include results from a state-of-theart HMM-based system (HMM-DNN-SHF) which does not report performance on all metrics we evaluate (NR). First, we build an HMM-GMM system using the Kaldi open-source toolkit2 (Povey et al., 2011). The baseline recognizer has 8,986 sub-phone states and 200K Gaussians trained using maximum likelihood. Input features are speaker-adapted MFCCs. Overall, the baseline GMM system setup largely follows the existing s5b Kaldi recipe, and we defer to previous work for details (Vesely et al., 2013). We additionally built an HMM-DNN system by training a DNN acoustic model using maximum likelihood on the alignments produced by our HMM-GMM system. The DNN consists of five hidden layers, each with 2,048 hidden units, for a total of approximately 36 million (M) free parameters in the acoustic model. Both baseline systems use a bigram language
+2
+
+http://kaldi.sf.net
+
+350
+
+

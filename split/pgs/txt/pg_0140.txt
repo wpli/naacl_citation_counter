@@ -1,0 +1,41 @@
+layer of binary-valued hidden units z = z1 . . . zn  {0, 1} for each pair of label sequence y = y1 . . . yn and observation sequence x = x1 . . . xn . A HUCRF parametrized by   Rd and   Rd defines a joint probability of y and z conditioned on x as follows: p, (y, z |x) = exp( (x, z ) +  (z, y )) z {0,1}n exp( (x, z ) +  (z , y ))
+
+y Y (x,z )
+
+where Y (x, z ) is the set of all possible label sequences for x and z , and (x, z )  Rd and (z, y )  Rd are global feature functions that decompose into local feature functions:
+n
+
+(x, z ) =
+Figure 1: Illustration of CRFs and hidden unit CRFs
+j =1 n
+
+(x, j, zj )  (zj , yj -1 , yj )
+j =1
+
+(z, y ) =
+
+x(i) and, the new training method is to find  that maximizes the log likelihood of the label lattices:  = arg max
+Rd i=1  N
+
+log p (Y (x(i) , y ~(i) )|x(i) ) -
+
+ ||||2 2
+
+In other words, it forces the interaction between the observations and the labels at each position j to go through a latent variable zj : see Figure 1 for illustration. Then the probability of labels y is given by marginalizing over the hidden units, p, (y |x) =
+z {0,1}n
+
+Since this objective is non-convex, we find a local optimum with a gradient-based algorithm. The gradient of this objective at each example (x(i) , y ~(i) ) takes an intuitive form:   log p (Y (x(i) , y ~(i) )|x(i) ) - ||||2  2 (i) ( i) = p (y |x )(x , y )
+y Y (x(i) ,y ~)
+
+p, (y, z |x)
+
+As in restricted Boltzmann machines (Larochelle and Bengio, 2008), hidden units are conditionally independent given observations and labels. This allows for efficient inference with HUCRFs despite their richness (see Maaten et al. (2011) for details). 2.2.1 Training with partially labeled sequences We extend the perceptron training method of Maaten et al. (2011) to train a HUCRF from partially labeled sequences. This can be viewed as a modification of the constrained lattice training method of T¨ ackstr¨ om et al. (2013) for HUCRFs. A sketch of our training algorithm is shown in Figure 2. At each example, we predict the most likely label sequence with the current parameters. If this sequence does not violate the given constrained lattice, we make no updates. If it does, we predict the most likely label sequence within the con-
+
+-
+y Y (x(i) )
+
+p (y |x(i) )(x(i) , y ) - 
+
+This is the same as the standard CRF training except the first term where the gold features (x(i) , y (i) ) are replaced by the expected value of features in the constrained lattice Y (x(i) , y ~). 2.2 Partially Observed HUCRF While effective, a CRF is still a linear model. To see if we can benefit from nonlinearity, we use a HUCRF (Maaten et al., 2011): a CRF that introduces a 86
+
+

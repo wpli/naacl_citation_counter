@@ -1,0 +1,71 @@
+B
+
+Explanation:
+
+A
+
+Means that either the presence or absence of A contributes to B
+
+B A
+
+Means that only the presence of A indicates B
+
+Social Constructs
+
+Leader
+
+Status
+
+Language Uses Deference Closeness
+
+Authority Behavior
+
+Motivational Behavior
+
+Language Indicators
+Politeness Respectful Appellation Informal Language Informal Address Command Negative Expertise Agenda Setting Expertise Resource Allocation Agreement Criticism
+
+· The signed LU s that contribute towards the SC Status are ordered based on their importance. We assume the following ordering exists: authoritative behavior > motivational behavior > negative deference > positive deference in the opposite direction > closeness. However, we do not assume such an ordering for the SC Leadership. Our extensive research and successful implementation of our system for different natural languages leads us to believe that these notions are universal in application.
+
+Disagreement
+
+Impoliteness
+
+Apologetic Behavior
+
+Indexical Statements
+
+Praise
+
+Encouragement
+
+Seeking Support
+
+5
+Figure 1: Social Construct-Language Use-Language Indicator hierarchy for English Language sharing a common goal, collaboration, problem solving and solidarity. In Figure 1, we present the entire hierarchy and how the categories are connected among each other. The arrows in the figure show which of the LI categories are used to infer a particular type of LU. It also demonstrates how each of the LU contributes to the Social Constructs.
+
+Fundamentals of the implementation
+
+After we parse each sentence using Stanford Dependency parser to get the POS tags and mutual dependencies, the detection of individual LI s and the mapping of LI s, LU s to SCs are achieved using a combination of statistical and logic based approach. Many of the ideas and insights about the detection of LI s and their relations with the LU s are motivated from (Simon, 1946), (Pennebaker et al., 2003) , (Bernstein, 2010) , (Brown and Levinson, 1988) and a few others. Some of our ideas for textual inference have been inspired by (Scherl et al., 2010).
+
+5.1
+
+Determining the Language Indicators
+
+4
+
+Behind the Curtain: Our Intuitions
+
+One of the fundamental contributions in this paper is formally describing the hierarchy to determine the Social Constructs, as shown in Figure 1. To come up with these interconnections and each of the different pieces of the puzzle, we went through an iterative process of discussions with many social scientists and linguists to analyze a large number of example conversations. In this process, we came up with the aforementioned hierarchy, definitions of SC, LU and LI s and most importantly, the following understanding: · The Language Indicators as shown in the Figure 1, suffice for the detection of Leadership and Status. · Each detected LI is associated with an Intensity Level that helps us to encode the dissimilar effects of different words in inferring LI s. · Each LI is associated with a Signed Language Use. For example, the LI politeness is associated with the signed LU positive deference. · Indicators of an LU with a certain sign are counterindicators of the same LU with the opposite sign. · A signed LU may contribute either favorably or unfavorably towards its associated SC. For example, positive authoritative behavior contributes favorably towards higher status.
+
+The process of detection of language indicators from sentences uses a huge ensemble of complex rules. To create these rules, we borrowed ideas from the researchers of social science and psychology (Simon, 1946; Pennebaker et al., 2003). With the help of POS tags, mutual dependencies and regular expressions, we create a framework where we detect individual events, verbs, other sentence constituents and their positive and negative sense. On top of this framework, we use two different methods to detect language indicators. The ideas are similar for all the LIs. We will only present a few examples for the LI "Command".
+
+5.1.1
+
+Using Regular Expressions Alone
+
+We use regular expressions of the form ".*\b[wW]hy don'?t (you|YOU) (start|read|submit|make|write|get)\s*\b.*" to detect LIs such as "Command". We employ a collection of such expressions to cover several different linguistic styles which indicates "Command" by an individual. We achieved a very high recall (close to 1.0) for most indicators with these rules on test data. However, in few cases, the frequency of such indicators (such as politeness) were very low deeming the set of regular expressions as incomplete. This observation led us to refine the regular expressions with Logical rules so that we can incorporate our domain knowledge and remove such bias to the training set.
+
+1295
+
+

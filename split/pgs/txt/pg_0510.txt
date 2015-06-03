@@ -1,0 +1,66 @@
+ARGM - TMP ARG 0 ARG 1
+
+ARGM - LOC
+
+Today
+
+FBI agents and divers
+
+were (a)
+
+collecting
+
+evidence
+
+at Lake Logan . . .
+
+ARGM - DIS ARGM - TMP ARG 1 ARG 0 ARGM - LOC
+
+However,
+
+before [any of the Disney symbols]ARG1 , v1 [were]v1 [in sight]ARG2 , v1
+
+the car
+
+was stopped
+
+by a security guard
+
+at the intersection of the roads towards Disney
+
+(b) x FBI agents and divers evidence any of the Disney symbols in sight the car by a security guard y at Lake Logan at Lake Logan at the intersection of the roads . . . at the intersection of the roads . . . at the intersection of the roads . . . at the intersection of the roads . . . ypred collecting collecting stopped stopped stopped stopped Before probYES certYES certNO UNK certNO probYES During certYES certYES certNO UNK certYES certYES After probYES probNO certNO UNK probNO probYES
+
+Figure 4: Examples of semantic role representations (solid arrows), potential additional spatial knowledge (discontinuous arrows) and annotations with respect to the verb to which y attaches (collecting or stopped).
+Label
+certYES probYES certNO probNO UNK
+
+Before During After All
+
+# 100 477 140 717
+
+% 15.04 71.51 21.12 35.94
+
+# 225 36 344 605
+
+% 33.83 5.40 51.89 30.33
+
+# 57 60 57 174
+
+% 8.57 9.00 8.60 8.72
+
+# 248 59 87 394
+
+% 37.29 8.85 13.12 19.75
+
+# 35 35 35 105
+
+% 5.26 5.25 5.28 5.26
+
+Table 3: Annotation counts. Over 44% of potential spatial knowledge can be inferred (certYES and certNO). tion before and after. In other words, annotators understood that (1) the car was moving down a road and arrived at the intersection; (2) then, it was pulled over by a security guard who is probably stationed at the intersection; and (3) after the stop, the car probably continued with its route but the guard probably stayed at the intersection. 3.3 Annotation Analysis Each annotator answered 1,995 questions generated with Algorithm 1. Basic label counts after resolving conflicts are shown in Table 3. First, it is worth noting that annotators used UNK to answer only 5.26% of questions. Thus, over 94% of times ARGM - LOC semantic role is found, additional spatial knowledge can be inferred with some degree of certainty. Second, annotators were certain about the additional spatial knowledge, i.e., labels certYES and certNO, 35.94% and 8.72% of times respectively. Thus, 44% of times one encounters ARGM - LOC seman456
+Observed 89.0% 91.2% 87.8% 89.8% Cohen Kappa 0.845 0.848 0.814 0.862
+
+Before During After All
+
+Table 4: Inter-annotation agreements. Kappa scores indicate "good reliability". tic role, additional spatial knowledge can be inferred with certainty. Finally, annotators answered around 50% of questions with probYES or probNO. In other words, they found it likely that spatial information can be inferred, but were not completely certain. 3.3.1 Inter-Annotator Agreements Table 4 presents observed agreements, i.e., raw percentage of equal annotations, and Cohen Kappa scores (Cohen, 1960) per temporal anchor and for all questions. Kappa scores are above 0.80, indicating "good reliability" (Artstein and Poesio, 2008).
+
+

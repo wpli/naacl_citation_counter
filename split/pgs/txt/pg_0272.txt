@@ -1,0 +1,23 @@
+Inducing Lexical Style Properties for Paraphrase and Genre Differentiation
+Ellie Pavlick University of Pennsylvania epavlick@seas.upenn.edu Ani Nenkova University of Pennsylvania nenkova@seas.upenn.edu
+
+Abstract
+We present an intuitive and effective method for inducing style scores on words and phrases. We exploit signal in a phrase's rate of occurrence across stylistically contrasting corpora, making our method simple to implement and efficient to scale. We show strong results both intrinsically, by correlation with human judgements, and extrinsically, in applications to genre analysis and paraphrasing.
+
+1
+
+Introduction
+
+True language understanding requires comprehending not just what is said, but how it is said, yet only recently have computational approaches been applied to the subtleties of tone and style. As the expectations on language technologies grow to include tailored search, context-aware inference, and analysis of author belief, an understanding of style becomes crucial. Lexical features have proven indispensable for the good performance of most applications dealing with language. Particularly, more generalized characterizations of the lexicon (Brown et al., 1992; Wilson et al., 2005; Feng et al., 2013; Ji and Lin, 2009; Resnik, 1995) have become key in overcoming issues with lexical sparseness and in providing practical semantic information for natural language processing systems (Miller et al., 2004; Rutherford and Xue, 2014; Velikovich et al., 2010; Dodge et al., 2012). Most work on stylistic variation, however, has focused on larger units of text (Louis and Nenkova, 2013; Danescu-Niculescu-Mizil et al., 2012; Greene and Resnik, 2009; Xu et al., 2012) and studies of style at the lexical level have been scant. The few recent efforts (Brooke et al., 2010; Brooke and Hirst, 2013b; 218
+
+Formal/Casual jesus/my gosh 18 years/eighteen respiratory/breathing yes/yeah decade/ten years 1970s/the seventies foremost/first of all megan/you there somewhere/some place this film/that movie full/a whole bunch otherwise/another thing father/my dad recreation/hobby
+
+Complex/Simple great/a lot cinema/a movie a large/a big music/the band much/many things exposure/the show relative/his family matters/the things april/apr journal/diary the world/everybody burial/funeral rail/the train physicians/a doctor
+
+Table 1: Paraphrases with large style differences. Our method learns these distinctions automatically.
+
+Brooke and Hirst, 2013a) have been motivated by the need to categorize genre in multiple continuous dimensions and focused on applying standard methods for lexical characterization via graph propagation or crowdsourcing. We propose a simple and flexible method for placing phrases along a style spectrum. We focus on two dimensions: formality and complexity. We evaluate the resulting scores in terms of their correlation with human judgements as well as their utility in two tasks. First, we use the induced dimensions to identify stylistic shifts in paraphrase, allowing us to differentiate stylistic properties in the Paraphrase Database (PPDB) with high accuracy. Second, we test how well the induced scores capture differences between genres, and explore the extent to which these differences are due to topic versus lexical choice between stylistically different expressions for the same content. We show that style alone
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 218­224, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

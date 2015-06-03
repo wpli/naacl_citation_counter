@@ -1,0 +1,35 @@
+labels based on a fixed, application-dependent quality criterion defined a priori (a threshold set on training data). Since the way to present the quality estimates can have interesting effects on their practical use, the impact of the aforementioned learning problem on a supervised classification setting is another aspect that deserves investigation and motivates our work.
+
+task, the input features and labels form two different matrices X(k) = [x1,(k) , . . . , xmk ,(k) ] and Y(k) = [y1,(k) , . . . , ymk ,(k) ], respectively. The weights of the features for all tasks are represented by matrix W, where each column corresponds to a task and each row corresponds to a feature. The function L(W, X, Y) is the loss function defined for each algorithm. We work with two loss functions: · Least squares (for regression), defined as 2 (XT (k) Wk - Y(k) ) , where k is the task identifier and Wk is the k -th column of W; · Logistic Regression (for classification), defined as log(1 + exp(-Y(k) XT (k) Wk )). MTL Lasso. This algorithm extends the idea of the Lasso (Tibshirani, 1996) to the MTL setting. In MTL Lasso the 1 -norm (the sum of the absolute values of the weights vector, given by applied to all the tasks at once (the nent in Eq. 1). The   [0, 1] parameter controls the level of regularization applied to the model. In other words, the sparsity of the predicted model is controlled via  which weights the 1 -norm across all tasks.
+K
+
+3
+
+Multitask Learning for Adaptive ASR Quality Estimation
+
+The problem of dealing with different distributions between training and test data is broadly investigated by the machine learning community. In particular, approaches for dealing with domain drift are proposed within the scope of transfer learning, whose aim is to explore knowledge from one or more source tasks (henceforth, we use the terms domain and task interchangeably) and apply it to a target task (Pan and Yang, 2010). In this paper we use a transfer learning technique called multitask learning (MTL), which explores domain-specific training signals of related tasks to improve model generalization (Caruana, 1997). MTL is an inductive transfer method that assumes that the tasks are related and share a certain structure that allows knowledge transfer. In early works, for instance, these shared structures are the hidden layers of a neural network (Caruana, 1997).3 The authors showed that MTL improves over learning each task in isolation (called single task learning, STL henceforth) for different problems. Several approaches to MTL have been proposed and each makes different assumptions about the structure shared among the tasks. In this work we explore three different MTL algorithms that deal with task relatedness in different ways. Before defining each one of the three approaches, we introduce some basic notation previously used by Chen et al. (2011). In MTL there are K  N tasks and each task k  [1, K ] has mk training instances {(x1 , y1 ), . . . , (xmk , ymk )}, with xi  Rd where d is the number of features and yi  R is the output (the response variable or label). For each
+Another intuitive example of transferable knowledge is the fact that, for some domains, a fraction of the extracted features can show a correlated behavior.
+3
+
+|wi |) is i=1 ||W||1 compo-
+
+d
+
+min
+W k=1
+
+L(Wk , X(k) , Y(k) ) + ||W||1
+
+(1)
+
+MTL L21. This algorithm (Argyriou et al., 2007) learns a low-dimensional representation of the features across tasks, and induces sparsity on the feature weights for all the tasks at the same time. This is achieved through the use of a group regularizer that penalizes the weights matrix W with the 2,1 norm (Eq. 2). This norm is defined as ||W||2,1 =
+d i=1 Wi
+
+||Wi ||2 , where d is the number of features and
+
+is the i-th row of W. It is obtained by first computing the 2-norm of each row in W (the features) and then computing the 1-norm over the resulting vector. The 2-norm of a vector is given by
+2 ||x||2 = i xi . The parameter   [0, 1] controls the regularization applied to the model. MTL L21 assumes that all tasks share the same feature representation.
+
+716
+
+

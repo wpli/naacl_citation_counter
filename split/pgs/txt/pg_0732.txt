@@ -1,0 +1,46 @@
+Task from 1800-1849  1750  1700  1650  1600  1550  1500
+AVERAGE
+
+baseline
+
+SCL
+
+mDA
+
+word2vec
+
+F EMA single embedding 90.25 91.61 87.64 89.39 91.47 89.29 89.94 95.14 92.56 93.80 94.23 92.05 93.56 attribute embeddings 90.59 92.03 88.12 89.77 91.78 89.89 90.36 95.22 93.26 93.89 94.20 92.95 93.90
+
+88.74 89.97 85.94 86.21 88.92 85.32 87.52 94.37 91.49 91.92 92.75 89.87 92.08
+
+89.31 90.41 86.76 87.65 89.92 86.82 88.48 94.60 91.78 92.51 93.21 90.53 92.53
+
+90.11 91.39 87.69 88.63 90.79 87.64 89.37 94.86 92.52 93.14 93.53 91.31 93.07
+
+89.24 90.51 86.22 87.41 89.85 86.60 88.30 94.60 91.85 92.83 93.21 91.48 92.80
+
+from 1750-1849  1700  1650  1600  1550  1500
+AVERAGE
+
+Table 4: Accuracy results for adaptation in the Tycho Brahe corpus of historical Portuguese.
+
+13. F EMA dominates the other approaches across the complete range of latent dimensionalities. The best parameters for SCL are dimensionality K = 50 and rescale factor  = 5. For both F EMA and WORD 2 VEC , the best embedding size is 100 and the best number of negative samples is 5. 4.3 Evaluation 2: Historical Portuguese
+
+Results As shown in Table 4, F EMA outperforms competitive systems on all tasks. The column "single embedding" reports results with a single feature embedding per feature, ignoring domain attributes; the column "attribute embeddings" shows that learning feature embeddings for domain attributes further improves performance, by 0.3-0.4% on average.
+
+Next, we consider the problem of multi-attribute domain adaptation, using the Tycho Brahe corpus of historical Portuguese text (Galves and Faria, 2010), which contains syntactic annotations of Portuguese texts in four genres over several centuries (Figure 1). We focus on temporal adaptation: training on the most modern data in the corpus, and testing on increasingly distant historical text. Settings For F EMA, we consider domain attributes for 50-year temporal epochs and genres; we also create an additional attribute merging all instances that are in neither the source nor target domain. In SCL and mDA, 1823 pivot features pass the threshold. Optimizing on a source-domain development set, we find that the best parameters for SCL are dimensionality K = 25 and rescale factor  = 5. The best embedding size and negative sample number are 50 and 15 for both F EMA and WORD 2 VEC. 678
+
+5
+
+Similarity in the embedding space
+
+The utility of word and feature embeddings for POS tagging task can be evaluated through word similarity in the embedding space, and its relationship to type-level part-of-speech labels. To measure the label consistency between each word and its top Q closest words in the vocabulary we compute, Consistency =
+|V | i=1 Q j =1  (wi , cij )
+
+|V | × Q
+
+(6)
+
+where |V | is the number of words in the vocabulary, wi is the i-th word in the vocabulary, cij is the j th closest word to wi in the embedding space (using cosine similarity),  (wi , cij ) is an indicator function that is equal to 1 if wi and cij have the same most common part-of-speech in labeled data. We compare feature embeddings of different templates against WORD 2 VEC embeddings. All embeddings are trained on the SANCL data, which is
+
+

@@ -1,0 +1,50 @@
+^  Y n for any most likely sequence of categories y arbitrary observation sequence, which can be expressed as: ^ = arg max P (y |x; ) y
+y Y n
+
+3.2
+
+CRF with state sequences
+
+There have been many proposals for modelling the probability distribution P . Some of the most popular proposals are Hidden Markov Models (Rabiner and Juang, 1986), local log-linear classifiers, Maximum Entropy Markov Models (McCallum et al., 2000), and Conditional Random Fields (Lafferty et al., 2001). The following two sections will briefly introduce the latter, together with a widely used improvement of the model. 3.1 Conditional Random Fields (CRF) As presented by Lafferty et al. (2001), CRF are sequence prediction models where no Markov assumption is made on the sequence of assigned categories y , but a factorizable global feature function is used so as to transform the problem into a log-linear model in feature space. Formally, CRF model the probability of a sequence in the following way: P (y |x; ) = exp{w · F (x, y )} Z (x)
+
+Since CRF do not assume independence between assigned categories, it is possible to extend the local feature function for enabling it to keep more information about previous assigned categories and not just the last category. These models are derived from the work on weighted automata and transducers presented in studies such as Mohri et al. (2002). Let S be a state space, s0 be a fixed initial empty state, and let function g : S × X  × N+ × Y  S model state transitions. Then the global feature function can be redefined as:
+n
+
+F (x, y ) =
+i=1
+
+f (x, i, si-1 , yi ), si = g (si-1 , x, i, yi )
+
+This slight change adds a lot of power to CRF because it provides the model with much more information that it can use for learning complex relations. Finally, the best candidate can be found by solving:
+n
+
+^ = arg max w · y
+y Y n i=1
+
+f (x, i, si-1 , yi )
+
+(1)
+
+4
+
+Model description: headlines as bitmaps
+
+Where  = {w} and w  Rm is a weight vector, F : X n × Y n  Rm is a global feature function of m dimensions, and Z (x) is a normalization function. Moreover, the global feature function is defined in the following factored way:
+n
+
+F (x, y ) =
+i=1
+
+f (x, i, yi-1 , yi )
+
+where f : X  × N+ ×Y ×Y  Rm is a local feature function. Due to this definition, it can be shown that the decoding of CRF is equivalent to: ^ = arg max w · F (x, y ) y
+y Y n
+
+Which is a linear classification in a feature space. The fact that the local feature function f only depends on the last two assigned categories allows the global optimum of the model to be found by means of a tractable algorithm, whereas otherwise it would be necessary to explore all the |Y|n possible solutions. 135
+
+We model headline generation as a sequence prediction task. In this manner a news article is seen as a series of observations, where each is a possible token in the document. Furthermore, each observation can be assigned to one of two categories: inheadline, or not in-headline. Note that this approach allows a generated headline to be interpreted as a bitmap over the article's tokens. If this set-up was used for a CRF model, the standard local feature function f (x, i, yi-1 , yi ) would only be able to know whether the previous token was taken or not, which would not be very informative. For solving the problem we integrate a state sequence into the model, where a state s  S holds the following information: · The last token that was chosen as part of the headline. · The part-of-speech tag1 of the second-to-last word that was selected as part of the headline.
+1
+
+We used the set of 45 tags from the Penn Treebank Tag-Set.
+
+

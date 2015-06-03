@@ -1,0 +1,20 @@
+Figure 2: Distribution of three SNA features (left to right): mean degree centrality, mean closeness centrality, and mean betweenness centrality of named women. Red histogram is for movies that fail and the Blue histogram is for movies that pass the third Bechdel Test. The histograms show that the average centralities of women are higher for movies that pass the Bechdel test.
+
+7.4
+
+Discussion
+
+We studied the correlation of our SNA features and the features proposed by Garcia et al. (2014) with the gold class on the set of 183 movies that pass or fail the third test in our training set. The most correlated SNA feature was the one that calculated the percentage of women who formed a 3-clique with a man and another woman (r = 0.34). Another highly correlated SNA feature was the binary feature that was true when the main character was a woman in terms of betweenness centrality (r = 0.32). Several other SNA features regarding the different notions of centralities of women were among the top. The feature suggested by Garcia et al. (2014), BF and BM , were also significantly correlated, with r = 0.27 and r = -0.23 respectively. Figure 2 shows the distribution of three of our SNA features: mean degree centrality, mean closeness centrality, and mean betweenness centrality of named women. As the distributions show, most of the mass for movies that fail the test is towards the left of the plot, while most of the mass for movies that pass is towards the right. So movies that fail the test tend to have lower centrality measures as compared to movies that pass the test. Using our classification results, correlation analysis, and visualizations of the distributions of the SNA features, we conclude that in fact, movies that fail the test are highly likely to have less centrally connected women.
+
+the question, do women talk to each other about something other than a man, is best answered by network analysis features derived from the interaction networks of characters in screenplays. We were thus able to show a significant correlation between the importance of roles of women in movies with the Bechdel test. Indeed, movies that fail the test tend to portray women as less-important and peripheral characters. To the best of our knowledge, there is no large scale empirical study on quantifying the percentage of children's books and novels that fail the Bechdel test. In the future, we hope to combine some of the ideas from this work with our past work on social network extraction from literary texts (Agarwal and Rambow, 2010; Agarwal et al., 2012; Agarwal et al., 2013a; Agarwal et al., 2013b; Agarwal et al., 2014a) for presenting a large scale study on children's book and novels.
+
+Acknowledgments
+We would like to thank anonymous reviewers for their insightful comments. We would also like to thank Owen Rambow, Caronae Howell, Kapil Thadani, Daniel Bauer, and Evelyn Rajan for their helpful comments. We thank Noura Farra for suggesting the title for the paper. The idea originated from a class project (Agarwal, 2013). We credit Michelle Adriana Marguer Cheripka and Christopher I. Young for the initial idea. This paper is based upon work supported in part by the DARPA DEFT Program. The views expressed are those of the authors and do not reflect the official policy or position of the Department of Defense or the U.S. Government.
+
+8
+
+Conclusion and Future Work
+
+In this paper, we introduced a novel NLP task of automating the Bechdel test. We utilized and studied the effectiveness of a wide range of linguistic features and features derived from social network analysis metrics for the task. Our results revealed that 838
+
+

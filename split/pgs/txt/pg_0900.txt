@@ -1,0 +1,81 @@
+4.2
+
+Description Vector
+
+argmax p(< a1, a2 ,..., an > | < w1, w2 ,..., wn >)
+a
+
+The goal is to ground each noun phrase to attributes of entities within the problem-solving artifact, which constitutes the "world" in this domain. To do this, we will link each semantic segment in a noun phrase to an attribute of an entity in the world. Because the world can contain any of an infinite set of user-created entities, representation cannot rely upon exhaustively enumerating the entities. To represent an entity in the domain, we define a description vector V which defines the attribute types for entities in the domain. Then, an entity O in the domain is represented uniquely by an instance of V. The values of each Vi indicate the value of the attribute i of O, as illustrated in Table 1. This definition of the description vector relies upon the structure of the domain by factorizing the attributes of entities. With this representation, grounding a noun phrase involves linking each segment of the noun phrase to an attribute in the description vector. Formally, we represent a noun phrase as a series of segments:
+
+In the tag sequence <a1, a2, ..., an>, if ai and ai+1 are the same, then wi and wi+1 are assigned to the same semantic segment with tag ai. The process of segmentation and semantic linking is illustrated in Figure 4.
+"a w1 2 w2 dimensional w3 array" w4
+
+NUM
+
+ARR_DIM
+
+ARR_DIM
+
+CATEG.
+
+a1
+
+a2
+
+a3
+
+a4
+
+s1
+NUM
+
+s2
+ARR_DIM
+
+s3
+CATEG.
+
+Figure 4. Segmentation and semantic linking of NP "a 2 dimensional array."
+
+4.3
+
+Joint Segmentation and Labeling
+
+NP =< s1, s2 ,..., sk >
+where si is the ith segment in this noun phrase. A noun phrase is also a sequence of words:
+
+NP =< w1, w2 ,..., wn >
+where each wj is the jth word in the noun phrase. Therefore each segment is a series of words:
+
+In order to perform this joint segmentation and labeling, we utilize a Conditional Random Field (CRF), which is a classic approach for sequence segmentation and labeling (Lafferty et al., 2001). Given the linear nature of our data, we employ a linear chain CRF. Specifically, given a sequence of words w, the probability of a label sequence a is defined as
+n m 1 exp(   j f j (i, w, ai , ai-1 )) i=1 j =1 Z (w) where fj(i,w,ai,ai-1) is a feature function. The weights  j of this feature function are learned within the training process. The normalization function Z(w) is the sum over the weighted feature function for all possible label sequences:
+
+si =< w j , w j+1,..., w j+l-1 >
+where l is the length of semantic segment i. Given a noun phrase, the segmentation problem is thus choosing a segmentation that maximizes the following conditional probability:
+
+p( a | w ) =
+
+p(< s1, s2 ,..., sk > | < w1, w2 ,..., wn >)
+Complementary to the segmentation problem is the semantic linking problem, which is to link si to an attribute ai, which is the label of the ith attribute in the entity description vector. That is, we wish to maximize the probability of the attribute label sequence a given the segments of the noun phrase:
+
+Z (w ) =  exp(
+a
+
+n i=1
+
+
+
+m j =1
+
+ j f j (i, w, ai , ai-1 ))
+
+^ is the one that maximizes The optimal labeling a the likelihood of the training set, where K is the number of noun phrases in the corpus.
+^ = argmax ( log P (a (i ) | w (i ) )) a
+i=1 K
+
+p(< a1, a2 ,..., ak > | < s1, s2 ,..., sk >)
+Taking consecutive words with the same attribute label as the same semantic segment, the noun phrase segmentation and semantic linking problem is then:
+
+846
+
+

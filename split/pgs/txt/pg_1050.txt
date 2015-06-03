@@ -1,0 +1,35 @@
+machine translation output from a first-pass system, conditioned on a set of lexical, morphological and syntactic features. More recently, (Chahuneau et al., 2013) applied a similar translate-and-inflect approach, utilizing unsupervised in addition to supervised morphological analyses. Inflection generation models were also used by (Fraser et al., 2012; Weller et al., 2013) for translation into German, and by (El Kholy and Habash, 2012) for Modern Standard Arabic. (Sultan, 2011) added both syntactic information on the source side that was used in filtering the phrase table, plus postprocessing on the target side for English-Arabic translation. Still other approaches enrich the translation system with morphology-aware feature functions or specific agreement models (Koehn and Hoang, 2007; Green and DeNero, 2012; Williams and Koehn, 2011). In contrast to the above studies, which have concentrated on text translation, this paper focuses on spoken language translation within a bilingual human-human dialog system. Thus, our main goal is not to predict the correct morphological form of every word, but to prevent communication errors resulting from the mishandling of morphology. The intended use in a real-time dialog system imposes additional constraints on morphological modeling: any proposed approach should not add a significant computational burden to the overall system that might result in delays in translation or response generation. Our goal is also complicated by the fact that our target language is a spoken dialect of Arabic, for which few linguistic resources (training data, lexicons, morphological analyzers) exist. Lastly, Arabic written forms are morphologically highly ambiguous due to the lack of short vowel markers that signal grammatical categories.
+
+User  A  
+LanguageA   ASR   ASR  Error   Detec1on   SLU   Parser   OOV/Name   Detec1on  
+
+Answer   Merging    
+
+Error   Processing  
+
+Sense   Detec1on  
+
+MT  
+
+MT  Error   Detec1on  
+
+LanguageA   TTS   Dialog  Manager    
+Clarify   Play  Transla2on  
+
+User  B  
+LanguageB   TTS  
+1  
+
+Needs   Clarifica- 1on?  
+
+Figure 1: Dialog system used in this work.
+
+3
+
+Dialog System and Analysis
+
+The first step in the dialog system used for this study consists of an automatic speech recognition (ASR) component that produces ASR hypotheses for the user's speech input. Several error detection modules then identify likely out-of-vocabulary and misrecognized words. This information is used by a clarification module that asks the user to rephrase these error segments; another module then combines the user's answers into a merged, corrected representa996
+
+tion before sending it to the translation engine. A machine translation error detection module analyzes the translation to check for errors, such as unknown words. If an error is found, another clarification subdialog is initiated; otherwise, the translation is sent to a text-to-speech engine to produce the acoustic output in the other language. A schematic representation is shown in Figure 1. More details about the system can be found in (et al., 2013). The system was evaluated in live mode with native IA speakers as part of the DARPA BOLT Phase-II benchmark evaluations. The predefined scenarios included military and humanitarian assistance/disaster relief scenarios as well as general topics. All system interactions were logged and evaluated by bilingual human assessors. During debriefing sessions with the users, some users voiced dissatisfaction with the translation quality, and a subsequent detailed error analysis was conducted on the logs of 30 interactions. Similar to previous studies (Condon et al., 2010) we found that a frequently recurring problem was wrong morphological verb forms in the IA output. Some examples are shown in Table 1. In Example 1, to make sure should be translated by a first-person plural verb but it is translated by a second-person plural form, changing the meaning to (you (pl.) make sure). The desired verb form would be ntAkd. Similarly, in Example 2 the translation of transport should agree with the translations of someone and the preceding
+
+

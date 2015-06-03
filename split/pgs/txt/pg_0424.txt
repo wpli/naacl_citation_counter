@@ -1,0 +1,33 @@
+graph and become a relation instead. An example is provided in Figure 6, where node in, a preposition, is replaced with node Singapore, and in a subsequent NEXT-EDGE action that examines arc (live, Singapore), the arc is labeled location.
+live live
+
+arrest
+
+arrest
+
+Michael
+
+Michael,Karras
+
+Karras
+
+Figure 8: MERGE action When  is empty, which means all the outgoing arcs of node 0 have been processed or 0 has no outgoing arcs, the following two actions can be applied: · NEXT-NODE-lc (nnd). This action first assigns a concept label lc to node 0 . Then it advances the parsing procedure by popping out the top element 0 of buffer  and re-initializes buffer  with all the children of node 1 which is the current top element of  . Since this action will be applied to every node which is kept in the final parsed graph, concept labeling could be done simultaneously through this action. · DELETE-NODE (dnd). This action simply deletes the node 0 and removes all the arcs associated with it. This action models the fact that most function words are stripped off in the AMR of a sentence. Note that this action only targets function words that are leaves in the dependency tree, and we constrain this action by only deleting nodes which do not have outgoing arcs. When parsing a sentence of length n (excluding the special root symbol w0 ), its corresponding dependency tree will have n nodes and n - 1 arcs. For projective transition-based dependency parsing, the parser needs to take exactly 2n - 1 steps or actions. So the complexity is O(n). However, for our tree-to-graph parser defined above, the actions needed are no longer linearly bounded by the sentence length. Suppose there are no REATTACH, REENTRANCE and SWAP actions during the parsing process, the algorithm will traverse every node and edge in the dependency tree, which results in 2n actions. However, REATTACH and REENTRANCE actions would add extra edges that need to be re-processed and the SWAP action adds both nodes and edges that need to be re-visited. Since the
+
+in
+
+Singapore
+
+Singapore
+
+Figure 6: REPLACE-HEAD action
+
+· REENTRANCEk -lr (reen). This is the action that transforms a tree into a graph. It keeps the current arc unchanged, and links node 0 to every possible node k in the partial graph that can also be its parent. Similar to the REATTACH action, the newly created arc (k, 0 ) should not produce a self-looping cycle and parameter k is bounded by the sentence length. In practice, we seek to constrain this action as we will explain in §3.2. Intuitively, this action can be used to model co-reference and an example is given in Figure 7.
+want police reentrance arrest police want ARG0 arrest
+
+Figure 7: REENTRANCE action
+
+· MERGE (mrg). This action merges nodes 0 and 0 into one node  ~ which covers multiple words in the sentence. The new node inherits all the incoming and outgoing arcs of both nodes 0 and 0 . The MERGE action is intended to produce nodes that cover a continuous span in the sentence that corresponds to a single name entity in AMR graph. see Figure 8 for an example.
+
+370
+
+

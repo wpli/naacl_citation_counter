@@ -1,0 +1,26 @@
+videos). Thus we first align the instructional steps to the speech signal using an HMM, and then refine this alignment by using a state of the art computer vision system. In summary, our contributions are as follows. First, we propose a novel system that combines text, speech and vision to perform an alignment between textual instructions and instructional videos. Second, we use our system to create a large corpus of 180k aligned recipe-video pairs, and an even larger corpus of 1.4M short video clips, each labeled with a cooking action and a noun phrase. We evaluate the quality of our corpus using human raters. Third, we show how we can use our methods to support applications such as within-video search and recipe auto-illustration.
+
+Class Background Ingredient Recipe step
+
+Precision 0.97 0.93 0.94
+
+Recall 0.95 0.95 0.95
+
+F1 0.96 0.94 0.94
+
+Table 1: Test set performance of text-based recipe classifier.
+
+2
+
+Data and pre-processing
+
+We first describe how we collected our corpus of recipes and videos, and the pre-processing steps that we run before applying our alignment model. The corpus of recipes, as well as the results of the alignment model, will be made available for download at github.com/malmaud/whats_cookin. 2.1 Collecting a large corpus of cooking videos with recipes
+
+additional text that we retrieve in this way. Finally, in order to extract the recipe from the text description of a video, we trained a classifier that classifies each sentence into 1 of 3 classes: recipe step, recipe ingredient, or background. We keep only the videos which have at least one ingredient sentence and at least one recipe sentence. This last step leaves us with 180,000 videos. To train the recipe classifier, we need labeled examples, which we obtain by exploiting the fact that many text webpages containing recipes use the machine-readable markup defined at http: //schema.org/Recipe. From this we extract 500k examples of recipe sentences, and 500k examples of ingredient sentences. We also sample 500k sentences at random from webpages to represent the non-recipe class. Finally, we train a 3-class na¨ ive Bayes model on this data using simple bag-of-words feature vectors. The performance of this model on a separate test set is shown in Table 1. 2.2 Parsing the recipe text
+
+We first searched Youtube for videos which have been automatically tagged with the Freebase mids /m/01mtb (Cooking) and /m/0p57p (recipe), and which have (automatically produced) Englishlanguage speech transcripts, which yielded a collection of 7.4M videos. Of these videos, we kept the videos that also had accompanying descriptive text, leaving 6.2M videos. Sometimes the recipe for a video is included in this text description, but sometimes it is stored on an external site. For example, a video's text description might say "Click here for the recipe". To find the recipe in such cases, we look for sentences in the video description with any of the following keywords: "recipe", "steps", "cook", "procedure", "preparation", "method". If we find any such tokens, we find any URLs that are mentioned in the same sentence, and extract the corresponding document, giving us an additional 206k documents. We then combine the original descriptive text with any 144
+
+For each recipe, we apply a suite of in-house NLP tools, similar to the Stanford Core NLP pipeline. In particular, we perform POS tagging, entity chunking, and constituency parsing (based on a reimplementation of (Petrov et al., 2006)).1 Following (Druck and Pang, 2012), we use the parse tree structure to partition each sentence into "micro steps". In particular, we split at any token categorized by the parser as a conjunction only if that token's parent in the sentence's constituency parse is a verb phrase. Any recipe step that is missing a verb is considered noise and discarded. We then label each recipe step with an optional action and a list of 0 or more noun chunks. The acSometimes the parser performs poorly, because the language used in recipes is often full of imperative sentences, such as "Mix the flour", whereas the parser is trained on newswire text. As a simple heuristic for overcoming this, we classify any token at the beginning of a sentence as a verb if it lexically matches a manually-defined list of cooking-related verbs.
+1
+
+

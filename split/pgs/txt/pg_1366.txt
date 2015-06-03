@@ -1,0 +1,50 @@
+that are known for such properties: · Skip-gram embeddings (Mikolov et al., 2013) are based on a log bilinear model that predicts an unordered set of context words given a target word. Bansal et al. (2014) found that smaller context window sizes tend to result in embeddings with more syntactic information. We confirm this finding in our experiments. · Structured skip-gram embeddings (Ling et al., 2015) extend the standard skip-gram embeddings (Mikolov et al., 2013) by taking into account the relative positions of words in a given context. We use the tool word2vec 3 and Ling et al. (2015)'s modified version 4 to generate both plain and structured skip-gram embeddings in nine languages.
+
+· p ( wi | t i ) is parameterized as a "naïve multinomial" distribution with one distinct parameter for each word type. · p ( wi | t i ) is parameterized as a multinomial logistic regression model with hand-engineered features as detailed in (Berg-Kirkpatrick et al., 2010). Gaussian Emissions. We now consider incorporating word embeddings in the HMM. Given a tag t  T , instead of generating the observed word w  V , we generate the (pre-trained) embedding vw  Rd of that word. The conditional probability density assigned to vw | t follows a multivariate Gaussian distribution with mean µ t and covariance matrix  t : p (vw ; µ t ,  t ) =
+-1 exp - 1 2 (vw - µ t )  t (vw - µ t )
+
+3
+
+Models for POS Induction
+
+(2 ) d |  t |
+
+(2)
+
+In this section, we briefly review two classes of models used for POS induction (HMMs and CRF autoencoders), and explain how to generate word embedding observations in each class. We will represent a sentence of length as w = w1 , w2 , . . . , w  V and a sequence of tags as t = t 1 , t 2 , . . . , t  T . The embeddings of word type w  V will be written as vw  Rd . 3.1 Hidden Markov Models The hidden Markov model with multinomial emissions is a classic model for POS induction. This model makes the assumption that a latent Markov process with discrete states representing POS categories emits individual words in the vocabulary according to state (i.e., tag) specific emission distributions. An HMM thus defines the following joint distribution over sequences of observations and tags: p(w, t ) =
+i =1
+
+This parameterization makes the assumption that embeddings of words which are often tagged as t are concentrated around some point µ t  Rd , and the concentration decays according to the covariance matrix  t . 6 Now, the joint distribution over a sequence of observations v = vw1 , vw2 . . . , vw (which corresponds to word sequence w = w1 , w2 , . . . , w , ) and a tag sequence t = t 1 , t 2 . . . , t becomes: p ( v, t ) =
+i =1
+
+p ( t i | t i -1 ) × p ( v w i ; µ t i ,  t i )
+
+We use the Baum­Welch algorithm to fit the µ t and  t i parameters. In every iteration, we update µ t  as follows: µ new t =
+vT i =1 ... vT
+
+p (t i = t  | v ) × v w i  i =1 ... p (t i = t | v)
+
+(3)
+
+p ( t i | t i -1 ) × p ( w i | t i )
+
+(1)
+
+where distributions p (t i | t i -1 ) represents the transition probability and p ( wi | t i ) is the emission probability, the probability of a particular tag generating the word at position i . 5 We consider two variants of the HMM as baselines:
+3https://code.google.com/p/word2vec/ 4https://github.com/wlin12/wang2vec/ 5Terms for the starting and stopping transition probabilities are omitted for brevity.
+
+where T is a data set of word embedding sequences v each of length | v | = , and p (t i = t  | v) is the posterior probability of label t  at position i in the sequence v. Likewise the update to  t  is: new t =
+vT i =1 ...
+
+vT
+
+p (t i = t  | v) ×   i =1 ... p (t i = t | v)
+
+(4)
+
+where  = vw i - µ new t .
+6"Essentially, all models are wrong, but some are useful." -- George E. P. Box
+
+1312
+
+

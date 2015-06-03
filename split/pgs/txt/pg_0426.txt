@@ -1,0 +1,19 @@
+gold action for current state s is given by consulting span graph Gw , which we formulate as a function oracle() (line 5). If the gold action is equal to the best action we get from the parser, then the best action is applied to current state; otherwise, we update the weight vector (line 6-7) and continue the parsing procedure by applying the gold action. 4.2 Feature Extraction
+
+Single node features  ¯0 .w,  ¯0 .lem,  ¯0 .ne,  ¯0 .t,  ¯0 .dl,  ¯0 .len ¯0 .w,  ¯0 .lem,  ¯0 .ne,  ¯0 .t,  ¯0 .dl,  ¯0 .len  ¯ k.lem, ¯ ¯ ¯ k.dl, ¯ ¯ k.w, k.ne, k.t, k.len  ¯0p .w,  ¯0p .lem,  ¯0p .ne,  ¯0p .t,  ¯0p .dl Node pair features ¯0 .t,  ¯0 .dl  ¯0 .lem +  ¯0 .lem +  ¯ ¯  ¯0 .t + 0 .lem,  ¯0 .dl + 0 .lem ¯0 .ne, k.ne ¯ ¯0 .ne  ¯0 .ne +  + ¯ ¯ ¯ ¯ k.t + 0 .lem, k.dl + 0 .lem Path features ¯0 .lem + path ,  ¯0 .lem +  0 0 ¯ ¯ k.lem + 0 .lem + pathk,0 Distance features dist0 ,0 distk,0 dist0 ,0 + path0 ,0 dist0 ,0 + pathk,0 Action specific features ¯0 .lem +  ¯0 .nswp  ¯ 0 .reph
+
+¯0 , k, ¯  Table 2: Features used in our parser.  ¯0 ,  ¯0p represents elements in feature context of nodes 0 , 0 , k, 0p , separately. Each atomic feature is represented as follows: w - word; lem - lemma; ne name entity; t - POS-tag; dl - dependency label; len - length of the node's span. For transition-based dependency parsers, the feature context for a parsing state is represented by the neighboring elements of a word token in the stack containing the partial parse or the buffer containing unprocessed word tokens. In contrast, in our treeto graph parser, as already stated, buffers  and  only specify which arc or node is to be examined next. The feature context associated with current arc
+
+or node is mainly extracted from the partial graph G. As a result, the feature context is different for the different types of actions, a property that makes our parser very different from a standard transitionbased dependency parser. For example, when evaluating action SWAP we may be interested in features about individual nodes 0 and 0 as well as features involving the arc (0 , 0 ). In contrast, when evaluating action REATTACHk , we want to extract not only features involving 0 and 0 , but also information about the reattached node k . To address this prob¯0 , k, ¯  lem, we define the feature context as  ¯0 ,  ¯0p , where each element x ¯ consists of its atomic features of node x and 0p denotes the immediate parent of node 0 . For elements in feature context that are not applicable to the candidate action, we just set the element to NONE and only extract features which are valid for the candidate action. The list of features we use is shown in Table 2. Single node features are atomic features concerning all the possible nodes involved in each candidate state-action pair. We also include path features and distance features as described in (Flanigan et al., 2014). A path feature pathx,y is represented as the dependency labels and parts of speech on the path between nodes x and y in the partial graph. Here we combine it with the lemma of the starting and ending nodes. Distance feature distx,y is the number of tokens between two node x, y 's spans in the sentence. Action-specific features record the history of actions applied to a given node. For exam¯0 .nswp records how many times node 0 has ple,  been swapped up. We combine this feature with the lemma of node 0 to prevent the parser from swap¯0 .reph records the ping a node too many times.  word feature of nodes that have been replaced with node 0 . This feature is helpful in predicting relation labels. As we have discussed above, in an AMR graph, some function words are deleted as nodes but they are crucial in determining the relation label between its child and parent.
+
+5
+5.1
+
+Experiments
+Experiment Setting
+
+Our experiments are conducted on the newswire section of AMR Annotation Corpus (LDC2013E117) (Banarescu et al., 2013).
+
+372
+
+

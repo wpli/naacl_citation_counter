@@ -1,0 +1,32 @@
+Socially-Informed Timeline Generation for Complex Events
+Lu Wang Claire Cardie Galen Marchetti Department of Computer Science Cornell University Ithaca, NY 14853 {luwang, cardie}@cs.cornell.edu gjm97@cornell.edu
+
+Abstract
+Existing timeline generation systems for complex events consider only information from traditional media, ignoring the rich social context provided by user-generated content that reveals representative public interests or insightful opinions. We instead aim to generate socially-informed timelines that contain both news article summaries and selected user comments. We present an optimization framework designed to balance topical cohesion between the article and comment summaries along with their informativeness and coverage of the event. Automatic evaluations on real-world datasets that cover four complex events show that our system produces more informative timelines than state-of-theart systems. In human evaluation, the associated comment summaries are furthermore rated more insightful than editor's picks and comments ranked highly by users.
+
+March 16th, 2014
+
+- Crimeans vote in a referendum to rejoin Russia or return to its status under the 1992 constitution.
+March 17th, 2014
+
+- The Crimean parliament officially declared independence and requested full accession to the Russian Federation. - Obama declared sanctions on Russian officials considered responsible for the crisis. - The leader of the pro-Russian organization "Youth Unity" was arrested.
+March 18th, 2014
+
+* Comment A: The "Crimean Parliament", headed by an ethnic Russian separatist who was elected leader of parliament AFTER pro-Russian armed forces occupied the parliamentary chambers, has voted for Crimea to be annexed into Russia... * Comment B: Does the West and US have a policy at all? The Obama administration has warned of "increasingly harsh sanctions", but it is unlikely that Europe will comply... * Comment C: Sanctions are effective and if done in unison with the EU...
+
+- President Obama warned Vladimir Putin that further provocations by Russia could isolate and diminish its influence. - One pro-Russian soldier was killed in the Simferopol incident. ... summaries for other dates ...
+
+Figure 1: A snippet of the event timeline on Ukraine Cri-
+
+sis is displayed on the left. On the right, we display a set of representative comments addressing the article summary of March 17th . Comment A (underlined) brings a perspective on "Crimean parliament passes declaration of independence" (the article sentence is also underlined on the left). Comments B and C focus on Obama's sanctions on Ukrainian and Russian officials. Sentences linked by edges belong to the same event thread, which is centered on the entities with the same color.
+
+1
+
+Introduction
+for readers to efficiently digest the user-generated content, much less integrate it with reported facts from the dozens or hundreds of news reports produced on the event each day. In this work, we present a socially-informed timeline generation system that jointly generates a news article summary and a user comment summary for each day of an ongoing complex event. A sample (gold standard) timeline snippet for Ukraine Crisis is shown in Figure 1. The event timeline is on the left; the comment summary for March 17th is on the right.
+
+Social media sites on the Internet provide increasingly more, and increasingly popular, means for people to voice their opinions on trending events. Traditional news media -- the New York Times and CNN, for example -- now provide online mechanisms that allow and encourage readers to share reactions, opinions, and personal experiences relevant to a news story. For complex emerging events, in particular, user comments can provide relevant, interesting and insightful information beyond the facts reported in the news. But their large volume and tremendous variation in quality make it impossible 1055
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1055­1065, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

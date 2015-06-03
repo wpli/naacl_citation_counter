@@ -1,0 +1,24 @@
+Predicate Argument Alignment using a Global Coherence Model
+Travis Wolfe, Mark Dredze, and Benjamin Van Durme Johns Hopkins University Baltimore, MD, USA Abstract
+We present a joint model for predicate argument alignment. We leverage multiple sources of semantic information, including temporal ordering constraints between events. These are combined in a max-margin framework to find a globally consistent view of entities and events across multiple documents, which leads to improvements over a very strong local baseline.
+
+1
+
+Introduction
+
+Natural language understanding (NLU) requires analysis beyond the sentence-level. For example, an entity may be mentioned multiple times in a discourse, participating in various events, where each event may itself be referenced elsewhere in the text. Traditionally the task of coreference resolution has been defined as finding those entity mentions within a single document that co-refer, while crossdocument coreference resolution considers a wider discourse context across many documents, yet still pertains strictly to entities. Predicate argument alignment, or entity-event cross-document coreference resolution, enlarges the set of possible co-referent elements to include the mentions of situations in which entities participate. This expanded definition drives practitioners towards a more complete model of NLU, where systems must not only consider who is mentioned, but also what happened. However, despite the drive towards an expanded notion of discourse, models typically are formulated with strong notions of localindependence: viewing a multi-document task as one limited to individual pairs of sentences. This creates a mis-match between the goals of such work ­ considering entire documents ­ with the systems ­ consider individual sentences. 11
+
+In this work, we consider a system that takes a document level view in considering coreference for entities and predictions: the task of predicate argument linking. We treat this task as a global inference problem, leveraging multiple sources of semantic information identified at the document level. Global inference for this problem is mostly unexplored, with the exception of Lee et al. (2012) (discussed in § 8). Especially novel here is the use of document-level temporal constraints on events, representing a next step forward on the path to full understanding. Our approach avoids the pitfalls of local inference while still remaining fast and exact. We use the pairwise features of a very strong predicate argument aligner (Wolfe et al., 2013) (competitive with the state-of-the-art (Roth, 2014)), and add quadratic factors that constrain local decisions based on global document information. These global factors lead to superior performance compared to the previous state-of-the-art. We release both our code and data.1
+
+2
+
+Model
+
+Consider the two sentences from the document pair shown in Figure 1. These sentences describe the same event, although with different details. The source sentence has four predicates and four arguments, while the target has three predicates and three arguments. In this case, one of the predicates from each sentence aligns, as do three of the arguments. We also show additional information potentially helpful to determining alignments: temporal relations between the predicates. The goal of predicate argument alignment is to assign these links indicating coreferent predicates and arguments across a document pair (Roth and Frank, 2012). Previous work by Wolfe et al. (2013) formulated
+1
+
+https://github.com/hltcoe/parma2
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 11­20, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

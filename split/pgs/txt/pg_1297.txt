@@ -1,0 +1,5 @@
+Z. Harris. 1954. Distributional structure. Word 10(23):146-162. Tomas Mikolov, Chen Kai, Corrado Greg and Dean Jeffrey. 2013. Efficient Estimation of Word Representations in Vector Space. In Proceedings of Workshop at ICLR, 2013. Diana McCarthy, Rob Koeling, Julie Weeds and John Carroll. 2007. Unsupervised Acquisition of Predominant Word Senses. Computational Linguistics, 33 (4) pp 553-590. Mirella Lapata and Chris Brew. 2004. Verb class disambiguation using informative priors. Computational Linguistics, 30(1):45-75. Bengio Yoshua, Ducharme R´ ejean, Vincent Pascal and Janvin Christian. 2003. A Neural Probabilistic Language Model. J. Mach. Learn. Res., issn = 1532-4435, pp 1137-1155.
+
+1243
+
+

@@ -1,0 +1,19 @@
+Models NDCG@1 NDCG@3 NDCG@10 TF-IDF model (BM25) 0.305 0.328 0.388 Unigram Language Model (Zhai and Lafferty, 2001) 0.304 0.327 0.385 PLSA(Topic=100) (Hofmann, 1999; Gao et al., 2011) 0.305 0.335 0.402 PLSA(Topic=500) (Hofmann, 1999; Gao et al., 2011) 0.308 0.337 0.402 Latent Dirichlet Allocation (Topic=100) (Blei et al., 2003) 0.308 0.339 0.403 Latent Dirichlet Allocation (Topic=500) (Blei et al., 2003) 0.310 0.339 0.405 Bilingual Topic Model (Gao et al., 2011) 0.316 0.344 0.410 Word based Machine Translation model (Gao et al., 2010) 0.315 0.342 0.411 DSSM, J=50 (Figure 2, (Huang et al., 2013)) 0.327 0.359 0.432 MT-DNN (Proposed, Figure 3) 0.334* 0.363 0.434 Table 3: Web Search NDCG results. Here, * indicates statistical significance improvement compared to the best baseline (DSSM) measured by t-test at p-value of 0.05.
+90 85 AUC Score 80 75 70 65 3.0 SemanticRepresentation Letter3gram Word3gram 2.5 2.0 1.5 1.0 0.5 0.0 Log10(Percentage of Training Data) AUC Score 95 90 85 80 75 3.0 SemanticRepresentation Letter3gram Word3gram 2.5 2.0 1.5 1.0 0.5 0.0 Log10(Percentage of Training Data)
+
+(a) Hotel
+92 90 88 AUC Score AUC Score 86 84 82 80 78 3.0 SemanticRepresentation Letter3gram Word3gram 2.5 2.0 1.5 1.0 0.5 0.0 Log10(Percentage of Training Data) 75 70 65 60 55 3.0
+
+(b) Flight
+
+SemanticRepresentation Letter3gram Word3gram 2.5 2.0 1.5 1.0 0.5 0.0 Log10(Percentage of Training Data)
+
+(c) Restaurant
+
+(d) Nightlife
+
+Figure 4: Domain Adaption in Query Classification: Comparison of features using SVM classifiers. The X-axis indicates the amount of labeled samples used in training the SVM. Intuitively, the three feature representations correspond to different layers in Figure 1. SemanticRepresentation is the l2 layer trained by MT-DNN. Word3gram is input X and Letter3gram is word hash layer (l1 ), both not trained/adapted. Generally, SemanticRepresentation performs best for small training labels, indicating its usefulness in domain adaptation. Note that the numbers -3.0, -2.0, -1.0 and 0.0 in x-axis denote 0.1, 1, 10 and 100 percent training data in each domain, respectively.
+
+917
+
+

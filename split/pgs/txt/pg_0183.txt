@@ -1,0 +1,35 @@
+language model construction to eliminate their noise in the cross entropy calculation. Experiments did support this design decision, and better results have been achieved with non-content words removed. We perform Dirichlet Prior Smoothing (Zhai and Lafferty, 2001) to both the citing sentence MLE and the summary MLE using the KPLM of the paper as a background model using a Dirichlet Prior (DP) of 20. The choice of 20 has been based on the observation that citing sentences are short (32 words on average) and a large DP is prone to generate overly smoothed language models that are dominated by the KPLM, thus lack discriminative power. Here we choose to use this empirically selected DP parameter without attempting to fine-tune it for best results. In summary, we implement a top sentence reranking heuristic that iteratively selects the next sentence to be appended to the existing summary whose smoothed language model is with the largest cross entropy (so it contains most extra information) with a smoothed language mode built for the summary at its current stage. We shall demonstrate how our top sentence re-ranking method introduces a major performance boost in the next section. For a quick inspection of the effectiveness of this method, compare the summaries constructed for paper P05-1012 with and without sentence re-reranking in Table 4. It shows that the summary constructed with sentence re-ranking covers key facts more comprehensively. The pseudo code for our re-ranking strategy is shown in Algorithm 1. It adopts a straightforward re-ranking approach that simply uses the top k +5 retrieved citing sentences in the previous step as the candidate pool; at each iteration, it selects the best sentence based on its cross entropy with the summary at the current stage. A more sophisticated reranking method is to combine the two cross entropy scores in some way (e.g., Maximal Marginal Relevance (Carbonell and Goldstein, 1998)) so that the final score for a citing sentence reflects its value in capturing salient keywords that have not yet been included in the summary. We leave the study of a more sophisticated re-ranking scheme for future work.
+
+Algorithm 1 Top Sentence Re-ranking
+1: function T OP S ENTENCE R ERANKER 2: k summary length limit 3: top sent top k plus 5 sents[0] 4: es top sent 5: cp top k plus 5 sents - top sent 6: for s in cp do 7: cp lms[s] DPSmoothed (s ) 8: 9: 10: 11: 12: 13:
+
+for i = 2 to k do es lm DPSmoothed (es) s argmaxs2cp (CE(cp lms||es lm)) es es + s cp cp s cp lms cp lms cp lms[s] return es
+
+been widely adopted because it incorporates both fact coverage and fact importance into the scoring process, which resonates well with the goals of summarisation (Qazvinian et al., 2010). More specifically, the pyramid method scores a summary using the ratio between the total facts weights of the facts it covers and that of an optimal summary. First a fact weights pyramid is built using some facts weighting method and each fact is subsequently put into its perspective pyramid tier. Qazvinian et al. (2008; 2010) built a weights pyramid for each paper and assigned each humanly discovered fact into a tier according to the number of citing sentences the fact occurs in that paper's citation summary. For example, fact fi appearing in |fi | citing sentences in the citation summary of paper D is assigned to the tier T|fi | in D's fact weights pyramid PD . Let Fi denotes the number of facts in the summary ES in tier Ti of PD . The total facts weights ES covers is calculated as:
+W (ES )=
+
+where n is the highest tier of PD . Let ES optimal be the optimal summary for D w.r.t. the summary length limit (ES optimal can be found using heuristicdriven exhaustive search). The pyramid score for ES is finally calculated as:
+Score (ES )=W (ES )/W (ES optimal )
+
+Pn
+
+i=1
+
+i ·F i
+
+(6)
+
+(7)
+
+4
+
+Experimental Setup
+Evaluation Method
+
+4.1
+
+Following Qazvinian et al. (2008; 2010), we use the pyramid method (Nenkova and Passonneau, 2004) at sentence level to evaluate our system's performance. The pyramid score is a fact-based evaluation method that has been especially popular in evaluating extractive summarisation systems. It has 129
+
+Note again that we used exactly the same corpus and evaluation method as in (Qazvinian and Radev, 2008; Qazvinian et al., 2010), which makes our results directly comparable to those described in those papers. Furthermore, both papers report on performance of various baseline methods which are also directly comparable to ours (see next section). We compare our results with the current state-of-theart; readers are encouraged to refer to (Qazvinian
+
+

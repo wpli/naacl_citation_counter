@@ -1,0 +1,30 @@
+method
+ASSOC ASSOC creative
+
+creativity 33% 67%
+
+relevance 41% 59%
+
+method O RIGINAL
+PARA creative PARA caption PARA creative
+
+creativity 32% 68% 56% 44%
+
+Table 9: Human evaluation for creative captioning: % of
+captions preferred by judges in pairwise comparisons
+
+relevance single multiple 80% 87% 20% 60% 47% 63% 53% 74%
+
+of the two captions that is more creative and inspirational than the other to describe each given test image. Results are shown in Table 9. (1) Creativity. For 2/3 of the query images, captions produced by the ASSOCcreative method are judged as more creative than those produced by the ASSOC method. This result indirectly validates that the figurativeness classifier has a reasonable precision to control the literalness of the system caption. (2) Visual relevance. Interestingly, not only the captions from the ASSOCcreative method are favored as creative, they are also judged as visually more relevant than those from the ASSOC method, despite that each figurative caption has lower neighborhoodbased affinity than the literal counterpart. We conjecture that it is easier for human judges to be imaginative and draw visual relevance between the query image and figurative captions than the literal counterparts. This result also suggests that figurative language may be of practical use in image caption applications as a means to smooth the potentially brittle system output. Figure 5 shows example system output. 8.2 Creative Visual Paraphrasing
+
+Table 10: Human eval for creative visual paraphrasing I. Comparing original captions with creative paraphrases (O RIGINAL vs. PARAcreative ): The paraphrases are preferred over the original literal captions as more creative most of the time. As for the visual relevance, the original captions are favored over the paraphrases most of the time in the single-choice competition. However, when we use a multiple-choice setting, paraphrases has a reasonable relevance rate (60%), despite the simplicity of the algorithm. The fact that the original captions has a high relevance rate (87%) shows that in our corpus the captions have high visual relevance to their associated images most of the time. II. Creative paraphrasing with and without the visual context (PARAcaption vs. PARAcreative ): In terms of creativity, the PARAcaption method is preferred over the PARAcreative method. We conjecture that without conditioning on the visual content, PARAcaption method tends to retrieve more unexpected captions that make turkers think they are more fun and creative. As for the visual relevance, by conditioning on the visual context given by query images, the PARAcreative method significantly improves the visual relevance over the text-only counterpart, PARAcaption method. This result highlights the pragmatic differences between visually-situated paraphrasing and text-based paraphrasing.
+
+We test 200 images that are associated with literal captions as predicted by the figurativeness classifier. The PARAcreative approach competes against two baselines: 1) the O RIGINAL captions , and 2) a text-only variant of the PARAcaption approach sans visual processing: it randomly chooses a figurative caption that shares the largest number of physicalobject nouns with the original caption, without looking at the query image. This is for evaluating the effect of visual context. In addition to the evaluations as in §8.1, we also use a multiple-choice setting that allows a turker to choose zero to two captions that are visually relevant to the query image. See Table 10 for results, and Figure 5 for example outputs. 511
+
+9
+
+Related work
+
+Image-caption corpus: Our work contributes to the line of research that makes use of internet web imagery and text (Ordonez et al., 2011; Berg et al., 2010) by detecting the visually relevant text (Dodge et al., 2012) and reducing the noise (Kuznetsova et al., 2013b; Kuznetsova et al., 2014). Compared to datasets with crowd-sourced captions (Hodosh et al., 2013; Lin et al., 2014), in which each image is annotated with several captions, our dataset presents several images for each caption, a subset of which also includes visually situated paraphrases. The as-
+
+

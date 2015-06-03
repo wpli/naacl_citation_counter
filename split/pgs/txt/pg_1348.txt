@@ -1,0 +1,29 @@
+sume different roles in different context. The above works do not seem to address this. (Prabhakaran et al., 2012) achieves a commendable accuracy in detecting overt display of "power". However, by our definitions, this is a lower level attribute and is similar to authoritative behavior which is a lower level concept than Leadership or Status. Hence, their results are not directly comparable to ours. In this paper, we use a mixture of logic-based and statistical approaches which better encodes the domain knowledge and infers higher-level constructs from indirect textual cues. The aim of this paper is to formalize the theory behind our work, highlight the advantages of integration of statistical and logicbased approaches and present results from an empirical study.
+
+fiers (basically rules) and probabilistic generative models (Medhat et al., 2014), (Hutto and Gilbert, 2014), (Vanzo et al., 2014) and (Saif et al., 2012). While their accuracy on some datasets is quite satisfactory, it is not clear how well they do on completely unseen data. From our experience on such classifiers, we believe that a higher level of accuracy with explainability can be achieved by imposing a structure that encodes background knowledge about the social hierarchy that is observed in nature. With this motivation, we built a system whose hierarchical architecture robustly defines the social constructs, the "hidden" concepts that induce them and their inter-connections. We define notions of intermediate Language Use (LU) and lower level Language Indicator (LI) categories1 . With the help of these robust definitions, our system properly explains how different emotions and behaviors interact to express status and leadership among individuals.
+
+2
+
+Motivation by a use-case
+
+3
+
+Social Constructs
+
+{D: Put a message on the talk page of the guy who made it. You're right; g(t) should be g(tau - t), and (f*g)(t) should be (f*g)(tau). T: I don't think he has a talk page. He's provided the code so I can reproduce it. I think he's right with (f*g)(t), though? D: Actually, I think we're both wrong. You need a variable of integration running opposite directions .... T: I've updated ... I guess it's not important, but would be kind of cool. Feel free to suggest improvements to the animations.} As we understand, these conversations suggest that participant D is supposed to hold a higher rank/status than T . If we analyze manually, we understand that phrases like Put a message, You're right, I think we're both wrong together supports our conclusion. Considered separately, the above phrases might be misleading. To conclude the example, our system outputs : D has a higher status than T because D demonstrates more language uses associated with status than T. Confidence: high. The above example illustrates the degree of contextsensitivity of our problem. The current statistical literature suggests methods such as Decision Trees, Boosting methods comprising of a collection of Weak classi-
+
+We start our discussion by presenting a use-case and explain how results of other traditional methods inspired us to come up with an integrated approach. Consider the following conversation from Wikipedia where the participants discuss about a misleading animation that is used under the topic Convolution.
+
+Our framework supports determination of various important Social Constructs such as Leadership, Status, Group Cohesion and Sub-Group Formation. However, due to the length constraints of the paper, we will only discuss Leadership and Status.
+
+3.1
+
+Definitions and Architecture
+
+We begin by first formally defining the two Social Constructs and the different Language Use categories. Leadership: A leader is someone who guides a group toward outcomes, controls the group actions, manages interactions between members and members usually recognize the leader. Status: Status is defined as the social position of one person with respect to another in a group. The principal Language Use categories that we detect are: Deference, Closeness, Authoritative Behavior and Motivational Behavior. The following intuitions are used to infer such LU s from text: Deference is understood when one uses language that shows respect to another conversational participant or defers to another's expertise or knowledge or authority. Closeness is understood when one uses language that shows familiarity with another conversationalist. It is also indicated by dialogues where conversationalists refer to similar events, experiences etc. Authoritative Behavior is understood when one uses language that shows power, dominance and control over a situation. Motivational Behavior is understood when one uses language that moves conversational participants toward
+These definitions were proposed as part of the IARPA Socio-Cultural Content In Language(SCIL) program.
+1
+
+1294
+
+

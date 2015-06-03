@@ -1,0 +1,22 @@
+both have an associated action keyword from the transcript as well as an aligned recipe step selected by the HMM alignment model. For each clip, three raters on Mechanical Turk were shown the clip, the text from the recipe step, and a fragment of the ASR transcript (the keyword, plus 5 tokens to the left and right of the keyword). Raters then indicated which description they preferred: 2 indicates a strong preference for the recipe step, 1 a weak preference, 0 indifference, -1 a weak preference for the transcript fragment, and -2 a strong preference. Results are shown in Figure 6. Excluding raters who indicated indiffierence, 67% of raters preferred the recipe step as the clip's description. A potential confound for using this analysis as a proxy for the quality of the alignment model is that the ASR transcript is generally an ungrammatical sentence fragment as opposed to the grammatical recipe steps, which is likely to reduce the raters' approval of ASR captions in the case when both accurately describe the scene. However, if users still on average prefer an ASR sentence fragment which describes the clip correctly versus a full recipe step which is unrelated to the scene, then this experiment still provides evidence of the quality of the alignment model. 4.2 Automatically illustrating a recipe
+
+Figure 8: Searching for "knead dough". Note that the videos
+have automatically been advanced to the relevant frame.
+
+and return a list of matches (ranked by confidence). Since each clip has a corresponding "provenance", we can return the results to the user as a set of videos in which we have automatically "fast forwarded" to the relevant section of the video (see Figure 8 for an example). This stands in contrast to standard video search on Youtube, which returns the whole video, but does not (in general) indicate where within the video the user's search query occurs.
+
+5
+
+Related work
+
+One useful byproduct of our alignment method is that each recipe step is associated with a segment of the corresponding video.5 We use a standard keyframe selection algorithm to pick the best frame from each segment. We can then associate this frame with the corresponding recipe step, thus automatically illustrating the recipe steps. An illustration of this process is shown in Figure 7. 4.3 Search within a video
+
+Another application which our methods enable is search within a video. For example, if a user would like to find a clip illustrating how to knead dough, we can simply search our corpus of labeled clips,
+The HMM may assign multiple non-consecutive regions of the video to the same recipe step (since the background state can turn on and off). In such cases, we just take the "convex hull" of the regions as the interval which corresponds to that step. It is also possible for the HMM not to assign a given step to any interval of the video.
+5
+
+There are several pieces of related work. (Yu et al., 2014) performs keyword spotting in the speech transcript in order to label clips extracted from instructional videos. However, our hybrid approach performs better; the gain is especially significant on automatically generated speech transcripts, as shown in Figure 4. The idea of using an HMM to align instructional steps to a video was also explored in (Naim et al., 2014). However, their conditional model has to generate images, whereas ours just has to generate ASR words, which is an easier task. Furthermore, they only consider 6 videos collected in a controlled lab setting, whereas we consider over 180k videos collected "in the wild". Another paper that uses HMMs to process recipe text is (Druck and Pang, 2012). They use the HMM to align the steps of a recipe to the comments made by users in an online forum, whereas we align the steps of a recipe to the speech transcript. Also, we use video information, which was not considered in this earlier work. (Joshi et al., 2006) describes a system to automatically illustrate a text document, however they only generate one image, not a sequence, and their techniques are very different. There is also a large body of other work on connecting language and vision; we only have space
+
+150
+
+

@@ -1,0 +1,30 @@
+det
+
+[ NN(deep), DT]
+
+Figure 5: Internal dependency within a hypernode
+
+pernodes must be connected between each other, such that we obtain a complete SSyntS. The interhypernode dependency generation SVMs use the following features of a hypernode ss to determine for each hypernode its governor. For each hypernode with a distinct internal dependency pattern, a separate classifier is dynamically derived (for our treebanks, we obtained 114 different SVM classifiers because they also take into account hypernodes with just one token).:
+the internal dependencies of ss , the head of ss , the lemmas of ss , the PoS of the dependent of the head of ss in DSyntS
+
+The beam is initialized with entries of single words that are expanded in the next step by the remaining words of the sub-tree, which results in a number of new entries for the next iteration. After the expansion step, the new beam entries are sorted and pruned. We keep the 30 best entries and continue with the expansion and pruning steps until no further nodes of the subtree are left. We take an SVM to obtain the scores for sorting the beam entries, using the same feature templates as in Guo et al. (2011b) and Bohnet et al. (2011).
+
+4 Experiments and Results
+In our experiments, the Spanish treebank has been divided into: (i) a development set of 219 sentences, with 3,437 tokens in the DSyntS treebank and 4,799 tokens in the SSyntS treebank (with an average of 21.91 words by sentence in SSynt); (ii) a training set of 3,036 sentences, with 57,665 tokens in the DSyntS treebank and 84,668 tokens in the SSyntS treebank (with an average of 27.89 words by sentence in SSynt); and a (iii) a held-out test for evaluation of 258 sentences, with 5,878 tokens in the DSyntS treebank and 8,731 tokens in the SSyntS treebank (with an average of 33.84 words by sentence in SSynt). For the English treebank, we used a classical split of (i) a training set of 39,279 sentences, with 724,828 tokens in the DSynt treebank and 958,167 tokens in the SSynt treebank (with an average of 24.39 words by sentence in SSynt); and (ii) a test set of 2,399 sentences, with 43,245 tokens in the DSynt treebank and 57,676 tokens in the SSynt treebank (with an average of 24.04 words by sentence in SSynt). In what follows, we show the system performance on both treebanks. The Spanish treebank was used for development and testing, while the English treebank was only used for testing. 4.1 Results
+
+For instance, the classifier for the hypernode [JJ(deep)] is most likely to identify as its governor NN in the hypernode [NN(deep), DT]; cf. Figure 6. The task faced by the inter-hypernode dependency classifiers is the same as that of a dependency parser, only that its search space is very small (which is favorably reflected in the accuracy figures).
+modif
+
+[ NN(deep), DT] [ JJ(deep)]
+
+Figure 6: Surface dependencies between two hypernodes.
+
+3.3
+
+Linearization
+
+Once we obtained a SSyntS, the linearizer must find the correct order of the words. There is already a body of work available on statistical linearization. Therefore, these tasks were not in the focus of our work. Rather, we adopt the most successful technique of the first SRST (Belz et al., 2011), a bottomup tree linearizer that orders bottom-up each head and its children (Bohnet et al., 2011; Guo et al., 2011a). This has the advantage that the linear order obtained previously can provide context features for ordering sub-trees higher up in the dependency tree. Each head and its children are ordered with a beam search. 393
+
+In this section, we present the performance of, first of all, the individual tasks of the data-driven DSyntS­SSyntS projection, since these have been the challenging tasks that we addressed. Table 1 shows similar results for all tasks on the development and test sets with gold-standard input, that is,
+
+

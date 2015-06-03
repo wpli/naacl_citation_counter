@@ -1,0 +1,27 @@
+first correct (% into RE) first final (% into RE) edit overhead (all lengths) never correct (all lengths)
+
+1-5 35.47 69.0 0.88% 5.5%
+
+6-8 22.34 49.85
+
+9-14 14.8 48.0
+
+Table 6: Incremental results for SIUM, numbers represent % into RE.
+
+types of utterances is to be preferred to one that doesn't. 6.2 Incremental Behaviour
+
+Table 6 shows how our model fares using the incremental metrics described earlier. (As this has not been done in Iida et al. (2011), direct comparison is not possible.) For the evaluation, REs are binned into short, normal, and long (1-5, 6-8, 9-14 characters, respectively, based on what the average numbers of words in REs in this corpus is), to make relative statements ("% into the utterance") comparable. Ideally, a system would make the first correct decision as early as possible without changing that decision. The results in the table show a respectable incremental model; on average it picks the right object early, with some edit overhead (making unnecessary changes in its prediction), finally fixing on a final decision before the end of the RE with low edit overhead, meaning it rarely changes its mind once it has made a decision. In some cases, SIUM never guessed the correct object, labeled never correct in the table. These incremental results are consistent with previous work for the SIUM; overall, the model is stable across the RE. 6.3 Discussion
+
+Figure 5: Words that describe objects are linked via a hand-coded compatibility function; links from words to multiple properties can exist, provided it is coded.
+
+and by a stochastic process of associating words with properties. Figure 6 visualises this: each word has a stochastic connection between each property and objects have a set of properties. The property names are arbitrary as long as they are consistent. In contrast, previous work in RR (Iida et al., 2011; Chai et al., 2014) used a hand-coded concept-labeled semantic representation and checked if aspects of the RE match that of a particular object. If so, a binary compatibility feature was set. Figure 5 shows this; words can only link to objects via hand-crafted rules (e.g., the word or FOL predicate and property string must match). By the way SIUM uses properties, it can also perform (exophoric) pronoun resolution, deixis (the mouse pointer) and definite descriptions, in a single framework. This is a nice feature of the model: adding additional modalities does not require model reformulation.
+
+Despite being very simple, there is an important difference that allows SIUM to improve over previous work. It learns to connect object properties selected for verbalisation to ways of verbalising them, and forms a stochastic expectation about which properties might be selected for verbalisation (namely, those that are present). This represents a type of grounding (Harnad, 1990; Roy, 2005).4 In terms of the SIUM formalism, the link between object and words is mediated by the properties the object has
+Not to be confused with building common ground (Clark, 1996) which is also referred to as grounding.
+4
+
+Figure 6: Words that describe objects are linked via properties stochastically: thicker lines between U and R represent higher probabilities. The lines between R and I denote a property belonging to an object. The cardinality of U does not equal R.
+
+279
+
+

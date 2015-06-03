@@ -1,0 +1,21 @@
+from the vocabulary, except for six unstressed ones (a, an, and, the, of, or). Here is a sample poem password: The le-gen-da-ry Ja-pan-ese         Sub-si-di-ar-ies ov-er-seas         Meter and rhyme constraints make it difficult to use the Moses machine translation toolkit to search for fluent output, as we did above; the decoder state must be augmented with additional short- and longdistance information (Genzel et al., 2010). Instead, we build a large finite-state acceptor (FSA) with a path for each legal poem. In each path, the second line of the poem is reversed, so that we can enforce rhyming locally. The details of our FSA construction are as follows. First, we create a finite-state transducer (FST) that maps each input English word onto four sequences that capture its essential properties, e.g.: create create create create -> -> -> -> 0 1 0 1 EY-T 1r 0r EY-T 1r 0r
+
+Sophisticated potentates misrepresenting Emirates. The supervisor notified the transportation nationwide. Afghanistan, Afghanistan, Afghanistan, and Pakistan. while others are very bad:
+The shirley emmy plebiscite complete suppressed unlike invite The shirley emmy plebiscite complaints suppressed unlike invite The shirley emmy plebiscite complaint suppressed unlike invite
+
+Here, EY-T represents the rhyme-class of words like create and debate. The r indicates a stress pattern in the right-to-left direction. We then compose this FST with an FSA that only accepts sequences of the form:
+0 1 0 1 0 1 0 1 X X 1r 0r 1r 0r 1r 0r 1r 0r
+
+where X and X are identical rhyme classes (e.g., EYT and EY-T). It remains to map an arbitrary 60-bit string onto a path in the FSA. Let k be the integer representation of the 60-bit string. If the FSA contains exactly 260 paths, we can easily select the k th path using the following method. At each node N of the FSA, we store the total number of paths from N to the final state--this takes linear time if we visit states in reverse topological order. We then traverse the FSA deterministically from the start state, using k to guide the path selection. Our FSA actually contains 279 paths, far more than the required 260 . We can say that the information capacity of the English rhyming iambic tetrameter couplet is 79 bits! Some are very good: 1573
+
+Fortunately, because our FSA contains over a million times the required 260 paths, we can avoid these bad outputs. For any particular 60-bit string, we have a million poems to choose from, and we output only the best one. More precisely, given a 60-bit input string k , we extract not only the k th FSA path, but also the k + i · 260 paths, with i ranging from 1 to 999,999. We explicitly list out these paths, reversing the second half of each, and score them with our 5-gram LM. We output the poem with the 1-best LM score. Table 1 shows sample outputs. To reconstruct the original 60-bit string k , we first find the FSA path corresponding to the user-recalled English string (with second half reversed). We use depth-first search to find this path. Once we have the path, it is easy to determine which numbered path it is, lexicographically speaking, using the nodelabeling scheme above to recover k .
+
+3
+
+Experiments
+
+We designed two experiments to compare our methods. The first experiment tests the memorability of passwords. We asked participants to memorize a password from a randomly selected method5 and recall it two days later. To give more options to users,
+In all experiments, we omit the First Letter Mnemonic, due to its low performance in early tests.
+5
+
+

@@ -1,0 +1,72 @@
+Table 1: CNNSE interpretable summarizations for the top 3 dimensions of an adjective, noun and adjectivenoun phrase.
+military servicemen, commandos, military intelligence guerrilla, paramilitary, anti-terrorist conglomerate, giants, conglomerates aid guidance, advice, assistance mentoring, tutoring, internships award, awards, honors military aid (observed) servicemen, commandos, military intelligence guidance, advice, assistance compliments, congratulations, replies
+
+the L1 regularizer can have a large impact on sparsity, our composition constraint represents a considerable change in composition compatibility. Consider a phrase p made up of words i and j . In the most general setting, the following composition constraint could be applied to the rows of matrix A corresponding to p, i and j : A(p,:) = f (A(i,:) , A(j,:) ) (4) where f is some composition function. The composition function constrains the space of learned latent representations A  Rw× to be those solutions that are compatible with the composition function defined by f . Incorporating f into Equation 1 we have:
+w
+
+This choice of f requires that we simultaneously optimize for A, D,  and  . However,  and  are simply constant scaling factors for the vectors in A corresponding to adjectives and nouns. For adjectivenoun composition, the optimization of  and  can be absorbed by the optimization of A. For models that include noun-noun composition, if  and  are assumed to be absorbed by the optimization of A, this is equivalent to setting  =  . We can further simplify the loss function by constructing a matrix B that imposes the composition by addition constraint. B is constructed so that for each phrase p = (i, j ): B(p,p) = 1, B(p,i) = -, and B(p,j ) = - . For our models, we use  =  = 0.5, which serves to average the single word representations. The matrix B allows us to reformulate the loss function from Eq 5: argmin
+A,D
+
+argmin
+A,D,
+
+c 2
+
+i=1
+
+1 Xi,: - Ai,: × D 2
+
+2
+
++ 1 Ai,:
+2
+
+1
+
++
+
+A(p,:) - f (A(i,:) , A(j,:) )
+phrase p, p=(i,j )
+
+(5)
+
+1 X - AD 2
+
+2 F
+
++ 1 A
+
+1
+
++
+
+c BA 2
+
+2 F
+
+(7)
+
+Where each phrase p is comprised of words (i, j ) and  represents all parameters of f to be optimized. We have added a squared loss term for composition, and a new regularization parameter c to weight the importance of respecting composition. We call this new formulation Compositional Non-Negative Sparse Embeddings (CNNSE). Some examples of the interpretable representations learned by CNNSE for adjectives, nouns and phrases appear in Table 1. There are many choices for f : addition, multiplication, dilation, etc. (Mitchell and Lapata, 2010). Here we choose f to be weighted addition because it has has been shown to work well for adjective noun composition (Mitchell and Lapata, 2010; Dinu et al., 2013; Hashimoto et al., 2014), and because it lends itself well to optimization. Weighted addition is: f (A(i,:) , A(j,:) ) = A(i,:) + A(j,:) (6) 34 3
+
+where F indicates the Frobenius norm. B acts as a selector matrix, subtracting from the latent representation of the phrase the average latent representation of the phrase's constituent words. We now have a loss function that is the sum of several convex functions of A: squared reconstruction loss for A, L1 regularization and the composition constraint. This sum of sub-functions is the format required for the alternating direction method of multipliers (ADMM) (Boyd, 2010). ADMM substitutes a dummy variable z for A in the sub-functions: argmin
+A,D
+
+1 X - AD 2
+
+2 F
+
++ 1 z1
+
+1
+
++
+
+c Bzc 2
+
+2 F
+
+(8)
+
+and, in addition to constraints in Eq 2 and 3, incorporates constraints A = z1 and A = zc to ensure dummy variables match A. ADMM uses an aug-
+
+

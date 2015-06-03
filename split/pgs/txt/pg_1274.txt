@@ -1,0 +1,5 @@
+A. Subramanya, S. Petrov, and F. Pereira. 2010. Efficient graph-based semi-supervised learning of structured tagging models. In Empirical Methods in Natural Language Processing (EMNLP). M. Thelen and E. Riloff. 2002. A bootstrapping method for learning semantic lexicons using extraction pattern contexts. In Empirical Methods in Natural Language Processing (EMNLP), pages 214­221. M. Whitney and A. Sarkar. 2012. Bootstrapping via graph propagation. In Association for Computational Linguistics (ACL). R. Yangarber, R. Grishman, and P. Tapanainen. 2000. Automatic acquisition of domain knowledge for information extraction. In International Conference on Computational Linguistics (COLING), pages 940­ 946. D. Yarowsky. 1995. Unsupervised word sense disambiguation rivaling supervised methods. In Association for Computational Linguistics (ACL).
+
+1220
+
+

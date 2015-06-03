@@ -1,0 +1,41 @@
+1
+
+2
+
+2
+
+2
+
+3
+
+1
+
+donor To word IPA
+
+Syllabification
+
+Phonological adaptation
+
+Morphological adaptation
+
+Ranking with OT constraints
+
+From IPA
+
+loan word
+
+GEN - generate loanword candidates
+
+EVAL - rank candidates
+
+Figure 1: Our morpho-phonological borrowing model conceptually has three main parts: (1) conversion of orthographic word forms to pronunciations in IPA format; (2) generation of loanword pronunciation candidates; (3) ranking of generated candidates using Optimality-Theoretic constraints. Part (1) and (2) are rule-based, (1) uses pronunciation dictionaries, (2) is based on prior linguistic studies; part (3) is learned. In (3) we learn OT constraint weights from a few dozen automatically extracted training examples.
+
+2
+
+Methodology
+
+Our task is to identify plausible donor­loan word pairs in a language pair. While modeling string transductions is a well-studied problem in NLP, we wish to be able to learn the cross-lingual correspondences from minimal amounts of data, so we propose a linguistically-motivated approach: we formulate a scoring model inspired by Optimality Theory (OT; discussed below), in which borrowing candidates are ranked by universal constraints posited to underly the human faculty of language, and the candidates are determined by transduction processes articulated in prior studies of contact linguistics. As shown in figure 1, our model is conceptually divided into three main parts: (1) mapping of orthographic word forms in two languages into a common space of their phonetic representation; (2) generation of loanword pronunciation candidates from a donor word; (3) ranking of generated loanword candidates, based on linguistic constraints of the donor and recipient languages. Parts (1) and (2) are rule-based; whereas (3) is learned. Each component of the model is discussed in detail in the following sections. The model is implemented within a finite-state cascade. Parts (1) and (2) amount to unweighted string transformation operations. In (1), we convert orthographic word forms to their pronunciations in the International Phonetic Alphabet (IPA), these are pronunciation transducers. In (2) we syllabify donor pronunciations, then perform insertion, deletion, and substitution of phonemes and morphemes (affixes), to generate multiple loanword candidates from a donor word. Although string transformation transducers in (2) can generate loanword candidates that are not found in a recipient language vocabulary, such can599
+
+didates are filtered out due to composition with the recipient language lexicon acceptor. We perform string transformations from donor to recipient (recapitulating the historical process). However, the resulting relation (i.e., the final composed transducer) is a bidirectional model which can just as well be used to reason about underlying donor forms given recipient forms. To employ the model in a specific direction, one needs to optimize parameters-- weights on transitions--to generate a desired set of outputs from a specific input. Our model is trained to discriminate a donor word given a loanword. In part (3), candidates are "evaluated" (i.e., scored) with a weighted sum of universal constraint violations. The non-negative weights, which we call "cost vector", constitute our model parameters and are learned using a small training set of donor­recepient pairs. We use a shortest path algorithm to find the path with the minimal cost. OT: constraint-based evaluation Our decision to evaluate borrowing candidates by weighting counts of "constraint violations" is based on Optimality Theory, which has shown that complex surface phenomena can be well-explained as the interaction of constraints on the form of outputs and the relationships of inputs and outputs (Kager, 1999). Although our linear scoring scheme departs from OT's standard evaluation assumptions (namely, the assumption of an ordinal constraint ranking and strict dominance rather than constraint "weighting"), we are still able to obtain effective models. Although originally a theory of monolingual phonology, OT has been adapted to account for borrowing by treating the donor language word as the underlying form for the recipient language; that is,
+
+

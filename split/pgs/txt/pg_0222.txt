@@ -1,0 +1,43 @@
+each video segment. The forward message n (m) is computed as: n (m) =
+m
+
+4.2
+
+Latent Variable Structured Perceptron
+
+n-1 (m )
+Y VY
+
+(Xim , Y, m, n, m )
+
+There can be 2|VY | - 1 possible subset of blobs at each of the alignment position, and the overall computational complexity becomes O(2|VY | mi ni d), which is prohibitively expensive, even for a small number of blobs. In our videos, the hands never touch more than 3 objects at a time. So we considered only the non-empty subsets with 3 or less elements: P = {S : S  VY , |S |  3, S = }. The pruning of larger subsets reduces the complexity to O(|VY |3 mi ni d). We can further reduce computation by decomposing the forward-backward recursions to the co-occurrence features and alignment path features: (Xim , Y, m, n, m ) = co (Xim , Y )ap (m, n, m ) The potential due to alignment path features (ap ) does not depend on the subset of blobs, and only depends on the current and previous alignment states h[n] = m and h[n - 1] = m . On the other hand, the co-occurrence potential co for a given set of blobs Y depends only on the sentence that it is being aligned to, and does not depend on the video chunk index n. Therefore we can decompose the forward recursion as: n (m) =
+m
+
+Structured Perceptron (Collins, 2002) has become a popular method for discriminative structured learning due to its relatively fast convergence rate and theoretical convergence guarantee. Since true alignments are unknown, we apply the latent variable structured perceptron algorithm (Liang et al., 2006; Sun et al., 2009; Yu et al., 2013) for our discriminative alignment task. We iteratively scan through our dataset, one protocol and video pair (xi , yi ) at a time. First, we infer orced for the given observation the best alignment hF i pair (xi , yi ) and the current weight vector w:
+orced hF = arg max wT (xi , yi , h). i h
+
+(6)
+
+This step is known as Forced Decoding, as we are given both the protocol sentences and the associated video chunks. Forced decoding is performed using Viterbi-like dynamic programming (Algorithm 1), where the dynamic programming states are the alignment states (m, n) such that h[n] = m. Algorithm 1 Perceptron Forced-Decoding
+Input: Observation pair (xi , yi ) and a weight vector w. 1: mi  length(xi ), and ni  length(yi ), 2: D[m, n]  - for 0  m  mi and 0  n  ni 3: D[0, 0]  0 4: for m = 1 to mi do 5: for n = 1 to ni do 6: for each (m , n - 1)  Predecessors(m, n) do 7:   create-features(Xi,m , Yi,n , m, n, m ) 8: if D[m , n - 1] + wT  > D[m, n] then 9: D[m, n]  D[m , n - 1] + wT  10: Backpointers[m, n]  m orced 11: hF  Backtrack(D, Backpointers) i orced 12: Return hF i
+
+n-1 (m ) ap (m, n, m )  (m)
+
+where  (m) = Y P co (Xim , Y ). We can precompute the values of  (m) for each of the mi sentences, which takes O(mi d|VY |3 ) operations. Finally, we run forward recursions over all the alignment states using the precomputed values, and the complexity becomes O(mi d|VY |3 + mi ni d) Similarly the backward recursion becomes: n (m) =
+m
+
+Next, we decode both the highest scoring align^ i and video sequence y ^ i , given the protocol ment h xi and the number of video chunks ni . ^ i, y ^ i = arg max wT (xi , y, h) h
+h,y
+
+n+1 (m ) ap (m , n+1, m)  (m )
+
+(7)
+
+The alignment state transition probabilities n (m , m) represents the probability p(hn-1 = m , hn = m | xi ), which can be estimated by marginalizing over all possible sets of blobs: n (m , m)  n-1 (m )ap (m, n, m ) (m)n (m) 168
+
+We refer to this step as Full Decoding (Algorithm 2). The dynamic programming is similar to that for forced decoding, except that we need to find the best set of blobs given a set of nouns, for every protocol sentence Xi,m :
+T B [m] = arg max wco co (Xi,m , S ) S P
+
+(8)
+
+

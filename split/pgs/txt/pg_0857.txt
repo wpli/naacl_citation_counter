@@ -1,0 +1,52 @@
+Count
+
+We hypothesize that this type of explicit discourse relations would not be useful as extra training instances for inferring implicit discourse relations because they will only add noise to the training set.
+
+40 30 20 10 0 0.00 0.25 0.50 0.75 1.00
+
+2.4.4
+
+Non-omissible discourse connectives
+
+They are defined as discourse connectives whose omission rate is close to zero as they are never found in implicit discourse relations. For example, conditionals can not be easily expressed without the use of an explicit discourse connective like "if". We hypothesize that instances of explicit discourse relations with such discourse connectives would not be useful as additional training data for inferring implicit discourse relations because they represent discourse relation senses that do not exist in the implicit discourse relations.
+
+Omission rate
+
+Figure 1: Omission rates of the discourse connective types vary drastically, suggesting that connectives vary in their optionality. Some connectives are never omitted.
+Explicit PDTB 15 Weakly Labeled Explicit Gigaword
+
+3.1
+
+Partitioning the discourse connectives
+
+Count
+
+3
+
+Experiments
+
+10
+
+We only include the discourse connectives that appear in both explicit and implicit discourse connectives in the PDTB to make the comparison and classification possible. As a result, we only analyze 69 out of 134 connectives for the purpose of classification. We also leave out 15 connectives whose most frequent sense acccounts for less than 90% of their instances. For example, since can indicate a T EMPORAL sense or a C ONTINGENCY sense of almost equal chance, so it is not readily useful for gathering weakly labeled data. Ultimately, we have 54 connectives as our candidates for freely omissible discourse connectives. We first classify the discourse connectives based on their omission rates and context differentials as discussed in the previous section and partition all of the explicit discourse connective instances based on this classification. The distributions of omission rates and context differentials show substantial amount of variation among different connectives. Many connectives are rarely omitted and naturally form its own class of non-omissible discourse connectives (Figure 1). We run the agglomerative hierchical clustering algorithm using Euclidean distance on the rest of the connectives to divide them into two groups: high omission and low omission rates. The boundary between the two groups is around 0.65. The distribution of discourse connectives with respect to the context differential suggests two distinct groups across the two corpora (Figure 2). The analysis only includes connectives that are omitted at least twenty times in the PDTB corpus, so that JSD can be computed. The hierarchical clustering algorithm divides the connectives into two groups with the boundary at around 0.32, as should be apparent from the histogram. The JSD's computed from the explicit discourse relations from the two
+
+5
+
+0 0.1 0.2 0.3 0.4 0.5 0.6 0.1 0.2 0.3 0.4 0.5 0.6
+
+Context Differential (Jensen-Shannon Divergence)
+
+Figure 2: The distributions of Jensen-Shannon Divergence from both corpora shows two potential distinct clusters of discourse connectives. corpora are highly correlated ( = 0.80, p < 0.05), so we can safely use the Gigaword corpus for the analysis and evaluation. The omission rate boundary and context differential boundary together classify the discourse connectives into four classes in addition to the non-omissible connectives. When plotted against each other, omission rates and context differential together group the discourse connectives nicely into clusters (Figure 3). For the purpose of evaluation, we combine Alternating I and II into one class because each individual class is too sparse on its own. The complete discourse connective classification result is displayed in Table 1.
+
+Sense Comparison Contingency Expansion Temporal Total
+
+Train 1855 3235 6673 582 12345
+
+Dev 189 281 638 48 1156
+
+Test 145 273 538 55 1011
+
+Table 2: The distribution of senses of implicit discourse relations in the PDTB
+
+803
+
+

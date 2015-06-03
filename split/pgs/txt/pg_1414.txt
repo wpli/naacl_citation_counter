@@ -1,0 +1,52 @@
+NO EN DA CA HR FI
+
+BASELINE 90.98 81.72 80.56 83.78 76.94 66.19
+
+C HILD P OS D 92.67 83.48 83.67 83.26 78.07 66.74
+
+L ABEL 91.16 80.35 82.90 84.21 78.22 64.88
+
+L ABEL D 91.34 83.05 82.47 83.79 77.52 67.18
+
+H EAD P OS 92.08 85.89 83.23 82.84 79.49* 65.63
+
+H EAD P OS D 90.48 85.91 84.11 82.61 78.71* 65.27
+
+Table 3: Crossvalidation results (in LAS incl. punctuation). Gray: below baseline. Best factorization per language in boldface. Significance at p < 0.01 (computed over runs and wrt baseline) is indicated by  .
+
+child pos
+attachment score 86
+
+10
+
+30
+
+50 % of data
+
+70
+
+90
+
+Figure 2: Bootstrap learning curve (k=50) for NO with C HILD P OS D. Black: LAS, green: UAS; solid line: baseline; dashed line: IAA-weighted model.
+NO EN DA CA HR FI C HILD P OS D 6.4% 2.0% 0.7% -2.0% -0.2% 0.4% L ABEL 0.6% 2.6% 1.6% -0.1% 0.3% -0.4% L ABEL D 0.7% 2.9% 1.0% -0.1% 0.7% 0.1% H EAD P OS 3.3% 5.3% 2.0% -2.9% 0.1% -0.1% H EAD P OS D 1.2% 3.8% 1.0% -2.8% 0.1% -0.70%
+
+Table 4: Overall avg. error red. across learning curves.
+
+proposed evaluation metrics that do not penalize disagreements (Schwartz et al., 2011; Tsarfaty et al., 2011), while others have argued that we should instead ensure the consistency of treebanks (Dickinson, 2010; Manning, 2011; McDonald et al., 2013). Others have claimed that because of these ambiguities, only downstream evaluations are meaningful (Elming et al., 2013). Syntactic annotation disagreement has typically been studied in the context of treebank development. Haverinen et al. (2012), for example, analyze annotator disagreement for Finnish dependency syntax, and compare it against parser performance. Skjærholt (2014) use doubly-annotated data to evaluate various agreement metrics. Our paper differs from both lines of research in that we leverage disagreements from doubly-annotated data to obtain more robust models. While we agree that evaluation metrics should probably reflect disagreements, we show that our learning algorithms can indeed benefit from information about disagreement, also using standard performance metrics.
+
+shuffled the confusion matrix and ran the bootstrap learning curve with k = 50 repetitions, for five different shufflings. The mean over the five runs for the overall average error reductions is negative (-0.38%, compared to the 2.4% mean for the original, nonshuffled version). We thus conclude that our factorizations capture linguistically plausible information rather than random noise.
+
+78
+
+82
+
+8 Conclusions
+We have evaluated five different factorizations on six treebanks to evaluate the impact of IAA-weighted learning for dependency parsing, obtaining promising results. The findings support our hypothesis that annotator disagreement is informative for parsing. The L ABEL D factorization--which takes both labeling and word order into account--is the overall most robust factorization across all languages. However, the best factorization for each language varies. This variation can be a result of the morphosyntax of the language, but also of the dependency annotation formalisms, annotation method, training corpus and size of the doubly-annotated sample.
+
+7
+
+Related Work
+
+Plank et al. (2014a) propose IAA-weighted costsensitive learning for POS tagging. We extend their line of work to dependency parsing. A single sentence can have more than one plausible dependency annotation. Some researchers have 1360
+
+

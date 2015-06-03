@@ -1,0 +1,27 @@
+A Transition-based Algorithm for AMR Parsing
+Chuan Wang Brandeis University cwang24@brandeis.edu Nianwen Xue Brandeis University xuen@brandeis.edu Sameer Pradhan Harvard Medical School Sameer.Pradhan@ childrens.harvard.edu
+
+Abstract
+We present a two-stage framework to parse a sentence into its Abstract Meaning Representation (AMR). We first use a dependency parser to generate a dependency tree for the sentence. In the second stage, we design a novel transition-based algorithm that transforms the dependency tree to an AMR graph. There are several advantages with this approach. First, the dependency parser can be trained on a training set much larger than the training set for the tree-to-graph algorithm, resulting in a more accurate AMR parser overall. Our parser yields an improvement of 5% absolute in F-measure over the best previous result. Second, the actions that we design are linguistically intuitive and capture the regularities in the mapping between the dependency structure and the AMR of a sentence. Third, our parser runs in nearly linear time in practice in spite of a worst-case complexity of O(n2 ).
+
+as Information Extraction, Question Answering and Machine Translation. The property that makes AMR a graph instead of a tree is that AMR allows reentrancy, meaning that the same concept can participate in multiple relations. Parsing a sentence into an AMR would seem to require graph-based algorithms, but moving to graph-based algorithms from the typical tree-based algorithms that we are familiar with is a big step in terms of computational complexity. Indeed, quite a bit of effort has gone into developing grammars and efficient graph-based algorithms that can be used to parse AMRs (Chiang et al., 2013).
+want nsubj police det The Karras nn Michael "Michael" aux to dobj xcomp arrest prep in pobj Singapore op1 police ARG0 ARG0 person name name op2 "Karras" want-01 ARG1 arrest-01 ARG1 location
+
+Singapore
+
+1
+
+Introduction
+
+Abstract Meaning Representation (AMR) is a rooted, directed, edge-labeled and leaf-labeled graph that is used to represent the meaning of a sentence. The AMR formalism has been used to annotate the AMR Annotation Corpus (Banarescu et al., 2013), a corpus of over 10 thousand sentences that is still undergoing expansion. The building blocks for an AMR representation are concepts and relations between them. Understanding these concepts and their relations is crucial to understanding the meaning of a sentence and could potentially benefit a number of natural language applications such
+
+(a) Dependency tree
+
+(b) AMR graph
+
+Figure 1: Dependency tree and AMR graph for the sentence, "The police want to arrest Micheal Karras in Singapore." Linguistically, however, there are many similarities between an AMR and the dependency structure of a sentence. Both describe relations as holding between a head and its dependent, or between a parent and its child. AMR concepts and relations abstract away from actual word tokens, but there are regularities in their mappings. Content words generally be-
+
+366
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 366­375, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

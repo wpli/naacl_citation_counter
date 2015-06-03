@@ -1,0 +1,13 @@
+Tuesday, June 2, 2015 (continued) 09:00­10:40 09:00­09:25 Session 4B: Machine Learning for NLP (Long Papers) Early Gains Matter: A Case for Preferring Generative over Discriminative Crowdsourcing Models Paul Felt, Kevin Black, Eric Ringger, Kevin Seppi and Robbie Haertel Optimizing Multivariate Performance Measures for Learning Relation Extraction Models Gholamreza Haffari, Ajay Nagesh and Ganesh Ramakrishnan Convolutional Neural Network for Paraphrase Identification Wenpeng Yin and Hinrich Schütze Representation Learning Using Multi-Task Deep Neural Networks for Semantic Classification and Information Retrieval Xiaodong Liu, Jianfeng Gao, Xiaodong He, Li Deng, Kevin Duh and Ye-Yi Wang Session 4C: Phonology, Morphology and Word Segmentation (Long Papers) Inflection Generation as Discriminative String Transduction Garrett Nicolai, Colin Cherry and Grzegorz Kondrak Penalized Expectation Propagation for Graphical Models over Strings Ryan Cotterell and Jason Eisner Joint Generation of Transliterations from Multiple Representations Lei Yao and Grzegorz Kondrak Prosodic boundary information helps unsupervised word segmentation Bogdan Ludusan, Gabriel Synnaeve and Emmanuel Dupoux Break
+
+09:25­09:50
+
+09:50­10:15 10:15­10:40
+
+09:00­10:40 09:00­09:25 09:25­09:50 09:50­10:15 10:15­10:40
+
+10:40­11:15
+
+xli
+
+

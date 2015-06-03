@@ -1,0 +1,34 @@
+s2 s1 Semantic Knowledge Graph w2 w1 w4 Lexical Knowledge Graph w3 w6 s3
+
+ccomp
+
+nsubj
+
+dobj
+
+det
+
+amod
+
+can i have a cheap restaurant
+capability
+w5
+w7
+
+expensiveness locale_by_use
+
+Figure 4: The dependency parsing result on an utterance.
+
+Figure 3: A simplified example of the two knowledge graphs, where a slot candidate si is represented as a node in a semantic knowledge graph and a word wj is represented as a node in a lexical knowledge graph.
+
+the "capability" frame does not convey particular valuable information for SLU. With the trained independent semantic decoders for all slot candidates, adaptation process computes the prominence of slot candidates for ranking and then selects a list of induced slots associated with their corresponding semantic decoders for use in domain-specific dialogue systems, where the detail is described in Section 4. Then with each induced slot si and its corresponding trained semantic decoder Mi , an SLU model can be built to predict whether the semantic slot occurs in the given utterance in a fully unsupervised way. In other words, the SLU model is able to transform the testing utterance into semantic representations without human involvement.
+
+scores, we only use the frequency of each slot candidate as its prominence. First we construct two knowledge graphs, one is a slot-based semantic knowledge graph and another is a word-based lexical knowledge graph, both of which encode the typed dependency relations in their edge weights. We also connect two graphs to model the relations between slot-filler pairs. 4.1 Knowledge Graphs We construct two undirected graphs, semantic and lexical knowledge graphs. Each node in the semantic knowledge graph is a slot candidate si outputted by the frame-semantic parser, and each node in the lexical knowledge graph is a word wj . · Slot-based semantic knowledge graph is built as Gs = Vs , Ess , where Vs = {si } and Ess = {eij | si , sj  Vs }. · Word-based lexical knowledge graph is built as Gw = Vw , Eww , where Vw = {wi } and Eww = {eij | wi , wj  Vw }. With two knowledge graphs, we build the edges between slots and slot-fillers to integrate them as shown in Figure 3. Thus the combined graph can be formulated as G = Vs , Vw , Ess , Eww , Ews , where Ews = {eij | wi  Vw , sj  Vs }. Ess , Eww , and Ews correspond to slot-to-slot relations, wordto-word relations, and word-to-slot relations respectively (Chen and Metze, 2012; Chen and Metze, 2013). 4.2 Edge Weight Estimation Considering the relations in the knowledge graphs, the edge weights for Eww and Ess are measured based on the dependency parsing results. The example utterance "can i have a cheap restaurant" and its dependency parsing result are illustrated in Figure 4. The arrows denote the de-
+
+4
+
+Slot Ranking Model
+
+The purpose of the ranking model is to distinguish between generic semantic concepts and domainspecific concepts that are relevant to an SDS. To induce meaningful slots for the purpose of SDS, we compute the prominence of the slot candidates using a slot ranking model described below. With the semantic parses from SEMAFOR, where each frame is viewed independently, so inter-slot relations are not included, the model ranks the slot candidates by integrating two information: (1) the frequency of each slot candidate in the corpus, since slots with higher frequency may be more important. (2) the relations between slot candidates. Assuming that domain-specific concepts are usually related to each other, globally considering inter-slot relations induces a more coherent slot set. Here for baseline 622
+
+

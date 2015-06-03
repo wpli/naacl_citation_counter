@@ -1,0 +1,22 @@
+Factors surp cumusurp
+
+Durations w4 w6 Rw Rw 4 5 -log P(w4|T3 ) -log P(w6|T5 ) -log P(w4|T3 ) 6 i=5 -log P(wi|Ti-1 )
+
+Table 4: PCFG surprisal factors and their predictions of reading times in example eye-tracking regions. wi represents word i. Ti represents the set of trees that wj can span from w1 to wi . Rwi represents the region from wi to wj (inclusive). 4.1 Surprisal PCFG surprisal (Hale, 2001; Levy, 2008) is a measure of incremental hierarchic syntactic processing. It reflects the information gained by observing a given word in a given context. In PCFG surprisal calculations, context is usually taken to refer to the preceding words in the sentence and their underlying syntactic structure. The PCFG surprisal S (wi ) of a word at position i may be calculated as: S (w i ) =
+t T i - 1
+
+-log P(wi | t)
+
+(1)
+
+where Ti represents the set of syntactic structures that can span from w1 to wi . PCFG surprisal in psycholinguistic models captures the influence of incremental hierarchic context when processing a given word. For space considerations, in Table 4, the summation over Ti-1 is notationally implicit: S (wi ) = -log P(wi | Ti-1 ) 4.2 Evaluation As in the previous section, a baseline model is fit to reading times without a fixed effect for surprisal, then surprisal is added as a fixed effect and significance of the fixed effect is determined using a likelihood ratio test with the baseline. The results (Table 5) show that PCFG surprisal is a significant predictor of both first pass and go-past durations even over a strong baseline including both types of ngram factors. The preceding section showed that applying region accumulation to an n-gram factor improves a model's fit to reading times. Previous work suggests region accumulation might improve the fit of 1600 (2)
+
+syntactic factors to reading times (van Schijndel and Schuler, 2013; van Schijndel et al., 2013b), but the baselines in those studies only included unigram and bigram statistics and did not apply region accumulation to the n-gram models. It does make intuitive sense that region accumulation would help improve the fit of total PCFG surprisal for the same reason accumulating n-grams helps. For an example, see Table 4. A non-cumulative total PCFG surprisal factor w6 (top line) would predict that duration of region Rw 5 depends on T5 (the set of trees that can span from w1 to w5 ), but the probability of generating the prefix of T5 is never fully calculated by this factor. As with cumulative n-grams, cumulative PCFG surprisal of a region can be calculated by simply summing the PCFG surprisal of each word in the region. When tested, however, the present work does not find any improvement from region accumulation of PCFG surprisal when stronger n-gram factors are also included (Table 5, Row 2), suggesting that the improvement in previous studies may have been due to latent n-gram information captured by cumulative PCFG surprisal. This finding is interesting because it suggests non-local hierarchic structure does not significantly influence reading times. The next section explores this hypothesis further by testing the fit of a hierarchic syntactic formalism whose strength lies in modeling long-distance dependencies.
+
+5
+
+Grammar Formalism Comparison
+
+So far, this study has tried to allay previous concerns that models of hierarchic syntax may just be accounting for the sparsity of n-gram statistics (Charniak et al., 2006; Frank and Bod, 2011). This section investigates whether a representation of hierarchic syntax that preserves long-distance dependencies can improve reading time predictions over a hierarchic representation based on the Penn Treebank which discards long-distance dependencies. This evaluation compares total PCFG surprisal as calculated by the original Penn Treebank grammar to total PCFG surprisal calculated by the Nguyen et al. (2012) Generalized Categorial Grammar (GCG). 5.1 GCG A GCG has a category set C , which consists of a set of primitive category types U , typically labeled
+
+

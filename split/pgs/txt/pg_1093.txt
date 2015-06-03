@@ -1,0 +1,63 @@
+author pub. year Ocular +code-switch +orth. var.
+
+Gante 1553
+CER WER
+
+Anunciaci´ on 1565
+CER WER
+
+Sahag´ un 1583
+CER WER
+
+Rinc´ on 1595
+CER WER
+
+Bautista 1600
+CER WER
+
+Macro Average
+WER CER WER
+
+13.7 12.8 13.5
+
+55.9 55.0 55.3
+
+15.7 14.6 14.1
+
+53.6 53.8 51.6
+
+10.8 9.6 8.4
+
+44.3 38.7 34.9
+
+11.6 10.7 9.5
+
+38.4 35.4 31.0
+
+9.7 8.8 7.1
+
+25.7 24.5 18.2
+
+12.3 11.3 10.5
+
+43.6 41.5 38.2
+
+w.p. 56.6 53.5 51.0
+
+Table 2: Experimental results for each book, and average across all books. Columns show Character Error Rate (CER) or Word Error Rate (WER; excluding punctuation). The final column gives the average WER including punctuation (w.p.). The Ocular row is the previous state-of-the-art: Berg-Kirkpatrick et al. (2013). The second row uses our code-switching model, and the third additionally handles orthographic variability. Gan. (1553) Anu. (1565) Sah. (1583) Rin. (1595) Bau. (1600) Table 3: An example line from each test book. incorporating orthographic variability into the training procedure for the component LMs. For our experiments, we built Latin, Nahuatl, and Spanish variability rulebanks by asking language experts to identify spelling anomalies from among several sample pages from Primeros Libros documents, and specify rewrite rules that map modern spellings back to variant spellings; we also drew on data from paleographic textbooks. Example rules can be seen in Table 1. These rules are used to rewrite corpus text before the LMs are trained; for instance, every nth occurrence of en in the Spanish corpus might be rewritten as e ~ . This approach reintroduces historically accurate orthographic variability into the LM. tween Spanish, Latin, and Nahuatl. For each book, a font was trained on ten (untranscribed) pages using unsupervised learning procedure described by BergKirkpatrick et al. (2013). The font was evaluated on a separate set of ten pages, manually transcribed.4
+
+6 Results and Analysis
+Our overall results (Table 2) show improvements on every book in our evaluation, achieving as high as 29% relative word-error (WER) reduction. Replacing Ocular's single mixed-language LM with our unsupervised code-switch model results in immediate improvements. An example of transcription output, including the language-assignments made by the model, can be seen in Figure 2. Further improvements are seen by handling orthographic variation. Figure 3 gives an example of how a single spelling variation can lead to a cascade of transcription errors. Here, the baseline system, confused by the elision of the letter n in the word m~ etira (from mentira, "lie"), transcribed it with an entirely different word (merita, "merit"). When our handling of alternate spellings is employed, the LM has good statistics for character sequences including the character e ~ , and is able to decode the word correctly. There are several explanations for the differences in results among the five evaluation books. First, the two oldest texts, Gante and Anunciaci´ on, use Gothic fonts that are more difficult to read and feature capital letters that are nearly impossible for the model to recognize (see Table 3). This contributes to the high character error rates for those books. Second, the word error rate metric is complicated by the inconsistent use of spaces in Nahuatl writHyperparameters were set to be consistent with BergKirkpatrick et al. (2013).
+4
+
+5
+
+Experiments
+
+We compare to Ocular, the state of the art for historical OCR.3 Since Ocular only supports monolingual English OCR, we added support for alternative alphabets, including diacritics and ligatures, and trained a single mixed-language model on a combined Spanish/Latin/Nahuatl corpus. We evaluate our model on five different books from the Primeros Libros collection, representing a variety of printers, presses, typefaces, and authors (Table 3). Each book features code-switching be3
+
+http://nlp.cs.berkeley.edu/projects/ocular.shtml
+
+1039
+
+

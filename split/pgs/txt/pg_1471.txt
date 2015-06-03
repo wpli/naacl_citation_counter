@@ -1,0 +1,25 @@
+· In line with classical Montague theory (Heim and Kratzer, 1998), our parser is type-driven instead of syntax-driven as in CCG-based efforts (Zettlemoyer and Collins, 2005; Kwiatkowski et al., 2011; Krishnamurthy and Mitchell, 2014) (§2.3). · We introduce parametric polymorphism into natural language semantics (§3), along with proper treatment of subtype polymorphism, and implement Hindley-Milner style type inference (Pierce, 2005, Chap. 10) during parsing (§3.3).1 · We adapt the latent-variable max-violation perceptron training from machine translation (Yu et al., 2013), which is a perfect fit for semantic parsing due to its huge search space (§4).
+
+pattern JJS NN pattern JJS NN
+
+-expression templates, simple types (§2.2) P : (et)(ei)e . P P : ee . P ; P : et . P ; P : ei . P -expression templates, polymorphic types (§3.3) P : ('at)('ai)'a . P P : 'b'c . P
+
+Table 1: POS-based meaning representation templates used in the running example (see Figure 1). The polymorphic types greatly simplifies the representation for common nouns (NN).
+
+2
+
+Type-Driven Incremental Parsing
+
+We start with the simplest meaning representation (MR), untyped lambda calculus, and introduce typing and the incremental parsing algorithm for it. Later in §3, we add subtyping and type polymorphism to enrich the system. 2.1 Meaning Representation with Types The untyped MR for the running example is: Q: What is the capital of the largest state by area? MR: (capital (argmax state size)) Note the binary function argmax(·, ·) is a higher-order function that takes two other functions as input: the first argument is a "domain" function that defines the set to search for, and second argument is an "evaluation" function that returns a integer for an element in that domain. The simply typed lambda calculus (Heim and Kratzer, 1998; Lu and Ng, 2011) augments the system with types, including base types (entities e, truth values t, or numbers i), and function types (e.g., et). So capital is of type ee, state is of type et, and size is of type ei. The argmax function is of type (et)(ei)e.2 The simply typed MR is now written as (capital : ee 2.2 (argmax :(et)(ei)e state : et size : ei))). Incremental Semantic Parsing: An Example Similar to a standard shift-reduce parser, we maintain a stack and a queue. The queue contains words to be
+are three kinds of polymorphisms in programming languages: parametric (e.g., C++ templates), subtyping, and ad-hoc (e.g., operator overloading). See Pierce (2002, Chap. 15) for details. 2 Note that the type notation is always curried, i.e., we represent a binary function as a unary function that returns another unary function. Also the type notation is always right-associative, so (et)((ei)e) is also written as (et)(ei)e.
+1 There
+
+parsed, while the stack contains subexpressions of the final MR, each of which is a valid typed lambda expression. At each step, the parser choose to shift or reduce, but unlike standard shift-reduce parser, there is also a third possible action, skip, skipping a semantically vacuous word (e.g., "the", "of", "is", etc.). For example, the first three words of the example question "What is the ..." are all skipped (steps 1­3 in Figure 1 (left)). The parser then shifts the next word, "capital", from the queue to the stack. But unlike incremental syntactic parsing where the word itself is moved onto the stack, here we need to find a grounded predicate in the GeoQuery domain for the current word. Triggered by the POS tag NN of word "capital", the template P : ee . P is fetched from a predefined MR templates set like Table 1. In its outermost lambda abstraction, variable P needs to be grounded on-the-fly before we push the expression onto the stack. We find a predicate capital : ee in the G EO Q UERY domain applicable to the MR template. After the application, we push the result onto the stack (step 4). Next, words "of the" are skipped (steps 5­6). For the next word "largest", argmax : (et)(ei)e is applied to the MR template triggered by its POS tag JJS in Table 1, and the stack becomes (step 7) capital : ee argmax : (et)(ei)e. At this step we have two expressions on the stack and we could attempt to reduce. But type checking fails because for left reduce, argmax expects an argument (its "domain" function) of type (et) which is different from capital's type (ee), so is the case for right reduce. So we have to shift again. This time for word "state": state : et. The stack becomes: capital : ee 2.3 argmax : (et)(ei)e state : et.
+
+Type-Driven Reduce
+
+At this step we can finally perform a reduce action, since the top two expressions on the stack pass the typechecking for rightward function application (a partial application): argmax expects an (et) argument, which is exactly the type of state. So we conduct a right-reduce, applying argmax on state, which results in (argmax state) : (ei)e
+
+1417
+
+

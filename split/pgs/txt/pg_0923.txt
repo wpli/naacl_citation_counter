@@ -1,0 +1,27 @@
+Metric Max YD Mean YD Total YD Tree height S T C DC CN VP CP CT MLS MLT MLC T/S C/S DC/T VP/T CP/T CN/T C/T CT/T DC/C CP/C CN/C
+
+SD vs controls manual auto * * * * * * *
+
+PNFA vs controls manual auto * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+SD vs PNFA manual auto
+
+* * * * * * *
+
+* * * * * * *
+
+*
+
+*
+
+Table 4: Difference between syntactic complexity metrics for each pair of patient groups. A significant difference ( p < 0.05) is marked with an asterisk. ual and automatic transcripts: participants with SD produce the most sentences, followed by controls, followed by participants with PNFA. In most applications of these syntactic complexity metrics, what matters most is not the absolute value of the metric, but the relative differences between groups. So, we now ask: which features distinguish between clinical groups in the manually segmented transcripts, and do they still distinguish between the groups in the automatically segmented transcripts? Our results for this experiment are reported in Table 4. In the case of SD vs. controls, there are 11 features which are significantly different between the two groups in the manual transcripts. Seven of these features are also significantly different between groups in the automatic transcripts, while an additional three features are significant only in the automatic transcripts. In the PNFA vs. controls case, there are 15 distinguishing features in the manual transcripts, and 14 of those are also significantly different in the automatic transcripts. There are four features which are significant only in the automatic case. Finally, in the case of SD vs. PNFA, there is 869
+
+only one distinguishing feature in the manual transcripts, and none in the automatic transcript. These findings suggest that automatically segmented transcripts can still be useful, even if the complexity metrics have different values from the manual transcripts. Importantly, a comparison of the mean feature values in Table 3 reveals that in 92% of cases, and in every case marked as significant in Table 4 4, the direction of the trend is the same in the manual and automatic transcripts. For example, in the first column of Table 4, maximum Yngve depth is significantly different between SD participants and controls. In both the manual and automatic transcripts, the controls have a greater maximum depth than SD participants. This is true for every metric that is significant in both the manual and automatic transcripts. This indicates that the metrics are not only significantly different, and therefore useful for machine learning classification or some other downstream application, but that they are interpretable in relation to the specific language impairments that we expect to observe in the patient groups.
+
+7
+
+Discussion
+
+We have introduced the issue of sentence segmentation of impaired speech, and tested the effectiveness of standard segmentation methods on PPA speech samples. We found that, as expected, performance was best on prepared speech from broadcast news, then on healthy controls, and worst on speech samples from PPA patients. However, the results on the PPA data are promising, and suggest that similar methods could be effective for impaired speech. Future work will look at adapting the standard algorithms to improve performance in the impaired case. This would include an evaluation of the forced alignment on impaired speech data, as well as the exploration of new features for the boundary classification. One limitation of this study is the use of manually transcribed data with capitalization and punctuation removed to simulate perfect ASR data. We expect that real ASR data will contain recognition errors, and it is not clear how these errors will affect the segmentation process. As well, our PPA data set is relatively small from a machine learning perspec-
+
+

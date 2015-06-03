@@ -1,0 +1,33 @@
+Type Baseline LexSiS CASSA Baseline LexSiS CASSA
+
+Freq. [H IGH ] [H IGH ] [H IGH ] [L OW ] [L OW ] [L OW ]
+
+Meaning (%) 40.00 41.67 73.33 58.33 43.33 75.00
+
+Simp. (%) 58.33 36.67 70.00 61.67 35.00 71.67
+
+Considering the maximum possible coverage of the baseline and assuming that all non covered sentences contain complex words (most probable case), the simplicity performance of the baseline drops to 53.1% while for ours would be 54.2% (that is, a 2.1% improvement). This should improve if any of the resources used grow.
+
+Table 2: Average percentage scores by frequency band. Case Comp. words Baseline (abs.) Baseline (rel.) Comp. contexts CASSA (abs.) CASSA (rel.) k = 10 27.16 24.07 88.62 27.95 2.67 9.55 k=5 38.80 35.32 91.03 40.03 4.14 10.34 k=2 54.24 50.14 92.04 55.84 6.44 11.53 No k 100.00 84.43 84.43 100.00 12.14 12.14
+
+6
+
+Conclusions and Future Work
+
+Table 3: Coverage of the baseline and our method.
+
+method. We included the books that are compulsory readings for secondary and high school in Spain. This corpus is composed by 16,495,885 tokens and 5,886,366 lexical words (without stop words, proper names and punctuation marks).4 The coverage of the Spanish Open Thesaurus in our corpus is 88.34%.5 This is the maximum that any simplification algorithm that uses this resource can obtain. In Table 3 we present the coverage of the baseline and our method depending on the threshold k used to decide what a complex word is and hence a complex content, including the absolute percentages as well as the relative percentages with respect to the complex words or contexts. For smaller k , the coverage of the baseline increases significantly being the maximum possible 84.43% when all words are considered complex (more than three times the default coverage). On the other hand, our method does not increase much the coverage as that is limited by the context coverage reaching a maximum of 12.14%, only 27% more than the default case (k = 10). This maximum, compared with the baseline is a bit more than 14% of the cases, implying that our method is equal to the baseline around 85% of the time.
+All the book titles used for this corpus are given in the Appendix of Rello (2014). 5 Note that this only applies to the corpus used in the coverage, not for the evaluation dataset.
+4
+
+Our method improves upon LexSiS and the baseline for all the measures. As we mentioned earlier, even beating the baseline is very hard and we improve upon both other methods by more than 50% in meaning preservation and is 11.8% better than the baseline, the second best, for simplicity. Compared to the results for English of Biran et al. (2011) using WordNet, our method has better simplicity scores for low frequency words as well as is in meaning preservation, although they are not directly comparable as different resources are used. Although Open Thesaurus is available in nine languages and Google Books Ngrams in seven, there are only two languages in both sets: Spanish and German. Hence our method should be easily extended to German. Other languages are also possible with language resources, in particular English.
+
+Acknowledgments
+We thank Diego Saez-Trumper, Eduardo Graells and Miguel Ballesteros for their suggestions in the implementation of CASSA.
+
+References
+S. M. Alu´ isio and C. Gasperin. 2010. Fostering digital inclusion and accessibility: the PorSimples project for simplification of Portuguese texts. In Proc. NAACL HLT '10 Workshop YIWCALA '10, pages 46­ 53, Stroudsburg, PA, USA. S. D. Baker and J. O. Lamping. 2011. Identifying a synonym with n-gram agreement for a query phrase. US Patent 7,925,498. O. Biran, S. Brody, and N. Elhadad. 2011. Putting it simply: a context-aware approach to lexical simplification. In Proc. ACL'11, pages 496­501, Portland, Oregon, USA. S. Bott, L. Rello, B. Drndarevic, and H. Saggion. 2012. Can Spanish be simpler? LexSiS: Lexical simplification for Spanish. In Proc. Coling '12, Mumbay, India.
+
+1384
+
+

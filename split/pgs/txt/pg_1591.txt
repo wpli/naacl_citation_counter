@@ -1,0 +1,21 @@
+A Corpus and Model Integrating Multiword Expressions and Supersenses
+Nathan Schneider School of Informatics University of Edinburgh Edinburgh, Scotland, UK
+nschneid@inf.ed.ac.uk
+
+Noah A. Smith School of Computer Science Carnegie Mellon University Pittsburgh, Pennsylvania, USA
+nasmith@cs.cmu.edu
+
+Abstract
+This paper introduces a task of identifying and semantically classifying lexical expressions in running text. We investigate the online reviews genre, adding semantic supersense annotations to a 55,000 word English corpus that was previously annotated for multiword expressions. The noun and verb supersenses apply to full lexical expressions, whether single- or multiword. We then present a sequence tagging model that jointly infers lexical expressions and their supersenses. Results show that even with our relatively small training corpus in a noisy domain, the joint task can be performed to attain 70% class labeling F1 .
+
+sentences is dense (describing a large proportion of tokens), in contrast to annotations that only describe named entities. Because most supersense tagging studies have worked with data originally annotated for finegrained WordNet senses, then automatically mapped to supersenses, the resulting systems have been tied to the lexical coverage of WordNet. Schneider et al. (2012) and Johannsen et al. (2014) overcame this limitation in part by annotating supersenses directly in text; thus, nouns and verbs not in WordNet were not neglected. However, the issue of which units ought to receive supersenses has not been addressed satisfactorily. We argue that the semantically holistic nature of multiword expressions (MWEs) including idioms, light verb constructions, verb-particle constructions, and many compounds (Baldwin and Kim, 2010) means that they should be considered as units for manual and automatic supersense tagging. Below, we motivate the need for an integrated representation for broad-coverage lexical semantic analysis that identifies MWEs and labels single- and multiword noun and verb expressions with supersenses (§2). By annotating supersenses directly on sentences with existing comprehensive MWE annotations, we circumvent WordNet's spotty coverage of many kinds of MWEs (§3). Then we demonstrate that the two kinds of information are readily combined in a discriminative sequence tagging model (§4). Notably, our analyzer handles gappy expressions that are ignored by existing supersense taggers, and it marks miscellaneous MWEs even though they do not receive a noun or verb supersense. Our annotations of the R EVIEWS section of the English Web Treebank (Bies et al., 2012), which
+
+1
+
+Introduction
+
+The central challenge in computational lexical semantics for text corpora is to develop and apply abstractions that characterize word meanings beyond what can be derived superficially from the orthography. Such abstractions can be found in type-level human-curated lexical resources such as WordNet (Fellbaum, 1998), but such intricate resources are expensive to build and difficult to annotate with at the token level, hindering their applicability beyond a narrow selection of languages and domains. A more portable and scalable--yet still linguisticallygrounded--way to represent lexical meanings is with coarse-grained semantic classes. Here we build on prior work with an inventory of semantic classes (for nouns and verbs) known as supersenses. The 41 supersenses resemble the types used for named entities (PERSON, LOCATION, etc.), but are more general, with semantic categories relevant to common nouns and verbs as well. As a result, their application to 1537
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1537­1547, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

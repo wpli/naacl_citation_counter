@@ -1,0 +1,30 @@
+d 10 3 3 3 3 d 10 3 3 3 3 system
+
+system baseline baseline Genzel (2010) Jehl et al (2014) this work
+
+speed ratio 1x 3.2x 2.7x 2.3x 2.7x
+
+eng-jpn in mixed 54.5 ±0.2 26.2 ±0.2 50.9 ±0.2 25.0 ±0.2 54.0 ±0.1 26.4 ±0.2 55.0 ±0.1 26.9 ±0.2 55.6 ±0.2 27.2 ±0.1
+
+eng-kor in mixed 33.5 ±0.3 9.7 ±0.2 28.7 ±0.1 8.2 ±0.1 30.5 ±0.2 9.8 ±0.2 33.1 ±0.1 10.4 ±0.1 33.4 ±0.1 10.6 ±0.2
+
+baseline baseline Genzel (2010) Jehl et al (2014) this work
+
+eng-chi in mixed 46.9 ±0.5 18.4 ±0.6 44.8 ±0.7 18.3 ±0.4 45.4 ±0.2 17.9 ±0.2 45.8 ±0.1 18.5 ±0.3 46.5 ±0.4 19.2 ±0.2
+
+eng-ara eng-hin in mixed mixed wmt14 25.1 ±0.1 22.7 ±0.2 10.1 ±0.3 11.7 ±0.1 24.6 ±0.1 21.9 ±0.2 8.3 ±0.2 9.3 ±0.3 24.8 ±0.1 21.6 ±0.3 9.6 ±0.2 11.4 ±0.3 25.1 ±0.2 22.4 ±0.2 10.0 ±0.1 12.7 ±0.3 25.5 ±0.2 22.6 ±0.1 10.6 ±0.1 12.6 ±0.3 best WMT14 constrained system 11.1
+
+Table 1: Translation performance for various language pairs using no preordering (baseline), and three alternative preordering systems. Average test BLEU score and standard deviation across 3 independent tuning runs. Speed ratio is calculated with respect to the speed of the slower baseline that uses a d = 10. Stack size is 1000. For eng-jpn and eng-chi, character-based BLEU is used.
+
+with preordering we only report d = 3, as increasing d does not improve performance. As shown, our preorderer obtains the best BLEU scores for all reported languages and domains, proving that the neural network is modeling the dependency tree node-swapping phenomenon more accurately, and that the reductions in crossing score reported in the previous section have a positive impact in the final translation performance. The bottom right-most column reports results on the WMT 2014 English-to-Hindi task. Our system achieves better results than the best score reported for this task4 . In this case, the two logistic regression preorderers perform similarly, as standard deviation is higher, possibly due to the small size of the dev set. 3.4 Decoding Speed
+
+The main purpose of preordering is to find a better translation performance in fast decoding conditions. In other words, by preordering the text we expect to be able to decode with less distortion or phrase reordering, resulting in faster decoding. This is shown in Table 1, which reports the speed ratio between each system and the speed of the top-most baseline,
+4
+
+as measured in English-to-Japanese in-domain5 . We find that decoding with a d = 3 is about 3 times faster than for d = 10. We now take this further by reducing the stack size from 1000 to 50; see results in Table 2. As expected, all systems accelerate with respect to our initial baseline. However, this usually comes at a cost in BLEU with respect to using a wider beam, unless preordering is used. In fact, the logistic regression preorderers achieve the same performance while decoding over 60 times faster than the baseline. Interestingly, the NN-based preorderer turns out to be slightly faster than any of the other preordering approaches. This is because there is no need to explicitly create thousands of feature combinations for each node pair; simply performing the forward matrix multiplications given the input sequence of 20 features is more efficient. Similar observations have been noted recently in the context of dependency parsing with NNs (Chen and Manning, 2014). Note also that, on average, only 25 pair-wise probabilities are queried to the logistic regression model per source sentence. Overall, we incorporate the benefits of neural networks for preordering at no compu5 Similar speed ratios were observed for other language pairs (not reported here for space)
+
+Details at matrix.statmt.org/matrix/systems list/1749
+
+1015
+
+

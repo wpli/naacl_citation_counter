@@ -1,0 +1,18 @@
+Accurate Evaluation of Segment-level Machine Translation Metrics
+Yvette Graham Nitika Mathur Timothy Baldwin  Department of Computing and Information Systems, The University of Melbourne  ADAPT Research Centre, Trinity College Dublin
+ygraham@scss.tcd.ie, nmathur@student.unimelb.edu.au, tb@ldwin.net
+
+Abstract
+Evaluation of segment-level machine translation metrics is currently hampered by: (1) low inter-annotator agreement levels in human assessments; (2) lack of an effective mechanism for evaluation of translations of equal quality; and (3) lack of methods of significance testing improvements over a baseline. In this paper, we provide solutions to each of these challenges and outline a new human evaluation methodology aimed specifically at assessment of segment-level metrics. We replicate the human evaluation component of W MT-13 and reveal that the current state-of-the-art performance of segment-level metrics is better than previously believed. Three segment-level metrics -- METEOR , NLEPOR and SENT BLEUMOSES -- are found to correlate with human assessment at a level not significantly outperformed by any other metric in both the individual language pair assessment for Spanish-toEnglish and the aggregated set of 9 language pairs.
+
+are notoriously inconsistent. For example, the main venue for evaluation of metrics, the annual Workshop on Statistical Machine Translation (WMT), reports disturbingly low inter-annotator agreement levels and highlights the need for better human assessment of MT. W MT-13, for example, report Kappa coefficients ranging from 0.075 to 0.324 for assessors from crowd-sourcing services, only increasing to between 0.315 and 0.457 for MT researchers (Bojar et al., 2013a). For evaluation of metrics that operate at the system or document-level such as BLEU , inconsistency in individual human judgments can, to some degree, be overcome by aggregation of individual human assessments over the segments within a document. However, for evaluation of segment-level metrics, there is no escaping the need to boost the consistency of human annotation of individual segments. This motivates our analysis of current methods of human evaluation of segment-level metrics, and proposal of an alternative annotation mechanism. We examine the accuracy of segment scores collected with our proposed method by replicating components of the W MT-13 human evaluation (Bojar et al., 2013b), with the sole aim of optimizing agreement in segment scores to provide an effective gold standard for evaluating segment-level metrics. Our method also supports the use of significance testing of segment-level metrics, and tests applied to the W MT-13 metrics over nine language pairs reveal for the first time which segment-level metrics outperform others. We have made available code for acquiring accurate segment-level MT human evaluations from the crowd, in addition to significance
+
+1
+
+Introduction
+
+Automatic segment-level machine translation (MT) metrics have the potential to greatly advance MT by providing more fine-grained error analysis, increasing efficiency of system tuning methods and leveraging techniques for system hybridization. However, a major obstacle currently hindering the development of segment-level metrics is their evaluation. Human assessment is the gold standard against which metrics must be evaluated, but when it comes to the task of evaluating translation quality, human annotators 1183
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1183­1191, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

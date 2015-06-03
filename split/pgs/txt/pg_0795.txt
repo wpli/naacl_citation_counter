@@ -1,0 +1,37 @@
+          
+
+  
+
+
+
+
+
+  
+
+          
+
+     
+
+
+
+Figure 1: F1 averaged over all 3 test sets as we add Fin10 training data to CoNLL.
+
+Figure 2: F1 averaged over all 3 test sets as we increase the percentage of tweets used to build representations.
+
+domain data hurts NER performance. Focusing on the lines Fin10+Reps and CoNLL+Fin10+Reps, we see the same problem. In the presence of word representations, unweighted CoNLL data hurts performance when added to a Fin10 system. Fortunately, the inclusion of importance weights (+Weights) reverses this trend, giving us our best result on each test. We saw no consistent improvement from importance weights on the representation-free system. To better understand the benefits of importance weights, Table 6 reports detailed scores for the Fro14 test set under the Base+Reps feature set, as we vary training scenarios. Results on the other test sets are similar. The Fin10 system achieves high precision but low recall, while the CoNLL+Fin10 does the opposite. This is because the CoNLL data is much more entity-dense than the Twitter data, which biases systems trained on CoNLL to return too many entities. By down-weighting the CoNLL data, we reduce this bias and gain 6.8 points of precision at the cost of only 2.6 points of recall. Figure 1 gives learning curves as we add Fin10 data to CoNLL across several feature sets. There is a steady improvement for all systems as the in-domain data grows, and importance weighting increases the impact of in-domain data even at very low quantities. Though the curves shows no sign of flattening out, note that the x-axis is log-scaled. We have access to roughly 100 million tweets for unsupervised representation learning. Figure 2 provides a learning curve for our Reps+Weights system as we increase the percentage of unlabeled tweets used to train both Brown clusters and word vectors from 1.5% to 100% of that data, doubling the 741
+
+Test Set Fin10Dev Rit11 Fro14
+
+PER 71.3 70.8 69.4
+
+LOC 72.4 61.9 70.2
+
+ORG 48.8 36.9 42.6
+
+Table 7: F1 for our All Data+Reps+Weights system, organized by entity class.
+
+amount with each step. With only 1.5 million tweets, average performance is already very good, and we can see that the benefits of scale are starting to level off after we clear 12.5 million. Table 7 reports our best system's performance by entity class. For all three test sets, ORG is the most difficult. ORG is perhaps the broadest entity class, but we suspect it is also the most likely to be annotated inconsistently, as it is rife with subtle distinctions: bands (ORG) versus musicians (PER); companies (ORG) versus their products (O); and teams (ORG) versus their home cities (LOC). During an inspection of 25 incorrect ORG predictions by our best system, drawn from a test on Fin10Dev, we found 10 cases where the gold standard was questionable. Two of these incorrectly placed "the" inside a chunk, ("[the Mariners]" is wrong; "the [Mariners]" is right), while the remaining 8 involved company-product distinctions, which are tricky even for human annotators. The NER task is not always as intuitive as we would like, and organizations tend to highlight these difficulties. 5.2 Comparison with Linguistic Resources
+
+Thus far, we have restricted ourselves to a setting without access to linguistic resources, but for some
+
+

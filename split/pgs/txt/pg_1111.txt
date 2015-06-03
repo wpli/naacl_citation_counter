@@ -1,0 +1,56 @@
+API. 1 NYT comments come with information on whether a comment is an editor's-pick. The statistics on the four datasets are displayed in Table 1.2
+MH370 Ukraine Israel-Gaza NSA Time Span # Articles # Comments 03/08 - 06/30 955 406,646 03/08 - 06/30 3,779 646,961 07/20 - 09/30 909 322,244 03/23 - 06/30 145 60,481
+
+Table 1: Statistics on the four event datasets. We extract parse trees, dependency trees, and coreference resolution results of articles and comments with Stanford CoreNLP (Manning et al., 2014). Sentences in articles are labeled with timestamps using SUTime (Chang and Manning, 2012). We also collect all articles with comments from NYT in 2013 (henceforth NYT2013) to form a training set for learning importance scoring functions on articles sentences and comments (see Section 3). NYT2013 contains 3, 863 articles and 833, 032 comments.
+
+Each comment is assigned a gold-standard value of 1.0 if it is an editor's pick, or 0.0 otherwise. The SENTENCE and COMMENT scorers rely on two classifiers, each designed to handle the special characteristics of news and user comments, respectively; and a graph-based regularizing constraint that encourages similarity between selected sentences and comments. We describe each component below. Article SENTENCE Importance. Each sentence xs in a news article is represented as a k -dimensional feature vector xs  Rk , with a gold-standard label ys . We denote the training set as a feature matrix ~ s , with a label vector Y ~ s . To produce the SEN X TENCE scoring function fs (xs ) = xs · ws , we use ridge regression to learn a vector ws that minimizes 2 ~ s ws - Y ~ s ||2 ||X 2 + s · ||ws ||2 . Features used in the model are listed in Table 2. We also impose the following position-based regularizing constraint to encode the fact that the first sentence in a news article usually conveys the most essential information: , where xsdi ,j is the j -th sentence in document di . Term (xsdi ,0 - xsdi ,j ) · ws measures the difference in predicted scores between the first sentence and any other sentence. This value is expected be close to the true difference. We further construct ~ s to contain all difference vectors (xsd ,0 - xsd ,j ), X i i ~ s as label difference vector. The objective with Y function to minimize becomes
+Js (ws ) = 2 ~ s ws - Y ~ s ||2 ~ ~ 2 ||X 2 + s · ||Xs ws - Ys ||2 + s · ||ws ||2
+di ysdi ,j )||2 2
+
+s ·
+
+3
+
+Joint Learning for Importance Scoring
+
+xsd
+
+i
+
+,j ,j =0
+
+||(xsdi ,0 - xsdi ,j ) · ws - (ysdi ,0 -
+
+We first introduce a joint learning method that uses graph-based regularization to simultaneously learn two functions -- a SENTENCE scorer and a COM MENT scorer -- that predict the importance of including an individual news article sentence or a particular user comment in the timeline. We train the model on the aforementioned NYT2013 dataset, where 20% of the articles and their comments are reserved for parameter tuning. Formally, the training data consists of a set of ar|D |-1 ticles D = {di }i =0 . Each article di contains a |sdi |-1 set of sentences xsdi = {xsdi ,j }j =0 and a set of
+di associated comments xcdi = {xcdi ,k }k=0 , where |sdi | and |cdi | are the numbers of sentences and comments for di . For simplicity, we use xs or xc to denote a sentence or a comment wherever there is no ambiguity. In addition, each article has a human-written abstract. We use the ROUGE-2 (Lin and Hovy, 2003) score of each sentence computed against the associated abstract as its gold-standard importance score.
+
+(1)
+
+|c
+
+|-1
+
+User COMMENT Importance. Similarly, each comment xc is represented as an l-dimensional feature vector xc  Rl , with label yc . Comments in the ~c training data are denoted with a feature matrix X ~ c . Likewise, we learn fc (xc ) = with a label vector Y 2 ~ c wc - Y ~ c ||2 xc · wc by minimizing ||X 2 + c · ||wc ||2 . Features are listed in Table 3. We apply a pairwise preference-based regularizing constraint (Joachims, 2002) to incorporate a bias toward editor's picks:
+c ·
+di
+
+BBC comment volume is low, so we do not collect it. The datasets are available at http://www.cs. cornell.edu/~luwang/data.html.
+2
+
+1
+
+itor's picks from regular comments. We further ~ c to contain all the pairwise differences construct X
+
+1||2 2 , where Edi are the editor's picks for di . Term (xcdi ,j - xcdi ,k ) · wc enforces the separation of ed-
+
+x cd
+
+i
+
+/ E di ,j Edi ,xcd ,k  i
+
+||(xcdi ,j - xcdi ,k ) · wc -
+
+1057
+
+

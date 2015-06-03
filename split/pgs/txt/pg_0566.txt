@@ -1,0 +1,25 @@
+Creative Image Captioning < Good > -Hood under a full moon (*) -Mirror, mirror on the lake < Bad > -Falling water(*) -Can you see the dogs < Good >
+
+Creative Visual Paraphrasing < Bad > -Bee on orange flowers(*) -long haired girl(*) -When the flower looms, -Diamonds are a girl's the bees come uninvited best friend -Lights in cave(*) -There is a light that never goes out -Sky on the way home(*) -Go home, sky, you're drunk -Young roe deer(*) -The tree that looks like a deer -The flight of the crane(*) -That's a crane
+
+-Sky on the way home(*) -Red sky at night, Shepherd's delight -Sail on by (*) -Row, row, row your boat gently down the stream
+
+-City of lights (*) -Great balls of fire
+
+-Red Bean Pastries (*) -When life gives you lemons
+
+Figure 5: Examples of creative captioning and creative visual paraphrasing. The left column shows good examples
+
+in blue, and the right column shows bad examples in red. The captions marked with * are the original captions of the corresponding query images.
+
+sociation structure of our dataset is analogous to that of ImageNet (Deng et al., 2009). Unlike ImageNet that is built for nouns (physical objects) listed under WordNet (Miller, 1995), our corpus is built for expressive phrases and full sentences and constructed without human curation. Our corpus has several unique properties to complement existing corpora. As explored in a very recent work of (Gong et al., 2014), we expect that it is possible to combine crowd-sourced and web-harvested datasets and achieve the best of both worlds. Image captioning: Our work contributes to the increasing body of research on retrieval-based image captioning (Ordonez et al., 2011; Hodosh et al., 2013; Hodosh and Hockenmaier, 2013; Socher et al., 2014), by providing a new large-scale corpus with unique association structure between images and captions, by proposing an algorithm that exploits the structure, and by exploring two new dimensions: (i) visually situated paraphrasing (and its utility for retrieval-based image captioning), and (ii) creative image captioning. Paraphrasing: Most previous studies in paraphrasing have focused exclusively on text, and the primary goal has been learning semantic equivalence of phrases that would be true out of context (e.g., (Barzilay and McKeown, 2001; Pang et al., 2003; Dolan et al., 2004; Ganitkevitch et al., 2013)), rather than targeting situated or pragmatic equivalence given a context. Emerging efforts began exploring paraphrases that are situated in video content (Chen and Dolan, 2011), news events (Zhang and Weld, 2013), and knowledge base (Berant and Liang, 2014). Our work is the first to introduce vi512
+
+sually situated paraphrasing in which the task is to find paraphrases that are conditioned on both the input text as well as the visual context. (Chen and Dolan, 2011) collected situated paraphrases only through crowd sourcing, while we also explore automatic collection, and further test the quality of automatic paraphrases by using the learned paraphrases in an extrinsic evaluation setting. Figurative language: There has been substantial work for detecting and interpreting figurative language (Shutova, 2010; Li et al., 2013; Kuznetsova et al., 2013a; Tsvetkov et al., 2014), while relatively less work on generating creative or figurative language (Veale, 2011; Ozbal and Strapparava, 2012). We probe data-driven approaches to creative language generation in the context of image captioning.
+
+10 Conclusion
+To conclude, we have provided insights into making a better use of multimodal web data in the wild, resulting in a large-scale corpus, Deja ImageCaptions, with several unique properties to complement datasets with crowdsourced captions. To validate the usefulness of the corpus, we proposed new image captioning algorithms using the associative structure, which we extended to several related tasks ranging from visually situated paraphrasing to enhanced image captioning. In the process we have also explored several new tasks: visually situated paraphrasing, creative image captioning, and creative caption paraphrasing.
+
+Acknowledgement The research is supported in
+part by NSF Award IIS 1447549 and IIS 1408287.
+
+

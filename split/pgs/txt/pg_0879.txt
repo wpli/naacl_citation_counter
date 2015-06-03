@@ -1,0 +1,39 @@
+Normalisation Class Factored Class Factored Tree Factored
+
+Clustering Brown clustering Frequency binning Huffman encoding
+
+BLEU 31.55 31.07 30.37
+
+Training SGD NCE
+
+Perplexity 116.596 115.119
+
+BLEU 31.75 31.55
+
+Duration 9.1 days 1.2 days
+
+Table 7: Qualitative analysis of clustering strategies on fren data.
+
+Table 9: A comparison between stochastic gradient descent (SGD) and noise contrastive estimation (NCE) for class factored models on the fren data.
+
+Model KenLM Unnormalised NLM Class Factored NLM Tree Factored NLM
+
+Average decoding time 1.64 s 3.31 s 42.22 s 18.82 s
+
+Model Unnormalised NCE Class Factored NCE Tree Factored SGD
+
+Training time 1.23 days 1.20 days 1.4 days
+
+Table 10: Training times for neural models on fren data.
+
+Table 8: Average decoding time per sentence for the proposed normalisation schemes.
+
+5
+
+Training
+
+Table 7 compares two popular techniques for obtaining word classes: Brown clustering (Brown et al., 1992; Liang, 2005) and frequency binning (Mikolov et al., 2011b). From these results, we learn that the clustering technique employed to partition the vocabulary into classes can have a huge impact on translation quality and that Brown clustering is clearly superior to frequency binning. Another thing to note is that frequency binning partitions the vocabulary in a similar way to Huffman encoding. This observation implies that the BLEU scores we report for tree factored models are not optimal, but we can get an insight on how much we expect to lose in general by imposing a tree structure over the vocabulary (on the fren setup, we lose roughly 0.7 BLEU points). Unfortunately, we are not able to report BLEU scores for factored models using Brown trees because the time complexity for constructing such trees is O(|V |3 ). We report the average time needed to decode a sentence for each of the models described in this paper in Table 8. We note that factored models are slow compared to unnormalised models. One option for speeding up factored models is using a GPU to perform the vector-matrix operations. However, GPU integration is architecture specific and thus against our goal of making our language modelling toolkit usable by everyone. 825
+
+In this section, we are concerned with finding scalable training algorithms for neural language models. We investigate noise contrastive estimation as a much more efficient alternative to standard maximum likelihood training via stochastic gradient descent. Class factored models enable us to conduct this investigation at a much larger scale than previous results (e.g. the WSJ corpus used by Mnih and Teh (2012) has slightly over 1M tokens), thereby gaining useful insights on how this method truly performs at scale. (In our experiments, we use a 2B words corpus and a 100k vocabulary.) Table 9 summarizes our findings. We obtain a slightly better BLEU score with stochastic gradient descent, but this is likely to be just noise from tuning the translation system with MERT. On the other hand, noise contrastive training reduces training time by a factor of 7. Table 10 reviews the neural models described in this paper and shows the time needed to train each one. We note that noise contrastive training requires roughly the same amount of time regardless of the structure of the model. Also, we note that this method is at least as fast as maximum likelihood training even when the latter is applied to tree factored models. Since tree factored models have lower quality, take longer to query and do not yield any substantial benefits at training time when compared to unnormalised models, we conclude they represent a suboptimal language modelling choice
+
+

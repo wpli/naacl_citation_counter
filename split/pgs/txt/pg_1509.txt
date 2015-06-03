@@ -1,0 +1,23 @@
+set, and trained classifiers using different amounts of training data. Figure 1 shows the results for classifiers using only the Word Features, Word and Local Context Features, and all features. The classifier with Web Context Features achieved an F score > 70% using only 10 training texts, and approached its best performance with just 100 training texts.
+
+100 80 F1 score 60 40 20 0 0
+Word Word+Local Word+Local+Web
+
+third set of Sentential Features are for the Question and Other categories to recognize sentences that do not describe use of the medication on a patient, but ask questions, request guidance, describe hypothetical scenarios, etc. The sentential features consist of clause initial part-of-speech (POS) and lemma bigrams; whether the sentence ends with a question mark; whether the word "question" occurs in the same NP as the medication; whether the sentence contains the POS sequence <MD PRP>5 ; and whether the medication is separated by a comma from the ending question mark (for lists). Semantic Tagging. We hypothesized that identifying semantic concepts might be beneficial. For example, the presence of an ANIMAL term suggests a patient, and a SYMPTOM term may indicate the reason for a prescription or an effect of medication use. First, we used WordNet (Miller, 1995) and identified synsets for 4 semantic classes: ANIMAL, DRUG, DISEASE / SYMPTOM , and HUMAN . We assigned any noun phrase with a head in these synsets to the corresponding semantic type. Next, we used a bootstrapping method (Huang and Riloff, 2010) to build domain-specific semantic taggers (SemTaggers) for the same four semantic classes as well as TEST, TREATMENT and OTHER . We used 10 seed words6 for each category and 10,000 unlabeled veterinary forum texts for bootstrapping. Finally, we created Semantic Features for our medication use classifier. Each noun phrase tagged with a semantic class was replaced by a semantic type. Then we constructed features from pairs of adjacent terms in a context window of size eight (+/-4) around each medication mention. For example, the word sequence "for a Boston terrier with diabetes" would be transformed into "for ANIMAL with DISSYM" and the features for this context would be: <for ANIMAL>, <ANIMAL with>, and <with DISSYM>. 5.1 Medication Use Categorization Results Table 2 shows the results for medication use classification, applied to the mentions identified by our medication detector (from Section 4). The N-gram
+For question phrases such as "would he". We used the same seeds as (Huang and Riloff, 2010). However we added one semantic class, TREATMENT, so for this category we manually identified the 10 most frequent words in the unannotated texts that describe treatments.
+6 5
+
+50 100 150 200 250 300 Number of training documents
+
+Figure 1: Learning curves with different feature sets
+
+5
+
+Medication Use Categorization
+
+We tackled this problem by designing a supervised classifier with linguistic features, and incorporated a semantic tagger trained by bootstrapping on a large collection of veterinary text. We also used a balanced self-training method on unannotated veterinary texts to further improve performance. First, we created a one-vs-the-rest binary SVM classifier for each category using scikit-learn (Pedregosa et al., 2011).4 If an instance is labeled with multiple categories, we select the most confident one using the distance from the hyperplane. We designed three sets of features. N-gram Features represent a context window of size eight (+/-4) around the medication mention. We define features for lexical unigrams, lexical bigrams, lemma unigrams, and lemma bigrams. Syntactic Features capture verb phrases that participate in a dependency relation with the medication, using the Stanford parser. The
+4 Note that for medication detection we used SVMlin, but we switched to scikit-learn for the medication categorization because it supported additional types of classifiers that we wanted to try. Ultimately, however, the SVM performed best. We confirmed that SVM results from both toolkits were very similar.
+
+1455
+
+

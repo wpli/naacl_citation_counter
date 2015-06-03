@@ -1,0 +1,47 @@
+I1
+X(2) X(1) N I1 V saw2 D X(4) N
+
+saw2
+X(2) N I1 V saw2
+
+the3
+
+man4
+X(2)
+
+X(2) X(4) D N
+
+X(2) N V D
+
+X(4) N
+
+the3 man4
+
+I1 saw2 the3 man4
+
+where s is a scoring function that factors over lexicalized tree productions. This problem can be solved by extending the CKY algorithm to propagate head information. The algorithm can be compactly defined by the productions in Figure 3 (left). For example, one type of production is of the form ( i, k , m, 1 ) ( k + 1, j , h, 2 ) ( i, j , h, A)
+  G and spans i  k < j . for all rules A  1 2 This particular production indicates that rule A   was applied at a vertex covering i, j to pro1 2 duce two vertices covering i, k and k + 1, j , and that the new head is index h has dependent index m. We say this production "completes" word m since it can no longer be the head of a larger span. Running the algorithm consists of bottom-up dynamic programming over these productions. However, applying this version of the CKY algorithm requires O(n5 |G|) time (linear in the number of productions), which is not practical to run without heavy pruning. Most lexicalized parsers therefore make further assumptions on the scoring function which can lead to asymptotically faster algorithms (Eisner and Satta, 1999). Instead, we consider the same objective, but constrain the c-parses to be consistent with a given dparse, d. By "consistent," we mean that the cparse will be converted by the head rules to this exact d-parse.4 Define the set of consistent c-parses as Y (x, d) and the constrained search problem as arg maxyY (x,d) s(y ; x, d). Figure 3 (right) shows the algorithm for this new problem. The algorithm has several nice properties. All rules now must select words h and m that are consistent with the dependency parse (i.e., there is an arc (h, m)) so these variables are no longer free. Furthermore, since we have the full d-parse, we can precompute the dependency span of each word m , m . By our definition of consistency, this gives us the c-parse span of m before it is completed, and fixes two more free variables. Finally the head item must have its alternative side index match
+
+the3 man4
+
+Figure 2: [Adapted from (Collins et al., 1999).] A d-parse (left) and several c-parses consistent with it (right). Our goal is to select the best parse from this set.
+
+3
+
+Parsing Dependencies
+
+Now we consider flipping this setup. There has been significant progress in developing efficient directto-dependency parsers. These d-parsers are trained only on dependency annotations and do not require full phrase-structure trees.3 Some prefer this setup, since it allows easy selection of the specific dependencies of interest in a downstream task (e.g., information extraction), and perhaps even training specifically for those dependencies. Other applications make use of phrase structures, so c-parsers enjoy wide use as well. With these latter applications in mind, we consider the problem of converting a fixed d-parse into a c-parse, with the intent of using off-the-shelf d-parsers for constructing phrase-structure parses. Since this problem is more challenging than its inverse, we use a structured prediction setup: we learn a function to score possible c-parse conversions, and then generate the highest-scoring c-parse given a dparse. A toy example of the problem is shown in Figure 2. 3.1 Parsing Algorithm
+
+Consider the classical problem of predicting the best c-parse under a CFG with head rules, known as lexicalized context-free parsing. Assume that we are given a binary CFG defining a set of valid c-parses Y (x). The parsing problem is to find the highestscoring parse in this set, i.e. arg maxyY (x) s(y ; x)
+For English these parsers are still often trained on trees converted from c-parses; however, for other languages, dependency-only treebanks of directly-annotated d-parses are common.
+3
+
+3
+
+An alternative, soft version of consistency, might enforce that the c-parse is close to the d-parse. While this allows the algorithm to potentially correct d-parse mistakes, it is much more computationally expensive.
+
+4
+
+790
+
+

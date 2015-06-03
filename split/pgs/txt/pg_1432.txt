@@ -1,0 +1,37 @@
+ERE (|L|=18) Correct FCM Incorrect
+
+Correct 423 57
+
+LRFCM
+
+Incorrect 34 246
+FCM
+
+Table 2: Confusion Matrix between the results of
+
+and LRFCM on the test set of ERE fine relation task. Each item in the table shows the number of relations on which the two models make correct/incorrect predictions.
+
+and labels, achieving improved results for relation extraction tasks on both ACE 2005 and ERE. To the best of our knowledge, we are the first to report relation extraction results on ERE. To make it easier to compare to our results on these tasks, we make the data splits used in this paper and our implementation available for general use4 . Acknowledgements Mo Yu is supported by China Scholarship Council and by NSFC 61173073.
+
+ments for coarse ACE relations with word embeddings (Brown clusters and LSA) without gold entity types. To demonstrate improvements of the low rank approximation of LRFCM, we compare to FCM 3 . Results Both FCM and LRFCM outperform Plank and Moschitti (2013) (no gold entities setting) (Table 1). With gold entity types, the feature-rich baseline beats both composition models for ACE coarse types. However, as we consider more labels, LR FCM improves over this baseline, as well as for ERE coarse types. Furthermore, LRFCM outperforms FCM on all tasks, save ACE coarse types, both with and without gold entity types. The fine-grained settings demonstrate that our model can better generalize by using relatively fewer parameters. Additionally, the gap between train and test F1 makes this clear. For coarse relations, FCM's train to test F1 gap was 35.2, compared to LRFCM with 25.4. On fine relations, the number increases to 40.2 for FCM but only 31.2 for LRFCM. In both cases, LRFCM does not display the same degree of overfitting. Analysis To highlight differences in the results we provide the confusion matrix of the two models on ERE fine relations. Table 2 shows that the two models are complementary to each other to a certain degree. It indicates that the combination of FCM and LRFCM may further boost the performance. We leave the combination of FCM and LRFCM, as well as their combination with the baseline method, to future work.
+
+References
+Yoshua Bengio, Holger Schwenk, Jean-S´ ebastien Sen´ ecal, Fr´ ederic Morin, and Jean-Luc Gauvain. 2006. Neural probabilistic language models. In Innovations in Machine Learning, pages 137­186. Springer. Antoine Bordes, Sumit Chopra, and Jason Weston. 2014. Question answering with subgraph embeddings. arXiv preprint arXiv:1406.3676. Danqi Chen and Christopher Manning. 2014. A fast and accurate dependency parser using neural networks. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 740­750, Doha, Qatar, October. Association for Computational Linguistics. Massimiliano Ciaramita and Yasemin Altun. 2006. Broad-coverage sense disambiguation and information extraction with a supersense sequence tagger. In EMNLP2006, pages 594­602, July. Ronan Collobert, Jason Weston, L´ eon Bottou, Michael Karlen, Koray Kavukcuoglu, and Pavel Kuksa. 2011. Natural language processing (almost) from scratch. JMLR, 12:2493­2537. Ronan Collobert. 2011. Deep learning for efficient discriminative parsing. In International Conference on Artificial Intelligence and Statistics. Marie-Catherine De Marneffe, Bill MacCartney, Christopher D Manning, et al. 2006. Generating typed dependency parses from phrase structure parses. In Proceedings of LREC, volume 6, pages 449­454. Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas Lamar, Richard Schwartz, and John Makhoul. 2014. Fast and robust neural network joint models for statistical machine translation. In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1370­1380, Baltimore, Maryland, June. Association for Computational Linguistics.
+4
+
+5
+
+Conclusion
+
+Our LRFCM learns conjunctions between features and word embeddings and scales to many features
+3 FCM_nips_workshop/
+
+We used their implementation:
+
+https://github.com/Gorov/
+
+https://github.com/Gorov/ERE_RE
+
+1378
+
+

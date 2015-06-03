@@ -1,0 +1,5 @@
+Meeting of the Association for Computational Linguistics: Human Language Technologies - Volume 1, HLT '11, pages 12­21, Stroudsburg, PA, USA. Association for Computational Linguistics. Thomas Schoenemann. 2011. Probabilistic word alignment under the L0 -norm. In Proceedings of CoNLL.
+
+618
+
+

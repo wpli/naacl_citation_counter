@@ -1,0 +1,29 @@
+Good
+
+The castle was later incorporated into the construction of Ashtown Lodge which was to serve as the official residence of the Under Secretary from 1782.
+
+After the building was made bigger and improved, it was used as the house for the Under Secretary of Ireland from 1782. Mozart used clarinets in A major often.
+
+Good Partial
+
+Mozart's Clarinet Concerto and Clarinet Quintet are both in A major, and generally Mozart was more likely to use clarinets in A major than in any other key besides E-flat major
+
+Table 3: Qualitative examples of the good and good partial matches identified by our method. Sequence-level Greedy (simG , sswk ) Ordered (simDP , sswk ) Unconstrained (simU C , sswk ) Word-level Structural WikNet (simG , sswk ) WordNet (simG , wd ) Structural WordNet (simG , sswd ) WikNet (simG , wk ) Max F1 0.712+ 0.656+ 0.689 Max F1 0.712+ 0.665+ 0.685 0.697 AUC 0.694+ 0.610+ 0.689 AUC 0.694+ 0.663+ 0.679 0.669
+
+Table 4: Max F1, AUC for ablation study on word-level and sequence-level similarity scores. Values with the + superscript are significant with p<0.05.
+
+constrained approaches. As expected, the dynamic programming approach used in previous work does not perform as well as our method, even with the structural semantic WikNet similarity, because the simple Wikipedia articles are not explicit simplifications of standard articles. Word-level Alignment: Table 4 also shows the contribution of the structural semantic WikNet similarity measure sswk vs. other word-level similarities (WordNet similarity wd , structural semantic WordNet similarity sswd , and WikNet similarity wk ). In all the experiments, we use the sequence-level greedy alignment method. The structural semantic similarity measures improve over the corresponding similarity measures for both WordNet and WikNet. Moreover, WikNet similarity outperforms WordNet, and the structural semantic WikNet similarity measure achieves the best performance. 5.2 Automatically Aligned Data
+
+the similarity scores of frequent words and distribute computations over multiple CPUs. We release a dataset of aligned sentence pairs, with a scaled threshold greater than 0.45.1 Based on the precision-recall data, we choose a scaled threshold of 0.67 (P = 0.798, R = 0.599, F1 = 0.685) for good matches, and 0.53 (P = 0.687, R = 0.495, F1 = 0.575) for good partial matches. The selected thresholds yield around 150k good matches, 130k good partial matches, and 110k uncategorized matches. In addition, around 51.5 million potential matches, with a scaled score below 0.45, are pruned from the dataset.
+
+6
+
+Conclusion and Future Work
+
+This work introduces a sentence alignment method for text simplification using a new word-level similarity measure (using Wiktionary and dependency structure) and a greedy search over sentences and sentence fragments. Experiments on comparable standard and simple Wikipedia articles outperform current baselines. The resulting hand-aligned and automatically aligned datasets are publicly available. Future work involves developing text simplification techniques using the introduced datasets. In addition, we plan to improve our current alignment technique with better text preprocessing (e.g., coreference resolution (Hajishirzi et al., 2013)), learning similarities, as well as phrase alignment techniques to obtain better partial matches. Acknowledgments This research was supported in part by grants from the NSF (IIS-0916951) and (IIS-1352249). The authors also wish to thank Alex Tan and Hayley Garment for annotations, and the anonymous reviewers for their valuable feedback.
+http://ssli.ee.washington.edu/tial/ projects/simplification/
+1
+
+We develop a parallel corpus of aligned sentence pairs between standard and simple Wikipedia, together with their similarity scores. In particular, we use our best case method to align sentences from 22k standard and simple articles, which were download in April 2014. To speed up our method, we index 215
+
+

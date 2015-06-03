@@ -1,0 +1,21 @@
+vergent pair is News-Weather, which is followed by News-Legal. The distance between News and the other domains indicates that, when it is used as target, knowledge transfer from the other domains might be problematic. In fact, looking at the results obtained by classification and regression models for News, we notice that none of the MTL methods achieves significant improvements over the STL baselines. Furthermore, the RMTL regression learning curve (Figure 1) for News shows that RMTL follows the same curve of STL, meaning that it is able to handle the high divergence between News and the other domains and hence, it learns mostly from indomain data. In general, the divergence measurements between the domains are relatively high (the values are closer to 1 than to 0). This is not surprising given the intra- and inter-domain variability of speakers and topics, the different conditions in which speech was recorded, and the WER differences across domains. However, the interesting aspect evidenced by the measurements is that MMD allows to successfully approximate such domain differences (and, likely, other more implicit diversity indicators), thus being a useful instrument to measure domain relatedness.
+
+ness and adaptability to such differences, we exploited the capability of multitask learning, which allows QE models to make the best use of training data coming from multiple domains by transferring knowledge across them. The MTL learning paradigm was applied both in regression mode (WER prediction) and, in a preliminary investigation, for binary classification (assignment of `good'/`bad' quality labels). In both settings, we experimented with different amounts of English data coming from four very diverse domains (different genres, speakers, topics, and styles). Our results indicate that MTL, which we used for the first time in ASR QE10 , is able to take advantage of data coming from such heterogeneous domains and to significantly improve over single-task learning baselines both in regression and in classification. Although the extent of the improvement depends on the divergence between the domains (a major issue for any supervised learning task), our results show that in the worst case MTL performance converges to the results of single-task learning. Overall, by suggesting a way to overcome the main limitations of previous approaches, our study opens interesting research avenues towards reference-free, system-agnostic and real-time ASR output evaluation.
+
+Acknowledgments
+The work of Hamed Zamani was supported by the FBK-HLT Summer Internship Program 2014.
+
+References
+[Argyriou et al.2007] Andreas Argyriou, Theodoros Evgeniou, and Massimiliano Pontil. 2007. Multi-task feature learning. In Advances in Neural Information Processing Systems 19, pages 41­48. [Bergstra and Bengio2012] James Bergstra and Yoshua Bengio. 2012. Random Search for Hyper-Parameter Figure 3: Domains divergence given by MMD (0 means Optimization. Journal of Machine Learning Research, similar and 1 means dissimilar). 13:281­305. [Brodersen et al.2010] Kay Henning Brodersen, Cheng Soon Ong, Klaas Enno Stephan, and
+
+6
+
+Conclusion
+
+We presented a supervised approach to ASR quality estimation aimed to cope with large differences between training and test data. To achieve robust722
+
+Previous works (Cohn and Specia, 2013; C. de Souza et al., 2014b) successfully applied similar methods to QE for machine translation (Specia et al., 2009; Mehdad et al., 2012; C. de Souza et al., 2014a; Turchi et al., 2014).
+
+10
+
+

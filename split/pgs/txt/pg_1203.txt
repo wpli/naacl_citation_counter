@@ -1,0 +1,5 @@
+Sekine, S. (2006). On-demand information extraction. In Proc. of COLING-ACL-06 Poster Session, pp. 731­738. Socher, R., A. Perelygin, J. Wu, J. Chuang, C. Manning, A. Ng & C. Potts (2013). Recursive deep models for semantic compositionality over a sentiment treebank. In Proc. of EMNLP-13. Yao, L., S. Riedel & A. McCallum (2012). Unsupervised relation discovery with sense disambiguation. In Proc. of ACL-12, pp. 712­720. Yates, A. & O. Etzioni (2007). Unsupervised resolution of objects and relations on the Web. In Proc. of NAACL-HLT-07, pp. 121­130. Zhang, C. & D. S. Weld (2013). Harvesting parallel news streams to generate paraphrases of event relations. In Proc. of EMNLP-13, pp. 1776­1786.
+
+1149
+
+

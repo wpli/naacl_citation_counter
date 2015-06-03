@@ -1,0 +1,29 @@
+WMT de-en baseline RPROP matrix.statmt.org
+
+# feat.
+
+newstest2013
+
+19 45.0M 14
+
+28.3 28.9 28.1
+
+Table 4: Results for the WMT GermanEnglish task in B LEU [%]. The baseline contains a recurrent neural LM. We compare with the best single system that is reported on matrix.statmt.org, which was submitted by the Unversity of Edinburgh.
+
+tiawan by 0.2 B LEU points. We would like to stress that this is not a domain adaptation effect, as maximum expected B LEU training was performed on discussion forum (df) data. On the df test set, on the other hand, we probably can observe domain adaptation via RPROP training. The improvement here is 0.7% B LEU absolute with a single reference, as opposed to four references on web and MT06. We also report results training the same feature sets with SGD and AdaGrad, confirming results we observed on IWSLT. Here, SGD yields only minor improvements. AdaGrad performs better, but still 0.1 - 0.4 B LEU points worse than RPROP. Running GT is infeasible in our hierarchical phrase-based setup. Table 4 shows the results on the WMT task. This is our largest setting, where max. exp. B LEU training is performed on the full training data with more than 4M sentence pairs which, to the best of our knowledge, is unsurpassed in the literature. Altogether, training took more than one month, about 3/4 of which were for generating n-best lists by decoding the training data. The triplet features did not finish in time, so we applied the feature sets (a), (b) and (d), 45M features in total. With a renormalization step as in GT, this number would grow to 309M. On newstest2013, our baseline already outperforms the best single system reported on matrix.statmt.org by 0.2 B LEU points. The discriminatively trained features yield an additional improvement of 0.6% B LEU absolute on this high-end system.
+
+superior performance compared to AdaGrad, growth transformation (GT) and stochastic gradient descent. In terms of time and memory efficiency, GT is clearly inferior to the other algorithms due to renormalization. Applying phrasal, lexical, triplet and reordering features, the baseline is improved by 1.2% B LEU absolute on the IWSLT GermanEnglish task. On two large scale tasks we achieve clearly superior performance compared to results reported in the literature. On BOLT ChineseEnglish our discriminative training yields nearly twice the improvement reported by Setiawan and Zhou (2013), resulting in a superior final system. On WMT GermanEnglish, we outperform the best single system reported on matrix.statmt.org by 0.8% B LEU absolute. Here, we perform maximum expexted B LEU training on more than 4M sentence pairs, which is the largest number reported in the literature to date.
+
+Acknowledgments
+The research leading to these results has received funding from the European Union Seventh Framework Programme (FP7/2007-2013) under grant agreement no 287658. This material is also partially based upon work supported by the DARPA BOLT project under Contract No. HR0011- 12-C-0015. Any opinions, findings and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of DARPA. We further thank the anonymous reviewers for valuable comments.
+
+References
+Michael Auli, Michel Galley, and Jianfeng Gao. 2014. Large-scale Expected BLEU Training of Phrase-based Reordering ModelsI. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1250­1260, Doha, Qatar, October. Phil Blunsom, Trevor Cohn, and Miles Osborne. 2008. A discriminative latent variable model for statistical machine translation. In Proc. of ACL-HLT. Peter F. Brown, Stephan A. Della Pietra, Vincent J. Della Pietra, and Robert L. Mercer. 1993. The Mathematics of Statistical Machine Translation: Parameter Estimation. Computational Linguistics, 19(2):263­311, June.
+
+7
+
+Conclusion
+
+We have experimentally compared several update strategies for maximum expected B LEU training. The RPROP algorithm proposed in this work shows 1524
+
+

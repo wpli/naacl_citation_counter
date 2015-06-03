@@ -1,0 +1,26 @@
+conjoined with a moving window of source characters. In the OT-uniform baseline, we evaluate the accuracy of the borrowing model with uniform weights, thus shortest paths in the loanwords transducer will be forms violating the fewest constraints. Evaluation In addition to predictive accuracy on all models (if a model produces multiple hypotheses with the same 1-best weight, we count the proportion of correct outputs in this set), we evaluate two particular aspects of our proposed model: (1) appropriateness of the model family, and (2) the quality of the learned OT constraint weights. The first aspect is designed to evaluate whether the morpho-phonological transformations implemented in the model are required and sufficient to generate loanwords from the donor inputs. We report two evaluation measures: model reachability and ambiguity. Reachability is a percentage of test samples that are reachable (i.e., there is a path from the input test example to a correct output) in the loanword transducer. A naïve model which generates all possible strings would score 100% reachability, but it will be hard to set the model parameters such that it discriminates between good and bad candidates. In order to capture this trade-off, we also report the inherent ambiguity of our model, which is the average number of outputs potentially generated per input. A generic Arabic­ Swahili transducer, for example, has an ambiguity of 786,998--the size of the Arabic pronunciation lexicon. Results The borrowing model reachability and ambiguity are listed in table 3. The model obtains high reachability, while significantly reducing the average number of possible outputs per input: in Arabic from 787K to 857 words, in French from 62K to 12. This result shows that the loanword transducer design, based on the prior linguistic analysis, is a plausible model of word borrowing. Yet, there are on average 33 correct Arabic words out of the possible 857 outputs, thus the second part of the model--OT constraint weights optimization--is crucial. The accuracy results in table 4 show how challenging the task of modeling lexical borrowing between two distinct languages is, and importantly, that orthographic and phonetic baselines including the stateof-the-art generative model of transliteration are not suitable for this task. Phonetic baselines for Arabic­ 604
+
+Reachability Ambiguity
+
+AR ­ SW
+
+87.7% 857
+
+FR ­ RO
+
+82.0% 12
+
+Table 3: The evaluation of the borrowing model design. Reachability is a percentage of donor­recipient pairs that are reachable from a donor to a recipient language. Ambiguity is an average number of outputs that the model generates per one input.
+AR ­ SW
+
+Orthographic Phonetic OT
+
+L CRF L L-W OT-U OT
+
+Accuracy (%) FR ­ RO 8.9 38.0 16.4 36.0 19.8 26.3 19.7 30.7 29.3 58.5 48.4 75.6
+
+Table 4: The evaluation of the borrowing model accuracy. The baselines are orthographic (surface) and phonetic (based on pronunciation lexicon) Levenshtein distance (L), heuristic Levenshtein distance with lower penalty on vowel updates and similar letter/phone substitutions (L-W), CRF transliteration, and our model with uniform (OT-U) and learned OT constraint weights assignment.
+
+Swahili perform better than orthographic ones, but substantially worse than OT-based models, even if OT constraints are not weighted. Crucially, the performance of the borrowing model with the learned OT weights corroborates the assumption made in numerous linguistic accounts that OT is an adequate analysis of the lexical borrowing phenomenon. Qualitative evaluation The constraint ranking learned by the borrowing model (constraints are listed in tables 1, 2) is in line with prior linguistic analysis. Space precludes a thorough discussion, but we highlight a few points. In Swahili NO - CODA dominates all other markedness constraints, as expected. Both * COMPLEX - S and * COMPLEX - C, restricting consonant clusters, dominate * COMPLEX - V, confirming that Swahili is more permissive to vowel clusters. SSP--sonority-based constraint--captures a common pattern of consonant clustering, found across languages, and is also learned by our model as undominated by most competitors in Swahili, and as a dominating markedness constraint in Romanian. Finally, vowel epenthesis DEP - IO - V is the most common strategy in Arabic loanword adaptation, and is ranked lower according to the model; however, it is ranked
+
+

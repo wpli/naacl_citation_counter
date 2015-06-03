@@ -1,0 +1,21 @@
+Exploiting Text and Network Context for Geolocation of Social Media Users
+Afshin Rahimi,1 Duy Vu,2 Trevor Cohn,1 and Timothy Baldwin1 1 Department of Computing and Information Systems 2 Department of Mathematics and Statistics The University of Melbourne arahimi@student.unimelb.edu.au {duy.vu, t.cohn}@unimelb.edu.au tb@ldwin.net Abstract
+Research on automatically geolocating social media users has conventionally been based on the text content of posts from a given user or the social network of the user, with very little crossover between the two, and no benchmarking of the two approaches over comparable datasets. We bring the two threads of research together in first proposing a text-based method based on adaptive grids, followed by a hybrid network- and text-based method. Evaluating over three Twitter datasets, we show that the empirical difference between textand network-based methods is not great, and that hybridisation of the two is superior to the component methods, especially in contexts where the user graph is not well connected. We achieve state-of-the-art results on all three datasets.
+
+of automatically geolocating (predicting lat/long coordinates) of users based on their publicly available posts, metadata and social network information. These approaches are built on the premise that a user's location is evident from their posts, or through location homophily in their social network. Our contributions in this paper are: a) the demonstration that network-based methods are generally superior to text-based user geolocation methods due to their robustness; b) the proposal of a hybrid classification method that backs-off from network- to text-based predictions for disconnected users, which we show to achieve state-of-the-art accuracy over all Twitter datasets we experiment with; and c) empirical evidence to suggest that text-based geolocation methods are largely competitive with network-based methods.
+
+1
+
+Introduction
+
+There has recently been a spike in interest in the task of inferring the location of users of social media services, due to its utility in applications including location-aware information retrieval (Amitay et al., 2004), recommender systems (Noulas et al., 2012) and rapid disaster response (Earle et al., 2010). Social media sites such as Twitter and Facebook provide two primary means for users to declare their location: (1) through text-based metadata fields in the user's profile; and (2) through GPSbased geotagging of posts and check-ins. However, the text-based metadata is often missing, misleading or imprecise, and only a tiny proportion of users geotag their posts (Cheng et al., 2010). Given the small number of users with reliable location information, there has been significant interest in the task 1362
+
+2
+
+Related Work
+
+Past work on user geolocation falls broadly into two categories: text-based and network-based methods. Common to both methods is the manner of framing the geolocation prediction problem. Geographic coordinates are real-valued, and accordingly this is most naturally modelled as (multiple) regression. However for modelling convenience, the problem is typically simplified to classification by first prepartitioning the regions into discrete sub-regions using either known city locations (Han et al., 2012; Rout et al., 2013) or a k -d tree partitioning (Roller et al., 2012; Wing and Baldridge, 2014). In the k -d tree methods, the resulting discrete regions are treated either as a flat list (as we do here) or a nested hierarchy.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1362­1367, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

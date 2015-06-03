@@ -1,0 +1,24 @@
+dataset # documents # words
+
+20-Newsgroups 18846 40343
+
+NIPS 1500 12419
+
+Table 1: Dataset Statistics
+
+4.1
+
+Experiment Setup
+
+· Dataset: We use two datasets in the experiments: 20-Newsgroups2 and NIPS3 . Their statistics are summarized in Table 1. · External Knowledge: We extract word correlation knowledge from Web Eigenwords4 , where each word has a real-valued vector capturing the semantic meaning of this word based on distributional similarity. Two words are regarded as correlated if their representation vectors are similar enough. It is worth mentioning that, other sources of external word correlation knowledge, such as Word2Vec (Mikolov et al., 2013) and Glove (Pennington et al., 2014), can be readily incorporated into MRF-LDA. · Baselines: We compare our model with three baseline methods: LDA (Blei et al., 2003), DFLDA (Andrzejewski et al., 2009) and QuadLDA (Newman et al., 2011). LDA is the most widely used topic model, but it is unable to incorporate external knowledge. DF-LDA and Quad-LDA are two models designed to incorporate word correlation to improve topic modeling. DF-LDA puts a Dirichlet Forest prior over the topic-word multinomials to encode the Must-Links and Cannot-Links between words. Quad-LDA regularizes the topic-word distributions with a structured prior to incorporate word relation. · Parameter Settings: For all methods, we learn 100 topics. LDA parameters are set to their default settings in (Andrzejewski et al., 2009). For DF-LDA, we set its parameters as  = 1,  = 0.01 and  = 100. The Must/Cannot links between words are generated based on the cosine similarity of words' vector representations
+2 3
+
+in Web Eigenwords. Word pairs with similarity higher than 0.99 are set as Must-Links, and pairs with similarity lower than 0.1 are put into Cannot-Link set. For Quad-LDA,  is set as 05·N 0.01;  is defined as 0.D ·T , where N is the total occurrences of all words in all documents, D is the number of documents and T is topic number. For MRF-LDA, word pairs with similarity higher than 0.99 are labeled as correlated. 4.2 Results
+
+We compare our model with the baseline methods both qualitatively and quantitatively. 4.2.1 Qualitative Evaluation Table 2 shows some exemplar topics learned by the four methods on the 20-Newsgroups dataset. Each topic is visualized by the top ten words. Words that are noisy and lack representativeness are highlighted with bold font. Topic 1 is about crime and guns. Topic 2 is about sex. Topic 3 is about sports and topic 4 is about health insurance. As can be seen from the table, our method MRF-LDA can learn more coherent topics with fewer noisy and meaningless words than the baseline methods. LDA lacks the mechanism to incorporate word correlation knowledge and generates the words independently. The similarity relationships among words cannot be utilized to imporve the coherence of topic modeling. Consequently, noise words such as will, year, used which cannot effectively represent a topic, show up due to their high frequency. DF-LDA and QuadLDA proposed to use word correlations to enhance the coherence of learned topics. However, they improperly enforce words labeled as similar to have similar probabilities in all topics, which violates the fact that whether two words are similar depend on which topic they appear in. As a consequence, the topics extracted by these two methods are unsatisfactory. For example, topic 2 learned by DF-LDA mixed up a sex topic and a reading topic. Less relevant words such as columbia, year, write show up in the health insurance topic (topic 4) learned by QuadLDA. Our method MRF-LDA incorporates the word correlation knowledge by imposing a MRF over the latent topic layer to encourage correlated words to share the same topic label, hence similar words have better chance to be put into the same topic. Conse-
+
+http://qwone.com/ jason/20Newsgroups/ http://archive.ics.uci.edu/ml/datasets/Bag+of+Words 4 http://www.cis.upenn.edu/ ungar/eigenwords/
+
+730
+
+

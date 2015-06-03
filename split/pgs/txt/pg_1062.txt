@@ -1,0 +1,44 @@
+show better performance than the inner product in our experiments. We therefore perform in an opposite way, i.e., enforcing the word vectors to be unit in length. Theoretically, this changes the learning of the embedding to an optimization problem with a quadratic constraint. Solving this problem by Lagrange multipliers is possible, but here we simply divide a vector by its l-2 norm whenever the vector is updated. This does not involve much code change and is efficient enough.1 The consequence of the normalization is that all the word vectors are located on a hypersphere, as illustrated in Figure 1. In addition, by the normalization, the inner product falls back to the cosine distance, hence solving the inconsistence between the embedding learning and the distance measurement.
+
+where W is the projection matrix to be learned, and xi and zi are word vectors in the source and target language respectively. The bilingual pair (xi , zi ) indicates that xi and zi are identical in semantic meaning. A high accuracy was reported on a word translation task, where a word projected to the vector space of the target language is expected to be as close as possible to its translation (Mikolov et al., 2013b). However, we note that the `closeness' of words in the projection space is measured by the cosine distance, which is fundamentally different from the Euler distance in the objective function (3) and hence causes inconsistence. We solve this problem by using the cosine distance in the transform learning, so the optimization task can be redefined as follows: max
+W i
+
+(W xi )T zi .
+
+(4)
+
+100 90 80 70 60 50 40 30 20 10 0 100 80 60 40 20 0 0 40 20 60 80 100
+
+1 0.8 0.6 0.4 0.2 0 -0.2 -0.4 -0.6 -0.8 -1 1 0.5 0 0 -0.5 -1 -1 -0.5 0.5 1
+
+Figure 1: The distributions of unnormalized (left) and normalized (right) word vectors. The red circles/stars/diamonds represent three words that are embedded in the two vector spaces respectively.
+
+4 Orthogonal transform
+The bilingual word translation provided by (Mikolov et al., 2013b) learns a linear transform from the source language to the target language by the linear regression. The objective function is as follows: min
+W i
+1
+
+Note that the word vectors in both the source and target vector spaces are normalized, so the inner product in (4) is equivalent to the cosine distance. A problem of this change, however, is that the projected vector W xi has to be normalized, which is not guaranteed so far. To solve the problem, we first consider the case where the dimensions of the source and target vector spaces are the same. In this case, the normalization constraint on word vectors can be satisfied by constraining W as an orthogonal matrix, which turns the unconstrained problem (4) to a constrained optimization problem. A general solver such as SQP can be used to solve the problem. However, we seek a simple approximation in this work. Firstly, solve (4) by gradient descendant without considering any constraint. A simple calculation shows that the gradient is as follows:
+W
+
+||W xi - zi ||2
+
+(3)
+
+=
+i
+
+T x i yi ,
+
+(5)
+
+For efficiency, this normalization can be conducted every n mini-batches. The performance is expected to be not much impacted, given that n is not too large.
+
+and the update rule is simply given by: W =W +
+W
+
+(6)
+
+1008
+
+

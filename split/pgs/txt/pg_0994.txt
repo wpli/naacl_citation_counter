@@ -1,0 +1,23 @@
+forms). Figure 3 shows the negated log-probabilities of these gold strings according to our beliefs, averaged over variables in a given factor graph. Our accuracy is weaker than Cotterell et al. (2015) because we are doing inference with their initial (untrained) parameters, a more challenging problem. Each update to  V consisted of a single step of (proximal) gradient descent: starting at the current value, improve (2) with a gradient step of size  = 0.05, then (in the adaptive case) apply the proximal operator of (9) with  = 0.01. We chose these values by preliminary exploration, taking  small enough to avoid backtracking (section 6.1). We repeatedly visit variables and factors (section 4.4) in the forward-backward order used by Cotterell et al. (2015). For the first few iterations, when we visit a variable we make K = 20 passes over its incoming messages, updating them iteratively to ensure that the high probability strings in the initial approximations are "in the ballpark". For subsequent iterations of message passing we take K = 1. For similar reasons, we constrained PEP to use only unigram features on the first iteration, when there are still many viable candidates for each morph. 7.1 Results The results show that PEP is much faster than the baseline pruning method, as described in Figure 3 and its caption. It mainly achieves better crossentropy on English and Dutch, and even though it loses on German, it still places almost all of its probability mass on the gold forms. While EP with unigram and bigram approximations are both faster than PEP, their accuracy is poor. Trigram EP is nearly as accurate but even slower than the baseline. The results support the claim that PEP has achieved a "Goldilocks number" of n-grams in its approximation--just enough n-grams to approximate the message well while retaining speed. Figure 4 shows the effect of  on the speedaccuracy tradeoff. To compare apples to apples, this experiment fixed the set of µF V messages for each variable. Thus, we held the set of beliefs fixed, but measured the size and accuracy of different approximations to these beliefs by varying . These figures show only the results from gradientbased approximation. Closed-form approximation is faster and comparably accurate: see Appendix C. 940
+
+Cross-Entropy of Gold Standard (bits)
+
+3. 5 3. 0 2. 5 2. 0  = 0 . 5 1. 5 1. 0 0. 5 0. 0  = 0.01 102  = 1 .0
+
+ = 1 .0  = 0 .5
+
+ = 0.01
+
+Number of Features (log-scale)
+
+103
+
+Figure 4: Increasing  will greatly reduce the number of selected features in a belief--initially without harming accuracy, and then accuracy degrades gracefully. (Number of features has 0.72 correlation with runtime, and is shown on a log scale on the x axis.) Each point shows the result of using PEP to approximate the belief at some latent variable V , using µF V messages from running the baseline method on German. Lighter points use larger . Orange points are affixes (shorter strings), blue are stems (longer strings). Large circles are averages over all points for a given .
+
+8
+
+Conclusion and Future Work
+
+We have presented penalized expectation propagation (PEP), a novel approximate inference algorithm for graphical models, and developed specific techniques for string-valued random variables. Our method integrates structured sparsity directly into inference. Our experiments show large speedups over the strong baseline of Cotterell et al. (2015). In future, instead of choosing , we plan to reduce  as PEP runs. This serves to gradually refine the approximations, yielding an anytime algorithm whose beliefs approach the BP beliefs. Thanks to (7), the coarse messages from early iterations guide the choice of finer-grained messages at later iterations. In this regard, "Anytime PEP" resembles other coarse-to-fine architectures such as generalized A* search (Felzenszwalb and McAllester, 2007). As NLP turns its attention to lower-resource languages and social media, it is important to model the rich phonological, morphological, and orthographic processes that interrelate words. We hope that the introduction of faster inference algorithms will increase the use of graphical models over strings. We are releasing our code package (see Appendix D).
+
+

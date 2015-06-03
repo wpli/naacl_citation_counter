@@ -1,0 +1,25 @@
+System Node Acc. supervised baseline RNTN, supervised 0.776 RNTN + clusters newspaper text+Brown 0.708 movie reviews+Brown 0.780 features+k-means 0.755 RNTN + split movie-review clusters split SentiWS 0.774 split GermanPolarityClues 0.807 RNTN + lexicon-based replacement replace-gold 0.844 repl-GermanPolarityClues 0.789 repl-SentiMerge[0.23] 0.780
+
+Root Acc. 0.687 0.649 0.677 0.674 0.676 0.689 0.730 0.681 0.648
+
+rule type AVG INV INT MWE
+
+# in SSTb 119468 2158 6614 18235
+
+# in HeiST 19228 289 646 1936
+
+Table 6: Rule types in SSTb and HeiST
+
+7
+
+Results and Error analysis
+
+Table 5: Incorporating additional information
+
+in (document-level) sentiment analysis for English, Hindi and Marathi. In our experiments, we follow Candito and Seddah (2010) in simply replacing words by clusters: in their experiments, even this simple procedure can yield an improvement, with improved results when the unlabeled data stems from the target domain. Since Brown clusters are mostly syntactic/semantic in nature and do not automatically distinguish positive or negative sentiment, we additionally performed multiple experiments to use clusters while incorporating additional sentiment information: On one hand, we try to incorporate the judgements on the Amazon near-domain dataset more directly into the clusters by using the repeated bisecting K-Means algorithm as implemented in CLUTO (Zhao and Karypis, 2005), with previous/next word, part-of-speech tag, and the score of the containing review as features. On the other hand, we split the Brown clusters according to the sentiment value that they have in a particular sentiment lexicon (e.g. SentiMerge), yielding three clusters 01101+, 01101and 01101? instead of the original cluster 01101. As a final experiment, we consider replacing only sentiment words by a concatenation of their partof-speech and the sentiment class (turning "a great film" into "a JJ++ film"), and leaving neutral words intact. As an upper baseline for this approach, we can get words' sentiment polarity directly from training and testing data, which yields the replacegold entry in table 5. 700
+
+Looking at the results in tables 2, 4 and 5, we see that simple support vector machine classification is very effective for reproducing the positive/negative sentiment of nodes and complete sentences, followed by crosslingual projection and a simple averaging approach; we also see that handling negation in the vote-and-flip approach seems to lower the score, just as the best model with word clusters and splitting (using the GermanPolarityClues lexicon) performs better than the word-based RNTN approach, but less well than the lexicon by itself. Even the replacegold upper baseline ­ replacing sentiment-carrying words by their sentiment label, which raises the performance substantially ­ gives results below the simpler SVM approach, which is counterintuitive. 7.1 Is it about Compositionality?
+
+One motivation for using sub-sentence structure both in approaches for rule-based composition (as, e.g. in Taboada et al. (2011) and other lexicon-based approaches) as well as in more complex learning approaches such as RNN (Socher et al., 2011) and RNTN (Socher et al., 2013) is the idea that such approaches are able to model the interaction between sentiment-bearing words and sentiment-modifying words. An example for investigations based on this assumption is the work by Zhu et al. (2014), who contrast different lexicon-based approaches for handling negation with an RNTN model of negation and a modification of said model. Given the results using a lexicon-based approach implementing the vote-and-flip heuristic in comparison to the vote-only heuristic, we found it worth investigating what specific types of interaction exist in compositional sentiment treebanks, also considering that Zhu et al.'s investigations yielded a more precise picture of the sentiment-shifting action of negators as a highly lexicalized phenomenon.
+
+

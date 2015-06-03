@@ -1,0 +1,24 @@
+Configuration -ADDITION -PUNCT -WORD -BEVERB -DETERMINER -OTHER -SUBJECT -REPLACEMENT -PUNCT -WORD -CAPITALIZATION -CONTRACTION -OTHER -SLANG -REMOVAL -PUNCT -WORD -OTHER -TWITTER
+
+F-measure 0.713 0.920 0.723 0.903 0.937 0.910 0.853 0.550 0.877 0.590 0.860 0.910 0.883 0.783 0.580 0.880 0.600 0.837 0.710
+
+Per-token Error Rate 0.00029 0.00018 0.00050 0.00071 0.00061 0.00064 0.00084 0.00025 0.00040 0.00028 0.00022 0.00037 0.00066 0.00051 0.00068 0.00100 0.00080 0.00095 0.00088
+
+Table 4: Text-To-Speech Synthesis Results.
+
+to be similar to the gold standard. The eSpeak speech synthesizer5 was used to produce audio files for all tweet variations in the ablation study. As is common for speech synthesizers, eSpeak does perform some amount of TTS-specific normalization natively. While this does influence the normalizations produced, the comparison to gold standard methodology employed in this study helps us to focus on differences that are primarily attributable to the normalization edits we wish to examine, not those produced natively. To obtain the gold standard, two native-English speaking judges were recruited via oDesk. Inter-annotator agreement was moderate,  = 0.48. 4.3.1 Results Table 4 shows the results of the speech synthesis study. As shown, the removal of non-standard or out of place tokens was most critical to the production of a normalization that is clearly understandable to human listeners. The aggregate results for token removals were comparable to or better than those of replacements at all levels of the taxonomy, in contrast to the results from the other two tasks, where the larger number of replacements led to the largest
+5
+
+performance hits. Meanwhile, word addition proved to be less essential overall. At the token level, the importance of token removal is even more stark; the per-token error rate of every category of removal is greater than that of all other categories at the same taxonomy level. Although most word additions had a comparatively small effect on performance overall, they were important on a per-token basis. Most notably, subject adding had high per-token importance. In contrast, failing to add missing punctuation was not often marked as erroneous by human judges, nor was failing to normalize capitalization or contractions. Similar to those on dependency parsing, the results on speech synthesis suggest that a broad approach that considers several different types of normalization edit is necessary to produce results comparable to those seen on clean text. However, at a high level there is a clear divide in importance between normalization types, where the greatest performance gains can be obtained by focusing on the comparatively small number of token removals.
+
+5
+
+Discussion
+
+Version 1.47.11, http://espeak.sourceforge.net/
+
+The results presented in Section 4 are consistent with the hypothesis that a "one size fits all" approach to Twitter normalization is problematic, as the importance of a given normalization edit was highly dependent on the intended downstream task. Differences in which edits had the most substantial effect were present at all levels of scrutiny. Adding subjects and other words that a Twitter author dropped can be vitally important if the goal is to improve parsing performance, but can mostly be ignored if the goal is NER. Removing twitter-specific or otherwise non-standard words showed a gradation of importance over the three tasks, with little importance for NER, moderate importance for parsing, and critical importance for speech synthesis. Capitalization correction had negligible impact on the parser or synthesizer, but was helpful for NER. The importance of different edit types can be seen even at the most coarse level of examination. While normalization for speech synthesis is primarily dependent on removing unknown tokens, normalization that targets name entity recognition would be better served focusing on replacing non-standard to-
+
+427
+
+

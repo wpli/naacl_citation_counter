@@ -1,0 +1,9 @@
+Tuesday, June 2, 2015 (continued) 15:45­17:00 15:45­16:10 16:10­16:35 16:35­17:00 Session 7A: Semantics (Long + TACL Papers) High-Order Low-Rank Tensors for Semantic Role Labeling Tao Lei, Yuan Zhang, Lluís Màrquez, Alessandro Moschitti and Regina Barzilay [TACL] Large-scale Semantic Parsing without Question-Answer Pairs Siva Reddy, Mirella Lapata, and Mark Steedman [TACL] A Large Scale Evaluation of Distributional Semantic Models: Parameters, Interactions and Model Selection Gabriella Lapesa and Stefan Evert Session 7B: Information Extraction and Question Answering (Long + TACL Papers) Lexical Event Ordering with an Edge-Factored Model Omri Abend, Shay B. Cohen and Mark Steedman [TACL] Entity disambiguation with web links Andrew Chisholm and Ben Hachey [TACL] A Joint Model for Entity Analysis: Coreference, Typing, and Linking Greg Durrett and Dan Klein Session 7C: Machine Translation (Long Papers) Bag-of-Words Forced Decoding for Cross-Lingual Information Retrieval Felix Hieber and Stefan Riezler Accurate Evaluation of Segment-level Machine Translation Metrics Yvette Graham, Timothy Baldwin and Nitika Mathur Leveraging Small Multilingual Corpora for SMT Using Many Pivot Languages Raj Dabre, Fabien Cromieres, Sadao Kurohashi and Pushpak Bhattacharyya
+
+15:45­17:00 15:45­16:10 16:10­16:35 16:35­17:00
+
+15:45­17:00 15:45­16:10 16:10­16:35 16:35­17:00
+
+xlv
+
+

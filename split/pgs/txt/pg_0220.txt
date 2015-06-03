@@ -1,0 +1,40 @@
+Markov Model (HMM) (Rabiner, 1989; Vogel et al., 1996). Next, each tracked object or blob in a video segment is generated from one of the nouns in the corresponding sentence using IBM Model 1 (Brown et al., 1993), a generative model frequently used in machine translation. The IBM Model 1 probabilities are incorporated as emission probabilities in HMM. The transition probabilities are parameterized using the jump size, i.e., the difference between the alignments of two consecutive video segments. They also extended IBM Model 1 by introducing latent variables for each noun, allowing some of the nonobject nouns to be unobserved in the video. While the alignment results are encouraging, and show that unsupervised alignment is feasible, they considered the mappings between nouns and blobs only, and ignored the verbs and other relations in the sentences. Moreover, incorporating domain knowledge is not straightforward in these generative models. 2.2 Discriminative Word Alignment
+
+xi = hi = yi =
+
+Xi,1
+1 2
+
+Xi,2
+2
+
+Xi,3
+3
+
+Yi,1
+
+Yi,2
+
+Yi,3
+
+Yi,4
+
+Figure 2: Each Xi,m is a sentence in the protocol, consisting of the nouns and verbs in the sentence, and each Yi,n is a video chunk represented by the set of blobs touched by hands in that chunk. The alignment hi = [1, 2, 2, 3] maps each video chunk to the corresponding sentence.
+
+In machine translation, alignment of the words in source language with the words in target language has traditionally been done using the IBM word alignment models (Brown et al., 1993), which are generative models, and typically trained using Expectation Maximization (Dempster et al., 1977). Early attempts (Blunsom and Cohn, 2006; Taskar et al., 2005) towards discriminative word alignment relied on supervised hand-aligned parallel corpora. Dyer et al. (2011) first applied a latent variable conditional random field (LCRF) to perform unsupervised discriminative word alignment. They treated the words' alignments as latent variables, and formulated the task as predicting the target sentence, given the source sentence. We apply similar latent variable discriminative models for unsupervised alignment of sentences with video segments.
+
+3
+
+Problem Formulation and Notations
+
+We apply similar data preprocessing as Naim et al. (2014). First, we parse each protocol sentence using the two-stage Charniak-Johnson parser (Charniak and Johnson, 2005), and extract the head nouns and verbs from each sentence. Let mi be the number of sentences in the protocol xi . We represent xi as a sequence of sets xi = [Xi,1 , . . . , Xi,mi ], where Xi,m is the set of nouns and verbs in the mth sentence of xi . Each video yi is segmented into a sequence of chunks, each one second long. For each video chunk, we determine the set of objects touched by the participant's hands using automated image segmentation and tracking. We ignore the chunks over which no object is touched by a hand. Let ni be the number of chunks in yi . We represent the video yi as a sequence of sets: yi = [Yi,1 , . . . , Yi,ni ], one for each video chunk, where Yi,n is the set of objects or blobs touched by hands in the nth chunk of yi . If VY is the set of all blobs in the videos, then Yi,n  VY . Our goal is to learn the alignment hi between the sentences in xi with their corresponding video chunks in yi (Figure 2). Formally, hi [n]  {1, . . . , mi }, for 1  n  ni , where hi [n] = m indicates that the video segment Yi,n is aligned to the protocol sentence Xi,m .
+
+The input to our system is a dataset containing N pairs of observations {(xi , yi )}N i=1 , where xi repth resents the i experiment protocol, and yi represents a video of a person carrying out the instructions in that protocol. The protocols are not necessarily unique, as we have multiple videos of different people carrying out the same protocol. 166
+
+4
+
+Discriminative Alignment
+
+To formulate the alignment problem as a discriminative learning task, we assume the text sequence xi as the observed input, and the video sequence yi as the output sequence that we aim to predict. Since the alignments are unknown, we treat them
+
+

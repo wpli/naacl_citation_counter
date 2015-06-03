@@ -1,0 +1,30 @@
+timates how much the win probability changed as a result of what happened during the at-bat. WPA thus provides an estimate of how much information about the game outcome this at-bat has provided, conditioned on the current game context. These measures are well-correlated (Kendall's  = .77), since a high-LI at-bat's value comes from its ability to affect win probability. As high LI or WPA values indicate an at-bat whose result has a large effect on the game, these metrics provide an estimate for non-linguistic informativity that is independent of medium-specific influences on tweet production. To assess their effects, we constructed four mixed-effects linear regression models, using LI and WPA to predict perword and per-tweet entropy in all pairwise combinations (we built separate models for LI and WPA due to their high collinearity). Fixed- and by-game random-effects of log(time) and log(rate) were included as controls in all models; if there is an effect of LI or WPA beyond the effect of rate, this effect can be interpreted as evidence of speaker adaptation to non-linguistic information content. Both LI and WPA had significant negative effects on per-tweet entropy (LI: -1.52 ± .43; p = .001, 2 (5) = 20.1, WPA: -2.27 ± .40; p < .001, 2 (5) = 44.18), over and above the effect of tweet rate. Per-word entropy did not show a significant effect of LI or WPA when rate was included as a control factor. Each was a significant factor on perword entropy (p = .008, p = .005) when rate was not included as a control, though, suggesting that the explanatory power of these independent metrics may be subsumed in the more complex factor of tweet rate. 5.2 Speaker Normalization A second alternative hypothesis for the observed behavioral changes with tweet rate is that they arise not from changes in the behavior of individuals but rather from a change in demographics. It is plausible that rising tweet rates come from an influx of new tweeters using the hashtag, and that these new tweeters simply produce shorter, less informative tweets in general. For instance, spambots often include trending hashtags in their spam tweets (MartinezRomo and Araujo, 2013). To account for this, we treated the users whose tweets are in our corpus as 1593
+
+Win Prob. Added vs. normalized tweet length
+Characters above average
+20
+q q qq q q q q q q q q q q q q q qq q q q q q q q q q q qq q q q q qq q q q q q q q q qq q q q q q q q q q q q q q q q q q
+
+Game #
+q
+
+1 2
+
+0
+
+q q q q
+
+3 4 5 6 7
+
+-20
+
+-40 0.0 0.1 0.2
+
+WPA
+
+Figure 4: Speaker-normalized tweet length also decreases for at-bats with greater win probability changes. Loess curve fitting with 95% confidence intervals.
+
+a "computational focus group" (Lin et al., 2013; Lin et al., 2014), and used the Twitter API to collected a further 100 tweets from each user outside the timeframe of the games. We used these tweets to estimate an average tweet length for each user, and subtracted this value from the length of their #worldseries tweets during the games.7 If this baselined metric displays the same effects as shown above, we have reason to believe that users are in fact changing their individual behaviors in response to information factors, rather than that a demographic shift is mimicking a behavioral shift. For this analysis, we created a mixed-effects model with WPA, log(rate) and log(time) as predictors of tweet length. All three factors were significant (WPA: -1.64 ± .36; p < .001, 2 (5) = 72.3; log(rate): -6.15 ± .47; p < .001, 2 (5) = 303.6; log(time): .82 ± .40; p = .001, 2 (5) = 20.6). We then created a second model using the same factors to predict the mean change in tweet length from the baseline length. Again, all three factors were significant (WPA: -2.01 ± .29; p < .001, 2 (5) = 70.2; log(rate): -5.10 ± .49; p < .001, 2 (5) = 252.6; log(time): .61 ± .35; p = .016, 2 (5) = 14.0). By ruling out demographic shifts (e.g., an influx of terser tweeters), this analysis provides additional support for the idea that tweeters indeed shift their behavior in response to in-game information.
+7 Note that these analyses are conducted over tweet length, rather than total entropy, as there was no obvious way of normalizing entropy by speaker.
+
+

@@ -1,0 +1,43 @@
+t t +3.73
+
+t
+
+t v -6.48
+
+t
+
+t v -1.05
+
+v
+
+v v +1.23
+
+v
+BIGGS
+
+C-3PO
+
+Figure 2: Estimated triad feature weights
+LUKE
+
+BLUE LEADER
+
+of cases. By Fisher's exact test, this difference is statistically significant at p < 0.01. Both results are significantly greater than chance agreement (33%) by a binomial test, p < 0.001. 6.3 Network feature weights Figure 2 shows the feature weights for each of the four possible triads. Triads with homogeneous signs are preferred, particularly TTT (all informal); heterogeneous triads are dispreferred, particularly TTV, which is when two individuals have a formal relationship despite having a mutual informal tie. Less dispreferred is TVV, when a pair of friends have an informal relationship despite both having a formal relationship with a third person; consider, for example, the situation of two students and their professor. In addition, the informal sign is preferred when the dyad has a high score on the Adamic-Adar metric, and dispreferred otherwise. This coheres with the intuition that highly-embedded edges are likely to be informal, with many shared friends. 6.4 Qualitative results Analysis of individual movies suggests that the induced tie signs are meaningful and coherent. For example, the film "Star Wars" is a space opera, in which the protagonists Luke, Han, and Leia attempt to defeat an evil empire led by Darth Vader. The induced signed social network is shown in Figure 3. The V-edges seem reasonable: C-3PO is a robotic servant, and Blue Leader is Luke's military commander (B LUE LEADER: Forget it, son. L UKE: Yes, sir, but I can get him...). In contrast, the character pairs with T-edges all have informal relationships: the lesser-known character Biggs is Luke's more experienced friend (B IGGS: That's no battle, kid). The animated film "South Park: Bigger, Longer & Uncut" centers on three children: Stan, Cartman, and Kyle; it also involves their parents, teachers, and friends, as well as a number of political and religious figures. The induced social network is shown in Fig1623
+
+BEN
+
+HAN
+
+LEIA
+
+Figure 3: Induced signed social network from the film Star Wars. Blue solid edges are in the V-cluster, red dashed edges are in the T-cluster.
+
+ure 4. The children and their associates mostly have T -edges, except for the edge to Gregory, a British character with few speaking turns. This part of the network also has a higher clustering coefficient, as the main characters share friends such as Chef and The Mole. The left side of the diagram centers on Kyle's mother, who has more formal relationships with a variety of authority figures.
+
+7
+
+Related work
+
+Recent work has explored the application of signed social network models to social media. Leskovec et al. (2010b) find three social media datasets from which they are able to identify edge polarity; this enables them to compare the frequency of signed triads against baseline expectations, and to build a classifier to predict edge labels (Leskovec et al., 2010a). However, in many of the most popular social media platforms, such as Twitter and Facebook, there is no metadata describing edge labels. We are also interested in new applications of signed social network analysis to datasets outside the realm of social media, such as literary texts (Moretti, 2005; Elson et al., 2010; Agarwal et al., 2013) and movie scripts, but in such corpora, edge labels are not easily available. In many datasets, it is possible to obtain the textual content exchanged between members of the network, and this content can provide a signal for network structure. For example, Hassan et al. (2012) characterize the sign of each network edge in terms
+
+

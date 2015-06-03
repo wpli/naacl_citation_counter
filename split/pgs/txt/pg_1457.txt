@@ -1,0 +1,24 @@
+Large-scale Native Language Identification with Cross-Corpus Evaluation
+Shervin Malmasi Centre for Language Technology Macquarie University Sydney, NSW, Australia shervin.malmasi@mq.edu.au Mark Dras Centre for Language Technology Macquarie University Sydney, NSW, Australia mark.dras@mq.edu.au
+
+Abstract
+We present a large-scale Native Language Identification (NLI) experiment on new data, with a focus on cross-corpus evaluation to identify corpus- and genre-independent language transfer features. We test a new corpus and show it is comparable to other NLI corpora and suitable for this task. Cross-corpus evaluation on two large corpora achieves good accuracy and evidences the existence of reliable language transfer features, but lower performance also suggests that NLI models are not completely portable across corpora. Finally, we present a brief case study of features distinguishing Japanese learners' English writing, demonstrating the presence of cross-corpus and cross-genre language transfer features that are highly applicable to SLA and ESL research.
+
+1
+
+Introduction
+
+Native Language Identification, the task of determining the native language (L1) of an author based on a second language (L2) text, has received much attention recently. Much of this is motivated by Second Language Acquisition (SLA) as NLI, often accomplished via machine learning methods, can be used to study language transfer effects. Most NLI research hitherto has focused on identifying linguistic phenomena that can capture transfer effects, with little effort towards interpreting discriminant features. Some researchers have now shifted their focus to developing data-driven methods for the automatic extraction and ranking of linguistic features that distinguish specific L1s (Swanson and Charniak, 2014). Such methods could be used not only to confirm existing SLA hypotheses, but also to create new ones. This hypothesis formulation is an inherently 1403
+
+difficult problem requiring copious amounts of data. Contrary to this requirement, researchers have long noted the paucity of suitable corpora1 for this task (Brooke and Hirst, 2011). This is one of the research issues addressed by this work. Furthermore, deriving SLA hypotheses from a single corpus may not be entirely useful for SLA research. Many variables like genre and topic are constant within a corpus, restricting the validity of such cross-validation studies to those dimensions. An alternative, potentially more helpful approach, is to identify transfer features that reliably distinguish an L1 across multiple corpora of differing genres and domains. A cross-corpus methodology may be a more promising avenue to finding features that generalize to diverse text sources, but requires additional large corpora. It is also a more realistic approach, and one we pursue in this work. Accordingly, the aims of the present work are to: (1) test a large new corpus suitable for NLI, (2) perform within-corpus evaluation with a comparative analysis against equivalent corpora, (3) perform cross-corpus evaluation to determine the efficiency of corpus independent features and (4) analyze the features' utility for SLA & ESL research.
+
+2
+
+Background and Motivation
+
+NLI work has been growing in recent years, using a wide range of syntactic and more recently, lexical features to distinguish the L1. A detailed review of NLI methods is omitted here for reasons of space, but a thorough exposition is presented in the report from the very first NLI Shared Task that was held in 2013 (Tetreault et al., 2013). Most English NLI work has been done using two corpora. The International Corpus of Learner EnAn ideal NLI corpus should have multiple L1s, be balanced by topic, proficiency, texts per L1 and be large in size.
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1403­1409, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

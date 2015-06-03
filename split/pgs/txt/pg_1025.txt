@@ -1,0 +1,31 @@
+Dataset Kotlerman 2010 Bless 2011 Baroni 2012 Turney 2014 Levy 2014
+
+#Instances 2,940 14,547 2,770 1,692 12,602
+
+#Positive 880 1,337 1,385 920 945
+
+#Negative 2,060 13,210 1,385 772 11,657
+
+Table 1: Datasets evaluated in this work.
+
+2.1
+
+Word Representations
+
+We built 9 word representations over Wikipedia (1.5 billion tokens) using the cross-product of 3 types of contexts and 3 representation models. 2.1.1 Context Types Bag-of-Words Uses 5 tokens to each side of the target word (10 context words in total). It also employs subsampling (Mikolov et al., 2013a) to increase the impact of content words. Positional Uses only 2 tokens to each side of the target word, and decorates them with their position (relative to the target word); e.g. the-1 is a common positional context of cat (Schütze, 1993). Dependency Takes all words that share a syntactic connection with the target word (Lin, 1998; Padó and Lapata, 2007; Baroni and Lenci, 2010). We used the same parsing apparatus as in (Levy and Goldberg, 2014). 2.1.2 Representation Models PPMI A word-context positive pointwise mutual information matrix M (Niwa and Nitta, 1994). SVD We reduced M 's dimensionality to k = 500 using Singular Value Decomposition (SVD).2 SGNS Skip-grams with negative sampling (Mikolov et al., 2013b) with 500 dimensions and 5 negative samples. SGNS was trained using a modified version of word2vec that allows different context types (Levy and Goldberg, 2014).3 2.2 Labeled Datasets We used 5 labeled datasets for evaluation. Each dataset entry contains two words (x, y ) and a label whether x entails y . Note that each dataset was created with a slightly different goal in mind, affecting word-pair generation and annotation. For example,
+Following Caron (2001), we used the square root  of the eigenvalue matrix k for representing words: Mk = Uk k . 3 http://bitbucket.org/yoavgo/word2vecf
+2
+
+both of Baroni's datasets are designed to capture hypernyms, while other datasets try to capture broader notions of lexical inference (e.g. causality). Table 1 provides metadata on each dataset, and the description below explains how each one was created. (Kotlerman et al., 2010) Manually annotated lexical entailment of distributionally similar nouns. (Baroni and Lenci, 2011) a.k.a. BLESS. Created by selecting unambiguous word pairs and their semantic relations from WordNet. Following Roller et al. (2014), we labeled noun hypernyms as positive examples and used meronyms, noun cohyponyms, and random noun pairs as negative. (Baroni et al., 2012) Created in a similar fashion to BLESS. Hypernym pairs were selected as positive examples from WordNet, and then permutated to generate negative examples. (Turney and Mohammad, 2014) Based on a crowdsourced dataset of 79 semantic relations (Jurgens et al., 2012). Each semantic relation was linguistically annotated as entailing or not. (Levy et al., 2014) Based on manually annotated entailment graphs of subject-verb-object tuples (propositions). Noun entailments were extracted from entailing tuples that were identical except for one of the arguments, thus propagating the existence/absence of proposition-level entailment to the noun level. This dataset is the most realistic dataset, since the original entailment annotations were made in the context of a complete proposition. 2.3 Supervised Methods
+
+We tested 4 compositions for representing (x, y ) as a feature vector: concat (x  y ) (Baroni et al., 2012), diff (y - x) (Roller et al., 2014; Weeds et al., 2014; Fu et al., 2014), only x (x), and only y (y ). For each composition, we trained two types of classifiers, tuning hyperparameters with a validation set: logistic regression with L1 or L2 regularization, and SVM with a linear kernel or quadratic kernel.
+
+3
+
+Negative Results
+
+Based on the above setup, we present three negative empirical results, which challenge the claim that the methods presented in §2.3 are learning a relation between x and y . In addition to our setup, these results were also reproduced in preliminary exper-
+
+971
+
+

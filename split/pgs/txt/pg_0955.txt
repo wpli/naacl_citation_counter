@@ -1,0 +1,18 @@
+Convolutional Neural Network for Paraphrase Identification
+¨ Wenpeng Yin and Hinrich Schutze Center for Information and Language Processing University of Munich, Germany wenpeng@cis.uni-muenchen.de
+
+Abstract
+We present a new deep learning architecture Bi-CNN-MI for paraphrase identification (PI). Based on the insight that PI requires comparing two sentences on multiple levels of granularity, we learn multigranular sentence representations using convolutional neural network (CNN) and model interaction features at each level. These features are then the input to a logistic classifier for PI. All parameters of the model (for embeddings, convolution and classification) are directly optimized for PI. To address the lack of training data, we pretrain the network in a novel way using a language modeling task. Results on the MSRP corpus surpass that of previous NN competitors.
+
+1
+
+Introduction
+
+In this paper, we address the problem of paraphrase identification. It is usually formalized as a binary classification task: for two sentences (S1 , S2 ), determine whether they roughly have the same meaning. Inspired by recent successes of deep neural networks (NNs) in fields like computer vision (Neverova et al., 2014), speech recognition (Deng et al., 2013) and natural language processing (Collobert and Weston, 2008), we adopt a deep learning approach to paraphrase identification in this paper. The key observation that motivates our NN architecture is that the identification of a paraphrase relationship between S1 and S2 requires an analysis at multiple levels of granularity. (A1) "Detroit manufacturers have raised vehicle prices by ten percent." ­ (A2) "GM, Ford and Chrysler have raised car prices by five percent."
+
+Example A1/A2 shows that paraphrase identification requires comparison at the word level. A1 cannot be a paraphrase of A2 because the numbers "ten" and "five" are different. (B1) "Mary gave birth to a son in 2000." ­ (B2) "He is 14 years old and his mother is Mary." PI for B1/B2 can only succeed at the sentence level since B1/B2 express the same meaning using very different means. Most work on paraphrase identification has focused on only one level of granularity: either on lowlevel features (e.g., Madnani et al. (2012)) or on the sentence level (e.g., ARC-I, Hu et al. (2014)). An exception is the RAE model (Socher et al., 2011). It computes representations on all levels of a parse tree: each node ­ including nodes corresponding to words, phrases and the entire sentence ­ is represented as a vector. RAE then computes a n1 × n2 comparison matrix of the two trees derived from S1 and S2 respectively, where n1 , n2 are the number of nodes and each comparison is the Euclidean distance between two vectors. This is then the basis for paraphrase classification. RAE (Socher et al., 2011) is one of three prior NN architectures that we draw on to design our system. It embodies the key insight that paraphrase identification involves analysis of information at multiple levels of granularity. However, relying on parsing has limitations for noisy text and for other applications in which highly accurate parsers are not available. We extend the basic idea of RAE by exploring stacked convolution layers which on one hand use sliding windows to split sentences into flexible phrases, furthermore, higher layers are able to ex-
+
+901
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 901­911, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

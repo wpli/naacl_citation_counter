@@ -1,0 +1,39 @@
+method baseline NOWEIGHT MT Ji and Eisenstein (2013) WORD WORD+GOOGLE WORD+PHRASE
+
+overall acc F1 .665 .799 .708 .809 .774 .841 .778 .843 .775 .839 .780 .843 .787 .848
+
+subset acc F1 .684 .812 .713 .823 .772 .839 .749 .827 .776 .843 .795 .853 .801 .857
+
+0.788 0.787 0.786 Accuracy 0.785 0.784 0.783 0.782 0.781 0.78 KNN Zero Type-average Context-average Reweighting methods for unseen units
+
+Table 1: Results on overall and subset corpus. Significant improvements over MT are marked with  (approximate randomization test, Pad´ o (2006), p < .05).
+
+Figure 1: Performance of different reweighting schemes for unseen units on overall.
+
+method NOWEIGHT TF-IDF TF-KLD TF-KLD-KNN
+
+acc .746 .752 .774 .787
+
+F1 .815 .821 .842 .848
+
+formance by the utilization of continuous and discontinuous phrase embeddings. In future, we plan to do experiments in a crossdomain setup and enhance our algorithm for domain adaptation paraphrase identification.
+
+Table 2: Effects of different reweighting methods on overall.
+
+Acknowledgments
+We are grateful to members of CIS for comments on earlier versions of this paper. This work was supported by Baidu (through a Baidu scholarship awarded to Wenpeng Yin) and by Deutsche Forschungsgemeinschaft (grant DFG SCHU 2246/8-2, SPP 1335).
+
+nation of MT features: NOWEIGHT, TF-IDF, TFKLD, TF-KLD Table 2 suggests that task-specific reweighting approaches (including TF-KLD and TF-KLD-KNN) are superior to unspecific schemes (NOWEIGHT and TF-IDF). Also, it demonstrates the effectiveness of our weight learning solution for unknown units in paraphrase task. 5.4 Reweighting schemes for unseen units We compare our reweighting scheme KNN (i.e., TFKLD-KNN) with three other reweighting schemes. Zero: zero weight, i.e., ignore unseen units; Typeaverage: take the average of weights of all known unit types in test set; Context-average: average of the weights of the adjacent known units of the unknown unit (two, one or defaulting to Zero, depending on how many there are). Figure 1 shows that KNN performs best.
+
+References
+Marco Baroni and Alessandro Lenci. 2010. Distributional memory: A general framework for corpus-based semantics. Computational Linguistics, 36(4):673­ 721. William Blacoe and Mirella Lapata. 2012. A comparison of vector-based representations for semantic composition. In Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, pages 546­556. Association for Computational Linguistics. Ronan Collobert and Jason Weston. 2008. A unified architecture for natural language processing: Deep neural networks with multitask learning. In Proceedings of the 25th international conference on Machine learning, pages 160­167. ACM. Dipanjan Das and Noah A Smith. 2009. Paraphrase identification as probabilistic quasi-synchronous recognition. In Proceedings of the Joint Conference of the 47th Annual Meeting of the ACL and the 4th International Joint Conference on Natural Language Pro-
+
+6
+
+Conclusion
+
+This work introduced TF-KLD-KNN, a new reweighting scheme that learns the discriminativities of known as well as unknown units effectively. We further improved paraphrase identification per-
+
+1372
+
+

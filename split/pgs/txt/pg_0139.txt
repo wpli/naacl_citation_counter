@@ -1,0 +1,27 @@
+Instead of projecting labels from a high-resource to a low-resource languages via parallel text and word alignment, we project annotations from structured data found in click logs. This can be seen as a benefit since typically a much larger volume of click log data is available than parallel text for low-resource languages. We also extend the constrained lattice training method of T¨ ackstr¨ om et al. (2013) from linear CRFs to non-linear CRFs. We propose a perceptron training method for hidden unit CRFs (Maaten et al., 2011) that allows us to train with partially labeled sequences. We show that combined with a novel pretraining methodology that leverages large quantities of unlabeled data, this training method achieves significant improvements over several strong baselines.
+
+ing method is to find  that maximizes the log likelihood of the label sequences under the model with l2 -regularization:  = arg max
+Rd N i=1
+
+log p (y (i) |x(i) ) -
+
+ ||||2 2
+
+Unfortunately, in our problem we do not have fully labeled sequences. Instead, for each token xj in sequence x1 . . . xn we have the following two sources of label information: · A set of allowed label types Y (xj ). (Label dictionary) · A label y ~j transferred from a source data. (Optional: transferred label) T¨ ackstr¨ om et al. (2013) propose a different objective that allows training a CRF in this scenario. To this end, they define a constrained lattice Y (x, y ~) = Y (x1 , y ~1 ) × . . . × Y (xn , y ~n ) where at each position j a set of allowed label types is given as: Y (xj , y ~j ) = {y ~j } Y (xj ) if y ~j is given otherwise
+
+2
+
+Model definitions and training methods
+
+In this section, we describe the two sequence models in our experiments: a conditional random field (CRF) of Lafferty et al. (2001) and a hidden unit CRF (HUCRF) of Maaten et al. (2011). Note that since we only have partially labeled sequences, we need a technique to learn from incomplete data. For a CRF, we follow a variant of the training method of T¨ ackstr¨ om et al. (2013). In addition, we make a novel extension of their method to train a HUCRF from partially labeled sequences. The resulting perceptron-style algorithm (Figure 2) is simple but effective. Furthermore, we propose an initialization scheme that naturally leverages unlabeled data for training a HUCRF. 2.1 Partially Observed CRF A first-order CRF parametrized by   Rd defines a conditional probability of a label sequence y = y1 . . . yn given an observation sequence x = x1 . . . xn as follows: p (y |x) = exp( (x, y )) y Y (x) exp( (x, y ))
+
+In addition to these existing constraints, we introduce constraints on the label structure. In our segmentation problem, labels are structured (e.g., some label types cannot follow certain others). We can easily incorporate this restriction by disallowing invalid label types as a post-processing step of the form: Y (xj , y ~j )  Y (xj , y ~j )  Y (xj -1 , y ~j -1 ) where Y (xj -1 , y ~j -1 ) is the set of valid label types that can follow Y (xj -1 , y ~j -1 ). T¨ ackstr¨ om et al. (2013) define a conditional probability over label lattices for a given observation sequence x: p (Y (x, y ~)|x) =
+y Y (x,y ~)
+
+where Y (x) is the set of all possible label sequences for x and (x, y )  Rd is a global feature function that decomposes into local feature n functions (x, y ) = j =1 (x, j, yj -1 , yj ) by the first-order Markovian assumption. Given fully labeled sequences {(x(i) , y (i) )}N i=1 , the standard train85
+
+p (y |x)
+
+Given a label dictionary Y (xj ) for every token type xj and training sequences {(x(i) , y ~(i) )}N i=1 where ( i ) y ~ is (possibly non-existent) transferred labels for
+
+

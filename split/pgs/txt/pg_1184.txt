@@ -1,0 +1,22 @@
+Unsupervised Entity Linking with Abstract Meaning Representation
+Xiaoman Pan1 , Taylor Cassidy2 , Ulf Hermjakob3 , Heng Ji1 , Kevin Knight3 1 Computer Science Department, Rensselaer Polytechnic Institute {panx2,jih}@rpi.edu 2 IBM Research & Army Research Laboratory taylor.cassidy.civ@mail.mil 3 Information Sciences Institute, University of Southern California {ulf,knight}@isi.edu
+
+Abstract
+Most successful Entity Linking (EL) methods aim to link mentions to their referent entities in a structured Knowledge Base (KB) by comparing their respective contexts, often using similarity measures. While the KB structure is given, current methods have suffered from impoverished information representations on the mention side. In this paper, we demonstrate the effectiveness of Abstract Meaning Representation (AMR) (Banarescu et al., 2013) to select high quality sets of entity "collaborators" to feed a simple similarity measure (Jaccard) to link entity mentions. Experimental results show that AMR captures contextual properties discriminative enough to make linking decisions, without the need for EL training data, and that system with AMR parsing output outperforms hand labeled traditional semantic roles as context representation for EL. Finally, we show promising preliminary results for using AMR to select sets of "coherent" entity mentions for collective entity linking 1 .
+
+1
+
+Introduction
+
+The Entity Linking (EL) task (Ji et al., 2010; Ji et al., 2011; Ji et al., 2014) aims at automatically linking each named entity mention appearing in a source text document to its unique referent in a target knowledge base (KB). For example, consider the following sentence posted to a discussion forum during the 2012 U.S. presidential election:
+The web service of this EL system is at: blender02.cs.rpi.edu:3300 and some related AMR tools are at: github.com/panx27/amr-reader
+1
+
+"Where would McCain be without Sarah?". An Entity Linker should link the entity mentions "McCain" and "Sarah" to the entities John McCain and Sarah Palin, respectively, which serve as unique identifiers for the real people. A typical EL system works as follows. Given a mention m (a string in a source document), the top N most likely entity referents from the KB are enumerated based on prior knowledge about which entities are most likely referred to using m. The candidate entities are re-ranked to ultimately link each mention to the top entity in its candidate list. Reranking consists of two key elements: context representation and context comparison. For a given mention, candidate entities are re-ranked based on a comparison of information obtained from the context of m with known structured and/or unstructured information associated with the top N KB entities, which can be considered the "context" of the KB entity2 . The basic intuition is that the entity referents of m and related mentions should be similarly connected in the KB. However, there might be many entity mentions in the context of a target entity mention that could potentially be leveraged for disambiguation. In this paper, we show that a deeper semantic knowledge representation - including the Abstract Meaning Representation (AMR) (Banarescu et al., 2013) - can capture contextual properties that are discriminative enough to disambiguate entity mentions that current state-of-the-art systems cannot handle, without the need for EL training data. Specifically, for a given
+Most work uses Wikipedia and related resources to derive the KB, prior link likelihood, and entity information (e.g., Wikipedia article text and infoboxes).
+2
+
+1130
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1130­1139, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

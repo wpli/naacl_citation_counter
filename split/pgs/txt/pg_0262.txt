@@ -1,0 +1,54 @@
+W1
+
+FST A
+
+W1 pron wFST B PMpron wFST C PM wFSA D PM FSA E1,2 PM
+
+W2 jogging juggling
+
+FST A
+
+W2 pron
+JH AH G AH L IH NG
+
+JH AH G IH NG JH AA G AH L IH NG
+
+joggaling
+
+juggling
+
+joggling
+
+Figure 4: The FSM cascade for converting W1 and W2 into a PM, and an illustrative example.
+
+phonemes x y z AA AA AA AH ER AH AH ER ER P B P P B B Z SH SH JH AO JH
+
+P (x, y  z ) cond. joint mixed 1.000 0.017 1.000 0.424 0.007 0.445 0.576 0.009 0.555 0.972 0.002 1.000 0.028 N/A N/A 1.000 N/A N/A 1.000 N/A N/A
+
+step k 1 2 3 4 5
+
+description W1 pron keep W2 pron delete align W1 pron delete W2 pron keep
+
+P (k ) 0.68 0.55 0.74 0.64 0.76
+
+Table 3: Learned step probabilities. The probabilities of keeping and aligning are higher than those of deleting, showing a tendency to preserve the component words.
+
+Table 2: Sample learned phoneme alignment probabilities for each method.
+
+We first generate the pronunciations of W1 and W2 with FST A, which functions as a simple lookup from the CMU Pronouncing Dictionary (Weide, 1998). Next, wFST B, the multitape wFST from Figure 2 3, translates W1 pron and Wpron into PMpron . wFST C, built from aligned graphemes and phonemes from the CMU Pronunciation Dictionary (Galescu and Allen, 2001), spells PMpron as PM . To improve PM , we now use three FSAs built from W1 and W2 . The first, wFSA D, is a smoothed "mini language model" which strongly prefers letter trigrams from W1 and W2 . The second and third, FSA E1 and FSA E2 , accept all inputs except W1 and W2 .
+
+manteaux with three component words ("turkey" + "duck" + "chicken"  "turducken") or without any overlap ("arpa" + "net"  "arpanet"). From 571 examples, this yields 401 {W1 , W2 , PM} triples. We also use manual annotations of PMpron for learning the multitape wFST B weights and for midcascade evaluation. We randomly split the data for 10-fold crossvalidation. For each iteration, 8 folds are used for training data, 1 for dev, and 1 for test. Training data is used to learn wFST B weights (Section 6) and dev data is used to learn reranking weights (Section 7).
+
+6
+
+Training
+
+5
+
+Data
+
+We obtained examples of portmanteaux and component words from Wikipedia and Wiktionary lists (Wikipedia, 2013; Wiktionary, 2013). We reject any that do not satisfy our constraints­for example, port208
+
+FST A is unweighted and wFST C is pretrained. wFSA D and FSA E1,2 are built at runtime. We only need to learn wFST B weights, which we can reduce to weights on transitions qk  qk a and q3 a  q3 from Figure 3. The weights qk  qk a represent the probability of each step, or P (k ). The weights q3 a  q3 represent the probability of generating phoneme z from input phonemes x and y , or P (x, y  z ).
+
+

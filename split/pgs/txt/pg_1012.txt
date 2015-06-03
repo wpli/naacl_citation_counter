@@ -1,0 +1,25 @@
+Model maxFscore maxPrecision maxRecall
+
+F-score .608 .391 .496
+
+Precision .705 .986 .377
+
+Recall .535 .244 .724
+
+Table 1: Automatic prosodic boundary annotation performance on the BU corpus.
+
+are not, generally, annotated for prosody. We would expect that experiments on ADS would improve less over the baseline, when compared to those run on IDS, due to its less exaggerated prosody and its reduced number of prosodic boundaries. Thus, any improvement found on ADS, would be found also on IDS. The corpora used have all been transcribed phonetically, but, for the purpose of this paper, we have transformed this phonetic annotation into a phonemic one. For the English databases the mappings proposed by Lee and Hon (1989) were employed, with two notable exceptions: vowels /er/ and /axr/ were mapped to the phonemes /ah/ and /r/, while the syllabic consonants /el/, /em/ and /en/ were mapped to the label /ah/ and their corresponding consonant (/l/, /m/ or /n/). For Japanese, we employed the same mappings used by Boruta (2011).
+
+Figure 3: Colloc3-Syll based grammars scores on the BU dataset, comparing results without prosodic annotation, with those obtained by automatic prosodic boundaries that maximize F-score, added at different levels in the grammar.
+
+5
+
+Results
+
+The prosodic boundary procedure on the BU and the CSJ used oracle segmental (phonetic) information, while phonemes were force-aligned from word-level annotation for the LUCID. The prosodic boundaries were evaluated with the classic measurements: precision, recall and F-score. The word segmentation token F-scores were obtained every 10 epochs (for less correlation due to the sampler) during the 100 epochs (BU corpus), or the 200 epochs (LUCID and CSJ corpora) centered around the point of convergence, and their mean and standard deviation computed. The convergence point was determined by smoothing the prior probability of the grammar with a sliding window and choosing the epoch where the negative log probability was the lowest. 5.1 English The best parameters of the prosodic boundary detection system were searched for on the development set left aside for this purpose. The F-score of the
+
+system was maximized and the best combination of cues and conjunction of cues were pause+onset and pause + nucleus, respectively. For these settings, we then determined the threshold values which gave the best F-score, precision and recall for boundary detection, which were further used to run the algorithm on the evaluation set. The results obtained on the evaluation set for the systems trying to maximize F-score (maxF score), precision (maxP recision) or recall (maxRecall) are presented in Table 1. The word segmentation method was then run with the grammars defined in section 3.2, with and without prosodic boundary information. For the prosody enhanced cases, both oracle and automatic boundaries were employed. The best results obtained on the BU corpus, for each of the five settings, are illustrated on the left side of Figure 2. It appears that all cases that employ prosodic information improve over the baseline, with oracle boundaries giving a 7% absolute performance gain. Next, we looked in more detail at the behaviour of the best system that uses automatic boundaries (maxF score). We present the token F-score obtained by this system for the different levels of the grammar where the prosodic information is added. Although we obtained improvements on the BU corpus, for all cases when prosodic information was used, the overall results are far from state-of-the art
+
+958
+
+

@@ -1,0 +1,26 @@
+Lang EN DE FR ES RO AR UZ
+
+|Tokens| 1.1b 1.2b 1.5b 566m 1.7b 453m 850m
+
+|V | 1.2m 2.9m 1.2m 941k 963k 624k 2.0m
+
+|GV M orph | 780k 3.7m 1.8m 2.2m 3.8m 2.4m 5.6m
+
+V |DM orph | 75,823 169,017 92,145 82,379 141,642 114,246 194,717
+
+Table 3: Statistics regarding the size of the training data and the induced morphology graphs.
+
+well does our method capture morphology, and how does it compare with previous approaches that use word-representations for morphology? How well does this method handle OOVs? How does the impact of morphology analysis change with training data size? We provide both qualitative and quantitative answers for each of these questions next. 4.1 Quality of Morphological Analysis
+
+We first evaluate the impact of our morphological analysis on a standard word-similarity rating task. The task measures word-level understanding by comparing the correlation between humanproduced similarity ratings for word pairs, e.g. (intraspecific, interspecies), with those produced by an algorithm. For the experiments reported here, we train SkipGram models4 using a dimensionality of n = 500. We denote a system using only SkipGram model embeddings as SG. To evaluate the impact of our method, we perform morphological analysis for words below a count threshold C . For a VC word w  DM orph , we simply use the SkipGram
+VC use as word-representation its mapping in DM orph ; we denote such a system SG+Morph. For both SG and SG+Morph systems, we compute the similarity of word-pairs using the cosine distance between the vector-representations. VC vector-representation; for a word w  DM orph , we
+
+we use the Wikipedia data (Shaoul and Westbury, 2010). For German, French, and Spanish, we use the monolingual data released as part of the WMT2013 shared task (Bojar et al., 2013). For Arabic we use the Arabic GigaWord corpus (Parker et al., 2011). For Romanian and Uzbek, we use collections of News harvested from the web and cleaned (boilerplate removed, formatting removed, encoding made consistent, etc.). All SkipGram models are trained using a count cutoff of 5 (all words with count less than the cutoff are ignored). Table 3 presents statistics on the data and vocabulary size, as well as the size of the induced morphology graphs. These numbers illustrate the richness of the morphological phenomena present in languages such as German, Romanian, Arabic, and Uzbek, compared to English. As test sets, we use standard, publicly-available word-similarity datasets. Most relevant for our approach is the Stanford English Rare-Word (RW) dataset (Luong et al., 2013), consisting of 2034 word pairs with a higher degree of English morphology compared to other word-similarity datasets. We also use for English the WS353 (Finkelstein et al., 2002) and RG65 datasets (Rubenstein and Goodenough, 1965). For German, we use the Gur350 and ZG222 datasets (Zesch and Gurevych, 2006). For French we use the RG65 French version (Joubarne and Inkpen, 2011); for Spanish, Romanian, and Arabic we use their respective versions of WS353 (Hassan and Mihalcea, 2009). Results We present in Table 4 the results obtained across 6 language pairs and 9 datasets, using a count threshold for SG+Morph of C = 100. We also include the results obtained by two previouslyproposed methods, LSM2013 (Luong et al., 2013) and BB2014 (Botha and Blunsom, 2014), which share some of the characteristics of our method. Even in the absence of any morphological treatment, our word representations are better than previously used ones. For instance, LSM2013 uses exactly the same EN Wikipedia (Shaoul and Westbury, 2010) training data, and achieves 26.8 and 34.4 Spearman  correlation on RW, with and without morphological treatment, respectively. The word representations we train yield a  of 35.8 for SG, and a  of 41.8 for SG+Morph (+7.4 improve-
+
+Data We train both the SG and SG+Morph models from scratch, for all languages considered. For English,
+Additional settings include a window-size of 5 and negative sampling set to 5. Unseen words receive a zero-vector embedding and a cosine score of 0.
+4
+
+1633
+
+

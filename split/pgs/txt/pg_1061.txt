@@ -1,0 +1,30 @@
+suboptimal estimation for both word vectors and the bilingual transform, as we will see shortly. This paper solves the inconsistence by normalizing the word vectors. Specifically, we enforce the word vectors to be in a unit length during the learning of the embedding. By this constraint, all the word vectors are located on a hypersphere and so the inner product falls back to the cosine distance. This hence solves the inconsistence between the embedding and the distance measurement. To respect the normalization constraint on word vectors, the linear transform in the bilingual projection has to be constrained as an orthogonal transform. Finally, the cosine distance is used when we train the orthogonal transform, in order to achieve full consistence.
+
+2012), which casts multilingual learning as a multitask learning and encodes the multilingual information in the interaction matrix. All the above methods rely on a multilingual lexicon or a word/pharse alignment, usually from a machine translation (MT) system. (Blunsom et al., 2014) proposed a novel approach based on a joint optimization method for word alignments and the embedding. A simplified version of this approach is proposed in (Hermann and Blunsom, 2014), where a sentence is represented by the mean vector of the words involved. Multilingual learning is then reduced to maximizing the overall distance of the parallel sentences in the training corpus, with the distance computed upon the sentence vectors.
+
+2 Related work
+This work largely follows the methodology and experimental settings of (Mikolov et al., 2013b), while we normalize the embedding and use an orthogonal transform to conduct bilingual translation. Multilingual learning can be categorized into projection-based approaches and regularizationbased approaches. In the projection-based approaches, the embedding is performed for each language individually with monolingual data, and then one or several projections are learned using multilingual data to represent the relation between languages. Our method in this paper and the linear projection method in (Mikolov et al., 2013b) both belong to this category. Another interesting work proposed by (Faruqui and Dyer, 2014) learns linear transforms that project word vectors of all languages to a common low-dimensional space, where the correlation of the multilingual word pairs is maximized with the canonical correlation analysis (CCA). The regularization-based approaches involve the multilingual constraint in the objective function for learning the embedding. For example, (Zou et al., 2013) adds an extra term that reflects the distances of some pairs of semantically related words from different languages into the objective funtion. A similar approach is proposed in (Klementiev et al.,
+
+3
+
+Normalized word vectors
+
+Taking the skip-gram model, the goal is to predict the context words with a word in the central position. Mathematically, the training process maximizes the following likelihood function with a word sequence w1 , w2 ...wN : 1 N
+N i=1 -C j C,j =0
+
+logP (wi+j |wi )
+
+(1)
+
+where C is the length of the context in concern, and the prediction probability is given by: P (wi+j |wi ) = exp(cT wi+j cwi )
+w
+
+exp(cT w cwi )
+
+(2)
+
+where w is any word in the vocabulary, and cw denotes the vector of word w. Obviously, the word vectors learned by this way are not constrained and disperse in the entire M -dimensional space, where M is the dimension of the word vectors. An inconsistence with this model is that the distance measurement in the training is the inner product cT w cw , however when word vectors are applied, e.g., to estimate word similarities, the metric is often the cosine cT cw distance ||cww ||||cw || . A way to solve this consistence is to use the inner product in applications, however using the cosine distance is a convention in natural language processing (NLP) and this measure does
+
+1007
+
+

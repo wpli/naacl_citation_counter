@@ -1,0 +1,33 @@
+Classification Feature Random Baseline Oracle Baseline Function Word unigrams Function Word bigrams Production Rules Part-of-Speech unigrams Part-of-Speech bigrams Part-of-Speech trigrams Ensemble (All features) Word unigrams
+
+E F C AM DAT 10-fold CV
+
+Train E F C AM DAT Test T OEFL11
+
+Train T OEFL11 Test E F C AM DAT
+
+9.09 86.84 52.01 47.92 49.12 33.21 50.43 53.05 64.95 ­
+
+11.11 64.92 27.14 29.21 30.73 23.42 31.02 32.38 33.45 41.82
+
+11.11 62.43 21.77 22.63 23.91 16.71 23.09 25.55 28.42 42.48
+
+Table 2: Classification accuracy (%) for our within- and cross-corpus experiments.
+
+(Odlin, 1989). The effects are mediated not only by cognates and word form similarities, but also semantics and meanings. Other NLI studies have also provided empirical evidence for this hypothesis (Malmasi and Cahill, 2015). However, issues stemming from topic bias5 have also limited their use in NLI (Brooke and Hirst, 2012a), although use could be justified in crosscorpus scenarios due to the lower risk of topic-bias across corpora. We applied word unigrams to our cross-corpus experiment, achieving an accuracy of 41.8% for training on the E F C AM DAT and testing on T OEFL11 and 42.5% for the reverse setting. These are the best results in this setup. To check for any topic-bias effects, we inspected the most discriminative features for each L1 class using the method proposed by Malmasi and Dras (2014d). This analysis revealed that the top features were mostly cultural and geographic references related to the author's country. Table 3 contains words selected from the top 15 most discriminative features found in the cross-corpus experiment for three L1s. We observe that most of these are toponyms or culture-specific terms such as names and currencies. These results reveal another potential issue with using lexical features. Although this isn't topicbias, the features do not represent genuine linguistic differences or lexical transfer effects between L1 groups. In practical scenarios, this could also make NLI systems vulnerable to content-based manipulation. The exclusion of proper nouns is one way to combat this.
+
+characterize English writings of Japanese learners. We extracted the most discriminative cross-corpus features of Japanese learner texts using the method of Malmasi and Dras (2014d). Table 4 contains the top production rule features. The first rule shows a preference for having a subordinate clause before the main clause. The next two rules show that Japanese learners tend to begin their sentences with adverbs and conjunctions. This preference for placing information at the start of sentences is most likely rooted in the fact that Japanese is an SOV head-final language6 where dependent clauses generally precede the main clause and relative clauses precede the noun they modify. The influence of this head-direction parameter on English acquisition has been previously investigated (Flynn, 1989). In contrast, it is quite common for the main clause to precede the subordinate clause in English. Other research has also noted that Japanese speakers have a "long before short" preference7 (Yamashita and Chang, 2001). This is also evidence by another highly discriminative rule for this L1: S  S , CC S . Japanese writers also seem more likely to split longer arguments into multiple shorter sentences, as suggested by our third production rule. It has also been noted that Japanese and Korean sentences in the T OEFL11 have the shortest mean length (Cimino et al., 2013, p. 211). Turning to POS trigrams, the POS tag sequence VBZ JJ NN is strongly linked to Japanese learnContrasted with English which is SVO. This refers to how conjuncts are ordered: short-before-long in English, long-before-short in Japanese. Our findings suggest that Japanese writers transfer this internal order-preference into their L2 English writing.
+7 6
+
+7
+
+To demonstrate the utility of this cross-corpus approach we present a brief case study of features that
+5
+
+A Case Study of Japanese Learners
+
+Due to correlations between text topics and L1 classes.
+
+1406
+
+

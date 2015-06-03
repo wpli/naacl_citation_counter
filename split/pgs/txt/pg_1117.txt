@@ -1,0 +1,23 @@
+variation of our system. We designed one question for each timeline. Sample questions are: "describe the activities for searching for the missing flight MH370", and "describe the attitude and action of Russian Government on Eastern Ukraine". We recruited 10 undergraduate and graduate students who are native speakers of English. Each student first read one question and its corresponding timeline for 5 minutes. The timeline was then removed, and the student wrote down an answer for the question. We asked each student to answer the question for each of four timelines (one for each event dataset). Two timelines are displayed with threads, and two without threads. We presented threads by adding a thread number in front of each sentence. We then used Amazon Mechanical Turk to evaluate the informativeness of students' answers. Turkers were asked to read all 10 answers for the same question, with five answers based on timelines with threads and five others based on timelines without threads. After that, they rated each answer with an informativeness score on a 1-to-5 rating scale (1 as "not relevant to the query", and 5 as "very informative"). We also added two quality control questions. Table 6 shows that the average rating for answers written after reading timelines with threads is 3.29 (43% are rated  4), higher than the 2.58 for the timelines with no thread exhibited (30% are rated  4).
+Answer Type Avg ± STD Rated 5 (%) Rated 4 (%) No Thread 2.58 ± 1.20 7% 23% With Threads 3.29 ± 1.28 17% 26% answers written after reading timelines with threads vs. with no thread. Answers written with access to threads are rated higher (3.29) than the ones with no thread (2.58).
+
+al. (2011). They propose a factor graph to allow sentences and tweets to mutually reinforce each other. Gao et al. (2012) exploit a co-ranking model to identify sentence-tweet pairs with complementary information estimated from a topic model. These efforts handle a small number of documents and tweets, while we target a larger scale of data. In terms of timeline summarization, the Chieu and Lee (2004) system ranks sentences according to "burstiness" and "interestingness" estimated by a likelihood ratio test. Yan et al. (2011) explore an optimization framework that maximizes the relevance, coverage, diversity, and coherence of the timeline. Neither system has leveraged the social context. Our event threading algorithm is also inspired by work on topic detection and tracking (TDT) (Allan et al., 1998), where efforts are made for document-level link detection and topic tracking. Similarly, Nallapati et al. (2004) investigate event threading for articles, where they predict linkage based on causal and temporal dependencies. Shahaf et al. (2012) instead seek for connecting articles into one coherent graph. To the best of our knowledge, we are the first to study sentence-level event threading.
+
+7
+
+Conclusion
+
+Table 6: Human evaluation on the informativeness of
+
+6
+
+Related Work
+
+We presented a socially-informed timeline generation system, which constructs timelines consisting of article summaries and comment summaries. An alternating optimization algorithm is designed to maximize the connectivity between the two sets of summaries as well as their importance and information coverage. Automatic and human evaluations showed that our system produced more informative timelines than state-of-the-art systems. Our comment summaries were also rated as very insightful.
+
+There is a growing interest in generating article summaries informed by social context. Existing work focuses on learning users' interests from comments and incorporates the learned information into a news article summarization system (Hu et al., 2008). Zhao et al. (2013) instead estimate word distributions from tweets, and bias a Page Rank algorithm to give higher restart probability to sentences with similar distributions. Generating tweet+article summaries has been recently investigated in Yang et 1063
+
+Acknowledgments
+We thank John Hessel, Lillian Lee, Moontae Lee, David Lutz, Karthik Raman, Vikram Rao, Yiye Ruan, Xanda Schofield, Adith Swaminathan, Chenhao Tan, Bishan Yang, other members of Cornell NLP group, and the NAACL reviewers for valuable suggestions and advice on various aspects of this work. This work was supported in part by DARPA DEFT Grant FA8750-13-2-0015.
+
+

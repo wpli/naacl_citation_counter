@@ -1,0 +1,27 @@
+Tag none Negative Active Strong Hostile Power Positive Passive Weak
+
+Summ. 0.58 0.21 0.26 0.16 0.13 0.08 0.07 0.05 0.04
+
+Article 0.77 0.05 0.15 0.03 0.01 0.01 0.03 0.05 0.03
+
+Examples counterfeit avert, weep wail intensify overhaul, grasp hop oust devestate, roar promote kidnap ravage, shrug crush curb reclaim, persuade overcome reinstate mend, reassure hug deplore mourn, gaze huddle flounder sag, abandon hesitate
+
+p-value Summary Article
+
+0.01 0.54 0.80
+
+0.001 0.53 0.86
+
+0.0001 0.54 0.88
+
+0.00001 0.54 0.91
+
+Table 3: Percentage of words with zero GI tags for increasing p-value cutoff strictness
+
+Table 2: Percentage of words in each class covered by different GI tags. The first two example words come from the summary-biased class and last two come from the article-biased class.
+
+a verb has domain-level importance: N EGATIVE , P OSITIVE , ACTIVE , PASSIVE , S TRONG , W EAK , H OSTILE , and P OWER. Table 2 shows some randomly selected words from each of the eight GI tags. The first two words come from the summary-biased class and last two come from the article-biased class. Table 2 also shows the fraction of verbs in each class that occur in the GI with a given tag, as well as the fraction of verbs that do not have any of the eight tags. It becomes immediately clear that the GI categories do have explanatory power but that it has a major problem with coverage, with the majority of verbs in the summary and article corpora not appearing in the GI at all as shown on the first line. Notably, the coverage is considerably better for the summarybiased verbs. Verbs from several GI categories appeared notably more often in summaries than in articles. For example, verbs with the N EGATIVE tag account for 21% of verbs in summaries, but only 5% of verbs in articles. Other such categories include verbs that imply an active physical engagement (ACTIVE), imply that the actor is in a position of power (S TRONG), imply that hostility exists between the entities involved (H OSTILE) or that imply that the actor has the influence to affect the policies of others (P OWER). P OSITIVE , PASSIVE , and W EAK verbs had more similar appearance rates in both classes, but the absolute number of words covered by these tags was low. Increasing the strictness of the p-value cutoff for pruning the vocabulary as described in the previous section reduces the size of the vocabulary but increases the purity of the classes by only including 1443
+
+verbs that have sufficiently different usage ratios. As shown in Table 3, as we restrict the vocabulary to increasingly certain verbs, the proportion of verbs in the summary class that are tagged by the GI remains almost constant while the proportion of untagged verbs in the article class steadily increases. This indicates that the summary-biased verbs have a consistent distribution of GI tags across all usage ratios, while verbs tended to be tagged less often as the bias towards the articles increased. Although the GI gives good indicators for which words are likely to be important summary words but no indicators for which words are likely to be of no interest in summarizing world news. 3.1 Personal Stories To get a sense for what aspects of the verb semantics causes a word to be excluded from the summary, we examined the contexts for the verbs with the highest bias weights in each class. To define the context for each verb, we used the dependency relations produced by the Stanford Parser. Any verb, noun, or adverb placed in a dependency relation with a given verb is considered to co-occur with it. For each of the ten most highly weighted verbs in each class, Table 4 shows the lemmas that co-occurred most frequently with it. The verbs that are biased towards the articles (not important) seem to capture human element of the news reports, corresponding to passages narrating personal stories of ordinary people involved in the larger political situation discussed in the news. The summary-biased verbs are clearly evocative of the N EGATIVE , ACTIVE , S TRONG , H OSTILE, and P OWER tags given by the GI and the common usages suggested by their contexts tend to be official, non-personal or that of people in public roles. No existing resources provide descriptions of this personal vs. non-personal dimension of lexical meaning and we decided to derive such a characterization from data unrelated to the NYT.
+
+

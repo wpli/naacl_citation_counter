@@ -1,0 +1,27 @@
+more token in common. Due to the support from their neighbor Republican in the KB (Figure 3) which matches the neighbor "Republican" of mentions "Paul" and "Johnson" (Figure 2), Ron Paul and Gary Johnson are promoted to top 1 and top 3 respectively. Gary Johnson is still behind two former U.S. presidents Andrew Johnson and Lyndon B. Johnson who also shares the neighbor Republican in the KB. 5.4 Context Coherence Based Re-ranking
+
+sorted according to alphabetic order of document IDs and taken as a tenth. The detailed data statistics are presented in Table 1 11 .
+News DF All PER 159 235 394 ORG 187 129 316 GPE 679 224 903 All 1,025 588 1,613
+
+Table 1: Total # of Entity Mentions in Test Set
+
+Context coherence based re-ranking is driven by the similarity among KB entities. Let Rm be a set of coherent entity mentions, and RE be the set of corresponding entity candidate lists, which are generated according to salience. Given RE , we generate every combination of possible top candidate lists for the mentions in Rm , and denote the set of these combinations Cm . Formally, Cm is the Cartesian product of all candidate lists E P RE . In the walk-through example, Rm contains ["Romney", "Paul", "Johnson"], and Cm contains [Mitt Romney, Ron Paul, Gary Johnson], [Mitt Romney, Paul McCartney, Lyndon Johnson], etc. We compute coherence for each combination c P Cm as Jaccard Similarity, by applying a form of Equation 5.3 generalized to take any number of arguments to the set of knowledge networks for all entities in c, i.e., tg peq|e P cu. The highest similarity combination is selected, yielding a top candidate for each m P Rm . For example, compared to Andrew Johnson and Lyndon Johnson, Gary Johnson is more coherently connected with Mitt Romney and Ron Paul, therefore it is promoted to top 1 with the coherence measure.
+
+For each mention, we check whether the KB entity returned by an approach is correct or not. We compute accuracy for an approach as the proportion of mentions correctly linked. 6.2 Experiment Results
+
+6
+6.1
+
+Experiments
+Data And Scoring Metric
+
+For our experiments we use a publicly available AMR R3 corpus (LDC2013E117) that includes manual EL annotations for all entity mentions (LDC2014E15) 10 . For evaluation we used all the discussion forum posts (DF), and news documents (News) that were
+EL annotations are available to KBP shared task registrants (nlp.cs.rpi.edu/kbp/2014) via Linguistic Data Consortium (www.ldc.upenn.edu).
+10
+
+We focus primarily on context collaborator based reranking results. We compare our results with several baseline and state-of-the-art approaches in Table 2. In Table 3 we present preliminary results for collective linking. Our Unsupervised Context Collaborator Approach substantially outperforms the popularity based methods. More importantly, we see that AMR provides the best context representation for collaborator selection. Even system AMR outperformed not only baseline co-occurrence based collaborator selection methods, but also outperforms the collaborator selection method based on human annotated core semantic roles. Figure 4 depicts accuracy increases as more AMR annotation is used in selecting collaborators. From the commonness baseline, additional knowledge about individual names leads to substantial gains followed by additional gains after incorporating links denoting semantic roles. Note that coreference here includes cross-sentence co-reference not based on AMR (Section 3.4). Furthermore, the results using human annotated AMR outperform the state-of-the-art supervised methods trained from a large scale EL training corpus, which rely on collective inference12 . These results all verify the importance of incorporating a wider range of deep knowledge. Finally, Table 2 presents results in which our
+11 The list of document IDs in the test set is at: nlp.cs.rpi.edu/amrel/testdoc.txt 12 Note that the ground-truth EL annotation for the test set was created by correcting the output from supervised methods, so it may even favor these methods.
+
+1136
+
+

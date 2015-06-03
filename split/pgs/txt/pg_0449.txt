@@ -1,0 +1,20 @@
+(lexical features, subcategorization frames, syntactic sentential constructions, etc.)--which can be also exploited for rule-based generation. The linearizer also suffers from a small size of the training set. Thus, while the small Spanish training corpus leads to 0.754 BLEU and 0.762 BLEU for the development and test sets respectively, for English, we achieve 0.91 BLEU, which is a very competitive outcome compared to other English linearizers (Song et al., 2014). We also found that the data-driven generator tends to output slightly shorter sentences, when compared to the rule-based baseline. It is always difficult to find the best evaluation metric for plain text sentences (Smith et al., 2014). In our experiments, we used BLEU, NIST and the exact match metric. BLEU is the average of n-gram precisions and includes a brevity penalty, which reduces the score if the length of the output sentence is shorter than the gold. In other words, BLEU favors longer sentences. We believe that this is one of the reasons why the machine-learning based generator shows a bigger difference for the English test set and the Spanish development set than the rule-based baseline. Firstly, there are extremely long sentences in the Spanish test set (31 words per sentence, in the average; the longest being 165 words). Secondly, the English sentences and the Spanish development sentences are much shorter than the Spanish test sentences, such that the ML approach has the potential to perform better.
+
+2009; Guo et al., 2011a). A number of proposals are hybrid in that they combine statistical machine learning-based generation with rule-based generation. Thus, some combine machine learning with pre-generated elements, as, e.g., (Marciniak and Strube, 2004; Wong and Mooney, 2007; Mairesse et al., 2010), or with handcrafted rules, as, e.g., (Ringger et al., 2004; Belz, 2005). Others derive automatically grammars for rule-based generation modules from annotated data, which can be used for surface generation, as, e.g., (Knight and Hatzivassiloglou, 1995; Langkilde and Knight, 1998; Oh and Rudnicky, 2002; Zhong and Stent, 2005; Bohnet et al., 2011; Rajkumar et al., 2011) or for generation from ontology triples, as, e.g., (Gyawali and Gardent, 2013).
+
+6
+
+Conclusions
+
+5
+
+Related work
+
+There is an increasing amount of work on statistical sentence generation, although hardly any addresses the problem of deep generation from semantic structures that are not isomorphic with syntactic- structures as a purely data-driven problem (as we do). To the best of our knowledge, the only exception is our earlier work in (Ballesteros et al., 2014b), where we discuss the principles of classifiers for data-driven generators. As already mentioned in Section 1, most of the state-of-the-art work focuses on syntactic generation; see, among others (Bangalore and Rambow, 2000; Langkilde-Geary, 2002; Filippova and Strube, 2008), or only on linearization and inflection (Filippova and Strube, 2007; He et al., 2009; Wan et al., 395
+
+We presented a statistical deep sentence generator that successfully handles the non-isomorphism between meaning representations and syntactic structures in terms of a principled machine learning approach. This generator has been successfully tested on an English and a Spanish corpus, as a stand-alone DSyntS­SSyntS generator and as a part of the generation pipeline. We are currently about to apply it to other languages--including Chinese, French and German. Furthermore, resources are compiled to use it for generation of spoken discourse in Arabic, Polish and Turkish. We believe that our generator can be used not only in generation per se, but also, e.g., in machine translation (MT), since MT could profit from using meaning representations such as DSyntSs, which abstract away from the surface syntactic idiosyncrasies of each language, but are still linguistically motivated, as transfer representations.
+
+Acknowledgments
+Our work on deep stochastic sentence generation is partially supported by the European Commission under the contract numbers FP7-ICT-610411 (project MULTISENSOR) and H2020-RIA-645012 (project KRISTINA).
+
+

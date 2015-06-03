@@ -1,0 +1,27 @@
+Our Model Bayes (De) Bayes (En) SyntF
+
+PU 76.4 86.8 80.6 83.1
+
+CO 87.0 75.7 76.0 79.3
+
+F1 81.4 80.9 78.3 81.2
+
+Table 2: Results on German (SALSA / CoNLL 2009).
+
+version of the Bayes model (denoted as Bayes (En)). Recently, Lang and Lapata (2014) evaluated their Agglom+ on a version of the same German SALSA dataset. Their best result is F1 of 79.2%, however, this score and our results are not directly comparable. Instead of using the CoNLL dataset, they processed the corpus themselves. They also relied on syntactic features from a constituent parser whereas we used dependency representations. The overall picture for German closely resembles the one for English. Our method achieves results comparable to the best method evaluated in this setting. Importantly, parameters and features of our model for German and English are identical. On the contrary, one can see that specialization of argument signatures was crucial for the Bayesian model. Also, similarly to English, our method induces less fine-grain sets of semantic roles but achieves much higher collocation scores.
+
+5
+
+Additional Related Work
+
+In recent years, unsupervised approaches to semantic role induction have attracted considerable attention. However, there exist other ways to address lack of coverage provided by existing semanticallyannotated resources. One natural direction is semi-supervised role labeling, where both annotated and unannotated data is used to estimate a model. Previous semisupervised approaches to SRL can be mostly regarded as extensions to supervised learning by either incorporating word features induced from unnannoted texts (Collobert and Weston, 2008; Deschacht and Moens, 2009) or creating some form of `surrogate' supervision (He and Gildea, 2006; F¨ urstenau and Lapata, 2009). Benefits from using unlabeled data were moderate, and more significant for the harder SRL version, frame-semantic parsing (Das and Smith, 2011). 8
+
+Another important direction includes crosslingual approaches (Pado and Lapata, 2009; van der Plas et al., 2011; Kozhevnikov and Titov, 2013) which leverage resources from resource-rich languages, as well as parallel data, to produce annotation or models for resource-poor languages. However, both translation shifts and noise in word alignments harm the performance of cross-lingual methods. Nevertheless, even joint unsupervised induction across languages appears to be beneficial (Titov and Klementiev, 2012b). Unsupervised learning has also been one of the central paradigms for the closely-related area of relation extraction (RE), where several techniques have been proposed to cluster semantically similar verbalizations of relations (Lin and Pantel, 2001; Banko et al., 2007; Yao et al., 2011). Similarly to SRL, unsupervised methods for RE mostly rely on generative modeling and agglomerative clustering. From the learning perspective, methods which use the reconstruction-error objective to estimate linear models (Ammar et al., 2014; Daum´ e III, 2009) are certainly related. However, they do not consider learning factorization models, and they also do not deal with semantics. Tensor factorization methods used in the context of modeling knoweldge bases (e.g., (Bordes et al., 2011)) are also close in spirit. However, they do not deal with inducing semantics but rather factorize existing relations (i.e. rely on semantics).
+
+6
+
+Conclusions and Discussion
+
+This work introduces a method for inducing featurerich semantic role labelers from unannoated text. In our approach, we view a semantic role representation as an encoding of a latent relation between a predicate and a tuple of its arguments. We capture this relation with a probabilistic tensor factorization model. The factorization model (relying on semantic roles) and a feature-rich model (predicting the roles) are jointly estimated by optimizing an objective which favours accurate reconstruction of arguments given the latent semantic representation (and other arguments). Our estimation method yields a semantic role labeler which achieves state-of-the-art results both on English and German. Unlike previous work on role induction, in our
+
+

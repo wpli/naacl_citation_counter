@@ -1,0 +1,20 @@
+Wang et al. (2006) propose triangulation heuristics for other model parameters; however, in this paper, we consider only t-table triangulation.
+
+3
+
+Our Method
+
+We now discuss two approaches that better exploit model triangulation. In the first, we use the triangulated t-table to construct a prior on the source-target t-table. In the second, we place a prior on each of the three models and train them jointly. 3.1 Triangulation as a Fixed Prior We first propose to better utilize the triangulated ttable tst (Eq. 1) by using it to construct an informative prior for the source-target t-table tst  st . Specifically, we modify the word alignment generative story by placing Dirichlet priors on each of the multinomial t-table distributions tst (· | s): tst (· | s)  Dirichlet( s ) for all s. (2)
+
+where C s > 0 is a scalar parameter, m s is a probability vector, encoding the mode of the Dirichlet and 1 denotes an all-one vector. Roughly, when C s is high, samples drawn from the Dirichlet are likely to concentrate near the mode m s . Using this decomposition, we set for all s: m s = tst (· | s) C s =  · c( s) ·
+s s
+
+(5) c( s ) c( s ) (6)
+
+Here, each  s = (. . . ,  st , . . .) denotes a hyperparameter vector which will be defined shortly. Fixing this prior, we optimize the model posterior likelihood P(st | bitextst ) to find a maximum-aposteriori (MAP) estimate. This is done according the MAP-EM framework (Dempster et al., 1977), which differs slightly from standard EM. The Estep remains as is: fixing the model st , we collect expected counts E [c( s, t)] for each decision in the generative story. The M-step is modified to maximize the regularized expected complete-data loglikelihood with respect to the model parameters st , where the regularizer corresponds to the prior. Due to the conjugacy of the Dirichlet priors with the multinomial t-table distributions, the sole modification to the regular EM implementation is in the M-step update rule of the t-table parameters: tst (t | s) = E [c( s, t)] +  st - 1 t ( E [c( s, t)] +  st - 1) (3)
+
+where c( s) is the count of source word s in the source-target bitext, and the scalar hyperparameters ,  > 0 are to be tuned (We experimented with completely eliminating the hyperparameters ,  by directly learning the parameters C s . To do so, we implemented the algorithm of Minka (2000) for learning the Dirichlet prior, but only learned the parameters C s while keeping the means m s fixed to the triangulation. However, preliminary experiments showed performance degradation compared to simple hyperparameter tuning). Thus, the distribution tst (· | s) arises from a Dirichlet with mode tst (· | s) and will tend to concentrate around this mode as a function of the frequency of s. The hyperparameter  linearly controls the strength of all priors. The last term in Eq. 6 keeps the sum of C s insensitive to , such that s C s =  s c( s). In all our experiments we fixed  = 0.5. Setting  < 1 down-weights the parameter C s of frequent words s compared to rare ones. This makes the Dirichlet prior relatively weaker for frequent words, where we can let the data speak for itself, and relatively stronger for rare ones, where a good prior is needed. Finally, note that this EM procedure reduces to an interpolation method similar to that of Wang et al. by applying Eq. 3 only at the very last M-step, with  s , m s as above and C s =  t E [c( s, t)]. 3.2 Joint Training Next, we further exploit the triangulation idea in designing a multi-task learning approach that jointly trains the three word alignment models st , sp , and pt . To do so, we view each model's t-table as originating from Dirichlet distributions defined by the triangulation of the other two t-tables. We then train
+
+where E [c( s, t)] is the expected number of times source word s aligns with target word t in the sourcetarget bitext. Moreover, through Eq. 3, we can view  st - 1 as a pseudo-count for such an alignment. To define the hyperparameter vector  s we decompose it as follows: s = C s · ms + 1 (4) 1222
+
+

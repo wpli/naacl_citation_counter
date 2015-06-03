@@ -1,0 +1,32 @@
+glish queries needs to be taken into account, which is standardly ignored in parser evaluation. That is, for the purpose of parsing translated queries, a parser should retrieve correct answers for correct English queries (true positives), and must not retrieve correct answers for incorrect translations (false positives). In order to measure false discovery rate, we prepare a test set of manually verified incorrect English in addition to a standard test set of original English queries. We show that if false discovery rate on incorrect English queries is taken into account in model selection, the semantic parser that yields best results for response-based learning in SMT can be found reliably.
+
+2
+
+Related Work
+
+Our work is most closely related to Riezler et al. (2014). We extend their application of responsebased learning for SMT to a larger and lexically more diverse dataset and show how to perform model selection in the environment from which response signals are obtained. In contrast to their work where a monolingual SMT-based approach (Andreas et al., 2013) is used as semantic parser, our work builds on existing parsers for Freebase, with a focus on exploiting paraphrasing and synonym extension for scaling semantic parsers to open-domain database queries. Response-based learning has been applied in previous work to semantic parsing itself (Kwiatowski et al. (2013), Berant et al. (2013), Goldwasser and Roth (2013), inter alia). In these works, extrinsic responses in form of correct answers from a database are used to alleviate the problem of manual data annotation in semantic parsing. Saluja et al. (2012) integrate human binary feedback on the quality of an SMT system output into a discriminative learner. Further work on learning from weak supervision signals has been presented in the machine learning community, e.g., in form of coactive learning (Shivaswamy and Joachims, 2012), reinforcement learning (Sutton and Barto, 1998), or online learning with limited feedback (Cesa-Bianchi and Lugosi, 2006).
+
+Algorithm 1 Response-based Online Learning repeat for i = 1, . . . , n do Receive input string x(i) Predict translation y ^ Receive task feedback e(^ y )  {1, 0} if e(^ y ) = 1 then y+  y ^ Store y ^ as reference y (i) for x(i) Compute y - else y-  y ^ Receive reference y (i) Compute y + end if w  w +  ((x(i) , y + ) - (x(i) , y - )) end for until Convergence
+
+y  Y (x), and by s(x, y ; w) = w, (x, y ) a linear scoring function for predicting a translation y ^. A response signal is denoted by a binary function e(y )  {1, 0} that executes a semantic parse against the database and checks whether it receives the same answer as the gold standard parse. Furthermore, a cost function c(y (i) , y ) = (1 - BLEU(y (i) , y )) based on sentence-wise BLEU (Nakov et al., 2012) is used. Algorithm 1, called "Response-based Online Learning" in Riezler et al. (2014), is based on contrasting a "positive" translation y + that receives positive feedback, has a high model score, and a low cost of predicting y instead of y (i) , with a "negative" translation y - that leads to negative feedback, has a high model score, and a high cost: y+ = y- =
+y Y
+
+arg max
+
+(x(i) ):e(y )=1
+
+s(x(i) , y ; w) - c(y (i) , y ) , s(x(i) , y ; w) + c(y (i) , y ) .
+
+y Y (x(i) ):e(y )=0
+
+arg max
+
+3
+
+Response-based Online SMT Learning
+
+We denote by (x, y ) a joint feature representation of input sentences x and output translations 1340
+
+The central algorithm operates as follows: The SMT system predicts translation y ^, and in case of positive task feedback, the prediction is accepted and stored as positive example by setting y +  y ^. In that case, y - needs to be computed in order to perform the stochastic gradient descent update of the weight
+
+

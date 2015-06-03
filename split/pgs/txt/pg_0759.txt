@@ -1,0 +1,17 @@
+Cost Optimization for Crowdsourcing Translation
+Mingkun Gao, Wei Xu and Chris Callison-Burch Computer and Information Science Department University of Pennsylvania, Philadelphia, PA, USA {gmingkun, xwe, ccb}@seas.upenn.edu
+
+Abstract
+Crowdsourcing makes it possible to create translations at much lower cost than hiring professional translators. However, it is still expensive to obtain the millions of translations that are needed to train statistical machine translation systems. We propose two mechanisms to reduce the cost of crowdsourcing while maintaining high translation quality. First, we develop a method to reduce redundant translations. We train a linear model to evaluate the translation quality on a sentenceby-sentence basis, and fit a threshold between acceptable and unacceptable translations. Unlike past work, which always paid for a fixed number of translations for each source sentence and then chose the best from them, we can stop earlier and pay less when we receive a translation that is good enough. Second, we introduce a method to reduce the pool of translators by quickly identifying bad translators after they have translated only a few sentences. This also allows us to rank translators, so that we re-hire only good translators to reduce cost.
+
+which requires large bilingual sentence-aligned parallel corpora to train translation models. Crowdsourcing's low cost has made it possible to hire people to create sufficient volumes of translation in order to train SMT systems (for example, Ambati and Vogel (2010), Zbib et al. (2012), Post et al. (2012), Zbib et al. (2013)). However, crowdsourcing is not perfect, and one of its most pressing challenges is how to ensure the quality of the data that is created by it. Unlike in more traditional employment scenarios, where annotators are pre-vetted and their skills are clear, in crowdsourcing very little is known about the annotators. They are not professional translators, and there are no built-in mechanisms for testing their language skills. They complete tasks without any oversight. Thus, translations produced via crowdousrcing may be low quality. Previous work has addressed this problem, showing that non-professional translators hired on Amazon Mechanical Turk (MTurk) can achieve professional-level quality, by soliciting multiple translations of each source sentence and then choosing the best translation (Zaidan and CallisonBurch, 2011). In this paper we focus on a different aspect of crowdsourcing than Zaidan and Callison-Burch (2011). We attempt to achieve the same high quality while minimizing the associated costs. We propose two complementary methods: (1) We reduce the number of translations that we solicit for each source sentence. Instead of soliciting a fixed number of translations for each foreign sentence, we stop soliciting translations after we get an acceptable one. We do so by building models to distinguish between
+
+1
+
+Introduction
+
+Crowdsourcing is a promising new mechanism for collecting large volumes of annotated data at low cost. Many NLP researchers have started creating speech and language data through crowdsourcing (for example, Snow et al. (2008), Callison-Burch and Dredze (2010) and others). One NLP application that has been the focus of crowdsourced data collection is statistical machine translation (SMT) 705
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 705­713, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

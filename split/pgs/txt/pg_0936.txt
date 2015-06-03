@@ -1,0 +1,18 @@
+Early Gains Matter: A Case for Preferring Generative over Discriminative Crowdsourcing Models
+Paul Felt, Eric Ringger, Kevin Seppi, Kevin Black, Robbie Haertel Brigham Young University Provo, UT 84602, USA {paul felt,kevin black}@byu.edu, {ringger,kseppi}@cs.byu.edu, robbie.haertel@gmail.com
+
+Abstract
+In modern practice, labeling a dataset often involves aggregating annotator judgments obtained from crowdsourcing. State-of-theart aggregation is performed via inference on probabilistic models, some of which are dataaware, meaning that they leverage features of the data (e.g., words in a document) in addition to annotator judgments. Previous work largely prefers discriminatively trained conditional models. This paper demonstrates that a data-aware crowdsourcing model incorporating a generative multinomial data model enjoys a strong competitive advantage over its discriminative log-linear counterpart in the typical crowdsourcing setting. That is, the generative approach is better except when the annotators are highly accurate in which case simple majority vote is often sufficient. Additionally, we present a novel mean-field variational inference algorithm for the generative model that significantly improves on the previously reported state-of-the-art for that model. We validate our conclusions on six text classification datasets with both human-generated and synthetic annotations.
+
+1
+
+Introduction
+
+The success of supervised machine learning has created an urgent need for manually-labeled training datasets. Crowdsourcing allows human label judgments to be obtained rapidly and at relatively low cost. Micro-task markets such as Amazon's Mechanical Turk and CrowdFlower have popularized crowdsourcing by reducing the overhead required to 882
+
+distribute a job to a community of annotators (the "crowd"). However, crowdsourced judgments often suffer from high error rates. A common solution to this problem is to obtain multiple redundant human judgments, or annotations,1 relying on the observation that, in aggregate, the ability of non-experts often rivals or exceeds that of experts by averaging over individual error patterns (Surowiecki, 2005; Snow et al., 2008; Jurgens, 2013). For the purposes of this paper a crowdsourcing model is a model that infers, at a minimum, class labels y based on the evidence of one or more imperfect annotations a. A common baseline method aggregates annotations by majority vote but by so doing ignores important information. For example, some annotators are more reliable than others, and their judgments ought to be weighted accordingly. State-of-the-art crowdsourcing methods formulate probabilistic models that account for such side information and then apply standard inference techniques to the task of inferring ground truth labels from imperfect annotations. Data-aware crowdsourcing models additionally account for the features x comprising each data instance (e.g., words in a document). The data can be modeled generatively by proposing a joint distribution p(y, x, a). However, because of the challenge of accurately modeling complex data x, most previous work uses a discriminatively trained conditional model p(y, a|x), hereafter referred to as a discriminative model. As Ng and Jordan (2001) explain, maximizing conditional log likelihood is a compuWe use the term annotation to identify human judgments and distinguish them from gold standard class labels.
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 882­891, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

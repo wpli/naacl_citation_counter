@@ -1,0 +1,20 @@
+Model 1st-order w/o tensor + 3-way tensor + 4-way tensor CoNLL-2009 1st place CoNLL-2009 2nd place CoNLL-2009 3rd place (Roth and Woodsend, 2014) (Bj¨ orkelund et al., 2010) Model + Reranker (Roth and Woodsend, 2014) + reranking (Bj¨ orkelund et al., 2010) + reranking
+
+Excluding predicate senses WSJ-dev WSJ-test Brown-test 79.42 80.84 69.38 80.77 82.19 69.76 81.03 82.51* 70.77 ­ 82.08 69.84 ­ 81.20 68.86 ­ 78.66 65.89 ­ 80.87 69.33 78.85 81.35 68.34 WSJ-dev ­ 80.50 WSJ-test 82.10 82.87 Brown-test 71.12 70.91
+
+Including predicate senses WSJ-test Brown-test 85.46 74.66 86.34 74.94 86.58* 75.57 86.15 74.58 85.51 73.82 83.24 70.65 85.50 74.67 85.80 73.92 WSJ-test 86.34 86.86 Brown-test 75.88 75.71
+
+Table 3: SRL labeled F-score of our model variants, and state-of-the-art systems on the CoNLL shared task. We consider a tensor-free variant of our model, and tensor-based variants that include first-order SRL features. For the latter, we consider implementations with 3-way and 4-way tensors. Winning systems (with and without a reranker) are marked in bold. Statistical significance with p < 0.05 is marked with . on English corpora because these datasets are most commonly used for system evalutation. As a single system without reranking, our model outperforms the five top performing systems (second block in Table 3) on both in-domain and out-of-domain datasets. The improvement from the F-score of 82.08% to our result 82.51% on the WSJ in-domain test set is significant with p < 0.05, which is computed using a randomized test tool8 based on Yeh (2000). For comparison purposes, we also report F-score performance when predicate senses are included in evaluation. The relative performance between the systems is consistent independent of whether the predicate senses are included or excluded. Table 4 shows the results of our system on other languages in the CoNLL-2009 shared task. Out of five languages, our model rivals the best performing system on three languages, achieving statistically significant gains on English and Chinese. Note that our model uses the same feature configuration for all the languages. In contrast, Zhao et al. (2009b) rely on language-specific configurations obtained via "huge feature engineering" (as noted by the authors). Results in Table 3 and 4 also highlight the conhttp://www.nlpado.de/~sebastian/ software/sigf.shtml
+8
+
+1st-order w/o tensor + 3-way Rnd. Init. tensor PM. Init. + 4-way Rnd. Init. tensor PM. Init.
+
+WSJ-test 80.84 81.87 82.19 81.63 82.51
+
+Brown-test 69.38 69.82 69.76 70.63 70.77
+
+Table 5: SRL labeled F-score for different initialization strategies of the first order model. Rnd stands for the random initialization, and PM for the power method initialization. tribution of the tensor to the model performance, which is consistent across languages. Without the tensor component, our system trails the top two performing systems. However, adding the tensor component provides on average 2.1% absolute gain, resulting in competitive performance. The mode of the tensor also contributes to the performance ­ the 4-way tensor model performs better than the 3-way counterpart, demonstrating the importance of modeling the interactions between dependency paths and semantic role labels. Table 5 shows the impact of initialization on the performance of the tensor-based model. The initialization based on the power method yields superior results compared to random initialization, for both
+
+1157
+
+

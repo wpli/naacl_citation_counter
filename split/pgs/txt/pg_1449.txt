@@ -1,0 +1,25 @@
+Sample Size 0.25 Days 19,613 Mentions 0.5 Days 39,225 Mentions 1.0 Days 78,450 Mentions 2.0 Days 156,900 Mentions 600,000 Mentions
+
+Sampling Technique Window Uniform-R Biased-R Cache  Diversity  D-C   Window Uniform-R Biased-R Cache  Diversity  D-C   Window Uniform-R Biased-R Cache  Diversity  D-C   Window Uniform-R Biased-R Cache  Diversity  D-C  Exact
+
+P 24.2 23.0 24.8 25.5 27.6 30.1 31.3 29.9 31.6 32.9 37.5 40.1 40.7 39.3 40.9 42.0 48.5 49.8 50.2 49.2 50.3 50.9 55.2 55.5 59.7
+
+CEAFe R 67.2 67.2 67.8 67.2 69.2 69.7 69.4 69.1 69.9 69.7 71.6 72.3 72.0 71.4 72.3 72.0 74.3 74.5 74.1 73.7 74.1 74.1 75.2 75.3 75.4
+
+F 35.6 34.3 36.3 37.0 39.4 42.0 43.1 41.7 43.5 44.7 49.2 51.6 52.0 50.6 52.3 53.1 58.7 59.7 59.8 58.9 59.9 60.4 63.7 63.9 66.6
+
+· Diversity-Cache (D-C): By combining the new sampling techniques we significantly improve performance. Once we have increased the amount of entities represented in the sample we are still able to benefit from an informed model of recency. Using uninformed sampling techniques (reservoir sampling) does not result in a significant performance improvement over Window sampling, only informed sampling techniques show a significant improvement. As the sample size increases the performance difference decreases. With larger samples there is space to represent more entities and it is less likely to remove a useful mention at random.
+
+8
+
+Conclusion
+
+Table 2: CEAFe performance for various sample sizes and sampling techniques.  indicates significant improvement over Window sampling.  indicates significant improvement over Diversity sampling
+
+We presented the first truly streaming CDC system, showing that significantly better performance is achieved by using an informed sampling technique that takes into account a notion of streaming discourse. We are able to get to within 5% of an exact system's performance while using only 30% of the memory required. Instead of improving performance by using an uninformed sampling technique and doubling the memory available, similar performance can be achieved by using the same amount of memory and a informed sampling technique. Further work could look at improving the similarity metric used, applying these sampling techniques to other streaming problems or adding a mention compression component.
+
+References
+· Biased Reservoir Sampling (Biased-R): Uninformed sampling of older mentions is not sufficient to significantly improve performance. · Cache: By using an informed model of recency we keep mentions critical to resolving references currently being tweeted resulting in a significant performance improvement. · Diversity: By using an informed technique to increase the amount of distinct entities represented in the sample we significantly improve performance. 1395
+Charu C Aggarwal. 2006. On biased reservoir sampling in the presence of stream evolution. In Proceedings of the 32nd international conference on Very large data bases, pages 607­618. VLDB Endowment. Nicholas Andrews, Jason Eisner, and Mark Dredze. 2014. Robust entity clustering via phylogenetic inference. In Association for Computational Linguistics (ACL). Amit Bagga and Breck Baldwin. 1998. Entity-based cross-document coreferencing using the vector space model. In Proceedings of the 17th international conference on Computational linguistics-Volume 1, pages 79­85. Association for Computational Linguistics. Heeyoung Lee, Marta Recasens, Angel Chang, Mihai Surdeanu, and Dan Jurafsky. 2012. Joint entity and
+
+

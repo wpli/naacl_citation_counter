@@ -1,0 +1,31 @@
+Algorithm 2: G ET P OSSIBLE ACTIONS for partial tree linearization, where C is a partial tree
+Input: A state s = ([ |j i], , A) and partial tree C Output: A set of possible transition actions T if s. is empty then for k  s. do T  T  (S HIFT, P OS, k ) else if R EDUCABLE(s, i, j , C ) then T  T  (L EFTA RC) if R EDUCABLE(s, j , i, C ) then T  T  (R IGHTA RC) for k  s. do if S HIFT L EGAL(s, k , C ) then T  T  (S HIFT, P OS, k ) return T stack  . ... 4 5 4 (a)
+
+stack  l . ... 1 5 (a) l . ... 1 5 (c) l . ... 3 1 2 2
+
+buffer  k 3 4 3 k 3 4 3 k 5 6 (e) 4 2 2
+
+l . ... ... 5 l 5 l . ... 1 5 3 4 (d) ... 3 4
+
+k 3 k 3 k 6 2
+
+1 2 3 4 5 6 7 8 9 10 11 12
+
+4
+
+(b)
+
+3 2 4 2
+
+5
+
+Figure 6: 5 relations between k and l. The indices correspond to those in Figure 4. The words in green boxes must have arcs with k in future transitions.
+3 . ... 5 3 4 (b) 3 1
+
+Figure 5: Two conditions for a valid L EFTA RC action in partial-tree linearization. The indices correspond to those in Figure 4. A shaded triangle represents the readily built arcs under a root word. cause this action will result in a sub-sequence (Harvard University5 , a team3 , of4 ), which cannot have the dependency arcs {3  4}, {4  5} by using arc-standard actions. Algorithm 3 shows pseudocode of G ET P OSSI BLE ACTIONS when C is a partial tree. Given a state s = ([ |j i], , A) the L EFTA RC action builds an arc {j  i} and pops the word j off the stack. Since the popped word j cannot be linked to any words in future transitions, all the descendants of j should have been processed and removed from the stack. In addition, constrained by the given partial tree, the arc {j  i} should be an arc in C (Figure 5a), or j should be the root of a sub dependency tree in C (Figure 5b). We denote the conditions as R EDUCABLE(s, i, j , C ) (lines 5-6). The case for R IGHTA RC is similar to L EFTA RC (lines 7-8). For the S HIFT action, the conditions are more complex. Due to space limitation, we briefly sketch
+
+the S HIFT L EGAL function below. Detailed algorithm pseudocode for S HIFT L EGAL is given in the supplementing material. For a word k in  to be shifted onto the stack, all the words on the stack must satisfy certain constraints. There are 5 possible relations between k and a word l on the stack. (1) If l is a child of k in C (Figure 6a), all the words on the stack from l to the top of the stack should be reducable to k , because only L EFTA RC can be applied between k and these words in future actions. (2) If l is a grand child of k (Figure 6b), no legal sentence can be constructed if k is shifted onto the stack. (3) If l is the parent of k (Figure 6c), legal S HIFTs require all the words on the stack from l to the top to be reducable to k . (4) If l is a grand parent of k , all the words on the stack from l to the top will become descendants of l in the output (Figure 6e). Thus these words must be descendants of l in C , or the root of different subdependency trees. (5) If l is a siblings of k , we denote a as the least common ancestor of k and l. a will become in the buffer and l should be a direct child of a. All the words from l to the top of the stack should be the descendants of a in the output (Figure 6d), and thus a should have the same conditions as in (4). Finally, if no word on the stack is in the same subdependency tree as k in C , then k can be safely shifted.
+
+117
+
+

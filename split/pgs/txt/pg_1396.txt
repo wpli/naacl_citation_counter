@@ -1,0 +1,28 @@
+Model S P P1 P2 P3
+
+#data 620 620 3,982 6,740 8,465
+
+F1 56.8 66.54 65.38 66.92 66.15
+
+FDR 28.00 25.22 24.89 26.38 25.97
+
+Table 1: Parsing F1 scores and False Discovery Rate (FDR) for SEMPRE (S), PARASEMPRE (P), and extensions of the latter with synonyms from first one (P1), first two (P2) and first three (P3) synsets, evaluated on the F REE 917 test set of correct database queries for F1 and including the test set of incorrect database queries for FDR, and trained on #data training queries. Best results are indicated in bold face.
+
+discovery rate (FDR) (Murphy, 2012), defined as FP/FP+TP, i.e., as the ratio of false positives out of all positive answer retrieval events.
+
+6
+
+Experiments
+
+We use a data dump of Freebase1 which was has been indexed by the Virtuoso SPARQL engine2 as our knowledge base. The corpus used in the experiments is the F REE 917 corpus as assembled by Cai and Yates (2013) and consists of 614 training and 276 test queries in English and corresponding logical forms.3 The dataset of negative examples, i.e., incorrect English database queries that should receive incorrect answers, consists of 166 examples that were judged either grammatically or semantically incorrect by the authors. The translation of the English queries in F REE 917 into German, in order to provide a set of source sentences for SMT, was done by the authors. The SMT framework used is CDEC (Dyer et al., 2010) with standard dense features and additional sparse features as described in Simianer et al. (2012)4 . Training of the baseline SMT system was performed on the C OMMON C RAWL5 (Smith
+http://www.freebase.com/ http://virtuoso.openlinksw.com/ 3 Note that we filtered out 33 questions (21 from the training set and 12 from the test set) because their logical forms only returned an empty string as an answer. 4 https://github.com/pks/cdec-dtrain 5 http://www.statmt.org/wmt13/ training-parallel-commoncrawl.tgz
+2 1
+
+et al., 2013) dataset consisting of 7.5M parallel English-German segments extracted from the web. Response-based learning for SMT uses the code described in Riezler et al. (2014)6 . For semantic parsing we use the SEMPRE and PARASEMPRE tools of Berant et al. (2013) and Berant and Liang (2014) which were trained on the training portion of the F REE 917 corpus7 . Further models use the training data enhanced with synonyms from WordNet as described in Section 4. Following Jones et al. (2012), we evaluate semantic parsers according to precision, defined as the percentage of correctly answered examples out of those for which a parse could be produced, recall, defined as the percentage of total examples answered correctly, and F1-score, defined as harmonic mean of precision and recall. Furthermore, we report false discovery rate (FDR) on the combined set of 276 correct and 166 incorrect database queries. Table 1 reports standard parsing evaluation metrics for the different parsers SEMPRE (S), PARASEMPRE (P), and extensions of the latter with synonyms from the first one (P1), first two (P2) and first three (P3) synsets which are ordered according to frequency of use of the sense. As shown in the second column, the size of the training data is increased up to 10 times by using various synonym extensions. As shown in the third column, PARASEM PRE improves F1 by nearly 10 points over SEMPRE . Another 0.5 points are added by extending the training data using two synsets. The third column shows that the system P1 that scored second-worst in terms of F1 score, scores best under the FDR metric8 . Table 2 shows an evaluation of the use of different parsing models to retrieve correct answers from the F REE 917 test set of correct database queries. The systems are applied to translated queries, but evaluated in terms of standard parsing metrics. Statistical significance is measured using an Approximate Randomization test (Noreen, 1989; Riezler and Maxwell, 2005). The baseline system is CDEC as described above. It never sees the F REE 917 data during training. As a second baseline method we use a stochastic (sub)gradient descent variant of R AM PION (Gimpel and Smith, 2012). This system is
+6 7
+
+https://github.com/pks/rebol www-nlp.stanford.edu/software/sempre 8 Note that in case of FDR, smaller is better.
+
+1342
+
+

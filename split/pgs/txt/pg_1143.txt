@@ -1,0 +1,24 @@
+G&S, which transforms the entity grid into a sentence graph and measures text coherence by computing the average out-degree of the graph. For a document d, its entity grid is constructed first, following the method described in Section 2.1. Then, a bipartite graph G = (V s , Ve , L, W ) is constructed, where V s is the set of nodes representing sentences in the text; Ve is the set of nodes representing entities; L is the set of edges associated with a weight w  W . An edge exists between a sentence s x and an entity e, if and only if e occurs in s x . Each edge is further associated with a weight w(e, s x ), determined by the grammatical role of the entity e in sentence s x : 3 for subject (S ), 2 for object (O), 1 for other (X ), and 0 for nothing (-). Note that graph G consists of both sentence nodes and entity nodes. Then, G is converted to another graph P, which consists of sentence nodes only, where an edge connects two sentence nodes if and only if at least one entity is shared between these two sentences. In P, the weight of each edge is computed by aggregating the edge weights in the original bipartite graph G: w(P) ( s x , sy ) =
+e E x y
+
+bases, such as YAGO (Hoffart et al., 2013), which consists of about 4 million human-edited instances from on-line encyclopedias such as WikiPedia (Denoyer and Gallinari, 2007) and FreeBase (Bollacker et al., 2008), and (2) automatically constructed knowledge bases, such as Reverb (Fader et al., 2011), which covers about 20 million instances extracted from raw texts. Generally speaking, manually edited knowledge bases have better accuracy but lower coverage, while automatically extracted knowledge bases are the opposite. To seek a good balance, we use both YAGO and Reverb as our knowledge sources. In addition, the automatically constructed knowledge bases can be extracted from raw texts of any domain, which makes our method adaptable. Both sources are presented in triples, argument1 - predicate-argument2 , (e.g., Gates-create-Microsoft), where the two arguments are usually entities and the predicate is the relation between them (Zhang et al., 2014). Knowledge selection For each document d, we then select the subset of relevant knowledge instances, in the sense that they represent relations between the entities in d. In particular, we extract all entities in d, and query the knowledge bases to obtain all the knowledge instances in which both of the two arguments, argument1 and argument2 , match some of the entities in d. One issue in knowledge selection is whether to retrieve knowledge instances using exact or partial matching. For a given pair of entities in the text, the chance is rather low to find instances in the knowledge bases where the two arguments perfectly match the pair of entities, because entities in the source document might appear in aliases or abbreviations. In contrast, partial matching between arguments and entities usually increases coverage but at risk of introducing more noise. In our work, to balance accuracy and coverage, when retrieving world knowledge, we use partial matching and form queries only for those entities realized as noun phrases in the text.
+
+w(G) (e, s x )  w(G) (e, sy ), (1)
+
+where E xy is the set of entities shared by two sentences s x and sy , and w(G) (e, s x ) is the weight of edge between entity e and sentence s x as illustrated before. The coherence of the document is thus measured by the average out-degree of graph P. Although this method is purely unsupervised, it achieves a performance comparable with its supervised counterparts, e.g., B&L. However, since this method still relies on matching multiple mentions of the same entity, it misses the important contribution from those semantically related yet distinct entities, e.g. Gates and Microsoft in Figure 1a.
+
+3
+
+Finding relevant world knowledge
+
+To supplement existing models with information derived from semantic relatedness, given a document d to be evaluated, we first retrieve all world knowledge related to d. There are two major issues for this process: (1) knowledge sources: where can we obtain this knowledge?, and (2) knowledge selection: how do we pinpoint the most relevant ones? Knowledge sources There are two main kinds of knowledge sources: (1) manually edited knowledge 1089
+
+4
+4.1
+
+World knowledge encoding
+Unsupervised graph-based framework
+
+As described in Section 2.2, G&S represents the text as a graph and measures the coherence by the average out-degree of the graph. In this part, we describe
+
+

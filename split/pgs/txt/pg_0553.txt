@@ -1,0 +1,31 @@
+# tokens # sents # dialog # types
+
+Bronze Training 1, 007, 722 129, 190 3309 26, 519
+
+SMS Test 8104 1152 34 1747
+
+OntoNotes Test 108, 531 9607 257 4753
+
+Pronoun 1p 2p 3p Micro-avg
+
+Precision 0.75 0.61 0.52 0.62
+
+Recall 0.43 0.32 0.45 0.41
+
+F-measure 0.55 0.42 0.49 0.50
+
+Table 2: Dataset statistics; numbers are for the Chinese side of the data. English has 25% more tokens and roughly as many types.
+
+Table 3: Bronze vs Gold labels
+
+as described in Section 4.2), and on telephone conversation data from the OntoNotes corpus (Hovy et al., 2006), consisting of 5000 sentences. Full data statistics are provided in Table 2. We perform zero pronoun identification using the method of (Cai et al., 2011), which automatically recovers empty categories corresponding to dropped pronouns, integrating these empty categories into syntactic parses. Syntactic parses were obtained with the Berkeley parser (Petrov and Klein, 2007). These parses were then used to split the Chinese utterances into single-clause units, based on IP and CP clausal nodes. These clauses were aligned with clauses in the English translation, which were used to determine the identity of the clausal subject, for extracting the 1v, 2v, . . . label for each utterance.4 For our machine learning systems, we use Vowpal Wabbit (Langford et al., 2007) with default hyperparameter settings. We train on 75% of the training data and retain 25% as development data on which to perform early stopping. We run 20 iterations by default and take the parameters with best development performance based on sequence labeling accuracy. 4.2 Gold standard test set Although we can use "bronze standard" annotations for learning, evaluating against a bronze standard is not directly useful. Therefore, we annotated our test set (1152 utterances) by hand. In particular, for the SMS/chat test set, we recruited three linguistically-informed native Mandarin speakers to annotate Chinese clauses containing empty categories. The clauses were labeled with a person number (1,2,3) when the empty category corresponded to
+Sometimes English syntactic parses were not well-aligned with the Chinese IP/CP nodes; in practice, we split the English utterances based on end-of-clause punctuation and aligned Chinese and English clauses based on a simple order heuristic.
+4
+
+such a pronoun; or "none" in spurious cases.5 In our annotated data,6 32% of identified zero pronouns were first person, 17% were second person, 25% were third person and 26% do not have a referent (were spurious). Of the correctly identified zero pronouns, a majority of pronouns (about 2/3) are deictic: referring either to the speaker or listener. The remainder are third person and mostly anaphoric.7 Since the annotators labeled the empty categories obtained from an automatic zero pronoun identification method (Cai et al., 2011), 26% spurious cases suggest that the accuracy of this method is only 74% on the SMS test data set. We then used these annotations to evaluate our bronze standard label assignment method against the gold standard judgments. Table 3 shows the precision, recall and F-measure of the bronze annotations when evaluated against the gold annotations. We use micro-averaging to average the precision, recall and F-measure values against different sets. In this method we sum up the individual true positives (TP), false positives (FP), and false negatives (FN) of the system for different sets and then apply them to get the statistics. For example, precision across two sets 1 and 2 is given by (TP1 + TP2)/(TP1 + TP2 + FP1 + FP2). We can see a fairly significant discrepancy between our bronze labels and the gold labels. One major--and unfortunately inevitable-- reason for this discrepancy is a high proportion of utterances in the English translation data which have
+Note that under this annotation scheme, our evaluations will be partially constrained by (Cai et al., 2011) performance, in including no zero pronouns that were missed by that method--however, use of the "none" label allows filtering out of any spuriously-identified zero pronouns. 6 Annotations are available at www.umiacs.umd.edu/raosudha/LDC2013E83-BOLTP2R2-cmn-SMS-CHT-dev.annotated. 7 In an in-person dialogue, a third person pronoun might be used in a deictic manner, as in "She is really smart" while pointing at someone. This rarely occurs in SMS/chat because there is no shared environment beyond the two dialogue participants.
+5
+
+499
+
+

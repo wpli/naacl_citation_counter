@@ -1,0 +1,27 @@
+intensities4 . When there are new eTargets which are not in any target span, annotator X splits the new eTargets into different attitudes based on the intensity, while annotator Y adds the new eTargets to all the attitudes regardless of intensity. Later the annotators discuss to decide which attitude each new eTarget should be linked to in the final version. 31% of the disagreements are caused by negligence, meaning an annotator realized, during later discussion, that she should have included an eTarget when she saw that the other annotator had included it. The remaining disagreements are due to annotator mistakes such as filling in the wrong id.
+
+countries and prepares a report on their violations all over the world. The annotations in MPQA 2.0: S1: writer-US, positive, hegemony S2: writer, negative, the United States ESE1: writer, negative, N/A First, it is possible for a state-of-the-art system to be trained to recognize the sentiment S1, by the maintaining phrase and syntax information. But it would be difficult to find S2. There is no direct sentiment modifying the US, nor is there any sentiment or ESE annotation toward maintain or hegemony in MPQA 2.0. Now, in MPQA 3.0, we add the eTarget of the ESE1, so that it becomes writer, negative, hegemony . This is a critical step, because the complete ESE bridges the two sentiments together. Second, even though we have the two sentiments and the ESE, there is still a gap between the United States in the sentence and report in the question. One of the eTargets we add is "report." It is more feasible for a co-reference system to recognize report in both the sentence and the question as the same thing, than recognizing that the United States and report refer to the same concept. Third, in this sentence, according to the newly added eTargets, the system knows the writer is negative toward both the United States and State Department. When building a knowledge base about the human rights report, this reveals that the two entities have the same stance toward this topic, even without any world knowledge.
+
+5
+
+Current Corpus
+
+The current corpus consists of 70 documents, including the subset of the documents in MPQA 2.0 that come from English-language sources (i.e., that are not translations) and a subset of the OPQA subset in MPQA 2.0. A subset contains consensus annotations of X and Y and the rest were annotated by Y . The 70 documents have 1,029 ESEs, 1,287 attitudes, and 1,213 target spans of attitudes (excluding the target span that are marked as "none") from MPQA 2.0; they have 4,459 eTargets in total. We added 1,366 eTargets to the ESEs and 1,608 eTargets to the target spans. We added 1,485 eTargets which are not in any target span.
+
+6
+
+An Example
+
+In this section, we present an example from the OPQA subset (Stoyanov et al., 2005) to demonstrate how eTargets could help to automatically answer a question. There are opinion and fact questions for each document in the OPQA subset. The sentence below is annotated in MPQA 2.0 to answer the question, "Is the US Annual Human Rights Report received with universal approval around the world?" Here the writer is negative toward the report. It is due to this hegemony, which the United States wants to maintain, that its State Department makes an assessment of the human rights situation in different
+In MPQA 2.0, an attitude is marked with an intensity (low, medium, or high) representing the intensity.
+4
+
+7
+
+Conclusion
+
+This paper presents an annotation scheme for adding entity and event target annotations to the MPQA corpus. A subset of MPQA has already been annotated according to the new scheme. We believe that the corpus will be a valuable new resource for developing entity/event-level sentiment analysis systems to facilitate NLP applications such as Automatic Question Answering. Acknowledgements. This work was supported in part by DARPA-BAA-12-47 DEFT grant #12475008. We thank the anonymous reviewers for their helpful comments.
+
+1327
+
+

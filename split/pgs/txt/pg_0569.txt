@@ -1,0 +1,20 @@
+Inferring Missing Entity Type Instances for Knowledge Base Completion: New Dataset and Methods
+Arvind Neelakantan Department of Computer Science University of Massachusetts, Amherst Amherst, MA, 01003 arvind@cs.umass.edu Ming-Wei Chang Microsoft Research 1 Microsoft Way Redmond, WA 98052, USA minchang@microsoft.com
+
+Abstract
+Most of previous work in knowledge base (KB) completion has focused on the problem of relation extraction. In this work, we focus on the task of inferring missing entity type instances in a KB, a fundamental task for KB competition yet receives little attention. Due to the novelty of this task, we construct a large-scale dataset and design an automatic evaluation methodology. Our knowledge base completion method uses information within the existing KB and external information from Wikipedia. We show that individual methods trained with a global objective that considers unobserved cells from both the entity and the type side gives consistently higher quality predictions compared to baseline methods. We also perform manual evaluation on a small subset of the data to verify the effectiveness of our knowledge base completion methods and the correctness of our proposed automatic evaluation method.
+
+al., 2014), jeopardizing their usefulness in downstream tasks such as question answering. This has led to the task of completing the knowledge base entries, or Knowledge Base Completion (KBC) extremely important. In this paper, we address an important subproblem of knowledge base completion-- inferring missing entity type instances. Most of previous work in KB completion has only focused on the problem of relation extraction (Mintz et al., 2009; Nickel et al., 2011; Bordes et al., 2013; Riedel et al., 2013). Entity type information is crucial in KBs and is widely used in many NLP tasks such as relation extraction (Chang et al., 2014), coreference resolution (Ratinov and Roth, 2012; Hajishirzi et al., 2013), entity linking (Fang and Chang, 2014), semantic parsing (Kwiatkowski et al., 2013; Berant et al., 2013) and question answering (Bordes et al., 2014; Yao and Durme, 2014). For example, adding entity type information improves relation extraction by 3% (Chang et al., 2014) and entity linking by 4.2 F1 points (Guo et al., 2013). Despite their importance, there is surprisingly little previous work on this problem and, there are no datasets publicly available for evaluation. We construct a large-scale dataset for the task of inferring missing entity type instances in a KB. Most of previous KBC datasets (Mintz et al., 2009; Riedel et al., 2013) are constructed using a single snapshot of the KB and methods are evaluated on a subset of facts that are hidden during training. Hence, the methods could be potentially evaluated by their ability to predict easy facts that the KB already contains. Moreover, the methods are not directly evaluated
+
+1
+
+Introduction
+
+There is now increasing interest in the construction of knowledge bases like Freebase (Bollacker et al., 2008) and NELL (Carlson et al., 2010) in the natural language processing community. KBs contain facts such as Tiger Woods is an athlete, and Barack Obama is the president of USA. However, one of the main drawbacks in existing KBs is that they are incomplete and are missing important facts (West et
+Most of the research conducted during summer internship at Microsoft.
+
+
+515
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 515­525, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,34 @@
+K
+
+min
+W k=1
+
+L(Wk , X(k) , Y(k) ) + ||W||2,1
+
+(2)
+
+Robust MTL. This algorithm does not assume that all the tasks share the same feature representation as the previous two algorithms do (Chen et al., 2011). Moreover, RMTL uses two different structures: one for grouping related tasks to share knowledge; the other for identifying irrelevant tasks and keeping them in a different group that does not share information with the first one. This is to cope with situations in which, since tasks are not related, negative transfer of information across tasks might occur, thus harming the generalization of the model. The algorithm approximates task relatedness via a low-rank structure and identifies outlier tasks using a group-sparse structure (column-sparse, at task level). RMTL minimizes the expression described in 3. It employs a non-negative linear combination of the trace norm (the task relatedness component L) and a column-sparse structure induced by the 1,2 norm (the outlier task detection component S). If a task is an outlier it will have non-zero entries in S.
+K
+
+min
+W k=1
+
+L(Wk , X(k) , Y(k) ) + l ||L|| + s ||S||1,2 (3)
+
+In Eq. 3 W is subject to L + S, where ||.|| is the trace norm, given by the sum of the singular values i of W, and ||S||1,2 is the group regularizer that induces sparsity on the tasks. It is obtained by first computing the 1 -norm over the columns of W and then applying the 2 -norm over the resulting vector. The l and s parameters control the level of regularization of L and S, respectively. All the MTL algorithms presented in this section are linear, with different regularization terms. While RMTL is only defined for regression, the other algorithms are defined for both regression and classification.
+
+compared with the STL baseline, both in regression and in binary classification. Given a set of (signal, transcription, WER) tuples as training instances, our task is to label new unseen (signal, transcription) test pairs with a WER prediction (regression models) or with a good/bad tag (classification models) depending on the quality of the transcription. In classification, the class boundary is defined a priori, according to an arbitrary threshold  set on the WER of the instances: those with a W ER   will be considered as positive examples while the others will be considered as negative examples. Different thresholds can be set to experiment with testing conditions that reflect a variety of applicationoriented requirements. We work at one extreme, in which a value of  close to zero (0.05) emphasizes systems' ability to precisely identify high-quality transcriptions (those with W ER   ). Any application that requires precise judgments to isolate highquality ASR output can potentially benefit of such optimization (e.g. data selection for acoustic modeling using a QE-based active learning model). The investigation of other thresholding schemes, however, is certainly an aspect that we want to explore in the future. The small value of  selected produces a skewed distribution of classes, with a ratio of good to bad labels across the four domains of about 75% "good" and 25% "bad". To cope with this issue, we use a sample weighting technique while training the classification models (Veropoulos et al., 1999). We assign a weight w to each of the training instances, computed as the inverse of its class frequency in the training set. In other words, w is obtained by dividing the total number of training samples by the number of training samples belonging to the class of the given utterance. 4.1 Data
+
+4
+
+Experimental Setting
+
+Our experiments aim to measure the capability of MTL methods to learn across different domains. To this aim, the algorithms4 previously described are
+In our experiments we used the implementations available in the Malsar toolkit (Zhou et al., 2012)
+4
+
+Our datasets include English audio recordings from four different domains: broadcast news (henceforth News), political speeches (Legal), weather reports (Weather) and talks of single speakers in the context of the TED talks (TED). All datasets (see Table 1 for details) were used in past ASR evaluation campaigns, and are provided with manual reference transcriptions associated to each audio recording.
+
+717
+
+

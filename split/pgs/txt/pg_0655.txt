@@ -1,0 +1,30 @@
+Arabic word to IPA kuttaba
+
+Syllabification ku.tta.ba. ku.t.ta.ba. ... ki.ta.ba. ki.ta.b. ...
+
+Phonological adaptation ku.ta.ba. [degemination] ku.tata.ba. [epenthesis] ku.ta.bu. [final vowel subst.] ki.ta.bu. [final vowel subst.] ki.ta.bu. [epenthesis] ...
+
+Morphological adaptation ku.tata.ba.li. ku.tata.ba. vi.ki.ta.bu. ki.ta.bu. ki.ta.bu. ...
+
+Ranking with OT constraints
+
+IPA to Swahili word
+
+
+
+kitaba ...
+
+ku.ta<DEP-V>ta<PEAK>.ba.li<DEP-MORPH>. ku.ta<DEP-V>ta<PEAK>.ba.li. kitabu ku.tta<*COMPLEX>.ba. ki.ta.bu<IDENT-IO-V>. ki.ta.bu<DEP-V>. vi<DEP-MORPH>.ki.ta.bu<IDENT-IO-V>.
+
+Figure 2: An example of an Arabic word loanword kitabu.
+
+(ktAbA) `book.sg.indef' transformed by our model into a Swahili
+
+Syllabification. Arabic words borrowed into Swahili undergo a repair of violations of the Swahili segmental and phonotactic constraints, for example via vowel epenthesis in a consonant cluster. Importantly, repair depends upon syllabification. To simulate plausible phonological repair processes, we generate multiple syllabification variants for input pronunciations. The syllabification transducer optionally inserts syllable separators between phones. For example, for an input phonetic sequence /kuttAbA/, the output strings include /ku.t.tA.bA/, /kut.tA.bA/, and /ku.ttA.bA/ as syllabification variants; each variant violates different constraints and consequently triggers different phonological adaptation. Phonological adaptation. Phonological adaptation of syllabified phone sequences is the crux of the loanword adaptation process. We implement phonological adaptation transducers as a composition of plausible context-dependent insertions, deletions, and substitutions of phone subsets, based on prior studies summarized in §3.1. In what follows, we list phonological adaptation components in the order of transducer composition in the borrowing model. The vowel deletion transducer shortens Arabic long vowels and vowel clusters. The consonant degemination transducer shortens Arabic geminate consonants, e.g., it degeminates /tt/ in /ku.ttA.bA/, outputting /ku.tA.bA/. The substitution of similar phonemes transducer substitutes similar phonemes and phonemes that are found in Arabic but not in Swahili (Polomé, 1967, p. 45). For example, the emphatic /tQ /, /dQ /, /sQ / are replaced by the corresponding non-emphatic segments [t], [d], [s]. The vowel epenthesis transducer inserts a vowel between pairs of consonants (/ku.ttA.bA/  /ku.tatA.bA/), and at the end of a syllable, if the syllable ends with a con601
+
+sonant (/ku.t.tA.bA/  /ku.ta.tA.bA/). Sometimes it is possible to predict the final vowel of a word, depending on the word-final coda consonant of its Arabic counterpart: /u/ or /o/ added if an Arabic donor ends with a labial, and /i/ or /e/ added after coronals and dorsals (Mwita, 2009). Following these rules, the final vowel substitution transducer complements the inventory of final vowels in loanword candidates. Morphological adaptation. Both Arabic and Swahili have significant morphological processes that alter the appearance of lemmas. To deal with morphological variants, we construct morphological adaptation transducers that optionally strip Arabic concatenative affixes and clitics, and then optionally append Swahili affixes, generating a superset of all possible loanword hypotheses. We obtain the list of Arabic affixes from the Arabic morphological analyzer SAMA (Maamouri et al., 2010); the Swahili affixes are taken from a hand-crafted Swahili morphological analyzer (Littell et al., 2014).
+
+4 Learning constraint weights
+Due to the computational problems of working with OT (Eisner, 1997; Eisner, 2002), we make simplifying assumptions by (1) bounding the theoretically infinite set of underlying forms with a small linguistically-motivated subset of allowed transformations on donor pronunciations, as described in §3; (2) imposing a priori restrictions on the set of the surface realizations by intersecting the candidate set with the recipient pronunciation lexicon; (3) assuming that the set of constraints is finite and regular (Ellison, 1994); and (4) assigning linear weights to constraints, rather than learning an ordinal constraint ranking (Boersma and Hayes, 2001; Goldwater and
+
+

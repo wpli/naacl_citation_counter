@@ -1,0 +1,21 @@
+An In-depth Analysis of the Effect of Text Normalization in Social Media
+Tyler Baldwin baldwin.tyler.s@gmail.com Yunyao Li IBM Research - Almaden 650 Harry Road San Jose, CA 95120, USA yunyaoli@us.ibm.com
+
+Abstract
+Recent years have seen increased interest in text normalization in social media, as the informal writing styles found in Twitter and other social media data often cause problems for NLP applications. Unfortunately, most current approaches narrowly regard the normalization task as a "one size fits all" task of replacing non-standard words with their standard counterparts. In this work we build a taxonomy of normalization edits and present a study of normalization to examine its effect on three different downstream applications (dependency parsing, named entity recognition, and text-to-speech synthesis). The results suggest that how the normalization task should be viewed is highly dependent on the targeted application. The results also show that normalization must be thought of as more than word replacement in order to produce results comparable to those seen on clean text.
+
+way in which normalization is examined. First, although social media normalization is universally motivated by pointing to its role in helping downstream applications, most normalization work gives little to no insight into the effect of the normalization process on the downstream application of interest. Further, the normalization process is generally seen to be agnostic of the downstream application, adopting a "one size fits all" view of how normalization should be performed. This view seems intuitively problematic, as different information is likely to be of importance for different tasks. For instance, while capitalization is important for resolving named entities, it is less important for other tasks, such as dependency parsing. Some recent work has given credence to the idea that application-targeted normalization is appropriate (Wang and Ng, 2013; Zhang et al., 2013). However, how certain normalization actions influence the overall performance of these applications is not well understood. To address this, we design a taxonomy of possible normalization edits based on inspiration from previous work and an examination of annotated data. We then use this taxonomy to examine the importance of individual normalization actions on three different downstream applications: dependency parsing, named entity recognition, and textto-speech synthesis. The results suggest that the importance of a given normalization edit is highly dependent on the task, making the "one size fits all" approach inappropriate. The results also show that a narrow view of normalization as word replacement is insufficient, as many often-ignored normalization actions prove to be important for certain tasks.
+
+1
+
+Introduction
+
+The informal writing style employed by authors of social media data is problematic for many natural language processing (NLP) tools, which are generally trained on clean, formal text such as newswire data. One possible solution to this problem is normalization, in which the informal text is converted into a more standard formal form. Because of this, the rise of social media data has coincided with a rise in interest in the normalization problem. Unfortunately, while many approaches to the problem exist, there are notable limitations to the
+
+
+Work was done while at IBM Research - Almaden.
+
+420
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 420­429, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

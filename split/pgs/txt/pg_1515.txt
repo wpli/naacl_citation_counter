@@ -1,0 +1,26 @@
+ukWaC Twitter Wikipedia
+
+microsoft, e-learning, helpline, mp3, unsubscribe selfie, retweet, hella, bday, homie admin, verifiability, bio, sockpuppetry, same-sex
+
+PoS Noun Verb Adj. Adv.
+
+WordNet synsets 82115 13767 18156 3621
+
+new C ROWN synsets 124967 16199 25534 2031
+
+new C ROWN lex. variants 29563 43318 6902 481
+
+Table 1: Examples of high-frequency lemmas in C ROWN but not in WordNet, from three corpora. lemma's dominant sense, though we note that most OOV lemmas are monosemous. The initial set C of candidate hypernym synsets for Wiktionary sense si is generated from the union of the synsets of the lemmas in li . Then, C is expanded by including all WordNet synsets reachable from each synset ci  C by a path of hypernym or hyponym edges, where a path (1) has at most three edges and (2) contains at most one hypernym edge. The second constraint is designed to avoid including overly-general concepts. The glosses of the synsets in C are then compared with the Wiktionary sense's gloss. Directly comparing glosses with string similarity measures omits the important detail that certain lemmas can be highly-specific and most strongly indicate that two glosses refer to the same concept. Therefore, prior to comparison, the lemmas occurring in all glosses are assigned a weight -log f (1 w) , where f (w) denotes the number of glosses in which lemma w appeared. Glosses' similarity is measured by (1) lemmatizing their texts and computing the lemmas in common, and then (2) summing the weights of the in-common lemmas. This similarity function assigns higher scores to glosses sharing more specific concepts. 3.4 Resource Creation The resulting attachments are converted into WordNet lexicography files and then integrated with the existing WordNet taxonomy using the G RIND program. Table 2 shows the resulting statistics for C ROWN in comparison to WordNet. The attachment process more than doubles the number of synsets and adds a significant number of new lexicalizations which are essential for capturing common spelling variants that are not reflected in WordNet. Additionally, 4739 new antonym relations were added. Of the OOV lemmas, 87.8% were attached using the lexical attachment procedure. Of the remaining, the Person and Antonymy heuristics were the most frequently used, accounting for 4.2% and 2.7% of cases respectively. The infrequent use of the structural and lexical heuristics underscores the sparsity of the available data in Wiktionary for straight-forward attachments. As an initial test of additional content present in C ROWN but not in WordNet, all lemmas unique to C ROWN were extracted and their occurrences counted in three corpora: (1) all of the English Wikipedia, (2) the web-gathered ukWaC corpus (Ferraresi et al., 2008), and (3) a sample of 50M microtext message from Twit-
+
+Table 2: The number of synsets in WordNet and new synsets and lexicalizations added by C ROWN. ter. Table 1 shows five example high-frequency lemmas from each corpus that are only present in C ROWN , highlighting the types of commonly-recognized terms not in WordNet due to their technical, informal, or recentlycreated nature. Indeed, "selfie" was only recently included in the Merriam Webster dictionary as of 2014,2 demonstrating the potential for quickly integrating new terminology into C ROWN from the frequently-updated entries of Wiktionary.
+
+4
+
+Evaluation
+
+Two evaluations were performed. The first estimates attachment accuracy by simulating OOV attachment with lemmas that are already in WordNet. The second calculates the benefit of using C ROWN in an example application using a WordNet-based algorithm to measure similarity. 4.1 WordNet Replication No standard dataset exists for where OOV lemmas should be attached to WordNet; therefore in the first evaluation, we assess construction accuracy by simulating the inclusion of OOV lemmas using those already in WordNet, which allows testing on tens of thousands of lemmas. Specifically, the C ROWN attachment approach is used to reattach all monosemous lemmas in WordNet. We opted for monosemous terms as they can have only one valid location in the taxonomy. 4.1.1 Methodology Glosses were extracted for 36,605 of the 101,863 nouns that were monosemous in WordNet and also present in Wiktionary, and for 4668 of the 6277 verbs matching the same condition. These glosses were then provided as input to the C ROWN attachment process. We note that these lemmas are not necessarily monosemous in Wiktionary, with nouns and verbs having on average 1.40 and 1.76 senses, respectively; however, the construction process will attach only the highest-scoring of these senses. Once a lemma is attached, accuracy is measured as the number of hyponym or hypernym edges away that C ROWN placed the lemma from its original position.
+2 http://www.merriam-webster.com/new-words/ 2014-update.htm
+
+1461
+
+

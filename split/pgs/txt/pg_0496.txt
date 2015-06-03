@@ -1,0 +1,25 @@
+2
+
+Background
+
+In this section, we provide a brief background on data annotation with rationales in the context of active learning and introduce the notation to be used throughout the paper. Let D be a set of document-label pairs x, y , where the label (value of y ) is known only for a small subset L  D of the documents: L = { x, y } and the rest U = D \ L consists of the unlabeled documents: U = { x, ? }. We assume that each document xi is represented as a vector of features (most commonly as a bag-of-words model with a dictionary of predefined set of phrases, which can i , f i , · · · , f i }. be unigrams, bigrams, etc.): xi {f1 n 2 i represents the binary presence (or Each feature fj absence), frequency, or tf-idf representation of the word/phrase j in document xi . Each label y  Y is discrete-valued variable Y {y1 , y2 , · · · , yl }. Typical greedy active learning algorithms iteratively select a document x, ?  U , query a labeler for its label y , and incorporate the new document x, y into its training set L. This process continues until a stopping criterion is met, usually until a given budget, B , is exhausted. In the learning with rationales framework, in addition to querying for label y i of a document xi , the active learner asks the labeler to provide a rationale, R(xi ) for the chosen label. The rationale in its most general form consists of a subset of the terms that i : j  xi }. Note are present in xi : R(xi ) = {fk that there might be cases where the labeler cannot pinpoint any phrase as a rationale, in which case R(xi ) is allowed to be . Algorithm 1 formally describes the active learning process that elicits rationales from the labeler. The goal of eliciting rationales is to improve the learning efficiency by incorporating domain knowledge. However, it is not trivial to integrate domain knowledge into state-of-the-art classifiers, such as logistic regression and support vector machines. Next, we describe our approach for incorporating rationales into the learning process.
+
+Algorithm 1 Active Learning with Rationales 1: Input: U - unlabeled documents, L - labeled documents,  - underlying classification model, B - budget 2: repeat 3: x = argmax utility (x|)
+4: 5: 6: 7: 8:
+
+request label and rationale for this label L  L  { x , y  , R(x ) } U  U \ { x } Train  on L until Budget B is exhausted; e.g., |L| = B
+
+xU
+
+out rationales (Lw/oR) and learning with rationales (LwR) on four datasets. We evaluate our approach using multinomial na¨ ive Bayes, logistic regression, and support vector machines classifiers. 3.1 Training a Classifier Using Labels and Rationales
+
+Like most previous work, we assume that the rationales, i.e. the phrases, returned by the labeler already exist in the dictionary of the vectorizer. Hence, rationales correspond to features in our vector representation. It is possible that the labeler returns a phrase that is currently not in the dictionary; for example, the labeler might return a phrase that consists of three words whereas the representation has single words and bi-grams only. In that case, the representation can be enriched by creating and adding a new feature that represents the phrase returned by the labeler. Our simple approach works as follows: we modify the features of the annotated document x , y  , R(x ) to emphasize the rationale(s) and de-emphasize the remaining phrases in that document. We simply multiply the features corresponding to phrase(s) that are returned as rationale(s) by weight r and we multiply the remaining features in the document by weight o, where r > o, and r and o are hyper-parameters. The modified document becomes:
+i i i i xi = r × fj , fj  R(xi ); o × fj , fj  / R(xi ), (1) Note that the rationales are tied to their documents for which they were provided as rationales. One phrase might be a rationale for the label of one
+
+3
+
+Learning with Rationales
+
+In this section we first provide the formulation of our approach to incorporate rationales into learning and then present the results to compare learning with442
+
+

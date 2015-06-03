@@ -1,0 +1,30 @@
+John likes mangoes
+NP (S\NP)/NP NP
+
+from
+(NP\NP)/NP NP
+
+India
+NP
+> < >
+
+madly
+(S\NP)\(S\NP)
+
+NP\NP S\NP S\NP S
+
+< <
+
+Figure 1: Normal form CCG derivation. of incremental CCG derivations and can train on the dependencies in the existing treebank. Our approach can therefore be adapted to other languages with dependency treebanks, since CCG lexical categories can be easily extracted from dependency treebanks (Cakici, 2005; Ambati et al., 2013). The rest of the paper is arranged as follows. Section 2 gives a brief introduction to related work in the areas of CCG parsing and incremental parsing. In section 3, we describe our incremental shift-reduce parsing algorithm. Details about the experiments, evaluation metrices and analysis of the results are in section 4. We conclude with possible future directions in section 5.
+
+dependency model for shift-reduce CCG parsing using a dynamic oracle technique. Unlike the chart parsers, both these parsers can produce fragmentary analyses when a complete spanning analysis is not found. Both these shift-reduce parsers are more incremental than standard chart based parsers. But, as they employ an arc-standard (Yamada and Matsumoto, 2003) shift-reduce strategy on CCGbank, given an SVO language, these parsers are not guaranteed to attach the subject before the object. 2.2 Incremental Parsers A strictly incremental parser is one which computes the relationship between words as soon as they are encountered in the input. Shift-reduce CCG parsers rely either on CCGbank derivations (Zhang and Clark, 2011) which are non-incremental, or on dependencies (Xu et al., 2014) which could be incremental in simple cases, but do not guarantee incrementality. Hassan et al. (2009) developed a semi-incremental CCG parser by transforming the English CCGbank into left branching derivation trees. The strictly incremental version performed with very low accuracy but a semi-incremental version gave a balance between incrementality and accuracy. There is also some work on incremental parsing using grammar formalisms other than CCG like phrase structure grammar (Collins and Roark, 2004) and tree substitution grammar (Sangati and Keller, 2013). 2.3 Greedy Parsers There has been a significant amount of work on greedy shift-reduce dependency parsing. The Malt parser (Nivre et al., 2007) is one of the earliest parsers based on this paradigm. Goldberg and Nivre (2012) improved learning for greedy parsers by using dynamic oracles rather than a single static transition sequence as the oracle. In all the standard shift-reduce parsers, when two trees combine, only the top node (root) of each tree participates in the action. Sartorio et al. (2013) introduced a technique where in addition to the root node, nodes on the right and left periphery respectively are also available for attachment in the parsing process. A non-monotonic parsing strategy was introduced by Honnibal et al. (2013), where an action taken during the parsing process is revised based on future context.
+
+2
+
+Related Work
+
+In this section, we first give a brief introduction to various available CCG parsers. Then we describe approaches towards incremental and greedy parsing. 2.1 CCG Parsers There has been a significant amount of work on developing chart-based parsers for CCG. Both generative (Hockenmaier and Steedman, 2002) and discriminative (Clark et al., 2002; Clark and Curran, 2007; Auli and Lopez, 2011; Lewis and Steedman, 2014) models have been developed. As these parsers employ a bottom-up chart-parsing strategy and use normal-form CCGbank derivations which are rightbranching, they are not incremental in nature. In an SVO (Subject-Verb-Object) language, these parsers first attach the object to the verb and then the subject. Two major works in shift-reduce CCG parsing with accuracies competitive with the widely used Clark and Curran (2007) parser (C&C) are Zhang and Clark (2011) and Xu et al. (2014). Zhang and Clark (2011) used a global linear model trained discriminatively with the averaged perceptron (Collins, 2002) and beam search for their shiftreduce CCG parser. Xu et al. (2014) developed a
+
+54
+
+

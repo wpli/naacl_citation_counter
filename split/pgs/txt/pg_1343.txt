@@ -1,0 +1,38 @@
+where n - 1 is history length and the parameters  consist of C , a matrix of context specific weights, R, the context word-embeddings, Q, the target wordembeddings, and b, a bias term. Note that a subscripted matrix indicates a vector, e.g., qw indicates the target word-embedding for word w and rhi is the embedding for the ith word in the history. The gradient, as in all energy-based models, takes the form of the difference between two expectations (LeCun et al., 2006).
+
+50 40 30 20 10 0 10 20 30 40
+
+4
+
+Morph-LBL
+
+Konflikts erfolgreiche Friedens Hauses erfolgreichen Familien soziale Landes sozialen kalte kalten Stunden Frauen schwere schrieb Konflikt ging blieb Zweck Frieden sprach Klang zweiter Kind alter neuer gesprochen gegangen Land Haus altes geschrieben zweites Ziel geht billiges bleibt schreibt spricht Nasdaq Harald Andreas Paul wieder dort hier
+40 30 20 10 0 10 20 30 40 50
+
+Stunde Krankheit Frau Familie
+
+We propose a multi-task objective that jointly predicts the next word w and its morphological tag t given a history h. Thus we are interested in a joint probability distribution defined as p(w, t | h)  exp((ftT S
+n-1
+
++
+i=1
+
+Ci rhi )T qw + bw ),
+
+(3) where ft is a hand-crafted feature vector for a morphological tag t and S is an additional weight matrix. Upon inspection, we see that p(t | w, h)  exp(ft S T qw ). (4)
+
+Figure 1: Projections of our 100 dimensional embeddings onto R2 through t-SNE (Van der Maaten and Hinton, 2008). Each word is given a distinct color determined by its morphological tag. We see clear clusters reflecting morphological tags and coarse-grained POS--verbs are in various shades of green, adjectives in blue, adverbs in grey and nouns in red and orange. Moreover, we see similarity across coarse-grained POS tags, e.g., the genitive adjective sozialen lives near the genitive noun Friedens, reflecting the fact that "sozialen Friedens" `social peace' is a frequently used German phrase.
+
+Hence given a fixed embedding qw for word w, we can interpret S as the weights of a conditional loglinear model used to predict the tag t. Morphological tags lend themselves to easy featurization. As shown in table 1, the morphological tag A DJ .N OM .S G .F EM decomposes into subtag units A DJ, N OM, S G and F EM. Our model includes a binary feature for each sub-tag unit in the tag set and only those present in a given tag fire; e.g., FA DJ .N OM .S G .F EM is a vector with exactly four non-zero components. 4.1 Semi-Supervised Learning In the fully supervised case, the method we proposed above requires a corpus annotated with morphological tags to train. This conflicts with a key use case of word-embeddings--they allow the easy incorporation of large, unannotated corpora into supervised tasks (Turian et al., 2010). To resolve this, we train our model on a partially annotated corpus. The key idea here is that we only need a partial set of labeled data to steer the embeddings to ensure they 1289
+
+capture morphological properties of the words. We marginalize out the tags for the subset of the data for which we do not have annotation.
+
+5
+
+Evaluation
+
+In our evaluation, we attempt to intrinsically determine whether it is indeed true that words similar in the embedding space are morphologically related. Qualitative evaluation, shown in figure 1, indicates that this is the case. 5.1 MorphoDist
+
+We introduce a new evaluation metric for morphologically-driven embeddings to quantitatively score models. Roughly, the question we want to evaluate is: are words that are similar in the embedded space also morphologically related? Given a word w and its embedding qw , let Mw be the set of morphological tags associated with w represented by bit vectors. This is a set because words may have several morphological parses. Our
+
+

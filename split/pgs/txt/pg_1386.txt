@@ -1,0 +1,56 @@
+product taxonomy consists of 6 hierarchical levels. Figure 3 shows the total number of categories per level. The highest density is at levels 3 and 4.
+levels! !!!8! ! #categories! !!!8! !
+
+· aprica&side&carrier&bou-que&pink&
+GOLD& baby&&&toddler&>&baby&transport&>&baby&carriers& PREDICTED& apparel&&&accessories&>&clothing&>&shirts&&&tops&
+
+!!31! !!93! !137! !!49! !!!1!!
+
+! ! ! ! ! !
+
+!1! !2! !3! !4! !5! !6!
+
+!!31! !!93! !137! !!49! !!!1!!
+
+! ! ! ! ! !
+
+!1! !2! !3! !4! !5! !6!
+
+· cabela's()pped(berber(camo(comfy(cup( ·  julie&brown&girl's&jersey&tunic/pink&9&pink& GOLD' animals'&'pet'supplies'>'pet'supplies'>'dog'supplies'>'dog'beds'
+GOLD& apparel&&&accessories&>&clothing&>&shirts&&&tops& PREDICTED' animals'&'pet'supplies'>'pet'supplies'>'small'animal'supplies'>'small'animal'bedding'
+
+Figure 3: Product Taxonomy.
+
+· flat$slat$sleigh$crib$espresso$8022n$ · carolina(pet(company(large(faux(suede(&( GOLD( baby(&(toddler( )pped(berber(round(comfy(cup(green( PREDICTED( furniture(>(baby(&(toddler(furniture(>(cribs(&(toddler(beds(
+GOLD' animals'&'pet'supplies'>'pet'supplies'>'small'animal'supplies'>'small'animal'bedding'
+
+6
+
+Experiments and Results
+
+In this section, we describe the evaluation metric and the sets of experiments we have conducted. 6.1 Evaluation Metric
+
+· angel$line$flat$slat$sleigh$changer$w/drawer$$ natural$8583$ those provided by humans. Figure 4 shows some GOLD( furniture(>(baby(&(toddler(furniture(>(cribs(&(toddler(beds( examples of the errors we discovered.
+
+Figure 4: Examples of Categorized Products.
+
+To evaluate the performance of the product categorization algorithms, we calculate f-score on the test set. The results are on exact match from top-to-leaf path of the gold and predicted categories. 6.2 Results
+
+Table 1 shows the obtained results. For each feature we report the performance of the two machine learning algorithms one-against-all (OAA) and error correcting tournament (ECT).
+features unigram unigram+bigram MI Dictionary LDA Dictionary NN-Embeddings OAA .72 .67 .85 .79 .88 ECT .63 .58 .77 .67 .80
+
+For instance, the title cabela's tipped beer como comfy cup was classified as Small Animal Bedding, while the gold standard category was Dog Beds. In our case we penalized such predictions, but still the two top level categories of Animals and Pet Supplies are similar. The major difference between the prediction and gold label is that the humans annotated bed as belonging to Dog Beds, while our algorithm predicted it as Small Animal Bedding. During manual inspection, we also noticed that often our classifier produces more descriptive categories compared to humans. For example, flat slat sleigh crib espresso 8022n had gold category Baby & Toddler, while our algorithm correctly identified the more descriptive category Cribs and Toddler Beds.
+
+7
+
+Conclusions
+
+Table 1: Results on Product Categorization.
+
+The highest performance is achieved with the neural network embedding representation. Between the two classifiers one-against-all consistently achieved the highest scores for all different feature sets. We also studied various feature combinations, however embeddings reached the highest performance. 6.3 Error Analysis
+
+We analyzed the produced outputs and noticed that sometimes the predicted category could be different from the gold one, but often the predicted category was semantically similar or more descriptive than 1332
+
+In this paper we have presented the first product categorization algorithm which operates on product title level. We classified products into a taxonomy of 319 categories organized into a 6 level taxonomy. We collected data for our experiments and conducted multiple empirical evaluations to study the effect of various features. Our experiments showed that neural network embeddings lead to the best performance reaching .88 f-score. We manually inspected the produced classification outputs and found that often the predicted categories are more specific and fine-grained compared to those provided by humans.
+
+

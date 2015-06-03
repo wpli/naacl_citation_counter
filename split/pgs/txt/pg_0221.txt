@@ -1,0 +1,43 @@
+as latent variables. Let hi be the hidden alignment vector for an observation pair (xi , yi ). The feature function (xi , yi , hi ) maps the input observation (xi , yi ), and their latent alignment vector hi to a ddimensional feature vector. Our goal is to learn the weights w  Rd for these features. 4.1 Latent Variable Conditional Random Field Given a text sequence xi and a video sequence yi with lengths |xi | = mi and |yi | = ni , the conditional probability of the video sequence is: p(yi |xi ) = p(yi , ni |xi ) = p(yi |xi , ni ) p(ni |xi ) (1) Since we only aim to learn the alignments given (xi , yi ), we ignore the length probability p(ni |xi ), and consider only the first term: p(yi |xi , ni ) =
+hi
+
+The gradient of the log-likelihood function with respect to the weight parameters is: L = w
+N i=1
+
+Ep(h|xi ,ni ,yi ) [(xi , yi , h)] - Ep(y,h|xi ,ni ) [(xi , y, h)] (5)
+
+We apply the stochastic gradient descent algorithm (Vishwanathan et al., 2006) to maximize the conditional log-likelihood. For each observation (xi , yi ), we perform forward-backward dynamic programming to estimate the two expectation terms in equation 5, as discussed next. 4.1.1 Estimation of Ep(h|xi ,ni ,yi ) [(xi , yi , h)] To estimate the first expectation term in equation 5, we need to sum over all the possible alignment states h[n] = m, where n  {1, . . . , ni } and m  {1, . . . , mi }. Since the output sequence yi is given, we refer to this stage as "forced" forwardF [m]  backward stage. The forward messages n p(Yi,1 , . . . , Yi,n , h[n] = m | xi ) are estimated using the following recursion:
+F (m) = n m F n -1 (m ) (Xi,m , Yi,n , m, n, m )
+
+p(yi , hi |xi , ni )
+
+(2)
+
+We model the conditional probability p(yi , hi |xi , ni ) using a log-linear model: p(yi , hi |xi , ni ) = exp wT (xi , yi , hi ) , Z (xi , ni ) exp wT (x (3)
+
+where Z (xi , ni ) = y h i , y, h). To keep our models tractable, we assume our feature function  decomposes linearly, similar to a linearchain graphical model:
+ni
+
+(xi , yi , hi ) =
+n=1
+
+(Xi,m , Yi,n , m, n, m ),
+
+where hi [n] = m and hi [n - 1] = m . Therefore, each factor in our linear chain graph structure depends on the alignment state for the current and the previous video chunk. For any two consecutive alignment states hi [n] = m and hi [n - 1] = m , we represent the factor potential as: (Xi,m , Yi,n , m, n, m ) = exp wT (Xi,m , Yi,n , m, n, m ) Our goal is to maximize the following loglikelihood function:
+N
+
+where m is one of the predecessors of the alignment state h[n] = m. Assuming no restrictions on the possible alignments, the computational complexity of each iteration on a single observation pair (xi , yi ) is O(m2 i ni d) for mi sentences, ni video chunks, and d dimensional features. However, we allow only a constant number of predecessor and successor states for each alignment state, and hence the computational complexity becomes O(mi ni d). Similarly, we apply backward recursions, with the same computational complexity. 4.1.2 Estimation of Ep(y,h|xi ,ni ) [(xi , y, h)] While computing the second expectation term, we assume only xi and the number of video chunks ni are observed, and we need to sum probabilities over all possible alignments h[n] = m and all possible video sequences y. Again we apply forwardbackward. The computational complexity, however, grows significantly, as we need to sum over all possible set of blobs that may be touched by hands in
+
+L(w) =
+i=1
+
+log
+hi
+
+p(yi , hi |xi , ni ).
+
+(4)
+
+167
+
+

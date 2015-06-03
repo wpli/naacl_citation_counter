@@ -1,0 +1,26 @@
+word-representations for the normal forms; different choices regarding how this pruning procedure is performed lead to different normalization procedures, including some that are more linguisticallymotivated (e.g., length-based). 3.3 Morphological Transformations for Rare and Unknown Words
+
+For some count threshold C , we define VC = {w  V |C  count(w)}. The method we presented up to VC this point induces a morphology graph DM orph that can be used to perform morphological analysis for any words in VC . We analyze the rest of the words we may encounter (i.e., rare words and OOVs) by VC mapping them directly to nodes in DM orph .
+V Figure 2: A part of a DM orph graph, with the morphological family for the normal-form created.
+
+V from GV M orph , using the nodes from GM orph and retaining only edges that meet certain criteria. For the experiments presented in Section 4, we V build a directed graph DM orph as follows:
+
+1. edge w1  w2 in GV M orph is considered only if count(w1 )  count(w2 ) in V ; 2. if multiple such edges exist, chose the one with minimal rank r; 3. if multiple such edges still exist, chose the one with the maximal cosine c. The interpretation we give is word-normalization: a normalization of w to w is guaranteed to be meaning preserving (using the direction-vector semantics), and to a more frequent form. A snippet of the V resulting graph DM orph is presented in Figure 2. One notable aspect of this normalization procedure is that these are not "traditional" morphological mappings, with morphology-inflected words mapped to their linguistic roots. Rather, our method produces morphological mappings that favor frequency over linguistic normalization. An example of this can be seen in Figure 2, where the root form create is morphologically-explained by mapping it to the form created. This choice is purely based on our desire to favor the accuracy of the 1632
+
+(r,c)
+
+VC We extract such mappings from DM orph using all the sequences of edges that start at nodes in the graph and end in a normal-form (i.e., nodes that have out-degree 0). The result is a set of rule sequences denoted RS. A count cutoff on the rule sequence counts is used, since low-count sequences tend to be less reliable (in the experiments reported in this paper we use a cutoff of 50). We also denote with R the set of all edges in DM orph . Using sets RS and R, VC we map w  VC to a node w  DM orph , as follows:
+
+1. for rule-sequences s  RS from highest-tos VC lowest count, if w  w and w  DM orph , then s is the morphological analysis for w; 2. if no s is found, do breadth-first search in VC 3 DM orph using r  R, up to a predefined depth d; for k  d, word w with w -k w  VC DM orph and the highest count in VC is the morphological analysis for w. For example, this procedure uses the RS sequence s=prefix : un : , suffix : ness : to perform the OOV morphological analysis unassertiveness s -assertive. We perform an in-depth analysis of the performance of this procedure in Section 4.2.
+r1 ...r
+
+4
+
+Empirical Results
+
+In this section, we evaluate the performance of the procedure described in Section 3. Our evaluations aim at answering several empirical questions: how
+3
+
+We use d=1 in the experiments reported in Section 4.2.
+
+

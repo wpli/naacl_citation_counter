@@ -1,0 +1,31 @@
+4.4
+
+Features
+
+Next, we introduce the features used to train the CRF. The feature function fj(i,w,ai,ai-1) was defined as a binary function, in which w is a feature value. We use both lexical and syntactic features. In a trained CRF model, the value of fi(i,w,ai,ai-1) is known given a combination of parameters (i,w,ai,ai-1). The features used in the CRF model include words themselves, word lemmas, parts of speech, and dependency relationships from the syntactic parse. The word itself, lemmatized words and parts-of-speech have all been shown useful within segmentation and labeling tasks, so they are made available here (Xue et al., 2004). Each of these features is represented as categorical data. For example, a word is represented as its index in a list of all of the words that appeared in the corpus. The dependency structure of natural language has also been shown to be important in semantic interpretation (Poon et al., 2009). This paper employs a dependency feature vector extracted from dependency parses. The head word of each noun phrase is the root of the dependency tree. Each dependent is a sub-tree directly under the head. We design the dependency feature as a sequence of dependency labels as follows. Given a dependency tree, words in each semantic segment of the noun phrase are assigned a tag according to the relationship between them and the head. The relationship between each segment and
+Attributes CATEGORY NAME VAR_TYPE NUMBER IN_CLASS IN_METHOD DIR_PARENT LINE_NUMBER SUPER_CLASS MODIFIER ARRAY_TYPE ARRAY_DIMENSION OBJ_CLASS RETURN_TYPE OTHER
+
+head is defined by the dependency type in the dependency tree. For example, the dependency tree of "a 2 dimensional array" is shown in Figure 5. The dependency features are <det,amod,amod,root>. In this way, the dependency information from an open-domain parser is encoded as a feature to the semantic grounding model.
+array
+det
+
+head
+amod
+
+a dependent 1
+
+2 dimensional dependent 2
+
+Figure 5. Dependency structure of "a 2 dimensional array."
+
+5 Experiments & Results
+The goal of the experiments is to determine how well the trained CRF can segment noun phrases and link these segments to the correct attribute of entities in the world. This section presents the experiments using CRFs trained and tested on the Java programming tutorial dialogue corpus. As described below, the results were evaluated by comparing with manually labeled data. Noun phrases from the tutorial dialogues were first manually extracted and annotated as to their slots in the description vector described in Section
+Example Method, Variable, etc. extractDigit int, String, etc. 2 postalFrame actionPerformed For_Statement, Method 67 JFrame public, private, etc. int, char, etc. 2, 1 PostalBarCode String, int, etc. the, extra, etc.
+
+Meaning (in Java programming) Category of an entity Variable name; often user-created Type of variable Number of entities The class that contains this entity The method that contains this entity Direct parent entity Line number Superclass of this entity Access modifier Type of Array Dimension of array The class an object instantiates Return type Other attributes
+
+Table 1. Elements of entity description vector to which noun phrases are mapped.
+
+847
+
+

@@ -1,0 +1,30 @@
+IWSLT German English Sentences Run. Words Vocabulary 138K 2.63M 2.70M 75.4K 50.2K
+
+BOLT Chinese English 4.08M 78.3M 85.9M 384K 817K
+
+WMT German English 4.09M 105M 104M 659K 649K
+
+Table 1: Statistics for the bilingual training data of the IWSLT 2013 GermanEnglish, the DARPA BOLT ChineseEnglish and the WMT 2014 GermanEnglish tasks.
+
+and LDC English Gigaword corpora. The selection is based on cross-entropy difference (Moore and Lewis, 2010). This makes for a total of 1.7 billion running words for LM training. The baseline further contains a hierarchical reordering model (HRM) (Galley and Manning, 2008) and a 7-gram word class language model (Wuebker et al., 2013). On IWSLT, all results are averages over three independent MERT runs, and we evaluate statistical significance with MultEval (Clark et al., 2011). To confirm our findings, additional experiments are run on two large-scale tasks over strong baselines including recurrent neural language models. On the DARPA BOLT ChineseEnglish task we use our internal evaluation system as a baseline. It is a powerful hierarchical phrase-based SMT engine with 19 dense features, including an LSTM recurrent neural language model (Sundermeyer et al., 2012) and a hierarchical reordering model (Huck et al., 2013). The 5-gram backoff LM is in total trained on 2.9 billion running words. We use the same data for tuning and testing as Setiawan and Zhou (2013), namely 1275 (tune) and 12393 sentences of web data taken from LDC2010E30, the NIST MT06 evaluation set and an additional single-reference test set from the discussion forum (df) domain containing 1124 sentence pairs. Maximum expected B LEU training is performed on the discussion forum portion of the training data, consisting of 67.8K sentence pairs. On the GermanEnglish task of the 9th Workshop on Statistical Machine Translation4 , both translation model and maximum expected B LEU training is performed on all available bilingual data. Our baseline is a phrase-based translation engine with a 4gram backoff LM trained on 2.5 billion words with lmplz (Heafield et al., 2013), a recurrent neural
+3 4
+
+IWSLT de-en baseline GT (He and Deng, 2012) SGD (Auli et al., 2014) AdaGrad (Green et al., 2013) RPROP (this work) RPROP w/o leave-one-out RPROP all features
+
+# feat.
+
+test
+
+18 6.08M 921K 921K 921K 921K 5.22M
+
+30.4 30.9 30.8 31.1 31.3 30.7 31.6
+
+Table 2: Results for the IWSLT 2013 GermanEnglish task in B LEU [%]. The comparison between update strategies is done with feature set (a) and RPROP all features uses feature sets (a)-(d). GT, SGD, AdaGrad and RPROP are trained with leave-one-out, unless otherwise specified.
+
+LM, a 7-gram word class LM and the HRM. Bilingual data statistics for all tasks are given in Table 1. We use the machine translation toolkit Jane (Vilar et al., 2010; Wuebker et al., 2012) and evaluate with case-insensitive B LEU [%] (Papineni et al., 2002) in all experiments. 6.2 Experimental Results Table 2 shows the IWSLT results. We first compare the performance of the four update algorithms, for simplicity only on the discriminative phrase table features. Different from previous work the nbest lists of the training data were generated with leave-one-out, unless otherwise stated. In all cases we tested different values for the regularization parameter  and in the case of SGD and AdaGrad also for the learning rate  . We selected the best configurations based on a validation set (test2011). For AdaGrad we also experimented with FOBOS regularization and feature selection (Duchi and Singer, 2009), but did not observe improved results. As
+
+named dev in (Setiawan and Zhou, 2013) http://statmt.org/wmt14/
+
+1522
+
+

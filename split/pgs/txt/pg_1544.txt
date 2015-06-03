@@ -1,0 +1,39 @@
+Dataset CORPS Movie Slogan Twitter
+
+N-Gram 0.733 0.694 0.826 0.732
+
+N-Gram+Rhyme 0.738 (3k, 1) 0.694 (1k, 1) 0.864 (2k, 1) 0.740 (4k, 1)
+
+
+N-Gram+Plosive 0.740 0.692 0.824 0.733
+
+
+N-Gram+Homogeneity 0.738 (3k, 1) 0.721 (1k, 1) 0.867 (3k, 1) 0.746 (4k, 1)
+
+
+N-Gram+Alliteration 0.738 (2k, 1) 0.709 (1k, 1) 0.859 (3k, 1) 0.742 (4k, 1)
+
+(2k, 1) (1k, 1) (2k, 1) (4k, 1)
+
+Table 6: Contribution of the phonetic features.
+CORPS Phonetic N-Gram 0.439 0.535 0.431 0.494 0.512 0.513 Twitter Phonetic N-Gram 0.463 0.535 0.562 0.508 0.510 0.533 Test All 0.523 0.539 0.560 Phonetic 0.508 0.564 0.581 Slogan N-Gram 0.517 0.531 0.537 Movie N-Gram 0.506 0.544 0.545 -
+
+Training CORPS Twitter Slogan Movie
+
+All 0.462 0.514 0.498
+
+All 0.539 0.637 0.589
+
+Phonetic 0.411 0.596 0.532 -
+
+All 0.516 0.589 0.588 -
+
+Table 7: Results of the cross-dataset prediction experiments optimized on the training set.
+
+from the ones to their left, while  represents no significance, as calculated according to McNemar's test (McNemar, 1947). For each dataset, the weakest models (i.e. the ones using only the phonetic features in all cases) are still significantly (p < .001) more accurate than a random baseline (accuracy = 50%). As can be observed from the table, the models using only n-grams significantly outperform the ones only based on phonetic features in all datasets. However, while the phonetic features are not very strong by themselves, their combination with ngrams results in models outperforming the n-gram based models in all cases. The difference is highly significant for all datasets except CORPS, where ngrams alone are sufficient to achieve a good performance. We speculate that the kind of persuasiveness used in political speeches is more dependent on the lexical choices of the speaker and on the use of a specific set of semantically loaded words such as bless, victory, God and justice or military. This is in line with the work of Guerini et al. (2008), who built a domain specific lexicon to study the persuasive impact of words in political speeches. We also conducted an additional set of experiments to investigate if some phonetic features stand out among the others, and to find out the contribution and importance of each phonetic feature in isolation. To achieve that, for each dataset we conducted a 10-fold cross validation to obtain the best four models containing a single phonetic feature on top of n-gram features (i.e. N-Gram+Rhyme, 1490
+
+N-Gram+Plosive, N-Gram+Homogeneity and NGram+Alliteration). In Table 6, we report the accuracy of the n-gram model and these four models for each dataset. Similarly to Table 5, for each accuracy value, we also report in parenthesis the number of features selected and the kernel degree of the corresponding model obtained with grid search. The results demonstrate that homegeneity is the most effective feature when added on top of n-grams, resulting in highly significant improvement against the basic n-gram models in three out of four datasets. Alliteration and rhyme closely follow homogeneity by yielding models that significantly outperform the ngram models in three and two datasets respectively. Finally, the models containing plosives do not improve over the n-gram models in any of the four datasets. It is worth noting that in CORPS none of the n-gram models enriched with phonetic features improves over the basic n-gram models as in line with the results of the within-dataset experiments reported in Table 5. 6.4 Cross-dataset experiments
+
+After observing that the combination of phonetic and n-gram features can be effective in the withindataset prediction experiments, we took a further step and investigated the interaction of the three feature sets across datasets. More specifically, we classified each dataset with the best models (one for each feature set) trained on the other datasets. With these experiments, we investigated the ability of phonetic
+
+

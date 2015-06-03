@@ -1,0 +1,25 @@
+ford flexibility to model the transitions between consecutive utterances and to capture long-span dependencies in a domain where traditional word and phrase alignment is difficult (Ritter et al., 2011). To this end, we present two simple, context-sensitive response-generation models utilizing the Recurrent Neural Network Language Model (RLM) architecture of (Mikolov et al., 2010). These models first encode past information in a hidden continuous representation, which is then decoded by the RLM to promote plausible responses that are simultaneously fluent and contextually relevant. Unlike typical complex task-oriented multi-modular dialog systems (Young, 2002; Stent and Bangalore, 2014), our architecture is completely data-driven and can easily be trained end-to-end using unstructured data without requiring human annotation, scripting, or automatic parsing. This paper makes the following contributions. We present a neural network architecture for response generation that is both context-sensitive and datadriven. As such, it can be trained from end to end on massive amounts of social media data. To our knowledge, this is the first application of a neural-network model to open-domain response generation, and we believe that the present work will lay groundwork for more complex models to come. We additionally introduce a novel multi-reference extraction technique that shows promise for automated evaluation.
+
+2
+
+Related Work
+
+Our work naturally lies in the path opened by Ritter et al. (2011), but we generalize their approach by exploiting information from a larger context. Ritter et al. and our work represent a radical paradigm shift from other work in dialog. More traditional dialog systems typically tease apart dialog management (Young, 2002) from response generation (Stent and Bangalore, 2014), while our holistic approach can be considered a first attempt to accomplish both tasks jointly. While there are previous uses of machine learning for response generation (Walker et al., 2003), dialog state tracking (Young et al., 2010), and user modeling (Georgila et al., 2006), many components of typical dialog systems remain hand-coded: in particular, the labels and attributes defining dialog states. In contrast, the dialog state in our neural network model is completely latent and directly optimized towards end-to-end performance. In this sense, 197
+
+we believe the framework of this paper is a significant milestone towards more data-driven and less hand-coded dialog processing. Continuous representations of words and phrases estimated by neural network models have been applied on a variety of tasks ranging from Information Retrieval (IR) (Huang et al., 2013; Shen et al., 2014), Online Recommendation (Gao et al., 2014b), Machine Translation (MT) (Auli et al., 2013; Cho et al., 2014; Kalchbrenner and Blunsom, 2013; Sutskever et al., 2014), and Language Modeling (LM) (Bengio et al., 2003; Collobert and Weston, 2008). Gao et al. (2014a) successfully use an embedding model to refine the estimation of rare phrase-translation probabilities, which is traditionally affected by sparsity problems. Robustness to sparsity is a crucial property of our method, as it allows us to capture context information while avoiding unmanageable growth of model parameters. Our work extends the Recurrent Neural Network Language Model (RLM) of (Mikolov et al., 2010), which uses continuous representations to estimate a probability function over natural language sentences. We propose a set of conditional RLMs where contextual information (i.e., past utterances) is encoded in a continuous context vector to help generate the response. Our models differ from most previous work in the way the context vector is constructed. For example, Mikolov and Zweig (2012) and Auli et al. (2013) use a pre-trained topic model. In our models, the context vector is learned along with the conditional RLM that generates the response. Additionally, the learned context encodings do not exclusively capture contentful words. Indeed, even "stop words" can carry discriminative power in this task; for example, all words in the utterance "how are you?" are commonly characterized as stop words, yet this is a contentful dialog utterance.
+
+3
+
+Recurrent Language Model
+
+We give a brief overview of the Recurrent Language Model (RLM) (Mikolov et al., 2010) architecture that our models extend. A RLM is a generative model of sentences, i.e., given sentence s = s1 , . . . , sT , it estimates:
+T
+
+p(s) =
+t=1
+
+p(st |s1 , . . . , st-1 ).
+
+(1)
+
+

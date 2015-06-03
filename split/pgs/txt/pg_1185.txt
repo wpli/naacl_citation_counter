@@ -1,0 +1,22 @@
+entity mention, using AMR provides a rich context representation, facilitating the selection of an optimal set of collaborator entity mentions, i.e., those co-occurring mentions most useful for disambiguation. In previous approaches, collaborator sets have tended to be too narrow or too broad, introducing noise. We then use unsupervised graph inference for context comparison, achieving results comparable with state-of-the-art supervised methods and substantially outperforming context representation based on traditional Semantic Role Labeling. In addition, most state-of-the-art EL approaches now rely on collective inference, where a set of coherent mentions are linked simultaneously by choosing an "optimal" or maximally "coherent" set of named entity targets - one target entity for each mention in the coherent set. We show preliminary results suggesting that AMR is effective for the partitioning of all mentions in a document into coherent sets for collective linking. We evaluate our approach using both human and automatic AMR annotation, limiting target named entity types to person (PER), organization (ORG), and geo-political entities (GPE) 3 .
+
+2014), dependent (Ling et al., 2014), or a combination of these through meta-paths (Huang et al., 2014). These measures can collect more precise collaborators but suffer from low coverage of predefined information templates and the unsatisfying quality of state-of-the-art coreference resolution, relation and event extraction. In this paper, we demonstrate that AMR is an appropriate and elegant way to acquire, select, represent and organize deeper knowledge in text. Together with our novel utilization of the rich structures in merged KBs, the whole framework carries rich enough evidence for effective EL, without the need for any labeled data, collective inference, or sophisticated similarity.
+
+3
+
+Knowledge Network Construction from Source
+
+2
+
+Related Work
+
+In most recent collective inference methods for EL (e.g., (Kulkarni et al., 2009; Pennacchiotti and Pantel, 2009; Fernandez et al., 2010; Radford et al., 2010; Cucerzan, 2011; Guo et al., 2011; Han and Sun, 2011; Ratinov et al., 2011; Chen and Ji, 2011; Kozareva et al., 2011; Dalton and Dietz, 2013)), the target entity mention's "collaborators" may simply include all mentions which co-occur in the same discourse (sentence, paragraph or document) (Ratinov et al., 2011; Nguyen et al., 2012). But this approach usually introduces many irrelevant mentions, and it's very difficult to automatically determine the scope of discourse. In contrast, some recent work exploited more restricted measures by only choosing those mentions which are topically related (Cassidy et al., 2012; Xu et al., 2012), bear a relation from a fixed set (Cheng and Roth, 2013), coreferential (Nguyen et al., 2012; Huang et al., 2014), socially related (Cassidy et al., 2012; Huang et al.,
+The mapping from AMR entity types to these three main types is at: amr.isi.edu/lib/ne-type-sc.txt
+3
+
+Abstract Meaning Representation (AMR) (Banarescu et al., 2013) is a sembanking language that captures whole sentence meanings in a rooted, directed, labeled, and (predominantly) acyclic graph structure. AMR utilizes multi-layer linguistic analysis such as PropBank frames, non-core semantic roles, coreference, named entity annotation, modality and negation to represent the semantic structure of a sentence. AMR strives for a more logical, less syntactic representation. Compared to traditional dependency parsing and semantic role labeling, the nodes in AMR are entities instead of words, and the edge types are much more fine-grained4 . AMR thus captures deeper meaning compared with other representations more commonly used to represent mention context in EL. We use AMR to represent semantic information about entity mentions expressed in their textual context. Specifically, given an entity mention m, we use a rule based method to construct a Knowledge Network, which is a star-shaped graph with m at the hub, with leaf nodes obtained from entity mentions reachable by AMR graph traversal from m, as well as AMR node attributes such as entity type. A subset of the leaf nodes are selected as m's collaborators using rules presented in the following subsecAMR distinguishes between entities and concepts, the former being instances of the latter. We consider AMR concepts as entity mentions, and use AMR entity annotation for coreference resolution.
+4
+
+1131
+
+

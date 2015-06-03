@@ -1,0 +1,44 @@
+Models Micro Macro
+
+Cucerzan 51.03 43.74
+
+Kulkarni 72.87 76.74
+
+Hoffart 81.82 81.91
+
+Shirakawa 82.29 83.02
+
+Alhelbawy 87.59 84.19
+
+iSim 62.61 72.21
+
+PPR 85.56 85.86
+
+PPRSim 91.77 89.89
+
+Table 1: Performance of PPRSim compared to baselines and state-of-the-art models on AIDA dataset. Baselines iSim and PPR choose a candidate with the highest initial similarity or coherence correspondingly.
+
+2011). There are 34,965 annotated mentions in 1393 documents. Only mentions with a valid entry in the Wikipedia KB are considered (Hoffart et al., 2011), resulting in a total of 27,816 mentions. We use a Wikipedia dump from June 14, 2014, as the reference KB. Our set of candidates is publicly available for experiments3 . Evaluation. We use two evaluation metrics: (1) Microaccuracy is the fraction of correctly disambiguated entities; (2) Macroaccuracy is the proportion of textual mentions, correctly disambiguated per entity, averaged over all entities. PPR. We adopt the Monte Carlo approach (Fogaras and Racz, 2004) for computing Personalized PageRank. It performs a number of independent random walks for every source node and takes an empirical distribution of ending nodes to obtain PPR weights with respect to the source. We initialized 2,000 random walks for every source node, performed 5 steps of PPR, and computed PPR weights from all iterations dropping walks from the first one. The teleport probability is set to 0.2. Baselines. We performed a set of experiments using initial similarity and Personalized PageRank weights. Model iSim uses only Freebase scores and achieves microaccuracy of 62.61% (Table 1). PPR model picks a candidate with highest coherence, computed in (3), where no initial similarity is used (iSim  1.0) and no constraints are applied. It has microaccuracy of 85.56%. This is a strong baseline, proving that coherence (3), solely based on PPR weights, is very accurate. We also reimplemented the most recent state-of-the-art approach by Alhelbawy (2014) based on the PageRank. We ran it on our set of candidates with freebase scores and got 82.2% and 80.2% in micro- and macroaccuracy correspondingy.
+3
+
+PPRSim iSim  1.0 iSim = localSim iSim = popSim +(c1) +(c2) +(c1),(c2)
+
+Micro 85.56 87.01 90.26 90.52 91.68 91.77
+
+Macro 85.86 86.65 88.98 89.21 89.78 89.89
+
+Table 2: Performance of PPRSim with different initial similarities and constraints.
+
+Results. We observe that PPR combined with global similarity popSim achieves a microaccuracy of 90.2% (Table 2). Adding constraints into the coherence computation further improves the performance to 91.7%. Interestingly, (c2) is more accurate than (c1). When put together, (c1)+(c2) performs better than each individual constraint (Table 2). Thus, combining coherence and initial similarity via (5) improves both micro- and macroaccuracy, outperforming state-of-the-art models (Table 1).
+
+6
+
+Conclusion and Future Work
+
+In this paper we devise a new algorithm for collective named entity disambiguation based on Personalized PageRank. We show how to incorporate pairwise constraints between candidate entities by using PPR scores and propose a new robust scheme to compute coherence of a candidate entity to a document. Our approach outperforms state-of-the-art models and opens up many opportunities to employ pairwise information in NED. For future work, we plan to explore other strategies and constraints for noise reduction in the document graph.
+
+https://github.com/masha-p/PPRforNED
+
+242
+
+

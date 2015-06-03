@@ -1,0 +1,25 @@
+query. Similarly terminological databases have been exploited to encode the salience of candidate key phrases in scientific papers (Lopez and Romary, 2010). In summarization, external information has also been used to measure word salience. Some TAC systems like (Kumar et al., 2010; Jia et al., 2010) used Wiki as an important external resource to measure the words' importance, which helped improve the summarization results. Hong and Nenkova (2014) introduced a supervised model for predicting word importance that incorporated a rich set of features. Tweets information is leveraged by (Wei and Gao, 2014) to help generate news highlights. In this paper our focus is on choosing useful bigrams and estimating accurate weights to use in the concept-based ILP methods. We explore many external resources to extract features for bigram candidates, and more importantly, propose to estimate the feature weights in a joint process via structured perceptron learning that optimizes summary sentence selection.
+
+3 Summarization System
+In this study we use the ILP-based summarization framework (Formulas 1-6) that tries to maximize the weights of the selected concepts (bigrams) under the summary length constraint. Our focus is on better selection of the bigrams and estimation of the bigram weights. We use syntax tree and POS of tokens to help filter some useless bigrams. Then supervised methods are applied to predict the bigram weights. The rich set of features we use is introduced in Section 4. In the following we describe how to select important bigrams and how the feature weights are trained. 3.1 Bigram Selection
+
+bigrams/concepts in the ILP optimization method. Details are described in (Gillick et al., 2009). In this paper, rather than considering all the bigrams, we propose to utilize syntactic information to help select important bigrams. Intuitively bigrams containing content words carry more topic related information. As proven in (Klavans and Kan, 1998), nouns, verbs, and adjectives were indeed beneficial in document analysis. Therefore we focus on choosing bigrams containing these words. First, we use a bottom-up strategy to go through the constituent parse tree and identify the `NP' nodes in the lowest level of the tree. Then all the bigrams in these base NPs are kept as candidates. Second, we find the verbs and adjectives from the sentence based on the POS tags, and construct bigrams by concatenating the previous or the next word of that verb or adjective. If these bigrams are not included in those already found from the base NPs, they are added to the bigram candidates. After the above filtering, we further drop bigrams if both words are stop words, as previous work in (Gillick et al., 2009). 3.2 Weight Training We propose to train the feature weights in a joint learning fashion. In the ILP summarization framework, we use the following new objective function: max
+i (
+
+· f(bi ))ci
+
+(7)
+
+In (Gillick et al., 2009), bigrams whose document frequency is higher than a predefined threshold (df=3 in previous work) are used as the concepts in the ILP model. The weight for these bigrams in the ILP optimization objective function (Formula 1) is simply set as their document frequency. Although this setting has been demonstrated to be quite effective, its gap with the oracle experiment (using bigrams that appear in the human summaries) is still very large, suggesting potential gains by using better
+
+We replace the wi in Formula 1 with a vector inner product of bigram features and their corresponding weights. Constraints remain the same as those in Formula 2 to 6. To train the model (feature weights), we leverage structured perceptron strategy (Collins, 2002) to update the feature weights whenever the hypothesis offered by the ILP decoding process is incorrect. Binary class labels are used for bigrams in the learning process, that is, we only consider whether a bigram is in the system generated summary or human summaries, not their term or document frequency. During perceptron training, a fixed learning rate is used and parameters are averaged to prevent overfitting.
+
+4
+
+Features for Bigrams
+
+We use a rich set of features to represent each bigram candidate, including internal features based on
+
+780
+
+

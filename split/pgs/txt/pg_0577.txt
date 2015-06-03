@@ -1,0 +1,36 @@
+Features D+W T+D+W
+
+G@100 87.68 84.91
+
+G@100-M 97.31 91.47
+
+Accuracy-M 97 88
+
+Table 3: Manual vs. Automatic evaluation of top 100 predictions on 70 types. Predictions are obtained by training a linear classifier using Adagrad with global training objective (m=1, n=1). G@100-M and Accuracy-M are computed by manual evaluation.
+
+Knowledge Base Completion Much of precious work in KB completion has focused on the problem of relation extraction. Majority of the methods infer missing relation facts using information within the KB (Nickel et al., 2011; Lao et al., 2011; Socher et al., 2013; Bordes et al., 2013) while methods such as Mintz et al. (2009) use information in text documents. Riedel et al. (2013) use both information within and outside the KB to complete the KB. Linear Embedding Model Weston et al. (2011) is one of first work that developed a supervised linear embedding model and applied it to image retrieval. We apply this model to entity type prediction but we train using a different objective function which is more suited for our task.
+
+5.4
+
+Error Analysis
+
+· Effect of training data: We find the performance of the models on a type is highly dependent on the number of training instances for that type. For example, the linear classifier model when evaluated on 70 types performs 24.86 % better on the most frequent 35 types compared to the least frequent 35 types. This indicates bootstrapping or active learning techniques can be profitably used to provide more supervision for the methods. In this case, G@k would be an useful metric to compare the effectiveness of the different methods. · Shallow Linguistic features: We found some of the false positive predictions are caused by the use of shallow linguistic features. For example, an entity who has acted in a movie and composes music only for television shows is wrongly tagged with the type / film/composer since words like "movie", "composer" and "music" occur frequently in the Wikipedia article of the entity (http://en.wikipedia. org/wiki/J._J._Abrams).
+
+7
+
+Conclusion and Future Work
+
+We propose an evaluation framework comprising of methods for dataset construction and evaluation metrics to evaluate KBC approaches for inferring missing entity type instances. We verified that our automatic evaluation is correlated with human evaluation, and our dataset and evaluation scripts are publicly available.8 Experimental results show that models trained with our proposed global training objective produces higher quality ranking within and across types when compared to baseline methods. In future work, we plan to use information from entity linked documents to improve performance and also explore active leaning, and other humanin-the-loop methods to get more training data.
+
+6
+
+Related Work
+
+References
+Jonathan Berant, Vivek Srikumar, Pei-Chun Chen, Abby Vander Linden, Brittany Harding, Brad Huang, and Christopher D. Manning. 2013. Semantic parsing on freebase from question-answer pairs. In Empirical Methods in Natural Language Processing. Kurt Bollacker, Colin Evans, Praveen Paritosh, Tim Sturge, and Jamie Taylor. 2008. Freebase: a collaboratively created graph database for structuring human knowledge. In Proceedings of the ACM SIGMOD International Conference on Management of Data.
+http://research.microsoft.com/en-US/ downloads/df481862-65cc-4b05-886c-acc181ad07bb/ default.aspx
+8
+
+Entity Type Prediction and Wikipedia Features Much of previous work (Pantel et al., 2012; Ling and Weld, 2012) in entity type prediction has focused on the task of predicting entity types at the sentence level. Yao et al. (2013) develop a method based on matrix factorization for entity type prediction in a KB using information within the KB and New York Times articles. However, the method was still evaluated only at the sentence level. Toral and Munoz (2006), Kazama and Torisawa (2007) use the first line of an entity's Wikipedia article to perform named entity recognition on three entity types. 523
+
+

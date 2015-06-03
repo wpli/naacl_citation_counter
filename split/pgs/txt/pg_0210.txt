@@ -1,0 +1,27 @@
+resentations, thus aligning the dimensions of the linguistic vector with those of the visual one (recall that we are inducing the first, while the second is fixed), and making the linguistic representation of a concept "move" closer to its visual representation. We maximize similarity through a max-margin framework commonly used in models connecting language and vision (Weston et al., 2010; Frome et al., 2013). More precisely, we formulate the visual objective Lvision (wt ) as:
+-
+w Pn (w)
+
+max(0,  - cos(uwt , vwt ) + cos(uwt , vw )) (4)
+
+where the minus sign turns a loss into a cost,  is the margin, uwt is the target multimodally-enhanced word representation we aim to learn, vwt is the corresponding visual vector (fixed in advance) and vw ranges over visual representations of words (featured in our image dictionary) randomly sampled from distribution Pn (wt ). These random visual representations act as "negative" samples, encouraging uwt to be more similar to its own visual representation than to that of other words. The sampling distribution is currently set to uniform, and the number of negative samples controlled by hyperparameter k . 3.4 Multi-modal Skip-gram Model B The visual objective in MMS KIP - GRAM -A has the drawback of assuming a direct comparison of linguistic and visual representations, constraining them to be of equal size. MMS KIP - GRAM -B lifts this constraint by including an extra layer mediating between linguistic and visual representations (see Figure 1 for a sketch of MMS KIP - GRAM -B). Learning this layer is equivalent to estimating a cross-modal mapping matrix from linguistic onto visual representations, jointly induced with linguistic word embeddings. The extension is straightforwardly implemented by substituting, into Equation 4, the word representation uwt with zwt = M uv uwt , where M uv is the cross-modal mapping matrix to be induced. To avoid overfitting, we also add an L2 regularization term for M uv to the overall objective (Equation 3), with its relative importance controlled by hyperparamer .
+
+Our text corpus is a Wikipedia 2009 dump comprising approximately 800M tokens.1 To train the multimodal models, we add visual information for 5,100 words that have an entry in ImageNet (Deng et al., 2009), occur at least 500 times in the corpus and have concreteness score  0.5 according to Turney et al. (2011). On average, about 5% tokens in the text corpus are associated to a visual representation. To construct the visual representation of a word, we sample 100 pictures from its ImageNet entry, and extract a 4096-dimensional vector from each picture using the Caffe toolkit (Jia et al., 2014), together with the pre-trained convolutional neural network of Krizhevsky et al. (2012). The vector corresponds to activation in the top (FC 7) layer of the network. Finally, we average the vectors of the 100 pictures associated to each word, deriving 5,100 aggregated visual representations. Hyperparameters For both S KIP - GRAM and the MMS KIP - GRAM models, we fix hidden layer size to 300. To facilitate comparison between MMS KIP GRAM -A and MMS KIP - GRAM -B, and since the former requires equal linguistic and visual dimensionality, we keep the first 300 dimensions of the visual vectors. For the linguistic objective, we use hierarchical softmax with a Huffman frequency-based encoding tree, setting frequency subsampling option t = 0.001 and window size c = 5, without tuning. The following hyperparameters were tuned on the text9 corpus:2 MMS KIP - GRAM -A: k =20,  =0.5; MMS KIP - GRAM -B: k=5, =0.5, =0.0001.
+
+5
+5.1
+
+Experiments
+Approximating human judgments
+
+4
+
+Experimental Setup
+
+Benchmarks A widely adopted way to test DSMs and their multimodal extensions is to measure how well model-generated scores approximate human similarity judgments about pairs of words. We put together various benchmarks covering diverse aspects of meaning, to gain insights on the effect of perceptual information on different similarity facets. Specifically, we test on general relatedness (MEN, Bruni et al. (2014), 3K pairs), e.g., pickles are related to hamburgers, semantic ( taxonomic) simi1 2
+
+The parameters of all models are estimated by backpropagation of error via stochastic gradient descent. 156
+
+http://wacky.sslmit.unibo.it http://mattmahoney.net/dc/textdata.html
+
+

@@ -1,0 +1,23 @@
+Unediting: Detecting Disfluencies Without Careful Transcripts
+Victoria Zayats, Mari Ostendorf and Hannaneh Hajishirzi Electrical Engineering Department University of Washington Seattle, WA, USA [vzayats, ostendor, hannaneh]@u.washington.edu
+
+Abstract
+Speech transcripts often only capture semantic content, omitting disfluencies that can be useful for analyzing social dynamics of a discussion. This work describes steps in building a model that can recover a large fraction of locations where disfluencies were present, by transforming carefully annotated text to match the standard transcription style, introducing a two-stage model for handling different types of disfluencies, and applying semi-supervised learning. Experiments show improvement in disfluency detection on Supreme Court oral arguments, nearly 23% improvement in F1.
+
+1
+
+Introduction
+
+Many hearings, lectures, news broadcasts and other spoken proceedings are hand-transcribed and made available online for easier searching and increased accessability. For speed and cost reasons, standard transcription services aim at representing semantic content only; thus, filled pauses (uh, um) and many disfluencies (repetitions and self corrections) are omitted, though not all. Careful transcripts represent all the words (and word fragments spoken), as shown below with disfluent regions underlined.
+Careful: It is it is a we submit Where there used to be um um um uh the decision Standard: It is, it is, we submit Where there used to be the decision
+
+of disfluencies provide an indication of other factors of interest in spoken language analysis, including cognitive load, emotion, and social cues (Shriberg, 2001). Further, predicting locations of disfluencies in standard transcripts would help to improve time alignments of transcripts to the audio signal, and to provide more useful text data for training language models for speech recognition. Since careful annotation of transcripts with this information is costly, this paper tackles the problem of recovering the disfluencies from clues in the standard orthographic transcripts, or "unediting" the transcripts.1 Here, unediting is treated as detection of the reparandum of the disfluencies. Following the structural representation of (Shriberg, 1994), as in: [ we would + which we would ] [ would + [ who + who ] wouldn't ] the task is to detect the words in the brackets preceding the '+' which marks the self-interruption point. Of course, here, some of the words in those regions may not be in the transcript, so location is more important than extent. In addition, some cues used (i.e. filled pauses and word fragments) are not available in standard transcripts. Three developments are combined to address the problem of unediting with the constraint of limited hand-annotated training data in the target domain: oral arguments from the Supreme Court of the United States (SCOTUS) available from the Oyez Project archive (oyez.org). First, we identify mechanisms for transforming the careful transcripts of the Switchboard corpus (Godfrey et al., 1992) to be
+1
+
+These phenomena are quite common in spontaneous speech, even in formal settings such as Supreme Court oral arguments and congressional hearings (Zayats et al., 2014). While disfluencies may not be important for analyzing the topic of a discussion, the rate and type 1410
+
+Thanks to Mark Liberman for the term "unediting."
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1410­1415, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,23 @@
+Multiview LSA: Representation Learning via Generalized CCA
+Pushpendre Rastogi1 and Benjamin Van Durme1,2 and Raman Arora1 1 Center for Language and Speech Processing 2 Human Language Technology Center of Excellence Johns Hopkins University
+
+Abstract
+Multiview LSA (MVLSA) is a generalization of Latent Semantic Analysis (LSA) that supports the fusion of arbitrary views of data and relies on Generalized Canonical Correlation Analysis (GCCA). We present an algorithm for fast approximate computation of GCCA, which when coupled with methods for handling missing values, is general enough to approximate some recent algorithms for inducing vector representations of words. Experiments across a comprehensive collection of test-sets show our approach to be competitive with the state of the art.
+
+mately recover the objective of (Pennington et al., 2014) while accounting for missing values. Our experiments show that MVLSA is competitive with state of the art approached for inducing vector representations of words and phrases. As a methodological aside, we discuss the (in-)significance of conclusions being drawn from comparisons done on small sized datasets.
+
+2
+
+Motivation
+
+1
+
+Introduction
+
+Winograd (1972) wrote that: "Two sentences are paraphrases if they produce the same representation in the internal formalism for meaning". This intuition is made soft in vector-space models (Turney and Pantel, 2010), where we say that expressions in language are paraphrases if their representations are close under some distance measure. One of the earliest linguistic vector space models was Latent Semantic Analysis (LSA). LSA has been successfully used for Information Retrieval but it is limited in its reliance on a single matrix, or view, of term co-occurrences. Here we address the single-view limitation of LSA by demonstrating that the framework of Generalized Canonical Correlation Analysis (GCCA) can be used to perform Multiview LSA (MVLSA). This approach allows for the use of an arbitrary number of views in the induction process, including embeddings induced using other algorithms. We also present a fast approximate method for performing GCCA and approxi556
+
+LSA is an application of Principal Component Analysis (PCA) to a term-document cooccurrence matrix. The principal directions found by PCA form the basis of the vector-space in which to represent the input terms (Landauer and Dumais, 1997). A drawback of PCA is that it can leverage only a single source of data and it is sensitive to scaling. An arguably better approach to representation learning is Canonical Correlation Analysis (CCA) that induces representations that are maximally correlated across two views, allowing the utilization of two distinct sources of data. While an improvement over PCA, being limited to only two views is unfortunate in light of the fact that many sources of data (perspectives) are frequently available in practice. In such cases it is natural to extend CCA's original objective of maximizing correlation between two views by maximizing some measure of the matrix  that contains all the pairwise correlations between linear projections of the covariates. This is how Generalized Canonical Correlation Analysis (GCCA) was first derived by Horst (1961). Recently these intuitive ideas about benefits of leveraging multiple sources of data have received strong theoretical backing due to the work by Sridharan and
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 556­566, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

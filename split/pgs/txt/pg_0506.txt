@@ -1,0 +1,24 @@
+Inferring Temporally-Anchored Spatial Knowledge from Semantic Roles
+Eduardo Blanco and Alakananda Vempala Human Intelligence and Language Technologies Lab University of North Texas Denton, TX, 76203
+eduardo.blanco@unt.edu, AlakanandaVempala@my.unt.edu
+
+Abstract
+This paper presents a framework to infer spatial knowledge from verbal semantic role representations. First, we generate potential spatial knowledge deterministically. Second, we determine whether it can be inferred and a degree of certainty. Inferences capture that something is located or is not located somewhere, and temporally anchor this information. An annotation effort shows that inferences are ubiquitous and intuitive to humans.
+NP NNP John
+
+S VP AUX was
+THEME
+
+VP VBN incarcerated
+LOCATION
+
+PP at Shawshank prison
+
+Figure 1: Semantic roles (solid arrows) and additional spatial knowledge (discontinuous arrow). because of the pressure. But LOCATION and other semantic relations often do not hold forever. For example, while buildings typically have one location during their existence, people and objects such as cars and books do not: they participate in events and as a result their locations change. This paper presents a framework to infer temporally-anchored spatial knowledge from verbal semantic roles. Specifically, our goal is to infer whether something is located somewhere or not located somewhere, and temporally anchor this spatial information. Consider sentence (2) John was incarcerated at Shawshank prison and its semantic roles (Figure 1, solid arrows). Given these roles, we aim at inferring that John had LOCATION Shawshank prison during event incarcerated, and that he (probably) did not have this LOCATION before and after (discontinuous arrow). Our intuition is that knowing that incarcerated has THEME John and LO CATION Shawshank prison will help making these inferences. As we shall discuss, sometimes we have evidence that something is (or is not) located somewhere, but cannot completely commit. We target temporally-anchored spatial knowledge between intra-sentential arguments of verbs, not only between arguments of the same verb as exemplified in Figure 1. The main contributions are:
+
+1 Introduction
+Extracting semantic relations from text is at the core of text understanding. Semantic relations encode semantic connections between words. For example, from (1) Bill couldn't handle the pressure and quit yesterday, one could extract that the CAUSE of quit was the pressure. Doing so would help answering question Why did Bill quit? and determining that the pressure started before Bill quit. In the past years, computational semantics has received a significant boost. But extracting all semantic relations in text--even in single sentences--is still an elusive goal. Most existing approaches target either a single relation, e.g., PART- WHOLE (Girju et al., 2006), or relations that hold between arguments following some syntactic construction, e.g., possessives (Tratz and Hovy, 2013). Among the latter kind, the task of verbal semantic role labeling focuses on extracting semantic links exclusively between verbs and their arguments. PropBank (Palmer et al., 2005) is a popular corpus for this task, and tools to extract verbal semantic roles have been proposed for years (Carreras and M` arquez, 2005). Some semantic relations hold forever, e.g., the CAUSE of event quit in example (1) above is pressure. Discussing when this CAUSE holds is somewhat artificial: at some point Bill quit, and he did so 452
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 452­461, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

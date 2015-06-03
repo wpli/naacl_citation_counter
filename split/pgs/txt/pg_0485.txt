@@ -1,0 +1,16 @@
+(a)
+
+(b)
+
+(c)
+
+Figure 2: The overall engineering architecture of our approach. (a) Basic engineering approach for extracting CENTRAL PROPOSITIONS and clustering them into argument FACETS across several dialogs; (b) Workflow for `detecting' central propositions via pyramid evaluation of multiple summaries; (c) Workflow for obtaining gold-standard labels for AFS task. gued across the population at large. Recognizing the FACETS of an argument automatically entails at least two subtasks, as schematized in Fig. 2a.
+PostID:Turn S1:1 Certainly not yours. You should know that I am for no marriage in government. It should be left to a religious institution where it will actually mean something. The states should then go back to doing something that actually makes sense and doesn't reward people like Britney Spears for being white trash. S2:1 That is all well and good, but it is not the religious ceremony and sanction that gays are looking for. They already have that; there are churches that perform same-sex marriages. It is the civil benefits that are at issue. Are you saying you would be in favor of foregoing ALL the legal rights and benefits you are afforded by marriage? For example: *Assumption of Spouse's Pension *Automatic Inheritance *Automatic Housing Lease Transfer *Bereavement Leave.... What do you say? S1:2 yeah I know. I'm saying that there should be a better system. For example, if you had a best friend who you are roommates with... both hetero for the sake of argument... and never wish to get married then could they get some of the benefits you described?
+
+Figure 3: Gay Marriage Dialog-2. First, there must be a system, the CENTRAL detector, that can extract the most essential arguments in a particular conversation. Example CENTRAL PROPOSITIONS in Figs. 1 and 3 are provided in bold. Second, there must be another system, the ARGUMENT FACET inducer, that relates these conversation-specific arguments to each other in terms of FACETS, e.g. that identifies the two spePROPOSITION
+
+cific central propositions in Figs. 1 and 3 about "legal protections" and "civil benefits" as the same (abstract) FACET, namely that same-sex marriage is about getting the civil rights benefits of marriage. We first focus on the question of extracting reliable data for central propositions. See Fig. 2b. We propose that the CENTRAL PROPOSITIONS of a dialog are exactly those arguments that people find most salient, which is naturally reflected by their summarization behavior. We then apply the Pyramid method, by which the CENTRAL PROPO SITIONS bubble up to the highest tiers of the pyramid, thereby allowing us to identify them. With the central propositions in hand, we proceed to build the argument facet inducer. We introduce a new task of ARGUMENT FACET SIMILARITY (AFS). We discuss how AFS is similar to, but different than SEMANTIC TEXTUAL SIMILARITY (STS) (Agirre et al., 2012; Jurgens et al., 2014; Agirre et al., 2013; Beltagy et al., 2014; Han et al., 2013). Sec. 2 provides a more detailed overview and description of our method, and the data that it produces. Sec. 3 describes our experimental setup for the AFS task and then presents our results. We describe a learning approach that achieves correlations of .54 on the AFS task, as compared to a baseline correlation of .45 using off-the-shelf modules that
+
+431
+
+

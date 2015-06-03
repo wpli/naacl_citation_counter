@@ -1,0 +1,29 @@
+# 1 2 3 4 5 6 7 8
+
+Context c noone can help this time its just i need a support system nothin much, and how's the book?! i know! what have you been up to? thanks, your way better though thanks. yeah i am good thanks! good, but angry! figures. bass. never ate bass. today i will walk for miles. clear sky clear mind. arresting people over "nasty tweets"? please. i'm not condoning what the lad did but arresting him is a tad silly.
+
+Message m well im here to support you. whenever you need me. its good but i'm only like halfway through cuz i don't feel like reading. i'm so bored ... nothing really. just enjoying summer and working. what about you? i'm just good at expressing it that's but trust me you are freakin amazing and waay better sorry you're angry, been there, i hope it dies down. bass is extremely mild with very few bones. my favorite after catfish
+
+Generated Response r thank you, i appreciate it thank you that's good! i have the book but i'm bored too. that's good! nothing much just listening to music and you? i know, i don't trust you, i love you too! thank you i hope so too, i'm not angry!! that's one of the bones, chuck bass is mine too.
+
+love walking. it's too hot to walk this month. it's too hot for you to get up to honey i haven't moved. frozen. heat freeze. if you have frozen yogurt to you. it appears he may have sent death threats to others while all this was kicking off too. i did! he was armed with nuclear threats? that's what's happening to you.
+
+Table 5: Sample responses produced by the MT-based DCGM-II+CMM system.
+
+information that conflicts either internally within the response itself, or is at odds with the context, as in examples 4-5. This is not unsurprising, since our model lacks mechanisms both for reflecting agent intent in the response and for maintaining consistency with respect to sentiment polarity. Longer context and message components may also result in responses that wander off-topic or lapse into incoherence as in 6-8, especially when relatively low frequency unigrams ("bass", "threat") are echoed in the response. In general, we expect that larger datasets and incorporation of more extensive contexts into the model will help yield more coherent results in these cases. Consistent representation of agent intent is outside the scope of this work, but will likely remain a significant challenge.
+
+BLEU in the MT setting and 24% in the IR setting, albeit using a minimal number of features. As our models are completely data-driven and self-contained, they hold the potential to improve fluency and contextual relevance in other types of dialog systems. Our work suggests several directions for future research. We anticipate that there is much room for improvement if we employ more complex neural network models that take into account word order within the message and context utterances. Direct generation from neural network models is an interesting and potentially promising next step. Future progress in this area will also greatly benefit from thorough study of automated evaluation metrics.
+
+Acknowledgments
+We thank Alan Ritter, Ray Mooney, Chris Quirk, Lucy Vanderwende, Susan Hendrich and Mouni Reddy for helpful discussions, as well as the three anonymous reviewers for their comments.
+
+7
+
+Conclusion
+
+We have formulated a neural network architecture for data-driven response generation trained from social media conversations, in which generation of responses is conditioned on past dialog utterances that provide contextual information. We have proposed a novel multi-reference extraction technique allowing for robust automated evaluation using standard SMT metrics such as BLEU and METEOR. Our context-sensitive models consistently outperform both context-independent and context-sensitive baselines by up to 11% relative improvement in 204
+
+References
+Michael Auli, Michel Galley, Chris Quirk, and Geoffrey Zweig. 2013. Joint language and translation modeling with recurrent neural networks. In Proc. of EMNLP, pages 1044­1054. Satanjeev Banerjee and Alon Lavie. 2005. METEOR: An automatic metric for MT evaluation with improved
+
+

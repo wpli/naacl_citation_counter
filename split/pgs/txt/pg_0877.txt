@@ -1,0 +1,41 @@
+Language pairs fren encs ende
+
+# tokens 113M 36.5M 104.9M
+
+# sentences 2M 733.4k 1.95M
+
+Language English (en) Czech (cs) German (de)
+
+# tokens 2.05B 566M 1.57B
+
+Vocabulary 105.5k 214.9k 369k
+
+Table 2: Statistics for the parallel corpora.
+
+Table 3: Statistics for the monolingual corpora.
+
+from the data distribution given its context is: P (C = 1|, wi , hi ) = P (wi |, hi ) . P (wi |, hi ) + kPn (wi )
+
+Mnih and Teh (2012) show that the gradient of J () converges to the gradient of the log-likelihood objective when k  . When using noise contrastive estimation, additional parameters can be used to capture the normalisation terms. Mnih and Teh (2012) fix these parameters to 1 and obtain the same perplexities, thereby circumventing the need for explicit normalisation. However, this method does not provide any guarantees that the models are normalised at test time. In fact, the outputs may sum up to arbitrary values, unless the model is explicitly normalised. Noise contrastive estimation is more efficient than the factorisation tricks at training time, but at test time one still has to normalise the model to obtain valid probabilities. We propose combining this approach with the class decomposition trick resulting in a fast algorithm for both training and testing. In the new training algorithm, when we account for the class conditional probabilities P (ci |hi ), we draw noise samples from the class unigram distribution, and when we account for P (wi |ci , hi ), we sample from the unigram distribution of only the words in the class Cci .
+
+3
+
+Experimental Setup
+
+In our experiments, we use data from the 2014 ACL Workshop in Machine Translation.2 We train standard phrase-based translation systems for French  English, English  Czech and English  German using the Moses toolkit (Koehn et al., 2007). We used the europarl and the news commentary corpora as parallel data for training
+The data is available here: http://www.statmt. org/wmt14/translation-task.html.
+2
+
+the translation systems. The parallel corpora were tokenized, lowercased and sentences longer than 80 words were removed using standard text processing tools.3 Table 2 contains statistics about the training corpora after the preprocessing step. We tuned the translation systems on the newstest2013 data using minimum error rate training (Och, 2003) and we used the newstest2014 corpora to report uncased BLEU scores averaged over 3 runs. The monolingual training data used for training language models consists of the europarl, news commentary and the news crawl 2007-2013 corpora. The corpora were tokenized and lowercased using the same text processing scripts and the words not occuring the in the target side of the parallel data were replaced with a special <unk> token. Statistics for the monolingual data after the preprocessing step are reported in Table 3. Throughout this paper we report results for 5gram language models, regardless of whether they are back-off n-gram models or neural models. To construct the back-off n-gram models, we used a compact trie-based implementation available in KenLM (Heafield, 2011), because otherwise we would have had difficulties with fitting these models in the main memory of our machines. When training neural language models, we set the size of the distributed representations to 500, we used diagonal context matrices and we used 10 negative samples for noise contrastive estimation, unless otherwise indicated. In cases where we perform experiments on only one language pair, the reader should assume we used FrenchEnglish data.
+
+4
+
+Normalisation
+
+The key challenge with neural language models is scaling the softmax step in the output layer of the
+We followed the first two steps from http://www. cdec-decoder.org/guide/tutorial.html.
+3
+
+823
+
+

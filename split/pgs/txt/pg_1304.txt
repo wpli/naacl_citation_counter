@@ -1,0 +1,26 @@
+LR Parsing for LCFRS
+Laura Kallmeyer and Wolfgang Maier Institute for Language and Information University of D¨ usseldorf D¨ usseldorf, Germany {kallmeyer,maierwo}@phil.hhu.de
+
+Abstract
+LR parsing is a popular parsing strategy for variants of Context-Free Grammar (CFG). It has also been used for mildly context-sensitive formalisms, such as Tree-Adjoining Grammar. In this paper, we present the first LRstyle parsing algorithm for Linear ContextFree Rewriting Systems (LCFRS), a mildly context-sensitive extension of CFG which has received considerable attention in the last years.
+
+1
+
+Introduction
+
+LR parsing is an incremental shift-reduce parsing strategy in which the transitions between parser states are guided by an automaton which is compiled offline. LR parsers were first introduced for deterministic context-free languages (Knuth, 1965) and later generalized to context-free languages (Tomita, 1984) and tree-adjoining languages (Nederhof, 1998; Prolo, 2003). Linear Context-Free Rewriting System (LCFRS) (Vijay-Shanker et al., 1987) is an immediate extension of CFG in which each non-terminal can cover more than one continuous span of the input string. LCFRS and equivalent formalisms have been used for the modeling of discontinuous constituents (Maier and Lichte, 2011) and nonprojective dependencies (Kuhlmann, 2013), as well as for data-driven parsing of such structures (Maier and Kallmeyer, 2010; Kallmeyer and Maier, 2013; van Cranenburgh, 2012; Angelov and Ljungl¨ of, 2014). They have also been used for modeling
+
+non-concatenative morphology (Botha and Blunsom, 2013), for grammar engineering (Ranta, 2011), and for modeling alignments in machine translation (Søgaard, 2008; Kaeshammer, 2013). To our knowledge, so far, no LR strategy for LCFRS has been presented in the literature. In this paper, we present an LR-style parser for LCFRS. It is based on the incremental parsing strategy implemented by Thread Automata (Villemonte de la Clergerie, 2002). The remainder of the article is structured as follows. In the following section, we introduce LCFRS and thread automata. Section 3 presents the algorithm along an example. In particular, section 3.2 gives the algorithms for automaton and parse table constructions, and section 3.3 presents the parsing algorithm. Section 4 concludes the article.
+
+2
+
+Preliminaries
+
+2.1 LCFRS In this paper, we restrict ourselves to string rewriting LCFRS and omit the more general definition (Weir, 1988). In LCFRS, a single non-terminal can span k  1 continuous blocks of a string. A CFG is simply a special case of an LCFRS in which k = 1. k is called the fan-out of the non-terminal. We notate LCFRS with the syntax of Simple Range Concatenation Grammars (SRCG) (Boullier, 1998), a formalism equivalent to LCFRS. An LCFRS1 (Vijay-Shanker et al., 1987; Seki et al., 1991) is a tuple G = (N, T, V, P, S ) where N
+Note that for purposes of exposition, we limit ourselves to -free LCFRS.
+1
+
+1250
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1250­1255, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

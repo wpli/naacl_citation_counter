@@ -1,0 +1,29 @@
+we set the parameters to be learning rate=10-1 , word vector dimension=80 and hidden layer dimension=500. From the experiments for parameter tuning, we find that for the word embeddings in the proposed model, low dimension vectors are better than high dimensions one for low dimension vectors are better in sharing meanings. For the hidden space which represents inputs as uninterpreted vectors, high dimensional vectors are better than low dimensional vectors. The learning rates also have an impact on the performance. If the learning rate is too small, we need more iterations to achieve convergence. If we stop iterations too early, we will suffer under-fitting. 3.3 Results 3.3.1 Metrics and Evaluation Previous work reports results based on different evaluation metrics. Some work uses linear positions to describe ECs. ECs are judged on a "whether there is an EC of type A before a certain token in the text" basis (Cai et al., 2011). Collapsing ECs before the same token to one, Cai et al. (2011) has 1352 ECs in the test data. Xue and Yang (2013) has stated that some ECs that share adjacent positions have different heads in the parse tree. They judge ECs on a "whether there is an EC of type A with a certain head word and a certain following token in the text" basis. Using this kind of metric, they gets 1765 ECs. Here we use the same evaluation metric with Xue and Yang (2013). Note that we still cannot describe all the 1838 ECs in the corpora, for on some occasions ECs preceding the same token share the same head word. We also omit some ECs which cause cycles in dependency trees as described in the previous sections. We have 1748 ECs, 95% of all the ECs in the test data, very close to 1765 used by Xue and Yang (2013). The total number of ECs has an impact on the recall. In Table 3, we include results based on each method's own EC count (1748, 1765, 1352 for Ours, Xue's and Cai's respectively) and the real total EC count 1838 (figures in brackets). Yang and Xue (2010) report an experiment result based on a classification model in a unified
+
+Type Xue Cai
+
+PRO 297 305 299
+
+pro 298 298 290
+
+T 575 584 578
+
+OP 527 527 134
+
+RNR 32 32 32
+
+* 19 19 19
+
+Others 0 0 0
+
+Total 1748 1765 1352
+
+Table 2: EC Distribution in the Test Data class PRO pro OP T RNR * Overall (Xue) (Cai) correct 162 161 409 506 23 0 1261 903 737 p .479 .564 .707 .939 .767 0 .712 .653 .660 r .545 .540 .776 .88 .719 0 .721 (.686) .512 (.491) .545 (.401) F1 .510 .552 .740 .908 .742 0 .717 (.699) .574 (.561) .586 (.499)
+
+Table 3: Performance on the CTB Test Data
+
+parsing frame. We do not include it for it uses different and relativelyThe distributions of ECs in the test data are shown in Table 2. The results are shown in Table 3. We present the results for each kind of EC and compare our results with two previous state-of-the-art methods(Cai et al., 2011; Xue and Yang, 2013). The proposed method yields the newest stateof-the-art performances on CTB as far as we know. We also identify the dependency types between ECs and their heads. Some ECs, such as pro and PRO, are latent subjects of sentences. They usually serve as SBJ with very few exceptions. While the others may play various roles. There are 31 possible (EC, Dep) pairs. Using the same model, the overall result is p = 0.701, r = 0.703, f = 0.702. 3.3.2 Analysis We compare the effectiveness of different features by eliminating each kind of features described in the previous section. As Table 4 shows, the most important kind is the dependency paths, which cause a huge drop in performance if eliminated. Dependency paths encode words and path pattern information which is proved essential for the detection of ECs. Besides, headwords are also useful. While for the
+
+268
+
+

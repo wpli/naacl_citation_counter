@@ -1,0 +1,33 @@
+Hoffmann MM-F-loss-wt
+
+Precision 75.44 77.04
+
+Recall 46.62 53.44
+
+F 57.62 63.11
+
+5
+
+Conclusion
+
+Table 4: Increasing weight on Precision in F .
+
+4.3
+
+Discussion
+
+So far we have discussed the performance of various approaches on the positive evaluation dataset. Our approach is shown to improve overall F -score having better recall than the baseline. By suitably tweaking the F we show an improvement in precision as well. The performance of the approaches when evaluated on the entire test dataset (consisting of both nil and non-nil datapoints) is shown in Table 5. Maxmargin based approaches generally perform well when trained only on the positive dataset compared to Hoffmann. However, our F1 -scores are 8% less when we train on the entire dataset consisting of both nil and non-nil datapoints. Trained On Hoffmann MM-Hamming MM-F-loss entire dataset 23.14 13.20 13.94 positive dataset 3.269 16.26 21.93
+
+In this paper, we described a novel max-margin approach to optimize non-linear performance measures, such as F , in distant supervision of information extraction models. Our approach is general and can be applied to other latent variable models in NLP. Our approach involves solving the hardoptimization problem in learning by interleaving Concave-Convex Procedure with dual decomposition. Dual decomposition allowed us to solve the hard sub-problems independently. A key aspect of our approach involves a local-search algorithm which has led to a speed up of 7,000 times in our experiments. We have demonstrated the efficacy of our approach in distant supervision of relation extraction. Under several conditions, we have shown our technique outperforms very strong baselines, and results in up to 8.5% improvement in F1 -score. For future work, we would like to maximize other performance measures, such as area under the curve, for information extraction models. Furthermore, we would like to explore our approach for other latent variable models in NLP, such as those in machine translation.
+
+Acknowledgements
+Gholamreza Haffari is grateful to National ICT Australia (NICTA) for their generous funding, as part of the Machine Learning Collaborative Research Projects. Ajay Nagesh acknowledges Xerox Research Centre India (XRCI) for their travel support in the form of International Student Travel grant.
+
+Table 5: F1 -scores on the entire test set.
+
+In a recent work, Xu et al. (2013) provide some statistics about the incompleteness of the Riedel dataset. Out of the sampled 1854 sentences from NYTimes corpus most of the entity pairs expressing a relation in Freebase correspond to false negatives. This is one of the reasons why we do not consider nil labeled datapoints during training and evaluation. MIMLRE (Surdeanu et al., 2012) is another stateof-the-art system which is based on the EM algorithm. Since that system uses an additional set of features for the relation variables y, it is not our primary baseline. On the positive dataset, our model MM-F-loss achieves a F1 -score of 65.598% compared to 65.341% of MIMLRE. As part of the future work, we would like to incorporate the additional features present in MIMLRE into our approach. 899
+
+References
+Pedro F. Felzenszwalb, Ross B. Girshick, David A. McAllester, and Deva Ramanan. 2010. Object detection with discriminatively trained part-based models. IEEE Trans. Pattern Anal. Mach. Intell., 32(9):1627­ 1645. Raphael Hoffmann, Congle Zhang, Xiao Ling, Luke Zettlemoyer, and Daniel S. Weld. 2011. Knowledgebased weak supervision for information extraction of overlapping relations. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies - Volume 1, HLT '11, pages 541­550, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+

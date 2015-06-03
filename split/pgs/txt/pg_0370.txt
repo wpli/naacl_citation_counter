@@ -1,0 +1,18 @@
+between words and hence, it can be useful in a wide range of applications. We only focus on word embeddings in this paper and apply them to word sense disambiguation. Word embeddings are distributed representations of words and contain some semantic and syntactic information (Mikolov et al., 2013c). Such representations are usually produced by neural networks. Examples of such neural networks are (log-)linear networks (Mikolov et al., 2013a), deeper feed-forward neural networks (Bengio et al., 2003; Collobert and Weston, 2008), or recurrent neural networks (Mikolov et al., 2010). Moreover, it has been shown that deep structures may not be needed for word embeddings estimation (Lebret et al., 2013) and shallow structures can obtain relatively high quality representations for words (Mikolov et al., 2013b). In this paper, we have used the word embeddings created and published by (Collobert and Weston, 2008). Throughout this paper, we refer to these word embeddings as `CW'. This method is proposed in (Collobert and Weston, 2008) and explained further in (Collobert et al., 2011). The authors use a feedforward neural network to produce word representations. In order to train the neural network, a large text corpus is needed. Collobert and Weston (2008) use Wikipedia (Nov. 2007 version containing 631 million words) and Reuters RCV1 (containing 221 million words) (Lewis et al., 2004) as their text corpora and Stochastic Gradient Descent (SGD) as the training algorithm. The training algorithm selects a window of text randomly and then replaces the middle word with a random word from the dictionary. Then the original window of text and the corrupted one is given to the neural network. The neural network computes f (x) and f (x(w) ), where x is the original window of text, x(w) is the same window of text with the middle word replaced by word w, and f (.) is the function that the neural network represents. After computing f (x) and f (x(w) ), the training algorithm uses a pairwise ranking cost function to train the network. The training algorithm minimizes the cost function by updating the parameters (including word embeddings) and as a consequence of using the pairwise ranking cost function, this neural network tends to assign higher scores to valid windows of texts and lower scores to incorrect ones. After training the neural network, the word vectors 316
+
+Figure 1: The neural network architecture for adaptation of word embeddings.
+
+in the lookup table layer form the word embeddings matrix. Collobert et al. (2011) have made this matrix available for public use and it can be accessed online1 .
+
+3
+
+Method
+
+In this section, we first explain our novel taskspecific method of adapting word embeddings and then describe our framework in which raw or adapted word embeddings are included in our word sense disambiguation system. To the best of our knowledge, the use of word embeddings for semisupervised word sense disambiguation is novel. 3.1 Adaptation of Word Embeddings
+
+Word embeddings capture some semantic and syntactic information and usually similar words have similar word vectors in terms of distance measures. However, in a classification task, it is better for word embeddings to also include some task specific discriminative information. In order to add such information to word embeddings, we modify word vectors using a neural network (Figure 1) to obtain adapted word embeddings. This section explains this process in detail. The neural network that we used to adapt word embeddings is similar to the window approach network introduced by (Collobert and Weston, 2008). This neural network includes the following layers:
+1
+
+http://ml.nec-labs.com/senna
+
+

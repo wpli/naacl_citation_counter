@@ -1,0 +1,24 @@
+Argument Name Date Time Country Region City Latitude Longitude Dead Injured Missing Magnitude Depth (km) Countries affected(*) Regions affected(*) Landslides Tsunami Aftershocks Foreshocks Duration Peak accel. TOTAL
+
+Arg. Type D T L L L N N N N N N N L L B B N N T N
+
+# KB Values 108 108 108 77 77 108 108 71 39 8 108 99 37 4 8 10 20 3 7 8 1,116
+
+Example Values 2009-5-28 T08:24:00 Honduras 16.733 -86.22 7 7.3 10 Guatemala, Belize
+
+# DS Values 291 378 6294 2598 1426 2 4 143 22 933 27 436 7 408 5 6 13,562
+
+# MA Values 706 589 6327 2663 1723 28 28 984 192 18 3403 313 357 36 9 273 22 1 17,672
+
+Table 2: Event arguments and types in the earthquake domain (first and second column), summary statistics for the knowledge base, i.e., the gold truth (third column), and values for one example earthquake (4th column). (*) indicates multi-valued arguments (all other are singlevalued). The two rightmost columns give statistics for the number of mentions in the tweets per argument, as obtained through manual annotation (MA) or distant supervision (DS) (cf. Section 2.4). The argument types are the following: D date, T time, L location, N numeric, and B boolean.
+
+tweets up to the first tweet that mentions a time expression more than a minute different from that of the main earthquake (after adjusting for time zone). For example, this heuristic removes all tweets starting with "A 4.9 earthquake occurred in Ryukyu Islands, Japan on 2010-2-27 T10:33:21 at epicenter." because the main earthquake occurred on February 26th at 8:31PM UTC. It is important to note that identifying event-relevant tweets is not the focus of this work (hence the simple heuristics used for tweet extraction). We focus instead on the extraction of information from such tweets. In a complete system, our approach would follow a component that detects event tweets automatically (Benson et al., 2011). The final dataset contains 108 earthquakes and 7,841 tweets, 72 tweets per earthquake on average, a maximum of 654 and a minimum of 2. 19 earthquakes had less than 10 tweets. 2.2 Manual annotation of tweets In order to analyze the challenges faced by our EE system based on distant supervision, we also manually annotated all tweets.7 The manual annotation included any mention of an event argument in the tweets. This included information already in the KB, but also information that is missing, caused by: variations of dates and times, similar but not identical latitude/longitude values, different reported numbers for dead/injured/missing etc. The first tweet in Table 1 is an example of this situation: even though the reported magnitude is different from the value in the KB (cf. example in Table 2), it was annotated during this process. In total, we annotated 17,672 mentions (at an average of two event arguments per tweet). Table 2 shows the breakdown per argument (the MA column), compared to the automatic annotations generated through distant supervision (the DS column). Note that some of the arguments have a very different coverage in the tweets compared with the KB. For example, latitude and longitude are rarely present in tweets, but affected countries are commonly mentioned. The quality of the manual annotation was assessed on a 5% sample of the dataset, which was annotated by an additional expert. The agreement was very high: 90% ITA and 85% Fleiss Kappa. Disagreements were generally
+These manual annotations are used solely for post-hoc analysis, not to train our system.
+7
+
+lected earthquakes from the beginning of 2009, with the last reported earthquake happening on July 7th, 2013, and constructed the KB from the above Wikipedia list page and the individual infoboxes. Where necessary, argument values were normalized.5 See Table 2 for a summary and an example. We used the Topsy API6 to search for tweets that are potentially relevant for each earthquake. We formed a query using the word "earthquake" plus the location, encoded as a disjunction of city, region, and country arguments. We retrieved tweets from the day before the date and time of the earthquake, up to seven days after. This procedure might also retrieve tweets about aftershocks, which we consider to be different events. We applied an aggressive method to discard aftershock tweets: we only kept
+2013, at 2PM CET. 5 Time and date expressions were converted to TimeML. Numerical values in English were converted to numbers, latitude and longitudes were converted to decimal format. 6 http://api.topsy.com/doc/
+
+643
+
+

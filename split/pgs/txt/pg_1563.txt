@@ -1,0 +1,23 @@
+1. 2. 3. 4. 5. 6.
+
+Image hb0.10s.png closeF same t.4s.png hb0.10s.png surrounds same c.9s.png hb1.19s.png below same c.5s.png hb0.10s.png closeF same t.4s.png hb1.19s.png closeF same hb0.10s.png hb1.19s.png below same c.5s.png
+
+description Mike isn't sharing the soccer ball Mike is wearing sunglasses Jenny is wearing a silly hat Mike is kicking the soccer ball Jenny is chasing Mike Jenny is wearing a silly hat
+
+Table 2: Parallel corpus of visual expressions and linguistic descriptions corresponding to Figure 2.
+
+mentioned object pairs probably express important scene content. In addition, it is reasonable to assume that the selected objects will be in close proximity, especially when actions are involved. One would expect the agent of the action to be near the object or person receiving it (e.g., Mike is kicking the ball, Jenny is holding Mike's hand ). The same is true for instruments, which are typically held by the persons using them (e.g., Jenny is digging with a shovel ). Content Selection We cast the problem of finding suitable objects to talk about as an integer linear program (ILP). Our model selects clip art object pairs that best describe the content of a scene and ranks them based on their relevance. Indicator variable ystk denotes whether two objects are being selected and how they are ranked (e.g, whether they should be mentioned first or last):   1 if objects s and t are selected for rank k and s is before t ystk =  0 otherwise (2) where s and t index two clip art objects and k = 1, .., S encodes their rank (based on relevance). Our objective function is given below: Z=
+sS,t S
+
+Figure 4: Example of three clip art objects and the most frequent objects they co-occur with.
+
+
+
+Fst · Dst ·  ((card (S) + 1) - k) · ystk (3)
+kS
+
+where Fst quantifies the normalized co-occurrence frequency of objects s and t (in the training set) and Dst specifies their relative distance. The term ((card (S) + 1) - k) accounts for the ranking of pairs so that most relevant ones are ranked first. Here, card (S) represents the cardinality of the set S denoting the number of clip art objects in the scene; k ranges over all available ranks (which is limited by the number of clip art objects available). The term 1509
+
+((card (S) + 1) - k) is inversely proportional to k, so its highest value is when k is 1. In other words, the value of the term is maximum when the selected objects are ranked first. This way, we ensure that most relevant object pairs are given high ranks. We compute Fst from our parallel corpus (see lefthand side in Table 2), simply by counting the number of times objects s and t co-occur. Figure 4 shows three clip art objects (Mike, a snake, and a bear) and their most frequent co-occurrences. We estimate term Dst , the distance between objects s and t , using function x2 + y2 + z2 . Coordinate z has only three possible values (see Table 1). To increase the effect of z, we use a scaling factor. We normalize and invert Dst so that it ranges from 0 to 1. In addition, we transform it with a sigmoid function so as to maximize the effect of near and distant objects (distances of relatively close objects are set to 1 and distances of distant objects are set to 0). The objective function in Equation (3) is too permissive, allowing repetitions of the same object within a pair and of the object pairs themselves. Constraints (4)­(10) avoid repetitions and ensure
+
+

@@ -1,0 +1,27 @@
+all-untyped Acc N CCAT 10 77.8 8245 CCAT 50 69.2 14461 Guardian1 55.6 5689 Guardian2 45.9 5687 Dataset
+
+all-typed Acc N 77.2 9715 69.1 17062 53.6 6966 45.6 6965
+
+affix+punct Acc N 78.8 5474 69.3 9966 57.0 3822 48.0 3820
+
+To use old-fashioned language, she is motherly - a plump, rosy-cheeked woman of Kent, whom nature seemed to have created to raise children. To use old-fashioned language, she is motherly - a plump, rosy-cheeked woman of Kent, whom nature seemed to have created to raise children. Table 8: Example sentence showing the opacity of each character. Darkness of character is determined by the number of categories it belongs to (lowest=lighter, highest=darkest color). Categories in word are discarded.
+
+Table 7: Results of excluding word n-grams, compared to using all n-grams, either in the traditional approach (untyped n-grams) or in the approach of this paper (typed n-grams). Accuracy (Acc) and the number of features (N in italics) are reported for each classifier. The best accuracy for each dataset is in bold.
+
+number of different combinations and were unable to identify one that outperformed affix+punct. Overall, this experiment gives compelling evidence that affix and punct n-grams are more important than word n-grams.
+
+6
+
+Analysis
+
+We did a manual exploration of our datasets. In our cross-domain dataset, the character 3-gram `sti' shows up as both prefix and mid-word. All 13 authors use `sti' frequently as a mid-word n-gram in words such as institution, existing, justice, and distinction. For example: · The government's story is that the existing warheads might be deteriorating. · For all the justice of many of his accusations, the result is occasionally as dreadful as his title suggests. But only six authors use `sti' as a prefix, in examples like: · Their mission was to convince tourists that Britain was still open for business. · There aren't even any dead people on it, since by the very act of being dead and still famous, they assert their long-term impact. Thus `sti' as a prefix is predictive of authorship even though `sti' as a mid-word n-gram is not. Notably, under the traditional untyped bag-of-n-grams approach, both versions of `sti' would have been treated the same, and this discriminative power would have been lost. 100
+
+As already demonstrated in Section 5 that affix+punct features perform better than using all the features, we would like to use an example from our dataset to visualize the text when features in SC word are discarded. Out of seven categories in affix and punct, we computed in how many of them each character belongs to, three being the maximum possible value. Therefore, we show each character with different opacity level depending on number of categories it belongs to: zero will get white color (word related n-grams), one will get 33% black, two will get 67% black, and three will get 100% black. In Table 8, we show an example sentence before (first row of Table 8) and after (second row of Table 8) showing the opacity level of each character. It is clear that the darkest characters are those around the punctuation characters and those around spaces are second darkest, while the lightest (with 0% darkness) are the ones in the middle of long words. This gives us an idea about the characters in a text that are important for AA tasks.
+
+7
+
+Discussion
+
+Various hypotheses have been put forth to explain the "black magic" (Kestemont, 2014) behind the success of character n-gram features in authorship attribution. Kestemont (2014) conjectured that their utility was in capturing function words and morphology. Koppel et al. (2009) suggested that they were capturing topic information in single domain settings, and style and syntactic information in cross-domain settings. Our study provides empirical evidence for testing these claims. We did indeed find that the ability of character n-grams to capture morphology is useful, as reflected in the high prediction performance of af-
+
+

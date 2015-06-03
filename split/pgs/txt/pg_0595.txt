@@ -1,0 +1,29 @@
+In order to segment phonemic representations into constituent morphemes, we apply a high-precision phonetic aligner (Kondrak, 2000) to link letters and phonemes using the procedure described in (Dwyer and Kondrak, 2009). In rare cases where the phonetic aligner fails to produce an alignment, we backoff to alignment generated with m2m-aligner (Jiampojamarn et al., 2007), an unsupervised EMbased algorithm. We found that this approach worked better for our purposes than relying on the alignments provided in Combilex. We use the same approach to align variant phonemic representations of morphemes as described in Section 3.1. The morphological information contained in CELEX is incomplete for our purposes, and requires further processing. For example, the word amputate is listed as monomorphemic, but in fact contains the suffix -ate. However, amputee is analyzed as amputee = amputate - ate + ee. This allows us to identify the stem as amput, which in turn implies the segmentations amput·ee, amput·ate, and amput·at·ion. Another issue that requires special handling in CELEX involves recovering reduced geminate consonants. For example, the word interrelate is pronounced with a single [r] phoneme at the morpheme boundary. However, when segmenting the phoneme sequence, we need to include [r] both at the end of inter- and at the beginning of relate. 4.2 Predictor The role of the predictor mentioned in Section 3.2 is performed by D IREC TL+ (Jiampojamarn et al., 2010), a publicly available discriminative string transducer. It takes as input a sequence of common morpheme representations, determined using the method described above, and produces the predicted word pronunciation. Since D IREC TL+ tends to make mistakes related to the unstressed vowel reduction phenomenon in English, we refrain from replacing the "underlying" phonemes with either [@] or [I]. An example derivation is shown in Table 3, where the Underlying string represents the input to D I REC TL+, Predicted is its output, Surface is the actual pronunciation, and Respelling is the spelling generated according to the algorithm in Figure 1. 541
+
+Underlying: Predicted: Surface: Respelling:
+
+foto + græf + fot@ græf f@tA gr@f fotA · græf ·
+
+@r + z @r z @r z @r · z
+
+Table 3: Deriving the spelling of the word photographers.
+
+Since D IREC TL+ requires a training set, we split the lexicon into two equal-size parts with no morpheme overlap, and induce two separate models on each set. Then we apply each model as the predictor on the other half of the lexicon. This approach simulates the human ability to guess pronunciation from the spelling. Jiampojamarn et al. (2010) report that D IREC TL+ achieves approximately 90% word accuracy on the letter-to-phoneme conversion task on the CELEX data.
+
+5
+
+Evaluation measures
+
+In this section, we define our measures of phonemic transparency and morphemic consistency. 5.1 Phonemic transparency
+
+Kominek and Black (2006) measure the complexity of spelling systems by calculating the average perplexity of phoneme emissions for each letter. The total perplexity is the sum of each letter's perplexity weighted by its unigram probability. Since their focus is on the task of inducing text-to-speech rules, they also incorporate letter context into this definition. Thus, a system that is completely explained by a set of rules has a perplexity of 1. The way we compute perplexity differs in several aspects. Whereas Kominek and Black (2006) calculate the perplexity of single letters, we take as units substrings derived from many-to-many alignment, with the length limited to two characters. Some letter bigrams, such as ph, th, and ch, are typically pronounced as a single phoneme, while the letter x often corresponds to the phoneme bigram [ks]. By considering substrings we obtain a more realistic estimate of spelling perplexity. We calculate the average orthographic perplexity using the standard formulation: Pave = Pc e
+-
+i
+
+Pi logPi
+
+c
+
+(1)
+
+

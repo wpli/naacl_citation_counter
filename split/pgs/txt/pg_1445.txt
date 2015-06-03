@@ -1,0 +1,23 @@
+Sampling Techniques for Streaming Cross Document Coreference Resolution
+Luke Shrimpton Victor Lavrenko Miles Osborne§  School of Informatics, University of Edinburgh: luke.shrimpton@ed.ac.uk  School of Informatics, University of Edinburgh: vlavrenk@inf.ed.ac.uk § Bloomberg, London: mosborne29@bloomberg.net
+
+Abstract
+We present the first truly streaming cross document coreference resolution (CDC) system. Processing infinite streams of mentions forces us to use a constant amount of memory and so we maintain a representative, fixed sized sample at all times. For the sample to be representative it should represent a large number of entities whilst taking into account both temporal recency and distant references. We introduce new sampling techniques that take into account a notion of streaming discourse (current mentions depend on previous mentions). Using the proposed sampling techniques we are able to get a CEAFe score within 5% of a non-streaming system while using only 30% of the memory.
+
+or store a sample. Compression is more computationally expensive as it involves merging/forgetting mention components (for example: components of a vector) whereas sampling decides to store or forget whole mentions. We investigate sampling techniques due to their computational efficiency. We explore which mentions should be stored while performing streaming CDC. A sample should represent a diverse set of entities while taking into account both temporal recency and distant mentions. We show that using a notion of streaming discourse, where what is currently being mentioned depends on what was previously mentioned significantly improves performance on a new CDC annotated Twitter corpus.
+
+1
+
+Introduction
+
+2
+
+Related Work
+
+Cross document coreference resolution (CDC) identifying mentions that refer to the same entity across documents - is a prerequisite when combining entity specific information from multiple documents. Typically large scale CDC involves applying a scalable clustering algorithm to all the mentions. We consider streaming CDC, hence our system must conform to the streaming computational resource model (Muthukrishnan, 2005). Each mention is processed in bounded time and only a constant amount of memory is used. Honoring these constraints ensures our system can be applied to infinite streams such as newswire or social media. Storing all the mentions in memory is clearly infeasible, hence we need to either compress mentions 1391
+
+There are many existing approaches to CDC (Bagga and Baldwin, 1998; Lee et al., 2012; Andrews et al., 2014). Few of them scale to large datasets. Singh et al. (2011) proposed a distributed hierarchical factor graph approach. While it can process large datasets, the scalability comes from distributing the problem. Wick et al. (2012) proposed a similar approach based on compressing mentions, while scalable it does not conform to the streaming resource model. The only prior work that addressed online/streaming CDC (Rao et al., 2010) was also not constrained to the streaming model. None of these approaches operate over an unbounded stream processing mentions in constant time/memory.
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1391­1396, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

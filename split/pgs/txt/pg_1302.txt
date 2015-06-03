@@ -1,0 +1,61 @@
+Method RNN SDT-RNN MV-RNN POS-RNN DC-RNN C-RNN-RAE C-RNN SVM
+
+F-measure 74.8 75.12 79.1 79.4 77.36 78.78 79.68 82.2
+
+MV-RNN C-RNN
+
+82.4 82.66
+
+Feature sets POS, WordNet, Levine classes, PropBank, FrameNet, TextRunner, paraphrases, Google n-grams, NormLex-Plus, morphological features, dependency parse features POS, NER, WordNet POS, NER, WordNet
+
+0.5 0.45 0.4
+MV-RNN C-RNN
+
+missclassification rate
+
+0.35 0.3 0.25 0.2 0.15 0.1 0.05 0 d<5 5 <= d < 10 10 <= d
+
+range of entities distance
+
+Figure 4: Misclassification based on entities distance in three
+
+Table 1: Results on SemEval 2010 relation classification task with the
+feature sets used. C-RNN outperforms all RNN based models. By including three extra features, it achieves the state-of-the-art performance.
+
+bins. More errors occur with entities separated by more than ten words. C-RNN performs better in bottleneck long distances.
+2500
+MV-RNN C-RNN
+
+2000
+
+tities, the figure shows what fraction of test instances are misclassified in each bin. Both classifiers make more errors when the distance between entities is longer than 10. The performance of the two classifiers for distances less than five is quite similar while C-RNN has the advantage in classifying more relations correctly when the distance increases. 5.2 SemEval-2013 Task 9.b To further illustrate the advantage of C-RNN over MV-RNN, we evaluate our work on another data set. See Table 2. In this task, the goal is to extract interactions between drug mentions in text. The corpus (Segura-Bedmar et al., 2013) consists of 1,017 texts that were manually annotated with a total of 5021 drug-drug interactions of four types: mechanism, effect, advise and int. Method MV-RNN C-RNN Precision 74.07 75.31 Recall 65.53 66.19 F=measure 67.84 68.64
+
+running time
+
+1500
+
+1000
+
+500
+
+0 SemEval-2010 SemEval-2013
+
+Figure 5: Training time measured by seconds. Experiments
+were run on a cluster node with 6 core 2.66GHz cpu.
+
+6
+
+Conclusions
+
+Table 2: Results on SemEval 2013 Drug-Drug Interaction task
+
+5.3 Training Time Dependency graphs can represent relations more compactly by utilizing only the words on the shortest path between entities. C-RNN uses a sixth of neural computations of MV-RNN. More precisely, there is an 83% decrease in the number of tanh evaluations. Consequently, as demonstrated by Figure 5, C-RNN runs 3.21 and 1.95 times faster for SemEval 2010 and SemEval 2013 respectively.
+
+Recently, Recursive Neural Network (RNN) has found a wide appeal in the Machine Learning community. This deep architecture has been applied in several NLP tasks including relation classification. We present an RNN architecture based on a compositional account of dependency graphs. The proposed RNN model is based on the shortest path between entities in a dependency graph. The resulting shallow network is superior for supervised learning in terms of speed and accuracy. We improve the classification results and save up to 70% in training time compared with a constituency-based RNN . The limitation of our Chain based RNN is that it assumes the named entities to be known in advance. This requires a separate named entity recognizer and cannot extract the entities jointly with the relation classifier.
+
+Acknowledgment
+This work is partially supported by the NIH grant R01GM103309.
+
+1248
+
+

@@ -1,0 +1,38 @@
+S SBAR NP Exactly a month IN after NP
+ARG1
+
+NP S VP
+ARGM - DIR
+
+VP has learnt . . .
+
+NBC News
+
+twenty-six year old George Smith
+
+VBD vanished
+
+PP NP NP
+ARG0
+
+IN from
+
+VP
+ARGM - LOC
+
+a Royal VBG Caribbean ship cruising
+
+PP in the Mediterranean
+
+Figure 2: Semantic roles (solid arrows) and additional spatial knowledge (discontinuous arrow) of type (1b). The additional LOCATION(a Royal Caribbean ship, in the Mediterranean ) of type (1a) is not shown. 2.2 Additional Spatial Knowledge one could also extract that the residents have LOCA TION Biddeford apartments. In this paper, we focus on extracting additional spatial knowledge of type (1), and reserve type (2) for future work. More specifically, we infer spatial knowledge between x and y, where the following semantic roles exist: ARGi (xpred , x ) and ARGM LOC (ypred , y ). ARG i indicates any numbered argument (ARG0 , ARG1 , ARG2 , etc.) and xpred (ypred ) indicates the verbal predicate to which x (y ) attaches. Targeting additional spatial knowledge exclusively for numbered arguments is not a significant limitation: most semantic roles annotated in OntoNotes (75%) are numbered arguments, and it is pointless to infer spatial knowledge for most modifiers, e.g., ARGM - EXT, ARGM - DIS, ARGM - ADV , ARGM - MOD , ARGM - NEG , ARGM - DIR .
+
+Sentences contain spatial information beyond ARGM - LOC semantic role, i.e., beyond links between verbs and their arguments. There are two main types of additional LOCATION(x, y ) relations:6 (1) those whose arguments x and y are semantic roles of a verb, and (2) those whose arguments x and y are not semantic roles of a verb. The first kind can be further divided into (1a) those whose arguments are semantic roles of the same verb (Figure 1), and (1b) those whose arguments are semantic roles of different verbs. Figure 2 illustrates type (1b). Semantic roles indicate ARG 1 and ARGM - DIR of vanished, and ARG 0 and ARGM - LOC of cruising. In this example, one can infer that twenty-six year old George Smith (ARG1 of vanished) has LOCATION in the Mediterranean (ARGM - LOC of cruising) during the cruising event. The second kind of additional LOCATION(x, y ) is exemplified in the following sentence: [Residents of Biddeford apartments]ARG0 can [enjoy]verb [the recreational center]ARG1 [free of charge]MANNER . LOCATION (recreational center, Biddeford apartments ) could be inferred yet Biddeford apartments is not a semantic role of a verb.7 Inferring this kind of relations would require splitting semantic roles;
+Both ARGM - LOC(x, y ) and LOCATION(x, y ) encode the same meaning, but we use ARGM - LOC for the PropBank semantic role and LOCATION for additional spatial knowledge. 7 Note that the head of ARG0 is residents, not the apartments.
+6
+
+3 Annotating Spatial Knowledge
+Annotating all additional spatial knowledge in OntoNotes inferable from semantic roles is a daunting task. OntoNotes is a large corpus with 63,918 sentences and 9,924 ARGM - LOC semantic roles annotated. Our goal is not to present an extensive annotation effort, but rather show that additional temporally-anchored spatial knowledge can be (1) annotated reliably by non-experts following simple guidelines, and (2) inferred automatically using supervised machine learning. Thus, we focus on 200 sentences from OntoNotes that have at least one ARGM - LOC role annotated.
+
+454
+
+

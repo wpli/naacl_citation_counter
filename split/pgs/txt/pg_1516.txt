@@ -1,0 +1,43 @@
+(a) 13,067 (b) 1722
+Att. Att.
+
+(c) 993
+Att. Cor. Att.
+
+(d) 831
+Att.
+
+(e) 724
+Cor.
+
+All WordNet C ROWN GST Baseline Best System 0.195 0.248 0.148 0.389
+
+Regular 0.463 0.452 0.283 0.529
+
+OOV 0.0 0.448 0.148 0.501
+
+Slang -0.170 0.138 0.018 0.146
+
+Cor.
+
+Cor.
+
+Cor.
+
+Figure 1: The five most-frequent error patterns and their frequencies seen in the results of monosemous lemma evaluation. Graphs show the attachment point (Att.) and correct hypernym synset (Cor.), with downward edges indicating hypernym relations and upward indicating hyponym. The overall error trend reveals that the vast majority of error was due to attaching a new sense to a morespecific concept than its actual hypernym.
+
+Table 3: The Pearson correlation performance of ADW when using the WordNet and C ROWN semantic networks on the word-to-sense test dataset of SemEval-2014 Task 3. We also show results for the string-based baseline system (GST) and for the best participating system in the word-to-sense comparison type of Task 3. 4.2.1 Methodology
+
+4.1.2
+
+Results
+
+The C ROWN construction process was able to attach 34,911 of the 36,605 monosemous noun lemmas (95.4%) and 4209 of the 4668 verb lemmas (90.2%). The median error for attaching monosemous nouns was three edges and for verbs was only one edge, indicating the attachment process is highly accurate for both. The most common form of error was attaching the OOV lemma to a hyponym of the correct hypernym, occurring in 13,067 of the erroneous attachments. Figure 1 shows the five most common displacement patterns when incorrectly attaching a monosemous noun, revealing that the majority of incorrect placements were to a more-specific concept than what was actually the hypernym. Furthermore, examining the 50 furthest-away noun and verb placements, we find that 28% of nouns and 20% of verbs were attached using a novel sense of the lemma not in WordNet (but in Wiktionary) and the placement is in fact reasonable. As a result, the median error is likely an overestimate of the expected error for the C ROWN construction process. 4.2 Application-based evaluation
+
+Semantic similarity was measured using the similarity algorithm of Pilehvar et al. (2013), ADW,3 which first represents a given linguistic item (such as a word or a concept) using random walks over the WordNet semantic network, where random walks are initialized from the synsets associated with that item. The similarity between two linguistic items is accordingly computed in terms of the similarity of their corresponding representations. ADW is an ideal candidate for measuring the impact of C ROWN for two reasons. First, the algorithm obtains state-of-the-art performance on both wordbased and sense-based benchmarks using only WordNet as a knowledge source. Second, the method is both unsupervised and requires no parameter tuning, removing potential performance differences between WordNet and C ROWN being due to these factors. To perform the second experiment, the ADW algorithm was used to generate similarity judgments for the data of Task 3, changing only the underlying semantic network to be either (1) the WordNet 3.0 network, with additional edges from disambiguated glosses,4 or (2) the same network with novel synsets from C ROWN. As the ADW algorithm is unchanged between settings, any performance change is due only to the differences between the two networks. Performance is measured using Pearson correlation with the gold standard judgments. 4.2.2 Results Of the 60 OOV lemmas and 38 OOV slang terms in the test data, 51 and 26 were contained in C ROWN, respectively. Table 3 shows the Pearson correlation performance of ADW in the two settings for all lemmas in the dataset, and for three subsets of the dataset: OOV, slang, and regular lemmas, the latter of which are in WordNet; the bottom rows show the performance of the Task's best participating system for the word-to-sense comparison type (Kashyap et al., 2014) and the most competi3 https://github.com/pilehvar/ADW 4 http://wordnet.princeton.edu/glosstag.shtml
+
+Semantic similarity is one of the core features of many NLP applications. The second evaluation measures the performance improvement of using C ROWN instead of WordNet for measuring semantic similarity when faced with slang or OOV lemmas. Notably, prior semantic similarity benchmarks such as SimLex-999 (Hill et al., 2014) and the ESL test questions (Turney, 2001) have largely omitted these types of words. However, the recent dataset of SemEval-2014 Task 3 (Jurgens et al., 2014) includes similarity judgments between a WordNet sense and a word not defined in WordNet's vocabulary or with a slang interpretation not present in WordNet.
+
+1462
+
+

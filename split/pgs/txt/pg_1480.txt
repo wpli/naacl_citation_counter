@@ -1,0 +1,36 @@
+Node Unigram properties: form form-1 pos pos-1 cpos cpos-1 i morphi Node Bigram properties: pos-1 , pos pos, pos+1 pos, form i pos, morphi
+
+form+1 pos+1 cpos+1 Edge prop: label len, dist always on
+
+Base Parser Base Reranker Kernel Reranker Final System Turbo Parser Zhang et al.
+
+Arabic 80.15 79.46 79.48 80.19 79.64 80.24
+
+Slovene 86.13 84.61 85.25 86.44 86.01 86.72
+
+Danish 90.76 90.36 91.04 91.56 91.48 91.86
+
+Bulgarian 92.98 92.27 93.28 93.4 93.1 93.72
+
+Table 1: Linguistic properties for nodes and edges.
+
+Table 2: System Performance (UAS excluding punctuation). TurboParser is (Martins et al., 2013), Zhang et al. is (Zhang et al., 2014)
+Sentences Avg. Sent Len Support Parts Training Time tokens/sec Arabic 1,460 37 15,466 6m 551 Slovene 1,534 19 10,101 7m 432 Danish 5,190 18 31,627 31m 223 Bulgarian 12,823 15 58,842 57m 99
+
+Results For each language we train a Kernel Reranker by running Alg 1 for 10 iterations over the training set, using k-best lists of size 25 and C set to infinity. As baseline, we train a Base Reranker in the same setup but with kernel features turned off. Table 2 shows the results for the two systems. Even though they use the same feature set, the base-reranker lags behind the base-parser. We attribute this to the fact that the reranker explores a much smaller fraction of the search space, and that the gold parse tree may not be available to it in either train or test time. However, the kernel-reranker significantly improves over the base-reranker. In Bulgarian and Danish, the kernel-reranker outperforms the baseparser. This is not the case for Slovene and Arabic, which we attribute to the low oracle accuracy of the k-best lists in these languages. As is common in reranking (Jagarlamudi and Daum´ e III, 2012), our final system incorporates the scores assigned to sentences by the base parser: i.e. scoref inal (x, y ) = scorebase (x, y ) + scorereranker (x, y ).  is tuned per language on a development set.8 Our final system outperforms the base parser, as well as TurboParser (Martins et al., 2013), a parser based on manually constructed feature templates over up to third order parts. The system lags slightly behind the sampling parser of Zhang et al. (2014) which additionally uses global features (not used by our system) and a tensor component for property combinations. Another important difference between the systems is that our search is severely restricted by the use of a reranker. It is likely that using our kernel in a graph-based parser will further improve its
+reason we did not select the English treebank. 8 To obtain a development set we further split the reranker training sets into tuning training and a development sets (90/10). We then tune  per language on the respective development sets by selecting the best value from a list of {0, 0.05, . . . , 3}
+
+Table 3: Runtime statistics, measured on a standard Macbook Pro 2.8 GHz Core i7 using 8 threads.
+
+accuracy. Performance Table 3 lists the performance metrics of our system on the four evaluation treebanks. While training times are reasonable even for large datasets, the increase in support size causes prediction to become slow for medium and large training sets. The number of support instances is a general problem with kernel methods. It has been addressed using techniques like feature maps (Rahimi and Recht, 2007; Lu et al., 2014) and bounded online algorithms (Dekel et al., 2008; Zhao et al., 2012). The application of these techniques to template kernels is a topic for future research.
+
+6
+
+We present a kernel approach to graph based dependency parsing. The proposed method facilitates globally optimal parameter estimation in a high dimensional feature space, corresponding to the full set of property combinations. We implemented our solution as part of a parse reranking system, demonstrating state of the art results. Future work will focus on performance improvements, using the kernel on higher order parts, and integrating the kernel directly into a graph based dependency parser. Acknowledgments This work is supported by the
+US-Israel Binational Science Foundation (BSF, Grant No 2012330) and by the Intel Collaborative Research Institute for Computational Intelligence (ICRI-CI). We thank the NAACL HLT reviewers for their comments.
+
+Conclusions
+
+1426
+
+

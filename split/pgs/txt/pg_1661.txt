@@ -1,0 +1,39 @@
+Figure 1: Word graph with edges between related words showing the observed (grey) and the inferred (white) word vector representations.
+
+tors to be retrofitted (and correspond to V ); shaded nodes are labeled with the corresponding vectors in ^ , which are observed. The graph can be interpreted Q as a Markov random field (Kindermann and Snell, 1980). The distance between a pair of vectors is defined to be the Euclidean distance. Since we want the inferred word vector to be close to the observed value q ^i and close to its neighbors qj , j such that (i, j )  E , the objective to be minimized becomes:  
+n
+
+(Q) =
+i=1
+
+i qi - q ^i
+
+2
+
++
+(i,j )E
+
+ij qi - qj
+
+2
+
+Experimentally, we show that our method works well with different state-of-the-art word vector models, using different kinds of semantic lexicons and gives substantial improvements on a variety of benchmarks, while beating the current state-of-theart approaches for incorporating semantic information in vector training and trivially extends to multiple languages. We show that retrofitting gives consistent improvement in performance on evaluation benchmarks with different word vector lengths and show a qualitative visualization of the effect of retrofitting on word vector quality. The retrofitting tool is available at: https://github.com/ mfaruqui/retrofitting.
+
+where  and  values control the relative strengths of associations (more details in §6.1). In this case, we first train the word vectors independent of the information in the semantic lexicons and then retrofit them.  is convex in Q and its solution can be found by solving a system of linear equations. To do so, we use an efficient iterative updating method (Bengio et al., 2006; Subramanya et al., 2010; Das and Petrov, 2011; Das and Smith, 2011). The vectors in Q are initialized to be equal ^ . We take the first derivative of  to the vectors in Q with respect to one qi vector, and by equating it to zero arrive at the following online update: qi =
+j :(i,j )E
+
+ij qj + i q ^i ij + i
+
+2
+
+Retrofitting with Semantic Lexicons
+
+j :(i,j )E
+
+(1)
+
+Let V = {w1 , . . . , wn } be a vocabulary, i.e, the set of word types, and  be an ontology that encodes semantic relations between words in V . We represent  as an undirected graph (V, E ) with one vertex for each word type and edges (wi , wj )  E  V × V indicating a semantic relationship of interest. These relations differ for different semantic lexicons and are described later (§4). ^ will be the collection of vector repThe matrix Q resentations q ^i  Rd , for each wi  V , learned using a standard data-driven technique, where d is the length of the word vectors. Our objective is to learn the matrix Q = (q1 , . . . , qn ) such that the columns are both close (under a distance metric) to ^ and to adjacent vertices in . their counterparts in Q Figure 1 shows a small word graph with such edge connections; white nodes are labeled with the Q vec1607
+
+In practice, running this procedure for 10 iterations converges to changes in Euclidean distance of adjacent vertices of less than 10-2 . The retrofitting approach described above is modular; it can be applied to word vector representations obtained from any model as the updates in Eq. 1 are agnostic to the original vector training model objective. Semantic Lexicons during Learning. Our proposed approach is reminiscent of recent work on improving word vectors using lexical resources (Yu and Dredze, 2014; Bian et al., 2014; Xu et al., 2014) which alters the learning objective of the original vector training model with a prior (or a regularizer) that encourages semantically related vectors (in ) to be close together, except that our technique is applied as a second stage of learning. We describe the
+
+

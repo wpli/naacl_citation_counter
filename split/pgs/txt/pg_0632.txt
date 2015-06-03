@@ -1,0 +1,23 @@
+Towards a standard evaluation method for grammatical error detection and correction
+Mariano Felice and Ted Briscoe ALTA Institute, Computer Laboratory, University of Cambridge 15 JJ Thomson Avenue, Cambridge CB3 0FD, United Kingdom {mf501,ejb}@cl.cam.ac.uk
+
+Abstract
+We present a novel evaluation method for grammatical error correction that addresses problems with previous approaches and scores systems in terms of improvement on the original text. Our method evaluates corrections at the token level using a globally optimal alignment between the source, a system hypothesis, and a reference. Unlike the M2 Scorer, our method provides scores for both detection and correction and is sensitive to different types of edit operations.
+
+Source: System hypothesis: System edits: Gold edits:
+
+You have missed word. You have missed a word. (  a) (word  a word) or (word  words)
+
+Figure 1: Mismatch between system and gold standard edits producing the same corrected sentence.
+
+1
+
+Introduction
+
+A range of methods have been applied to evaluation of grammatical error correction, but no entirely satisfactory method has emerged as yet. Standard metrics (such as accuracy, precision, recall and F -score) have been used, but they can lead to different results depending on the criteria used for their computation (Leacock et al., 2014; Chodorow et al., 2012). Accuracy, for example, can only be computed in cases where we can enumerate all true negatives, which is why it has been mostly used for article and preposition errors (De Felice and Pulman, 2008; Rozovskaya and Roth, 2010). Extending this approach to other error types involves the identification of all relevant instances or positions where an error can occur, which is not always easy and renders the evaluation process costly, languagedependent, and possibly inexact. Accuracy has also been criticised as being a poor indicator of predictive power, especially on unbalanced datasets (Manning and Sch¨ utze, 1999). 578
+
+Alternatively, we can compute precision (P ), recall (R) and F -score by comparing system edits to gold-standard edits and thus circumvent the problem of counting true negatives. This was the official evaluation scheme adopted for the HOO 2011 (Dale and Kilgarriff, 2011) and HOO 2012 (Dale et al., 2012) shared tasks. However, these metrics can fail when edits are not identical and therefore underestimate system performance (see Figure 1). This problem was later addressed by the MaxMatch or M2 Scorer (Dahlmeier and Ng, 2012), which is able to identify equivalent edits by applying a transitive rule (e.g. (  a) + (word  word)  (word  a word)). The scorer also allows for multiple gold standard annotations of each sentence, choosing the ones that maximise overall F -score. So far, the M2 Scorer has been the most reliable tool for evaluating error correction systems and has been used as the official scorer in the subsequent CoNLL 2013 (Ng et al., 2013), CoNLL 2014 (Ng et al., 2014) and EMNLP 2014 (Mohit et al., 2014) shared tasks. In 2014, system ranking was based on F0.5 score, weighting precision twice as highly as recall. Nevertheless, this method also suffers from a number of limitations:
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 578­587, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

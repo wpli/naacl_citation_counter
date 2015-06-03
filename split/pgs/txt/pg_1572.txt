@@ -1,0 +1,45 @@
+train the standard phrasal and lexical channel models with the growth transformation (GT) algorithm. They use n-best lists on the training data and optimize a maximum expected B LEU objective, that provides a clear training criterion, which is missing e.g. in MIRA estimation. Auli et al. (2014) report good results by applying the same objective function to reordering features, which are trained with stochastic gradient descent (SGD). Our work differs in several key aspects: (i) We propose to apply the RPROP algorithm, which yields superior results to GT, SGD and AdaGrad in our experimental comparison. (ii) For the first time, we apply maximum expected B LEU training on a data set as large as four million sentence pairs. (iii) We apply a leave-one-out heuristic (Wuebker et al., 2010) to make better use of the training data. (iv) We apply phrasal, lexical, reordering and triplet features. (v) Finally, we do not run MERT after each training iteration, which is expensive for large translation systems.
+
+plied and for simplicity, in the following we will assume the particular derivation for a translation hypothesis to be included in the variable E . The loglinear feature weights are optimized with minimum error rate training (MERT) (Och, 2003).
+
+4
+4.1
+
+Update Strategies
+Previously Proposed Algorithms
+
+3
+
+Statistical Translation System
+
+Our work can be applied to any statistical machine translation paradigm and we will present results on a standard phrase-based translation system (Koehn et al., 2003) and a hierarchical phrase-based translation system (Chiang, 2005). The translation process is implemented as a weighted log-linear combination of several models hm, (E, F ), where E = e1 , . . . , eI denotes the translation hypothesis, F = f1 , . . . , fJ the source sentence, m a model index, and  the model parameters. These models include the phrase translation and lexical smoothing scores in both directions, language model (LM) score, distortion penalty, word penalty and phrase penalty (Och and Ney, 2004). Given a source sentence F , the models hm, (E, F ) and the corresponding loglinear feature weights m , the translation decoder ^: searches for the best scoring translation E ^ = arg max {f (E, F )} E
+E
+
+The Growth Transformation (GT) or Extended Baum-Welch Algorithm was proposed by He and Deng (2012) for maximum expected B LEU training of the standard phrasal and lexical channel models. It is an algorithm to iteratively optimize polynomials of random variables that are subject to sum-to-one contraints and is therefore suitable for training probability distributions. The disadvantage is that each parameter update requires a renormalization step, which artificially blows up the number of features that need to be changed and has a significant impact on time and memory efficiency. The update formulas are derived in (He and Deng, 2012). Stochastic Gradient Descent (SGD) is a wellknown and frequently applied training scheme, which is used for maximum expected B LEU training of reordering models by (Auli et al., 2014). It performs the following update: (t+1) = (t) +  · 
+(t)
+
+(3)
+
+(1) (2)
+
+f (E, F ) =
+mM
+
+m hm, (E, F )
+
+Here, the disadvantage is its high sensitivity to the fixed learning rate  . However, as it does not subject the features to sum-to-one-contraints, it is considerably more time and memory efficient than GT. As an improvement to SGD, AdaGrad (Duchi et al., 2011) is designed for large, sparse feature sets and makes use of an adaptive learning rate. It was proposed for MT training by (Green et al., 2013). Although its main area of application are online algorithms, it is also applicable in our offline setting and is more robust than SGD due to the adaptive learning rate. Following (Green et al., 2013), we apply the approximation with a diagonal outer product matrix, which is computationally cheap. This results in the update equations (t+1) = (t) +  · Gt
+-1 2
+
+where . . . , m , . . . are the model weighting parameters. In practice, the Viterbi approximation is ap1518
+
+· 
+
+(t)
+
+(4) (5)
+
+Gt = Gt-1 + ( )2
+
+(t)
+
+

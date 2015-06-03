@@ -1,0 +1,22 @@
+3
+
+Methods
+
+We begin our discussion of sense disambiguation for thematic fit with the following insight: the baseline (Centroid ) method takes as input a set of typical role-fillers, the highest-ranked ones according to the DM, and returns a single prototype vector. However, if we allow the system to return a set of prototype vectors, then the framework gains the capacity to handle multiple senses of the verb-role pair. The first choice is how to handle the output. Now instead of one cosine similarity, we would have a set of cosines corresponding to the similarities between the test role-filler and each prototype vector in the set. But if we make the theoretical assumption that each prototype corresponds to a sense, then roughly only one should apply at a time. So, we choose to use the one that is most relevant, i.e. similar, to the test role-filler. Therefore, we use the maximum of the cosine similarities as the thematic fit score. 3.1 One best or nearest
+
+if one of them fits with the verb-role better than the other. Also, psycholinguistically, it seems implausible that one must remember all of the times that one has encountered a word in order to use it. Therefore, we impose 50 as an arbitrary upper bound on n. We also set a lower bound of 10 on n because values smaller than this generated quite erratic sets of top role-fillers. Second, OneBest might return a cosine of 1.0 if the DM retrieves the test role-filler itself as one of the top role-fillers. This could unfairly help the correlation between the cosines returned by the system and human judgements because the good role-fillers would all have the same cosine value, thus reducing the effect of the cosine ratings produced for the more distant (interesting) role-fillers. Therefore, we prohibit our system from returning any cosines of 1.0. The test role-filler thus achieves a high score by having a closely related role-filler in the prototype set, not by being present itself. 3.2 Clustering
+
+In the extreme case, we can just use the unaltered set of highly-ranked role-fillers as our set of prototypes. For example, if we query TypeDM for the top four instrument-fillers of eat, we would retrieve spoon, hand, bread, and sauce. Then, to assign a thematic fit score for fork as an instrument-filler, we compute the cosine similarities of (fork, spoon), (fork, hand), (fork, bread), and (fork, sauce). The cosine similarity of (fork, spoon) is the highest, so this cosine determines the score. We refer to this method as OneBest . Note that OneBest requires the calculation of a large number of cosines, which is a relatively expensive operation given the sparse representations of words in DM spaces. The number of retrieved top role-fillers (n) appears to be the only parameter for OneBest . Yet, this method poses a few theoretical questions. First, there most likely should be an upper bound on the number of role-fillers that the system can retrieve at once. Mathematically, allowing the system to retrieve the entire relevant cross-section of the tensor would be equivalent to reducing the thematic fit evaluation task to a binary decision, i.e. whether the verb-role has occurred with the test role-filler in the training data. So, we would not be able to model any graded effect on the fit of two seen role-fillers, even 26
+
+In order to reduce noise from OneBest , we cluster similar top role-fillers together, calculate centroids for each cluster, and use these cluster centroids as the prototype set. This way, the presence of an anomalous vector in the centroid set has less effect. We use the group average agglomerative clustering package within NLTK (Bird et al., 2009). This algorithm works by initializing each top role-filler in its own cluster and iteratively combining the two most similar clusters. For the stopping criterion, which determines the final number of clusters for the verb-role, we use the Variance Ratio Criterion (V RC ) method (Cali´ nski and Harabasz, 1974). Let c be the baseline centroid of all top role-fillers retrieved, f be a top role-filler, and cf be the cluster centroid of the cluster to which f is assigned. Then, this method works by (a) calculating the V RC metric for each number of clusters (k ), given by V RC (k ) = where we define SSB =
+f
+
+SSB SSW / k-1 n-k
+
+(2)
+
+(1 - cos2 (cf , c))
+
+(3)
+
+

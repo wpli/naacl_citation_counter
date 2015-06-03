@@ -1,0 +1,26 @@
+Recipe Steps
+1: In a bowl combine flour, chilli powder, cumin, paprika and five spice. Once thoroughly mixed, add in chicken strips and coat in mixture. 2: Heat oil in a wok or large pan on medium to high heat. Add in chicken and cook until lightly brown for 3 -- 5 minutes. 3: Add in chopped vegetables along with garlic, lime juice, hot sauce and Worcestershire sauce. 4: Cook for a further 15 minutes on medium heat. 5: As the mixture cooks, chop the tomatoes and add lettuce, and cucumber into a serving bowl. 6: Once cooked, serve fajita mix with whole wheat wrap. Add a spoonful of fajita mix into wrap with salsa and natural yogurt. Wrap or roll up the tortilla and serve with side salad.
+
+Automatic Speech Transcription
+in a bowl combine the flower chili powder paprika cumen and five-spice do 130 mixed add in the chicken strips and post in the flour mixture he's oil in a walk for large pan on medium to high heat add in the chicken and cook until lightly browned for three to five minutes add in chopped vegetables along with the garlic lime juice hot sauce and Worcestershire sauce dome cook for a further 15 minutes on medium peace and the mixture coax chop the tomatoes and as blessed tomato and cucumber into a serving bowl up we've cooked add a spoonful up the fajita mix into a wrap with the salsa and after yogurt throughout the rack and served with side salad this recipe makes to avalanche portions done they have just taken but he says and delicious introduction to Mexican flavors blue that
+
+1 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0
+
+Step 2 Step 5 Step 1
+
+Fried chicken Tomato
+
+Video Position
+
+Figure 2: Examples from a Chicken Fajitas recipe at https://www.youtube.com/watch?v=mGpvZE3udQ4 (figure best
+viewed in color). Top: Alignment between (left) recipe steps to (right) automatic speech transcript. Tokens from the ASR are allowed to be classified as background steps (see e.g., the uncolored text at the end). Bottom: Detector scores for two ingredients as a function of position in the video.
+
+three methods), we find a translation of the window (of up to 3 seconds in either direction) for which the average detector score corresponding to the object is maximized. The intuition is that by detecting when the object in question is visually present in the scene, it is more likely that the corresponding action is actually being performed. Training visual food detectors. We trained a deep convolutional neural network (CNN) classifier (specifically, the 16 layer VGG model from (Simonyan and Zisserman, 2014)) on the FoodFood101 dataset of (Bossard et al., 2014), using the Caffe open source software (Jia et al., 2014). The Food101 dataset contains 1000 images for 101 different kinds of food. To compensate for the small training set, we pretrained the CNN on the ImageNet dataset (Russakovsky et al., 2014), which has 1.2M images, and then fine-tuned on Food-101. After a few hours of fine tuning (using a single GPU), we obtained 79% classification accuracy (assuming all 101 labels are mutually exclusive) on the test set, which is consistent with the state of the art results.3
+In particular, the website https://www.metamind. io/vision/food (accessed on 2/25/15) claims they also got 79% on this dataset. This is much better than the 56.4% for a CNN reported in (Bossard et al., 2014). We believe the main reason for the improved performance is the use of pre-training on ImageNet.
+3
+
+We then trained our model on an internal, proprietary dataset of 220 million images harvested from Google Images and Flickr. About 20% of these images contain food, the rest are used to train the background class. In this set, there are 2809 classes of food, including 1005 raw ingredients, such as avocado or beef, and 1804 dishes, such as ratatouille or cheeseburger with bacon. We use the model trained on this much larger dataset in the current paper, due to its increased coverage. (Unfortunately, we cannot report quantitative results, since the dataset is very noisy (sometimes half of the labels are wrong), so we have no ground truth. Nevertheless, qualitative behavior is reasonable, and the model does well on Food-101, as we discussed above.) Visual refinement pipeline. For storage and time efficiency, we downsample each video temporally to 5 frames per second and each frame to 224 × 224 before applying the CNN. Running the food detector on each video then produces a vector of scores (one entry for each of 2809 classes) per timeframe. There is not a perfect map from the names of ingredients to the names of the detector outputs. For example, an omelette recipe may say "egg", but there are two kinds of visual detectors, one for "scrambled egg" and one for "raw egg". We therefore decided to define the match score between an ingredient and a frame by taking the maximum
+
+147
+
+

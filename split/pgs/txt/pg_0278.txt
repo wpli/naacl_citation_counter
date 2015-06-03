@@ -1,0 +1,5 @@
+Proceedings of the 14th Conference of the European Chapter of the Association for Computational Linguistics, EACL, pages 645­654. Leonid Velikovich, Sasha Blair-Goldensohn, Kerry Hannan, and Ryan T. McDonald. 2010. The viability of web-derived polarity lexicons. In Human Language Technologies: Conference of the North American Chapter of the Association of Computational Linguistics, Proceedings,, pages 777­785. Theresa Wilson, Janyce Wiebe, and Paul Hoffmann. 2005. Recognizing contextual polarity in phrase-level sentiment analysis. In Proceedings of the Conference on Human Language Technology and Empirical Methods in Natural Language Processing, HLT '05, pages 347­354. Wei Xu, Alan Ritter, Bill Dolan, Ralph Grishman, and Colin Cherry. 2012. Paraphrasing for style. In COLING, pages 2899­2914.
+
+224
+
+

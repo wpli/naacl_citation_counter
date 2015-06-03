@@ -1,0 +1,21 @@
+G EOT EXT Acc@161 LR (text-based) LP (network-based) LP-LR (hybrid) Wing and Baldridge (2014) (uniform) Wing and Baldridge (2014) (k -d) Han et al. (2012) Ahmed et al. (2013) 38.4 45.1 50.2 -- -- -- ??? Mean 880.6 676.2 653.9 -- -- -- ??? Median 397.0 255.7 151.2 -- -- -- 298 50.1 37.4 50.2 49.2 48.0 45.0 --
+
+T WITTER -US Acc@161 Mean 686.7 747.8 620.0 703.6 686.6 814 -- Median 159.2 431.5 157.1 170.5 191.4 260 --
+
+T WITTER -W ORLD Acc@161 63.8 56.2 59.2 32.7 31.3 24.1 -- Mean 866.5 1026.5 903.6 1714.6 1669.6 1953 -- Median 19.9 79.8 53.7 490.0 509.1 646 --
+
+Table 2: Geolocation accuracy over the three Twitter corpora comparing Logistic Regression (LR), Label Propagation (LP) and LP over LR initialisation (LP-LR) with the state-of-the-art methods for the respective datasets ("--" signifies that no results were published for the given dataset, and "???" signifies that no results were reported for the given metric).
+
+estimate the location for each test node using the LR classifier described above, before running label propagation over the mention graph. This iteratively adjusts the locations based on both the known training users and guessed test users, while simultaneously inferring locations for the external users. In such a way, the inferred locations of test users will better match neighbouring users in their sub-graph, or in the case of disconnected nodes, will retain their initial classification estimate.
+
+5
+
+Results
+
+Table 2 shows the performance of the three methods over the test set for the three datasets. The results are also compared with the state of the art for T WITTER US and T WITTER -W ORLD (Wing and Baldridge, 2014), and G EOT EXT (Ahmed et al., 2013). Our methods achieve a sizeable improvement over the previous state of the art for all three datasets. LP-LR performs best over G EOT EXT and T WITTER -US, while LR performs best over T WITTER -W ORLD; the reduction in median error distance over the state of the art ranges from around 40% to over 95%. Even for T WITTER -W ORLD, the results for LP-LR are substantially better than the best-published results for that dataset. Comparing LR and LP, no strong conclusion can be drawn -- the text-based LP actually outperforms the network-based LR for two of the three datasets, but equally, the combination of the two (LP-LR) performs better than either component method over two of the three datasets. For the third (T WITTER W ORLD), LR outperforms LP-LR due to a combi1365
+
+nation of factors. First, unlike the other two datasets, the label set is pre-discretised (everything is aggregated at the city level), meaning that LP and LR use the same label set.3 This annuls the representational advantage that LP has in the case of the other two datasets, in being able to capture a more fine-grained label set (i.e., all locations associated with training users). Second, there are substantially fewer disconnected test users in T WITTER -W ORLD (see Table 1), meaning that the results for the hybrid LP-LR method are dominated by the empiricallyinferior LP. Although LR is similar to Wing and Baldridge (2014), we achieved large improvements over their reported results. This might be due to: (a) our use of @-mention features; (b) l1 regularisation, which is essential to preventing overfitting for large feature sets; or (c) our use of l2 normalisation of rows in the design matrix, which we found reduced errors by about 20% on G EOT EXT, in keeping with results from text categorisation (Lee, 1995). Preliminary experiments also showed that lowering the term frequency threshold from 10 can further improve the LR results on all three datasets. LP requires few hyper-parameters and is relatively robust. It converged on all datasets in fewer than 10 iterations, and geolocates not only the test users but all nodes in the mention graph. Another advantage of LP over LR is the relatively modest amount of memory and processing power it requires.
+For consistency, we learn a k-d tree for T WITTER -W ORLD and use the merged representation for LR, but the k-d tree largely preserves the pre-existing city boundaries.
+3
+
+

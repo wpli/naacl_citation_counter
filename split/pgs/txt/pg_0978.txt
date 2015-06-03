@@ -1,0 +1,63 @@
+a)  
+
+s   s   s  
+
+c   c   c   c  
+
+h   h   h   h  
+
+l   l   l   l  
+
+e   e  
+
+i   i   i   i   c)  
+
+c   c   c   c  
+
+h   h   h   h   $   $   $  
+
+e   e   e   e   e  
+
+n  
+
+g   b)  
+
+e  
+
+s  
+
+n   en$   e$   $   en$  
+
+$   x1   e   x2   en$   $   x1   e   x2   e$   $   x1   $ge   x1   x2   $   x2   en$  
+
+$ge   c   c   h   h  
+
+d)  
+
+$  
+
+e  
+
+e   en$   en$   en$   s   en$   e$   $   s  
+
+l   l  
+
+i   i  
+
+$ge   e  
+
+Figure 2: Competing strategies for rule extraction: (a) an aligned table; (b) a table-level rule; (c) vertical rules; (d) atomic rules. $ is a word boundary marker.
+
+each changed span, with the rule specifying transformations to perform for each inflection. Ahlberg et al. instead replace each unchanged span with a variable, creating a single rule that specifies complete inflections for the entire table. The latter approach creates larger rules, which are easier to interpret for a linguist, but are less flexible, and restrict information sharing across paradigms. We move in the opposite direction by extracting a rule for each minimal, multi-character transformation identified by our aligner, with no hard constraint on what rules travel together across different inflections. We attempt to learn atomic character transformations, which extends the flexibility of our rules at the cost of reduced interpretability. The differences in rule granularity are illustrated on the German verb schleichen "to sneak" in Figure 2. The single rule of Ahlberg et al. comprises three vertical rules of Durrett & DeNero, which in turn correspond to eleven atomic rules in our system. Note that this is a simplification, as alignments and word boundary markers vary across the three systems. 2.3 Rule selection The final component of an inflection generation system is a mechanism to determine what rules to apply to a new base-form, in order to generate the inflected forms. The strongest signal for this task 924
+
+comes from learning how the training base-forms use the rules. With their highly restrictive rules, Ahlberg et al. can afford a simple scheme, keeping an index that associates rules with base-forms, and employing a longest suffix match against this index to assign rules to new base-forms. They also use the corpus frequency of the inflections that would be created by their rules as a rule-selection feature. Durrett & DeNero have much more freedom, both in what rules can be used together and in where each rule can be applied. Therefore, they employ a more complex semi-Markov model to assign rules to spans of the base-form, with features characterizing the n-gram character context surrounding the source side of each rule. Since our rules provide even greater flexibility, we model rule application very carefully. Like Durrett & DeNero, we employ a discriminative semiMarkov model that considers source character context, and like Ahlberg et al., we use a corpus to reevaluate predictions. In addition, we model rule sequences, and the character-shape of the resulting inflected form. Note that our rules are much more general than those of our predecessors, which makes it easy to get statistical support for these additional features. Finally, since our rules are not bound by paradigm structure, we employ a reranking step to account for intra-paradigm regularities.
+
+3
+
+Discriminative Transduction
+
+In this section, we describe the details of our approach, including the affix representation, the string alignment and transduction, and the paradigm reranking. 3.1 Affix representation
+
+Our inflection generation engine is a discriminative semi-Markov model, similar to a monotonic phrasebased decoder from machine translation (Zens and Ney, 2004). This system cannot insert characters, except as a part of a phrasal substitution, so when inflecting a base form, we add an abstract affix representation to both provide an insertion site and to indicate the desired inflection. Abstract tags are separated from their lemmas with a single `+' character. Marking the morpheme boundary in such a way allows the transducer to gen-
+
+

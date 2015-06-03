@@ -1,0 +1,47 @@
+x8 =
+
+i6,7
+
+xi
+
+of dependencies in our model. We found that using dependency types inside the composition function as in typed functions worsens the results.
+x7 = f (x2 , x5 )
+
+x6 = f (x1 , x2 )
+
+5.1 SemEval-2010 Task 8 This data set consists of 10017 sentences and nine types of relations between nominals (Hendrickx et al., 2010). Table 1 compares the results of our tree based chain RNN (C-RNN), DAG based chain RNN (DC-RNN) and the autoencoder based one (C-RNNRAE) with other RNN models and the best system participating (Rink and Harabagiu, 2010) in the task. Evaluation of the systems is done by comparing the F-measure of their best runs. The best system (Rink and Harabagiu, 2010) uses SVM with many sets of features. We add some external features using supersense sequence tagger (Ciaramita and Altun, 2006). Adding POS tags, WordNet hypernyms, and named entity tags (NER) of the two arguments helps CRNN improve the results. We implement SDT-RNN (Socher et al., 2014) which has similar complexity as our model but has significantly lower F-measure. SDT-RNN also performs much better when considering only the words on the path between entities; confirming our hypothesis about the effectiveness of chains. This can be attributed to the intuitive advantage of dependency trees where the shortest path between entities captures most of the information about the relation (Bunescu and Mooney, 2005). As it can bee seen in Table 1, C-RNN achieves the best results. The baseline RNN, uses a global composition function and R50 vectors for each word. We also use the same number of model parameters. The advantage of our approach is that our models are computationally less expensive compared with other RNN models. MV-RNN (Socher et al., 2012) uses an additional matrix R50×50 for each word, resulting in a 50 fold increase in the number of model parameters. POS-RNN (Hashimoto et al., 2013) uses untied weight matrices and POS based word vectors that results in about 100% increase in the number of model parameters compared with CRNN. Relations with long distances between entities are harder to classify. This is illustrated in Figure 4 where MV-RNN and C-RNN are compared. Considering three bins for the distance between two en-
+
+x5 = f (x3 , x4 ) x1 = child x2 = wrapped
+
+x3 = into
+
+x4 = cradle
+
+Figure 3: a fixed DAG example
+
+4
+
+Learning
+
+To predict the label of the relation, a softmax classifier is added on top of the tree. i.e., yi = T W label ) where L  Rk , k is the numsof tmax(Pn ber of classes, and Pn is the final vector on top of the tree for sentence n. The objective function is the sum of cross entropy error at all the nodes, for all the sentences in the training set. E ( ) = -
+n k k tk n log yn +
+
+ 2
+
+
+
+2
+
+(2)
+
+The vectors for target, predicted labels, and regularization parameters are denoted by tn , yn and  respectively. We initialize the word vectors with pretrained 50-dimensional words from (Collobert and Weston, 2008) and initialize other parameters by a normal distribution with mean of 0 and standard deviation of 0.01. Derivatives are computed by backpropagation through structure (Goller and Kuchler, 1996) and L-BFGS is used for optimization.
+
+5
+
+Experiments
+
+In this section we discuss our experimental results on two datasets for relation classification. To derive the dependency tree for each sentence, we use arceager MaltParser (Goldberg and Nivre, 2012). We set the hyper-parameters through a validation set for the first dataset and use them for the second dataset too. Similar to the previous works, a few internal features were also added e.g., depth of the tree, distance between entities, context words, and the type
+
+1247
+
+

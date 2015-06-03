@@ -1,0 +1,19 @@
+System GMM CPU LLR GPU LLR
+
+Scottish Male to US Female CD Time Frac. RT 7.05 5.99 5.98 1.1 12.2 1.4 3.7X 0.3X 2.7X
+
+US Female to Scottish Male CD Time Frac. RT 7.01 6.51 6.55 0.7 8.75 0.9 3.9X 0.3X 2.9X
+
+Table 1: Voice conversion results for the GMM baseline system, CPU-based local linear regression baseline system, and the GPUbased local linear regression method. The cepstral distortion (CD), average inference time per sentence in seconds (Time), and fraction of real-time (Frac. RT) are shown. Smaller cepstral distortion corresponds to more accurate transformations and fractions of real-time that exceed one imply faster than real-time operation.
+
+4
+
+Experiments
+
+We run a series of experiments to determine whether our GPU-based inference technique offers speedsups and at what cost to accuracy. Baselines We compare our LLR-based conversion system that performs inference on the GPU (using the GPU-friendly neighborhood function) with two different baseline systems. The first baseline system also uses LLR, but performs inference on the CPU using the standard neighborhood function. The second baseline is the GMM model of Toda et al. (2007), which is known to be fast and is widely used in practice. The size, K , of both CPU and GPU neighborhoods was set on a development data to the smallest value that did not show degraded performance compared to exact local regression. Implementation We implemented our GPUbased LLR technique using the CUDA API (Nickolls et al., 2008), and the CUBLAS API which contains bindings for GPU BLAS routines. We ran the system using an NVIDIA Tesla K40c GPU. We built a multi-threaded implementation of CPU-based inference for local regression using calls to CPU BLAS routines, and ran this system on a 4.4GHz 4-core Intel CPU. Data We train and test on a portion of the CMU Arctic database. The training data consists of 70 sentences spoken by both a US female speaker and a Scottish male speaker. The testing data consists of 20 sentences spoken by the same two speakers. We give results for converting in both directions, from the female voice to the male voice, and from the male voice to the female voice. 1337
+
+Frame Alignment Since the source and target speakers speak at slightly different rates, our training data consist of different numbers of frames for each training sentence. We use dynamic time warping to induce the frame alignment. Specifically, we find the minimum cost monotonic alignment from source frames into target frames where the cost of each alignment edge is the L2 distance between the corresponding vectors. We use a distortion limit of 2, and a linear distortion cost. Analysis and Synthesis We use the CMU implementation of the STRAIGHT analysis and synthesis methods introduced by Kawahara (2006). This is the same method used many state-of-the-art voice conversion systems, included our GMM baseline of Toda et al. (2007). We transform the top 24 cepstral coefficients using our system, but process the power coefficient and fundamental frequency separately, using simple transformations for the latter two components. Evaluation In order to evaluate the accuracy of our model we measure the cepstral distortion between the predicted ceptstral frames y ^ and the actual cepstral frames for the target voice y . The cepstral distortion is calculated as follows: distortion(^ y, y)  y ^-y We using dynamic time warping to align the predicted frame sequence to the target frame sequence. 4.1 Results
+
+The results of our experiments are displayed in Table 1. For the Scottish male to US female and the US female to Scottish male transformations the systems that use local regression outperform the parametric
+
+

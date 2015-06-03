@@ -1,0 +1,31 @@
+Set DE-V DE-N ES-V FI-V FI-N NL-V FR-V
+
+DDN 96.2 88.9 99.7 96.4 93.4 94.4* 96.8*
+
+AFH 97.9 91.8 99.6 96.6 93.8 87.7* 98.1*
+
+Ours 97.9 89.9 99.9 98.1 93.6 96.6 99.2
+
+Set DE-V DE-N ES-V FI-V FI-N NL-V FR-V
+
+DDN 85.0 79.5 95.0 87.5 83.5 79.5* 92.1*
+
+AFH 76.5 82.0 98.0 92.5 88.0 37.7* 96.0*
+
+Ours 90.5 76.5 99.0 94.5 82.0 82.1 97.1
+
+Table 4: Individual form accuracy of models trained on complete inflection tables.
+
+Table 5: Complete table accuracy of models trained on complete inflection tables.
+
+ing to single-form accuracy, neither our system nor DDN benefits too much from joint predictions. Table 5 shows the same results evaluated with respect to complete table accuracy. 4.4 Incomplete paradigms
+
+case. 4.5 Partial paradigms
+
+In this experiment, we consider a scenario where, instead of complete tables, we have access to some but not all of the possible word-forms. This could occur for example if we extracted our training data from a morphologically annotated corpus. We simulate this by only including in our training tables the forms that are observed in the corresponding raw corpus. We then test our ability to predict the same test forms as in the previous experiments, regardless of whether or not they were observed in the corpus. We also allow a small held-out set of complete tables, which corresponds to the development set. For Durrett & DeNero's method, we include this heldout set in the training data, while for our system, we use it to train the reranker. The Joint method of DDN and the methods of AFH are incapable of training on incomplete tables, and thus, we can only compare our results against the Factored model of DDN. However, unlike their Factored model, we can then still take advantage of paradigmatic and corpus information, by applying our reranker to the predictions made by our simple model. The results are shown in Table 6, where we refer to our independent model as Basic, and to our reranked system as Reranked. The latter outperforms DDN on all sets. Furthermore, even with only partial tables available during training, reranking improves upon our independent model in every 928
+
+We run a separate experiment for Czech, as the data is substantially less comprehensive than for the other languages. Although the number of 13.0% observed noun forms is comparable to the Finnish case, the percentages in Table 6 refer only to the training set: the test and held-out sets are complete. For Czech, the percentage includes the testing and held-out sets. Thus, the method of Durrett & DeNero and our reranker have access to less training data than in the experiment of Section 4.4. The results of this experiment are shown in Table 7. Our Basic model outperforms DDN for both nouns and verbs, despite training on less data. However, reranking actually decreases the accuracy of our system on Czech nouns. It appears that the reranker is adversely affected by the lack of complete target paradigms. We leave the full investigation into the effectiveness of the reranker on incomplete data to future work. 4.6 Seed paradigms
+
+Dreyer and Eisner (2011) are particularly concerned with situations involving limited training data, and approach inflection generation as a semi-supervised task. In our last experiment we follow their experimental setup, which simulates the situation where we obtain a small number of complete tables from an expert. We use the same training, development, and test splits to test our system. Due to the nature of our model, we need to set aside a hold-out set for reranking. Thus, rather than training on 50 and 100 tables, we train on 40 and 80, but compare the results
+
+

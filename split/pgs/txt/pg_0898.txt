@@ -1,0 +1,14 @@
+Figure 1. Tutorial dialogue interface.
+
+The corpus was collected within a tutorial dialogue study in which human tutors and students interacted through a tutorial dialogue interface that supported remote textual communication (Boyer et al., 2011) The tutorial dialogue interface (Figure 1) consists of two windows that display interactive components: the student's Java code, the compilation or execution output associated with the code, and the textual dialogue messages between the student and tutor. All of the information in these two windows was synchronized between the student's screen and tutor's screen in real time. The corpus contains 45 Java programming tutorial sessions from student-tutor pairs, with a total of 4857 utterances, an average of 108 utterances per session. For the current work, six of these tutorial sessions were manually annotated for their semantic grounding (as described in Section 5), a total of 758 utterances. The problem students solved during this tutorial dialogue involved creating, traversing, and modifying parallel arrays. This task was challenging for students and represented a complex problem-solving effort since the students were novices who were enrolled in an introductory computer programming class. The dialogues within this domain are characterized by situated features that pertain to the programming task. A portion of user utterances refer
+
+to general Java knowledge, and in these cases semantic interpretation can be accomplished by mapping to a domain-specific ontology (e.g., Dzikovska et al., 2007). In contrast, many utterances refer to concrete entities within the dynamically changing, user-created programing artifact. Identifying these entities correctly is crucial for generating specific tutorial dialogue moves. A dialogue excerpt is shown in Figure 2.
+
+4 Methodology
+To ground the dialogue utterances as described in the previous section, our approach focuses first upon noun phrases, which contain rich semantic information. This section introduces the approach, based on Conditional Random Fields, to jointly segment the noun phrases and link those segments to entities within the domain. 4.1 Noun Phrases in Domain Language
+
+A noun phrase is defined as "a phrase which has a noun (or indefinite pronoun) as its head word, or which performs the same grammatical function as such a phrase" (Crystal, 1997). The syntactic structure of a noun phrase consists of dependents which could include determiners, adjectives, prepositional phrases, or even a clause. For example, let us con-
+
+844
+
+

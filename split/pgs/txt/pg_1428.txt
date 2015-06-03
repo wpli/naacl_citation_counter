@@ -1,0 +1,20 @@
+Combining Word Embeddings and Feature Embeddings for Fine-grained Relation Extraction
+Matthew R. Gormley, Mark Dredze Mo Yu  Machine Intelligence Human Language Technology Center of Excellence & Translation Lab Center for Language and Speech Processing Harbin Institute of Technology Johns Hopkins University Harbin, China Baltimore, MD, 21218 gflfof@gmail.com {mgormley, mdredze}@cs.jhu.edu
+
+Abstract
+Compositional embedding models build a representation for a linguistic structure based on its component word embeddings. While recent work has combined these word embeddings with hand crafted features for improved performance, it was restricted to a small number of features due to model complexity, thus limiting its applicability. We propose a new model that conjoins features and word embeddings while maintaing a small number of parameters by learning feature embeddings jointly with the parameters of a compositional model. The result is a method that can scale to more features and more labels, while avoiding overfitting. We demonstrate that our model attains state-of-the-art results on ACE and ERE fine-grained relation extraction.
+
+to build representations for higher-level structures in some compositional embedding models (Collobert et al., 2011; Collobert, 2011; Socher et al., 2012; Socher et al., 2013b; Hermann et al., 2014). Applications of embedding have boosted the performance of many NLP tasks, including syntax (Turian et al., 2010; Collobert et al., 2011), semantics (Socher et al., 2012; Socher et al., 2013b; Hermann et al., 2014), question answering (Bordes et al., 2014) and machine translation (Devlin et al., 2014). While compositional models aim to learn higherlevel structure representations, composition of embeddings alone may not capture important syntactic or semantic patterns. Consider the task of relation extraction, where decisions require examining long-distance dependencies in a sentence. For the sentence in Figure 1, "driving" is a strong indicator of the "ART" (ACE) relation because it appears on the dependency path between a person and a vehicle. Yet such conjunctions of different syntactic/semantic annotations (dependency and NER) are typically not available in compositional models. In contrast, hand-crafted features can easily capture this information, e.g. feature fi3 (Figure 1). Therefore, engineered features should be combined with learned representations in compositional models. One approach is to use the features to select specific transformations for a sub-structure (Socher et al., 2013a; Hermann and Blunsom, 2013; Hermann et al., 2014; Roth and Woodsend, 2014), which can conjoin features and word embeddings, but is impractical as the numbers of transformations will exponentially increase with additional features. Typically, less than 10 features are used. A solution
+
+1
+
+Introduction
+
+Word embeddings represent words in some lowdimensional space, where each dimension might intuitively correspond to some syntactic or semantic property of the word.1 These embeddings can be used to create novel features (Miller et al., 2004; Koo et al., 2008; Turian et al., 2010; Sun et al., 2011; Nguyen and Grishman, 2014; Roth and Woodsend, 2014), and can also be treated as model parameters
+The work was done while the author was visiting JHU. Such embeddings have a long history in NLP, such as term co-occurrence frequency matrices and their low-dimensional counterparts obtained by linear algebra tools (LSA, PCA, CCA, NNMF) and word clusters. Recently, neural networks have become popular methods for obtaining such embeddings (Bengio et al., 2006; Collobert et al., 2011; Mikolov et al., 2013).
+1 
+
+1374
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1374­1379, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

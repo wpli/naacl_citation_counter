@@ -1,0 +1,27 @@
+NP . VBD . NP . . NP . .. .IN Dr. Talcott . . 2 a team . 3 of.4 Harvard University . . 1 led 5 .6
+
+Figure 2: Example dependency tree. lem, which has a theoretical upper bound on the time complexity, and always yields a full sentence in quadratic time. Our method is inspired by the connection between syntactic linearization and syntactic parsing: both build a syntactic tree over a sentence, with the former performing word ordering in addition to derivation construction. As a result, syntactic linearization can be treated as a generalized form of parsing, for which there is no input word order, and therefore extensions to parsing algorithms can be used to perform linearization. For syntactic parsing, the algorithm of Zhang and Nivre (2011) gives competitive accuracies under linear complexity. Compared with parsers that use dynamic programming (McDonald and Pereira, 2006; Koo and Collins, 2010), the efficient beam-search system is more suitable for the NP-hard linearization task. We extend the parser of Zhang and Nivre (2011), so that word ordering is performed in addition to syntactic tree construction. Experimental results show that the transition-based linearization system runs an order of magnitude faster than a state-ofthe-art best-first baseline, with improved accuracies in standard evaluation. Our linearizer is publicly available under GPL at http://sourceforge. net/projects/zgen/.
+
+0 1 2 3 4 5 6 7 8 9 10 11
+
+Transition S HIFT S HIFT S HIFT S HIFT S HIFT R IGHTA RC R IGHTA RC R IGHTA RC S HIFT R IGHTA RC L EFTA RC
+
+ [] [1] [1 2] [1 2 3] [1 2 3 4] [1 2 3 4 5] [1 2 3 4] [1 2 3] [1 2] [1 2 6] [1 2] [2]
+
+ [1...6] [2...6] [3...6] [4...6] [5,6] [6] [6] [6] [6] [] [] []
+
+A 
+
+A  {4  5} A  {3  4} A  {2  3} A  {2  6} A  {1  2}
+
+Table 1: arc-standard transition action sequence for parsing the sentence in Figure 2. pendency arcs. Each state in the transition system can be formalized as a tuple (, , A), where  is a stack that maintains a partial derivation,  is a buffer of incoming input words and A is the set of dependency relations that have been built. Our work is based on the arc-standard algorithm (Nivre, 2008). The deduction system of the arcstandard algorithm is shown in Figure 1. In this system, three transition actions are used: L EFTA RC , R IGHTA RC and S HIFT. Given a state s = ([ | j i], [k | ], A), · L EFTA RC builds an arc {j  i} and pops j off the stack. · R IGHTA RC builds an arc {j  i} and pops i off the stack. · S HIFT removes the front word k from the buffer  , and shifts it onto the stack. In the notations above, i, j and k are word indices of an input sentence. The arc-standard system assumes that each input word has been assigned a part-ofspeech (POS) tag. The sentence in Figure 2 can be parsed by the transition sequence shown in Table 1. Given an input sentence of n words, the algorithm takes 2n transitions to construct an output, because each word needs to be shifted onto the stack once and popped off once before parsing finishes, and all the transition actions are either shifting or popping actions.
+
+2
+
+Transition-Based Parsing
+
+The task of dependency parsing is to find a dependency tree given an input sentence. Figure 2 shows an example dependency tree, which consists of dependency arcs that represent syntactic relations between pairs of words. A transition-based dependency parsing algorithm (Nivre, 2008) can be formalized as a transition system, S = (C, T, cs , Ct ), where C is the set of states, T is a set of transition actions, cs is the initial state and Ct is a set of terminal states. The parsing process is modeled as an application of a sequence of actions, transducing the initial state into a final state, while constructing de-
+
+114
+
+

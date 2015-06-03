@@ -1,0 +1,50 @@
+fj -1
+
+fj
+
+fj +1
+
+Observed layer (source words)
+
+3.1
+
+Training
+
+aj -1
+
+aj
+
+aj +1
+
+Latent alignment layer (target words)
+
+D
+
+Latent domain layer
+
+Figure 2: Latent domain HMM alignment model. An additional latent layer representing domains has been conditioned on by both the rest two layers.
+
+to learn the D-conditioned word alignment model P (f, a| e, D).2 Relying on the HMM alignment model, our latent domain HMM alignment model factors P (f, a| e, D) into the domain-conditioned word translation and transition probabilities: P (f, a|e, D) =
+J j =1
+
+P (fj |eaj , D)P (aj |aj -1 , D).
+
+(2) The generative story of the model is shown in Figure 2. Note how domain-conditioned alignment statistics, P (·| ·, D) contain their former domainconfused alignment statistics, P (·| ·) as special case P (fj |eaj , D) = P (fj |eaj )P (D|fj , eaj ) , f P (fj |eaj )P (D |fj , eaj )
+
+Basically, our model can be viewed as having a set,  of N subsets of domain-conditioned parameters, D for N different domains, i.e.,  = {D1 , . . . , DN }. In this work, to simplify the learning problem we assume that the domains are very different from each other. If this assumption does not hold, the learning problem would shift from single-label learning to multiple-label learning. We leave this extension for future work. Our training procedure seeks the parameters  that maximize the log-likelihood, L of the data: L = f, e log D a PD (f, e, D, a). There, however, does not exist a closed-form solution for maximizing L, and EM comes as an alternative solution to fit the model. EM maximizes L via blockcoordinate ascent on a "free energy" lower bound F (q, ) (Neal and Hinton, 1999), using an auxiliary distribution q over both the latent variables: PD (a, D, f, e) F (q, ) = . f, e D a q log q In the E-step of the EM algorithm, we fix  and aim to find the distribution q  that maximizes F (q, ) over the heterogeneous data. Simple mathematics lead to F (q, ) = f, e log P (f, e) - KL[q || PD (a, D| f, e)], where KL[· || ·] is the Kullback-Leiber divergence between two distributions. The distribution q  can be thus derived as q  = argmaxq F (q, ) = argminq KL[q || PD (a, D| f, e)] PD (f, a| e, D) = PD (D| f, e). a PD (f, a| e, D ) Here, PD (D| f, e) aims to exploit the contrast between the domain-sensitive alignment statistics. Assigning higher probability to one domain forces lower probability assignment to other domains. Note that PD (f, a| e, D) is given in Eq. 2 and a PD (f, a| e, D ) can be computed efficiently using dynamic programming.4 Meanwhile, PD (D| f, e) can be derived by Bayes' rule, i.e., PD (D| f, e)  PD (f, e| D)PD (D). Here, the estimation of the domain prior parameters is easy, PD (D)  f, e PD (D | f, e). The estimation of PD (f, e| D) raises a task of defining a
+Its time complexity is O(J × I 2 ) for each sentence pair f, e with their length J and I respectively.
+4
+
+(3)
+
+P (aj |aj -1 , D) =
+
+P (aj |aj -1 )P (D|aj , aj -1 ) . aj P (aj |aj -1 )P (D |aj , aj -1 ) (4)
+
+With an additional latent domain layer, it becomes crucial to train the model in an efficient way. As suggested by Eq. 3 and 4, we could simplify training by breaking up the estimation process into two steps. That is, we train alignment parameters, P (·| ·) or domain parameters, P (D| ·, ·) first, hold them fixed before training the other kind of the parameters.3 Instead, in this work we design an algorithm that trains both of them simultaneously via training domain-conditioned parameters P (·| , ·, D) directly.
+Note that P (f, a| e, D) contains their former P (f, a| e) as P (f, a| e)P (D | f, a, e) special case, i.e., P (f, a| e, D) = . f a P (f, a| e)P (D | f, a, e) 3 This training scheme is in fact applied in the work of Cuong and Sima'an (2014a), however, for a different purpose.
+2
+
+400
+
+

@@ -1,0 +1,17 @@
+Pragmatic Neural Language Modelling in Machine Translation
+Paul Baltescu University of Oxford paul.baltescu@cs.ox.ac.uk Phil Blunsom University of Oxford Google DeepMind phil.blunsom@cs.ox.ac.uk
+
+Abstract
+This paper presents an in-depth investigation on integrating neural language models in translation systems. Scaling neural language models is a difficult task, but crucial for real-world applications. This paper evaluates the impact on end-to-end MT quality of both new and existing scaling techniques. We show when explicitly normalising neural models is necessary and what optimisation tricks one should use in such scenarios. We also focus on scalable training algorithms and investigate noise contrastive estimation and diagonal contexts as sources for further speed improvements. We explore the tradeoffs between neural models and back-off ngram models and find that neural models make strong candidates for natural language applications in memory constrained environments, yet still lag behind traditional models in raw translation quality. We conclude with a set of recommendations one should follow to build a scalable neural language model for MT.
+
+shown to outperform back-off n-gram models using intrinsic evaluations of heldout perplexity (Chelba et al., 2013; Bengio et al., 2003), or when used in addition to traditional models in natural language systems such as speech recognizers (Mikolov et al., 2011a; Schwenk, 2007). Neural language models combat the problem of data sparsity inherent to traditional n-gram models by learning distributed representations for words in a continuous vector space. It has been shown that neural language models can improve translation quality when used as additional features in a decoder (Vaswani et al., 2013; Botha and Blunsom, 2014; Baltescu et al., 2014; Auli and Gao, 2014) or if used for n-best list rescoring (Schwenk, 2010; Auli et al., 2013). These results show great promise and in this paper we continue this line of research by investigating the tradeoff between speed and accuracy when integrating neural language models in a decoder. We also focus on how effective these models are when used as the sole language model in a translation system. This is important because our hypothesis is that most of the language modelling is done by the n-gram model, with the neural model only acting as a differentiating factor when the n-gram model cannot provide a decisive probability. Furthermore, neural language models are considerably more compact and represent strong candidates for modelling language in memory constrained environments (e.g. mobile devices, commodity machines, etc.), where back-off n-gram models trained on large amounts of data do not fit into memory. Our results show that a novel combination of noise contrastive estimation (Mnih and Teh, 2012)
+
+1
+
+Introduction
+
+Language models are used in translation systems to improve the fluency of the output translations. The most popular language model implementation is a back-off n-gram model with Kneser-Ney smoothing (Chen and Goodman, 1999). Back-off n-gram models are conceptually simple, very efficient to construct and query, and are regarded as being extremely effective in translation systems. Neural language models are a more recent class of language models (Bengio et al., 2003) that have been 820
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 820­829, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

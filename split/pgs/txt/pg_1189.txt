@@ -1,0 +1,133 @@
+Medicare
+
+o
+
+nk utli
+ob t ty jec pe
+
+outlink
+Freebase objec t type
+
+George W. Romney
+Mitt Romney presidential campaign, 2012
+inlink
+
+Author
+
+eb Fre
+
+ase
+
+Lyndon B. Johnson
+tlin
+k
+
+Governor of Massachusetts
+
+Mitt Romney
+outlink
+o ob inf x: i rel
+eID
+
+category
+infob o x: po litica
+
+n gio
+kiP
+
+United States presidential candidates, 2012
+l par ty
+
+category
+
+ou
+
+outlin
+
+k
+
+Salt Lake City, Utah
+
+outlink
+
+ou
+
+tli
+
+nk
+
+Andrew Johnson
+
+Gary Johnson
+ego cat
+i o nf
+
+te typ
+
+dia
+
+Wiki T empla
+
+Mormon
+Db
+
+ca te go ry
+
+ry
+x: ot r he
+
+ag
+
+wi
+
+e
+
+pa
+
+rty
+
+bo
+
+pe
+
+426208
+
+Republican Party
+category
+ca
+
+Persondata
+
+Paul McCartney
+
+Ron Paul
+
+ou
+
+tlin
+
+k
+
+Paul the Apostle
+
+Figure 3: Knowledge Network for Entities in KB
+
+agnostic to knowledge network edge labels using the Jaccard similarity measure computed between the mention and each entity, by taking their collaborator sets as inputs (Section 5.3). We also describe Context Coherence re-ranking in terms of KB knowledge networks only, which constitutes preliminary steps toward unsupervised collective entity linking in section 5.4 based on the notion of coherence described in section 3.5. We leave a combination of the two re-ranking approaches to future work. 5.2 Salience We use commonness (Medelyan and Legg, 2008) as a measure of context independent salience for each mention m, to generate an initial ranked list of candidate entities E " pe1 , ..., eN q where N is the cutoff for number of candidates. In all experiments, we used N = 15 which can give us an oracle accuracy score 97.58%.
+countpm, eq Commonnesspm, eq "  1 e1 countpm, e q
+
+Mitt Romney. For the mention "Paul", the politician Ron Paul is ranked at top 2 (less popular than the musician Paul McCartney). For the mention "Johnson", the correct entity Gary Johnson is ranked at top 9, after more popular entities such as Lyndon B. Johnson and Andrew Johnson. 5.3 Context Collaborator Based Re-ranking Context collaborator based re-ranking is driven by the similarity between mention and entity knowledge networks. We construct knowledge network g pmq for each mention m, and knowledge network g pei q for each entity candidate ei in m's entity candidate list E . We re-rank E according to Jaccard Similarity, which computes the similarity between g pmq and g pei q:
+J pg pmq, g pei qq " |g pmq X g pei q| |g pmq Y g pei q|
+
+Here, countpm, eq is the number of hyperlinks with anchor text m and entity e within all of Wikipedia. As illustrated in Figure 3, using this salience measure "Romney" is successfully linked to 1135
+
+Note that the edge labels (e.g., nominate-01 for a mention, or infobox: religion for an entity) are ignored, as the similarity metric operates over sets of collaborators (leaf nodes in the knowledge networks). For set intersection and union computation, elements are treated as lists of lower-cased tokens with stop words removed, and two elements are considered equal if and only if they have one or
+
+G als oog o le se pe ar o ch ple fo r
+
+Living People
+k
+g te or y
+
+lin in k/ tlin ou
+
+

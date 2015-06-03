@@ -1,0 +1,27 @@
+Weakly Supervised Slot Tagging with Partially Labeled Sequences from Web Search Click Logs
+Young-Bum Kim
+
+
+Minwoo Jeong
+
+
+Karl Stratos
+
+Ruhi Sarikaya
+
+Microsoft Corporation, Redmond, WA Columbia University, New York, NY {ybkim, minwoo.jeong, ruhi.sarikaya}@microsoft.com stratos@cs.columbia.edu
+
+Abstract
+In this paper, we apply a weakly-supervised learning approach for slot tagging using conditional random fields by exploiting web search click logs. We extend the constrained lattice training of T¨ ackstr¨ om et al. (2013) to non-linear conditional random fields in which latent variables mediate between observations and labels. When combined with a novel initialization scheme that leverages unlabeled data, we show that our method gives significant improvement over strong supervised and weakly-supervised baselines.
+
+1
+
+Introduction
+
+The standard approach to slot tagging involves training a sequence model such as a conditional random field (CRF) on manually annotated data. An obvious limitation of this approach is that it relies on fully labeled data, which is both difficult to adapt and changing tasks and schemas. Certain films, songs, and books become more or less popular over time, and the performance of models trained on outdated data will degrade. If not updated, models trained on live data feeds such as movies, songs and books become obsolete over time and their accuracy will degrade. In order to achieve high accuracy continuously data and even model schemas have to be refreshed on a regular basis. To remedy this limitation, we propose a weakly supervised framework that utilizes the information available in web click logs. A web click log is a mapping from a user query to URL link. For example, users issuing queries about movies tend to click on links from the IMDB.com or rottentomatoes.com, which provide rich structured data for entities such as title of the movie ("The Matrix"), the director ("The Wachowski Brothers"), and the release date ("1999"). Web click logs present an opportunity to learn semantic tagging models from large-scale and naturally occurring user interaction data (Volkova et al., 2013). While some previous works (Li et al., 2009) have applied a similar strategy to incorporate click logs in slot tagging, they do not employ recent advances in machine learning to effectively leverage the incomplete annotations. In this paper, we pursue and extend learning from partially labeled sequences, in particular the approach of T¨ ackstr¨ om et al. (2013).
+
+A key problem in natural language processing (NLP) is to effectively utilize large amounts of unlabeled and partially labeled data in situations where little or no annotations are available for a task of interest. Many recent work tackled this problem mostly in the context of part-of-speech (POS) tagging by transferring POS tags from a supervised language via automatic alignment and/or constructing tag dictionaries from the web (Das and Petrov, 2011; Li et al., 2012; T¨ ackstr¨ om et al., 2013). In this work, we attack this problem in the context of slot tagging, where the goal is to find correct semantic segmentation of a given query, which is an important task for information extraction and natural language understanding. For instance, answering the question "when is the new bill murray movie release date?" requires recognizing and labeling key phrases: e.g., "bill murray" as actor and "movie" as media type. 84
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 84­92, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

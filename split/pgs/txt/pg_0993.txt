@@ -1,0 +1,59 @@
+Cross-Entropy (bits) Time (seconds, log-scale)
+
+105 104 103 102 100 4. 0 3. 5 3. 0 2. 5 2. 0 1. 5 1. 0 0. 5 0. 0 100
+
+Trigram EP (Gradient) Baseline Penalized EP (Gradient) Bigram EP (Gradient) Unigram EP (Gradient)
+
+105 104 103 102 100 4. 0 3. 5 3. 0 2. 5 2. 0 1. 5 1. 0 0. 5 0. 0 100
+
+105 104 103 102 200 300 400 500 101 100 4. 0 3. 5 3. 0 2. 5 2. 0 1. 5 1. 0 0. 5 0. 0 100 200 300 400 500
+
+200
+
+300
+
+400
+
+500
+
+200
+
+300
+
+400
+
+500
+
+200
+
+300
+
+400
+
+500
+
+200
+
+300
+
+400
+
+500
+
+German
+
+English
+
+Dutch
+
+Figure 3: Inference on 15 factor graphs (3 languages × 5 datasets of different sizes). The first row shows the total runtime (logscale) of each inference method. The second row shows the accuracy, as measured by the negated log-probability that the inferred belief at a variable assigns to its gold-standard value, averaged over "underlying morpheme" variables. At this penalty level ( = 0.01), PEP [thick line] is faster than the pruning baseline of Cotterell et al. (2015) [dashed line] and much faster than trigram EP, yet is about as accurate. (For Dutch with sparse observations, it is considerably more accurate than baseline.) Indeed, PEP is nearly as fast as bigram EP, which has terrible accuracy. An ideal implementation of PEP would be faster yet (see Appendix B.5). Further graphs are in Appendix C.
+
+7
+
+Experiments and Results
+
+Our experimental design aims to answer three questions. (1) Is our algorithm able to beat a strong baseline (adaptive pruning) in a non-trivial model? (2) Is PEP actually better than ordinary EP, given that the structured sparsity penalty makes it more algorithmically complex? (3) Does the  parameter successfully trade off between speed and accuracy? All experiments took place using the graphical model over strings for the discovery of underlying phonological forms introduced in Cotterell et al. (2015). They write: "Comparing cats ([kæts]), dogs ([dOgz]), and quizzes ([kwIzIz]), we see the English plural morpheme evidently has at least three pronunciations." Cotterell et al. (2015) sought a unifying account of such variation in terms of phonological underlying forms for the morphemes. In their Bayes net, morpheme underlying forms are latent variables, while word surface forms are observed variables. The factors model underlyingto-surface phonological changes. They learn the factors by Expectation Maximization (EM). Their first E step presents the hardest inference problem because the factors initially contribute no knowledge of the language; so that is the setting we test on here. 939
+
+Their data are surface phonological forms from the CELEX database (Baayen et al., 1995). For each of 3 languages, we run 5 experiments, by observing the surface forms of 100 to 500 words and running EP to infer the underlying forms of their morphemes. Each of the 15 factor graphs has  150­700 latent variables, joined by 500­2200 edges to 200­ 1200 factors of degree 1­3. Variables representing suffixes can have extremely high degree (> 100). We compare PEP with other approximate inference methods. As our main baseline, we take the approximation scheme actually used by Cotterell et al. (2015), which restricts the domain of a belief to that of the union of 20-best strings of its incoming messages (section 5).We also compare to unpenalized EP with unigram, bigram, and trigram features. We report both speed and accuracy for all methods. Speed is reported in seconds. Judging accuracy is a bit trickier. The best metric would to be to measure our beliefs' distance from the true marginals or even from the beliefs computed by vanilla loopy BP. Obtaining these quantities, however, would be extremely expensive--even Gibbs sampling is infeasible in our setting, let alone 100-way WFSA intersections. Luckily, Cotterell et al. (2015) provide goldstandard values for the latent variables (underlying
+
+

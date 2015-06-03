@@ -1,0 +1,155 @@
+in which Eq [log p(z| , )] can be expanded as Eq [log p(z| , )] = -Eq [log A( , )] +  +
+N K K (m,n)P k=1 K j =1
+
+c/
+
+n1 ,n2 ,··· ,nK
+
+K k=1 (nk )!
+
+(N )!
+
+, we get } - 1 + log c
+
+mk nk
+
+Eq [log A( , )]  c-1 exp{
+
+(6) The item Eq [log A( , )] involves the hard-tocompute partition function, which has no analytical expressions. We discuss how to deal with it in the sequel. With Taylor expansion, we can obtain an upper bound of Eq [log A( , )] Eq [log A( , )]  c-1 Eq [A( , )] - 1 + log c (7) where c  0 is a new variational parameter. Eq [A( , )] can be further upper bounded as Eq [log A( , )]  exp{ Eq [
+K (m,n)P
+
+i=1 k=1
+
+ik ((k ) - (
+
+j ))
+
+(10) Given this upper bound, we can obtain a lower bound of the variational lower bound defined in Eq.(5). Variational parameters and model parameters can be learned by maximizing the lower bound using iterative EM algorithm. In E-step, we fix the model parameters and compute the variational parameters by setting the derivatives of the lower bound w.r.t the variational parameters to zero
+N
+
+(i,j )P
+
+k = k +
+i=1
+
+ik , c = exp{
+(m,n)P K
+
+}
+
+(11)
+
+} (8)
+
+ik  exp{(k ) - ( +
+V v =1
+
+j =1
+
+j ) + 
+
+j N (i)
+
+jk
+
+n1 ,n2 ,··· ,nK
+
+k=1
+
+ ]
+
+nk
+
+wiv log kv }
+
+where nk denotes the number of words assigned with topic label k and bound
+n1 ,n2 ,··· ,nK K K k=1
+
+nk = N . We further
+
+Eq [
+K
+
+k=1
+
+ nk ] as follows
+
+n1 ,n2 ,··· ,nK
+
+Eq [
+
+k=1
+
+ nk ]
+k ) K k=1
+K
+
+=
+
+( n1 ,n2 ,··· ,nK
+
+K
+
+(12) In Eq.(12), N (i) denotes the words that are labeled to be similar to i. As can be seen from this equation, the probability ik that word i is assigned to topic k depends on the probability jk of i's correlated words j . This explains how our model can incorporate word correlations in topic assignments. In M-step, we fix the variational parameters and update the model parameters by maximizing the lower bound defined on the set of documents {wd }D d=1
+D Nd
+
+k=1 K
+
+k=1 K
+
+(k ) k )
+
+nk +k -1 d kv 
+
+d,i,k wd,i,v
+d=1 i=1
+
+(13)
+
+= =
+
+(
+
+n1 ,n2 ,··· ,nK
+
+k=1 K
+
+k=1 k=1 K k=1 (k )nk K n1 ,n2 ,··· ,nK ( k )N k=1 K k=1
+
+(k ) (
+
+k=1 K
+
+(nk +k ) nk +k )
+
+(9)
+D K d=1 (m,n)Pd k=1 1 = log D |P | |P |
+
+d,m,k d,n,k (14)
+1 cd
+
+
+
+(nk )!
+
+d=1
+
+n1 ,n2 ,··· ,nK
+
+(N )!
+
+4
+
+Experiment
+
+where (a)n denotes the Pochhammer symbol, which is defined as (a)n = a(a + 1) . . . (a + n - 1) and
+n1 ,n2 ,··· ,nK
+K k=1 (nk )!
+
+(N )!
+
+is a constant. Setting c = 729
+
+In this section, we corroborate the effectiveness of our model by comparing it with three baseline methods on two datasets.
+
+

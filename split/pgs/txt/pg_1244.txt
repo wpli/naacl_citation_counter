@@ -1,0 +1,105 @@
+4
+
+4
+
+2
+
+2
+
+LEPOR_v3.1
+
+TerrorCat
+
+Meteor
+
+0
+
+0
+
+-2
+
+-2
+
+-4
+
+-4
+
+-3
+
+-2
+
+-1
+
+0
+
+1
+
+2
+
+-3
+
+-2
+
+-1
+
+0
+
+1
+
+2
+
+-4 -3
+
+-2
+
+0
+
+2
+
+4
+
+r= 0.484
+
+r= 0.408
+
+r= 0.313
+
+-2
+
+-1
+
+0
+
+1
+
+2
+
+Human
+
+Human
+
+Human
+
+Figure 4: Standardized segment-level scores for human vs. metric over the W MT-13 Spanish-to-English segment-level metric task, for a metric achieving highest, mid-range and lowest Pearson's correlation with human judgment.
+
+pairs.
+0
+
+p-value 0.05 0.1
+
+Assessments of translations were crowd-sourced for nine language pairs used in the W MT-13 shared metrics task: Russian-to-English, Spanish-toEnglish, French-to-English, German-to-English, Czech-to-English, English-to-Russian, Englishto-Spanish, English-to-French and English-toGerman.4 Again, we obtain a minimum of 15 assessments per translation, and collect scores for 100 translations per language pair. After removal of quality control items, this leaves 70 distinct translations per language pair, combined into a cross-lingual test set of 630 distinct translations spanning nine language pairs. Table 3 shows Pearson's correlation with human assessment for the six segment-level metrics that competed across all language pairs in W MT-13, and Figure 6 shows the outcomes of Williams test for statistical significance between different pairings of metrics. Results reveal that the same three metrics as before (METEOR , SENT BLEU- MOSES and NLE POR ), in addition to SIMP BLEU P and SIMP BLEU R are not significantly outperformed by any other metric at p<0.05. However, since the latter two were shown to be outperformed for Spanish-to-English, all else being equal, METEOR , SENT BLEU- MOSES and NLEPOR are still a superior choice of default metric.
+Figure 6: Evaluation of significance of increase in correlation with human judgment between every pair of segment-level metrics competing in all nine in W MT-13 metrics task. A colored cell (i,j ) indicates that system named in row i significantly outperforms system named in column j at p < 0.1 and green cells specifically p < 0.05.
+
+5
+
+Conclusion
+
+We were regrettably unable to include English-to-Czech, due to a lack of Czech-speaking MTurk workers.
+
+4
+
+We presented a new evaluation methodology for segment-level metrics that overcomes the issue of low inter-annotator agreement levels in human assessments, includes evaluation of very close and equal quality translations, and provides a significance test that supports system comparison with confidence. Our large-scale human evaluation reveals three metrics to not be significantly outperformed by any other metric in both Spanish-to-
+
+1190
+
+

@@ -1,0 +1,50 @@
+Alg. G LOBAL -P RC G REEDY-P RC G REEDY-L OG L IN G LOBAL -P RC G REEDY-P RC G REEDY-L OG L IN R ANDOM 4K
+
+acc2 MI MA 71.2 77.7 60.8 68.0 65.6 71.5 68.9 76.4 60.7 67.8 66.3 72.4 50.0 51.2
+
+acc3 44.7 30.6 35.8 41.3 30.6 36.6 16.7
+
+acc4 27.9 15.0 18.7 24.8 15.2 19.4 4.2
+
+E XACT 35.1 20.4 21.0 34.4 20.5 21.3 0.5
+
+ 30
+
+Set FrLim Fr Fr + Le Full FrLim Fr Fr + Le Full
+
+MI
+
+acc2 MA 61.5 75.9 76.2 76.0 60.9 74.2 74.3 74.5
+
+acc3 21.6 40.6 40.7 39.9 20.9 36.0 36.8 36.9
+
+acc4 6.9 23.9 23.8 23.1 6.5 19.3 20.4 20.4
+
+E XACT 8.2 31.7 32.1 31.8 8.2 30.4 30.7 30.4
+
+5
+
+percents. Columns correspond to evaluation measures, namely accuracy of sub-sequences of lengths 2 (micro and macro averages), 3 and 4, and exact match. The upper (lower) part presents results for a training set of 4K (58K) samples. G LOBAL -P RC is run with  = 30 for 4K and with  = 5 for 58K. In 58K, all models are run with the Full feature set. In 4K, following prior experimentation on the development set, we select the best performing feature sets (Full for G REEDY-L OG L IN and G REEDY-P RC; Fr + Lex for G LOBAL -P RC).
+
+Table 2: Accuracy of the different models on the test data in
+
+55.9 68.7 68.9 68.4 55.1 65.9 66.2 66.3
+
+58K
+
+Table 3: The performance of G LOBAL -P RC on the development set in various settings (4K scenario). Columns correspond to evaluation measures, namely accuracy of sub-sequences of lengths 2 (micro and macro averages), 3 and 4, and exact match. The upper (lower) part of the table presents results for a time limit of  =30 (5). Fr includes the Frequency features estimated on 58K recipes. Fr + Le further includes Lexical features. Full includes all features. FrLim includes all features, where Frequency features are estimated only on 4K recipes.
+
+scenario, and 5 seconds in the 58K scenario. The number of threads was limited to 3. Where the time limit is reached before an optimal solution is found, the highest scoring Hamiltonian path found up to that point is returned by the ILP solver. In the infrequent samples where no feasible solution is found during training, the sample is skipped over, while at test time, we perform greedy inference instead. We define the following feature sets. Fr includes only features of class Frequency, while Fr + Lex includes features from both the Frequency and Lexical categories. Full includes all feature sets. All above feature sets take C, the reference corpus for computing F REQUENCY features, to be the entire 58K training samples in both scenarios. In the 4K scenario, we also experiment with FrLim, which includes all features, but takes C to contain only the 4K samples of the training data. We use the Gurobi package for ILP.8 Brown clusters are extracted from the 58K samples of the training data using Liang's implementation.9 The convex log-likelihood function of G REEDY-L OG L IN is optimized using LBFGS. All features are selected and all parameters are tuned using the development set.
+
+8
+
+Results
+
+Table 2 presents the results of the three major algorithms in the two main scenarios 58K and 4K.
+8 9 http://www.gurobi.com https://github.com/percyliang/brown-cluster
+
+We find that the structured perceptron algorithm, G LOBAL -P RC, obtains the best results in both cases and under all evaluation measures. The importance of global optimization was also stressed in other works on event ordering (Chambers and Jurafsky, 2008a; Talukdar et al., 2012). In order to assess the contribution of the different components of the model of the best scoring model, G LOBAL -P RC, we compare the performance of the different feature sets and settings of  on the development set in 4K (Table 3). Results reveal the strong impact of the Frequency feature set on the results. Using this category set alone (Fr) yields slightly lower results than using the full feature set, while estimating the Frequency features on a small corpus (FrLim) lowers results dramatically. Adding Lexical and Brown features yields a small improvement over using Frequency alone. While Table 3 demonstrates the importance of  in the performance of G LOBAL -P RC, it also shows that on a limited time budget, a small training set and few features (4K, Fr) and a reasonably small  (5) can yield competitive results. Increasing  from 5 to 30 generally improves results by 2 to 3 percent absolute. The importance of  is further demonstrated in Table 2, where performance with 4K training instances and  = 30 is better than with 58K training instances and  = 5. Preliminary experiments conducted on the development data with higher values of  of 60 and 120 suggest that further increasing 
+
+1168
+
+

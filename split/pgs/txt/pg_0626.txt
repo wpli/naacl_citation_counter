@@ -1,0 +1,22 @@
+WordSim-353 (WS-Sim) as test bed for our evaluations. The subset comprises 203 word pairs. 4.1.2 Experimental setup In this task, we assess the performance of different systems in terms of Pearson correlation. We compare our system against six similarity measures that have reported best performance on the three datasets. Lin (Lin, 1998) and ADW (Pilehvar et al., 2013) are WordNet-based approaches that leverage the structural information of WordNet for the computation of semantic similarity. Most similar to our work are Explicit Semantic Analysis (Gabrilovich and Markovitch, 2007, ESA), which represents a word in a high-dimensional space of Wikipedia articles, and Salient Semantic Analysis (Hassan and Mihalcea, 2011, SSA), which leverages the linking of concepts within Wikipedia articles for generating semantic profiles of words. Word2Vec (Mikolov et al., 2013) and PMI-SVD are the best predictive and cooccurrence models obtained by Baroni et al. (2014) on a 2.8 billion-token corpus that also includes the English Wikipedia.4 Word2Vec is based on neural network context prediction models (Mikolov et al., 2013), whereas PMI-SVD is a traditional cooccurrence based vector wherein weights are calculated by means of Pointwise Mutual Information (PMI) and the vector's dimension is reduced to 500 by singular value decomposition (SVD). We use the DKProSimilarity (B¨ ar et al., 2013) implementation of Lin and ESA in order to evaluate these measures on the WS-Sim dataset. 4.1.3 Results Table 1 shows the Pearson correlation of the different similarity measures on the three datasets considered. NASARI proves to be highly reliable on the task of word similarity, providing state-of-theart performance on RG-65 and MC-30, and competitive results on WS-Sim. Importantly, the improvement we attain over measures that utilize as their knowledge base either WordNet (i.e., ADW, Lin) or Wikipedia (i.e., ESA and SSA) shows that our usage of the complementary information of the two types of resource has been helpful. We note that our Wiktionary module detects four additional synonymous pairs (i.e., similarity = 1.0) in MC-30 (13%), eight in RG-65 (12%), and thirteen in WS-Sim (6%) that are
+4
+
+Measure NASARI SSA Word2Vec Lin ADW PMI-SVD ESA
+
+RG-65 0.91 0.86 0.84 0.83 0.81 0.74 0.72
+
+MC-30 0.91 0.88 0.83 0.82 0.79 0.76 0.74
+
+WS-Sim 0.74 NA 0.76 0.66 0.63 0.68 0.45
+
+Table 1: Pearson correlation of different similarity measures on RG-65, MC-30, and WordSim-353 similarity (WS-Sim) datasets. Results for Lin and ESA on RG-65 and MC-30 are taken from (Hassan and Mihalcea, 2011). We show the best performance obtained by Baroni et al. (2014) out of 48 configurations specifically tested on RG65 (highlighted by ) and across different datasets including WS-Sim (highlighted by ).
+
+not defined as synonyms in WordNet. We also obtain competitive results according to the Spearman correlation (a setting in which the absolute similarity scores do not play a role and it is solely their ranking that matters) on all the three datasets: MC-30 (0.89), RG-65 (0.88), and WS-Sim (0.73). WS-Sim is the only dataset on which we do not report state-of-the-art performance. An analysis of the outputs of our system on the WS-Sim dataset revealed that there are pairs in this subset of WordSim353 that are not assigned proper scores according to the similarity scale. Hill et al. (2014) had previously pointed out this deficiency of WS-Sim, mainly due to its original relatedness-based scoring scale. For instance, word pairs that are barely related (e.g., street-children) or antonyms (e.g., profit-loss and smart-stupid) are assigned relatively high similarity values (respectively, 4.9 for the former and 7.3 and 5.8 for the latter case, in the 0-10 scale). In all these cases our system produces more appropriate judgements according to the similarity scale. On the other hand, there are highly similar pairs in the dataset with relatively low gold scores. Examples include school-center5 and term-life6 with the respective gold similarity scores of 3.4 and 4.5, whereas
+School and center have a pair of highly similar senses in WordNet 3.0: center3 n : "a building dedicated to a particular activity" and school2 n : "a building where young people receive education." 6 Term and life are in coordinate synsets (with time period as their common hypernym) in WordNet 3.0.
+5
+
+clic.cimec.unitn.it/composes/semantic-vectors.html
+
+572
+
+

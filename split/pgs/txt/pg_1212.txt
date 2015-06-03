@@ -1,0 +1,22 @@
+Language English Catalan Chinese German Spanish Average
+
+Ours (4-way tensor) 82.51* 74.67 69.16* 76.94 75.58 75.77
+
+Test set Ours CoNLL 1st (no tensor) 80.84 82.08 71.86 76.78* 68.43 68.52 74.03 74.65 72.85 77.33* 73.60 75.87
+
+CoNLL 2nd 81.20 74.02 68.71 76.27 74.01 74.84
+
+Table 4: Semantic labeled F-score excluding predicate senses on 5 languages in the CoNLL-2009 shared task. Statistical significance with p < 0.05 is marked with . Adding the tensor leads to more than 2% absolute gain on average F-score. Our method with the same feature configuration (a standard set + 4way tensor) rivals the best CoNLL-2009 system which explores much richer feature sets, language-specific feature engineering, and n-best parse combination (Zhao et al., 2009a). Our method 1st order w/o tensor + 4-way tensor + 3-way tensor (Roth and Woodsend) original baseline + pred & arg + deppath + span WSJ-test 80.84 82.51 82.19 WSJ-test 80.38 80.23 80.63 80.87 Gain ­ +1.67 +1.35 Gain ­ -0.15 +0.25 +0.49
+
+8
+
+Conclusions
+
+Table 6: Comparision between our low-rank tensor method and (Roth and Woodsend, 2014) for leveraing word compositions.
+
+In this paper we introduce a tensor-based approach to SRL that induces a compact feature representation for words and their relations. In this sense, our dimensionality reduction method provides a clear alternative to a traditional feature engineering approach used in SRL. Augmenting a simple, yet competitive SRL model with the tensor component yields significant performance gains. We demonstrate that our full model outperforms the best performing systems on the CoNLL-2009 shared task.
+
+Acknowledgments
+3-way and 4-way tensors. However, random initialization still delivers reasonable performance, outperforming the tensor-free model by more than 1% in F-score. Finally, we compare our tensor-based approach against a simpler model that captures interactions between predicate, argument and syntactic path using word embeddings (Roth and Woodsend, 2014). Table 6 demonstrates that modeling feature interactions using tensor yields higher gains than using word embeddings alone. For instance, the highest gain achieved by Roth and Woodsend (2014) when the embeddings of the arguments are averaged is 0.5%, compared to 1.6% obtained by our model. 1158 The authors acknowledge the support of the MURI program (W911NF-10-1-0533) and the DARPA BOLT program. This research is developed in a collaboration of MIT with the Arabic Language Technologies (ALT) group at Qatar Computing Research Institute (QCRI) within the Interactive sYstems for Answer Search (I YAS) project. We are grateful to Anders Bj¨ okelund and Michael Roth for providing the outputs of their systems. We thank Yu Xin, Tommi Jaakkola, the MIT NLP group and the ACL reviewers for their comments. Any opinions, findings, conclusions, or recommendations expressed in this paper are those of the authors, and do not necessarily reflect the views of the funding organizations.
+
+

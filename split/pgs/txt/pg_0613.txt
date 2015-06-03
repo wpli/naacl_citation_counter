@@ -1,0 +1,31 @@
+al. (2013) to create 15 irredundant views of cooccurrence statistics where element [z ]ij of view Zk represents that number of times word wj occurred k words behind wi . We selected the top 500K words by occurrence to create our vocabulary for the rest of the paper. We extracted cooccurrence statistics from a large bitext corpus that was made by combining a number of parallel bilingual corpora as part of the ParaPhrase DataBase (PPDB) project: Table 1 gives a summary, Ganitkevitch et al. (2013) provides further details. Element [z ]ij of the bitext matrix represents the number of times English word wi was automatically aligned to the foreign word wj . We also used the dependency relations in the Annotated Gigaword Corpus (Napoles et al., 2012) to create 21 views2 where element [z ]ij of view Zd represents the number of times word wj occurred as the governor of word wi under dependency relation d. We combined the knowledge of paraphrases present in FrameNet and PPDB by using the dataset created by Rastogi and Van Durme (2014) to construct a FrameNet view. Element [z ]ij of the FrameNet view represents whether word wi was present in frame fj . Similarly we combined the knowledge of morphology present in the CatVar database released by Habash and Dorr (2003) and morpha released by Minnen et al. (2001) along with morphy that is a part of WordNet. The morphological views and the frame semantic views were especially sparse with densities of 0.0003% and 0.03%. While the approach allows for an arbitrary number of distinct sources of semantic information, such as going further to include cooccurrence in WordNet synsets, we considered the described views to be representative, with further improvements possible as future work. Test Data We evaluated the representations on the word similarity datasets listed in Table 2. The first 10 datasets in Table 2 were annotated with different rubrics and rated on different scales. But broadly they all contain human judgements about how similar two words are. The "AN-SYN" and "AN-SEM" datasets contain 4-tuples of analogous words and the
+2 Dependency relations employed: nsubj, amod, advmod, rcmod, dobj, prep of, prep in, prep to, prep on, prep for, prep with, prep from, prep at, prep by, prep as, prep between, xsubj, agent, conj and, conj but, pobj.
+
+Word  Aligned   Bitext  (Fr,  Zh,   Es,  De,  ...)  
+
+Dependency   RelaKons   (nsubj,  amod,   advmod,  ...)  
+
+Morphology   (CatVar,   Morphy/a)  
+
+Monolingual   Text  From   Wikipedia  
+
+Embeddings   (Incremental,   Missing  value   aware,  Max-Var   GCCA)  
+
+Frame   RelaKons   (FrameNet)  
+
+Figure 1: An illustration of datasets used.
+
+Language Bitext-Arabic Bitext-Czech Bitext-German Bitext-Spanish Bitext-French Bitext-Chinese Monotext-En-Wiki
+
+Sentences 8.8M 7.3M 1.8M 11.1M 30.9M 10.3M 75M
+
+English Tokens 190M 17M 44M 241M 671M 215M 1700M
+
+Table 1: Portion of data used to create GCCA representations (in millions).
+
+task is to predict the missing word given the first three. Both of these are open vocabulary tasks while TOEFL is a closed vocabulary task. 4.1 Significance of comparison While surveying the literature we found that performance on word similarity datasets is typically reported in terms of the Spearman correlation between the gold ratings and the cosine distance between normalized embeddings. However researchers do not report measures of significance of the difference between the Spearman Correlations even for comparisons on small evaluation sets.3 This motivated our defining a method for calculating the Minimum Required Difference for Significance (MRDS). Minimum Required Difference for Significance (MRDS): Imagine two lists of ratings over the same
+3 For example, the comparative difference by competing algorithms reported by Faruqui et al. (2014) could not be significant for the Word Similarity test set released by Finkelstein et al. (2001), even if we assumed a correlation between competing methods as high as 0.9, with a p value threshold of 0.05. Similar such comparisons on small datasets are performed by Hill et al. (2014a).
+
+559
+
+

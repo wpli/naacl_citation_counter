@@ -1,0 +1,15 @@
+Figure 1: A scene from the movie Hannah and Her Sisters. The scene shows one conversation between two named women Mickey and Gail. Tag S denotes scene boundary, C denotes character mention, D denotes dialogue, N denotes scene description, and M denotes meta-data.
+
+Researchers in the Natural Language Processing (NLP) community have used movie screenplays for a number of different applications. Ye and Baldwin (2008) used movie screenplays for evaluating word sense disambiguation in an effort to automatically generate animated storyboards. Danescu-NiculescuMizil and Lee (2011) utilized movie screenplays for studying the coordination of linguistic styles in dialogues. Bamman et al. (2013) used movie plot summaries for finding personas of film characters. Agarwal et al. (2014c) used screenplays for automatically creating the xkcd movie narrative charts. In this paper, we use movie screenplays for yet another novel NLP task: automating the Bechdel test.
+
+3
+
+Terminology Related to Screenplays
+
+Turetsky and Dimitrova (2004) described the structure of a movie screenplay as follows: a screenplay describes a story, characters, action, setting and dialogue of a film. The content of a screenplay follows a (semi) regular format. Figure 1 shows a snippet of a screenplay from the film Hannah and Her Sisters. A scene (tag "S") starts with what is called the slug line (or scene boundary). The slug line indicates whether the scene is to take place inside or outside (INT, EXT), the name of the location 832
+
+("MICKEY'S OFFICE"), and can potentially specify the time of day (e.g. DAY or NIGHT). Following the scene boundary, is a scene description (tag "N"). A scene description is followed by a character name (tag "C"), which is followed by dialogues (tag "D"). Screenplays also have directions for the camera, such as "CUT TO:, DISSOLVE TO:". For lack of a better name, we refer to these as meta-data (tag "M"). Screenplays are expected to conform to a strict grammar ­ scene boundaries should be capitalized and start with markers such as INT./EXT., character names should be capitalized with an optional (V.O.) for "Voice Over" or (O.S.) for "Off-screen.", dialogues and scene descriptions should be indented1 at a unique level (i.e. nothing else in the screenplay is indented at this level). However, screenplays found on the web have anomalies in their structures (Gil et al., 2011). In order to parse screenplays found on the web, we presented a supervised machine learning approach in Agarwal et al. (2014b). By parsing we mean assigning each line of the screenplay one of the following five tags: {S, N, C, D, M}. We showed that a rule based system, often used in
+By level of indentation we mean the number of spaces from the start of the line to the first non-space character.
+1
+
+

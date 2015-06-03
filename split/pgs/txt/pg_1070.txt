@@ -1,0 +1,30 @@
+d 10 3 3 3 3
+
+system w/ stack=50 baseline baseline Genzel (2010) Jehl et al (2014) this work
+
+speed ratio 22x 66x 64x 61x 65x
+
+eng-jpn in mixed 53.6 (-0.9) 25.4 (-0.8) 50.5 (-0.4) 24.8 (-0.2) 53.8 (-0.2) 26.3 (-0.1) 55.0 (0.0) 26.5 (-0.4) 55.7 (+0.1) 27.2 (0.0)
+
+eng-kor in mixed 32.8 (-0.7) 9.3 (-0.4) 28.8 (+0.1) 8.1 (-0.1) 30.4 (-0.1) 9.8 (0.0) 33.0 (-0.1) 10.4 (0.0) 33.2 (-0.2) 10.8 (+0.2)
+
+eng-chi mixed 17.9 (-0.5) 18.0 (-0.3) 18.1 (+0.2) 18.3 (-0.2) 19.1 (-0.1)
+
+Table 2: Translation performance for maximum stack size of 50. The figures in parentheses indicate the difference in BLEU scores due to using a smaller stack size, that is, compared to the same systems in Table 1. Speed ratio is calculated with respect to the speed of the slower baseline that uses a stack of 1000, eg. the first row in Table 1.
+
+tational cost. Currently, our preorderer takes 6.3% of the total decoding time (including 2.6% for parsing and 3.7% for actually preordering). We believe that further improvements in preordering will result in more translation gains and faster decoding, as the distortion limit is lowered.
+
+4
+
+Conclusions
+
+To the best of our knowledge, this is the first paper to describe the usage of NNs in preordering for SMT. We show that simply replacing the logistic regression node-swapping model with an NN model improves both crossing scores and translation performance across various language pairs. Feature combination engineering is avoided, which also results in even faster decoding times.
+
+References
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2014. Neural machine translation by jointly learning to align and translate. CoRR, abs/1409.0473. Yoshua Bengio, Rjean Ducharme, Pascal Vincent, and Christian Jauvin. 2003. A neural probabilistic language model. Machine Learning Research, 3:1137­ 1155. Ondrej Bojar, Christian Buck, Christian Federmann, Barry Haddow, Philipp Koehn, Johannes Leveling, Christof Monz, Pavel Pecina, Matt Post, Herve SaintAmand, Radu Soricut, Lucia Specia, and Ale s Tamchyna. 2014a. Findings of the 2014 workshop on statistical machine translation. In Proceedings of the Ninth Workshop on Statistical Machine Translation, pages 12­58. Ond rej Bojar, Vojt ech Diatka, Pavel Rychl´ y, Pavel ´ k, V´ Stra na it Suchomel, Ale s Tamchyna, and Daniel Zeman. 2014b. HindEnCorp - Hindi-English and
+
+Hindi-only Corpus for Machine Translation. In Proceedings of LREC, pages 3550­3555. Danqi Chen and Christopher Manning. 2014. A fast and accurate dependency parser using neural networks. In Proceedings of EMNLP, pages 740­750. Michael Collins, Philipp Koehn, and Ivona Kucerova. 2005. Clause Restructuring for Statistical Machine Translation. In Proceedings of ACL, pages 531­540. Ronan Collobert, Jason Weston, L´ eon Bottou, Michael Karlen, Koray Kavukcuoglu, and Pavel Kuksa. 2011. Natural language processing (almost) from scratch. Journal of Machine Learning Research, 12:2493­ 2537. John DeNero and Jakob Uszkoreit. 2011. Inducing Sentence Structure from Parallel Corpora for Reordering. In Proceedings of EMNLP, pages 193­203. Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas Lamar, Richard Schwartz, and John Makhoul. 2014. Fast and robust neural network joint models for statistical machine translation. In Proceedings of ACL, pages 1370­1380. Rong-En Fan, Kai-Wei Chang, Cho-Jui Hsieh, Xiang-Rui Wang, and Chih-Jen Lin. 2008. LIBLINEAR: A Library for Large Linear Classification. Journal of Machine Learning Research, 9:1871­1874. Michel Galley and Christopher D. Manning. 2008. A Simple and Effective Hierarchical Phrase Reordering Model. In Proceedings of EMNLP, pages 847­855. Dmitriy Genzel. 2010. Automatically learning sourceside reordering rules for large scale machine translation. In Proceedings of COLING, pages 376­384. Jes´ us Gim´ enez and Llu´ is M` arquez. 2004. SVMTool: A general POS tagger generator based on Support Vector Machines. In Proceedings of LREC, pages 43­46. Laura Jehl, Adri` a de Gispert, Mark Hopkins, and Bill Byrne. 2014. Source-side preordering for translation using logistic regression and depth-first branch-andbound search. In Proceedings of EACL, pages 239­ 248.
+
+1016
+
+

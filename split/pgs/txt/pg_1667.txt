@@ -1,0 +1,21 @@
+Figure 3: Two-dimensional PCA projections of 100-dimensional SG vector pairs holding the "adjective to adverb" relation, before (left) and after (right) retrofitting. Language German French Spanish Task RG-65 RG-65 MC-30 SG 53.4 46.7 54.0 Retrofitted SG 60.3 60.6 59.1
+
+Table 5: Spearman's correlation for word similarity evaluation using the using original and retrofitted SG vectors.
+74 72 Spearman's correlation 70 68 66 64 62 60 58 560 200
+
+SG word vectors and plot them in R2 . In Figure 3 we plot these projections before (left) and after (right) retrofitting. It can be seen that in the first case the direction of the analogy vectors is not consistent, but after retrofitting all the analogy vectors are aligned in the same direction.
+
+8
+
+Related Work
+
+SG + Retrofitting SG
+400 600 Vector length 800 1000
+
+Figure 2: Spearman's correlation on the MEN word similarity task, before and after retrofitting.
+
+tors on 1 billion English tokens for vector lengths ranging from 50 to 1,000 and evaluate on the MEN word similarity task. We retrofit these vectors to PPDB (§4) and evaluate those on the same task. Figure 2 shows consistent improvement in vector quality across different vector lengths. Visualization. We randomly select eight word pairs that have the "adjective to adverb" relation from the SYN-REL task (§5). We then take a twodimensional PCA projection of the 100-dimensional 1613
+
+The use of lexical semantic information in training word vectors has been limited. Recently, word similarity knowledge (Yu and Dredze, 2014; Fried and Duh, 2014) and word relational knowledge (Xu et al., 2014; Bian et al., 2014) have been used to improve the word2vec embeddings in a joint training model similar to our regularization approach. In latent semantic analysis, the word cooccurrence matrix can be constructed to incorporate relational information like antonym specific polarity induction (Yih et al., 2012) and multi-relational latent semantic analysis (Chang et al., 2013). The approach we propose is conceptually similar to previous work that uses graph structures to propagate information among semantic concepts (Zhu, 2005; Culp and Michailidis, 2008). Graph-based belief propagation has also been used to induce POS tags (Subramanya et al., 2010; Das and Petrov, 2011) and semantic frame associations (Das and Smith, 2011). In those efforts, labels for unknown words were inferred using a method similar to ours. Broadly, graph-based semi-supervised learning (Zhu, 2005; Talukdar and Pereira, 2010) has been applied to machine translation (Alexandrescu
+
+

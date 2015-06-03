@@ -1,0 +1,20 @@
+Model K IELA AND B OTTOU B RUNI ET AL . S ILBERER AND L APATA CNN FEATURES S KIP - GRAM C ONCATENATION SVD MMS KIP - GRAM -A MMS KIP - GRAM -B
+
+MEN 100% 42% 0.74 0.77 0.62 0.70 0.68 0.74 0.61 0.74 0.75 0.74 0.74 0.76
+
+Simlex-999 100% 29% 0.33 0.44 0.54 0.33 0.29 0.46 0.28 0.46 0.37 0.50 0.40 0.53
+
+SemSim 100% 85% 0.60 0.69 0.70 0.55 0.62 0.62 0.68 0.65 0.68 0.72 0.72 0.66 0.68
+
+VisSim 100% 85% 0.50 0.56 0.64 0.56 0.48 0.48 0.60 0.58 0.60 0.63 0.63 0.60 0.60
+
+Table 1: Spearman correlation between model-generated similarities and human judgments. Right columns report correlation on visual-coverage subsets (percentage of original benchmark covered by subsets on first row of respective columns). First block reports results for out-of-the-box models; second block for visual and textual representations alone; third block for our implementation of multimodal models.
+Target donut owl mural tobacco depth chaos S KIP - GRAM fridge, diner, candy pheasant, woodpecker, squirrel sculpture, painting, portrait coffee, cigarette, corn size, bottom, meter anarchy, despair, demon MMS KIP - GRAM -A pizza, sushi, sandwich eagle, woodpecker, falcon painting, portrait, sculpture cigarette, cigar, corn sea, underwater, level demon, anarchy, destruction MMS KIP - GRAM -B pizza, sushi, sandwich eagle, falcon, hawk painting, portrait, sculpture cigarette, cigar, smoking sea, size, underwater demon, anarchy, shadow
+
+Table 2: Ordered top 3 neighbours of example words in purely textual and multimodal spaces. Only donut and owl were trained with direct visual information. models pick taxonomically closer neighbours of concrete objects, since often closely related things also look similar (Bruni et al., 2014). In particular, both multimodal models get rid of squirrels and offer other birds of prey as nearest neighbours. No direct visual evidence was used to induce the embeddings of the remaining words in the table, that are thus influenced by vision only by propagation. The subtler but systematic changes we observe in such cases suggest that this indirect propagation is not only non-damaging with respect to purely linguistic representations, but actually beneficial. For the concrete mural concept, both multimodal models rank paintings and portraits above less closely related sculptures (they are not a form of painting). For tobacco, both models rank cigarettes and cigar over coffee, and MMS KIP - GRAM -B avoids the arguably less common "crop" sense cued by corn. The last two examples show how the multimodal models turn up the embodiment level in their representation of abstract words. For depth, their neighbours suggest a concrete marine setup 158 over the more abstract measurement sense picked by the MMS KIP - GRAM neighbours. For chaos, they rank a demon, that is, a concrete agent of chaos at the top, and replace the more abstract notion of despair with equally gloomy but more imageable shadows and destruction (more on abstract words below). 5.2 Zero-shot image labeling and retrieval
+
+The multimodal representations induced by our models should be better suited than purely textbased vectors to label or retrieve images. In particular, given that the quantitative and qualitative results collected so far suggest that the models propagate visual information across words, we apply them to image labeling and retrieval in the challenging zeroshot setup (see Section 2 above).3
+We will refer here, for conciseness' sake, to image labeling/retrieval, but, as our visual vectors are aggregated representations of images, the tasks we're modeling consist, more precisely, in labeling a set of pictures denoting the same object and retrieving the corresponding set given the name of the object.
+3
+
+

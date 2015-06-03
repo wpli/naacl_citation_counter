@@ -1,0 +1,20 @@
+Identification and Characterization of Newsworthy Verbs in World News
+
+Benjamin Nye University of Pennsylvania bepnye@gmail.com
+
+Ani Nenkova University of Pennsylvania nenkova@seas.upenn.edu
+
+Abstract
+We present a data-driven technique for acquiring domain-level importance of verbs from the analysis of abstract/article pairs of world news articles. We show that existing lexical resources capture some the semantic characteristics for important words in the domain. We develop a novel characterization of the association between verbs and personal story narratives, which is descriptive of verbs avoided in summaries for this domain.
+
+1
+
+Introduction
+
+Summarization, either by people or machine, calls for the ability to identify important content. Computational approaches to identifying important content fall into the two extremes of a possible spectrum. On one end, the types of important information for a given domain and topic are predefined as information extraction templates defined by experts, as in the earliest approaches to multidocument summarization (Radev and McKeown, 1998) and the recently introduced guided summarization (Owczarzak and Dang, 2011). On the other extreme, traditional systems work only with indicators of importance coming solely from the input to be summarized, or possibly also from the context of the input, i.e . analyzing the anchor text of links to a webpage, or comments on a blog post or citations to a scientific article (Nenkova and McKeown, 2012). Here we explore the feasibility of data-driven identification of important information in the world news domain. We specifically focus on the analysis of verbs, which is the first step of identifying 1440
+
+event types of special interest. The goal is to collect evidence of verb importance globally, without regard to a particular input or its context. Such ideas have been explored in the past as subcomponents of extractive summarizers (Schiffman et al., 2002; Hong and Nenkova, 2014) or as features derived from small datasets for sentence compression (Woodsend and Lapata, 2012). In contrast, in our work we rely on large corpora and exclusively focus on the task of acquiring input independent indicators of importance. We also constrain our analysis to a single domain, which allows us to examine the semantic aspects of the verbs that may contribute to their perceived importance. We leverage a dataset of human-written summaries of news articles to objectively ground the definition of word importance. Summaries are intended to convey important information while omitting the less important pieces, so words that are important in a newsworthy sense will occur more frequently in summaries. The same data and intuition was used recently to develop a large corpus for determining entity salience (Dunietz and Gillick, 2014). We derive a list of over one thousand verbs that have statistically significant bias to appear in the summaries (important verbs) and verbs with higher rate of occurrence in the original articles (unimportant). This resource of verbs and their domain-level importance may be fruitfully exploited in models of summarization that do not use pre-defined templates but are richer than approaches that rely solely on analysis of the article text. We furthermore seek to characterize the properties of words that are biased to occur more often
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1440­1445, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

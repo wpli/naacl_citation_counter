@@ -1,0 +1,19 @@
+Toward Abstractive Summarization Using Semantic Representations
+Fei Liu Jeffrey Flanigan Sam Thomson Norman Sadeh Noah A. Smith School of Computer Science Carnegie Mellon University Pittsburgh, PA 15213, USA {feiliu, jflanigan, sthomson, sadeh, nasmith}@cs.cmu.edu
+
+Abstract
+We present a novel abstractive summarization framework that draws on the recent development of a treebank for the Abstract Meaning Representation (AMR). In this framework, the source text is parsed to a set of AMR graphs, the graphs are transformed into a summary graph, and then text is generated from the summary graph. We focus on the graph-tograph transformation that reduces the source semantic graph into a summary graph, making use of an existing AMR parser and assuming the eventual availability of an AMR-totext generator. The framework is data-driven, trainable, and not specifically designed for a particular domain. Experiments on goldstandard AMR annotations and system parses show promising results. Code is available at: https://github.com/summarization
+
+1
+
+Introduction
+
+Abstractive summarization is an elusive technological capability in which textual summaries of content are generated de novo. Demand is on the rise for high-quality summaries not just for lengthy texts (e.g., books; Bamman and Smith, 2013) and texts known to be prohibitively difficult for people to understand (e.g., website privacy policies; Sadeh et al., 2013), but also for non-textual media (e.g., videos and image collections; Kim et al., 2014; Kuznetsova et al., 2014; Zhao and Xing, 2014), where extractive and compressive summarization techniques simply do not suffice. We believe that the challenge of abstractive summarization deserves renewed attention 1077
+
+and propose that recent developments in semantic analysis have an important role to play. We conduct the first study exploring the feasibility of an abstractive summarization system based on transformations of semantic representations such as the Abstract Meaning Representation (AMR; Banarescu et al., 2013). Example sentences and their AMR graphs are shown in Fig. 1. AMR has much in common with earlier formalisms (Kasper, 1989; Dorr et al., 1998); today an annotated corpus comprised of over 20,000 AMR-analyzed English sentences (Knight et al., 2014) and an automatic AMR parser (JAMR; Flanigan et al., 2014) are available. In our framework, summarization consists of three steps illustrated in Fig. 1: (1) parsing the input sentences to individual AMR graphs, (2) combining and transforming those graphs into a single summary AMR graph, and (3) generating text from the summary graph. This paper focuses on step 2, treating it as a structured prediction problem. We assume text documents as input1 and use JAMR for step 1. We use a simple method to read a bag of words off the summary graph, allowing evaluation with ROUGE-1, and leave full text generation from AMR (step 3) to future work. The graph summarizer, described in §4, first merges AMR graphs for each input sentence through a concept merging step, in which coreferent nodes of the graphs are merged; a sentence conjunction step, which connects the root of each sentence's AMR graph to a dummy "ROOT" node; and an optional
+In principle, the framework could be applied to other inputs, such as image collections, if AMR parsers became available for them.
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1077­1086, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

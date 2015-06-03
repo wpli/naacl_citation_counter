@@ -1,0 +1,26 @@
+out of the five largest frames, the classifiers using sense vectors clearly outperform those using lemma vectors. The frame where we do not see any improvement by introducing sense distinctions, P EO PLE BY VOCATION , contains terms for professions such as painter and builder; since SALDO derives such terms from their corresponding verbs rather than from a common hypernym (e.g. worker), they do not form a coherent subnetwork in SALDO or subregion in the embedding space.
+Frame A NIMALS F OOD P EOPLE BY VOCATION O RIGIN P EOPLE BY ORIGIN Overall Frame A NIMALS F OOD P EOPLE BY VOCATION O RIGIN P EOPLE BY ORIGIN Overall P 0.741 0.684 0.595 0.789 0.693 0.569 P 0.826 0.726 0.605 0.813 0.756 0.667 R 0.643 0.679 0.651 0.691 0.481 0.292 R 0.663 0.743 0.637 0.684 0.508 0.332 F 0.689 0.682 0.622 0.737 0.568 0.386 F 0.736 0.735 0.621 0.742 0.608 0.443
+
+(a) Using lemma embeddings.
+
+(b) Using sense embeddings.
+
+Table 3: FrameNet lexical unit classification.
+
+5
+
+Conclusion
+
+We have presented a new method to embed a semantic network consisting of linked word senses into a continuous-vector word space; the method is agnostic about whether the original word space was produced using a context-counting or contextpredicting method. Unlike previous approaches for creating sense vectors, since we rely on the network structure, we can create representations for senses that occur rarely in corpora. While the experiments described in this paper have been carried out using a Swedish corpus and semantic network, the algorithm we have described is generally applicable and the software3 can be applied to other languages and semantic networks.
+3
+
+The algorithm takes word vectors and uses them and the network structure to induce the sense vectors. It is based on two separate ideas: first, sense embeddings should preserve the structure of the semantic network as much as possible, so two senses should be close if they are neighbors in the graph; secondly, the word vectors are a probablistic mix of sense vectors. These two ideas are stated as an optimization problem where the first becomes the objective and the second a constraint. While this is hard to solve in the general case, we presented an approximation that can be applied when using the squared Euclidean distance. We implemented the algorithm and used it to embed the senses of a Swedish semantic network into a word space produced using the skip-gram model. While a qualitative inspection of nearest-neighbor lists of a few senses gives very appealing results, our main evaluation was extrinsic: a FrameNet lexical unit classifier saw a large performance boost when using sense vectors instead of word vectors. In a followup paper (Johansson and Nieto Pi~ na, 2015), we have shown that sense embeddings can be used to build an efficient word sense disambiguation system that is much faster than graph-based systems with a similar accuracy, and that the mix variables can be used to predict the predominant sense of a word. In future work, we plan to investigate whether the sense vectors are useful for retrieving rarely occurring senses in corpora. Furthermore, since we now evaluated extrinsically, it would be useful to devise intrinsic sense-based evaluation schemes, e.g. a sense analogy task similar to the word analogy task used by Mikolov et al. (2013).
+
+Acknowledgments
+This research was funded by the Swedish Research Council under grant 2013­4944, Distributional methods to represent the meaning of frames and constructions, and grant 2012­5738, Towards a knowledge-based culturomics. The evaluation material used in this work was developed in the project Swedish FrameNet++, grant 2010­6013. We also acknowledge the University of Gothenburg for its support of the Centre for Language Technology and Spr° akbanken.
+
+http://demo.spraakdata.gu.se/richard/scouse
+
+1432
+
+

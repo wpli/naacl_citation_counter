@@ -1,0 +1,35 @@
+5.1
+Method Active Random
+
+Evaluating the Berkeley System on Quiz Bowl Data
+
+56
+
+54
+
+52
+
+50 0 20 40 60
+
+Iteration
+
+Figure 4: Voting sampling active learning works better than randomly sampling for annotation.
+
+(and thus interesting) combinations of entities and references, which annotators noticed during the annotation process. Documents selected by the active learning process were dissimilar to previously-selected questions in both content and structure.
+
+We use two publicly-available pretrained models supplied with the Berkeley coreference system, Surface and Final, which are trained on the entire OntoNotes dataset. The difference between the two models is that Final includes semantic features. We report results with both models to see if the extra semantic features in Final are expressive enough to capture quiz bowl's inherently difficult coreferences. We also train the Berkeley system on quiz bowl data and compare the performance of these models to the pretrained newswire ones in Table 3. Our results are obtained by running a five-fold cross-validation on our dataset. The results show that newswire is a poor source of data for learning how to resolve quiz bowl coreferences and prompted us to see how well a pairwise classifier does in comparison. To build an end-to-end coreference system using this classifier, we first need to know which parts of the text are "mentions", or spans of a text that refer to real world entities. In the next section we talk about our mention detection system. 5.2 A Simple Mention Detector
+
+5
+
+Precision
+
+Experimental Comparison of Coreference Systems
+
+We evaluate the widely used Berkeley coreference system (Durrett and Klein, 2013) on our dataset to show that models trained on newswire data cannot effectively resolve coreference in quiz bowl data. Training and evaluating the Berkeley system on quiz bowl data also results in poor performance. 11 This result motivates us to build an end-to-end coreference resolution system that includes a data-driven mention detector (as opposed to Berkeley's rule-based one) and a simple pairwise classifier. Using our mentions and only six feature types, we are able to outperform the Berkeley system on our data. Finally, we explore the linguistic phenomena that make quiz bowl coreference so hard and draw insights from our analysis that may help to guide the next generation of coreference systems.
+11 We use default options, including hyperparameters tuned on OntoNotes
+
+Detecting mentions is done differently by different coreference systems. The Berkeley system does rule-based mention detection to detect every NP span, every pronoun, and every named entity, which leads to many spurious mentions. This process is based on an earlier work of Kummerfeld et al. (2011), which assumes that every maximal projection of a noun or a pronoun is a mention and uses rules to weed out spurious mentions. Instead of using such a rule-based mention detector, our system detects mentions via sequence labeling, as detecting mentions is essentially a problem of detecting start and stop points in spans of text. We solve this sequence tagging problem using the mallet (McCallum, 2002) implementation of conditional random fields (Lafferty et al., 2001). Since our data contain nested mentions, the sequence labels are bio markers (Ratinov and Roth, 2009). The features we use, which are similar to those used in Kummerfeld et al. (2011), are:
+
+1113
+
+

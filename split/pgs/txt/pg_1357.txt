@@ -1,0 +1,38 @@
+CBOW Skip-gram CWindow Structured Skip-gram SENNA
+
+PTB Dev Test 95.89 96.13 96.62 96.68 96.99 97.01 96.62 97.05 96.54 96.58
+
+Twitter Dev Test 87.85 87.54 88.84 88.73 89.72 89.63 89.69 89.79 84.96 84.85
+
+CBOW Skip-gram CWindow Structured Skip-gram SENNA
+
+Dev UAS LAS 91.74 88.74 92.12 89.30 92.38 89.62 92.49 89.78 92.24 89.30
+
+Test UAS LAS 91.52 88.93 91.90 89.55 92.00 89.70 92.24 89.92 92.03 89.51
+
+Table 2: Results for part-of-speech tagging using different word embeddings (rows) on different datasets (PTB and Twitter). Cells indicate the part-of-speech accuracy of each experiment.
+
+Table 3: Results for dependency parsing on PTB using different word embeddings (rows). Columns UAS and LAS indicate the labelled attachment score and the unlabelled parsing scores, respectively.
+
+sults than the original models in both datasets. In the Twitter dataset, our results slightly higher than the accuracy reported using only Brown clusters in (Owoputi et al., 2013), which was 89.50. We also try initializing our embeddings with those in (Collobert et al., 2011), which are in the "Senna" row. Even though results are higher in our models, we cannot conclude that our method is better as they are trained crawls from Wikipedia in different time periods. However, it is a good reference to show that our embeddings are on par with those learned using more sophisticated models. 4.3 Dependency Parsing The evaluation on dependency parsing is performed on the English PTB, with the standard train, dev and test splits with Stanford Dependencies. We use neural network defined in (Chen and Manning, 2014), with the default hyper-parameters2 and trained for 5000 iterations. The word projections are initialized using WIKI(L) embeddings. Evaluation is performed with the labelled (LAS) and unlabeled (UAS) attachment scores. In Table 3, we can observe that results are consistent with those in part-of-speech tagging, where our models obtain higher scores than the original models and with competitive results compared to Senna embeddings. This suggests that our models are suited at learning syntactic relations between words.
+
+tasks. This is done by introducing changes that make the network aware of the relative positioning of context words. With these models we obtain improvements in two mainstream NLP tasks, namely partof-speech tagging and dependency parsing, and results generalize in both clean and noisy domains.
+
+Acknowledgements
+This work was partially supported by FCT (INESCID multiannual funding) through the PIDDAC Program funds, and also through projects CMUPT/HuMach/0039/2008 and CMU-PT/0005/2007. The PhD thesis of Wang Ling is supported by FCT grant SFRH/BD/51157/2010. The authors also wish to thank the anonymous reviewers for many helpful comments.
+
+References
+Jacob Andreas and Dan Klein. 2014. How much do word embeddings encode about syntax. In Proceedings of ACL. Mohit Bansal, Kevin Gimpel, and Karen Livescu. 2014. Tailoring continuous word representations for dependency parsing. In Proceedings of the Annual Meeting of the Association for Computational Linguistics. Danqi Chen and Christopher D Manning. 2014. A fast and accurate dependency parser using neural networks. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 740­750. Ronan Collobert, Jason Weston, L´ eon Bottou, Michael Karlen, Koray Kavukcuoglu, and Pavel Kuksa. 2011. Natural language processing (almost) from scratch. The Journal of Machine Learning Research, 12:2493­ 2537. Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas Lamar, Richard Schwartz, and John Makhoul. 2014.
+
+5
+
+Conclusions
+
+In this work, we present two modifications to the original models in Word2Vec that improve the word embeddings obtained for syntactically motivated
+2
+
+Found in http://nlp.stanford.edu/software/nndep.shtml
+
+1303
+
+

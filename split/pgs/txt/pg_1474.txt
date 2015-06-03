@@ -1,0 +1,55 @@
+System Z&C'05 Z&C'07 UBL FUBL T ISP (st) T ISP
+
+G EO Q UERY J OBS P R F1 P R F1 96.3 79.3 87.0 97.3 79.3 87.4 91.6 86.1 88.8 94.1 85.0 89.3 88.6 88.6 88.6 89.7 86.8 88.2 76.4 76.4 76.4 92.9 88.9 90.9 85.0 85.0 85.0
+
+P 85.8 72.1 82.8 84.7
+
+ATIS R 84.6 71.4 82.8 84.2
+
+F1 85.2 71.7 82.8 84.4
+
+top (root) qa (qualification) ye (year) ar (area) pa (platform)
+
+t (boolean)
+
+jb (job) i (integer)
+
+Figure 3: Type hierarchy for J OBS domain (slightly simplified).
+
+Table 2: Performances (precision, recall, and F1) of various parsing algorithms on G EO Q UERY, J OBS, and ATIS datasets. T ISP with simple types are marked "st".
+
+Recall = 5.1
+
+# of correctly parsed questions . # of questions
+
+Evaluation on G EO Q UERY Dataset
+
+while the Viterbi partial derivation is d- i (x, y ) = argmax w · (x, d),
+dbad i (x,y ) 
+
+(6)
+
+where (x, d) is the defined feature set for derivation d. In practice, to compute Eq. 6 exactly is intractable, and we resort to beam search. Following Yu et al. (2013), we then find the step i with the maximal score difference between the best reference partial derivation and the Viterbi partial derivation:
+- i = argmax w · (x, d+ i (x, y ), di (x, y )), i - and do update w  w + (x, d+ i (x, y ), di (x, y )) 
+
+where (x, d, d ) = (x, d) - (x, d ). We also use minibatch parallelization of Zhao and Huang (2013); in practice we use 24 cores.
+
+
+
+5
+
+Experiments
+
+We implement our type-driven incremental semantic parser (T ISP) using Python, and evaluate its performance on G EO Q UERY, J OBS, and ATIS datasets. Our feature design is inspired by the very effective Word-Edge features in syntactic parsing (Charniak and Johnson, 2005) and MT (He et al., 2008). From each parsing state, we collect atomic features including the types and the leftmost and rightmost words of the span of the top 3 MR expressions on the stack, the top 3 words on the queue, the grounded predicate names and the ID of the MR template used in the shift action. We use budget scheme similar to (Yu et al., 2013) to alleviate the overfitting problem caused by feature sparsity. We get 84 combined feature templates in total. Our final system contains 62 MR expression templates, of which 33 are triggered by POS tags, and 29 are triggered by specific phrases. In the experiments, we use the same training, development, and testing data splits as Zettlemoyer and Collins (2005) and Zettlemoyer and Collins (2007). For evaluation, we follow Zettlemoyer and Collins (2005) to use precision and recall: Precision = # of correctly parsed questions , # of successfully parsed questions
+
+We first evaluate T ISP on G EO Q UERY dataset. In the training and evaluating time, we use a very small beam size of 16, which gives us very fast decoding. In serial mode, our parser takes  83s to decode the 280 sentences (2,147 words) in the testing set, which means  0.3s per sentence, or  0.04s per word. We compare the our accuracy performance with existing methods (Zettlemoyer and Collins, 2005; Zettlemoyer and Collins, 2007; Kwiatkowski et al., 2010; Kwiatkowski et al., 2011) in Table 2. Given that all other methods use CKY-style parsing, our method is well balanced between accuracy and speed. In addition, to unveil the helpfulness of our type system, we train a parser with only simple types. (Table 2) In this setting, the predicates only have primitive types of location lo, integer i, and boolean t, while the constants still keep their types. It still has the type system, but it is weaker than the polymorphic one. Its accuracy is lower than the standard one, mostly caused by that the type system can not help pruning the wrong applications like (population:aui mississippi:rv). 5.2 Evaluations on J OBS and ATIS Datasets We also evaluate the performance of our parser on J OBS and ATIS datasets. Figure 3 shows the type hierarchy for J OBS. We omit the type hierarchy for ATIS due to space constraint. Note that ATIS contains more than 5,000 examples and is a lot larger than G EO Q UERY and J OBS. We show the results in Table 2. In J OBS, we achieves very good recall, but the precision is not as good as Zettlemoyer and Collins (2005), which is actually because we parsed a lot more sentences. Also, T ISP with simple types is still weaker than the one with subtyping and parametric polymorphisms. For ATIS, our performance is very close to the state-of-the-art.
+
+6
+
+Conclusion
+
+We have presented an incremental semantic parser that is guided by a powerful type system of subtyping and polymorphism. This polymorphism greatly reduced the number of templates and effectively pruned search space during the parsing. Our parser is competitive with stateof-the-art accuracies, but, being linear-time, is faster than CKY-based parsers in theory and in practice.
+
+1420
+
+

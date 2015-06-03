@@ -1,0 +1,41 @@
+90 89.5 F1 on the dev set 89 88.5 88 87.5 87 86.5 86 16 32 beam size 48 64 DP train, DP test non-DP train, non-DP test
+
+Collins (1999) Charniak (2000) Carreras (2008) Petrov (2007) Ratnaparkhi (1997) Sagae (2006) Zhu (2013) non-DP DP
+
+LR 88.1 89.5 90.7 90.1 86.3 87.8 90.2 90.3 90.7
+
+LP 88.3 89.9 91.4 90.2 87.5 88.1 90.7 90.4 90.9
+
+F1 88.2 89.5 91.1 90.1 86.9 87.9 90.4 90.3 90.8
+
+comp. O (n5 ) O (n5 )  O (n4 )  O (n3 )  O (n) O (n)
+
+Figure 5: The F1 curves of non-DP and DP parsers (train and test consistently) on the dev set.
+
+Table 2: Final Results on English (PTB) test set (sec23). The empirical complexities for Charniak and Petrov are O(n2.5 ) and O(n2.4 ), resp., but Carreras is exact O(n4 ).
+
+ing the MaxEnt POS tagger (at 97.1% accuracy on English, and 94.5% on Chinese) trained on the training set. We set k to 20 for English. And we run two sets of experiments, 1-best vs. 20-best, for Chinese to address the tagging issue. We train our parsers using "max-violation perceptron" (Huang et al., 2012) (which has been shown to converge much faster than "early-update" of Collins and Roark (2004)) with minibatch parallelization (Zhao and Huang, 2013) on the head-out binarized and unary-collapsed training set. We finally debinarize the trees to recover the collapsed unary rules. We evaluate parser performance with EVALB including labeled precision (LP), labeled recall (LR), and bracketing F1. We use a beam size of 32, and pick the optimal iteration number based on the performances on the dev set. Our baseline is the shift-reduce parser without state recombination (henceforth "non-DP"), and our dynamic programming parser (henceforth "DP") is the extension of the baseline. 5.1 Learning Curves and Search Quality
+
+Charniak (2000) Petrov (2007) Zhu (2013) Wang (2014) (1-best POS) Wang (2014) (joint) non-DP (1-best POS) non-DP (20-best POS) DP (20-best POS)
+
+LR 79.6 81.9 82.1 80.3 82.9 80.7 83.3 83.6
+
+LP 82.1 84.8 84.3 80.0 84.2 80.5 83.2 84.2
+
+F1 80.8 83.3 83.2 80.1 83.6 80.6 83.2 83.9
+
+POS 94.0 95.5 94.5 95.5 95.6
+
+Table 3: Results on Chinese (CTB) 5.1 test set.
+
+5.2
+
+Final Results on English
+
+Table 2 shows the final results on the PTB test set. The last column shows the empirical time complexity. Our baseline parser achieves a competitive score, which is higher than Berkeley even with a linear time complexity, and is comparable to Zhu et al. (2013). Our DP parser improves the F1 score by 0.5 points over the non-DP, and achieves the best F1 score among empirical linear-time parsers. 5.3 Sausage Lattice Parsing
+
+Figure 4 shows the learning curves on the PTB dev set. With a same beam width, DP parser achieves a better performance (89.8%, peaking at the 11th iteration) and converges faster than non-DP. Picking the optimal iterations for DP and non-DP models, we test each with various beam size, and plot the F1 curves in Figure 5. Again, DP is always better than non-DP, with 0.5% difference at beam of 64. 1033
+
+To alleviate the propagation of errors from POS tagging, we run sausage lattice parsing on both Chinese and English, where Chinese tagging accuracy significantly lag behind English. Table 3 shows the F1 score and POS tagging accuracy of all parsing models on the Chinese 5.1 test set. Our MaxEnt POS tagger achieves an accuracy of 94.5% on 1-best outputs, and an oracle score of 97.1% on 20-best results. The average number of
+
+

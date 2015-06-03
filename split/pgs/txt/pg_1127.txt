@@ -1,0 +1,33 @@
+1. 2. 3. 4. 5.
+
+Why does Trevor leave New York and where does he move to? What is KOS, who is their leader, and why is he attending high school? What happened to Cesar's finger, how did he eventually die? Who killed Benny and how does Ellen find out? Who is Rita and what becomes of her?
+
+MaxOv MinOv SceneSum Random
+
+10% 0.40 0.13 0.23 0.10
+
+20% 0.50 0.27 0.37 0.20
+
+30% 0.58 0.40 0.50 0.30
+
+40% 0.64 0.53 0.60 0.40
+
+50% 0.71 0.66 0.68 0.50
+
+Table 2: Model performance on automatically generated gold standard (test set) at different compression rates.
+
+Table 1: Questions for the movie "One Eight Seven".
+
+to  = 0.5, and the sigmoid scaling factor in our diversity term to k = -1.2. Evaluation We assessed the output of our model (and comparison systems) automatically against the gold chains described above. We performed experiments with compression rates in the range of 10% to 50% and measured performance in terms of F1. In addition, we also evaluated the quality of the extracted scenes as perceived by humans, which is necessary, given the approximate nature of our gold standard. We adopted a question-answering (Q&A) evaluation paradigm which has been used previously to evaluate summaries and document compression (Morris et al., 1992; Mani et al., 2002; Clarke and Lapata, 2010). Under the assumption that the summary is to function as a replacement for the full script, we can measure the extent to which it can be used to find answers to questions which have been derived from the entire script and are representative of its core content. The more questions a hypothetical system can answer, the better it is at summarizing the script as a whole. Two annotators were independently instructed to read scripts (from our test set) and create Q&A pairs. The annotators generated questions relating to the plot of the movie and the development of its characters, requiring an unambiguous answer. They compared and revised their Q&A pairs until a common agreed-upon set of five questions per movie was reached (see Table 1 for an example). In addition, for every movie we asked subjects to name the main characters, and summarize its plot (in no more than four sentences). Using Amazon Mechanical Turk (AMT)9 , we elicited answers for eight scripts (four comedies and thrillers) in four summarization con9 https://www.mturk.com/
+
+ditions: using our model, the two baselines based on minimum and maximum character overlap, and the random system. All models were assessed at the same compression rate of 20% which seems realistic in an actual application environment, e.g., computer aided summarization. The scripts were preselected in an earlier AMT study where participants were asked to declare whether they had seen the movies in our test set (65 in total). We chose the screenplays which had received the least viewings so as to avoid eliciting answers based on familiarity with the movie. A total of 29 participants, all self-reported native English speakers, completed the Q&A task. The answers provided by the subjects were scored against an answer key. A correct answer was marked with a score of one, and zero otherwise. In cases where more answers were required per question, partial scores were awarded to each correct answer (e.g., 0.5). The score for a summary is the average of its question scores.
+
+7
+
+Results
+
+Table 2 shows the performance of SceneSum, our scene extraction model, and the three comparison systems (MaxOv, MinOv, Random) on the automatic gold standard at five compression rates. As can be seen, MaxOv performs best in terms of F1, followed by SceneSum. We believe this is an artifact due to the way the gold standard was created. Scenes with large numbers of main characters are more likely to figure in Wikipedia plot summaries and will thus be more frequently aligned. A chain based on maximum character overlap will focus on such scenes and will agree with the gold standard better compared to chains which take additional script properties into account. We further analyzed the scenes selected by SceneSum and the comparison systems with respect to their position in the script. Table 3 shows the av-
+
+1073
+
+

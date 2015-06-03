@@ -1,0 +1,17 @@
+Sentiment after Translation: A Case-Study on Arabic Social Media Posts
+Mohammad Salameh University of Alberta msalameh@ualberta.ca Saif M. Mohammad and Svetlana Kiritchenko National Research Council Canada {saif.mohammad,svetlana.kiritchenko} @nrc-cnrc.gc.ca
+
+Abstract
+When text is translated from one language into another, sentiment is preserved to varying degrees. In this paper, we use Arabic social media posts as stand-in for source language text, and determine loss in sentiment predictability when they are translated into English, manually and automatically. As benchmarks, we use manually and automatically determined sentiment labels of the Arabic texts. We show that sentiment analysis of English translations of Arabic texts produces competitive results, w.r.t. Arabic sentiment analysis. We discover that even though translation significantly reduces the human ability to recover sentiment, automatic sentiment systems are still able to capture sentiment information from the translations.
+
+specific sentiment analysis systems, one can translate the texts into English and use an English sentiment analysis system. However, it is widely believed that aspects of sentiment may be lost in translation, especially in automatic translation. Though, the extent of this loss, in terms of drop in accuracy of automatic sentiment systems remains undetermined. This paper analyzes several methods available in annotating non-English texts for sentiment: · Use a source-language sentiment analysis system. · Run an English sentiment analysis system on manually created English translations of source language text. · Run an English sentiment analysis system on automatically generated English translations of source language text. In our experiments, we use Arabic social media posts as a specific instance of the source language text. We use state-of-the-art Arabic and English sentiment analysis systems as well as a state-of-theart Arabic-to-English translation system. We outline the advantages and disadvantages of each of the methods listed above, and more importantly conduct experiments to determine accuracy of sentiment labels obtained using each of these methods. As benchmarks we use manually and automatically determined sentiment labels of the Arabic tweets. These results will help users determine methods best suited for their particular needs. Along the way, we answer several research questions such as: 1. What sentiment prediction accuracy is expected when Arabic blog posts and tweets are
+
+1
+
+Introduction
+
+Automatic sentiment analysis of text, especially social media posts, has a number of applications in commerce, public health, and public policy development. However, a vast majority of prior research on automatic sentiment analysis has been on English texts. Furthermore, many sentiment resources essential to automatic sentiment analysis (e.g., sentiment lexicons) exist only in English. Thus there is a growing need for effective methods for analyzing text from other languages such as Arabic and Chinese, especially posts on social media. There has also been marked progress in automatic translation of texts, especially from other languages into English. Thus, instead of building source-language 767
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 767­777, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

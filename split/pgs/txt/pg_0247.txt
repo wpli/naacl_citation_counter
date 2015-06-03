@@ -1,0 +1,32 @@
+age County
+
+under 25 athens tech uga virginia georgia altpress colourlovers hotnewhiphop planetminecraft me katherine diana me my this Democratic oregon eugene oregon nesn university keithellison repjohnlewis sensanders thinkprogres thenation
+
+Follow
+
+Name politician County
+
+above 25 airport nashvillescene at theonion and newsobserver baseballamerica peopleenespanol breakingnews hogshaven debra lori sandra janet No Desc Republican colts beach tahoe indiana jgfortwayne gopleader senmikelee senrandpaul gop glennbeck
+
+and locations in the Pacific Northwest are indicative of Democrats. Indiana-related terms are strong indicators of Republicans: indiana, the Indianapolis Colts (an American football team), and `jgfortwayne' (The Journal Gazette, a newspaper in Fort Wayne, Indiana). This aligns with the strong support of the Republican party in Indiana.7 The second row shows top-ranked following features. Accounts `keithellison' and `repjohnlewis' are top features for Democratic Party; these belong to Keith Ellison and John Robert Lewis, members of the Democratic leadership of the House of Representatives. On other hand, the `gopleader' (the official account for the Republican's majority leader in the House) and `senmikelee' (Republican Senator Mike Lee from Utah) are the top features for Republicans.
+
+7
+
+Conclusions and Future work
+
+Follow
+
+Table 3: Top features learned by label regularization
+
+for the age and politician datasets using semi-greedy constraint selection. Models were fit separately for each constraint type (county, follow, name). Italicized words are from the description field, bold words are from the name field, and underlined words are followed accounts. from the name field of the user profile. In the first row, we display the top features for a model fit using only county constraints. College names appear as top features for younger users, and "airport" and @NashvilleScene (a newspaper) are for older users. The second row of Table 3 shows the top features for following constraints; some news channels are appear for younger (Alternative Press) and older (The News & Observer) users. The third row shows the top features for name constraints, and some names are in the top features for younger (Katherine and Diana) and older (Debra, Lori, Sandra, and Janet). In addition, the absence of a profile description is indicative of older users. The bottom of Table 3 shows top features for the politician dataset. The first row shows that some colleges, a sports network in New England,
+
+While label regularization has been used on a number of NLP tasks, we have presented evidence that it is applicable to latent attribute inference even using many noisy, heterogeneous constraints. We have compared a number of constraint selection algorithms and found they can make label regularization more robust to noisy constraints, allowing developers to combine many rich constraint types without reducing accuracy. There are many avenues for future work. Most pressing is the need to directly address the sampling bias created when constraints derived from the overall population are applied to online users. We plan to explore alternative optimization strategies to explicitly address this issue. Finally, additional research should quantify how responsive label regularization approaches are to the changing linguistic patterns common in online data.
+
+References
+F Al Zamal, W Liu, and D Ruths. 2012. Homophily and latent attribute inference: Inferring latent attributes of twitter users from neighbors. In ICWSM. Pablo Barber´ a. 2013. Birds of the same feather tweet together. bayesian ideal point estimation using twitter data. Proceedings of the Social Media and Political Participation, Florence, Italy, pages 10­11.
+http://en.wikipedia.org/wiki/Politics_ of_Indiana
+7
+
+193
+
+

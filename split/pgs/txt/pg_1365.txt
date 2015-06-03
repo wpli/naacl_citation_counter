@@ -1,0 +1,25 @@
+Unsupervised POS Induction with Word Embeddings
+Chu-Cheng Lin Waleed Ammar Chris Dyer Lori Levin School of Computer Science Carnegie Mellon University {chuchenl,wammar,cdyer,lsl}@cs.cmu.edu
+
+Abstract
+Unsupervised word embeddings have been shown to be valuable as features in supervised learning problems; however, their role in unsupervised problems has been less thoroughly explored. In this paper, we show that embeddings can likewise add value to the problem of unsupervised POS induction. In two representative models of POS induction, we replace multinomial distributions over the vocabulary with multivariate Gaussian distributions over word embeddings and observe consistent improvements in eight languages. We also analyze the effect of various choices while inducing word embeddings on "downstream" POS induction results.
+
+1
+
+Introduction
+
+Unsupervised POS induction is the problem of assigning word tokens to syntactic categories given only a corpus of untagged text. In this paper we explore the effect of replacing words with their vector space embeddings 1 in two POS induction models: the classic first-order HMM (Kupiec, 1992) and the newly introduced conditional random field autoencoder (Ammar et al., 2014). In each model, instead of using a conditional multinomial distribution 2 to generate a word token wi  V given a POS tag t i  T , we use a conditional Gaussian distribution and generate a d -dimensional word embedding vw i  Rd given t i .
+1Unlike Yatbaz et al. (2014), we leverage easily obtainable and widely used embeddings of word types. 2 Also known as a categorical distribution.
+
+Our findings suggest that, in both models, substantial improvements are possible when word embeddings are used rather than opaque word types. However, the independence assumptions made by the model used to induce embeddings strongly determines its effectiveness for POS induction: embedding models that model short-range context are more effective than those that model longer-range contexts. This result is unsurprising, but it illustrates the lack of an evaluation metric that measures the syntactic (rather than semantic) information in word embeddings. Our results also confirm the conclusions of Sirts et al. (2014) who were likewise able to improve POS induction results, albeit using a custom clustering model based on the the distance-dependent Chinese restaurant process (Blei and Frazier, 2011). Our contributions are as follows: (i) reparameterization of token-level POS induction models to use word embeddings; and (ii) a systematic evaluation of word embeddings with respect to the syntactic information they contain.
+
+2
+
+Vector Space Word Embeddings
+
+Word embeddings represent words in a language's vocabulary as points in a d -dimensional space such that nearby words (points) are similar in terms of their distributional properties. A variety of techniques for learning embeddings have been proposed, e.g., matrix factorization (Deerwester et al., 1990; Dhillon et al., 2011) and neural language modeling (Mikolov et al., 2011; Collobert and Weston, 2008). For the POS induction task, we specifically need embeddings that capture syntactic similarities. Therefore we experiment with two types of embeddings
+
+1311
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1311­1316, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

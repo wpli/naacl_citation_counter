@@ -1,0 +1,53 @@
+from the Europarl corpus (Koehn, 2005) which was then split into two disjoint Czech-pivot and pivotEnglish bitexts of equal size. Sentences of length greater than 40 were filtered out from all training corpora. 4.2 Experiment 1: Method Comparison We trained word alignment models in both sourceto-target and target-to-source directions. We used 5 iterations of IBM Model 1 followed by 5 iterations of HMM. We tuned hyperparameters to maximize alignment F-score of the hand-aligned development set. Both interpolation parameters interp and  were tuned over the range [0, 1]. For our methods, we fixed  = 0.5, which we found effective during preliminary experiments. Alignment F-scores using grow-diag-final-and (gdfa) symmetrization (Koehn, 2010) are reported in Table 2, column 2. We conducted MT experiments using the Moses translation system (Koehn, 2005). We used a 5-gram LM trained on the Xinhua portion of English Gigaword (LDC2007T07). To tune the decoder, we used the WMT10 tune set. MT Bleu scores are reported in Table 2, columns 3­4. Both our methods outperform the baseline and the interpolation approach. In particular, the joint training approach more than doubles the gains obtained by the interpolation approach, on both F- and Bleu. We also evaluated the Czech-French and FrenchEnglish alignments produced as a by-product of our joint method. While our French-to-English MT experiments showed no improvement in Bleu, we saw a +0.6 (25.6 to 26.2) gain in Bleuon the Czech-toFrench translation task. This shows that joint training may lead to some improvements even on highresource bitexts. 4.3 Other Pivot Languages We examined how the choice of pivot language affects the joint training approach by varying it over 6 languages (French, German, Greek, Hungarian,
+train dev WMT09 WMT10
+
+method/dataset baseline interpolation (Wang) fixed-prior (§3.1) joint (§3.2)
+
+F dev 63.8 66.2 67.3 70.1
+
+Bleu
+WMT09 WMT10
+
+16.2 16.6 16.9 17.2
+
+16.6 17.1 17.3 17.7
+
+Table 2: F- and Bleu scores for Czech-English via French. The joint training method outperforms all other methods tested.
+
+Tune WMT09 WMT10
+
+fr 16.1 17.2 17.7
+
+fr, sk 16.4 17.2 17.8
+
+fr, el 16.4 17.2 17.8
+
+fr, sk, el 16.4 17.3 17.8
+
+all 6 16.4 17.4 17.8
+
+Table 3: Czech-English Bleu scores over pivot language combinations. Key: fr=French, sk=Slovak, el=Greek.
+
+Lithuanian and Slovak), while keeping the size of the pivot language resources roughly the same. Somewhat surprisingly, all models achieved an F-score of about 70%, which resulted in Bleu scores comparable to those reported with French (Table 2). Subsequently, we combined all pivot languages by simply concatenating the aligned parallel texts across pairs, triples and all pivot languages. Combining all pivots yielded modest Bleu score improvements of +0.2 and +0.1 on the test datasets (Table 3). Considering the low variance in F- and Bleu scores across pivot languages, we computed the pairwise F-scores between the predicted alignments: All scores ranged around 97­98%, indicating that the choice of pivot language had little effect on the joint training procedure. To further verify, we repeated this experiment over Greek-English and Lithuanian-English as the source-target task (85k parallel sentences), using the same pivot languages as above, and with comparable amounts of parallel data (200k sentences). We obtained similar results: In all cases, pairwise F-scores were above 97%.
+
+sentences cz tokens en tokens
+
+85k 1.63M 1.78M
+
+460 9.7k 10k
+
+2525 55k 66k
+
+2489 53k 62k
+
+5
+
+Related Work
+
+Table 1: Czech-English sentence and token statistics.
+
+The term "triangulation" comes from the phrasetable triangulation literature (Cohn and Lapata, 2007; Razmara and Sarkar, 2013; Dholakia and
+
+1224
+
+

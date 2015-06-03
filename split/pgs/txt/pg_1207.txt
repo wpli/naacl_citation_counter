@@ -1,0 +1,32 @@
+templates, used as our first-order semantic baseline in the experiments. 3.2 Low-rank Scoring via Projected Representations
+
+Now, we describe the tensor-based scoring function. We characterize each semantic arc (p, a, r) using the cross-product of atomic feature vectors associated with the four types of information described above: the predicate vector (p), the argument vector (a), the dependency path vector (path) and the semantic role label vector (r). For example, in the simplest case (p), (a)  [0, 1]n are one-hot indicator vectors, where n is the size of the vocabulary. Similarly, (path)  [0, 1]m and (r)  [0, 1]l are indicator vectors where m is the number of unique paths (seen in the training set) and l is the number of semantic role labels. Of course, we can add other atomic information into these atomic vectors. For example, (p) will not only indicate the word form of the current predicate p, but also the word lemma, POS tag and surrounding tokens as well. The crossproduct of these four vectors is an extremely highdimensional rank-1 tensor, (p)  (a)  (path)  (r)  Rn×n×m×l in which each entry indicates the combination of four atomic features appearing in the semantic arc (p, a, r)3 . The rank-1 tensor (cross-product) captures all possible combinations over atomic units, and therefore it is a full feature expansion over the manually selected feature set in Table 1. Similar to the traditional scoring, the semantic arc score is the inner product between a 4-way parameter tensor A and this feature tensor: A  Rn×n×m×l : vec(A) · vec ((p)  (a)  (path)  (r)) , (2) where vec(·) denotes the vector representation of a matrix / tensor. Instead of reducing and pruning possible feature concatenations (e.g., by manual feature template
+We always add a bias term into these atomic vectors (e.g., a fixed "1" attached to the beginning of every vector). Therefore, their cross-product will contain all unigram to 4-gram concatenations, not just 4-gram concatenations.
+3
+
+construction as in the traditional approach), this tensor scoring method avoids parameter explosion and overfitting by assuming a low-rank factorization of the parameters A. Specifically, A is decomposed into the sum of k simple rank-1 components,
+k
+
+A=
+i=1
+
+P (i)  Q(i)  R(i)  S (i).
+
+(3)
+
+Here k is a small constant, P, Q  Rk×n , R  Rk×m and S  Rk×l are parameter matrices, and P (i) (and similarly Q(i), R(i) and S (i)) represents the i-th row vector of matrix P . The advantages of this low-rank assumption are as follows. First, computing the score no longer requires maintaining and constructing extremely large tensors. Instead, we can project atomic vectors via P , Q, R and S obtaining small dense vectors, and subsequently calculating the arc score by
+k i=1
+
+[P (p)]i [Q(a)]i [R(path)]i [S (r)]i .
+
+Second, projecting atomic units such as words, POS tags and labels into dense, low-dimensional vectors can effectively alleviate the sparsity problem, and it enables the model to capture high-order feature interactions between atomic units, while avoiding the parameter explosion problem. 3.3 Combined System Similar to our low-rank syntactic dependency parsing model (Lei et al., 2014), our final scoring function Ssem (x, ysyn , zsem ) is the combination of the traditional scoring and the low-rank scoring, Ssem (x, ysyn , zsem ) =
+k
+
+ w · (x, ysyn , zsem ) + (1 -  )
+(p,a,r)zsem i=1
+
+[P (p)]i [Q(a)]i [R(path)]i [S (r)]i . where   [0, 1] is a hyper-parameter balancing the two scoring terms. We tune this value on the development set. Finally, the set of parameters of our model is denoted as  = {w, P, Q, R, S }. Our goal is to optimize the weight vector w as well as the four projection matrices given the training set.
+
+1153
+
+

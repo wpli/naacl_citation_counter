@@ -1,0 +1,27 @@
+Learning Translation Models from Monolingual Continuous Representations
+Kai Zhao Graduate Center, CUNY New York, NY 10016, USA kzhao.hf@gmail.com Abstract
+Translation models often fail to generate good translations for infrequent words or phrases. Previous work attacked this problem by inducing new translation rules from monolingual data with a semi-supervised algorithm. However, this approach does not scale very well since it is very computationally expensive to generate new translation rules for only a few thousand sentences. We propose a much faster and simpler method that directly hallucinates translation rules for infrequent phrases based on phrases with similar continuous representations for which a translation is known. To speed up the retrieval of similar phrases, we investigate approximated nearest neighbor search with redundant bit vectors which we find to be three times faster and significantly more accurate than locality sensitive hashing. Our approach of learning new translation rules improves a phrase-based baseline by up to 1.6 BLEU on Arabic-English translation, it is three-orders of magnitudes faster than existing semi-supervised methods and 0.5 BLEU more accurate.
+
+Hany Hassan Microsoft Research Redmond, WA 98502, USA hanyh@microsoft.com
+
+Michael Auli Facebook AI Research Menlo Park, CA 94025, USA michaelauli@fb.com
+
+1
+
+Introduction
+
+Statistical translation models (Koehn et al. 2003, Chiang et al. 2005) are trained with bilingual data and a simple solution to improve accuracy is to train on more data. However, for many language pairs we only have a very limited amount of bilingual data and even when dealing with resource-rich languages, we still often perform poorly when dealing with rare words or phrases. On the other hand, there is plenty of monolingual data and previous work has investigated its use in learning translation models (Rapp, 1995; CallisonBurch et al., 2006; Haghighi et al., 2008; Saluja et
+*The entirety of this work was conducted while at Microsoft Research.
+
+al., 2014). However, most methods rely on statistics that are computationally expensive. As a concrete example, the graph propagation algorithm of Saluja et al. (2014) relies on pair-wise mutual information statistics between any pair of phrases in the monolingual corpus that is very expensive to compute, even for moderately sized corpora. In this paper, we study the use of standard continuous representations for words to generate translation rules for infrequent phrases (§2). We explore linear projections that map continuous representations of rare foreign phrases to English phrases. In particular, we propose to learn many local projections that are specific to a given foreign phrase. We find this to be much more accurate than a single globally learned mapping such as proposed by (Mikolov et al. 2013; §3). Our method relies on the fast retrieval of similar phrases in continuous space. We explore both Locality Sensitive Hashing (LSH; Indyk and Motwani, 2008) as well as the lesser known Redundant Bit Vector method (RBV; Goldstein et al. 2005) for fast k -nearest neighbor (k -NN) search. RBV outperforms the popular LSH algorithm by a large margin, both in speed as well as accuracy (§4). Our results show that the local linear projection method is not only three orders of magnitudes faster than the algorithm of Saluja et al. (2014) but also by 0.5 BLEU more accurate. We achieve a 1.6 BLEU improvement in Arabic-English translation compared to a standard phrase-based baseline (§5).
+
+2
+
+Continuous Phrase Representations
+
+Continuous representations of words have been found to capture syntactic and semantic regularities in language (Turian et al., 2014; Collobert et al., 2011; Mikolov et al., 2013c). The induced representations often tend to cluster similar words together as illustrated in Figure 1.
+
+1527
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1527­1536, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

@@ -1,0 +1,55 @@
+let V (k) represent the top M words for K ; where (k) (k) V (k) = (vi , ..., vM ) and D(v ) represents the document frequency of word type v . Then, P M I (k ) is defined by Equation 4 and T C (k ) is defined by Equation 5. In Table 6, we see that our most useful topic (Topic 49) concerns vision research, and since our corpus is heavily filled with research concerning (non-vision-related) natural language processing, it makes sense for this topic to be highly important for predicting citations. Similarly, we see the other topranking topics all represent a well-defined, subfield of natural language processing research, including parsing, text generation, and Japanese-English machine translation.
+M m-1 (k) (k)
+
+the general popularity of the said terms. Therefore, words could highly co-occur together but otherwise represent nothing special about the corpus at large. On the other hand, Logit-Expanded's ranking is mainly concerned with quantifying how well each topic represents discriminatively useful content within a document.
+Table 6: The highest quality topics (out of 125), sorted according to Logit-Expanded's estimate. Topics are also ranked according to Pointwise Mutual Information (PMI) and Topic Coherence (TC).
+Logit's Rank 1 2 3 4 PMI Rank 116 33 68 49 107 TC Rank 103 44 37 27 61 Logit Weight -5.50 -4.76 -4.71 -4.28 -4.24 Topic # 49 25 65 32 0 Top Words image, visual, multimodal, images, spatial, gesture, objects, object, video, scene, instructions, pointing grammar, parsing, grammars, left, derivation, terminal, nonterminal, items, free, string, item, derivations, cfg generation, generator, generated, realization, content, planning, choice, nlg, surface, generate noun, nouns, phrases, adjectives, adjective, compound, verb, head, compounds, preposition japanese, ga, expressions, wo, accuracy, bunsetsu, ni, dictionary, wa, kanji, noun, expression
+
+P M I (k ; V (k) ) =
+
+log
+m=2 l=1
+
+(k) (k ) p(Vm )p(Vl )
+
+p(Vm , Vl
+
+) (4)
+
+5
+
+T C (k ; V
+
+(k)
+
+M m-1
+
+)=
+m=2 l=1
+
+log
+
+D(Vm , Vl
+
+(k )
+
+(k)
+
+)
+
+(k) D (V m )
+
+(5)
+
+Table 7: The lowest quality topics (out of 125), sorted by Logit-Expanded's estimate. Topics are also ranked according to Pointwise Mutual Information (PMI) and Topic Coherence (TC).
+Logit's Rank 121 122 123 124 125 PMI Rank 13 83 42 10 65 TC Rank 110 122 36 34 115 Logit Weight -1.45 -1.20 -1.09 -0.75 -0.33 Topic # 96 77 91 43 30 Top Words wikipedia, links, link, articles, article, title, page, anchor, pages, wiki, category, attributes x1, x2, c1, c2, p2, a1, p1, a2, r1, l1, xf, fi annotation, agreement, annotated, annotators, annotator, scheme, inter, annotate, gold, kappa selection, learning, active, selected, random, confidence, sample, sampling, cost, size, select region, location, texts, city, regions, weather, locations, map, place, geographic, country
+
+Table 7 shows the worst 5 topics according to Logit-Expanded. Topic 96 concerns Wikipedia as a corpus, which naturally encompasses many areas of research, and as we would expect, the mention of such is probably a poor indicator for predicting citations. Topic 77 concerns artifacts from the OCRrendering of our corpus, which offers no meaningful information. In general, the worst-ranking topics concern words that span many documents and do not represent cohesive, well-defined areas of research. Additionally, in both Table 6 and 7 we see that Pointwise Mutual Information (PMI) disagrees quite a bit with our Logit-Expanded's ranking, and from this initial result, it appears Logit-Expanded's ranking might be a better metric than PMI ­ at least in terms of quantifying relevance towards documents being related and linked via a citation. This cursory, qualitative critique of the metrics warrants more research, ideally with humanevaluation. However, one can see how these metrics differ: TC and PMI are both entirely concerned with just the co-occurrence of terms, normalized by 82
+
+5
+
+Conclusions
+
+We have provided a strong baseline, LDA-Bayes, which when run on the largest corpus for this task, offers compelling performance. We have demonstrated that modelling the prior probability of each candidate source being cited is simple yet important, for it allows all of our systems to outperform the previous state-of-the-art ­ our large corpus helps towards making this a useful feature, too. Our biggest contribution is our new system, Logit-Expanded, which combines both the effectiveness of the generative model LDA with the power of logistic regression to discriminately learn important features for classification. By representing each topic as its own feature, while still modelling the re-
+
+

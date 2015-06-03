@@ -1,0 +1,56 @@
+comes from deeper networks. All of the proof techniques used in this paper can be combined straightforwardly with existing tools for covering the output spaces of neural networks (Anthony and Bartlett, 2009). If optimization of the self-normalizing portion of the objective is deferred to a post-processing step after standard (likelihood) training, and restricted to parameters in the output layers, then Theorem 2 applies exactly.
+
+Proof. || log Z (x;  1 )| - | log Z (x;  2 )||  | log Z (x;  1 ) - log Z (x;  2 )| Z (x;  1 )  log (w.l.o.g.) Z (x;  2 ) exp (1i - 2i ) x exp 2i x = log i i exp 2i x Z (x;  2 )  dDR + log = Z (x;  2 ) Corollary 4. The set of partition functions Z = {Z (·;  ) : ||||  B    } can be covered ^ with on on the  ball of radius R by a grid of  distance D. The size of this cover is ^ = |Z| B D
+dk
+
+7
+
+Conclusion
+
+We have provided both qualitative and formal characterizations of "self-normalizing" log-linear models, including what we believe to be the first theoretical guarantees for self-normalizing training procedures. Motivated by these results, we have described a novel objective for training self-normalized log-linear models, and demonstrated that this objective achieves significant performance improvements without a decrease in the quality of the models learned.
+
+=
+
+dBR 
+
+dk
+
+(7)
+
+Proof of Theorem 2. From a standard discretization lemma (Kakade, 2011) and Corollary 4, we immediately have that with probabilty 1 -  ,
+Z Z
+
+^ - L|  sup |L  inf 2
+
+
+A
+
+Quality of the approximation
+
+dk (log dBR - log ) + log 1  + 2 2n
+
+Proof of Theorem 1. Using the definitions of X  , ~ given in the proof sketch for Theorem 1, X - and  E| log( exp{i X })| exp{i (X  + X - )})|
+-
+
+Taking  = 1/n, 2 dk (log dBR + log n) + log 1 2  + 2n n
+
+Acknowledgements
+exp{i X })|
+
+
+= E| log(
+
+~ X }  E| log(exp{ ~ X - })|  E| log(exp{  dDB
+
+The authors would like to thank Peter Bartlett, Robert Nishihara and Maxim Rabinovich for useful discussions. This work was partially supported by BBN under DARPA contract HR0011-12-C-0014. The first author is supported by a National Science Foundation Graduate Fellowship.
+
+B
+
+Generalization error
+
+References
+Martin Anthony and Peter Bartlett. 2009. Neural network learning: theoretical foundations. Cambridge University Press. Yoshua Bengio, Holger Schwenk, Jean-S´ ebastien Sen´ ecal, Fr´ ederic Morin, and Jean-Luc Gauvain. 2006. Neural probabilistic language models. In Innovations in Machine Learning, pages 137­186. Springer.
+
+Lemma 3. For any  1 ,  2 with ||1,i - 2,i ||  def D = /dR for all i, || log Z (x;  1 )| - | log Z (x;  2 )||   (6) 248
+
+

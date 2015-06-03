@@ -1,0 +1,28 @@
+adding missing semantic tags. Table 2 shows the sizes of the current lexicons.
+Language Italian Chinese Portuguese Single word entries 33,100 64,413 13,942 MWE entries 5,622 19,039 1,799
+
+Table 2: Sizes of current semantic lexicons.
+
+4 Architecture of Annotation System
+Based on the multilingual semantic lexicons described in the previous section, prototype semantic taggers were built for the three languages by deploying the lexicons into the existing software architecture, which employs disambiguation methods reported by Rayson et al. (2004). A set of POS tagging tools were incorporated to pre-process texts from the target languages. The TreeTagger (Schmid, 1994) was used for Italian and Portuguese, and the Stanford POS tagger (Toutanova et al., 2003) was used for Chinese. These tools and semantic lexicon look-up components form pipelines to annotate words in running texts. Figure 1 shows the architecture of the software framework.
+raw text
+
+For the lexical coverage evaluation, three reference corpora were chosen: PAISÀ Italian corpus (Borghetti et al., 2011), LCMC Corpus (Lancaster Corpus of Mandarin Chinese) (McEnery and Xiao, 2004) and Lacio-Ref Portuguese corpus (Aluisio et al., 2003). Because PAISÀ and Lacio-Ref corpora are too large for our purpose, we extracted subsections of about 1.5 million Italian words and 1.7 million Portuguese words from them. For the evaluation, we annotated the corpus data using the annotation tools of the corresponding target languages, and examined what percentage of the words were assigned with semantic tags. Punctuation marks were excluded in this evaluation process. Table 3 shows the statistics of the evaluation for each language.
+Language Italian Chinese Portuguese Average Number of words 1,479,394 975,482 1,705,184 Tagged words 1,265,399 786,663 1,251,579 Lexicon coverage (%) 85.53 80.64 73.40 79.86
+
+Table 3: Lexical coverage of the semantic taggers.
+
+context rules mwe lexicon
+
+pos tagger lemmatizer sem tagger annotated
+word lexicon
+
+Figure 1: Architecture of the semantic tagger.
+
+5 Evaluation of Prototype System
+Following the initial manual evaluation of the prototype semantic taggers described in section 3, we then carried out larger scale automatic evaluations using a set of sample corpora. We conducted two complementary types of evaluations: lexical coverage and annotation precision. The lexical coverage is a particularly interesting metric for our evaluation, as we expect this is where an automatic approach can make significant contribution to the development of annotation systems. On the other hand, high annotation precision normally entails manual improvement of the lexical resources or a period of training on manually tagged corpora.
+1271
+
+As shown in the table, the annotation tools achieved an average lexical coverage of 79.86% over the three languages, with Italian having the highest coverage of 85.53% and Portuguese the lowest coverage of 73.40%. Due to the different types of data in the three sample corpora, this result is not conclusive. Homogeneous corpus data from all of the three languages will be needed to make more reliable comparison of the lexical coverage. Considering that the tools were built based on only three bilingual lexical resources over a short period of time, such lexical coverage is encouraging. This result also demonstrates that, if sufficiently large bilingual lexicons become available; our approach can potentially achieve high lexical coverage. Next we conducted an evaluation of the precision of the prototype tools. We randomly selected sample texts for each language as follows. Italian sample texts were selected from domains of press, contemporary literature and blogs; Chinese sample texts from press, reviews and fiction; Portuguese sample texts from press and fiction. In the evaluation, we annotated the sample texts using the prototype annotation tools and manually checked the precision among the annotated words. We used two metrics: correctly tagged and partially cor-
+
+

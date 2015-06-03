@@ -1,0 +1,26 @@
+the final tree structure. At the same time, it can produce trees with crossing dependencies. Across ten languages, on average 96.7% of sentences have dependency trees in the proposed class (Table 1), compared with 79.4% for projective trees. The implemented mildly non-projective transition-based parser is more accurate than a fully projective parser (arc-eager, (Nivre, 2003)) and a fully non-projective parser (swap-based, (Nivre, 2009)) (§7.1).
+
+root Who do you think came to DC where a parade was held for Sam
+
+(a) A dependency tree with two disjoint sets (blue and dashed/red and dotted) of crossing arcs (bold).
+(root, think) (came, Who)
+
+(parade, for) (DC, held) (held, where)
+
+2
+
+Preliminaries
+
+Given an input sentence w1 w2 . . . wn , a dependency tree for that sentence is a set of vertices V = {0, 1, . . . , n} and arcs A  V × V . Each vertex i corresponds to a word in the sentence and vertex 0 corresponds to an artificial root word, which is standard in the literature. An arc (i, j )  A represents a dependency between a modifier wj and a head wi . Critically, the arc set A is constrained to form a valid dependency tree: its root is at the leftmost vertex 0; each vertex i has exactly one incoming arc (except 0, which has no incoming arcs); and there are no cycles. A common extension is to add labels of syntactic relations to each arc. For ease of exposition, we will focus on the unlabeled variant during the discussion but use a labeled variant during experiments. A dependency tree is projective if and only if the nodes in the yield of each subtree form a contiguous interval with respect to the words and their order in the sentence. For instance, the tree in Figure 1a is non-projective since the subtrees rooted at came and parade do not cover a contiguous set of words. Equivalently, a dependency tree is non-projective if and only if the tree cannot be drawn in the plane above the sentence without crossing arcs. As we will see, these crossing arcs are a useful measure when defining sub-classes of non-projectivity. We will often reason about the set of vertices incident to a particular arc. The incident vertices of an arc are its endpoints: for an arc (u, v ), u and v are the two vertices incident to it.
+
+(b) The auxiliary graph for the sentence above. There are two connected components of crossed arcs, one of which corresponds to the crossing interval [root, came] and the other [DC, for]. Figure 1: A sentence with two crossing intervals.
+
+class or not. We compare the coverage of this class on various natural language datasets with the coverage of the class of projective trees. Definition 1. Let A be a set of unlabeled arcs. The Interval of A, Interval(A), is the interval from the leftmost vertex in A to the rightmost vertex in A, i.e., Interval(A) = [min(VA ), max(VA )], where VA = {v : u[(u, v )  A  (v, u)  A]}. Definition 2. For any dependency tree T , the below procedure partitions the crossed arcs in T into disjoint sets A1 , A2 , . . . ., Al such that Interval(A1 ), Interval(A2 ), . . . , Interval(Al ) are all vertex-disjoint. These intervals are the crossing intervals of the tree T . Procedure: Construct an auxiliary graph with a vertex for each crossed arc in the original tree. Two such vertices are connected by an arc if the intervals defined by the arcs they correspond to have a non-empty intersection. Figure 1b shows the auxiliary graph for the sentence in Figure 1a. The connected components of this graph form a partition of the graph's vertices, and so also partition the crossed arcs in the original sentence. The intervals defined by these groups cannot overlap, since then the crossed arcs that span the overlapping portion would have been connected by an arc in the auxiliary graph and hence been part of the same connected component. Definition 3. A tree is a k -Crossing Interval tree if for each crossing interval, there exists at most k ver-
+
+3
+
+k -Crossing Interval Trees
+
+We begin by defining a class of trees based on restrictions on crossing dependencies. The class definition is independent of any transition system; it is easy to check whether a particular tree is within the 663
+
+

@@ -1,0 +1,26 @@
+Pronoun 1p 2p 3p Micro-avg
+
+Subject Continuation Baseline SMS Test set OntoNotes Test set Precision Recall F-measure Precision Recall F-measure 0.43 0.28 0.34 0.29 0.08 0.13 0.27 0.19 0.22 0.28 0.11 0.16 0.29 0.75 0.42 0.32 0.21 0.25 0.32 0.42 0.36 0.31 0.15 0.20 Our Full Model SMS Test set OntoNotes Test set Precision Recall F-measure Precision Recall F-measure 0.64 0.47 0.54 0.27 0.58 0.37 0.55 0.21 0.31 0.25 0.23 0.24 0.50 0.18 0.27 0.40 0.28 0.33 0.59 0.31 0.41 0.30 0.36 0.33
+
+Pronoun 1p 2p 3p Micro-avg
+
+Table 4: Results across different pronoun categories for (top) subject continuation and (bottom) our full model.
+SMS/chat Micro-average Pre Rec F 0.42 0.23 0.30 0.44 0.23 0.30 0.43 0.23 0.30 0.58 0.29 0.39 0.52 0.30 0.38 0.59 0.28 0.38 0.59 0.31 0.41 OntoNotes Micro-average Pre Rec F 0.30 0.07 0.11 0.31 0.07 0.12 0.30 0.07 0.12 0.32 0.13 0.18 0.23 0.27 0.25 0.30 0.35 0.32 0.30 0.36 0.33
+
+System Minimal (M) M + question M + object M + verb M + pos M + bow Full Model
+
+Words and Bag of POS. This supports the hypothesis that the verb is informative with respect to the nature of its subject, as are the other words of the clause, and their parts of speech. For the OntoNotes corpus, however, the Bag of Words feature performs best by a large margin. Interesting, although the Bag of Words features are clearly the most useful, the linguistically motivated features (verb/question) performing well supports our linguistic intuitions.
+
+Table 6: Summary of results for feature ablation against the gold standard labels from SMS data (left) and OntoNotes (right).
+
+5
+
+Discussion and related work
+
+model trained on gold annotated data (instead of bronze data). Owing to cost, we could not obtain gold annotations for the full training set; however, a leave-one-out cross validation on the gold annotated test set (of SMS data) gave an F-measure of 0.47, versus 0.41 for our model trained on bronze labels. This suggests the noisy bronze labels are indeed useful for this task. 4.4 Feature ablations
+
+In order to investigate the individual contributions of each of our features, we performed feature ablation experiments, pairing our Minimal Model with a single feature at a time and retraining the model with this pairing. The results of these experiments can be seen in Table 6. We see in this table that for the SMS data, the Verb feature creates the greatest improvement over the Minimal Model, followed by Bag of 501
+
+Past approaches to zero pronoun resolution focus exclusively on anaphoric zero pronouns approached as a task of antecedent identification. Almost all work makes use of syntactic structure, with differences primarily in how that structure is used. (Yeh and Chen, 2007) take a rule-based, Centering Theoryinspired approach based on a system of constraints to guide selection of zero pronoun antecedents. In the same year, (Zhao and Ng, 2007) introduced a supervised learning approach for both zero pronoun identification and antecedent selection based on engineered features; these engineered features were replaced with a tree-kernel by (Kong and Zhou, 2010), who jointly perform zero pronoun identification, anaphoricity determination, and antecedent selection. Recently, (Chen and Ng, 2013) built upon the model introduced by Zhao and Ng, introducing additional features and allowing coreference links between multiple zero pronouns. Chen and Ng (2013) also test their model on automatically identified zero pronouns and automatically gener-
+
+

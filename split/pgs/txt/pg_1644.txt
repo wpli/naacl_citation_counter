@@ -1,0 +1,54 @@
+Time vs. per-word entropy
+7.0 Game #
+q
+
+Per-word entropy
+
+1 2 3 4 5 6 7
+
+6.5
+q q q q q q q q q q q qq q q q qq q q qq q q q q q q q q q q q qq q qq qq q qq q q q q q q q q q q q q q q q q q q qq q q q q q q q q q q
+
+6.0
+
+5.5
+
+5.0
+
+q
+
+0
+
+1
+
+2
+
+3
+
+4
+
+Time (hrs)
+
+Figure 1: Per-word entropy increases with time for the first two hours of the games, then levels off and slightly declines. Color reflects in-game time; line shows loess fit with 95% confidence intervals.
+
+tematically and substantially across tweets of different lengths--counter to existing results suggesting uniform information density operates at multiple structural levels (e.g., Qian and Jaeger 2009)-- longer tweets will generally carry more information.
+
+3
+
+Gradual Changes in Information Rate
+
+Our first analytic goal was to examine changes in the information content of tweets due to the longterm build-up of context in a shared event. We predicted that we would see similar developments in information structure as in more traditional conversational settings, even though there was no formal conversation or explicit linguistic history to develop common ground. Specifically, we predicted that the build-up of contextual information would cause the context-independent per-word entropy to rise over time, replicating the effect that has been observed across languages and genres (Genzel and Charniak, 2003; Qian and Jaeger, 2012). Figure 1 shows evidence for changes in per-word entropy over the course of games. Per-word entropy rises throughout in the first two hours of each game, slowly levels off and finally declines slightly over time. This pattern is consistent with the constant entropy rate proposal of Genzel and Charniak 2002, and more specifically with the context decay model of Qian and Jaeger 2012.5
+A late decline in per-word entropy also appeared in Qian and Jaeger 2012's analysis of Swedish.
+5
+
+We used mixed-effects linear regression to quantify this relationship, using the time of an at-bat to predict both per-word and per-tweet entropy during the at-bat. Specifically, we used the logarithm of time as our fixed-effect predictor, per the contextdecay models of Qian and Jaeger 2012. We added game-specific random intercepts and slopes of logtime to capture cross-game variation. This model showed significant positive effects of time on entropy, using likelihood-ratio tests for both models (per-word entropy: .348 ± .045; p < .001, 2 (3) = 104.6, per-tweet entropy: 10.31 ± 2.08; p = .001, 2 (3) = 74.65). We hypothesize that this finding--greater linguistic entropy for later tweets--is due to the accrual of common ground across users from shared nonlinguistic information. As they watch more of the game, they share more referents and have stronger expectations about what aspects of the game will be discussed. This shared common ground licenses more complex language and more sophisticated linguistic references. Table 1 gives example tweets at different time points; as a game progresses, references can expand from generic references to the teams or series, to specific individuals and events, and eventually to sequences of events. While this finding is consistent with previous work on the effect of context, it expands the definition of context. In previous work, the context came from explicit linguistic information built up through paragraphs in a formally-structured, written document. In the Twitter dataset, the context comes from real-world events during the games, as there is no canonical shared sequence of tweets that the tweeters can refer back to (indeed, two random users of the #Worldseries hashtag probably have relatively little Twitter context in common). In sum, contextual influences on entropy need not be explicitly linguistic, so long as discourse participants have reason to believe that the other participants share their knowledge.
+
+4
+
+Fast Changes In Information Content
+
+Intuitively, after an exciting, game-changing event, tweets will be shorter and make more reference to the shared knowledge that this event has just happened. Such events should also generate more re-
+
+1590
+
+

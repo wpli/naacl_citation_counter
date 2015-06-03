@@ -1,0 +1,23 @@
+rectly tagged. With the current tools, a word can be assigned with multiple candidate semantic tags. The first evaluation metric refers to the cases where the first candidate tag is correct, whereas the other metric refers to the cases where the other tags in the list are correct or closely related to the true word sense. Table 4 shows the statistics of the evaluation.
+Lan. Ita Chi Port Avg Sample text size 4,510 1,053 1,231 Tagged words 3,266 813 953 Correct 1,826 (55.91%) 616 (75.76%) 787 (82.58%) 71.42% Partially correct 672 (20.58%) 97 (11.93%) 68 (7.14%) 13.22%
+
+da is a homonym which is classified as a discourse marker of exclamation (Z4) in English lexicons. Our current automatic process collects all the semantic tags derived from the English translation counterparts found in the bilingual lexicon and assigns them to the Chinese word "", resulting in an erroneous entry as shown below:
+ noun M6 A3+ S1.1.3+ S1.2 S9 S4/B1 S4m S9/S2.2m Z4
+
+In order to resolve such cases, we will need to consider contexts of each translation word pairs' usage via parallel or comparable corpora.
+
+6 Conclusion and Future Work
+In this paper, we have investigated the feasibility of rapidly bootstrapping semantic annotation tools for new target languages2 by mapping an existing semantic lexicon and software architecture. In particular, we tested the possibility of automatically translating existing English semantic lexicons into other languages, Italian, Chinese and Brazilian Portuguese in this particular case. Our experiment demonstrates that, if appropriate high-quality bilingual lexicons are available, it is feasible to rapidly generating prototype systems with a good lexical coverage with our automatic approach. On the other hand, our experiment also shows that, in order to achieve a high precision, parallel/comparable corpus based disambiguation is needed for identifying precise translation equivalents, and a certain amount of manual cleaning and improvement of the automatically generated semantic lexicons is indispensible. We are continuing to improve the multilingual semantic taggers and extend them to cover more languages, such as Spanish and Dutch, aiming to develop a large-scale multilingual semantic annotation and analysis system. We also intend to perform task-based evaluation of the manually checked versus automatically generated lexicons.
+
+Table 4: Evaluation of precision.
+
+As shown in the table, the Portuguese tagger obtained the highest first-tag precision (82.58%), while the Italian tagger produced a precision (55.91%) significantly lower than others. However, if we include the partially correct annotations, the precision scores become more consistent: 76.49%, 87.69% and 89.72% for the three languages respectively, with an average precision of 84.64%. We also estimated recall based on the numbers of tokens of the sample texts and those tagged correctly/partially correctly, obtaining 55.39%, 67.71% and 69.46% for Italian, Chinese and Portuguese respectively. Such a fairly close range of the precision and recall values indicates that our approach to developing prototype semantic annotation tools can be expected to achieve stable results across various languages, although we need largerscale evaluations to draw a conclusion. It is worth noting that, although the recall is still low, these taggers are starting to approach the precision of the English system at 91% (Rayson et al., 2004). Our further error analysis revealed that the main causes of the errors include the homonym translations (e.g. bank as river bank vs. money bank), translation errors and missing of the translation words in the English semantic lexicons. For example, the Chinese word "" (father) has a number of synonymous English translation equivalents in the bilingual lexicon: dad (with semantic tag S4m), baba, da, dada, daddy (S4m), father (S4m S9/S2m), papa (S4m). It is also translated into presence (M6, A3+, S1.1.3+, S1.2, S9) by mistake. Among the correct English translations, baba, da, dada (transliteration) are not included in the English semantic lexicons. Making things worse,
+1272
+
+Acknowledgments
+We would like to thank Prof. Elena Semino, Prof. Yufang Qian and Dr. Richard Xiao for their contributions to our research. This work is supported by the UCREL research centre and the ESRC Centre for Corpus Approaches to Social Science (CASS), ESRC grant reference ES/K002155/1, both at Lancaster University, UK.
+2
+
+The results are available at http://ucrel.lancs.ac.uk/usas/
+
+

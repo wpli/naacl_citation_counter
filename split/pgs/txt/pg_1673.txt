@@ -1,0 +1,28 @@
+1. Initialize Q(Y (t) ) for each t  {1 . . . T } 2. Iterate until convergence: E-step update each qij in closed form, based on Equation 5. M-step: content Update  in closed form from Equations 6 and 7. M-step: structure Update  ,  , and c by applying L-BFGS to the noise-contrastive estimation objective in Equation 8.
+Table 1: Expectation-maximization estimation procedure
+
+we compute the expectations of the relevant log probabilities, under the distribution Q(y ),
+EQ [log P 0 (y ;  ,  )] = qij (y ) f (y, i, j, G)
+i,j G y
+
++
+k: i,j,k T (G) y,y ,y
+
+qij (y )qjk (y )qik (y )y,y ,y . (9)
+
+Obtaining estimates for  and  is more challenging, as it would seem to involve computing the partition function Z ( ,  ; G), which sums over all possible labeling of each network G(t) . The number of such labelings is exponential in the number of edges in the network. West et al. (2014) show that for an objective function involving features on triads and dyads, it is NP-hard to find even the single optimal labeling. We therefore apply noise-contrastive estimation (NCE; Gutmann and Hyv¨ arinen, 2012), which transforms the problem of estimating the density P (y ) into a classification problem: distinguishing the observed graph labelings y (t) from randomly~ (t)  Pn , where Pn generated "noise" labelings y is a noise distribution. NCE introduces an additional parameter c for the partition function, so that log P (y ;  ,  , c) = log P 0 (y ;  ,  )+ c, with P 0 (y ) representing the unnormalized probability of y . We can then obtain the NCE objective by writing D = 1 for the case that y is drawn from the data distribution and D = 0 for the case that y is drawn from the noise distribution, JN CE ( ,  , c) =
+t
+
+We define the noise distribution Pn by sampling edge labels yij from their empirical distribution under Q(y ). The expectation Eq [log Pn (y )] is therefore simply the negative entropy of this empirical distribution, multiplied by the number of edges in G. We then plug in these expected log-probabilities to the noise-contrastive estimation objective function, and take derivatives with respect to the parameters  ,  , and c. In each iteration of the M-step, we optimize these parameters using L-BFGS (Liu and Nocedal, 1989).
+
+4
+
+Identifying address terms in dialogue
+
+The model described in the previous sections is applied in a study of the social meaning of address terms -- terms for addressing individual people -- which include: Names such as Barack, Barack Hussein Obama. Titles such as Ms., Dr., Private, Reverend. Titles can be used for address either by preceding a name (e.g., Colonel Kurtz), or in isolation (e.g., Yes, Colonel.). Placeholder names such as dude (Kiesling, 2004), bro, brother, sweetie, cousin, and asshole. These terms can be used for address only in isolation (for example, in the address cousin Sue, the term cousin would be considered a title). Because address terms connote varying levels of formality and familiarity, they play a critical role in establishing and maintaining social relationships. However, we find no prior work on automatically identifying address terms in dialogue transcripts. There are several subtasks: (1) distinguishing addresses from mentions of other individuals, (2) identifying a lexicon of titles, which either precede name addresses or can be used in isolation, (3) identifying
+
+log P (D = 1 | y (t) ;  ,  , c) ~ (t) ;  ,  , c), - log P (D = 0 | y (8)
+
+~ for each where we draw exactly one noise instance y true labeling y (t) . Because we are working in an unsupervised setting, we do not observe y (t) , so we cannot directly compute the log probability in Equation 8. Instead, 1619
+
+

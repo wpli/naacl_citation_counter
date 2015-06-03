@@ -1,0 +1,36 @@
+Dataset Kotlerman 2010 Bless 2011 Baroni 2012 Turney 2014 Levy 2014
+
+Lexical .346 .960 .638 .644 .302
+
++Contextual .437 .960 .802 .747 .370
+
+ .091 .000 .164 .103 .068
+
+Dataset Kotlerman 2010 Bless 2011 Baroni 2012 Turney 2014 Levy 2014
+
+Best Supervised .408 .665 .774 .696 .324
+
+Only y .375 .637 .663 .649 .324
+
+Unsupervised .461 .197 .788 .642 .231
+
+Table 2: The performance (F1 ) of lexical versus contextual feature classifiers on a random train/test split with lexical overlap.
+
+Table 3: A comparison of each dataset's best supervised method with: (a) the best result using only y composition; (b) unsupervised cosine similarity cos(x, y ). Performance is measured by F1 . Uses lexical train/test splits.
+
+iments by applying the JoBimText framework4 for scalable distributional thesauri (Biemann and Riedl, 2013) using Google's syntactic N-grams (Goldberg and Orwant, 2013) as a corpus. Lexical Memorization is the phenomenon in which the classifier learns that a specific word in a specific slot is a strong indicator of the label. For example, if a classifier sees many positive examples where y = animal, it may learn that anything that appears with y = animal is likely to be positive, effectively memorizing the word animal. The following experiment shows that supervised methods with contextual features are indeed memorizing words from the training set. We randomly split each dataset into 70% train, 5% validation, and 25% test, and train lexical-feature classifiers, using a one-hot vector representation of y as input features. By definition, these classifiers memorize words from the training set. We then add contextual-features (as described in §2.1), on top of the lexical features, and train classifiers analogously. Table 2 compares the best lexical- and contextual-feature classifiers on each dataset. The performance difference is under 10 points in the larger datasets, showing that much of the contextual-feature classifiers' success is due to lexical memorization. Similar findings were also reported by Roller et al. (2014) and Weeds et al. (2014), supporting our memorization argument. To prevent lexical memorization in our following experiments, we split each dataset into train and test sets with zero lexical overlap. We do this by randomly splitting the vocabulary into "train" and "test" words, and extract train-only and test-only subsets of each dataset accordingly. About half of each original dataset contains "mixed" examples (one train-word and one test-word); these are discarded.
+4
+
+Supervised vs Unsupervised While supervised methods were reported to perform better than unsupervised ones, this is not always the case. As a baseline, we measured the "vanilla" cosine similarity of x and y , tuning a threshold with the validation set. This unsupervised symmetric method outperforms all supervised methods in 2 out of 5 datasets (Table 3). Ignoring x's Information We compared the performance of only y to that of the best configuration in each dataset (Table 3). In 4 out of 5 datasets, the difference in performance is less than 5 points. This means that the classifiers are ignoring most of the information in x. Furthermore, they might be overlooking the compatibility (or incompatibility) of x to y . Weeds et al. (2014) reported a similar result, but did not address the fundamental question it beckons: if the classifier cannot capture a relation between x and y , then what is it learning?
+
+4
+
+Prototypical Hypernyms
+
+We hypothesize that the supervised methods examined in this paper are learning whether y is a likely "category" word ­ a prototypical hypernym ­ and, to a lesser extent, whether x is a likely "instance" word. This hypothesis is consistent with our previous observations (§3). Though the terms "instance" and "category" pertain to hypernymy, we use them here in the broader sense of entailment, i.e. as "tends to entail" and "tends to be entailed", respectively. We later show (§4.2) that this phenomenon indeed extends to other inference relations, such as meronymy. 4.1 Testing the Hypothesis To test our hypothesis, we measure the performance of a trained classifier on mismatched instance-
+
+http://jobimtext.org
+
+972
+
+

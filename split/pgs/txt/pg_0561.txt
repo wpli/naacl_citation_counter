@@ -1,0 +1,53 @@
+100k 80k 60k 40k 20k 0 4k 3k 2k 1k 0
+
+#images
+
+type verb
+
+tree light flower home sun rain sky water beach girl
+
+#captions
+
+prep
+
+tree light flower home sun rain sky water beach girl
+adj
+
+Figure 3: Top 10 queries with the largest number of images and unique captions
+polarity pos. neg. % in all caps. 8% 2% mean/median #imgs. per cap. 20 / 8 19.5 / 7 example (#imgs) Happy bride and groom (282) The rock and pool, is nice and cool (4) Bad day at the office (269) Crying lightning (147)
+
+%caps. %imgs. 45% 44% be, have, do, look, go, make, come, get, wait, take, love, play, walk, fly, see, watch, find, live, sleep, fall 44% 41% in, of, on, at, with, for, from, by, over, through 11% 15% old, little, new, red, blue, more, white, big, beautiful, black
+
+mean #imgs. std #imgs. 22 9 Sky is the limit (3057) Home is where the heart is (2480) Lunch is served (2443) Let them eat cake (2193) Follow the yellow brick road (2077) 21 9 On the road (4617) After the rains (4450) Under the bridge (3443) At the beach (3203) 30 15 Home sweet home (2398) Good morning sun (1122) Cabbage white butterfly (976) Next door neighbors (838)
+
+Table 5: Statistics on the syntactic composition of cap-
+
+Table 4: Distribution of caption sentiment. The polar-
+
+ity is determined by comparing number of positive words and negative words (>: positive; <: negative) according to a sentiment lexicon (Wilson et al., 2005) (counting only words of strong polarity).
+
+tions. verb: captions with at least one verb. prep: prepositional phrases (without any verbs). adj: adjective phrases (without any verbs and prepositions). For each caption type, we also show the top words that appear in the most number of captions (left), and the top captions that are associated with largest number of images (right).
+
+and brainyquotes.com to identify 6K quotation captions illustrated by 180K images. We also present a manual labeling on a small subset of the data (Table 3) to provide better insights into the degree and types of figurative speech used in natural captions. Using these labels we build a classifier (§7) to further detect 18K figurative captions associated with 410K images. INSIGHTS As additional insights into the dataset, Figure 3 shows statistics of the visual content, Table 5 shows syntactic types of the captions, and Table 4 shows positive and negative sentiment in captions.
+
+ferent visual instantiations (Figure 4a). Our dataset G = (T, V, E ) serves as a database to navigate the possible visual instantiations of descriptive captions as observed in online photo sharing communities. Let Nc = {i|e(c, i, original)  E } denote the set of adjacent nodes (i.e., visual instantiations) of a caption c. To quantify how well a caption c describe a query image q , we propose to examine caption c's visual neighborhood Nc as provided in our dataset. Concretely, the affinity A(q, c) of a query image q to a caption c is a function (q, Nc ) of q and the visual neighborhood Nc defined as: 1 A(q, c) = (q, Nc ) = 
+
+
+sim(q, Nci )
+
+(2)
+
+i=1
+
+3
+
+Image Captioning using Association Structure
+
+We demonstrate the usefulness of the association between images and captions via retrieval-based image captioning. Given a query image q and the corpus G = (T, V, E ), the task is to find a caption c  T that maximizes an affinity function A(q, c), which measures how well the caption c fits the query image q , c = arg max{A(q, c)} (1)
+cT
+
+Visual Neighborhood: Each textual description, e.g., "reading a book", can associate with many dif507
+
+where  is a parameter; sim(·, ·) is a similarity func|N | tion of two images; and Nc = [Nc1 , Nc2 , ..., Nc c ] is sorted by sim(q, Nci ) in descending order. Figure 4a illustrates the key insight: instead of directly transferring the caption of the single image with the closest visual similarity to the query image (Ordonez et al., 2011), we propose to retrieve a caption based on the aggregated visual similarity between its visual neighborhood and the query image. The idea is to prefer a caption for which the query image is likely to be a prototypical visual rendering (Ordonez et al., 2013; Deselaers and Ferrari, 2011), hence avoid an unusual association between the text
+
+

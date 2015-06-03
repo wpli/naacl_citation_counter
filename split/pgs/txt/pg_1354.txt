@@ -1,0 +1,61 @@
+In this work, we describe two simple modifications to Word2Vec, one for the skip-gram model and one for the CBOW model, that improve the quality of the embeddings for syntax-based tasks1 . Our goal is to improve the final embeddings while maintaining the simplicity and efficiency of the original models. We demonstrate the effectiveness of our approaches by training, on commodity hardware, on datasets containing more than 50 million sentences and over 1 billion words in less than a day, and show that our methods lead to improvements when used in state-of-the-art neural network systems for part-of-speech tagging and dependency parsing, relative to the original models.
+
+2
+
+Word2Vec
+
+The work in (Mikolov et al., 2013) is a popular choice for pre-training the projection matrix W  d×|V | where d is the embedding dimension with the vocabulary V . As an unsupervised task that is trained on raw text, it builds word embeddings by maximizing the likelihood that words are predicted from their context or vice versa. Two models were defined, the skip-gram model and the continuous bag-of-words model, illustrated in Figure 1. The skip-gram model's objective function is to maximize the likelihood of the prediction of contextual words given the center word. More formally, given a document of T words, we wish to maximize L= 1 T
+T
+
+owi , since this requires the computation of a |V |× dw matrix multiplication. Solutions for problem are addressed in the Word2Vec by using the hierarchical softmax objective function or resorting to negative sampling (Goldberg and Levy, 2014). The CBOW model predicts the center word wo given a representation of the surrounding words w-c , ..., w-1 , w1 , wc . Thus, the output vector ow-c ,...,w-1 ,w1 ,wc is obtained from the product of the matrix O  |V |×dw with the sum of the embeddings of the context words -cj c,j =0 rwj . We can observe that in both methods, the order of the context words does not influence the prediction output. As such, while these methods may find similar representations for semantically similar words, they are less likely to representations based on the syntactic properties of the words.
+CBOW
+input projection output input
+
+Skip-Ngram
+projection output
+
+w-2 w-1
+SUM
+
+O O O O O
+
+w-2 w-1 w1 w2
+
+w0
+
+w0
+
+w1 w2
+
+Figure 1: Illustration of the Skip-gram and Continuous Bag-of-Word (CBOW) models.
+
+log p(wt+j | wt )
+t=1
+-cj c,
+
+(1)
+
+3
+
+Structured Word2Vec
+
+j =0
+
+Where c is a hyperparameter defining the window of context words. To obtain the output probability p(wo |wi ), the model estimates a matrix O  |V |×dw , which maps the embeddings r wi into a |V |-dimensional vector owi . Then, the probability of predicting the word wo given the word wi is defined as: p(wo | wi ) = e
+owi (wo )
+
+To account for the lack of order-dependence in the above models, we propose two simple modifications to these methods that include ordering information, which we expect will lead to more syntacticallyoriented embeddings. These models are illustrated in Figure 2. 3.1 Structured Skip-gram Model The skip-gram model uses a single output matrix |V |×d to predict every contextual word O  w-c , ..., w-1 , w1 , ..., wc , given the embeddings of the center word w0 . Our approach adapts the model so that it is sensitive to the positioning of the words. It defines a set of c × 2 output predictors O-c , ..., O-1 , O1 , Oc , with size O  (|V |)×d . Each of the output matrixes is dedicated to predicting the
+
+wV
+
+eowi (w)
+
+(2)
+
+This is referred as the softmax objective. However, for larger vocabularies it is inefficient to compute
+The code developed in this work is made available in https://github.com/wlin12/wang2vec.
+1
+
+1300
+
+

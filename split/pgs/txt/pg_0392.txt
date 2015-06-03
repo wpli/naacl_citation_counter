@@ -1,0 +1,25 @@
+the number of nouns or adjectives located outside the modifier and head. Candidate interpretations extracted for a noun phrase are ranked in increasing order of their penalty scores or, in case of ties, in decreasing order of their frequency scores.
+
+Vocabulary ListQ IsA WikiC R 406,249 613,148 248,615
+
+Relative Coverage Q I 406,249 277,193 405,262 282,927 87,878 63,518
+
+I/Q 0.682 0.698 0.723
+
+3
+
+Experimental Setting
+
+Sources of Textual Data: The experiments rely on a random sample of around 1 billion fullyanonymized Web search queries in English. The sample is drawn from queries submitted to a generalpurpose Web search engine. Each query is available independently from other queries, and is accompanied by its frequency of occurrence in the query logs. Sources of Variants: The original form of the modifiers is denoted as orig-phrase. Three types of variant phrases are collected for the purpose of matching modifiers within noun phrases to interpret, with phrases from queries. Relations encoded as ValueOf, Related-Noun and Derivationally-Related relations in WordNet (Fellbaum, 1998) are the source of adj-noun variants. They map around 6,000 adjectives into one or more nouns (e.g., (frenchfrance), (electricelectricity), (aquaticwater)). A repository of distributionally similar phrases, collected in advance (Lin and Wu, 2009) from a sample of around 200 million Web documents in English, is the source of dist-sim variants. For each of around 1 million phrases, the variants consist of their 50 most similar phrases (e.g., art garfunkel{carly simon, melissa manchester, aaron neville, ..}). A snapshot of all Wikipedia articles in English, as available in June 2014, is the source of wiki-templ variants. For each of around 50,000 phrases, their wiki-templ variants are collected from Wikipedia categories sharing a common parent Wikipedia category (e.g., "albums by artist") and having a common head ("art garfunkel albums", "black sabbath albums", "metallica albums"). The different modifiers (art garfunkel, black sabbath, metallica) that accompany the shared head are collected as variants of one another. Among the four types of variants, wiki-templ variants are applied only when the noun phrase to interpret, and the source Wikipedia category names from which the variants were collected, have the same head. For example, X=art garfunkel{black sabbath, metallica, 50 cent, ..} is applied only in the context of the noun phrase "X albums". Vocabularies of Noun Phrases: The extraction 338
+
+Table 2: Relative coverage of noun phrase interpretation, over noun phrases from various vocabularies (R=number of raw noun phrases; Q=subset of noun phrases from R that are queries; I=subset of noun phrases from Q with some extracted interpretation(s); I/Q=fraction of noun phrases from Q that are present in I)
+
+method acquires interpretations from queries, for noun phrases from three vocabularies. ListQ is a set of phrases X (e.g., "aramaic words") from queries in the form [list of X], where the frequency of the query [X] is at most 100 times higher than the frequency of the query [list of X], and the frequency of the latter is at least 5. IsA is a set of class labels (e.g., "academy award nominees"), originally extracted from Web documents via Hearst patterns (Hearst, 1992), and associated with at least 25 instances each (e.g., zero dark thirty). WikiC is a set of Wikipedia categories that contain some tokens in lowercase beyond prepositions and determiners, and whose heads are pluralform nouns (e.g., "french fiction writers"). Only phrases that are one of the full-length queries from the input set of Web search queries are retained in the respective sets, as vocabularies of noun phrases to interpret; other phrases are discarded. Parameter Settings: The noun phrases to interpret and queries are both part-of-speech tagged (Brants, 2000). From among candidate interpretations extracted for a noun phrase, interpretations whose penalty score is higher than 1 are discarded. When computing the frequency score of a candidate interpretation as the weighted sum of the frequencies of source queries, the weights assigned to various variants are 1.0, for orig-phrase, adj-noun and wikitempl variants; and the available distributional similarity scores within [0.0, 1.0], for dist-sim variants.
+
+4
+
+Evaluation Results
+
+Relative Coverage: Because it is not feasible to manually compile the exhaustive sets of all string forms of valid interpretations of all (or many) noun phrases, we compute relative instead of absolute coverage. As illustrated in Table 2, some interpretations are extracted from queries for more than 500,000 of the noun phrases from all input vocabu-
+
+

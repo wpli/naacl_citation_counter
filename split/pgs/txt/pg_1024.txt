@@ -1,0 +1,29 @@
+Do Supervised Distributional Methods Really Learn Lexical Inference Relations?
+Omer Levy Steffen Remus§ Chris Biemann§ Ido Dagan
+
+ Natural Language Processing Lab Bar-Ilan University Ramat-Gan, Israel {omerlevy,dagan}@cs.biu.ac.il
+
+§ Language Technology Lab Technische Universität Darmstadt Darmstadt, Germany {remus,biem}@cs.tu-darmstadt.de
+
+Abstract
+Distributional representations of words have been recently used in supervised settings for recognizing lexical inference relations between word pairs, such as hypernymy and entailment. We investigate a collection of these state-of-the-art methods, and show that they do not actually learn a relation between two words. Instead, they learn an independent property of a single word in the pair: whether that word is a "prototypical hypernym".
+
+1
+
+Introduction
+
+Inference in language involves recognizing inference relations between two words (x and y ), such as causality (f lu  f ever), hypernymy (cat  animal), and other notions of lexical entailment. The distributional approach to automatically recognize these relations relies on representing each word x as a vector x of contextual features: other words that tend to appear in its vicinity. Such features are typically used in word similarity tasks, where cosine similarity is a standard similarity measure between two word vectors: sim(x, y ) = cos(x, y ). Many unsupervised distributional methods of recognizing lexical inference replace cosine similarity with an asymmetric similarity function (Weeds and Weir, 2003; Clarke, 2009; Kotlerman et al., 2010; Santus et al., 2014). Supervised methods, reported to perform better, try to learn the asymmetric operator from a training set. The various supervised methods differ by the way they represent each candidate pair of words (x, y ): Baroni et al. (2012) use concatenation x  y , others (Roller et al., 2014; Weeds 970
+
+et al., 2014; Fu et al., 2014) take the vectors' difference y - x, and more sophisticated representations, based on contextual features, have also been tested (Turney and Mohammad, 2014; Rimell, 2014). In this paper, we argue that these supervised methods do not, in fact, learn to recognize lexical inference. Our experiments reveal that much of their previously perceived success stems from lexical memorizing. Further experiments show that these supervised methods learn whether y is a "prototypical hypernym" (i.e. a category), regardless of x, rather than learning a concrete relation between x and y . Our mathematical analysis reveals that said methods ignore the interaction between x and y , explaining our empirical findings. We modify them accordingly by incorporating the similarity between x and y . Unfortunately, the improvement in performance is incremental. We suspect that methods based solely on contextual features of single words are not learning lexical inference relations because contextual features might lack the necessary information to deduce how one word relates to another.
+
+2
+
+Experiment Setup
+
+Due to various differences (e.g. corpora, train/test splits), we do not list previously reported results, but apply a large space of state-of-the-art supervised methods and review them comparatively. We observe similar trends to previously published results, and make the dataset splits available for replication.1
+http://u.cs.biu.ac.il/~nlp/resources/ downloads/
+1
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 970­976, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

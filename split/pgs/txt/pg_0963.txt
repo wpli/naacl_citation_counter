@@ -1,0 +1,34 @@
+method baseline NLM+ NLM NLM RAE ARC-I ARC-II RAE MT Bi-CNN-MI­ Bi-CNN-MI
+
+acc 66.5 69.0 67.8 70.3 69.6 69.9 76.7 77.4 72.5 78.1
+
+F1 79.9 80.1 79.3 81.3 80.3 80.9 83.6 84.1 81.4 84.4
+
+Table 1: Performance of different systems on MSRP
+
+1 2 3 4 5 6 7 8 9 10
+
+features used no features + u: unigram + sn: short ngram + ln: long ngram + s: sentence ­ u: unigram ­ sn: short ngram ­ ln: long ngram ­ s: sentence all features
+
+acc 66.5 68.4 75.3 76.2 73.4 77.8 76.3 75.6 77.6 78.1
+
+F1 79.9 79.7 82.8 83.1 82.3 84.3 83.5 83.2 84.2 84.4
+
+corpus typically do not involve individual words (replacing one word by its synonym); rather, the paraphrase relationship involves larger context, which can only be judged by the higher-level features. Just using the sentence matrix by itself performs well (line 5), but less well than using only levels sn or ln (lines 3&4). Most prior NN work on PI has taken the sentence-level approach. Our results indicate that combining this with the more fine-grained comparison on the ngram-level is superior. Removing the sentence matrix results in a small drop in performance (line 9). The reason is that sentence representations are computed by k-max pooling from level ln. Thus, we can roughly view the sentence-level feature matrix Fs as a subset of Fln . Adding (Madnani et al., 2012)'s MT metrics as input to the Bi-CNN-MI logistic regression further improves performance: accuracy of 78.4 and F1 of 84.6.
+
+7
+
+Conclusion and future work
+
+Table 2: Analysis of impact of the four feature classes. Line 1: majority baseline. Line 10: Bi-CNN-MI result from Table 1. Lines 2­5: Bi-CNN-MI when only one feature class is used. Line 6­9: ablation experiment: on each line one feature class is removed.
+
+detection, especially when the training set is small. RAE also uses pretraining, but not as effectively as Bi-CNN-MI as Table 1 indicates. Hu et al. (2014) also suggest that training complex NNs only with supervised training runs the risk of overfitting on the small MSRP corpus. Table 2 looks at the relative importance of the four feature matrices shown in Figure 1. (The unsupervised part of the training regime is not changed for this experiment.) The results indicate that levels sn and ln are most informative: F1 scores are highest if only these two levels are used (lines 3&4: 82.8, 83.1) and performance drops most when they are removed (lines 7&8: 83.5, 83.2). Unigrams contribute little to overall performance (lines 2&6), probably because the paraphrases in the
+
+We presented the deep learning architecture BiCNN-MI for paraphrase identification (PI). Based on the insight that PI requires comparing two sentences on multiple levels of granularity, we learn multigranular sentence representations using convolution and compute interaction feature matrices at each level. These matrices are then the input to a logistic classifier for PI. All parameters of the model (for embeddings, convolution and classification) are directly optimized for PI. To address the lack of training data, we pretrain the network in a novel way for a language modeling task. Results on MSRP are state of the art. In the future, we plan to apply Bi-CNN-MI to sentence matching, question answering and other tasks.
+
+Acknowledgments
+We are grateful to Thang Vu, Irina Sergienya and Sebastian Ebert for comments on earlier versions of this paper. This work was supported by Baidu (through a Baidu scholarship awarded to Wenpeng Yin) and by Deutsche Forschungsgemeinschaft (grant DFG SCHU 2246/8-2, SPP 1335).
+
+909
+
+

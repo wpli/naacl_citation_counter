@@ -1,0 +1,7 @@
+marked with * in the list of reviewers. We are also indebted to the best paper award committee which consists of Claire Cardie, Daniel Gildea, Daniel Marcu, and Fernando Pereira. Their time and effort in recommending the best paper awards is much appreciated. We also would like to thank Hal Daumé III, Kristina Toutanova, and Lucy Vanderwende for generously sharing their experience in organizing prior NAACL/ACL conferences and for their advice. We are grateful for the guidance and the support of the NAACL president Hal Daumé III, and the NAACL board. We also would like to thank the publication co-chairs Matt Post and Adam Lopez for putting together the proceedings and the conference handbook; and Paolo Gai and Rich Gerber from Softconf for always being responsive to our requests. We would like to thank the ACL Business Manager Priscilla Rasmussen. She was our go to person who knew all details of the conference in and out. We are very grateful for her help. Finally, this conference could not have happened without the efforts of the general chair, Rada Mihalcea. She made sure the various sections of NAACL organization worked well together. Her monthly newsletters informed all the organizers about what was being done by everyone else. We are very thankful for her leadership in the organization of NAACL HLT 2015. We hope you will enjoy NAACL HLT 2015!
+
+NAACL HLT 2015 Program Co-Chairs Joyce Chai, Michigan State University Anoop Sarkar, Simon Fraser University
+
+vii
+
+

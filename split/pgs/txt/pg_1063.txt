@@ -1,0 +1,51 @@
+where  is the learning rate. After the update, W is orthogonalized by solving the following constrained quadratic problem: ¯ = I. ¯ || s.t. W ¯ TW min ||W - W
+¯ W
+
+(7)
+
+One can show that this problem can be solved by taking the singular value decomposition (SVD) of W and replacing the singular values to ones. For the case where the dimensions of the source and target vector spaces are different, the normalization constraint upon the projected vectors is not easy to satisfy. We choose a pragmatic solution. First, we extend the low-dimensional vector space by padding a small tunable constant at the end of the word vectors so that the source and target vector spaces are in the same dimension. The vectors are then renormalized after the padding to respect the normalization constraint. Once this is done, the same gradient descendant and orthognalization approaches are ready to use to learn the orthogonal transform.
+
+as 'NUM', and special characters (such as !?,:) were removed. The word2vector toolkit4 was used to train the word embedding model. We chose the skip-gram model and the text window was set to 5. The training resulted in embedding of 169k English tokens and 116k Spanish tokens. 5.2 Monolingual word similarity
+
+5
+
+Experiment
+
+We first present the data profile and configurations used to learn monolingual word vectors, and then examine the learning quality on the word similarity task. Finally, a comparative study is reported on the bilingual word translation task, with Mikolov's linear transform and the orthogonal transform proposed in this paper. 5.1 Monolingual word embedding
+
+The first experiment examines the quality of the learned word vectors in English. We choose the word similarity task, which tests to what extent the word similarity computed based on word vectors agrees with human judgement. The WordSimilarity353 Test Collection5 provided by (Finkelstein et al., 2002) is used. The dataset involves 154 word pairs whose similarities are measured by 13 people and the mean values are used as the human judgement. In the experiment, the correlation between the cosine distances computed based on the word vectors and the humane-judged similarity is used to measure the quality of the embedding. The results are shown in Figure 2, where the dimension of the vector space varies from 300 to 1000. It can be observed that the normalized word vectors offer a high correlation with human judgement than the unnormalized counterparts.
+0.62 0.61 0.6 Unormalized WV Normalized WV
+
+Correlation
+
+0.59 0.58 0.57 0.56 0.55 0.54 300
+
+The monolingual word embedding is conducted with the data published by the EMNLP 2011 SMT workshop (WMT11)2 . For an easy comparison, we largely follow Mikolov's settings in (Mikolov et al., 2013b) and set English and Spanish as the source and target language, respectively. The data preparation involves the following steps. Firstly, the text was tokenized by the standard scripts provided by WMT113 , and then duplicated sentences were removed. The numerical expressions were tokenized
+2 3
+
+400
+
+500
+
+600
+
+700
+
+800
+
+900
+
+1000
+
+Dimension
+
+Figure 2: Results on the word similarity task with the normalized and unnormalized word vectors. A higher correlation indicates better quality.
+4 5
+
+http://www.statmt.org/wmt11/ http://www.statmt.org
+
+https://code.google.com/p/word2vec http://www.cs.technion.ac.il/ gabr/resources/data/wordsim353/
+
+1009
+
+

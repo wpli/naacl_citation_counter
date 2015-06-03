@@ -1,0 +1,19 @@
+To create further large paraphrase lexicons, we need to acquire these idiosyncratic paraphrases by improving existing methods and/or exploring yet another approach. Another limitation of LEXVAR is that it considers only prefixes and suffixes of words as clues of lexical correspondences. We will need extensions to deal with a wider range of lexical correspondences. For instance, depending on the targeted language, other types of affixes, such as infixes and circumfixes, should be taken into account. Gaussier (1999) pointed out that some lexical derivations involve character-level alternations, e.g., "c" and "c ¸ ." Fujita et al. (2007) demonstrated that lexical derivations in an ideographic language, i.e., Japanese, can be captured by considering both ideographs and their phonetic transcriptions. Last but not least, as LEXVAR regards only corpus as source, it does not acquire paraphrases that do not appear in a given corpus.
+
+the 2006­2007 chapters of NTCIR unaligned patent documents were used as a monolingual corpus. For learning curve experiments, several sizes of bilingual sub-corpora were created by sub-sampling sentence pairs for both settings. The other language resources involved in this experiment are as follows. Phrase table learner: SyMGIZA++6 was used for IBM2 alignment, then grow-diag-final phrase extraction and phrase table pruning were performed using toolkits in Moses7 . Tokenizer: The tokenizer distributed with Moses was used for both English and French texts. For Japanese data, MeCab8 was used. Stoplists: To perform several types of filtering proposed by Fujita et al. (2012), we used the stoplists available on the Web9 : 571 English and 463 French words. For Japanese, we manually listed 160 morphemes. 4.2 Paraphrase Patterns Paraphrase patterns were learned from the set of seed paraphrase pairs. Figure 2 shows the numbers of the acquired paraphrase patterns and the percentages of paraphrase pairs in the seed lexicon, SSeed , covered by the patterns. As illustrated by example (4), LEXVAR learns more general paraphrase patterns than IDENT . Applied to another seed paraphrase pair (11a), IDENT will generate another pattern (11b), but LEXVAR will not: the corresponding (4c) is already learned. (11) a. development of tourism  developing tourism b. development of X  developing X On the other hand, LEXVAR also learns patterns from seed paraphrase pairs that IDENT ignores, e.g., (6) and (9a). Consequently, a wider range of seed paraphrases were involved in learning patterns and more patterns were acquired. 4.3 New Paraphrase Pairs Finally, new paraphrases were acquired from the monolingual data. At this time, only single words
+6 7
+
+4
+
+Expanding Paraphrase Lexicons
+
+To what extent can our LEXVAR method expand a given paraphrase lexicon? We examined this, taking English as a target language and the bilingual pivoting method as the means of acquiring SSeed . 4.1 Seed Paraphrase Pairs We conducted experiments on the following two corpora configurations. Europarl setting: The English­French version of the Europarl Parallel Corpus3 comprising 2.0 M sentence pairs (55.7 M words in English and 61.9 M words in French) was used as a bilingual corpus. Its English side and the 2011­ 2013 editions of News Crawl corpora4 comprising 52.0 M sentences (1.20 B words) were used as a monolingual corpus. NTCIR setting: The Japanese­English Patent Translation data5 comprising 3.2 M sentence pairs (107 M words in English and 116 M morphemes in Japanese) was used as a bilingual parallel corpus, while its English side and the 39.9 M sentences (1.36 B words) from
+3
+
+http://statmt.org/europarl/, release 7 4 http://statmt.org/wmt14/translation-task.html 5 http://ntcir.nii.ac.jp/PatentMT-2/
+
+http://psi.amu.edu.pl/en/index.php?title=SyMGIZA http://statmt.org/moses/, RELEASE-2.1.1 8 https://code.google.com/p/mecab/, version 0.996 9 http://members.unine.ch/jacques.savoy/clef/
+
+635
+
+

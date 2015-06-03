@@ -1,0 +1,30 @@
+Template Kernels for Dependency Parsing
+Hillel Taub-Tabib Yoav Goldberg Hebrew University Bar-Ilan University Jerusalem, Israel Ramat-Gan, Israel {hillel.t,yoav.goldberg}@gmail.com Abstract
+A common approach to dependency parsing is scoring a parse via a linear function of a set of indicator features. These features are typically manually constructed from templates that are applied to parts of the parse tree. The templates define which properties of a part should combine to create features. Existing approaches consider only a small subset of the possible combinations, due to statistical and computational efficiency considerations. In this work we present a novel kernel which facilitates efficient parsing with feature representations corresponding to a much larger set of combinations. We integrate the kernel into a parse reranking system and demonstrate its effectiveness on four languages from the CoNLL-X shared task.1
+
+Amir Globerson Hebrew University Jerusalem, Israel gamir@cs.huji.ac.il
+
+over parts p of the tree y :  (x, y ) =
+py
+
+ (x, p)
+
+1
+
+Introduction
+
+Dependency parsing is the task of labeling a sentence x with a syntactic dependency tree y  Y (x), where Y (x) denotes the space of valid trees over x. Each word in x is represented as a list of linguistic properties (e.g. word form, part of speech, base form, gender, number, etc.). In the graph based approach (McDonald et al., 2005b) parsing is cast as a structured linear prediction problem: hv (x) = argmax vT ·  (x, y )
+y Y (x)
+
+(1)
+
+where  (x, y )  Rd is a feature representation defined over a sentence and its parse tree, and v  Rd is a vector of parameters. To construct an effective representation,  (x, y ) is typically decomposed into local representations
+See https://bitbucket.org/hillel/templatekernels for implementation.
+1
+
+Standard decompositions include different types of parts: arcs, sibling arcs, grandparent arcs, etc. Feature templates are then applied to the parts to construct the local representations. The templates determine how the linguistic properties of the words in each part should combine to create features (see Section 2). Substantial effort has been dedicated to the manual construction of feature templates (McDonald et al., 2005b; Carreras, 2007; Koo and Collins, 2010). Still, for both computational and statistical reasons, existing templates consider only a small subset of the possible combinations of properties. From a computational perspective, solving Eq. 1 involves applying the templates to y and calculating a dot product in the effective dimension of . The use of many templates thus quickly leads to computational infeasibility (the dimensionality of v, as well as the number of non-zero features in , become very large). From a statistical perspective, the use of a large number of feature templates can lead to overfitting. Several recent works have proposed solutions to the above problem. Lei et al., (2014) represented the space of all possible property combinations in an arc-factored model as a third order tensor and learned the parameter matrix for the tensor under a low rank assumption. In the context of transition parsers, Chen and Manning (2014) have implemented a neural network that uses dense representations of words and parts of speech as its input and implicitly considers combinations in its inner layers. Earlier work on transition-based dependency parsing used SVM classifiers with 2nd order polynomial kernels to achieve similar effects (Hall
+
+1422
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1422­1427, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+

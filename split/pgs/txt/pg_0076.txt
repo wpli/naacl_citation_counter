@@ -1,0 +1,36 @@
+cluster  1   centroid   salad   cluster  2   sauce   centroid  
+order   
+
+overall     centroid  
+
+wine  
+
+no9
+
+meal  
+
+squadron  
+
+ba;alion   army  
+
+cluster  3   centroid  
+
+regiment   Verb  serve,  "with"-preposi9onal  object  
+
+Figure 1: Illustration of TypeDM centroid for with-PP arguments of the verb serve.
+
+matic fit scores. Also, verbs will be "penalized" for having many senses in that it will seem as though no role filler fits as well as they do with unambiguous verbs. This may produce inconsistent judgements when comparing one verb that is highly polysemous with a second, more restrictive verb whose meaning overlaps with the most dominant meanings of the first verb. For example, cut can be used in the sense of "cutting costs," which carries with it restrictions on instruments, locations, and so on that somewhat overlap with eliminate as in "eliminating costs." Things that are plausible to be eliminated are also plausible to be cut. But cut is also used in the sense of "cutting a cake" or "cutting (editing) a film." Without taking word sense into account, costs would be judged by the model as being less appropriate as a patient of cut than it should, and also its score for filling the patient role of eliminate would be infelicitously higher than its score for filling the patient role of cut. One possible solution to this problem would be to do full word sense disambiguation on the resources from which these vector spaces are constructed. Then, there would be separate entries in the space for each meaning. This would however increase the overall size of the vector space by a significant factor and also cause an additional burden on corpus construction and annotation, even if automatic. In this paper, we will approach the verb-role sense problem by clustering the most typical role-filler vectors and calculating the maximal cosine similarity for a candidate role filler with respect to each 22
+
+cluster prototype vector. So, to estimate the thematic fit of salad as an item with which something is served, in the vector space represented by Figure 1, we would use the cosine similarity with the nearest cluster centroid, the cluster 1 centroid. For a thematic fit task, the correlation between calculated estimates and human judgements can be expected to improve. In particular, good role fillers that are very different from one another and belong to different senses of a verb can all be assigned thematic fit scores as high as those of good role fillers of monosemous verbs. We will evaluate our system using three distributional spaces: TypeDM (Baroni and Lenci, 2010), which is based on a syntactic dependency parser, SDDM (Sayeed and Demberg, 2014), which uses features obtained from the semantic role labeller SENNA (Collobert et al., 2011), and SDDMX , a novel extension of SDDM . This way, we can draw conclusions about feature space-specific and feature space-general trends. The effects of clustering and choice of distributional space will be evaluated against the Pad´ o (2007) and McRae et al. (1998) datasets of human judgements on thematic fit of agent and patient roles, and the Ferretti et al. (2001) datasets of human judgements on thematic fit of instrument and location roles. These different roles are conceptually interesting to compare, as instruments tend to be more strongly constrained by verbs than locations.
+
+ce  
+
+2
+2.1
+
+Background and related work
+Thematic fit
+
+The fit of a filler of a thematic role can be characterized as a semantic constraint on what can fill potentially available syntactic slots for a given predicate. For example, not every noun can satisfy the agent or patient roles of the typically transitive verb eat. There must be a valid "eater" for the agent and a valid "eatee" for the patient. Some nouns are simply more plausible than others in these positions: lunch is eaten, but rarely ever eats. But there can also be optional role assignments: there are certain utensils with which one is more or less likely to eat (i.e., appropriate instrument role-fillers) and even places where one is more or less likely to eat (i.e., location roles).
+
+

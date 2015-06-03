@@ -1,0 +1,30 @@
+3.5
+
+Named Entity Recognition
+
+A supervised machine learning approach was then applied to the task of identifying the named entities shown in Table 2. The task was modeled as a BIO classification task, classifiers identify the Beginning, the Inside, and Outside of the text segments. We first used a traditional set of text-based features for the classification task. Table 4 lists the various textbased features used. In all cases, a sliding window including the 6 preceding and 6 following tokens was used as features.
+Feature Name Token Description A normalized string representation of the token. All tokens were converted to lower case and all digits were converted to a common format. The token orthography. Possible values are lowercase (all token characters are lower case), all capitals (all token characters are upper case), upper initial (the first token character is upper case, the rest are lower case), mixed (any mixture of upper and lower case letters not included in the previous categories). Possible values are word, number, symbol, punctuation. Regex-based rules were used to mark chunks as one of 3 regex types: email, phone number, zip code. Text chunks were marked as possible US cities or states based on US Census Bureau city and state data.
+www.census.gov/geo/maps-data/data/gazetteer2013.html.
+
+Feature Name Font Size
+
+Color
+
+Y Coordinate
+
+Token Orth
+
+Description The computed font-size attribute of the surrounding HTML DOM element, normalized to 7 basic sizes (xx-small, x-small, small, medium, large, x-large, xx-large). The computed color attribute of the surrounding HTML DOM element. The RGB values were normalized to a set of 100 basic colors. We converted the RGB values to the YUV color space, and then used Euclidian distance to find the most similar basic color approximating human perception. The computed top attribute of the surrounding HTML DOM element, i.e. the y-coordinate in pixels. The pixel locations was normalized to 150 pixel increments (roughly 1/5th of the visible screen for the most common screen resolution.)
+
+Table 5: List of visual features used for the NER task. A sliding window of 6 preceding and 6 following DOM elements were used for all features.
+
+Token Kind Regex type Gazetteer
+
+Table 4: List of text-based features used for the NER task. A sliding window of the 6 preceding and 6 following tokens was used for all features.
+
+As noted previously, data entry staff were able to quickly spot named entities of interest solely because of their visual characteristics. To account for such visual characteristics, we also included visual features associated with text chunks. We used the computed HTML style attributes for each DOM element containing text. Table 5 lists the computed visual features and shows details on how we normalized the style attribute values for font size, RGB color, and Y coordinate. We then applied SVM on the NER task using the LibSVM library. We again chose SVMs as they have been shown to perform well on a variety of 288
+
+NER tasks, for example (Isozaki and Kazawa, 2002; Takeuchi and Collier, 2002; Mayfield et al., 2003; Ekbal and Bandyopadhyay, 2008). We used a linear kernel model with the default parameters. The multi-class problem was converted to binary problems using the one-vs-others scheme. As described earlier, we used a portion of the total training data (a total of 1,361 flyers) for the NER tasks. We were able to automatically annotate and use as training data 878 flyers used for address named entities, 1,145 flyers used for broker information named entities, and 1,242 flyers for space named entities. Results were evaluated against the manually entered data for the full test set of 908 flyers. We first used the trained classifiers to find named entities, including their boundaries and types. The predicted named entities were then used to generate listing data as follows. For attributes that have a single value per flyer, we used the predicted named entity of the corresponding type with the highest probability estimate12 . Single value listing attributes are the fields of the listing address (street or intersection, city, state, zip). Flyers contain a single listWe used the LibSVM probability estimates for each predicted named entity.
+12
+
+

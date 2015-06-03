@@ -1,0 +1,71 @@
+quadratically weighted kappa
+
+0.84
+
+Q1
+
+Q2 0.70 0.65
+
+Q3
+
+Q4
+
+0.7 0.80
+q q
+
+0.7
+q q q 0.6 q q q q
+
+ref ref+resp ref+resp (stacking) resp
+
+0.6 0.5
+q q q
+
+0.76
+q
+
+q q
+
+0.60
+q
+
+q
+
+0.72 q
+
+0.4 q 100 200 400 800 1600
+
+0.55 q 0.50
+
+0.5 q
+
+100 200 400 800 1600
+
+100 200 400 800 1600
+
+100 200 400 800 1600
+
+sample size
+
+Figure 2: Test set results for various models trained on differently sized random samples of the training data. Each point represents an average over 20 runs, except for the rightmost points for each question, which correspond to training on the full training set. Note that the "resp" and "ref+resp" lines mostly overlap.
+
+uated models trained on differently sized subsets of the training data. For each subset size, we averaged over 20 samples. The results are in Figure 2. The performance of all models increased as training data grew, though there were diminishing returns (note the logarithmic scale). Also, the models with response-based features outperform those with just reference-based features, as observed previously by Heilman and Madnani (2013). Most importantly, while all models with responsebased features perform about the same with 1,000 training examples or higher, the stacked model tended to outperform the other models for cases where the number of training examples was very limited.9 This indicates that stacking enables learning better feature weights than a simple combination when the feature set contains a mixture of sparse as well as dense features, particularly for smaller data sizes.
+
+combined a response-based method that uses sparse features (e.g., word and character n-grams) with a reference-based method that uses a small number of features for the similarity between the response and information from the scoring guidelines (exemplars and key concepts). On four reading comprehension assessment questions, we found that a combined model using stacking outperformed a non-stacked combination, particularly for the most practically relevant cases where training data was limited. We believe that such an approach may be useful for dealing with diverse feature sets in other automated scoring tasks as well as other NLP tasks. As future work, it might be interesting to explore a more sophisticated model where the regression models in different layers are trained simultaneously by back-propagating the error of the upper-layer, as in neural networks.
+
+5
+
+Conclusion
+
+Acknowledgments
+We would like to thank John Sabatini and Kietha Biggers for providing us with the RfU datasets. We would also like to thank Dan Blanchard, Aoife Cahill, Swapna Somasundaran, Anastassia Loukina, Beata Beigman Klebanov, and the anonymous reviewers for their help.
+
+In this paper, we explored methods for using different sources of information for automatically scoring short, content-based assessment responses. We
+9 We are not aware of an appropriate significance test for experiments where subsets of the training data are used. However, the benefits of stacking seem unlikely to be due to chance. For all 4 items, stacking outperformed the non-stacking combination for 18 or more of the 20 200-response training subsets (note that under a binomial test, this would be significant with p < 0.001). Also, for the 100-response training subsets, stacking was better for 16 or more of the 20 subsets (p < 0.01).
+
+References
+Eneko Agirre, Daniel Cer, Mona Diab, Aitor GonzalezAgirre, and Weiwei Guo. 2013. *SEM 2013 shared
+
+1053
+
+

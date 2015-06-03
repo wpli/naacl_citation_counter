@@ -1,0 +1,30 @@
+both lexical sample tasks. POS Adj. Noun Verb #word types 15 29 29 SE2 baseline 67.45% 69.39% 60.45% CW (17) 67.72% 69.38% 61.89%
+
+Table 3: The scores for each part-of-speech (POS) on SE2 lexical sample tasks. The window size is shown inside brackets.
+
+IMS (baseline) IMS + CW IMS + adapted CW ­ Dropout Rank 1 system Rank 2 system MFS
+
+SE2 65.3% 66.1%* (17) 66.2%* (5) 65.4% (7) 64.2% 63.8% 47.6%
+
+SE3 72.7% 73.0%* (9) 73.4%* (7) 72.7% (7) 72.9% 72.6% 55.2%
+
+Table 5: Lexical sample task results. The values inside brackets are the selected window sizes and statistically significant (p < 0.05) improvements are marked with `*'.
+
+POS Adj. Noun Verb
+
+SE3 #word types baseline 5 45.93% 32 73.44% 20 74.12%
+
+CW (9) 47.81% 73.83% 74.17%
+
+Table 4: The scores for each part-of-speech (POS) on SE3 lexical sample tasks. The window size is shown inside brackets.
+
+from our experiments on the DS05 dataset. In this table, as explained earlier, `CC' denotes the additional manually tagged instances. For comparison purposes, we included the results reported by two state-of-the-art knowledge-based systems, namely PPRw2w (Agirre et al., 2014) and Degree (Ponzetto and Navigli, 2010). Table 6 shows that IMS performs worse than PPRw2w on Sports and Finance domains but IMS + CC outperforms PPRw2w . One of the reasons behind this observation is unseen sense tags. For example, in the sentence "the winning goal came with less than a minute left to play2 ", the sense tag for word `goal' is `goal%1:04:00::'. However, the training data for IMS does not contain any sample with this sense tag and so it is impossible for IMS to assign this tag to any test instances. On the other hand, the manually annotated instances (CC) include samples with this tag and therefore IMS + CC is able to associate a target word with this sense tag. According to Table 6, adding word embeddings results in improved performance over the baseline (IMS + CC). Moreover, adapting word embeddings is found to increase accuracy in most cases. 4.2 All-Words Task
+
+Finally, we evaluated the effect of word embeddings and the adaptation process. Table 5 summarizes our findings on SE2 and SE3 lexical sample tasks. According to this table, both types of word embeddings lead to improvements on lexical sample tasks. We also performed a one-tailed paired t-test to see whether the improvements are statistically significant over the baseline (IMS). The improvements obtained using CW word embeddings over the baseline are significant (p < 0.05) in both lexical sample tasks. Furthermore, the results show that adapted word embeddings achieve higher scores than raw word embeddings. We have included the scores obtained by the first and the second best participating systems in these lexical sample tasks and also the Most Frequent Sense (MFS) score. The results also show that the Dropout layer increases performance significantly. The reason behind this observation is that without Dropout, word embeddings are overfitted to the training data and when they are used as extra features in IMS, the classifier does not generalize well to the test set. Since adaptation without Dropout leads to worse performance, we include Dropout in all other experiments and only report results obtained using Dropout. Similarly, Table 6 presents the results obtained 320
+
+We also evaluated the performance of our system on the SensEval-3 (SE3) all-words task. Next, we explain our setup and then present the results of our evaluation.
+2
+
+This example is taken from WordNet v3.1.
+
+

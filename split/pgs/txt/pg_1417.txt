@@ -1,0 +1,25 @@
+2.1
+
+Text-based Geolocation
+
+Text-based approaches assume that language in social media is geographically biased, which is clearly evident for regions speaking different languages (Han et al., 2014), but is also reflected in regional dialects and the use of region specific terminology. Text based models have predominantly used bag of words features to learn per-region classifiers (Roller et al., 2012; Wing and Baldridge, 2014), including feature selection for location-indicative terms (Han et al., 2012). Topic models have also been applied to model geospatial text usage (Eisenstein et al., 2010; Ahmed et al., 2013), by associating latent topics with locations. This has a benefit of allowing for prediction over continuous space, i.e., without the need to render the problem as classification. On the other hand, these methods have high algorithmic complexity and their generative formulation is unlikely to rival the performance of discriminative methods on large datasets. 2.2 Network-based Geolocation
+
+ison between the respective methods over standard datasets. In this, we propose both text- and networkbased methods, and show that they achieve state-ofthe-art results on three pre-existing Twitter geolocation corpora. We also propose a new hybrid method incorporating both textual and network information, which also improves over the state-of-the-art, and outperforms the text-only or network-only methods over two of the three datasets.
+
+3
+
+Data
+
+We evaluate on three Twitter corpora, each of which uses geotagged tweets to derive a geolocation for each user. Each user is represented by the concatenation of their tweets, and is assumed to come from a single location. G EOT EXT: around 380K tweets from 9.5K users based in contiguous USA, of which 1895 is held out for development and testing (Eisenstein et al., 2010); the location of each user is set to the GPS coordinates of their first tweet. T WITTER -US: around 39M tweets from 450K users based in the contiguous USA. 10K users are held out for each of development and testing (Roller et al., 2012); again users' locations are taken from their first tweet. T WITTER -W ORLD: around 12M English tweets from 1.4M users based around the world, of which 10K users are held out for each of development and testing (Han et al., 2012); users are geotagged with the centre of the closest city to their tweets. In each case, we use the established training, development and testing partitions, and follow Cheng et al. (2010) and Eisenstein et al. (2010) in evaluating based on: (1) accuracy at 161km ("Acc@161"); (2) mean error distance, in kilometres ("Mean"); and (3) median error distance, in kilometres ("Median").
+
+Although online social networking sites allow for global interaction, users tend to befriend and interact with many of the same people online as they do off-line (Rout et al., 2013). Network-based methods exploit this property to infer the location of users from the locations of their friends (Jurgens, 2013; Rout et al., 2013). This relies on some form of friendship graph, through which location information can be propagated, e.g., using label propagation (Jurgens, 2013; Talukdar and Crammer, 2009). A significant caveat regarding the generality of these techniques is that friendship graphs are often not accessible, e.g., secured from the public (Facebook) or hidden behind a heavily rate-limited API (Twitter). While the raw accuracies reported for networkbased methods (e.g., Jurgens (2013) and Rout et al. (2013)) are generally higher than those reported for text-based methods (e.g., Wing and Baldridge (2014) and Han et al. (2014)), they have been evaluated over different datasets and spatial representations, making direct comparison uninformative. Part of our contribution in this paper is direct compar1363
+
+4
+4.1
+
+Methods
+Text-based Classification
+
+Our baseline method for text based geolocation is based on Wing and Baldridge (2014), who formulate the geolocation problem as classification using k -d
+
+

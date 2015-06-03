@@ -1,0 +1,37 @@
+Status :) today was actually pretty good is listening to The Sad Cafe by The Eagles! considering checking out base jumping and parkour some time in the future XP I just watched Oprah and am posting what it was about. really wanted a snow day, but probably not going to get one tomorrow. now homework. Another day of great restraint.
+
+R1 pa pr fu pa pr pa
+
+R2 pa pr fu pr fu pa
+
+R3 Maj pa pa pr pr fu fu pa pa fu fu pr pa
+
+Table 1: Examples of statuses annotated for temporal classes: past (pa), present/none (pr), and future (fu). R1, R2, R3: judgements from each rater; Maj: choice from majority voting. The bottom three examples illustrate difficult cases.
+
+lengths: mean size of 1grams and number of tokens in
+
+the post. We found it useful to use a modest variety of feature types and to build on existing work that labels time expressions. While one might expect time expression features to be extremely valuable for this task, we found only 15% of Facebook messages contain them, even though many more communicate a focus on the past or future through other means (e.g. tense or semantic information). All features were limited to those mentioned in at least 0.05% of messages. At the user-level, we produce three categories of temporal orientation, defined simply as the proportion of a user's total messages (msgs(user)all ) classified in the given temporal category (tc  {past, present, f uture}): orientationtc (user) = |msgstc (user)| |msgsall (user)|
+
+We generate three separate variables (summing to one), rather than a single variable temporal index, in order to capture non-linear relationships (i.e., the potential for the present to correlate in the opposite direction of both the past and future). All of our user analyses are based on 100 randomly selected messages from each user.
+
+4
+
+Data collection and labeling
+
+We use three social media datasets: the training set, test set, and user set. The training set consists of 4,302 Twitter and Facebook annotated messages. The test set is a random subset of 500 annotated Facebook messages, representative of messages we will apply our model. Finally, the user set contains 531,893 messages from Facebook users with known age, gender, personality, satisfaction with life, depression, IQ and number of Facebook friends. We derived the test set from the user set in order to establish accuracies of our model over the application domain.
+
+updates, sent between March 2009 and October 2011, were randomly sampled from users of the MyPersonality application (Kosinski and Stillwell, 2012; Quercia et al., 2012), who also provided their age and gender. For Twitter, 3,000 messages were sampled from the 1% random stream provided by Twitter during September 2012. Three annotators, undergraduate students at the University of Pennsylvania, independently labeled the temporal orientation of each message. Messages were labeled in units of days past or future (adapted from Liberman et al. (2007)). For example, -7 would be a week ago, -1 /24 would be an hour ago, 0 would be now (present), and 365 would be a year from now. Inter-annotator agreement, as the intraclass correlation coefficient (Shrout and Fleiss, 1979), was 0.85. Ratings were averaged into a single "time from now" index. For the purposes of this study we then discretized the data into past (mean rating < 0), present (mean rating = 0), or future (mean rating > 0). Annotation of the 6,000 messages took approximately 150 human hours. When rating, messages were marked `NA' when they appeared to come from a bot or were composed of song lyrics or quotations. (Removing unoriginal content was desired for the consumer behavior research for which the messages were first labeled.) For our purposes, in order to maximize the training set size, we only removed messages when all three raters chose `NA', such that there was no average rating available for the message. The resulting final training set consisted of 4,302 total messages (2,009 tweets; 2,293 Facebook status updates). Since our application of the data does not include a manual filtering of messages, we created a separate message test set with no filtering in order to accurately evaluate our classifier in the application's setting (below).
+
+Test set. Evaluating our classifiers over our annotated
+
+training set would not yield an accurate assessment of the performance when applied to the user set (described next). Therefore, we randomly selected 500 statuses from the user set as our message test set.5 Statuses exclude
+While we desired a large training set, the test set only needed to be large enough to evaluate differences in accuracy.
+5
+
+Training set. Our training data consists of both Face-
+
+book and Twitter messages. For Facebook, 3,000 status
+
+413
+
+

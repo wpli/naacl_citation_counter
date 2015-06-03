@@ -1,0 +1,45 @@
+E-step D  {D1 , . . . , DN } do c(D; f, e) = P (c) (D| f, e) c(f | e; f, e, D) = P (c) (D| f, e) c(i| i ; f, e, D) = P (c) (D| f, e) M-step D  {D1 , . . . , DN } do f,e c(f |e; f, e, D ) P (+) (i|i , D) = P (+) (f |e, D) = c ( f | e ; f , e , D ) f f,e
+a a
+
+P (c) (a| f, e, D) P (c) (a| f, e, D)
+f,e i
+
+J j =1 J j =1
+
+ (f, fj )
+
+I i=0
+
+ (e, ei )
+
+ (aj , i) (aj -1 , i )
+f,e D
+
+c(i|i ; f, e, D) c(i|i ; f, e, D)
+
+f,e
+
+P (+) (D) =
+
+c(D; f, e)
+f,e
+
+c(D; f, e)
+
+Figure 3: Pseudocode for the training algorithm for the latent domain HMM alignment model. Note that notation P (c) denotes current iteration estimates, and P (+) denotes the re-estimates.
+
+generative process for every sentence pair in the heterogeneous data with respect to a specific domain. Following (Cuong and Sima'an, 2014b), we factor it into two kinds of models in a symmetrized strategy: PD (f, e| D)  PD (e| D)PD (f| e, D) + PD (f| D)PD (e| f, D) . Basically, PD (·| ·, D) can be thought of as the domain-conditioned translation models, aiming to model how well a target/source sentence is generated over a source/target sentence with respect to a domain.5 Meanwhile, PD (·| D) can be thought of as the domain-conditioned language models (LMs), aiming to model how fluent a source/target sentence with respect to a domain. For simplicity, once the domain-conditioned LMs are trained, they will stay fixed during training, i.e., LM probabilities are not parameters in our model. In the M-step of the EM algorithm, we fix the derived q  and aim to find the parameter set  that maximizes F (q, ) over the data. This can be (easily) done by using q  to softly fill in the values of a and D to estimate model parameters. Pseudocode In summary, the model has three kinds of parameters - word translation, word transition, and domain prior parameters. We now summarize the training via presenting the pseudocode. First, we present expected count notations with respect to domains for the parameters. We use c(f | e; f, e, D) to denote the expected counts that word e aligns to word f . We use c(i| i ; f, e, D) to denote the expected counts that two certain conNote that PD (·| ·, D) = a PD (·, a| ·, D) and it can be thus computed efficiently using dynamic programming.
+5
+
+secutive source words j and j - 1 align to two target words i and i respectively, i.e., j aligns to i and j - 1 aligns to i . Finally, we also use c(D; f, e) to denote the expected count of domain priors. Note that all the expected counts are in the translation (f| e). Figure 3 represents the pseudocode.
+
+4
+
+Learning with Partial Supervision
+
+We now discuss remaining issues on how to guide the learning with partial supervision, i.e., how to use the given domain information of seed samples to guide the learning. Number of Domains The values of D  [1..(N + 1)] depends on the N available seed samples plus the so-called "out-domain," i.e., the part of the heterogeneous data that is dissimilar to all of the N sample domains. Parameter Initialization We first discuss how to initialize the domain prior parameters. If a sentence pair f, e belongs to a sample with a pre-specified domain Di , we initialize P (Di | f, e) close to 1, and, P (Di | f, e) close to 0 for other domains i , i = i. Furthermore, we uniformly create the domain prior parameters for the rest of sentence pairs. Uniform initialization for the domain-conditioned alignment parameters is also a reasonable option. Nevertheless, a more effective way is to make use of the domain-specific seed samples and the pool of the rest sentence pairs in the heterogeneous data.6 That is, we train the model on each of the samples, assignDuring the initialization, we assume that the pool of the rest sentence pairs in the heterogeneous data is the exemplifying sample of the out-domain.
+6
+
+401
+
+

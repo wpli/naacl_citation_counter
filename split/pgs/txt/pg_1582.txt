@@ -1,0 +1,21 @@
+source
+caballo (horse) perro (dog) cerdo (pig) gato (cat) cat
+
+target
+horse cow dog pig
+
+3 Translation Rule Generation
+We first describe how we can learn a single mapping between the foreign and English continuous spaces to find translations for an infrequent foreign phrase (§3.1). Next, we make this approach more robust by learning many mappings that are specific to a given foreign phrase (§3.2). Finally, we review the semisupervised label propagation algorithm of Saluja et al. (2014) which we make much faster using continuous word representations and k -NN algorithms (§3.3). 3.1 Global Linear Projection Mikolov et al. (2013a) find that the relative positions between words are preserved between languages (Figure 1), and, thus, it is possible to learn a linear projection that maps the continuous representation of source phrases to points on the target side. The hope is to learn a mapping that captures the relationship between the source and target spaces. We call this linear transform global linear projection, since we use a single mapping that we apply to every source phrase. More formally, we denote f and e as source side and target side phrases respectively, and f  R1×d and e  R1×d as the corresponding phrasal vectors with dimension d. Following Mikolov et al. (2013a), we learn a global linear projection matrix W  Rd×d based on the translations of the n most frequent labeled source side phrases: (f1 , e1 ), (f2 , e2 ), . . . , (fn , en ), n  d.2 Let F = T , f T , . . . , f T ]T , and E = [eT , eT , . . . , eT ]T . We [f1 n n 2 1 2 calculate W by solving the following linear system: FW = E whose solution is: W  (F T F )-1 F T E Using the linear transform W , we can compute ¯ = f W for each unlabeled source phrase f , where e ¯ will be close to target phrases that are potential e translation candidates for f . We denote the set of all nearby English phrase vectors as N (¯ e) and use
+2 We need more than d phrases to be fetched to make the linear system solvable. Similar is for the local linear projection in §3.2.
+
+vaca (cow)
+
+Figure 1: Illustration of word representations in Spanish and English (Figure from Mikolov et al. (2013a)). The plots are based on a two-dimensional projection of the original vectors with principal component analysis.
+
+A logical next step is to learn representations for larger linguistic units, a topic which has received a lot of interest (Mitchell and Lapata, 2010; Socher et al., 2011; Le and Mikolov, 2014). For machine translation there have been efforts to learn representations for entire bilingual phrases (Zou et al., 2013; Zhang et al., 2014; Gao et al., 2014). In this work, we only require representations for monolingual phrases that are relatively short.1 We therefore decided to use off-the-shelf word representations to build phrase vectors. In particular, we chose the continuous bag-of-words model (Mikolov et al., 2013b) which is very fast to train and scales very well to large monolingual corpora. The resulting word vectors are then used to build phrase vectors via simple element-wise addition which has been found to perform very competitively in comparison to alternative approaches (Mitchell and Lapata, 2010). Note that all the algorithms described in this paper are agnostic to the choice of phrase-representation and other schemes may perform better. We use these monolingual phrase representations to generate translation rules for infrequent, or unlabeled, phrases. Unlabeled phrases do not appear in the bilingual data and thus do not have translation rules. The general idea behind the following algorithms is to identify labeled phrases for which we know translation rules that are similar to an unlabeled phrase, and to use them to induce translation rules for the unlabeled phrase.
+For simplicity, we only consider unigrams and bigrams on the source side, see §5
+1
+
+1528
+
+

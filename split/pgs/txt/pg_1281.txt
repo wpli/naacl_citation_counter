@@ -1,0 +1,23 @@
+Automatic cognate identification with gap-weighted string subsequences.
+Taraka Rama Spr° akbanken University of Gothenburg Box 200, Gothenburg, Sweden taraka.rama.kasicheyanula@gu.se
+
+Abstract
+In this paper, we describe the problem of cognate identification in NLP. We introduce the idea of gap-weighted subsequences for discriminating cognates from non-cognates. We also propose a scheme to integrate phonetic features into the feature vectors for cognate identification. We show that subsequence based features perform better than state-ofthe-art classifier for the purpose of cognate identification. The contribution of this paper is the use of subsequence features for cognate identification.
+
+1
+
+Introduction
+
+Cognates are words across languages whose origin can be traced back to a common ancestral language. For example, English  German night  Nacht `night' and English hound  German Hund `dog' are cognates whose origin can be traced back to Proto-Germanic. Sometimes, cognates are not revealingly similar but have changed substantially over time such that they do not share form similarity. An example of such a cognate pair is the English wheel and Sanskrit chakra `wheel', which can be traced back to Proto-Indo-European (PIE) k w ek w elo. Automatic cognate identification, in NLP, refers to the application of string similarity or phonetic similarity algorithms either independently, or in tandem with machine learning algorithms for determining if a given word pair is cognate or not (Inkpen et al., 2005). In NLP, even borrowed words (loanwords) are referred to as cognates. In contrast, his1227
+
+torical linguistics makes a stark distinction between loanwords and cognates. For example, English beef is a loanword from Norman French. In this paper, we use cognates to refer to those words whose origin can be traced back to a common ancestor. We use string subsequence based features (motivated from string kernels) for automatic cognate identification. We show that subsequencebased features outperform word similarity measures at the task of automatic cognate identification. We motivate the use of subsequence based features in terms of linguistic examples and then proceed to formulate the subsequence based features that can be derived from string kernels (Shawe-Taylor and Cristianini, 2004). In information retrieval literature, string subsequences go under the name of skipgrams (J¨ arvelin et al., 2007).
+
+2
+
+Related work
+
+The approaches developed by Kondrak and Sherif (2006) and Inkpen et al. (2005) supply different string distances between a pair of words as features to a linear classifier. Usually, a linear classifier such as SVM is trained on labeled positive ("cognates") and negative ("non-cognates") examples and tested on a held-out dataset. Basic vocabulary lists such as the ones devised by Morris Swadesh (Swadesh, 1952), provide a suitable testing ground for applying machine learning algorithms to automatically identify cognates. Some standardized word lists come with cognate information and, subsequently, can used to infer the relationship between the languages (Dyen et al., 1992).
+
+Human Language Technologies: The 2015 Annual Conference of the North American Chapter of the ACL, pages 1227­1231, Denver, Colorado, May 31 ­ June 5, 2015. c 2015 Association for Computational Linguistics
+
+
